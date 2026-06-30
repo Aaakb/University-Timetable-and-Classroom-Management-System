@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="Business_Logic_Layer/Business_Logic_Layer.csproj" Id="4a6a0a8d-4151-4d99-939e-ad0d32ec8ad9" />
+  <Project Path="Data_Access_Layer/Data_Access_Layer.csproj" Id="ef23bb61-0f5a-4d92-b5e7-d7649142b12b" />
+  <Project Path="Models/Models.csproj" Id="bdf1c523-5e1d-4068-90da-2b2231077062" />
+  <Project Path="University Timetable and Classroom Management System/Presentation_Layer.csproj" />
+</Solution>

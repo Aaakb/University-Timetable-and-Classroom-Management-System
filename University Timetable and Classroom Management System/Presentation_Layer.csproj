@@ -1,0 +1,112 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <RootNamespace>University_Timetable_and_Classroom_Management_System</RootNamespace>
+    <Nullable>enable</Nullable>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <ApplicationIcon>Assets\AppIcon.ico</ApplicationIcon>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Guna.UI2.WinForms" Version="2.0.4.8" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Business_Logic_Layer\Business_Logic_Layer.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Assets\AppIcon.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\AppLogo.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\AppLogoSquare.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="PresentationLayer\BranchesForm.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="PresentationLayer\ClassroomsForm.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="PresentationLayer\FacultyMembersForm.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="PresentationLayer\FacultyMemberSubjectsForm.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="PresentationLayer\MainShellForm.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="PresentationLayer\LoginForm.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="PresentationLayer\RegisterForm.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="PresentationLayer\SchedulesForm.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="PresentationLayer\SchedulesForm.Actions.cs">
+      <DependentUpon>SchedulesForm.cs</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="PresentationLayer\SchedulesForm.Designer.cs">
+      <DependentUpon>SchedulesForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </Compile>
+    <Compile Update="PresentationLayer\SchedulesForm.Grid.cs">
+      <DependentUpon>SchedulesForm.cs</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="PresentationLayer\SchedulesForm.Loading.cs">
+      <DependentUpon>SchedulesForm.cs</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="PresentationLayer\SchedulesForm.Timetable.cs">
+      <DependentUpon>SchedulesForm.cs</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="PresentationLayer\SchedulesForm.Validation.cs">
+      <DependentUpon>SchedulesForm.cs</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="PresentationLayer\SectionsForm.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="PresentationLayer\StudyYearsForm.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="PresentationLayer\SubjectsForm.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="PresentationLayer\TimeSlotsForm.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Remove="PresentationLayer\*.resx" />
+    <None Remove="PresentationLayer\*.resx" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="PresentationLayer\BranchesForm.resx" />
+    <EmbeddedResource Include="PresentationLayer\ClassroomsForm.resx" />
+    <EmbeddedResource Include="PresentationLayer\FacultyMembersForm.resx" />
+    <EmbeddedResource Include="PresentationLayer\FacultyMemberSubjectsForm.resx" />
+    <EmbeddedResource Include="PresentationLayer\LoginForm.resx" />
+    <EmbeddedResource Include="PresentationLayer\MainShellForm.resx" />
+    <EmbeddedResource Include="PresentationLayer\RegisterForm.resx" />
+    <EmbeddedResource Include="PresentationLayer\SchedulesForm.resx" />
+    <EmbeddedResource Include="PresentationLayer\SectionsForm.resx" />
+  </ItemGroup>
+</Project>
