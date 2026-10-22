@@ -1,0 +1,11 @@
+  Models -> D:\Telegram Desktop\University-Timetable-and-Classroom-Management-System (2)\University-Timetable-and-Classroom-Management-System\Models\bin\Debug\net8.0\Models.dll
+  Data_Access_Layer -> D:\Telegram Desktop\University-Timetable-and-Classroom-Management-System (2)\University-Timetable-and-Classroom-Management-System\Data_Access_Layer\bin\Debug\net8.0\Data_Access_Layer.dll
+  Business_Logic_Layer -> D:\Telegram Desktop\University-Timetable-and-Classroom-Management-System (2)\University-Timetable-and-Classroom-Management-System\Business_Logic_Layer\bin\Debug\net8.0\Business_Logic_Layer.dll
+  Presentation_Layer -> D:\Telegram Desktop\University-Timetable-and-Classroom-Management-System (2)\University-Timetable-and-Classroom-Management-System\University Timetable and Classroom Management System\bin\Debug\net8.0-windows\Presentation_Layer.dll
+  UniversityTimetable.API -> D:\Telegram Desktop\University-Timetable-and-Classroom-Management-System (2)\University-Timetable-and-Classroom-Management-System\UniversityTimetable.API\bin\Debug\net8.0\UniversityTimetable.API.dll
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:02.86

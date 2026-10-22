@@ -1,0 +1,287 @@
+{
+  "checked": 70,
+  "unchanged": 70,
+  "designerAndResources": 27,
+  "files": [
+    {
+      "path": "D:\\Telegram Desktop\\University-Timetable-and-Classroom-Management-System (2)\\University-Timetable-and-Classroom-Management-System\\Business_Logic_Layer\\FacultyScheduling\\FacultyCpSatPlanner.cs",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\Telegram Desktop\\University-Timetable-and-Classroom-Management-System (2)\\University-Timetable-and-Classroom-Management-System\\Business_Logic_Layer\\FacultyScheduling\\FacultyDayPreferenceService.cs",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\Telegram Desktop\\University-Timetable-and-Classroom-Management-System (2)\\University-Timetable-and-Classroom-Management-System\\Business_Logic_Layer\\FacultyScheduling\\FacultyPracticalExchange.cs",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\Telegram Desktop\\University-Timetable-and-Classroom-Management-System (2)\\University-Timetable-and-Classroom-Management-System\\Business_Logic_Layer\\FacultyScheduling\\FacultyPreferenceMeasurement.cs",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\Telegram Desktop\\University-Timetable-and-Classroom-Management-System (2)\\University-Timetable-and-Classroom-Management-System\\Business_Logic_Layer\\FacultyScheduling\\FacultyPreferenceRules.cs",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\Telegram Desktop\\University-Timetable-and-Classroom-Management-System (2)\\University-Timetable-and-Classroom-Management-System\\Business_Logic_Layer\\FacultyScheduling\\FacultyPreferenceService.cs",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\Telegram Desktop\\University-Timetable-and-Classroom-Management-System (2)\\University-Timetable-and-Classroom-Management-System\\Business_Logic_Layer\\FacultyScheduling\\FacultyScheduleEditorService.cs",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\Telegram Desktop\\University-Timetable-and-Classroom-Management-System (2)\\University-Timetable-and-Classroom-Management-System\\Business_Logic_Layer\\FacultyScheduling\\FacultyScheduleModels.cs",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\Telegram Desktop\\University-Timetable-and-Classroom-Management-System (2)\\University-Timetable-and-Classroom-Management-System\\Business_Logic_Layer\\FacultyScheduling\\FacultySchedulingRuntime.cs",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\Telegram Desktop\\University-Timetable-and-Classroom-Management-System (2)\\University-Timetable-and-Classroom-Management-System\\Business_Logic_Layer\\FacultyScheduling\\ScheduleQualityAnalyzer.cs",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\Telegram Desktop\\University-Timetable-and-Classroom-Management-System (2)\\University-Timetable-and-Classroom-Management-System\\Business_Logic_Layer\\FacultyScheduling\\SchedulingCpSupport.cs",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\Telegram Desktop\\University-Timetable-and-Classroom-Management-System (2)\\University-Timetable-and-Classroom-Management-System\\Business_Logic_Layer\\Importing\\AcademicExcelImport.cs",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\Telegram Desktop\\University-Timetable-and-Classroom-Management-System (2)\\University-Timetable-and-Classroom-Management-System\\Business_Logic_Layer\\Importing\\ExcelImportModels.cs",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\Telegram Desktop\\University-Timetable-and-Classroom-Management-System (2)\\University-Timetable-and-Classroom-Management-System\\Business_Logic_Layer\\Importing\\ExcelImportSchema.cs",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\Telegram Desktop\\University-Timetable-and-Classroom-Management-System (2)\\University-Timetable-and-Classroom-Management-System\\Business_Logic_Layer\\Importing\\ExcelImportService.cs",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\Telegram Desktop\\University-Timetable-and-Classroom-Management-System (2)\\University-Timetable-and-Classroom-Management-System\\Business_Logic_Layer\\Importing\\ExcelImportTemplates.cs",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\Telegram Desktop\\University-Timetable-and-Classroom-Management-System (2)\\University-Timetable-and-Classroom-Management-System\\Business_Logic_Layer\\Importing\\ExcelWorkbookReader.cs",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\Telegram Desktop\\University-Timetable-and-Classroom-Management-System (2)\\University-Timetable-and-Classroom-Management-System\\Business_Logic_Layer\\Importing\\ImportCatalog.cs",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\Telegram Desktop\\University-Timetable-and-Classroom-Management-System (2)\\University-Timetable-and-Classroom-Management-System\\Business_Logic_Layer\\Importing\\ImportedTimetableRepair.cs",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\Telegram Desktop\\University-Timetable-and-Classroom-Management-System (2)\\University-Timetable-and-Classroom-Management-System\\Business_Logic_Layer\\Importing\\ImportedTimetableRepairPlanner.cs",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\Telegram Desktop\\University-Timetable-and-Classroom-Management-System (2)\\University-Timetable-and-Classroom-Management-System\\Business_Logic_Layer\\Importing\\ImportFileReader.cs",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\Telegram Desktop\\University-Timetable-and-Classroom-Management-System (2)\\University-Timetable-and-Classroom-Management-System\\Business_Logic_Layer\\Importing\\ImportLabels.cs",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\Telegram Desktop\\University-Timetable-and-Classroom-Management-System (2)\\University-Timetable-and-Classroom-Management-System\\Business_Logic_Layer\\Importing\\ImportValues.cs",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\Telegram Desktop\\University-Timetable-and-Classroom-Management-System (2)\\University-Timetable-and-Classroom-Management-System\\Business_Logic_Layer\\Importing\\PdfTableReader.cs",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\Telegram Desktop\\University-Timetable-and-Classroom-Management-System (2)\\University-Timetable-and-Classroom-Management-System\\Business_Logic_Layer\\Importing\\WeeklyPdfTimetableReader.cs",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\Telegram Desktop\\University-Timetable-and-Classroom-Management-System (2)\\University-Timetable-and-Classroom-Management-System\\Business_Logic_Layer\\Maintenance\\DatabaseMaintenanceService.cs",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\Telegram Desktop\\University-Timetable-and-Classroom-Management-System (2)\\University-Timetable-and-Classroom-Management-System\\Business_Logic_Layer\\Maintenance\\FourthYearPracticalMaintenance.cs",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\Telegram Desktop\\University-Timetable-and-Classroom-Management-System (2)\\University-Timetable-and-Classroom-Management-System\\Business_Logic_Layer\\Maintenance\\SchedulingResourceMaintenance.cs",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\Telegram Desktop\\University-Timetable-and-Classroom-Management-System (2)\\University-Timetable-and-Classroom-Management-System\\Business_Logic_Layer\\Rules\\ClassroomRules.cs",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\Telegram Desktop\\University-Timetable-and-Classroom-Management-System (2)\\University-Timetable-and-Classroom-Management-System\\Business_Logic_Layer\\Rules\\ScheduleDayRules.cs",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\Telegram Desktop\\University-Timetable-and-Classroom-Management-System (2)\\University-Timetable-and-Classroom-Management-System\\Business_Logic_Layer\\Rules\\ScheduleTimingRules.cs",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\Telegram Desktop\\University-Timetable-and-Classroom-Management-System (2)\\University-Timetable-and-Classroom-Management-System\\Business_Logic_Layer\\Scheduling\\FreshTimetablePlanner.cs",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\Telegram Desktop\\University-Timetable-and-Classroom-Management-System (2)\\University-Timetable-and-Classroom-Management-System\\Business_Logic_Layer\\Scheduling\\ScheduleBuildContext.cs",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\Telegram Desktop\\University-Timetable-and-Classroom-Management-System (2)\\University-Timetable-and-Classroom-Management-System\\Business_Logic_Layer\\Scheduling\\ScheduleConflictChecker.cs",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\Telegram Desktop\\University-Timetable-and-Classroom-Management-System (2)\\University-Timetable-and-Classroom-Management-System\\Business_Logic_Layer\\Scheduling\\ScheduleFacultySelector.cs",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\Telegram Desktop\\University-Timetable-and-Classroom-Management-System (2)\\University-Timetable-and-Classroom-Management-System\\Business_Logic_Layer\\Scheduling\\ScheduleGenerationModels.cs",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\Telegram Desktop\\University-Timetable-and-Classroom-Management-System (2)\\University-Timetable-and-Classroom-Management-System\\Business_Logic_Layer\\Scheduling\\ScheduleGenerationResult.cs",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\Telegram Desktop\\University-Timetable-and-Classroom-Management-System (2)\\University-Timetable-and-Classroom-Management-System\\Business_Logic_Layer\\Scheduling\\ScheduleGenerationState.cs",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\Telegram Desktop\\University-Timetable-and-Classroom-Management-System (2)\\University-Timetable-and-Classroom-Management-System\\Business_Logic_Layer\\Scheduling\\ScheduleGenerator.cs",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\Telegram Desktop\\University-Timetable-and-Classroom-Management-System (2)\\University-Timetable-and-Classroom-Management-System\\Business_Logic_Layer\\Scheduling\\ScheduleRequirementMatcher.cs",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\Telegram Desktop\\University-Timetable-and-Classroom-Management-System (2)\\University-Timetable-and-Classroom-Management-System\\Business_Logic_Layer\\Scheduling\\ScheduleRoomSelector.cs",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\Telegram Desktop\\University-Timetable-and-Classroom-Management-System (2)\\University-Timetable-and-Classroom-Management-System\\Business_Logic_Layer\\Scheduling\\TimetableAlternativeModels.cs",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\Telegram Desktop\\University-Timetable-and-Classroom-Management-System (2)\\University-Timetable-and-Classroom-Management-System\\Business_Logic_Layer\\Scheduling\\TimetableAlternativesService.cs",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\Telegram Desktop\\University-Timetable-and-Classroom-Management-System (2)\\University-Timetable-and-Classroom-Management-System\\University Timetable and Classroom Management System\\PresentationLayer\\BranchesForm.Designer.cs",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\Telegram Desktop\\University-Timetable-and-Classroom-Management-System (2)\\University-Timetable-and-Classroom-Management-System\\University Timetable and Classroom Management System\\PresentationLayer\\BranchesForm.resx",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\Telegram Desktop\\University-Timetable-and-Classroom-Management-System (2)\\University-Timetable-and-Classroom-Management-System\\University Timetable and Classroom Management System\\PresentationLayer\\ClassroomsForm.Designer.cs",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\Telegram Desktop\\University-Timetable-and-Classroom-Management-System (2)\\University-Timetable-and-Classroom-Management-System\\University Timetable and Classroom Management System\\PresentationLayer\\ClassroomsForm.resx",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\Telegram Desktop\\University-Timetable-and-Classroom-Management-System (2)\\University-Timetable-and-Classroom-Management-System\\University Timetable and Classroom Management System\\PresentationLayer\\ExcelImportForm.resx",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\Telegram Desktop\\University-Timetable-and-Classroom-Management-System (2)\\University-Timetable-and-Classroom-Management-System\\University Timetable and Classroom Management System\\PresentationLayer\\FacultyMembersForm.Designer.cs",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\Telegram Desktop\\University-Timetable-and-Classroom-Management-System (2)\\University-Timetable-and-Classroom-Management-System\\University Timetable and Classroom Management System\\PresentationLayer\\FacultyMembersForm.resx",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\Telegram Desktop\\University-Timetable-and-Classroom-Management-System (2)\\University-Timetable-and-Classroom-Management-System\\University Timetable and Classroom Management System\\PresentationLayer\\FacultyMemberSubjectsForm.Designer.cs",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\Telegram Desktop\\University-Timetable-and-Classroom-Management-System (2)\\University-Timetable-and-Classroom-Management-System\\University Timetable and Classroom Management System\\PresentationLayer\\FacultyMemberSubjectsForm.resx",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\Telegram Desktop\\University-Timetable-and-Classroom-Management-System (2)\\University-Timetable-and-Classroom-Management-System\\University Timetable and Classroom Management System\\PresentationLayer\\FacultyScheduleEditorForm.resx",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\Telegram Desktop\\University-Timetable-and-Classroom-Management-System (2)\\University-Timetable-and-Classroom-Management-System\\University Timetable and Classroom Management System\\PresentationLayer\\LoginForm.Designer.cs",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\Telegram Desktop\\University-Timetable-and-Classroom-Management-System (2)\\University-Timetable-and-Classroom-Management-System\\University Timetable and Classroom Management System\\PresentationLayer\\LoginForm.resx",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\Telegram Desktop\\University-Timetable-and-Classroom-Management-System (2)\\University-Timetable-and-Classroom-Management-System\\University Timetable and Classroom Management System\\PresentationLayer\\MainShellForm.Designer.cs",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\Telegram Desktop\\University-Timetable-and-Classroom-Management-System (2)\\University-Timetable-and-Classroom-Management-System\\University Timetable and Classroom Management System\\PresentationLayer\\MainShellForm.resx",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\Telegram Desktop\\University-Timetable-and-Classroom-Management-System (2)\\University-Timetable-and-Classroom-Management-System\\University Timetable and Classroom Management System\\PresentationLayer\\RegisterForm.Designer.cs",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\Telegram Desktop\\University-Timetable-and-Classroom-Management-System (2)\\University-Timetable-and-Classroom-Management-System\\University Timetable and Classroom Management System\\PresentationLayer\\RegisterForm.resx",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\Telegram Desktop\\University-Timetable-and-Classroom-Management-System (2)\\University-Timetable-and-Classroom-Management-System\\University Timetable and Classroom Management System\\PresentationLayer\\SchedulesForm.Designer.cs",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\Telegram Desktop\\University-Timetable-and-Classroom-Management-System (2)\\University-Timetable-and-Classroom-Management-System\\University Timetable and Classroom Management System\\PresentationLayer\\SchedulesForm.resx",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\Telegram Desktop\\University-Timetable-and-Classroom-Management-System (2)\\University-Timetable-and-Classroom-Management-System\\University Timetable and Classroom Management System\\PresentationLayer\\SectionsForm.Designer.cs",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\Telegram Desktop\\University-Timetable-and-Classroom-Management-System (2)\\University-Timetable-and-Classroom-Management-System\\University Timetable and Classroom Management System\\PresentationLayer\\SectionsForm.resx",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\Telegram Desktop\\University-Timetable-and-Classroom-Management-System (2)\\University-Timetable-and-Classroom-Management-System\\University Timetable and Classroom Management System\\PresentationLayer\\StudyYearsForm.Designer.cs",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\Telegram Desktop\\University-Timetable-and-Classroom-Management-System (2)\\University-Timetable-and-Classroom-Management-System\\University Timetable and Classroom Management System\\PresentationLayer\\StudyYearsForm.resx",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\Telegram Desktop\\University-Timetable-and-Classroom-Management-System (2)\\University-Timetable-and-Classroom-Management-System\\University Timetable and Classroom Management System\\PresentationLayer\\SubjectsForm.Designer.cs",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\Telegram Desktop\\University-Timetable-and-Classroom-Management-System (2)\\University-Timetable-and-Classroom-Management-System\\University Timetable and Classroom Management System\\PresentationLayer\\SubjectsForm.resx",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\Telegram Desktop\\University-Timetable-and-Classroom-Management-System (2)\\University-Timetable-and-Classroom-Management-System\\University Timetable and Classroom Management System\\PresentationLayer\\TimeSlotsForm.Designer.cs",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\Telegram Desktop\\University-Timetable-and-Classroom-Management-System (2)\\University-Timetable-and-Classroom-Management-System\\University Timetable and Classroom Management System\\PresentationLayer\\TimeSlotsForm.resx",
+      "unchanged": true
+    },
+    {
+      "path": "D:\\Telegram Desktop\\University-Timetable-and-Classroom-Management-System (2)\\University-Timetable-and-Classroom-Management-System\\University Timetable and Classroom Management System\\PresentationLayer\\TimetableAlternativesForm.resx",
+      "unchanged": true
+    }
+  ]
+}

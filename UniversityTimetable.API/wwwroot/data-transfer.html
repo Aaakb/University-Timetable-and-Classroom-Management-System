@@ -1,0 +1,30 @@
+﻿<!doctype html>
+<html lang="ar" dir="rtl">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>استيراد وحفظ الجداول</title><link rel="stylesheet" href="/css/app.css"><link rel="stylesheet" href="/css/preferences.css"><link rel="stylesheet" href="/css/data-transfer.css"><script type="module" src="/js/data-transfer.js"></script></head>
+<body><main class="preferences-page transfer-page">
+<a href="/index.html#schedules">← العودة إلى الجدول الدراسي</a>
+<div class="page-heading"><div><h1>استيراد البيانات ونسخ الجدول</h1><p>استورد ملفاتك، وراجع البيانات قبل الحفظ، واحفظ نسخة من الجدول للرجوع إليها لاحقًا.</p></div></div>
+<nav class="transfer-tabs" aria-label="أدوات البيانات"><a href="#import">استيراد Excel / PDF</a><a href="#backups">حفظ واستعادة الجدول</a></nav>
+<div id="transfer-error" class="error" role="alert" hidden></div><p id="transfer-status" role="status" aria-live="polite"></p><button id="cancel-transfer" class="secondary" hidden>إلغاء العملية الحالية</button>
+<section id="import-section">
+<fieldset id="import-controls" class="panel"><legend>١. فتح الملف وخيارات الاستيراد</legend>
+<div class="filters"><label>نوع الاستيراد<select id="import-mode"><option value="0">التدريسيون والمواد فقط</option><option value="1">جدول كامل</option><option value="2">جدول مع توليد المتبقي</option><option value="3">إصلاح جدول مستورد</option></select></label><label>الفصل<select id="import-semester"><option value="1">الأول</option><option value="2">الثاني</option></select></label><label>نطاق الدراسة<select id="import-session"><option value="">الكل</option></select></label><label>مهلة الإصلاح / ثانية<input type="number" id="import-seconds" min="1" max="120" value="20"></label></div>
+<div class="actions"><label>الملف (حتى 20 MB)<input id="import-file" type="file" accept=".xlsx,.pdf"></label><button id="open-import" class="primary">فتح الملف</button><button id="download-template" class="secondary">تنزيل قالب Excel</button><label class="check-label"><input type="checkbox" id="import-updates"> تحديث السجلات الموجودة</label></div>
+<p>تدعم ملفات PDF النصية والجداول الأسبوعية. راجع أسماء المواد والتدريسيين والأوقات بعد القراءة. اختر نطاق الدراسة عند وجود صباحي ومسائي.</p>
+</fieldset>
+<fieldset id="sheet-controls" class="panel" disabled><legend>٢. اختيار الأوراق وربط الأعمدة ومراجعة البيانات</legend>
+<div id="sheet-selection" class="attendance-days"></div><div class="filters"><label>الورقة المعروضة<select id="import-sheet"></select></label><label>نوع بيانات الورقة<select id="sheet-schema"></select></label></div>
+<p>حدد الأوراق المطلوب حفظها، واربط الأعمدة بالحقول. يمكنك تعديل الخلايا والتثبيت قبل التحقق. تعرض كل صفحة حتى 50 صفًا.</p>
+<div class="table-scroll" id="mapping-table"></div><div class="table-scroll" id="source-table"></div><div class="actions"><button id="source-prev" class="secondary">السابق</button><span id="source-page"></span><button id="source-next" class="secondary">التالي</button></div>
+</fieldset>
+<fieldset id="preview-controls" class="panel" disabled><legend>٣. التحقق والمعاينة والحفظ</legend>
+<div class="actions"><button id="validate-import" class="primary">التحقق من البيانات</button><button id="skip-import" class="secondary">التحقق مع تخطي الصفوف غير الصالحة</button><button id="generate-import" class="secondary" disabled>توليد / إصلاح ومعاينة</button><button id="save-import" class="primary" disabled>حفظ الاستيراد…</button></div>
+<p id="import-summary" role="status"></p><div class="table-scroll" id="import-report"></div><div class="table-scroll" id="import-result"></div>
+</fieldset>
+</section>
+<section id="backup-section" hidden>
+<fieldset id="backup-controls" class="panel"><legend>حفظ نسخة الجدول</legend><p>تنزيل نسخة لمحاضرات الفصلين وحالة التثبيت، متوافقة مع Windows Forms. لا تشمل نسخة الجدول استعادة الموارد الأكاديمية أو الحسابات.</p><button id="download-backup" class="primary">تنزيل نسخة الجدول</button></fieldset>
+<fieldset id="restore-controls" class="panel"><legend>استعادة نسخة محفوظة</legend><label>ملف نسخة الجدول JSON (حتى 20 MB)<input type="file" id="restore-file" accept=".json"></label><div class="actions"><button id="preview-restore" class="secondary">معاينة النسخة وفحصها</button><button id="restore-backup" class="primary" disabled>استعادة النسخة…</button></div><p>الاستعادة تستبدل محاضرات الفصلين بعد التأكيد. تُحفظ نسخة أمان من الجدول الحالي قبل الاستبدال.</p><p id="restore-summary" role="status"></p><ul id="restore-issues"></ul><a id="safety-download" hidden>تنزيل نسخة الأمان للجدول السابق</a></fieldset>
+</section>
+<dialog id="transfer-confirm"><form method="dialog"><h2>تأكيد الحفظ</h2><p id="transfer-confirm-text"></p><div class="actions"><button value="yes" class="primary">تأكيد</button><button value="cancel" class="secondary" autofocus>إلغاء</button></div></form></dialog>
+</main></body></html>

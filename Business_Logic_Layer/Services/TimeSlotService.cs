@@ -1,4 +1,4 @@
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Data_Access_Layer;
 using University_Timetable_and_Classroom_Management_System.Models;
 
@@ -6,6 +6,19 @@ namespace University_Timetable_and_Classroom_Management_System.BusinessLayer
 {
     public class TimeSlotService
     {
+        public static (TimeSpan Start, TimeSpan End) DefaultLecturePeriod => ScheduleTimingRules.DefaultLectureSlots[0];
+
+        public static void ValidateLectureRange(TimeSpan startTime, TimeSpan endTime)
+        {
+            if (endTime <= startTime)
+                throw new ArgumentException("End time must be after start time.");
+
+            if (!ScheduleTimingRules.IsValidLectureRange(startTime, endTime))
+            {
+                throw new ArgumentException("Choose start and end times within the same day, using whole minutes. Lecture duration is flexible.");
+            }
+        }
+
         public async Task<List<TimeSlot>> GetAllAsync()
         {
             await using var context = new AppDbContext();
@@ -15,9 +28,7 @@ namespace University_Timetable_and_Classroom_Management_System.BusinessLayer
                 .OrderBy(t => t.StartTime)
                 .ToListAsync();
 
-            return timeSlots
-                .Where(ScheduleTimingRules.IsOfficialLectureSlot)
-                .ToList();
+            return timeSlots;
         }
 
         public async Task<TimeSlot?> GetByIdAsync(int id)
@@ -27,31 +38,48 @@ namespace University_Timetable_and_Classroom_Management_System.BusinessLayer
                 .AsNoTracking()
                 .FirstOrDefaultAsync(t => t.TimeSlotID == id && !t.IsBreak);
 
-            return timeSlot is not null && ScheduleTimingRules.IsOfficialLectureSlot(timeSlot)
-                ? timeSlot
-                : null;
+            return timeSlot;
         }
 
         public async Task<TimeSlot> AddAsync(TimeSlot timeSlot)
         {
             await using var context = new AppDbContext();
-            timeSlot.IsBreak = false;
+            await using var transaction = await context.Database.BeginTransactionAsync(System.Data.IsolationLevel.Serializable);
             timeSlot.TimeSlotID = await AutoKeyGenerator.NextAsync(context.TimeSlots.Select(t => t.TimeSlotID));
+            var result = await AddInContextAsync(context, timeSlot);
+            await transaction.CommitAsync();
+            return result;
+        }
+
+        internal static async Task<TimeSlot> AddInContextAsync(AppDbContext context, TimeSlot timeSlot)
+        {
+            timeSlot.IsBreak = false;
             await ValidateAsync(context, timeSlot, false);
             await context.TimeSlots.AddAsync(timeSlot);
             await ManualKeySaveHelper.SaveWithManualKeyAsync(context, "[TimeSlots]");
             return timeSlot;
         }
 
+
         public async Task<TimeSlot> UpdateAsync(TimeSlot timeSlot)
         {
             await using var context = new AppDbContext();
+            await using var transaction = await context.Database.BeginTransactionAsync(System.Data.IsolationLevel.Serializable);
+            var result = await UpdateInContextAsync(context, timeSlot);
+            await transaction.CommitAsync();
+            return result;
+        }
+
+        internal static async Task<TimeSlot> UpdateInContextAsync(AppDbContext context, TimeSlot timeSlot)
+        {
             timeSlot.IsBreak = false;
             await ValidateAsync(context, timeSlot, true);
-            context.TimeSlots.Update(timeSlot);
+            var existing = await context.TimeSlots.SingleAsync(slot => slot.TimeSlotID == timeSlot.TimeSlotID);
+            context.Entry(existing).CurrentValues.SetValues(timeSlot);
             await context.SaveChangesAsync();
             return timeSlot;
         }
+
 
         public async Task DeleteAsync(int id)
         {
@@ -65,32 +93,10 @@ namespace University_Timetable_and_Classroom_Management_System.BusinessLayer
 
         private static async Task ValidateAsync(AppDbContext context, TimeSlot timeSlot, bool isUpdate)
         {
-            if (timeSlot.TimeSlotID <= 0)
-            {
-                throw new ArgumentException("Time slot ID is required.");
-            }
+            await InputValidation.RecordIdAsync(timeSlot.TimeSlotID, isUpdate,
+                () => context.TimeSlots.AnyAsync(t => t.TimeSlotID == timeSlot.TimeSlotID), "Time slot");
 
-            var idExists = await context.TimeSlots.AnyAsync(t => t.TimeSlotID == timeSlot.TimeSlotID);
-
-            if (!isUpdate && idExists)
-            {
-                throw new ArgumentException("Time slot ID already exists.");
-            }
-
-            if (isUpdate && !idExists)
-            {
-                throw new KeyNotFoundException("Time slot not found.");
-            }
-
-            if (timeSlot.EndTime <= timeSlot.StartTime)
-            {
-                throw new ArgumentException("End time must be after start time.");
-            }
-
-            if (!ScheduleTimingRules.IsValidLectureRange(timeSlot.StartTime, timeSlot.EndTime))
-            {
-                throw new ArgumentException("Time slots must be 80 minutes and match the official lecture periods.");
-            }
+            ValidateLectureRange(timeSlot.StartTime, timeSlot.EndTime);
 
             var exists = await context.TimeSlots.AnyAsync(t =>
                 t.StartTime == timeSlot.StartTime &&
@@ -103,25 +109,19 @@ namespace University_Timetable_and_Classroom_Management_System.BusinessLayer
                 throw new ArgumentException("Time slot already exists.");
             }
 
-            if (timeSlot.IsBreak)
-            {
-                return;
-            }
-
             var lectureSlots = await context.TimeSlots
                 .AsNoTracking()
                 .Where(t => !t.IsBreak && (!isUpdate || t.TimeSlotID != timeSlot.TimeSlotID))
                 .ToListAsync();
 
             bool tooCloseToAnotherLecture = lectureSlots
-                .Where(ScheduleTimingRules.IsOfficialLectureSlot)
                 .Any(t =>
                     timeSlot.StartTime < t.EndTime + ScheduleTimingRules.LectureGap &&
                     timeSlot.EndTime + ScheduleTimingRules.LectureGap > t.StartTime);
 
             if (tooCloseToAnotherLecture)
             {
-                throw new ArgumentException("Lecture time slots cannot overlap.");
+                throw new ArgumentException("Lecture periods must not overlap and must leave at least a 10-minute gap.");
             }
         }
     }

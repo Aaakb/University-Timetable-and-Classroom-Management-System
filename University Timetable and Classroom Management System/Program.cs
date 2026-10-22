@@ -7,6 +7,15 @@ namespace University_Timetable_and_Classroom_Management_System
         [STAThread]
         private static void Main(string[] args)
         {
+            // Deployment smoke check: deliberately runs before all database/UI startup.
+            if (args.Contains("--check-cp-sat", StringComparer.OrdinalIgnoreCase))
+            {
+                try { Console.WriteLine(FacultySchedulingRuntime.Check()); }
+                catch (Exception ex) { Console.Error.WriteLine(ex); Environment.ExitCode = 1; }
+                return;
+            }
+
+            ArabicUi.InitializeCulture();
             ApplicationConfiguration.Initialize();
             bool updateDatabaseOnly = args.Contains("--update-db", StringComparer.OrdinalIgnoreCase);
 
@@ -52,8 +61,8 @@ namespace University_Timetable_and_Classroom_Management_System
                 {
                     UiMessages.ShowError(
                         null,
-                        $"Database update could not be completed.\n\n{UiMessages.GetUserSafeExceptionMessage(ex)}",
-                        "Database Update");
+                        $"تعذر إكمال تحديث قاعدة البيانات.\n\n{UiMessages.GetUserSafeExceptionMessage(ex)}",
+                        "تحديث قاعدة البيانات");
                 }
 
                 return false;

@@ -1,0 +1,1008 @@
+tests\AssignmentScopes\Program.cs:20:async Task<List<Schedule>> Rows() { await using var db = new AppDbContext(); return await db.Schedules.AsNoTracking().OrderBy(s => s.ScheduleID).ToListAsync(); }
+tests\AssignmentScopes\Program.cs:26:    db.StudyYears.AddRange(new StudyYear { StudyYearID = 1, YearName = "First Year" }, new StudyYear { StudyYearID = 3, YearName = "Third Year" }, new StudyYear { StudyYearID = 4, YearName = "Fourth Year" });
+tests\AssignmentScopes\Program.cs:27:    db.Branches.AddRange(new Branch { BranchID = 1, BranchName = "Information Technology" }, new Branch { BranchID = 2, BranchName = "Cyber Security" });
+tests\AssignmentScopes\Program.cs:30:        db.FacultyMembers.Add(new() { FacultyMemberID = id, FullName = "Teacher " + id });
+tests\AssignmentScopes\Program.cs:31:        db.Classrooms.Add(new() { ClassroomID = id, ClassroomNumber = "Lab " + id, RoomType = "Lab", Capacity = 30 });
+tests\AssignmentScopes\Program.cs:32:        db.Classrooms.Add(new() { ClassroomID = id + 10, ClassroomNumber = "Lecture " + id, RoomType = "Lecture", Capacity = 40 });
+tests\AssignmentScopes\Program.cs:33:        db.TimeSlots.Add(new() { TimeSlotID = id, StartTime = new TimeSpan(8, 30, 0) + TimeSpan.FromMinutes((id - 1) * 90), EndTime = new TimeSpan(9, 50, 0) + TimeSpan.FromMinutes((id - 1) * 90) });
+tests\AssignmentScopes\Program.cs:35:    db.Sections.AddRange(new Section { SectionID = 1, SectionName = "A", StudyYearID = 1, StudentCount = 30 },
+tests\AssignmentScopes\Program.cs:40:    db.Subjects.AddRange(new Subject { SubjectID = 1, SubjectName = "Common subject", StudyYearID = 1, SemesterNumber = 1, TheoreticalHours = 2, PracticalHours = 2 },
+tests\AssignmentScopes\Program.cs:43:    db.FacultyMemberSubjects.Add(new() { FacultyMemberID = 3, SubjectID = 1 });
+tests\AssignmentScopes\Program.cs:45:    await db.Database.ExecuteSqlRawAsync("ALTER TABLE FacultyMemberSubjects DROP CONSTRAINT FK_FacultyMemberSubjects_Sections_SectionID; DROP INDEX IX_FacultyMemberSubjects_SectionID ON FacultyMemberSubjects; ALTER TABLE FacultyMemberSubjects DROP COLUMN SectionID;");
+tests\AssignmentScopes\Program.cs:48:    var legacy = await db.FacultyMemberSubjects.AsNoTracking().SingleAsync();
+tests\AssignmentScopes\Program.cs:84:await using (var db = new AppDbContext()) await db.FacultyMemberSubjects.ExecuteUpdateAsync(s => s.SetProperty(a => a.SectionID, (int?)null));
+tests\AssignmentScopes\Program.cs:89:    if (reference!["Table"]!.GetValue<string>() == "FacultyMemberSubjects")
+tests\AssignmentScopes\Program.cs:96:legacyNode["Checksum"] = (string)typeof(TimetableBackupService).GetMethod("Checksum", BindingFlags.Static | BindingFlags.NonPublic)!.Invoke(null, new[] { payload })!;
+tests\AssignmentScopes\Program.cs:101:        await db.FacultyMemberSubjects.Where(a => a.FacultyMemberID == assignment.FacultyMemberID && a.SubjectID == assignment.SubjectID)
+tests\AssignmentScopes\Program.cs:104:await using (var db = new AppDbContext()) await db.Schedules.ExecuteDeleteAsync();
+tests\AssignmentScopes\Program.cs:112:    var table = new DataTable("FacultyMemberSubjects"); foreach (string name in columns) table.Columns.Add(name);
+tests\AssignmentScopes\Program.cs:114:    var book = new ExcelWorkbookData(); book.Sheets.Add(new("FacultyMemberSubjects", table, new[] { 2 })); return book;
+tests\AssignmentScopes\Program.cs:126:    var subject = await db.Subjects.AsNoTracking().SingleAsync(s => s.SubjectID == 2); subject.BranchID = 2;
+tests\AssignmentScopes\Program.cs:128:    var section = await db.Sections.AsNoTracking().SingleAsync(s => s.SectionID == 3); section.BranchID = 2;
+tests\AssignmentScopes\Program.cs:142:        object? Call(string method, params object?[] values) => type.GetMethod(method, flags)!.Invoke(form, values);
+tests\AssignmentScopes\Program.cs:145:        Set("assignmentSubjects", db.Subjects.AsNoTracking().ToList()); Set("assignmentSections", db.Sections.AsNoTracking().ToList()); Set("assignmentBranches", db.Branches.AsNoTracking().ToList());
+tools\RestoreRoomConfiguration\Program.cs:18:object Scalars(object value)=>value.GetType().GetProperties().Where(p=>p.PropertyType.IsValueType||p.PropertyType==typeof(string))
+tools\RestoreRoomConfiguration\Program.cs:22:async Task<object> Catalog(AppDbContext db){var task=(Task)catalogType.GetMethod("LoadAsync")!.Invoke(null,[db,CancellationToken.None])!;await task;return task.GetType().GetProperty("Result")!.GetValue(task)!;}
+tools\RestoreRoomConfiguration\Program.cs:23:string Version(object c)=>(string)catalogType.GetMethod("Version")!.Invoke(c,null)!;
+tools\RestoreRoomConfiguration\Program.cs:24:Dictionary<Type,List<object>> Tables(object c)=>(Dictionary<Type,List<object>>)catalogType.GetProperty("Tables")!.GetValue(c)!;
+tools\RestoreRoomConfiguration\Program.cs:28:var beforeRooms=await db.Classrooms.AsNoTracking().OrderBy(r=>r.ClassroomID).ToListAsync();
+tools\RestoreRoomConfiguration\Program.cs:29:var beforeRows=await db.Schedules.AsNoTracking().OrderBy(s=>s.ScheduleID).ToListAsync();
+tools\RestoreRoomConfiguration\Program.cs:34:    var target=config.RootElement.GetProperty("rooms").EnumerateArray().Select(r=>new Classroom{
+tools\RestoreRoomConfiguration\Program.cs:35:        ClassroomID=r.GetProperty("id").GetInt32(),ClassroomNumber=r.GetProperty("name").GetString()!,
+tools\RestoreRoomConfiguration\Program.cs:36:        RoomType=r.GetProperty("type").GetString()!,
+tools\RestoreRoomConfiguration\Program.cs:38:        Capacity=beforeRooms.Single(old=>old.ClassroomID==r.GetProperty("id").GetInt32()).Capacity
+tools\RestoreRoomConfiguration\Program.cs:43:    var sections=await db.Sections.AsNoTracking().ToDictionaryAsync(s=>s.SectionID);
+tools\RestoreRoomConfiguration\Program.cs:89:        var result=planner.GetMethod("Solve")!.Invoke(null,[catalog,imported,planned.Where(s=>s.SemesterNumber!=semester).ToList(),55.0,CancellationToken.None,false,null,false,false])!;
+tools\RestoreRoomConfiguration\Program.cs:90:        Console.WriteLine("Semester "+semester+" search: "+result.GetType().GetProperty("Status")!.GetValue(result));
+tools\RestoreRoomConfiguration\Program.cs:91:        var solved=(List<Schedule>?)result.GetType().GetProperty("Plan")!.GetValue(result);
+tools\RestoreRoomConfiguration\Program.cs:107:Check(plan.Schedules.Count==beforeRows.Count,"No lecture is added or removed");
+tools\RestoreRoomConfiguration\Program.cs:108:foreach(var row in plan.Schedules)
+tools\RestoreRoomConfiguration\Program.cs:116:var existing=await db.Classrooms.ToListAsync();
+tools\RestoreRoomConfiguration\Program.cs:119:var changed=plan.Schedules.Where(row=>Json(row)!=Json(beforeRows.Single(s=>s.ScheduleID==row.ScheduleID))).ToList();
+tools\RestoreRoomConfiguration\Program.cs:122:foreach(var room in removed)Check(!await db.Schedules.AnyAsync(s=>s.ClassroomID==room.ClassroomID),"All lectures transferred from extra room "+room.ClassroomID);
+tools\RestoreRoomConfiguration\Program.cs:123:db.Classrooms.RemoveRange(removed);await db.SaveChangesAsync();
+tools\RestoreRoomConfiguration\Program.cs:124:var validate=typeof(ScheduleService).GetMethod("ValidateAsync",BindingFlags.Static|BindingFlags.NonPublic)!;
+tools\RestoreRoomConfiguration\Program.cs:125:foreach(var row in plan.Schedules)await(Task)validate.Invoke(null,[db,row,true,true])!;
+tools\RestoreRoomConfiguration\Program.cs:131:var audit=new{Database=args[1],TotalLectures=plan.Schedules.Count,
+tools\RestoreRoomConfiguration\Program.cs:132:    ChangedRooms=plan.Schedules.Count(row=>row.ClassroomID!=beforeRows.Single(s=>s.ScheduleID==row.ScheduleID).ClassroomID),
+tools\RestoreRoomConfiguration\Program.cs:133:    ChangedTimes=plan.Schedules.Count(row=>{var b=beforeRows.Single(s=>s.ScheduleID==row.ScheduleID);return row.DayOfWeek!=b.DayOfWeek||row.TimeSlotID!=b.TimeSlotID;}),
+tools\RestoreRoomConfiguration\Program.cs:139:record Plan(string BeforeVersion,List<Classroom> Rooms,List<Schedule> Schedules);
+Business_Logic_Layer\Services\TimeSlotService.cs:25:            var timeSlots = await context.TimeSlots
+Business_Logic_Layer\Services\TimeSlotService.cs:37:            var timeSlot = await context.TimeSlots
+Business_Logic_Layer\Services\TimeSlotService.cs:48:            timeSlot.TimeSlotID = await AutoKeyGenerator.NextAsync(context.TimeSlots.Select(t => t.TimeSlotID));
+Business_Logic_Layer\Services\TimeSlotService.cs:58:            await context.TimeSlots.AddAsync(timeSlot);
+Business_Logic_Layer\Services\TimeSlotService.cs:59:            await ManualKeySaveHelper.SaveWithManualKeyAsync(context, "[TimeSlots]");
+Business_Logic_Layer\Services\TimeSlotService.cs:77:            var existing = await context.TimeSlots.SingleAsync(slot => slot.TimeSlotID == timeSlot.TimeSlotID);
+Business_Logic_Layer\Services\TimeSlotService.cs:87:            var timeSlot = await context.TimeSlots.FindAsync(id)
+Business_Logic_Layer\Services\TimeSlotService.cs:90:            context.TimeSlots.Remove(timeSlot);
+Business_Logic_Layer\Services\TimeSlotService.cs:97:                () => context.TimeSlots.AnyAsync(t => t.TimeSlotID == timeSlot.TimeSlotID), "Time slot");
+Business_Logic_Layer\Services\TimeSlotService.cs:101:            var exists = await context.TimeSlots.AnyAsync(t =>
+Business_Logic_Layer\Services\TimeSlotService.cs:112:            var lectureSlots = await context.TimeSlots
+Business_Logic_Layer\Services\SubjectService.cs:12:            var subjects = await context.Subjects
+Business_Logic_Layer\Services\SubjectService.cs:30:            return await context.Subjects
+Business_Logic_Layer\Services\SubjectService.cs:40:            subject.SubjectID = await AutoKeyGenerator.FirstAvailableAsync(context.Subjects.Select(s => s.SubjectID));
+Business_Logic_Layer\Services\SubjectService.cs:49:            await context.Subjects.AddAsync(subject);
+Business_Logic_Layer\Services\SubjectService.cs:50:            await ManualKeySaveHelper.SaveWithManualKeyAsync(context, "[Subjects]");
+Business_Logic_Layer\Services\SubjectService.cs:66:            var existing = await context.Subjects.SingleOrDefaultAsync(s => s.SubjectID == subject.SubjectID && !s.IsDeleted)
+Business_Logic_Layer\Services\SubjectService.cs:72:            var assignedSections = await context.FacultyMemberSubjects.Where(a => a.SubjectID == subject.SubjectID && a.SectionID != null)
+Business_Logic_Layer\Services\SubjectService.cs:76:            var linkedSchedules = await context.Schedules.Where(s => s.SubjectID == subject.SubjectID).ToListAsync();
+Business_Logic_Layer\Services\SubjectService.cs:92:                var otherSchedules = await context.Schedules.AsNoTracking()
+Business_Logic_Layer\Services\SubjectService.cs:118:            var subject = await context.Subjects.FindAsync(id)
+Business_Logic_Layer\Services\SubjectService.cs:131:                () => context.Subjects.AnyAsync(s => s.SubjectID == subject.SubjectID), "Subject");
+Business_Logic_Layer\Services\SubjectService.cs:149:            if (!await context.StudyYears.AnyAsync(sy => sy.StudyYearID == subject.StudyYearID))
+Business_Logic_Layer\Services\SubjectService.cs:165:                !await context.Branches.AnyAsync(b => b.BranchID == subject.BranchID.Value))
+Business_Logic_Layer\Services\SubjectService.cs:173:            var exists = await context.Subjects.AnyAsync(s =>
+tests\AssignmentLectureTypes\Program.cs:19:async Task<List<Schedule>> Rows() { await using var db = new AppDbContext(); return await db.Schedules.AsNoTracking().OrderBy(s => s.ScheduleID).ToListAsync(); }
+tests\AssignmentLectureTypes\Program.cs:24:    db.StudyYears.Add(new() { StudyYearID = 4, YearName = "Fourth Year" });
+tests\AssignmentLectureTypes\Program.cs:25:    db.Branches.Add(new() { BranchID = 1, BranchName = "Computer Science" });
+tests\AssignmentLectureTypes\Program.cs:26:    db.Sections.Add(new() { SectionID = 1, SectionName = "A", StudyYearID = 4, BranchID = 1, StudentCount = 30 });
+tests\AssignmentLectureTypes\Program.cs:27:    db.Subjects.Add(new() { SubjectID = 1, SubjectName = "Separate theory and practical", StudyYearID = 4, BranchID = 1, SemesterNumber = 1, TheoreticalHours = 2, PracticalHours = 2 });
+tests\AssignmentLectureTypes\Program.cs:30:        db.FacultyMembers.Add(new() { FacultyMemberID = i, FullName = "Teacher " + i });
+tests\AssignmentLectureTypes\Program.cs:31:        db.TimeSlots.Add(new() { TimeSlotID = i, StartTime = TimeSpan.FromHours(8 + 2 * i), EndTime = TimeSpan.FromHours(9 + 2 * i) });
+tests\AssignmentLectureTypes\Program.cs:33:    db.Classrooms.AddRange(new Classroom { ClassroomID = 1, ClassroomNumber = "Lecture", RoomType = "Lecture", Capacity = 30 },
+tests\AssignmentLectureTypes\Program.cs:35:    db.FacultyMemberSubjects.Add(new() { FacultyMemberID = 1, SubjectID = 1 });
+tests\AssignmentLectureTypes\Program.cs:38:        DECLARE @constraint sysname=(SELECT name FROM sys.default_constraints WHERE parent_object_id=OBJECT_ID('FacultyMemberSubjects') AND parent_column_id=COLUMNPROPERTY(OBJECT_ID('FacultyMemberSubjects'),'LectureType','ColumnId'));
+tests\AssignmentLectureTypes\Program.cs:39:        IF @constraint IS NOT NULL EXEC('ALTER TABLE FacultyMemberSubjects DROP CONSTRAINT '+@constraint);
+tests\AssignmentLectureTypes\Program.cs:40:        ALTER TABLE FacultyMemberSubjects DROP COLUMN LectureType;
+tests\AssignmentLectureTypes\Program.cs:45:    Check((await db.FacultyMemberSubjects.SingleAsync()).LectureType == "Both", "Legacy schema upgrades idempotently with Both and preserves assignment identities");
+tests\AssignmentLectureTypes\Program.cs:65:    var table = new DataTable("FacultyMemberSubjects"); foreach(var column in columns) table.Columns.Add(column);
+tests\AssignmentLectureTypes\Program.cs:67:    return new("FacultyMemberSubjects",table,[2]);
+tests\AssignmentLectureTypes\Program.cs:81:await using (var db = new AppDbContext()) await db.FacultyMemberSubjects.ExecuteUpdateAsync(a => a.SetProperty(x => x.LectureType,"Both"));
+tests\AssignmentLectureTypes\Program.cs:84:foreach(var reference in node["Payload"]!["References"]!.AsArray().Where(r => r!["Table"]!.GetValue<string>()=="FacultyMemberSubjects"))
+tests\AssignmentLectureTypes\Program.cs:91:node["Checksum"]=(string)typeof(TimetableBackupService).GetMethod("Checksum",BindingFlags.Static|BindingFlags.NonPublic)!.Invoke(null,[payload])!;
+tests\AssignmentLectureTypes\Program.cs:98:await using(var db=new AppDbContext()) await db.Schedules.ExecuteDeleteAsync();
+tests\IncrementalGeneration\Program.cs:9:async Task<List<Schedule>> Rows(){await using var db=new AppDbContext();return await db.Schedules.AsNoTracking().OrderBy(s=>s.ScheduleID).ToListAsync();}
+tests\IncrementalGeneration\Program.cs:16: db.StudyYears.Add(new(){StudyYearID=4,YearName="Fourth Year"});db.Branches.Add(new(){BranchID=1,BranchName="IT"});
+tests\IncrementalGeneration\Program.cs:17: db.Sections.Add(new(){SectionID=1,SectionName="A",StudentCount=30,StudyYearID=4,BranchID=1});
+tests\IncrementalGeneration\Program.cs:18: db.FacultyMembers.AddRange(new FacultyMember{FacultyMemberID=1,FullName="New Teacher"},new FacultyMember{FacultyMemberID=2,FullName="Existing Teacher"});
+tests\IncrementalGeneration\Program.cs:19: db.Classrooms.AddRange(new Classroom{ClassroomID=1,ClassroomNumber="Lecture",RoomType="Lecture",Capacity=60},new Classroom{ClassroomID=2,ClassroomNumber="Lab",RoomType="Lab",Capacity=30});
+tests\IncrementalGeneration\Program.cs:20: for(int p=1;p<=3;p++)db.TimeSlots.Add(new(){TimeSlotID=p,StartTime=new TimeSpan(8,30,0)+TimeSpan.FromMinutes((p-1)*110),EndTime=new TimeSpan(10,10,0)+TimeSpan.FromMinutes((p-1)*110)});
+tests\IncrementalGeneration\Program.cs:23:  db.Subjects.Add(new(){SubjectID=id,SubjectName=id==11?"New mixed subject":"Existing "+id,StudyYearID=4,BranchID=1,SemesterNumber=2,TheoreticalHours=2,PracticalHours=id==11?2:0,CreditUnits=2});
+tests\IncrementalGeneration\Program.cs:24:  db.FacultyMemberSubjects.Add(new(){SubjectID=id,FacultyMemberID=id==11?1:2});
+tests\IncrementalGeneration\Program.cs:28: for(int p=1;p<=(day is "Sunday" or "Tuesday"?2:3);p++)db.Schedules.Add(Lecture(index++,2,day,p));
+tests\IncrementalGeneration\Program.cs:37:var validate=typeof(ScheduleService).GetMethod("ValidateAsync",BindingFlags.Static|BindingFlags.NonPublic)!;
+tests\IncrementalGeneration\Program.cs:43: await db.Schedules.Where(s=>s.SubjectID==11).ExecuteDeleteAsync();
+tests\IncrementalGeneration\Program.cs:44: for(int p=1;p<=3;p++)db.Schedules.Add(Lecture(1,2,"Monday",p));
+tests\IncrementalGeneration\Program.cs:45: db.Schedules.AddRange(Lecture(1,2,"Sunday",3),Lecture(1,2,"Tuesday",3));
+tools\AssignmentScopeUpgrade\Program.cs:15:int exists = await Scalar("SELECT CASE WHEN COL_LENGTH(N'dbo.FacultyMemberSubjects',N'SectionID') IS NULL THEN 0 ELSE 1 END");
+tools\AssignmentScopeUpgrade\Program.cs:19:int count = await Scalar("SELECT COUNT(*) FROM FacultyMemberSubjects");
+tools\AssignmentScopeUpgrade\Program.cs:20:int keys = await Scalar("SELECT COALESCE(CHECKSUM_AGG(BINARY_CHECKSUM(FacultyMemberID,SubjectID)),0) FROM FacultyMemberSubjects");
+tools\AssignmentScopeUpgrade\Program.cs:21:string before = JsonSerializer.Serialize(await db.Schedules.AsNoTracking().OrderBy(s => s.ScheduleID).ToListAsync());
+tools\AssignmentScopeUpgrade\Program.cs:23:if (count != await db.FacultyMemberSubjects.CountAsync() ||
+tools\AssignmentScopeUpgrade\Program.cs:24:    keys != await Scalar("SELECT COALESCE(CHECKSUM_AGG(BINARY_CHECKSUM(FacultyMemberID,SubjectID)),0) FROM FacultyMemberSubjects") ||
+tools\AssignmentScopeUpgrade\Program.cs:25:    (exists == 0 && await db.FacultyMemberSubjects.AnyAsync(a => a.SectionID != null)) ||
+tools\AssignmentScopeUpgrade\Program.cs:26:    before != JsonSerializer.Serialize(await db.Schedules.AsNoTracking().OrderBy(s => s.ScheduleID).ToListAsync()))
+Business_Logic_Layer\Services\StudyYearService.cs:12:            var studyYears = await context.StudyYears.AsNoTracking().ToListAsync();
+Business_Logic_Layer\Services\StudyYearService.cs:23:            return await context.StudyYears.AsNoTracking().FirstOrDefaultAsync(sy => sy.StudyYearID == id);
+Business_Logic_Layer\Services\StudyYearService.cs:29:            studyYear.StudyYearID = await AutoKeyGenerator.NextAsync(context.StudyYears.Select(sy => sy.StudyYearID));
+Business_Logic_Layer\Services\StudyYearService.cs:36:            await context.StudyYears.AddAsync(studyYear);
+Business_Logic_Layer\Services\StudyYearService.cs:37:            await ManualKeySaveHelper.SaveWithManualKeyAsync(context, "[StudyYears]");
+Business_Logic_Layer\Services\StudyYearService.cs:51:            context.StudyYears.Update(studyYear);
+Business_Logic_Layer\Services\StudyYearService.cs:60:            var studyYear = await context.StudyYears.FindAsync(id)
+Business_Logic_Layer\Services\StudyYearService.cs:63:            context.StudyYears.Remove(studyYear);
+Business_Logic_Layer\Services\StudyYearService.cs:70:                () => context.StudyYears.AnyAsync(sy => sy.StudyYearID == studyYear.StudyYearID), "Study year");
+Business_Logic_Layer\Services\StudyYearService.cs:79:            var exists = await context.StudyYears.AnyAsync(sy =>
+tests\ArabicInterfaces\Program.cs:28:        ui.GetMethod("InitializeCulture")!.Invoke(null, null);
+tests\ArabicInterfaces\Program.cs:34:            ui.GetMethod("Apply")!.Invoke(null, [control]);
+tests\ArabicInterfaces\Program.cs:60:                var schedule = control.GetType().GetMethod("ReadScheduleFromForm", BindingFlags.Instance | BindingFlags.NonPublic)!.Invoke(control, null)!;
+tests\ArabicInterfaces\Program.cs:61:                Check("Schedule editor reads the canonical day", (string)schedule.GetType().GetProperty("DayOfWeek")!.GetValue(schedule)! == "Sunday");
+tests\ArabicInterfaces\Program.cs:62:                Check("Schedule editor reads the canonical lecture type", (string)schedule.GetType().GetProperty("LectureType")!.GetValue(schedule)! == "Practical");
+tests\ArabicInterfaces\Program.cs:79:        var translator = assembly.GetType(Ns + "ArabicUiText")!.GetMethod("Message")!;
+tests\ArabicInterfaces\Program.cs:102:                foreach (string page in new[] { "Branches", "StudyYears", "Sections", "Subjects", "Classrooms", "TimeSlots", "FacultyMembers", "FacultyAssignments", "Schedules" })
+tests\ArabicInterfaces\Program.cs:105:                    button.GetType().GetMethod("PerformClick")!.Invoke(button, null);
+tests\ArabicInterfaces\Program.cs:113:                    if (page is "Branches" or "Classrooms" or "Schedules")
+tests\FourthYearPractical\Program.cs:17:async Task<List<Schedule>> Rows() { await using var db = new AppDbContext(); return await db.Schedules.AsNoTracking().OrderBy(s => s.ScheduleID).ToListAsync(); }
+tests\FourthYearPractical\Program.cs:23:    db.StudyYears.AddRange(new StudyYear { StudyYearID = 1, YearName = "First Year" }, new StudyYear { StudyYearID = 3, YearName = "Third Year" }, new StudyYear { StudyYearID = 4, YearName = "Fourth Year" });
+tests\FourthYearPractical\Program.cs:26:        db.FacultyMembers.Add(new() { FacultyMemberID = id, FullName = "Teacher " + id });
+tests\FourthYearPractical\Program.cs:27:        db.Classrooms.Add(new() { ClassroomID = id, ClassroomNumber = "Lab " + id, RoomType = "Lab", Capacity = 30 });
+tests\FourthYearPractical\Program.cs:28:        db.Classrooms.Add(new() { ClassroomID = id + 10, ClassroomNumber = "Lecture " + id, RoomType = "Lecture", Capacity = 40 });
+tests\FourthYearPractical\Program.cs:29:        if (id <= 3) db.Branches.Add(new() { BranchID = id, BranchName = "Branch " + id });
+tests\FourthYearPractical\Program.cs:30:        db.Sections.Add(new() { SectionID = id, SectionName = "A", StudentCount = 30, StudyYearID = id <= 3 ? 4 : id == 4 ? 3 : 1, BranchID = id <= 3 ? id : id == 4 ? 1 : null });
+tests\FourthYearPractical\Program.cs:32:    for (int p = 1; p <= 3; p++) db.TimeSlots.Add(new() { TimeSlotID = p, StartTime = new TimeSpan(8, 30, 0) + TimeSpan.FromMinutes((p - 1) * 90), EndTime = new TimeSpan(9, 50, 0) + TimeSpan.FromMinutes((p - 1) * 90) });
+tests\FourthYearPractical\Program.cs:37:        db.Subjects.Add(new() { SubjectID = id, SubjectName = "Subject " + id, StudyYearID = year, BranchID = section <= 3 ? section : section == 4 ? 1 : null, SemesterNumber = id <= 3 || id >= 7 ? 1 : 2,
+tests\FourthYearPractical\Program.cs:39:        db.FacultyMemberSubjects.Add(new() { SubjectID = id, FacultyMemberID = section });
+tests\FourthYearPractical\Program.cs:42:    foreach (var subject in await db.Subjects.ToListAsync())
+tests\FourthYearPractical\Program.cs:47:        db.Schedules.Add(Row("Theory", null, "Thursday", 3));
+tests\FourthYearPractical\Program.cs:50:            db.Schedules.Add(Row("Practical", "A1", n == 0 ? "Sunday" : "Monday", 1));
+tests\FourthYearPractical\Program.cs:51:            db.Schedules.Add(Row("Practical", "A2", n == 0 ? "Tuesday" : "Wednesday", 1));
+tests\FourthYearPractical\Program.cs:58:await using (var db = new AppDbContext()) await db.Classrooms.Where(c => c.ClassroomID == 1).ExecuteUpdateAsync(s => s.SetProperty(c => c.Capacity, 15));
+tests\FourthYearPractical\Program.cs:64:    await db.Classrooms.Where(c => c.ClassroomID == 1).ExecuteUpdateAsync(s => s.SetProperty(c => c.Capacity, 30));
+tests\FourthYearPractical\Program.cs:65:    await db.Schedules.Where(s => s.SubjectID == 1 && s.GroupName == "A2").ExecuteUpdateAsync(s => s.SetProperty(c => c.IsLocked, true));
+tests\FourthYearPractical\Program.cs:69:await using (var db = new AppDbContext()) await db.Schedules.Where(s => s.IsLocked).ExecuteUpdateAsync(s => s.SetProperty(c => c.IsLocked, false));
+tests\FourthYearPractical\Program.cs:89:Check(rules.GetProperty("sections").EnumerateArray().Where(x => x.GetProperty("id").GetInt32() <= 3).All(x => x.GetProperty("groups").GetArrayLength() == 0), "Web rules expose no fourth-year subgroups");
+tests\FourthYearPractical\Program.cs:107:        type.GetMethod("BindSectionsCombo", flags)!.Invoke(form, new object?[] { 4, 1, 1 });
+tests\FourthYearPractical\Program.cs:108:        type.GetMethod("BindGroupNameCombo", flags)!.Invoke(form, new object?[] { "A2" });
+tests\FourthYearPractical\Program.cs:111:        var read = (Schedule)type.GetMethod("ReadScheduleFromForm", flags)!.Invoke(form, null)!;
+tests\FourthYearPractical\Program.cs:117:        type.GetMethod("BindGroupFilterCombo", flags)!.Invoke(form, null);
+tests\FourthYearPractical\Program.cs:121:        type.GetMethod("BindGroupFilterCombo", flags)!.Invoke(form, null);
+tools\ImportFacultyDays\Program.cs:19:object Scalars(object o)=>o.GetType().GetProperties().Where(p=>p.PropertyType.IsValueType||p.PropertyType==typeof(string)).ToDictionary(p=>p.Name,p=>p.GetValue(o));
+tools\ImportFacultyDays\Program.cs:27:async Task<object> Catalog(AppDbContext db){var task=(Task)catalogType.GetMethod("LoadAsync")!.Invoke(null,[db,CancellationToken.None])!;await task;return task.GetType().GetProperty("Result")!.GetValue(task)!;}
+tools\ImportFacultyDays\Program.cs:28:string Version(object c)=>(string)catalogType.GetMethod("Version")!.Invoke(c,null)!;
+tools\ImportFacultyDays\Program.cs:29:Dictionary<Type,List<object>> Tables(object c)=>(Dictionary<Type,List<object>>)catalogType.GetProperty("Tables")!.GetValue(c)!;
+tools\ImportFacultyDays\Program.cs:33:var before=await db.Schedules.AsNoTracking().OrderBy(s=>s.ScheduleID).ToListAsync();
+tools\ImportFacultyDays\Program.cs:34:var faculty=await db.FacultyMembers.AsNoTracking().ToListAsync();
+tools\ImportFacultyDays\Program.cs:35:var revisions=await db.FacultySchedulingPreferences.AsNoTracking().Where(p=>p.SemesterNumber==1).ToDictionaryAsync(p=>p.FacultyMemberID,p=>p.Revision);
+tools\ImportFacultyDays\Program.cs:51:var save=typeof(FacultyPreferenceService).GetMethod("SaveInTransactionAsync",BindingFlags.Static|BindingFlags.NonPublic)!;
+tools\ImportFacultyDays\Program.cs:67:    var result=planner.GetMethod("Solve")!.Invoke(null,[catalog,imported,before.Where(s=>s.SemesterNumber!=1).ToList(),55.0,CancellationToken.None,true,null,false,false])!;
+tools\ImportFacultyDays\Program.cs:68:    Console.WriteLine("SEARCH "+result.GetType().GetProperty("Status")!.GetValue(result));
+tools\ImportFacultyDays\Program.cs:69:    var solved=(List<Schedule>?)result.GetType().GetProperty("Plan")!.GetValue(result);
+tools\ImportFacultyDays\Program.cs:75:Check(plan.Schedules.Count==before.Count(s=>s.SemesterNumber==1),"Every semester-one lecture retained");
+tools\ImportFacultyDays\Program.cs:76:foreach(var row in plan.Schedules)
+tools\ImportFacultyDays\Program.cs:83:Check(plan.Schedules.GroupBy(s=>s.SectionID).All(g=>g.Select(s=>s.DayOfWeek).Distinct().Count()<=4),"Every section uses at most four teaching days");
+tools\ImportFacultyDays\Program.cs:84:var changed=plan.Schedules.Where(s=>Json(s)!=Json(before.Single(b=>b.ScheduleID==s.ScheduleID))).ToList();
+tools\ImportFacultyDays\Program.cs:86:var validate=typeof(ScheduleService).GetMethod("ValidateAsync",BindingFlags.Static|BindingFlags.NonPublic)!;
+tools\ImportFacultyDays\Program.cs:87:var all=await db.Schedules.AsNoTracking().OrderBy(s=>s.ScheduleID).ToListAsync();
+tools\ImportFacultyDays\Program.cs:93:var rooms=await db.Classrooms.AsNoTracking().ToListAsync();
+tools\ImportFacultyDays\Program.cs:99:        ActualDays=plan.Schedules.Where(s=>s.FacultyMemberID==r.FacultyId).Select(s=>s.DayOfWeek).Distinct().OrderBy(d=>Array.IndexOf(days,d)).ToArray()}).ToList(),
+tools\ImportFacultyDays\Program.cs:116:record Plan(string BeforeVersion,List<FacultyScheduleRequest> Requests,List<Schedule> Schedules);
+Business_Logic_Layer\Services\SectionService.cs:12:            return await context.Sections
+Business_Logic_Layer\Services\SectionService.cs:22:            return await context.Sections
+Business_Logic_Layer\Services\SectionService.cs:32:            section.SectionID = await AutoKeyGenerator.NextAsync(context.Sections.Select(s => s.SectionID));
+Business_Logic_Layer\Services\SectionService.cs:39:            await context.Sections.AddAsync(section);
+Business_Logic_Layer\Services\SectionService.cs:40:            await ManualKeySaveHelper.SaveWithManualKeyAsync(context, "[Sections]");
+Business_Logic_Layer\Services\SectionService.cs:57:            var assignedSubjects = await context.FacultyMemberSubjects.Where(a => a.SectionID == section.SectionID)
+Business_Logic_Layer\Services\SectionService.cs:61:            var existing = await context.Sections.SingleAsync(s => s.SectionID == section.SectionID);
+Business_Logic_Layer\Services\SectionService.cs:62:            var lessons = await context.Schedules.Include(s => s.Classroom)
+Business_Logic_Layer\Services\SectionService.cs:78:            var section = await context.Sections.FindAsync(id)
+Business_Logic_Layer\Services\SectionService.cs:81:            context.Sections.Remove(section);
+Business_Logic_Layer\Services\SectionService.cs:88:                () => context.Sections.AnyAsync(s => s.SectionID == section.SectionID), "Section");
+Business_Logic_Layer\Services\SectionService.cs:100:            if (!await context.StudyYears.AnyAsync(sy => sy.StudyYearID == section.StudyYearID))
+Business_Logic_Layer\Services\SectionService.cs:125:                !await context.Branches.AnyAsync(b => b.BranchID == section.BranchID.Value))
+Business_Logic_Layer\Services\SectionService.cs:132:            var exists = await context.Sections.AnyAsync(s =>
+tests\GenerationDiagnostics\Program.cs:23:    foreach (string table in new[] { "StudyYears", "Branches", "FacultyMembers", "Classrooms", "TimeSlots", "Sections", "Subjects", "FacultyMemberSubjects", "Schedules", "FacultySchedulingPreferences", "FacultyPeriodPreferences" })
+tests\GenerationDiagnostics\Program.cs:43:            WHERE dc.parent_object_id=OBJECT_ID(N'dbo.Schedules') AND c.name=N'IsLocked')
+tests\GenerationDiagnostics\Program.cs:44:            ALTER TABLE dbo.Schedules ADD DEFAULT(0) FOR IsLocked;
+tests\GenerationDiagnostics\Program.cs:56:        .GetMethod("HasAnyPairConflict")!.Invoke(null, [rows])!;
+Business_Logic_Layer\Services\ScheduleService.cs:12:            return await context.Schedules
+Business_Logic_Layer\Services\ScheduleService.cs:37:            var query = context.ScheduleDetails.AsNoTracking().AsQueryable();
+Business_Logic_Layer\Services\ScheduleService.cs:53:                var scheduleIds = context.Schedules.AsNoTracking().AsQueryable();
+Business_Logic_Layer\Services\ScheduleService.cs:90:            return await context.Schedules
+Business_Logic_Layer\Services\ScheduleService.cs:107:            await context.Schedules.AddAsync(schedule);
+Business_Logic_Layer\Services\ScheduleService.cs:118:            var existing = await context.Schedules.FindAsync(schedule.ScheduleID)
+Business_Logic_Layer\Services\ScheduleService.cs:131:            var schedule = await context.Schedules.FindAsync(id)
+Business_Logic_Layer\Services\ScheduleService.cs:134:            context.Schedules.Remove(schedule);
+Business_Logic_Layer\Services\ScheduleService.cs:141:            var schedule = await context.Schedules.FindAsync(id)
+Business_Logic_Layer\Services\ScheduleService.cs:156:            var preferences = FacultyPreferenceRules.FromRows(await context.FacultySchedulingPreferences.AsNoTracking().ToListAsync(),
+Business_Logic_Layer\Services\ScheduleService.cs:157:                await context.FacultyPeriodPreferences.AsNoTracking().ToListAsync());
+Business_Logic_Layer\Services\ScheduleService.cs:158:            var allSubjects = await context.Subjects
+Business_Logic_Layer\Services\ScheduleService.cs:163:            var assignments = await context.FacultyMemberSubjects
+Business_Logic_Layer\Services\ScheduleService.cs:171:            var sections = (await context.Sections
+Business_Logic_Layer\Services\ScheduleService.cs:182:            var classrooms = await context.Classrooms
+Business_Logic_Layer\Services\ScheduleService.cs:191:            var timeSlots = await context.TimeSlots
+Business_Logic_Layer\Services\ScheduleService.cs:198:            var existingSchedules = await context.Schedules.ToListAsync();
+Business_Logic_Layer\Services\ScheduleService.cs:312:                ScheduleRequirementMatcher.Remaining(remainingRequests, plan.Schedules.Except(retainedSchedules).ToList()).Count == 0;
+Business_Logic_Layer\Services\ScheduleService.cs:335:                    planningResult.Schedules, catalog);
+Business_Logic_Layer\Services\ScheduleService.cs:336:                if (solved.Schedules is not null)
+Business_Logic_Layer\Services\ScheduleService.cs:337:                    planningResult = new(solved.Schedules, 0, 0);
+Business_Logic_Layer\Services\ScheduleService.cs:358:            generatedSchedules.AddRange(planningResult.Schedules);
+Business_Logic_Layer\Services\ScheduleService.cs:459:                context.Schedules.RemoveRange(existingSchedules.Where(s => !s.IsLocked));
+Business_Logic_Layer\Services\ScheduleService.cs:474:            await context.Schedules.AddRangeAsync(newPlacements);
+Business_Logic_Layer\Services\ScheduleService.cs:522:            var subject = await context.Subjects
+Business_Logic_Layer\Services\ScheduleService.cs:534:                ? await context.Schedules.AsNoTracking().FirstOrDefaultAsync(s => s.ScheduleID == schedule.ScheduleID)
+Business_Logic_Layer\Services\ScheduleService.cs:542:            if (!await context.FacultyMembers.AnyAsync(f => f.FacultyMemberID == schedule.FacultyMemberID))
+Business_Logic_Layer\Services\ScheduleService.cs:552:            var classroom = await context.Classrooms
+Business_Logic_Layer\Services\ScheduleService.cs:561:            var lecturePeriods = await context.TimeSlots.AsNoTracking().Where(slot => !slot.IsBreak).ToListAsync();
+Business_Logic_Layer\Services\ScheduleService.cs:574:            var section = await context.Sections
+Business_Logic_Layer\Services\ScheduleService.cs:616:                var profileRows = await context.FacultySchedulingPreferences.AsNoTracking().Where(p =>
+Business_Logic_Layer\Services\ScheduleService.cs:620:                    var otherLectures = await context.Schedules.AsNoTracking().Where(s =>
+Business_Logic_Layer\Services\ScheduleService.cs:623:                    var cells = await context.FacultyPeriodPreferences.AsNoTracking().Where(p => p.FacultyMemberID == schedule.FacultyMemberID && p.SemesterNumber == schedule.SemesterNumber).ToListAsync();
+Business_Logic_Layer\Services\ScheduleService.cs:655:            return await context.FacultyMemberSubjects.AnyAsync(assignment =>
+tools\AdoptPdfAssignments\Program.cs:25:    var task = (Task)catalogType.GetMethod("LoadAsync")!.Invoke(null, [db, CancellationToken.None])!;
+tools\AdoptPdfAssignments\Program.cs:26:    await task; return task.GetType().GetProperty("Result")!.GetValue(task)!;
+tools\AdoptPdfAssignments\Program.cs:28:string Version(object catalog) => (string)catalogType.GetMethod("Version")!.Invoke(catalog, null)!;
+tools\AdoptPdfAssignments\Program.cs:37:var allRows = await db.Schedules.OrderBy(s => s.ScheduleID).ToListAsync();
+tools\AdoptPdfAssignments\Program.cs:40:var assignments = await db.FacultyMemberSubjects.OrderBy(a => a.SubjectID).ThenBy(a => a.FacultyMemberID).ToListAsync();
+tools\AdoptPdfAssignments\Program.cs:45:    var subjects = await db.Subjects.AsNoTracking().Where(s => s.SemesterNumber == 1 && !s.IsDeleted).ToListAsync();
+tools\AdoptPdfAssignments\Program.cs:46:    var faculty = await db.FacultyMembers.AsNoTracking().ToListAsync();
+tools\AdoptPdfAssignments\Program.cs:70:    var tables = (Dictionary<Type, List<object>>)catalogType.GetProperty("Tables")!.GetValue(catalog)!;
+tools\AdoptPdfAssignments\Program.cs:76:    var result = planner.GetMethod("Solve")!.Invoke(null,
+tools\AdoptPdfAssignments\Program.cs:78:    Console.WriteLine("SEARCH " + result.GetType().GetProperty("Status")!.GetValue(result));
+tools\AdoptPdfAssignments\Program.cs:79:    var solved = (List<Schedule>?)result.GetType().GetProperty("Plan")!.GetValue(result);
+tools\AdoptPdfAssignments\Program.cs:96:foreach (var row in plan.Schedules)
+tools\AdoptPdfAssignments\Program.cs:111:var validate = typeof(ScheduleService).GetMethod("ValidateAsync", BindingFlags.Static | BindingFlags.NonPublic)!;
+tools\AdoptPdfAssignments\Program.cs:115:Check(before.Count == allRows.Count && plan.Schedules.Count == before.Count(s => s.SemesterNumber == 1), $"All {allRows.Count} saved lecture identities retained; no lecture added or deleted");
+tools\AdoptPdfAssignments\Program.cs:118:    Database=args[1], SemesterOneLectures=plan.Schedules.Count, AdoptedAssignments=plan.Assignments.Count,
+tools\AdoptPdfAssignments\Program.cs:131:record Plan(string BeforeVersion, string PdfSha256, List<FacultyMemberSubject> Assignments, List<Schedule> Schedules);
+tests\ImportedTimetableRepair\Program.cs:31:        await using (var db = factory()) await db.Schedules.ExecuteDeleteAsync();
+tests\ImportedTimetableRepair\Program.cs:53:    private static async Task<List<Schedule>> Rows() { await using var db = factory(); return await db.Schedules.AsNoTracking().OrderBy(s => s.ScheduleID).ToListAsync(); }
+tests\ImportedTimetableRepair\Program.cs:60:        db.Schedules.Add(row); await db.SaveChangesAsync(); return row;
+tests\ImportedTimetableRepair\Program.cs:83:            db.StudyYears.Add(new() { StudyYearID = 1, YearName = "First Year" });
+tests\ImportedTimetableRepair\Program.cs:86:                db.FacultyMembers.Add(new() { FacultyMemberID = i, FullName = "تدريسي " + i });
+tests\ImportedTimetableRepair\Program.cs:87:                db.Subjects.Add(new() { SubjectID = i, SubjectName = "مادة " + i, StudyYearID = 1, SemesterNumber = 1,
+tests\ImportedTimetableRepair\Program.cs:89:                db.FacultyMemberSubjects.Add(new() { FacultyMemberID = i, SubjectID = i });
+tests\ImportedTimetableRepair\Program.cs:91:            db.Sections.AddRange(new Section { SectionID = 1, SectionName = "A", StudyYearID = 1, StudentCount = 40 }, new Section { SectionID = 2, SectionName = "B", StudyYearID = 1, StudentCount = 40 });
+tests\ImportedTimetableRepair\Program.cs:92:            db.Classrooms.AddRange(new Classroom { ClassroomID = 1, ClassroomNumber = "Room 101", Capacity = 60, RoomType = "Lecture" },
+tests\ImportedTimetableRepair\Program.cs:96:            db.TimeSlots.AddRange(new TimeSlot { TimeSlotID = 1, StartTime = new(8, 30, 0), EndTime = new(10, 0, 0) },
+tests\ImportedTimetableRepair\Program.cs:196:            await using var db = factory(); await db.Classrooms.Where(r => r.ClassroomID == 1).ExecuteUpdateAsync(set => set.SetProperty(r => r.Capacity, 61));
+tests\ImportedTimetableRepair\Program.cs:198:            finally { await db.Classrooms.Where(r => r.ClassroomID == 1).ExecuteUpdateAsync(set => set.SetProperty(r => r.Capacity, 60)); }
+tests\ImportedTimetableRepair\Program.cs:213:                await using (var db = factory()) await db.Schedules.ExecuteDeleteAsync();
+tests\ImportedTimetableRepair\Program.cs:258:            await db.FacultyMembers.Where(f => f.FacultyMemberID == 2).ExecuteUpdateAsync(set => set.SetProperty(f => f.FullName, "تَدْرِيسي 1"));
+tests\ImportedTimetableRepair\Program.cs:264:            finally { await db.FacultyMembers.Where(f => f.FacultyMemberID == 2).ExecuteUpdateAsync(set => set.SetProperty(f => f.FullName, "تدريسي 2")); }
+tests\FullGenerationPreferences\Program.cs:17:async Task<List<Schedule>> Rows(){await using var db=new AppDbContext();return await db.Schedules.AsNoTracking().OrderBy(s=>s.ScheduleID).ToListAsync();}
+tests\FullGenerationPreferences\Program.cs:23:    await using var db=new AppDbContext();var task=(Task)catalogType.GetMethod("LoadAsync")!.Invoke(null,[db,CancellationToken.None])!;
+tests\FullGenerationPreferences\Program.cs:24:    await task;var data=task.GetType().GetProperty("Result")!.GetValue(task)!;
+tests\FullGenerationPreferences\Program.cs:25:    var tables=(Dictionary<Type,List<object>>)catalogType.GetProperty("Tables")!.GetValue(data)!;
+tests\FullGenerationPreferences\Program.cs:27:    return(string)catalogType.GetMethod("Version")!.Invoke(data,null)!;
+tests\FullGenerationPreferences\Program.cs:32:    Check(initial.Count==263&&await db.FacultySchedulingPreferences.CountAsync(p=>p.SemesterNumber==1)==50,"Full 263-lecture fixture includes all 50 strict day profiles");
+tests\FullGenerationPreferences\Program.cs:33:    var rooms=await db.Classrooms.AsNoTracking().ToListAsync();
+tests\FullGenerationPreferences\Program.cs:46:            var row=await db.Schedules.Where(s=>s.SemesterNumber==semester).OrderBy(s=>s.ScheduleID).FirstAsync();
+tests\FullGenerationPreferences\Program.cs:50:        locked=await db.Schedules.AsNoTracking().Where(s=>s.IsLocked).OrderBy(s=>s.ScheduleID).ToListAsync();
+tests\FullGenerationPreferences\Program.cs:62:    var validate=typeof(ScheduleService).GetMethod("ValidateAsync",BindingFlags.Static|BindingFlags.NonPublic)!;
+tests\FullGenerationPreferences\Program.cs:70:await using(var db=new AppDbContext())teacher=await db.FacultyMembers.Where(f=>f.FullName=="حنان عبد الولي").Select(f=>f.FacultyMemberID).SingleAsync();
+tests\WeeklyPdfImport\WeeklyVerification.cs:40:        Check("Branches, CY groups, whole-section practicals and glued group/room glyphs survive extraction", () =>
+tests\WeeklyPdfImport\WeeklyVerification.cs:76:            db.StudyYears.Add(new() { StudyYearID = 1, YearName = "First Year" });
+tests\WeeklyPdfImport\WeeklyVerification.cs:77:            db.Sections.Add(new() { SectionID = 1, SectionName = "A", StudyYearID = 1, StudentCount = 40 });
+tests\WeeklyPdfImport\WeeklyVerification.cs:82:            db.Subjects.AddRange(subjects); db.FacultyMembers.AddRange(faculty);
+tests\WeeklyPdfImport\WeeklyVerification.cs:84:                db.FacultyMemberSubjects.Add(new() { SubjectID = subjects.Single(s => s.SubjectName == assignment.Item1).SubjectID, FacultyMemberID = faculty.Single(f => f.FullName == assignment.Item2).FacultyMemberID });
+tests\WeeklyPdfImport\WeeklyVerification.cs:86:            db.Classrooms.AddRange(new Classroom { ClassroomID = 1, ClassroomNumber = "302", Capacity = 60, RoomType = "Lecture" },
+tests\WeeklyPdfImport\WeeklyVerification.cs:91:            db.TimeSlots.AddRange(new TimeSlot { TimeSlotID = 1, StartTime = new(8, 30, 0), EndTime = new(10, 10, 0) },
+tests\WeeklyPdfImport\WeeklyVerification.cs:103:        await using (var db = factory()) Assert(!await db.Schedules.AnyAsync());
+tests\WeeklyPdfImport\WeeklyVerification.cs:106:        await using (var db = factory()) Assert(!await db.Schedules.AnyAsync());
+tests\WeeklyPdfImport\WeeklyVerification.cs:108:        await using (var db = factory()) Check("Reviewed real-PDF repair saves atomically into an isolated database", () => Assert(saved.Added == 10 && db.Schedules.Count() == 10));
+tests\WeeklyPdfImport\WeeklyVerification.cs:117:            typeof(ExcelImportForm).GetMethod("LoadWorkbook", BindingFlags.Instance | BindingFlags.NonPublic)!.Invoke(form, [loaded, path]); Application.DoEvents();
+tests\WeeklyPdfImport\WeeklyVerification.cs:121:            var selected = (List<ExcelSheetData>)typeof(ExcelImportForm).GetMethod("PrepareSheets", BindingFlags.Instance | BindingFlags.NonPublic)!.Invoke(form, null)!;
+tests\WeeklyPdfImport\WeeklyVerification.cs:130:            selected = (List<ExcelSheetData>)typeof(ExcelImportForm).GetMethod("PrepareSheets", BindingFlags.Instance | BindingFlags.NonPublic)!.Invoke(form, null)!;
+tests\FinalTimetableImport\Program.cs:13:var rows = await db.Schedules.AsNoTracking().Where(s => s.SemesterNumber == 1).OrderBy(s => s.ScheduleID).ToListAsync();
+tests\FinalTimetableImport\Program.cs:17:var after = await db.Schedules.AsNoTracking().Where(s => s.SemesterNumber == 1).OrderBy(s => s.ScheduleID).ToListAsync();
+tests\FinalTimetableImport\Program.cs:35:var room = await db.Classrooms.SingleAsync(r => r.ClassroomID == full.ClassroomID);
+tests\FinalTimetableImport\Program.cs:57:var second = await db.Schedules.AsNoTracking().Where(s => s.SemesterNumber == 2).OrderBy(s => s.ScheduleID).ToListAsync();
+tests\FinalTimetableImport\Program.cs:61:var beforeStartup = JsonSerializer.Serialize(await db.Schedules.AsNoTracking().OrderBy(s => s.ScheduleID).ToListAsync());
+tests\FinalTimetableImport\Program.cs:63:var afterStartup = JsonSerializer.Serialize(await db.Schedules.AsNoTracking().OrderBy(s => s.ScheduleID).ToListAsync());
+tools\FourthYearPractical\Program.cs:9:var summary = await db.Schedules.AsNoTracking().Where(s => s.StudyYearID == 4 && s.LectureType == "Practical")
+tools\FourthYearPractical\Program.cs:17:    var before = document.RootElement.GetProperty("Payload").GetProperty("Lectures").Deserialize<List<Schedule>>()!;
+tools\FourthYearPractical\Program.cs:20:    var after = await db.Schedules.AsNoTracking().OrderBy(s => s.ScheduleID).ToListAsync();
+Business_Logic_Layer\Services\FacultyMemberSubjectService.cs:12:            return await context.FacultyMemberSubjects
+Business_Logic_Layer\Services\FacultyMemberSubjectService.cs:26:            return await context.FacultyMemberSubjects
+Business_Logic_Layer\Services\FacultyMemberSubjectService.cs:39:            await context.FacultyMemberSubjects.AddAsync(entity);
+Business_Logic_Layer\Services\FacultyMemberSubjectService.cs:51:            var item = await context.FacultyMemberSubjects.FindAsync(currentFacultyMemberId, currentSubjectId)
+Business_Logic_Layer\Services\FacultyMemberSubjectService.cs:64:                if (entity.SectionID.HasValue && await context.Schedules.AnyAsync(s =>
+Business_Logic_Layer\Services\FacultyMemberSubjectService.cs:69:                if (await context.Schedules.AnyAsync(s => s.FacultyMemberID == currentFacultyMemberId &&
+Business_Logic_Layer\Services\FacultyMemberSubjectService.cs:79:            context.FacultyMemberSubjects.Remove(item);
+Business_Logic_Layer\Services\FacultyMemberSubjectService.cs:80:            await context.FacultyMemberSubjects.AddAsync(entity);
+Business_Logic_Layer\Services\FacultyMemberSubjectService.cs:91:            var item = await context.FacultyMemberSubjects.FindAsync(facultyMemberId, subjectId)
+Business_Logic_Layer\Services\FacultyMemberSubjectService.cs:96:            if (!await context.Subjects.AnyAsync(s => s.SubjectID == subjectId && s.IsDeleted))
+Business_Logic_Layer\Services\FacultyMemberSubjectService.cs:98:            context.FacultyMemberSubjects.Remove(item);
+Business_Logic_Layer\Services\FacultyMemberSubjectService.cs:105:            int count = await context.Schedules.CountAsync(s => s.FacultyMemberID == facultyMemberId && s.SubjectID == subjectId);
+Business_Logic_Layer\Services\FacultyMemberSubjectService.cs:108:                string subjectName = await context.Subjects.Where(s => s.SubjectID == subjectId).Select(s => s.SubjectName).SingleAsync();
+Business_Logic_Layer\Services\FacultyMemberSubjectService.cs:122:            if (!await context.FacultyMembers.AnyAsync(f => f.FacultyMemberID == entity.FacultyMemberID))
+Business_Logic_Layer\Services\FacultyMemberSubjectService.cs:127:            var subject = await context.Subjects.AsNoTracking().FirstOrDefaultAsync(s => s.SubjectID == entity.SubjectID && !s.IsDeleted);
+Business_Logic_Layer\Services\FacultyMemberSubjectService.cs:135:                var section = await context.Sections.AsNoTracking().FirstOrDefaultAsync(s => s.SectionID == entity.SectionID);
+Business_Logic_Layer\Services\FacultyMemberSubjectService.cs:140:            var exists = await context.FacultyMemberSubjects.AnyAsync(fms =>
+tests\SubjectLectureCounts\Program.cs:75:            await db.Database.ExecuteSqlRawAsync("ALTER TABLE Subjects DROP COLUMN TheoreticalLectureCount, PracticalLectureCount");
+tests\SubjectLectureCounts\Program.cs:79:                DROP INDEX [IX_Subjects_SubjectName_StudyYearID_BranchID_SemesterNumber] ON [dbo].[Subjects];
+tests\SubjectLectureCounts\Program.cs:82:                    WHERE dc.parent_object_id = OBJECT_ID(N'dbo.Subjects') AND c.name = N'IsDeleted');
+tests\SubjectLectureCounts\Program.cs:83:                IF @defaultName IS NOT NULL EXEC(N'ALTER TABLE [dbo].[Subjects] DROP CONSTRAINT ' + @defaultName);
+tests\SubjectLectureCounts\Program.cs:84:                ALTER TABLE [dbo].[Subjects] DROP COLUMN [IsDeleted];
+tests\SubjectLectureCounts\Program.cs:86:                    ON [dbo].[Subjects] ([SubjectName], [StudyYearID], [BranchID], [SemesterNumber]);
+tests\SubjectLectureCounts\Program.cs:91:            db.StudyYears.Add(new StudyYear { StudyYearID = 1, YearName = "First Year" });
+tests\SubjectLectureCounts\Program.cs:92:            db.FacultyMembers.Add(new FacultyMember { FacultyMemberID = 1, FullName = "Lecture count test" });
+tests\SubjectLectureCounts\Program.cs:93:            db.Sections.Add(new Section { SectionID = 1, SectionName = "A", StudyYearID = 1, StudentCount = 30 });
+tests\SubjectLectureCounts\Program.cs:94:            db.Classrooms.AddRange(new Classroom { ClassroomID = 1, ClassroomNumber = "Theory room", Capacity = 40, RoomType = "Lecture" },
+tests\SubjectLectureCounts\Program.cs:96:            for (int i = 0; i < 4; i++) db.TimeSlots.Add(new TimeSlot { TimeSlotID = i + 1, StartTime = TimeSpan.FromMinutes(510 + i * 90), EndTime = TimeSpan.FromMinutes(590 + i * 90) });
+tests\SubjectLectureCounts\Program.cs:108:            db.FacultyMemberSubjects.Add(new FacultyMemberSubject { SubjectID = subject.SubjectID, FacultyMemberID = 1 });
+tests\SubjectLectureCounts\Program.cs:117:            var lectures = await db.Schedules.AsNoTracking().ToListAsync();
+tests\SubjectLectureCounts\Program.cs:121:            exchange.GetMethod("Validate")!.Invoke(null, [lectures, new HashSet<int> { 1 }, await db.TimeSlots.OrderBy(t => t.StartTime).ToListAsync()]);
+tests\SubjectLectureCounts\Program.cs:133:        var table = new DataTable("Subjects");
+tests\SubjectLectureCounts\Program.cs:136:        var preview = await new ExcelImportService().ValidateAsync(ExcelImportMode.AcademicData, [new ExcelSheetData("Subjects", table, [2])], true);
+tests\SubjectLectureCounts\Program.cs:143:            .GetMethod("EnsureSectionDayLimit")!;
+tests\SubjectLectureCounts\Program.cs:178:        typeof(SubjectsForm).GetMethod("PopulateSubjectEditorFromSelection", Private)!.Invoke(control, null);
+tests\SubjectLectureCounts\Program.cs:184:        bool built = (bool)typeof(SubjectsForm).GetMethod("TryBuildSubject", Private)!.Invoke(control, args)!;
+tests\SubjectLectureCounts\Program.cs:188:        typeof(SubjectsForm).GetMethod("ResetLectureCounts", Private)!.Invoke(control, null);
+tests\SubjectLectureCounts\Program.cs:193:        typeof(SubjectsForm).GetMethod("TryBuildSubject", Private)!.Invoke(control, args);
+tests\SubjectLectureCounts\Program.cs:197:        typeof(SubjectsForm).GetMethod("PopulateSubjectEditorFromSelection", Private)!.Invoke(control, null);
+tests\SubjectLectureCounts\Program.cs:208:        return await db.Schedules.AsNoTracking().OrderBy(s => s.ScheduleID).ToListAsync();
+tests\SubjectLectureCounts\Program.cs:264:        var validate = typeof(ScheduleService).GetMethod("ValidateAsync", BindingFlags.Static | BindingFlags.NonPublic)!;
+tests\SubjectLectureCounts\Program.cs:274:            await db.Database.ExecuteSqlRawAsync("CREATE TRIGGER [dbo].[RejectRegeneration] ON [dbo].[Schedules] AFTER INSERT AS BEGIN THROW 51000, 'Injected regeneration failure', 1; END");
+tests\SubjectLectureCounts\Program.cs:286:        await using (var db = new AppDbContext()) await db.FacultyMemberSubjects.ExecuteDeleteAsync();
+tests\SubjectLectureCounts\Program.cs:299:            await (Task)typeof(DatabaseMaintenanceService).GetMethod("RecreateScheduleDetailsViewAsync", BindingFlags.Static | BindingFlags.NonPublic)!.Invoke(null, [db])!;
+tests\SubjectLectureCounts\Program.cs:350:                db.FacultyMembers.AddRange(new FacultyMember { FacultyMemberID = 2, FullName = "Exchange teacher" }, new FacultyMember { FacultyMemberID = 3, FullName = "Backup teacher" });
+tests\SubjectLectureCounts\Program.cs:351:                db.Classrooms.Add(new Classroom { ClassroomID = 3, ClassroomNumber = "Second lab", RoomType = "Lab", Capacity = 40 });
+tests\SubjectLectureCounts\Program.cs:366:            var load = (Task)assembly.GetType("University_Timetable_and_Classroom_Management_System.BusinessLayer.ImportCatalog")!.GetMethod("LoadAsync")!.Invoke(null, [context, CancellationToken.None])!;
+tests\SubjectLectureCounts\Program.cs:368:            var catalog = load.GetType().GetProperty("Result")!.GetValue(load);
+tests\SubjectLectureCounts\Program.cs:369:            var solve = assembly.GetType("University_Timetable_and_Classroom_Management_System.BusinessLayer.ImportedTimetableRepairPlanner")!.GetMethod("Solve")!;
+tests\SubjectLectureCounts\Program.cs:373:            Check("Regression fixture reproduces false infeasibility from frozen provisional teachers", frozen.GetType().GetProperty("Plan")!.GetValue(frozen) is null);
+tests\SubjectLectureCounts\Program.cs:375:            var plan = (List<Schedule>?)flexible.GetType().GetProperty("Plan")!.GetValue(flexible);
+tests\SubjectLectureCounts\Program.cs:377:                flexible.GetType().GetProperty("Status")!.GetValue(flexible)?.ToString() ?? "");
+tests\SubjectLectureCounts\Program.cs:381:                independent.GetType().GetProperty("Plan")!.GetValue(independent) is List<Schedule> { Count: 8 });
+tests\SubjectLectureCounts\Program.cs:388:            await db.FacultyMemberSubjects.Where(a => a.FacultyMemberID == 2 || a.FacultyMemberID == 3).ExecuteDeleteAsync();
+tests\SubjectLectureCounts\Program.cs:389:            if (extraSubjectId > 0) await db.Subjects.Where(s => s.SubjectID == extraSubjectId).ExecuteDeleteAsync();
+tests\SubjectLectureCounts\Program.cs:390:            await db.FacultyMembers.Where(f => f.FacultyMemberID == 2 || f.FacultyMemberID == 3).ExecuteDeleteAsync();
+tests\SubjectLectureCounts\Program.cs:391:            await db.Classrooms.Where(c => c.ClassroomID == 3).ExecuteDeleteAsync();
+tests\PdfExport\Program.cs:20:var export = service.GetType().GetMethod("ExportAsync")!;
+tests\SchedulePdfExport\Program.cs:29:var details = await db.ScheduleDetails.AsNoTracking().Where(x=>x.SemesterNumber==1 && x.FacultyMemberName=="ورود حسن").ToListAsync();
+Business_Logic_Layer\Services\FacultyMemberService.cs:12:            return await context.FacultyMembers.AsNoTracking().ToListAsync();
+Business_Logic_Layer\Services\FacultyMemberService.cs:18:            return await context.FacultyMembers.AsNoTracking().FirstOrDefaultAsync(f => f.FacultyMemberID == id);
+Business_Logic_Layer\Services\FacultyMemberService.cs:24:            facultyMember.FacultyMemberID = await AutoKeyGenerator.NextAsync(context.FacultyMembers.Select(f => f.FacultyMemberID));
+Business_Logic_Layer\Services\FacultyMemberService.cs:31:            await context.FacultyMembers.AddAsync(facultyMember);
+Business_Logic_Layer\Services\FacultyMemberService.cs:32:            await ManualKeySaveHelper.SaveWithManualKeyAsync(context, "[FacultyMembers]");
+Business_Logic_Layer\Services\FacultyMemberService.cs:46:            context.FacultyMembers.Update(facultyMember);
+Business_Logic_Layer\Services\FacultyMemberService.cs:55:            var facultyMember = await context.FacultyMembers.FindAsync(id)
+Business_Logic_Layer\Services\FacultyMemberService.cs:58:            context.FacultyMembers.Remove(facultyMember);
+Business_Logic_Layer\Services\FacultyMemberService.cs:65:                () => context.FacultyMembers.AnyAsync(f => f.FacultyMemberID == facultyMember.FacultyMemberID), "Faculty member");
+Business_Logic_Layer\Services\FacultyMemberService.cs:79:            var exists = await context.FacultyMembers.AnyAsync(f =>
+tests\PresentationBllRefactoring\Program.cs:10:        .GetType("University_Timetable_and_Classroom_Management_System.EditorAction")!.GetMethod("RunAsync")!;
+tests\PresentationBllRefactoring\Program.cs:122:            "University_Timetable_and_Classroom_Management_System.BusinessLayer.InputValidation")!.GetMethod("RecordIdAsync")!;
+tests\ApplicationAudit\Program.cs:40:        return JsonSerializer.Serialize(await c.Schedules.OrderBy(s=>s.ScheduleID).Select(s=>new{s.ScheduleID,s.SubjectID,s.FacultyMemberID,s.ClassroomID,s.TimeSlotID,s.SemesterNumber,s.StudyYearID,s.BranchID,s.SectionID,s.LectureType,s.GroupName,s.DayOfWeek}).ToListAsync());
+tests\ApplicationAudit\Program.cs:48:        using(var countCommand=new SqlCommand("SELECT (SELECT COUNT(*) FROM Subjects),(SELECT COUNT(*) FROM Schedules),(SELECT COUNT(*) FROM Subjects WHERE IsDeleted=0)",source))
+tests\ApplicationAudit\Program.cs:79:            Ensure(await copy.Subjects.CountAsync()==expectedSubjects && allSubjects.Count==expectedActiveSubjects && original.Count==expectedLessons);
+tests\ApplicationAudit\Program.cs:170:        await Check("Branches add update duplicate validation and delete",async()=>{
+tests\ApplicationAudit\Program.cs:182:        await Check("Sections add update and delete",async()=>{
+tests\ApplicationAudit\Program.cs:185:        await Check("Subjects permit matching names in different branches and reject duplicates within one",async()=>{
+tests\ApplicationAudit\Program.cs:221:                Ensure(await copy.Subjects.AnyAsync(s=>s.SubjectID==subject.SubjectID && s.IsDeleted && s.BranchID==branch.BranchID));
+tests\ApplicationAudit\Program.cs:228:            finally{await using var c=new AppDbContext();await c.ApplicationUsers.Where(u=>u.UserName==name).ExecuteDeleteAsync();}
+tests\ApplicationAudit\Program.cs:236:        object? Invoke(string name,params object?[] args)=>typeof(SchedulesForm).GetMethod(name,flags)!.Invoke(page,args);
+tests\ApplicationAudit\Program.cs:242:        void Select(ComboBox combo,int id)=>combo.SelectedItem=combo.Items.Cast<object>().Single(o=>(int?)o.GetType().GetProperty("Id")!.GetValue(o)==id);
+tests\FacultyScheduleEditor\Program.cs:21:    static async Task<List<Schedule>> Rows() { await using var db = factory(); return await db.Schedules.AsNoTracking().OrderBy(s => s.ScheduleID).ToListAsync(); }
+tests\FacultyScheduleEditor\Program.cs:31:        await db.Schedules.Where(s => !originalIds.Contains(s.ScheduleID)).ExecuteDeleteAsync();
+tests\FacultyScheduleEditor\Program.cs:63:            db.StudyYears.Add(new() { StudyYearID = 1, YearName = "First Year" });
+tests\FacultyScheduleEditor\Program.cs:64:            db.FacultyMembers.AddRange(new FacultyMember { FacultyMemberID = 1, FullName = "د. أحمد محمد" }, new FacultyMember { FacultyMemberID = 2, FullName = "د. سارة علي" }, new FacultyMember { FacultyMemberID = 3, FullName = "Other Teacher" });
+tests\FacultyScheduleEditor\Program.cs:65:            db.Sections.AddRange(new Section { SectionID = 1, SectionName = "A", StudentCount = 40, StudyYearID = 1 }, new Section { SectionID = 2, SectionName = "B", StudentCount = 40, StudyYearID = 1 });
+tests\FacultyScheduleEditor\Program.cs:66:            db.Subjects.AddRange(Subject(1,"Programming Lab",0,2), Subject(2,"Networks Lab",0,2), Subject(3,"Mathematics",2,0), Subject(4,"English",2,0));
+tests\FacultyScheduleEditor\Program.cs:67:            db.Classrooms.AddRange(new Classroom { ClassroomID = 1, ClassroomNumber = "Room 101", Capacity = 60, RoomType = "Lecture" }, new Classroom { ClassroomID = 2, ClassroomNumber = "Lab 1", Capacity = 30, RoomType = "Lab" }, new Classroom { ClassroomID = 3, ClassroomNumber = "Lab 2", Capacity = 30, RoomType = "Lab" }, new Classroom { ClassroomID = 4, ClassroomNumber = "Tiny", Capacity = 5, RoomType = "Lecture" });
+tests\FacultyScheduleEditor\Program.cs:68:            db.TimeSlots.AddRange(new TimeSlot { TimeSlotID = 1, StartTime = new(8,30,0), EndTime = new(10,0,0) }, new TimeSlot { TimeSlotID = 2, StartTime = new(10,10,0), EndTime = new(11,40,0) }, new TimeSlot { TimeSlotID = 3, StartTime = new(11,50,0), EndTime = new(13,20,0) });
+tests\FacultyScheduleEditor\Program.cs:69:            db.FacultyMemberSubjects.AddRange(new FacultyMemberSubject { FacultyMemberID = 1, SubjectID = 1 }, new FacultyMemberSubject { FacultyMemberID = 2, SubjectID = 2 }, new FacultyMemberSubject { FacultyMemberID = 1, SubjectID = 3 }, new FacultyMemberSubject { FacultyMemberID = 3, SubjectID = 4 });
+tests\FacultyScheduleEditor\Program.cs:71:            db.Schedules.AddRange(Lecture(1,1,2,1,"Sunday","Practical","A1",1), Lecture(1,1,2,2,"Sunday","Practical","A2",1), Lecture(2,2,3,1,"Sunday","Practical","A2",1), Lecture(2,2,3,2,"Sunday","Practical","A1",1), Lecture(3,1,1,3,"Tuesday","Theory",null,2), Lecture(4,3,1,1,"Wednesday","Theory",null,2));
+tests\FacultyScheduleEditor\Program.cs:137:            await using(var db = factory()) await db.Classrooms.Where(r => r.ClassroomID == 1).ExecuteUpdateAsync(set => set.SetProperty(r => r.ClassroomNumber,"Renamed"));
+tests\FacultyScheduleEditor\Program.cs:139:            finally { await using var db = factory(); await db.Classrooms.Where(r => r.ClassroomID == 1).ExecuteUpdateAsync(set => set.SetProperty(r => r.ClassroomNumber,"Room 101")); }
+tests\FacultyScheduleEditor\Program.cs:144:            await using(var db = factory()) await db.Schedules.Where(s => s.FacultyMemberID == 3).ExecuteUpdateAsync(set => set.SetProperty(s => s.DayOfWeek,"Thursday"));
+tests\FacultyScheduleEditor\Program.cs:164:            var saved = await db.Schedules.AsNoTracking().OrderBy(s => s.ScheduleID).ToListAsync(); Assert(pair.All(p => saved.Single(s => s.ScheduleID == p.ScheduleID).TimeSlotID == p.TimeSlotID));
+tests\FacultyScheduleEditor\Program.cs:181:            await using(var db = factory()) await db.Schedules.Where(s => s.ScheduleID == id).ExecuteUpdateAsync(set => set.SetProperty(s => s.GroupName,"A2").SetProperty(s => s.DayOfWeek,"Thursday"));
+tests\FacultyScheduleEditor\Program.cs:183:            finally { await using var db = factory(); await db.Schedules.Where(s => s.ScheduleID == id).ExecuteUpdateAsync(set => set.SetProperty(s => s.GroupName,"A1").SetProperty(s => s.DayOfWeek,"Sunday")); }
+tests\FacultyScheduleEditor\Program.cs:189:                db.Branches.Add(new() { BranchID = 8, BranchName = "Computer Science" });
+tests\FacultyScheduleEditor\Program.cs:190:                db.StudyYears.Add(new() { StudyYearID = 4, YearName = "Fourth Year" });
+tests\FacultyScheduleEditor\Program.cs:191:                db.Sections.Add(new() { SectionID = 4, SectionName = "A", StudentCount = 30, StudyYearID = 4, BranchID = 8 });
+tests\FacultyScheduleEditor\Program.cs:192:                db.Subjects.Add(new() { SubjectID = 8, SubjectName = "Whole-section lab", StudyYearID = 4, BranchID = 8, SemesterNumber = 1, PracticalHours = 2, CreditUnits = 2, RequirementType = "Core" });
+tests\FacultyScheduleEditor\Program.cs:193:                db.FacultyMemberSubjects.Add(new() { FacultyMemberID = 3, SubjectID = 8 }); await db.SaveChangesAsync();
+tests\FacultyScheduleEditor\Program.cs:194:                var whole = Lecture(8,3,2,2,"Wednesday","Practical",null,4); whole.StudyYearID = 4; whole.BranchID = 8; db.Schedules.Add(whole); await db.SaveChangesAsync();
+tests\FacultyScheduleEditor\Program.cs:203:                await using var db = factory(); await db.Schedules.Where(s => s.SubjectID == 8).ExecuteDeleteAsync(); await db.FacultyMemberSubjects.Where(s => s.SubjectID == 8).ExecuteDeleteAsync();
+tests\FacultyScheduleEditor\Program.cs:204:                await db.Subjects.Where(s => s.SubjectID == 8).ExecuteDeleteAsync(); await db.Sections.Where(s => s.SectionID == 4).ExecuteDeleteAsync(); await db.StudyYears.Where(s => s.StudyYearID == 4).ExecuteDeleteAsync(); await db.Branches.Where(s => s.BranchID == 8).ExecuteDeleteAsync();
+tests\FacultyScheduleEditor\Program.cs:209:            await using(var db = factory()) await db.TimeSlots.Where(p => p.TimeSlotID == 2).ExecuteUpdateAsync(set => set.SetProperty(p => p.EndTime,new TimeSpan(11,30,0)));
+tests\FacultyScheduleEditor\Program.cs:215:            finally { await using var db = factory(); await db.TimeSlots.Where(p => p.TimeSlotID == 2).ExecuteUpdateAsync(set => set.SetProperty(p => p.EndTime,new TimeSpan(11,40,0))); }
+Business_Logic_Layer\Services\ClassroomService.cs:12:            return await context.Classrooms.AsNoTracking()
+Business_Logic_Layer\Services\ClassroomService.cs:20:            return await context.Classrooms.AsNoTracking().FirstOrDefaultAsync(c => c.ClassroomID == id);
+Business_Logic_Layer\Services\ClassroomService.cs:26:            classroom.ClassroomID = await AutoKeyGenerator.NextAsync(context.Classrooms.Select(c => c.ClassroomID));
+Business_Logic_Layer\Services\ClassroomService.cs:33:            await context.Classrooms.AddAsync(classroom);
+Business_Logic_Layer\Services\ClassroomService.cs:34:            await ManualKeySaveHelper.SaveWithManualKeyAsync(context, "[Classrooms]");
+Business_Logic_Layer\Services\ClassroomService.cs:51:            var existing = await context.Classrooms.SingleAsync(c => c.ClassroomID == classroom.ClassroomID);
+Business_Logic_Layer\Services\ClassroomService.cs:52:            var lessons = await context.Schedules.Include(s => s.Section)
+Business_Logic_Layer\Services\ClassroomService.cs:66:            var classroom = await context.Classrooms.FindAsync(id)
+Business_Logic_Layer\Services\ClassroomService.cs:69:            context.Classrooms.Remove(classroom);
+Business_Logic_Layer\Services\ClassroomService.cs:76:                () => context.Classrooms.AnyAsync(c => c.ClassroomID == classroom.ClassroomID), "Classroom");
+Business_Logic_Layer\Services\ClassroomService.cs:92:            var exists = await context.Classrooms.AnyAsync(c =>
+tests\SchedulingCapacity\Program.cs:21:    var loads=fixture.Sections.Where(s=>s.StudyYearID>=3).ToDictionary(s=>s.SectionID,s=>fixture.Subjects.Where(sub=>sub.StudyYearID==s.StudyYearID&&sub.BranchID==s.BranchID&&sub.SemesterNumber==specification.Semester).Sum(sub=>(sub.TheoreticalHours>0?1:0)+(sub.PracticalHours>0?1:0)));
+tests\SchedulingCapacity\Program.cs:24:        var section=fixture.Sections.Where(s=>loads.ContainsKey(s.SectionID)&&loads[s.SectionID]+increment<=15).OrderBy(s=>loads[s.SectionID]).ThenBy(s=>s.StudyYearID).ThenBy(s=>s.BranchID).FirstOrDefault();
+tests\SchedulingCapacity\Program.cs:29:        var representative=fixture.Subjects.Where(s=>s.StudyYearID==section.StudyYearID&&s.BranchID==section.BranchID&&s.SemesterNumber==specification.Semester).OrderBy(s=>s.SubjectID).First();
+tests\SchedulingCapacity\Program.cs:37:    foreach(var subject in fixture.Subjects.Concat(newSubjects)){
+tests\SchedulingCapacity\Program.cs:39:        foreach(var section in fixture.Sections.Where(s=>s.StudyYearID==subject.StudyYearID&&AcademicStructureRules.SectionMatchesSubject(subject.StudyYearID,subject.BranchID,s.BranchID,s.SectionName))){
+tests\SchedulingCapacity\Program.cs:40:            foreach(var request in (IEnumerable)generator.GetMethod("CreateScheduleRequests")!.Invoke(null,[teaching,section])!)requests.Add(request);
+tests\SchedulingCapacity\Program.cs:44:    var ordered=requests.Cast<object>().OrderByDescending(r=>((Subject)requestType.GetProperty("Subject")!.GetValue(r)!).StudyYearID)
+tests\SchedulingCapacity\Program.cs:45:        .ThenBy(r=>((Subject)requestType.GetProperty("Subject")!.GetValue(r)!).BranchID??0)
+tests\SchedulingCapacity\Program.cs:46:        .ThenBy(r=>((Subject)requestType.GetProperty("Subject")!.GetValue(r)!).SemesterNumber)
+tests\SchedulingCapacity\Program.cs:47:        .ThenBy(r=>((Subject)requestType.GetProperty("Subject")!.GetValue(r)!).SubjectName)
+tests\SchedulingCapacity\Program.cs:48:        .ThenBy(r=>(int)requestType.GetProperty("LessonNumber")!.GetValue(r)!)
+tests\SchedulingCapacity\Program.cs:49:        .ThenBy(r=>((Section)requestType.GetProperty("Section")!.GetValue(r)!).SectionName).ToList();
+tests\SchedulingCapacity\Program.cs:52:    contextType.GetProperty("RequirePracticalExchange")!.SetValue(context,false);
+tests\SchedulingCapacity\Program.cs:53:    var watch=Stopwatch.StartNew();var result=generator.GetMethod("BuildPlan")!.Invoke(null,[requests,context])!;watch.Stop();
+tests\SchedulingCapacity\Program.cs:54:    var rows=(List<Schedule>)result.GetType().GetProperty("Schedules")!.GetValue(result)!;
+tests\SchedulingCapacity\Program.cs:55:    var issues=(IReadOnlyList<string>)result.GetType().GetProperty("PracticalExchangeIssues")!.GetValue(result)!;
+tests\SchedulingCapacity\Program.cs:56:    int conflicts=(int)result.GetType().GetProperty("ConflictCount")!.GetValue(result)!;
+tests\SchedulingCapacity\Program.cs:63:            var a=rows[i];var room=fixture.Rooms.Single(r=>r.ClassroomID==a.ClassroomID);var section=fixture.Sections.Single(s=>s.SectionID==a.SectionID);
+tests\SchedulingCapacity\Program.cs:87:    fixtureData=new(await context.Subjects.AsNoTracking().ToListAsync(),await context.Sections.AsNoTracking().ToListAsync(),await context.Classrooms.AsNoTracking().ToListAsync(),await context.TimeSlots.AsNoTracking().Where(t=>!t.IsBreak).OrderBy(t=>t.StartTime).ToListAsync(),await context.FacultyMemberSubjects.Select(a=>new Assignment(a.SubjectID,a.FacultyMemberID)).ToListAsync());
+tests\SchedulingCapacity\Program.cs:90:Console.WriteLine($"ISOLATED FULL COPY: {clone}; {fixtureData.Subjects.Count} subjects");
+tests\SchedulingCapacity\Program.cs:109:record Fixture(List<Subject> Subjects,List<Section> Sections,List<Classroom> Rooms,List<TimeSlot> Periods,List<Assignment> Assignments);
+tests\PdfImport\Program.cs:29:                Assert(sheet.SuggestedSchemaName == "FacultyMembers");
+tests\PdfImport\Program.cs:47:            Assert(ImportLabels.MatchSheet("القاعات") == "Classrooms");
+tests\PdfImport\Program.cs:72:                var sheet = book.AddWorksheet("Branches"); sheet.Cell(1, 1).Value = "BranchID"; sheet.Cell(1, 2).Value = "BranchName";
+tests\PdfImport\Program.cs:122:        Assert(sheet.SuggestedSchemaName == "FacultyMembers", string.Join(" | ", sheet.Table.Columns.Cast<DataColumn>().Select(c => c.ColumnName)));
+tests\PdfImport\Program.cs:136:            typeof(ExcelImportForm).GetMethod("LoadWorkbook", BindingFlags.Instance | BindingFlags.NonPublic)!.Invoke(form, [workbook, modeIndex == 0 ? "arabic.pdf" : "timetable.pdf"]);
+tests\PdfImport\Program.cs:141:            var prepared = (List<ExcelSheetData>)typeof(ExcelImportForm).GetMethod("PrepareSheets", BindingFlags.Instance | BindingFlags.NonPublic)!.Invoke(form, null)!;
+tests\PdfImport\Program.cs:143:            if (modeIndex == 0) Assert(prepared[0].Name == "FacultyMembers" && prepared[0].SourceName == "صفحة 1");
+tests\PdfImport\Program.cs:159:                typeof(ExcelImportForm).GetMethod("ShowPreview", BindingFlags.Instance | BindingFlags.NonPublic)!.Invoke(form, null);
+tests\PdfImport\Program.cs:160:                typeof(ExcelImportForm).GetMethod("UpdateActions", BindingFlags.Instance | BindingFlags.NonPublic)!.Invoke(form, null);
+tests\PdfImport\Program.cs:167:                typeof(ExcelImportPreview).GetProperty("GenerationCompleted")!.SetValue(preview, true);
+tests\PdfImport\Program.cs:168:                typeof(ExcelImportForm).GetMethod("ShowPreview", BindingFlags.Instance | BindingFlags.NonPublic)!.Invoke(form, null);
+tests\PdfImport\Program.cs:169:                typeof(ExcelImportForm).GetMethod("UpdateActions", BindingFlags.Instance | BindingFlags.NonPublic)!.Invoke(form, null);
+tests\PdfImport\Program.cs:184:                typeof(ExcelImportForm).GetMethod("ShowPreview", BindingFlags.Instance | BindingFlags.NonPublic)!.Invoke(form, null);
+tests\PdfImport\Program.cs:193:        typeof(ExcelImportForm).GetMethod("LoadWorkbook", BindingFlags.Instance | BindingFlags.NonPublic)!.Invoke(automatic,
+Business_Logic_Layer\Services\BranchService.cs:12:            return await context.Branches.AsNoTracking().ToListAsync();
+Business_Logic_Layer\Services\BranchService.cs:18:            return await context.Branches.AsNoTracking().FirstOrDefaultAsync(b => b.BranchID == id);
+Business_Logic_Layer\Services\BranchService.cs:24:            branch.BranchID = await AutoKeyGenerator.NextAsync(context.Branches.Select(b => b.BranchID));
+Business_Logic_Layer\Services\BranchService.cs:31:            await context.Branches.AddAsync(branch);
+Business_Logic_Layer\Services\BranchService.cs:32:            await ManualKeySaveHelper.SaveWithManualKeyAsync(context, "[Branches]");
+Business_Logic_Layer\Services\BranchService.cs:46:            context.Branches.Update(branch);
+Business_Logic_Layer\Services\BranchService.cs:55:            var branch = await context.Branches.FindAsync(id)
+Business_Logic_Layer\Services\BranchService.cs:58:            context.Branches.Remove(branch);
+Business_Logic_Layer\Services\BranchService.cs:65:                () => context.Branches.AnyAsync(b => b.BranchID == branch.BranchID), "Branch");
+Business_Logic_Layer\Services\BranchService.cs:74:            var exists = await context.Branches.AnyAsync(b =>
+Business_Logic_Layer\Services\AuthService.cs:25:            var user = await context.ApplicationUsers
+Business_Logic_Layer\Services\AuthService.cs:55:            bool exists = await context.ApplicationUsers
+Business_Logic_Layer\Services\AuthService.cs:66:                    context.ApplicationUsers.Select(item => item.ApplicationUserID)),
+Business_Logic_Layer\Services\AuthService.cs:75:            await context.ApplicationUsers.AddAsync(user);
+Business_Logic_Layer\Services\AuthService.cs:76:            await ManualKeySaveHelper.SaveWithManualKeyAsync(context, "[ApplicationUsers]");
+tests\ManualFacultySelection\Program.cs:18:        void Invoke(string name, params object?[] args) => typeof(SchedulesForm).GetMethod(name, PrivateInstance)!.Invoke(page, args);
+tests\ManualFacultySelection\Program.cs:19:        int? Selected(Guna2ComboBox combo) => combo.SelectedItem?.GetType().GetProperty("Id")!.GetValue(combo.SelectedItem) as int?;
+tests\ManualFacultySelection\Program.cs:22:            combo.SelectedItem = combo.Items.Cast<object>().Single(item => (int?)item.GetType().GetProperty("Id")!.GetValue(item) == id);
+tests\TimetableBackups\Program.cs:42:                typeof(SchedulesForm).GetMethod("LayoutScheduleButtons",BindingFlags.Instance|BindingFlags.NonPublic)!.Invoke(form,new object[]{parent});
+tests\TimetableBackups\Program.cs:61:    static async Task<List<Schedule>> Rows(){await using var db=factory();return await db.Schedules.AsNoTracking().OrderBy(s=>s.ScheduleID).ToListAsync();}
+tests\TimetableBackups\Program.cs:65:    {await using var db=factory();await db.Schedules.Where(s=>s.ScheduleID==original[0].ScheduleID).ExecuteUpdateAsync(set=>set.SetProperty(s=>s.DayOfWeek,"Tuesday"));}
+tests\TimetableBackups\Program.cs:78:            db.StudyYears.Add(new(){StudyYearID=1,YearName="First Year"});
+tests\TimetableBackups\Program.cs:79:            db.Sections.Add(new(){SectionID=1,SectionName="A",StudentCount=30,StudyYearID=1});
+tests\TimetableBackups\Program.cs:80:            db.FacultyMembers.Add(new(){FacultyMemberID=1,FullName="د. أحمد"});
+tests\TimetableBackups\Program.cs:81:            db.Classrooms.Add(new(){ClassroomID=1,ClassroomNumber="قاعة 301",Capacity=60,RoomType="Lecture"});
+tests\TimetableBackups\Program.cs:82:            db.TimeSlots.Add(new(){TimeSlotID=1,StartTime=new(8,30,0),EndTime=new(10,10,0)});
+tests\TimetableBackups\Program.cs:85:                db.Subjects.Add(new(){SubjectID=semester,SubjectName="مادة "+semester,StudyYearID=1,SemesterNumber=semester,TheoreticalHours=2,CreditUnits=2});
+tests\TimetableBackups\Program.cs:86:                db.FacultyMemberSubjects.Add(new(){SubjectID=semester,FacultyMemberID=1});
+tests\TimetableBackups\Program.cs:89:            for(int semester=1;semester<=2;semester++)db.Schedules.Add(new(){SubjectID=semester,FacultyMemberID=1,ClassroomID=1,TimeSlotID=1,DayOfWeek="Sunday",SectionID=1,StudyYearID=1,SemesterNumber=semester,IsLocked=semester==2});
+tests\TimetableBackups\Program.cs:115:            await using(var db=factory())await db.Classrooms.Where(x=>x.ClassroomID==1).ExecuteUpdateAsync(set=>set.SetProperty(x=>x.ClassroomNumber,"Renamed room"));
+tests\TimetableBackups\Program.cs:116:            try{var p=await service.PreviewRestoreAsync(sourceFile);Assert(!p.CanRestore&&p.Issues.Any(x=>x.Contains("Classrooms")));await Reject(()=>service.RestoreAsync(p,true,Safety()));}
+tests\TimetableBackups\Program.cs:117:            finally{await using var db=factory();await db.Classrooms.Where(x=>x.ClassroomID==1).ExecuteUpdateAsync(set=>set.SetProperty(x=>x.ClassroomNumber,"قاعة 301"));}
+tests\TimetableBackups\Program.cs:121:            await using(var db=factory()){db.Subjects.Add(new(){SubjectID=3,SubjectName="New subject",StudyYearID=1,SemesterNumber=1,TheoreticalHours=2});await db.SaveChangesAsync();}
+tests\TimetableBackups\Program.cs:123:            await using var check=factory();Assert(await check.Subjects.AnyAsync(s=>s.SubjectID==3));Assert(Json(original)==Json(await Rows()));
+tests\TimetableBackups\Program.cs:127:            await using(var db=factory())await db.FacultyMemberSubjects.Where(x=>x.SubjectID==2).ExecuteDeleteAsync();
+tests\TimetableBackups\Program.cs:129:            finally{await using var db=factory();db.FacultyMemberSubjects.Add(new(){SubjectID=2,FacultyMemberID=1});await db.SaveChangesAsync();}
+tests\TimetableBackups\Program.cs:156:            await using(var db=factory())await db.Schedules.ExecuteDeleteAsync();var p=await service.PreviewRestoreAsync(sourceFile);Assert(p.CanRestore&&p.CurrentLectureCount==0);
+tests\RowNumbering\Program.cs:89:            void Set(string key, object value) => type.GetProperty(key)!.SetValue(row, value);
+tests\RowNumbering\Program.cs:99:        var ids = binding.Cast<object>().Select(r => (int)type.GetProperty("ScheduleID")!.GetValue(r)!).ToArray();
+tests\RowNumbering\Program.cs:102:        Check("Schedule chronology is retained after filters are reapplied", binding.Cast<object>().Select(r => (int)type.GetProperty("ScheduleID")!.GetValue(r)!).SequenceEqual(ids));
+tests\RowNumbering\Program.cs:175:        bool valid = (bool)page.GetType().GetMethod("TryGetBranchIdFromEditor", PrivateInstance)!.Invoke(page, arguments)!;
+tests\RowNumbering\Program.cs:185:        var row = rowType.GetMethod("FromSubject", BindingFlags.Static | BindingFlags.Public)!.Invoke(null,
+tests\RowNumbering\Program.cs:196:        bool valid = (bool)page.GetType().GetMethod("TryGetSubjectIdFromEditor", PrivateInstance)!.Invoke(page, arguments)!;
+tests\RowNumbering\Program.cs:210:        .GetMethod("Attach", BindingFlags.Static | BindingFlags.Public)!.Invoke(null, [grid, grid.Columns["colRowNumber"]]);
+tests\RowNumbering\Program.cs:222:    private static void Invoke(object instance, string method) => instance.GetType().GetMethod(method, PrivateInstance)!.Invoke(instance, null);
+tests\WebIntegration\Program.cs:29:    foreach (var definition in await db.Database.SqlQueryRaw<string>("SELECT definition AS [Value] FROM sys.check_constraints WHERE parent_object_id IN (OBJECT_ID('Subjects'), OBJECT_ID('Sections'), OBJECT_ID('StudyYears'))").ToListAsync()) Console.WriteLine(definition);
+tests\WebIntegration\Program.cs:42:    await using (var db = new AppDbContext()) testUserId = await db.ApplicationUsers.Where(x => x.UserName == marker).Select(x => x.ApplicationUserID).SingleAsync();
+tests\WebIntegration\Program.cs:142:    var user = await db.ApplicationUsers.SingleOrDefaultAsync(x => x.UserName == marker && (!testUserId.HasValue || x.ApplicationUserID == testUserId));
+tests\WebIntegration\Program.cs:143:    if (user is not null) { db.ApplicationUsers.Remove(user); await db.SaveChangesAsync(); }
+tests\WebIntegration\Program.cs:174:    rows["allScheduleColumns"] = await db.Schedules.AsNoTracking().OrderBy(x => x.ScheduleID).ToListAsync();
+tests\WebIntegration\Program.cs:175:    rows["allTimeSlotsIncludingBreaks"] = await db.TimeSlots.AsNoTracking().OrderBy(x => x.TimeSlotID).ToListAsync();
+tests\WebIntegration\Program.cs:176:    rows["users"] = await db.ApplicationUsers.AsNoTracking().OrderBy(x => x.ApplicationUserID).ToListAsync();
+tests\WebIntegration\Program.cs:189:    foreach (var request in (IEnumerable)generator.GetMethod("CreateScheduleRequests")!.Invoke(null, [teaching, section])!) requests.Add(request);
+tests\WebIntegration\Program.cs:193:    var result = generator.GetMethod("BuildPlan")!.Invoke(null, [requests, context])!;
+tests\WebIntegration\Program.cs:194:    var schedules = (List<Schedule>)result.GetType().GetProperty("Schedules")!.GetValue(result)!;
+tests\WebIntegration\Program.cs:197:    result = generator.GetMethod("BuildPlan")!.Invoke(null, [requests, context])!;
+tests\WebIntegration\Program.cs:198:    schedules = (List<Schedule>)result.GetType().GetProperty("Schedules")!.GetValue(result)!;
+tests\WebIntegration\CurrentDataPlanner.cs:31:                foreach (var request in (IEnumerable)generator.GetMethod("CreateScheduleRequests")!.Invoke(null, [teaching, section])!) requests.Add(request);
+tests\WebIntegration\CurrentDataPlanner.cs:33:        Subject SubjectOf(object r) => (Subject)requestType.GetProperty("Subject")!.GetValue(r)!;
+tests\WebIntegration\CurrentDataPlanner.cs:34:        Section SectionOf(object r) => (Section)requestType.GetProperty("Section")!.GetValue(r)!;
+tests\WebIntegration\CurrentDataPlanner.cs:37:            .ThenBy(r => SubjectOf(r).SubjectName).ThenBy(r => (int)requestType.GetProperty("LessonNumber")!.GetValue(r)!)
+tests\WebIntegration\CurrentDataPlanner.cs:41:        context.GetType().GetProperty("RequirePracticalExchange")!.SetValue(context, false);
+tests\WebIntegration\CurrentDataPlanner.cs:43:        var result = generator.GetMethod("BuildPlan")!.Invoke(null, [requests, context])!;
+tests\WebIntegration\CurrentDataPlanner.cs:45:        var schedules = (List<Schedule>)result.GetType().GetProperty("Schedules")!.GetValue(result)!;
+tests\WebIntegration\CurrentDataPlanner.cs:46:        var conflicts = (bool)assembly.GetType(prefix + "ScheduleConflictChecker")!.GetMethod("HasAnyPairConflict")!.Invoke(null, [schedules])!;
+tests\WebIntegration\CurrentDataPlanner.cs:47:        var issues = (IReadOnlyList<string>)result.GetType().GetProperty("PracticalExchangeIssues")!.GetValue(result)!;
+tests\PracticalExchange\GeneratorProbe.cs:11:        Plan(requests, rooms, periods).Schedules;
+tests\PracticalExchange\GeneratorProbe.cs:25:        var result = assembly.GetType(prefix + "ScheduleGenerator")!.GetMethod("BuildPlan")!.Invoke(null, [list, context])!;
+tests\PracticalExchange\GeneratorProbe.cs:26:        return new ProbeResult((List<Schedule>)result.GetType().GetProperty("Schedules")!.GetValue(result)!,
+tests\PracticalExchange\GeneratorProbe.cs:27:            ((IReadOnlyList<string>)result.GetType().GetProperty("PracticalExchangeIssues")!.GetValue(result)!).ToList(),
+tests\PracticalExchange\GeneratorProbe.cs:28:            (int)result.GetType().GetProperty("ConflictCount")!.GetValue(result)!);
+tests\PracticalExchange\GeneratorProbe.cs:40:        foreach (var booking in occupied) stateType.GetMethod("Add")!.Invoke(state, [booking]);
+tests\PracticalExchange\GeneratorProbe.cs:49:            var enumerable = (IEnumerable)generator.GetMethod("CreatePlacementCandidates", BindingFlags.Static | BindingFlags.NonPublic)!
+tests\PracticalExchange\GeneratorProbe.cs:54:        generator.GetMethod("TryPlaceSinglePracticalSubject", BindingFlags.Static | BindingFlags.NonPublic)!
+tests\PracticalExchange\GeneratorProbe.cs:56:        return ((List<Schedule>)stateType.GetProperty("Schedules")!.GetValue(state)!)
+tests\PracticalExchange\GeneratorProbe.cs:61:internal sealed record ProbeResult(List<Schedule> Schedules, List<string> Issues, int Conflicts);
+Business_Logic_Layer\Maintenance\SchedulingResourceMaintenance.cs:20:            var timeSlots = await context.TimeSlots.ToListAsync();
+Business_Logic_Layer\Maintenance\SchedulingResourceMaintenance.cs:39:                await context.TimeSlots.AddAsync(timeSlot);
+Business_Logic_Layer\Maintenance\SchedulingResourceMaintenance.cs:46:                await ManualKeySaveHelper.SaveWithManualKeyAsync(context, "[TimeSlots]");
+Business_Logic_Layer\Maintenance\SchedulingResourceMaintenance.cs:54:            var classrooms = await context.Classrooms.ToListAsync();
+Business_Logic_Layer\Maintenance\SchedulingResourceMaintenance.cs:62:                await context.Sections.MaxAsync(section => (int?)section.StudentCount) ?? DefaultCapacity);
+Business_Logic_Layer\Maintenance\SchedulingResourceMaintenance.cs:77:                await context.Classrooms.AddAsync(classroom);
+Business_Logic_Layer\Maintenance\SchedulingResourceMaintenance.cs:93:                await context.Classrooms.AddAsync(classroom);
+Business_Logic_Layer\Maintenance\SchedulingResourceMaintenance.cs:101:                await ManualKeySaveHelper.SaveWithManualKeyAsync(context, "[Classrooms]");
+Business_Logic_Layer\Helpers\ManualKeySaveHelper.cs:10:            "[Branches]",
+Business_Logic_Layer\Helpers\ManualKeySaveHelper.cs:11:            "[StudyYears]",
+Business_Logic_Layer\Helpers\ManualKeySaveHelper.cs:12:            "[Sections]",
+Business_Logic_Layer\Helpers\ManualKeySaveHelper.cs:13:            "[Subjects]",
+Business_Logic_Layer\Helpers\ManualKeySaveHelper.cs:14:            "[FacultyMembers]",
+Business_Logic_Layer\Helpers\ManualKeySaveHelper.cs:15:            "[Classrooms]",
+Business_Logic_Layer\Helpers\ManualKeySaveHelper.cs:16:            "[TimeSlots]",
+Business_Logic_Layer\Helpers\ManualKeySaveHelper.cs:17:            "[ApplicationUsers]"
+Business_Logic_Layer\Maintenance\DatabaseMaintenanceService.cs:38:                IF OBJECT_ID(N'[ApplicationUsers]', N'U') IS NULL
+Business_Logic_Layer\Maintenance\DatabaseMaintenanceService.cs:40:                    CREATE TABLE [ApplicationUsers]
+Business_Logic_Layer\Maintenance\DatabaseMaintenanceService.cs:53:                IF NOT EXISTS (SELECT 1 FROM sys.indexes WHERE name = N'IX_ApplicationUsers_NormalizedUserName' AND object_id = OBJECT_ID(N'[ApplicationUsers]'))
+Business_Logic_Layer\Maintenance\DatabaseMaintenanceService.cs:55:                    ON [ApplicationUsers] ([NormalizedUserName]);
+Business_Logic_Layer\Maintenance\DatabaseMaintenanceService.cs:62:                IF OBJECT_ID(N'[Subjects]', N'U') IS NOT NULL
+Business_Logic_Layer\Maintenance\DatabaseMaintenanceService.cs:63:                   AND COL_LENGTH(N'dbo.Subjects', N'SemesterNumber') IS NULL
+Business_Logic_Layer\Maintenance\DatabaseMaintenanceService.cs:64:                    ALTER TABLE [Subjects]
+Business_Logic_Layer\Maintenance\DatabaseMaintenanceService.cs:70:                IF OBJECT_ID(N'[Subjects]', N'U') IS NOT NULL
+Business_Logic_Layer\Maintenance\DatabaseMaintenanceService.cs:72:                    UPDATE [Subjects]
+Business_Logic_Layer\Maintenance\DatabaseMaintenanceService.cs:76:                    IF EXISTS (SELECT 1 FROM sys.indexes WHERE name = N'IX_Subjects_SubjectName_StudyYearID_SemesterNumber' AND object_id = OBJECT_ID(N'[Subjects]'))
+Business_Logic_Layer\Maintenance\DatabaseMaintenanceService.cs:77:                        DROP INDEX [IX_Subjects_SubjectName_StudyYearID_SemesterNumber] ON [Subjects];
+Business_Logic_Layer\Maintenance\DatabaseMaintenanceService.cs:79:                    IF NOT EXISTS (SELECT 1 FROM sys.indexes WHERE name = N'IX_Subjects_SubjectName_StudyYearID_BranchID_SemesterNumber' AND object_id = OBJECT_ID(N'[Subjects]'))
+Business_Logic_Layer\Maintenance\DatabaseMaintenanceService.cs:82:                            FROM [Subjects]
+Business_Logic_Layer\Maintenance\DatabaseMaintenanceService.cs:86:                        ON [Subjects] ([SubjectName], [StudyYearID], [BranchID], [SemesterNumber]);
+Business_Logic_Layer\Maintenance\DatabaseMaintenanceService.cs:94:                IF OBJECT_ID(N'[Schedules]', N'U') IS NOT NULL
+Business_Logic_Layer\Maintenance\DatabaseMaintenanceService.cs:95:                   AND COL_LENGTH(N'dbo.Schedules', N'SemesterNumber') IS NULL
+Business_Logic_Layer\Maintenance\DatabaseMaintenanceService.cs:96:                    ALTER TABLE [Schedules]
+Business_Logic_Layer\Maintenance\DatabaseMaintenanceService.cs:102:                IF OBJECT_ID(N'[Schedules]', N'U') IS NOT NULL
+Business_Logic_Layer\Maintenance\DatabaseMaintenanceService.cs:103:                   AND COL_LENGTH(N'dbo.Schedules', N'LectureType') IS NULL
+Business_Logic_Layer\Maintenance\DatabaseMaintenanceService.cs:104:                    ALTER TABLE [Schedules] ADD [LectureType] nvarchar(20) NULL;
+Business_Logic_Layer\Maintenance\DatabaseMaintenanceService.cs:108:                IF OBJECT_ID(N'[Schedules]', N'U') IS NOT NULL
+Business_Logic_Layer\Maintenance\DatabaseMaintenanceService.cs:109:                   AND COL_LENGTH(N'dbo.Schedules', N'GroupName') IS NULL
+Business_Logic_Layer\Maintenance\DatabaseMaintenanceService.cs:110:                    ALTER TABLE [Schedules] ADD [GroupName] nvarchar(20) NULL;
+Business_Logic_Layer\Maintenance\DatabaseMaintenanceService.cs:114:                IF OBJECT_ID(N'[Schedules]', N'U') IS NOT NULL
+Business_Logic_Layer\Maintenance\DatabaseMaintenanceService.cs:118:                    FROM [Schedules] schedule
+Business_Logic_Layer\Maintenance\DatabaseMaintenanceService.cs:119:                    INNER JOIN [Subjects] subject ON subject.[SubjectID] = schedule.[SubjectID];
+Business_Logic_Layer\Maintenance\DatabaseMaintenanceService.cs:121:                    UPDATE [Schedules]
+Business_Logic_Layer\Maintenance\DatabaseMaintenanceService.cs:131:                IF OBJECT_ID(N'[Schedules]', N'U') IS NOT NULL
+Business_Logic_Layer\Maintenance\DatabaseMaintenanceService.cs:133:                    UPDATE [Schedules]
+Business_Logic_Layer\Maintenance\DatabaseMaintenanceService.cs:137:                    UPDATE [Schedules]
+Business_Logic_Layer\Maintenance\DatabaseMaintenanceService.cs:149:                    UPDATE [Schedules]
+Business_Logic_Layer\Maintenance\DatabaseMaintenanceService.cs:159:                        FROM [Schedules] schedule
+Business_Logic_Layer\Maintenance\DatabaseMaintenanceService.cs:160:                        INNER JOIN [Sections] currentSection ON currentSection.[SectionID] = schedule.[SectionID]
+Business_Logic_Layer\Maintenance\DatabaseMaintenanceService.cs:161:                        INNER JOIN [Sections] baseSection ON
+Business_Logic_Layer\Maintenance\DatabaseMaintenanceService.cs:178:                    FROM [Schedules] schedule
+Business_Logic_Layer\Maintenance\DatabaseMaintenanceService.cs:181:                    UPDATE [Schedules]
+Business_Logic_Layer\Maintenance\DatabaseMaintenanceService.cs:186:                    FROM [Sections] practicalSection
+Business_Logic_Layer\Maintenance\DatabaseMaintenanceService.cs:192:                          FROM [Schedules] schedule
+Business_Logic_Layer\Maintenance\DatabaseMaintenanceService.cs:201:                IF OBJECT_ID(N'[Schedules]', N'U') IS NOT NULL
+Business_Logic_Layer\Maintenance\DatabaseMaintenanceService.cs:206:                        N'ALTER TABLE [Schedules] DROP CONSTRAINT [' + constraintItem.[name] + N'];'
+Business_Logic_Layer\Maintenance\DatabaseMaintenanceService.cs:208:                    WHERE constraintItem.[parent_object_id] = OBJECT_ID(N'[Schedules]')
+Business_Logic_Layer\Maintenance\DatabaseMaintenanceService.cs:222:                    IF EXISTS (SELECT 1 FROM sys.indexes WHERE name = N'UQ_Classroom_Time' AND object_id = OBJECT_ID(N'[Schedules]'))
+Business_Logic_Layer\Maintenance\DatabaseMaintenanceService.cs:223:                        DROP INDEX [UQ_Classroom_Time] ON [Schedules];
+Business_Logic_Layer\Maintenance\DatabaseMaintenanceService.cs:225:                    IF EXISTS (SELECT 1 FROM sys.indexes WHERE name = N'UQ_Faculty_Time' AND object_id = OBJECT_ID(N'[Schedules]'))
+Business_Logic_Layer\Maintenance\DatabaseMaintenanceService.cs:226:                        DROP INDEX [UQ_Faculty_Time] ON [Schedules];
+Business_Logic_Layer\Maintenance\DatabaseMaintenanceService.cs:228:                    IF EXISTS (SELECT 1 FROM sys.indexes WHERE name = N'UQ_Section_Time' AND object_id = OBJECT_ID(N'[Schedules]'))
+Business_Logic_Layer\Maintenance\DatabaseMaintenanceService.cs:229:                        DROP INDEX [UQ_Section_Time] ON [Schedules];
+Business_Logic_Layer\Maintenance\DatabaseMaintenanceService.cs:231:                    IF EXISTS (SELECT 1 FROM sys.indexes WHERE name = N'IX_Schedules_ClassroomID_TimeSlotID' AND object_id = OBJECT_ID(N'[Schedules]'))
+Business_Logic_Layer\Maintenance\DatabaseMaintenanceService.cs:232:                        DROP INDEX [IX_Schedules_ClassroomID_TimeSlotID] ON [Schedules];
+Business_Logic_Layer\Maintenance\DatabaseMaintenanceService.cs:234:                    IF EXISTS (SELECT 1 FROM sys.indexes WHERE name = N'IX_Schedules_FacultyMemberID_TimeSlotID' AND object_id = OBJECT_ID(N'[Schedules]'))
+Business_Logic_Layer\Maintenance\DatabaseMaintenanceService.cs:235:                        DROP INDEX [IX_Schedules_FacultyMemberID_TimeSlotID] ON [Schedules];
+Business_Logic_Layer\Maintenance\DatabaseMaintenanceService.cs:237:                    IF EXISTS (SELECT 1 FROM sys.indexes WHERE name = N'IX_Schedules_StudyYearID_BranchID_TimeSlotID' AND object_id = OBJECT_ID(N'[Schedules]'))
+Business_Logic_Layer\Maintenance\DatabaseMaintenanceService.cs:238:                        DROP INDEX [IX_Schedules_StudyYearID_BranchID_TimeSlotID] ON [Schedules];
+Business_Logic_Layer\Maintenance\DatabaseMaintenanceService.cs:240:                    IF EXISTS (SELECT 1 FROM sys.indexes WHERE name = N'IX_Schedules_ClassroomID_TimeSlotID_DayOfWeek' AND object_id = OBJECT_ID(N'[Schedules]'))
+Business_Logic_Layer\Maintenance\DatabaseMaintenanceService.cs:241:                        DROP INDEX [IX_Schedules_ClassroomID_TimeSlotID_DayOfWeek] ON [Schedules];
+Business_Logic_Layer\Maintenance\DatabaseMaintenanceService.cs:243:                    IF EXISTS (SELECT 1 FROM sys.indexes WHERE name = N'IX_Schedules_FacultyMemberID_TimeSlotID_DayOfWeek' AND object_id = OBJECT_ID(N'[Schedules]'))
+Business_Logic_Layer\Maintenance\DatabaseMaintenanceService.cs:244:                        DROP INDEX [IX_Schedules_FacultyMemberID_TimeSlotID_DayOfWeek] ON [Schedules];
+Business_Logic_Layer\Maintenance\DatabaseMaintenanceService.cs:246:                    IF EXISTS (SELECT 1 FROM sys.indexes WHERE name = N'IX_Schedules_StudyYearID_BranchID_SectionID_TimeSlotID_DayOfWeek' AND object_id = OBJECT_ID(N'[Schedules]'))
+Business_Logic_Layer\Maintenance\DatabaseMaintenanceService.cs:247:                        DROP INDEX [IX_Schedules_StudyYearID_BranchID_SectionID_TimeSlotID_DayOfWeek] ON [Schedules];
+Business_Logic_Layer\Maintenance\DatabaseMaintenanceService.cs:249:                    IF EXISTS (SELECT 1 FROM sys.indexes WHERE name = N'UQ_Section_Semester_Time' AND object_id = OBJECT_ID(N'[Schedules]'))
+Business_Logic_Layer\Maintenance\DatabaseMaintenanceService.cs:250:                        DROP INDEX [UQ_Section_Semester_Time] ON [Schedules];
+Business_Logic_Layer\Maintenance\DatabaseMaintenanceService.cs:252:                    IF EXISTS (SELECT 1 FROM sys.indexes WHERE name = N'IX_Schedules_Year_Branch_Section_Semester_Time' AND object_id = OBJECT_ID(N'[Schedules]'))
+Business_Logic_Layer\Maintenance\DatabaseMaintenanceService.cs:253:                        DROP INDEX [IX_Schedules_Year_Branch_Section_Semester_Time] ON [Schedules];
+Business_Logic_Layer\Maintenance\DatabaseMaintenanceService.cs:255:                    IF NOT EXISTS (SELECT 1 FROM sys.indexes WHERE name = N'UQ_Classroom_Semester_Time' AND object_id = OBJECT_ID(N'[Schedules]'))
+Business_Logic_Layer\Maintenance\DatabaseMaintenanceService.cs:258:                            FROM [Schedules]
+Business_Logic_Layer\Maintenance\DatabaseMaintenanceService.cs:262:                        ON [Schedules] ([ClassroomID], [SemesterNumber], [DayOfWeek], [TimeSlotID]);
+Business_Logic_Layer\Maintenance\DatabaseMaintenanceService.cs:264:                    IF NOT EXISTS (SELECT 1 FROM sys.indexes WHERE name = N'UQ_Faculty_Semester_Time' AND object_id = OBJECT_ID(N'[Schedules]'))
+Business_Logic_Layer\Maintenance\DatabaseMaintenanceService.cs:267:                            FROM [Schedules]
+Business_Logic_Layer\Maintenance\DatabaseMaintenanceService.cs:271:                        ON [Schedules] ([FacultyMemberID], [SemesterNumber], [DayOfWeek], [TimeSlotID]);
+Business_Logic_Layer\Maintenance\DatabaseMaintenanceService.cs:273:                    IF NOT EXISTS (SELECT 1 FROM sys.indexes WHERE name = N'UQ_Section_Semester_Time' AND object_id = OBJECT_ID(N'[Schedules]'))
+Business_Logic_Layer\Maintenance\DatabaseMaintenanceService.cs:276:                            FROM [Schedules]
+Business_Logic_Layer\Maintenance\DatabaseMaintenanceService.cs:280:                        ON [Schedules] ([SectionID], [SemesterNumber], [DayOfWeek], [TimeSlotID], [GroupName]);
+Business_Logic_Layer\Maintenance\DatabaseMaintenanceService.cs:289:                IF OBJECT_ID(N'[Schedules]', N'U') IS NOT NULL
+Business_Logic_Layer\Maintenance\DatabaseMaintenanceService.cs:330:                        FROM [dbo].[Schedules] schedule
+Business_Logic_Layer\Maintenance\DatabaseMaintenanceService.cs:331:                        INNER JOIN [dbo].[Subjects] subject ON subject.[SubjectID] = schedule.[SubjectID]
+Business_Logic_Layer\Maintenance\DatabaseMaintenanceService.cs:332:                        INNER JOIN [dbo].[FacultyMembers] faculty ON faculty.[FacultyMemberID] = schedule.[FacultyMemberID]
+Business_Logic_Layer\Maintenance\DatabaseMaintenanceService.cs:333:                        INNER JOIN [dbo].[Classrooms] classroom ON classroom.[ClassroomID] = schedule.[ClassroomID]
+Business_Logic_Layer\Maintenance\DatabaseMaintenanceService.cs:334:                        INNER JOIN [dbo].[TimeSlots] timeSlot ON timeSlot.[TimeSlotID] = schedule.[TimeSlotID]
+Business_Logic_Layer\Maintenance\DatabaseMaintenanceService.cs:335:                        LEFT JOIN [dbo].[StudyYears] studyYear ON studyYear.[StudyYearID] = schedule.[StudyYearID]
+Business_Logic_Layer\Maintenance\DatabaseMaintenanceService.cs:336:                        LEFT JOIN [dbo].[Branches] branch ON branch.[BranchID] = schedule.[BranchID]
+Business_Logic_Layer\Maintenance\DatabaseMaintenanceService.cs:337:                        LEFT JOIN [dbo].[Sections] section ON section.[SectionID] = schedule.[SectionID];
+tests\PracticalExchange\PracticalExchangeChecks.cs:73:                Ensure(result.Schedules.Count == 4 && result.Issues.Count == 0);
+tests\PracticalExchange\PracticalExchangeChecks.cs:74:                ValidateBlocks(result.Schedules, periods);
+tests\PracticalExchange\PracticalExchangeChecks.cs:75:                Ensure(result.Schedules.Select(s => s.ClassroomID).Distinct().Count() == 2);
+tests\PracticalExchange\PracticalExchangeChecks.cs:76:                Ensure(result.Schedules.Select(s => s.DayOfWeek).Distinct().Count() == 1);
+tests\PracticalExchange\PracticalExchangeChecks.cs:77:                foreach (var slot in result.Schedules.GroupBy(s => s.TimeSlotID))
+tests\PracticalExchange\PracticalExchangeChecks.cs:83:            Ensure(result.Schedules.Count == 2 && result.Issues.Count == 0); ValidateBlocks(result.Schedules, periods);
+tests\PracticalExchange\PracticalExchangeChecks.cs:84:            var first = result.Schedules.OrderBy(s => periods.FindIndex(p => p.TimeSlotID == s.TimeSlotID)).First();
+tests\PracticalExchange\PracticalExchangeChecks.cs:90:            Ensure(result.Schedules.Count == 2 && result.Issues.Count == 0);
+tests\PracticalExchange\PracticalExchangeChecks.cs:91:            Ensure(result.Schedules.Select(s => s.DayOfWeek).Distinct().Count() == 2);
+tests\PracticalExchange\PracticalExchangeChecks.cs:92:            ValidateBlocks(result.Schedules, periods.Take(1).ToList());
+tests\PracticalExchange\PracticalExchangeChecks.cs:114:            Ensure(result.Schedules.Count == 6 && result.Issues.Count == 0); ValidateBlocks(result.Schedules, periods);
+tests\PracticalExchange\PracticalExchangeChecks.cs:119:            Ensure(result.Schedules.Count == 0 && result.Issues.Count > 0);
+tests\PracticalExchange\PracticalExchangeChecks.cs:124:            Ensure(result.Schedules.Count == 0 && result.Issues.Count > 0);
+tests\PracticalExchange\PracticalExchangeChecks.cs:129:            Ensure(result.Schedules.Count == 0 && result.Issues.Count > 0);
+tests\PracticalExchange\PracticalExchangeChecks.cs:134:            Ensure(result.Schedules.Count == 0 && result.Issues.Count > 0);
+tests\PracticalExchange\PracticalExchangeChecks.cs:140:            Ensure(result.Schedules.Count == 0 && result.Issues.Count > 0);
+tests\PracticalExchange\PracticalExchangeChecks.cs:145:            Ensure(result.Schedules.Count == 4 && result.Issues.Count == 0); ValidateBlocks(result.Schedules, periods);
+tests\PracticalExchange\PracticalExchangeChecks.cs:146:            Ensure(result.Schedules.GroupBy(s => new { s.SemesterNumber, s.DayOfWeek, s.TimeSlotID }).All(g => g.Count() == 1));
+tests\PracticalExchange\PracticalExchangeChecks.cs:151:            Ensure(result.Schedules.Count == 4 && result.Issues.Count == 0); ValidateBlocks(result.Schedules, periods);
+tests\PracticalExchange\PracticalExchangeChecks.cs:152:            Ensure(result.Schedules.GroupBy(s => new { s.SectionID, s.DayOfWeek, s.TimeSlotID }).All(g => g.Count() == 1));
+tests\PracticalExchange\PracticalExchangeChecks.cs:158:            Ensure(result.Schedules.Count == 8 && result.Issues.Count == 0); ValidateBlocks(result.Schedules, periods);
+tests\PracticalExchange\PracticalExchangeChecks.cs:167:            Ensure(result.Schedules.Count == 12 && result.Issues.Count == 0); ValidateBlocks(result.Schedules, periods);
+tests\PracticalExchange\PracticalExchangeChecks.cs:168:            Ensure(result.Schedules.Count(s => s.DayOfWeek == "Sunday" && s.TimeSlotID == 10) == 6);
+tests\PracticalExchange\PracticalExchangeChecks.cs:177:            Ensure(result.Schedules.Count(s => s.LectureType == "Practical") == 4 && result.Issues.Count == 0);
+tests\PracticalExchange\PracticalExchangeChecks.cs:178:            ValidateBlocks(result.Schedules, periods);
+tests\PracticalExchange\PracticalExchangeChecks.cs:183:            Ensure(result.Schedules.Count == 0 && result.Issues.Count > 0);
+tests\TimetableRegression\Program.cs:15:    static readonly SubjectService Subjects = new();
+tests\TimetableRegression\Program.cs:16:    static readonly ScheduleService Schedules = new();
+tests\TimetableRegression\Program.cs:44:        await context.FacultyMemberSubjects.Where(a=>a.FacultyMemberID==faculty && a.SubjectID==subject).ExecuteDeleteAsync();
+tests\TimetableRegression\Program.cs:49:        return JsonSerializer.Serialize(await c.Schedules.AsNoTracking().OrderBy(s=>s.ScheduleID).Select(s=>new{s.ScheduleID,s.SubjectID,s.SemesterNumber,s.StudyYearID,s.BranchID,s.SectionID,s.ClassroomID,s.FacultyMemberID,s.TimeSlotID,s.DayOfWeek,s.LectureType,s.GroupName}).ToListAsync());
+tests\TimetableRegression\Program.cs:80:        var sub=await Subjects.AddAsync(Subject("Programming"));
+tests\TimetableRegression\Program.cs:84:            var theory=await Schedules.AddAsync(new(){SubjectID=sub.SubjectID,FacultyMemberID=teacher.FacultyMemberID,ClassroomID=room.ClassroomID,SectionID=a.SectionID,TimeSlotID=1,DayOfWeek="Sunday",LectureType="Theory"});
+tests\TimetableRegression\Program.cs:88:            await Reject(()=>Schedules.AddAsync(practical));
+tests\TimetableRegression\Program.cs:89:            practical.TimeSlotID=2;practical=await Schedules.AddAsync(practical);
+tests\TimetableRegression\Program.cs:91:            await Reject(()=>Schedules.AddAsync(new(){SubjectID=sub.SubjectID,FacultyMemberID=teacher.FacultyMemberID,ClassroomID=regular.ClassroomID,SectionID=a.SectionID,TimeSlotID=3,DayOfWeek="Sunday",LectureType="Theory"}));
+tests\TimetableRegression\Program.cs:92:            await Schedules.DeleteAsync(theory.ScheduleID);await Schedules.DeleteAsync(practical.ScheduleID);
+tests\TimetableRegression\Program.cs:95:        await Check("Normal generation produces a complete timetable",async()=>{var r=await Schedules.GenerateAsync();Assert(r.CreatedCount==r.RequiredCount && r.CreatedCount>0 && r.SkippedCount==0);});
+tests\TimetableRegression\Program.cs:96:        await Check("Regeneration does not duplicate lessons",async()=>{int count=(await Schedules.GetAllAsync()).Count; await Schedules.GenerateAsync();Assert((await Schedules.GetAllAsync()).Count==count);});
+tests\TimetableRegression\Program.cs:100:            var rooms=await context.Classrooms.Where(r=>r.RoomType=="Lecture" || r.RoomType==ClassroomRules.SharedLabType).ToListAsync();
+tests\TimetableRegression\Program.cs:105:                await Reject(()=>Schedules.GenerateAsync());Assert(await Snapshot()==before);
+tests\TimetableRegression\Program.cs:113:            try {await Reject(()=>Schedules.GenerateAsync());Assert(await Snapshot()==before);}
+tests\TimetableRegression\Program.cs:118:            missing=await Subjects.AddAsync(missing);
+tests\TimetableRegression\Program.cs:121:            try {await Reject(()=>Schedules.GenerateAsync());Assert(await Snapshot()==before);}
+tests\TimetableRegression\Program.cs:124:                await Teaching.DeleteAsync(teacher.FacultyMemberID,missing.SubjectID);await Subjects.DeleteAsync(missing.SubjectID);
+tests\TimetableRegression\Program.cs:128:            var before=await Schedules.GetAllAsync();sub.SemesterNumber=2;await Subjects.UpdateAsync(sub);
+tests\TimetableRegression\Program.cs:129:            var after=await Schedules.GetAllAsync();Assert(after.All(s=>s.SemesterNumber==2));Assert(before.Select(s=>s.ScheduleID).Order().SequenceEqual(after.Select(s=>s.ScheduleID).Order()));
+tests\TimetableRegression\Program.cs:130:            await new DatabaseMaintenanceService().ApplyPendingFixesAsync();Assert((await Schedules.GetAllAsync()).All(s=>s.SemesterNumber==2));
+tests\TimetableRegression\Program.cs:131:            sub.SemesterNumber=1;await Subjects.UpdateAsync(sub);
+tests\TimetableRegression\Program.cs:133:        await Check("Subject name edit preserves timetable",async()=>{string before=await Snapshot();sub.SubjectName="Programming Updated";await Subjects.UpdateAsync(sub);Assert(await Snapshot()==before);});
+tests\TimetableRegression\Program.cs:134:        await Check("Scheduled subject year change is safely rejected",async()=>{sub.StudyYearID=2;try{await Reject(()=>Subjects.UpdateAsync(sub));Assert((await Subjects.GetByIdAsync(sub.SubjectID))!.StudyYearID==1);}finally{sub.StudyYearID=1;}});
+tests\TimetableRegression\Program.cs:135:        await Check("Invalid semester is rejected",async()=>{await Reject(()=>Subjects.AddAsync(Subject("Invalid",3)));});
+tests\TimetableRegression\Program.cs:136:        var occupied=(await Schedules.GetAllAsync()).First(s=>s.LectureType=="Theory");
+tests\TimetableRegression\Program.cs:137:        var other=await Subjects.AddAsync(Subject("Mathematics",2));
+tests\TimetableRegression\Program.cs:139:        var collision=await Schedules.AddAsync(new(){SubjectID=other.SubjectID,FacultyMemberID=teacher.FacultyMemberID,ClassroomID=occupied.ClassroomID,SectionID=occupied.SectionID,TimeSlotID=occupied.TimeSlotID,DayOfWeek=occupied.DayOfWeek,LectureType="Theory"});
+tests\TimetableRegression\Program.cs:142:            try{await Reject(()=>Subjects.UpdateAsync(sub));Assert(await Snapshot()==before);Assert((await Subjects.GetByIdAsync(sub.SubjectID))!.SemesterNumber==1);await new DatabaseMaintenanceService().ApplyPendingFixesAsync();Assert(await Snapshot()==before);}
+tests\TimetableRegression\Program.cs:145:        await Schedules.DeleteAsync(collision.ScheduleID);
+tests\TimetableRegression\Program.cs:147:            var parallel=await Subjects.AddAsync(Subject("Parallel practical"));
+tests\TimetableRegression\Program.cs:153:                await Schedules.AddAsync(new(){SubjectID=parallel.SubjectID,FacultyMemberID=pair.Teacher,ClassroomID=pair.Room,SectionID=a.SectionID,TimeSlotID=3,DayOfWeek="Monday",LectureType="Practical",GroupName=pair.Group});
+tests\TimetableRegression\Program.cs:154:            parallel.SemesterNumber=2;await Subjects.UpdateAsync(parallel);
+tests\TimetableRegression\Program.cs:155:            var moved=(await Schedules.GetAllAsync()).Where(s=>s.SubjectID==parallel.SubjectID).ToList();
+tests\TimetableRegression\Program.cs:157:            foreach(var lesson in moved) await Schedules.DeleteAsync(lesson.ScheduleID);
+tests\TimetableRegression\Program.cs:159:            await Subjects.DeleteAsync(parallel.SubjectID);await new FacultyMemberService().DeleteAsync(faculty2.FacultyMemberID);
+tests\TimetableRegression\Program.cs:161:        await Check("Unscheduled subject can change semester",async()=>{other.SemesterNumber=1;await Subjects.UpdateAsync(other);Assert((await Subjects.GetByIdAsync(other.SubjectID))!.SemesterNumber==1);});
+tests\TimetableRegression\Program.cs:164:            var rows=(await Schedules.GetAllAsync()).Select(s=>new SchedulePdfRow(s.SemesterNumber,s.StudyYear!.YearName,s.Branch?.BranchName??"General",s.Section!.SectionName,s.GroupName??"",s.LectureType,s.Subject.SubjectName,s.FacultyMember.FullName,s.Classroom.ClassroomNumber,s.DayOfWeek,DateTime.Today.Add(s.TimeSlot.StartTime).ToString("hh:mm tt",System.Globalization.CultureInfo.InvariantCulture),DateTime.Today.Add(s.TimeSlot.EndTime).ToString("hh:mm tt",System.Globalization.CultureInfo.InvariantCulture))).ToList();
+tests\TimetableRegression\Program.cs:179:        return JsonSerializer.Serialize(await context.TimeSlots.AsNoTracking().OrderBy(slot=>slot.TimeSlotID)
+tests\TimetableRegression\Program.cs:197:                await context.Database.ExecuteSqlRawAsync("CREATE TABLE dbo.TimeSlots (TimeSlotID int IDENTITY(1,1) NOT NULL PRIMARY KEY, StartTime time NOT NULL, EndTime time NOT NULL, IsBreak bit NOT NULL, UNIQUE(StartTime,EndTime,IsBreak));");
+tests\TimetableRegression\Program.cs:228:            Assert((await Schedules.GetAllAsync()).Where(s=>s.TimeSlotID==first.TimeSlotID).All(s=>s.TimeSlot.EndTime==first.EndTime));
+tests\TimetableRegression\Program.cs:263:                context.Schedules.RemoveRange(await context.Schedules.ToListAsync());await context.SaveChangesAsync();
+tests\TimetableRegression\Program.cs:264:                removed=await context.TimeSlots.AsNoTracking().Where(slot=>slot.TimeSlotID!=afternoon.TimeSlotID).ToListAsync();
+tests\TimetableRegression\Program.cs:265:                context.TimeSlots.RemoveRange(removed);await context.SaveChangesAsync();
+tests\TimetableRegression\Program.cs:266:                foreach(var subject in await context.Subjects.ToListAsync()){subject.TheoreticalHours=1;subject.PracticalHours=0;}
+tests\TimetableRegression\Program.cs:271:                var result=await Schedules.GenerateAsync();
+tests\TimetableRegression\Program.cs:273:                Assert((await Schedules.GetAllAsync()).All(s=>s.TimeSlotID==afternoon.TimeSlotID && s.TimeSlot.EndTime-s.TimeSlot.StartTime==TimeSpan.FromMinutes(90)));
+tests\TimetableRegression\Program.cs:278:                await using var context=new AppDbContext();context.TimeSlots.AddRange(removed);await context.SaveChangesAsync();
+tests\TimetableRegression\Program.cs:283:            await using(var context=new AppDbContext()){context.TimeSlots.Add(bad);await context.SaveChangesAsync();}
+tests\TimetableRegression\Program.cs:289:                await Reject(()=>Schedules.GenerateAsync());Assert(await Snapshot()==before);
+tests\TimetableRegression\Program.cs:290:                var lesson=(await Schedules.GetAllAsync()).First();
+tests\TimetableRegression\Program.cs:291:                await Reject(()=>Schedules.AddAsync(new(){SubjectID=lesson.SubjectID,FacultyMemberID=lesson.FacultyMemberID,ClassroomID=lesson.ClassroomID,SectionID=lesson.SectionID,TimeSlotID=bad.TimeSlotID,DayOfWeek=lesson.DayOfWeek,LectureType=lesson.LectureType,GroupName=lesson.GroupName}));
+tests\TimetableRegression\Program.cs:294:            finally{await using var context=new AppDbContext();context.TimeSlots.Remove(await context.TimeSlots.SingleAsync(slot=>slot.TimeSlotID==bad.TimeSlotID));await context.SaveChangesAsync();}
+tests\TimetableRegression\Program.cs:368:        var show=typeof(MainShellForm).GetMethod("ShowPage",BindingFlags.Instance|BindingFlags.NonPublic)!;
+tests\TimetableRegression\Program.cs:375:                foreach(string page in new[]{"Schedules","TimeSlots"}) {
+tests\TimetableRegression\Program.cs:387:            shell.Size=new Size(1280,960);show.Invoke(shell,[Enum.Parse(pageType,"Schedules")]);
+tests\TimetableRegression\Program.cs:403:        var show = typeof(MainShellForm).GetMethod("ShowPage",BindingFlags.Instance|BindingFlags.NonPublic)!;
+tests\TimetableRegression\Program.cs:419:                using (var command = new SqlCommand("SELECT TOP (1) 1 FROM dbo.Branches WITH (TABLOCKX,HOLDLOCK); SELECT TOP (1) 1 FROM dbo.StudyYears WITH (TABLOCKX,HOLDLOCK); SELECT TOP (1) 1 FROM dbo.Subjects WITH (TABLOCKX,HOLDLOCK); SELECT TOP (1) 1 FROM dbo.Classrooms WITH (TABLOCKX,HOLDLOCK); SELECT TOP (1) 1 FROM dbo.TimeSlots WITH (TABLOCKX,HOLDLOCK); SELECT TOP (1) 1 FROM dbo.FacultyMembers WITH (TABLOCKX,HOLDLOCK);", gate, transaction))
+tests\TimetableRegression\Program.cs:423:                    (Page:"Branches", Load:"LoadBranchesAsync"), (Page:"StudyYears", Load:"LoadStudyYearsAsync"),
+tests\TimetableRegression\Program.cs:424:                    (Page:"Sections", Load:"RefreshSectionsAsync"), (Page:"Subjects", Load:"RefreshSubjectsAsync"),
+tests\TimetableRegression\Program.cs:425:                    (Page:"Classrooms", Load:"LoadClassroomsAsync"), (Page:"TimeSlots", Load:"LoadTimeSlotsAsync"),
+tests\TimetableRegression\Program.cs:426:                    (Page:"FacultyMembers", Load:"LoadFacultyMembersAsync"), (Page:"FacultyAssignments", Load:"RefreshAssignmentsAsync"),
+tests\TimetableRegression\Program.cs:427:                    (Page:"Schedules", Load:"RefreshSchedulesAsync")
+tests\TimetableRegression\Program.cs:434:                    var load = (Task)content.GetType().GetMethod(item.Load,BindingFlags.Instance|BindingFlags.NonPublic)!.Invoke(content,null)!;
+tests\TimetableRegression\Program.cs:438:                show.Invoke(shell,[Enum.Parse(pageType,"Subjects")]);
+tests\TimetableRegression\Program.cs:444:                var liveLoad = (Task)livePage.GetType().GetMethod("RefreshSubjectsAsync",BindingFlags.Instance|BindingFlags.NonPublic)!.Invoke(livePage,null)!;
+Business_Logic_Layer\Maintenance\FourthYearPracticalMaintenance.cs:15:        var sections = await db.Sections.AsNoTracking().ToDictionaryAsync(s => s.SectionID, token);
+Business_Logic_Layer\Maintenance\FourthYearPracticalMaintenance.cs:16:        var subjects = await db.Subjects.AsNoTracking().ToDictionaryAsync(s => s.SubjectID, token);
+Business_Logic_Layer\Maintenance\FourthYearPracticalMaintenance.cs:17:        var rows = await db.Schedules.ToListAsync(token);
+Business_Logic_Layer\Maintenance\FourthYearPracticalMaintenance.cs:44:        db.Schedules.RemoveRange(duplicates);
+tests\TimetableRegression\DynamicResourceChecks.cs:187:                context.Classrooms.Add(new() { ClassroomID = 500, ClassroomNumber = "Legacy Lab", RoomType = null, Capacity = 20 });
+tests\TimetableRegression\DynamicResourceChecks.cs:201:            Rooms = await context.Classrooms.AsNoTracking().OrderBy(room => room.ClassroomID)
+tests\TimetableRegression\DynamicResourceChecks.cs:203:            Periods = await context.TimeSlots.AsNoTracking().OrderBy(period => period.TimeSlotID)
+tests\TimetableRegression\DynamicResourceChecks.cs:205:            Lessons = await context.Schedules.AsNoTracking().OrderBy(lesson => lesson.ScheduleID)
+UniversityTimetable.API\Controllers\AuthController.cs:26:        var user = await db.ApplicationUsers.AsNoTracking().Where(x => x.ApplicationUserID == id)
+Business_Logic_Layer\Importing\AcademicExcelImport.cs:33:                            var property = entity.GetType().GetProperty(optional)!;
+Business_Logic_Layer\Importing\AcademicExcelImport.cs:64:        "StudyYears" => new StudyYear { StudyYearID = v.Int("StudyYearID"), YearName = v.Text("YearName") },
+Business_Logic_Layer\Importing\AcademicExcelImport.cs:65:        "Branches" => new Branch { BranchID = v.Int("BranchID"), BranchName = v.Text("BranchName") },
+Business_Logic_Layer\Importing\AcademicExcelImport.cs:66:        "FacultyMembers" => new FacultyMember { FacultyMemberID = v.Int("FacultyMemberID"), FullName = v.Text("FullName"), AcademicTitle = Empty(v.Text("AcademicTitle", false)) },
+Business_Logic_Layer\Importing\AcademicExcelImport.cs:67:        "Classrooms" => new Classroom { ClassroomID = v.Int("ClassroomID"), ClassroomNumber = v.Text("ClassroomNumber"), Capacity = v.Int("Capacity"), RoomType = v.Text("RoomType") },
+Business_Logic_Layer\Importing\AcademicExcelImport.cs:68:        "TimeSlots" => new TimeSlot { TimeSlotID = v.Int("TimeSlotID"), StartTime = v.Time("StartTime"), EndTime = v.Time("EndTime") },
+Business_Logic_Layer\Importing\AcademicExcelImport.cs:69:        "Sections" => new Section { SectionID = v.Int("SectionID"), SectionName = v.Text("SectionName"), StudentCount = v.Int("StudentCount"), StudyYearID = v.Int("StudyYearID"), BranchID = v.OptionalInt("BranchID") },
+Business_Logic_Layer\Importing\AcademicExcelImport.cs:70:        "Subjects" => new Subject { SubjectID = v.Int("SubjectID"), SubjectName = v.Text("SubjectName"), StudyYearID = v.Int("StudyYearID"), BranchID = v.OptionalInt("BranchID"), SemesterNumber = v.Int("SemesterNumber"), TheoreticalHours = v.Number("TheoreticalHours"), PracticalHours = v.Number("PracticalHours"), CreditUnits = v.Text("CreditUnits", false).Length == 0 ? 0 : v.Number("CreditUnits"), TheoreticalLectureCount = v.OptionalInt("TheoreticalLectureCount"), PracticalLectureCount = v.OptionalInt("PracticalLectureCount") },
+Business_Logic_Layer\Importing\AcademicExcelImport.cs:71:        "FacultyMemberSubjects" => new FacultyMemberSubject { FacultyMemberID = v.Int("FacultyMemberID"), SubjectID = v.Int("SubjectID"), SectionID = v.OptionalInt("SectionID"), LectureType = v.Text("LectureType", false) is { Length: > 0 } t ? t : "Both" },
+Business_Logic_Layer\Importing\AcademicExcelImport.cs:77:        : e.GetType().GetProperty(e.GetType().Name + "ID")!.GetValue(e)!.ToString()!;
+Business_Logic_Layer\Importing\AcademicExcelImport.cs:206:                if (update && await db.Schedules.AnyAsync(s => s.FacultyMemberID == x.FacultyMemberID &&
+Business_Logic_Layer\Importing\AcademicExcelImport.cs:209:                if (!await db.FacultyMembers.AnyAsync(f => f.FacultyMemberID == x.FacultyMemberID) ||
+Business_Logic_Layer\Importing\AcademicExcelImport.cs:210:                    !await db.Subjects.AnyAsync(s => s.SubjectID == x.SubjectID && !s.IsDeleted)) throw new ArgumentException("Teaching assignment reference no longer exists.");
+Business_Logic_Layer\Importing\AcademicExcelImport.cs:213:                    var subject = await db.Subjects.AsNoTracking().SingleAsync(s => s.SubjectID == x.SubjectID);
+Business_Logic_Layer\Importing\AcademicExcelImport.cs:214:                    var section = await db.Sections.AsNoTracking().SingleOrDefaultAsync(s => s.SectionID == x.SectionID);
+Business_Logic_Layer\Importing\AcademicExcelImport.cs:217:                    if (update && await db.Schedules.AnyAsync(s => s.FacultyMemberID == x.FacultyMemberID &&
+Business_Logic_Layer\Importing\AcademicExcelImport.cs:223:                    var current = await db.FacultyMemberSubjects.FindAsync(x.FacultyMemberID, x.SubjectID)
+Business_Logic_Layer\Importing\AcademicExcelImport.cs:228:                else db.FacultyMemberSubjects.Add(x);
+tests\FacultyPreferences\WebSmoke.cs:35:            csrf = (await Send("auth/csrf", HttpMethod.Get, null, HttpStatusCode.OK)).GetProperty("token").GetString();
+tests\FacultyPreferences\WebSmoke.cs:39:            csrf = (await Send("auth/csrf", HttpMethod.Get, null, HttpStatusCode.OK)).GetProperty("token").GetString();
+tests\FacultyPreferences\WebSmoke.cs:40:            var lookups = await Send("faculty-preferences/lookups", HttpMethod.Get, null, HttpStatusCode.OK); Assert(lookups.GetProperty("data").GetProperty("periods").GetArrayLength() == 3);
+tests\FacultyPreferences\WebSmoke.cs:42:            long revision = data.GetProperty("profile").GetProperty("revision").GetInt64();
+tests\FacultyPreferences\WebSmoke.cs:47:            var preview = result.GetProperty("preview"); Assert(preview.GetProperty("canSave").GetBoolean()); Assert(!preview.TryGetProperty("plan", out _));
+tests\FacultyPreferences\WebSmoke.cs:48:            string id = result.GetProperty("id").GetString()!;
+tests\FacultyPreferences\WebSmoke.cs:50:            var committed = await Send("faculty-preferences/commit", HttpMethod.Post, new { id, confirmed = true }, HttpStatusCode.OK); Assert(committed.GetProperty("changed").GetInt32() == 2);
+tests\FacultyPreferences\WebSmoke.cs:53:            Assert(allAlternatives.GetProperty("alternatives").GetArrayLength() > 0);
+tests\FacultyPreferences\WebSmoke.cs:54:            string alternativeId = allAlternatives.GetProperty("alternatives")[0].GetProperty("id").GetString()!;
+tests\FacultyPreferences\WebSmoke.cs:59:            await Send("timetable-alternatives/locks", HttpMethod.Post, new { semester = 1, ids = new[] { initial[0].ScheduleID }, locked = true, version = current.GetProperty("version").GetString(), confirmed = false }, HttpStatusCode.BadRequest);
+Business_Logic_Layer\Scheduling\ScheduleConflictChecker.cs:14:            return await context.Schedules.AnyAsync(existing =>
+Business_Logic_Layer\Scheduling\ScheduleConflictChecker.cs:27:            return await context.Schedules.AnyAsync(existing =>
+Business_Logic_Layer\Scheduling\ScheduleConflictChecker.cs:42:            return await context.Schedules.AnyAsync(existing =>
+Business_Logic_Layer\Scheduling\ScheduleBuildContext.cs:6:        IReadOnlyCollection<Classroom> Classrooms,
+Business_Logic_Layer\Scheduling\ScheduleBuildContext.cs:7:        IReadOnlyCollection<TimeSlot> TimeSlots)
+tests\FacultyPreferences\SectionDayLimitChecks.cs:10:        await using var db = factory(); await db.Schedules.ExecuteDeleteAsync();
+tests\FacultyPreferences\SectionDayLimitChecks.cs:15:            db.Schedules.Add(row);
+tests\FacultyPreferences\SectionDayLimitChecks.cs:19:        db.Schedules.Add(movable); await db.SaveChangesAsync();
+tests\FacultyPreferences\SectionDayLimitChecks.cs:59:            var plan = (IReadOnlyList<Schedule>)typeof(FacultySchedulePreview).GetProperty("Plan", BindingFlags.Instance | BindingFlags.NonPublic)!.GetValue(preview)!;
+tests\FacultyPreferences\Program.cs:23:    static async Task<List<Schedule>> Rows() { await using var db = factory(); return await db.Schedules.AsNoTracking().OrderBy(s => s.ScheduleID).ToListAsync(); }
+tests\FacultyPreferences\Program.cs:42:        await db.FacultySchedulingPreferences.ExecuteDeleteAsync(); await db.Schedules.ExecuteDeleteAsync();
+tests\FacultyPreferences\Program.cs:71:            db.StudyYears.Add(new() { StudyYearID = 1, YearName = "First Year" });
+tests\FacultyPreferences\Program.cs:72:            db.FacultyMembers.AddRange(new FacultyMember { FacultyMemberID = 1, FullName = "د. أحمد" }, new FacultyMember { FacultyMemberID = 2, FullName = "د. سارة" });
+tests\FacultyPreferences\Program.cs:73:            db.Sections.AddRange(new Section { SectionID = 1, SectionName = "A", StudyYearID = 1, StudentCount = 40 }, new Section { SectionID = 2, SectionName = "B", StudyYearID = 1, StudentCount = 40 });
+tests\FacultyPreferences\Program.cs:74:            db.Classrooms.AddRange(new Classroom { ClassroomID = 1, ClassroomNumber = "قاعة 1", RoomType = "Lecture", Capacity = 60 }, new Classroom { ClassroomID = 2, ClassroomNumber = "صغيرة", RoomType = "Lecture", Capacity = 10 });
+tests\FacultyPreferences\Program.cs:75:            for (int p = 1; p <= 3; p++) db.TimeSlots.Add(new() { TimeSlotID = p, StartTime = TimeSpan.FromMinutes(510 + (p - 1) * 70), EndTime = TimeSpan.FromMinutes(570 + (p - 1) * 70) });
+tests\FacultyPreferences\Program.cs:76:            for (int id = 1; id <= 4; id++) { db.Subjects.Add(new() { SubjectID = id, SubjectName = "مادة " + id, StudyYearID = 1, SemesterNumber = 1, TheoreticalHours = 2, CreditUnits = 2, RequirementType = "Core" }); db.FacultyMemberSubjects.Add(new() { SubjectID = id, FacultyMemberID = id <= 2 ? 1 : 2 }); }
+tests\FacultyPreferences\Program.cs:78:            for (int id = 1; id <= 4; id++) db.Schedules.Add(new() { SubjectID = id, FacultyMemberID = id <= 2 ? 1 : 2, SectionID = id <= 2 ? 1 : 2, StudyYearID = 1, SemesterNumber = 1, LectureType = "Theory", DayOfWeek = id % 2 == 1 ? "Sunday" : "Wednesday", TimeSlotID = id <= 2 ? 1 : 2, ClassroomID = 1 });
+tests\FacultyPreferences\Program.cs:85:            await db.Database.ExecuteSqlRawAsync("DROP TABLE [FacultyPeriodPreferences]; DROP TABLE [FacultySchedulingPreferences];");
+tests\FacultyPreferences\Program.cs:89:        await Check("Absent profile preserves legacy behavior and no faculty accounts are created", async () => { Assert(await preferences.GetAsync(1, 1) is null); Assert((await editor.GetCurrentAsync(1, 1)).Count == 2); await using var db = factory(); Assert(await db.ApplicationUsers.CountAsync() == 0); });
+tests\FacultyPreferences\Program.cs:97:        await Check("Locked lectures cannot move to improve preferences", async () => { await preferences.SaveAsync(Profile(), 0); await using (var db = factory()) await db.Schedules.Where(s => s.FacultyMemberID == 1).ExecuteUpdateAsync(x => x.SetProperty(s => s.IsLocked, true)); var plan = await editor.PreviewAsync(Profile()); Assert(plan.CanSave && plan.Changes.All(c => !c.Changed)); });
+tests\FacultyPreferences\Program.cs:98:        await Check("A prohibited locked lecture prevents a saveable solution", async () => { var p = Profile() with { PeriodPreferences = Profile().PeriodPreferences.Select(c => c.TimeSlotId == 1 ? c with { Level = FacultyPreferenceLevel.Prohibited } : c).ToArray() }; await preferences.SaveAsync(p, 0); await using (var db = factory()) await db.Schedules.Where(s => s.FacultyMemberID == 1).ExecuteUpdateAsync(x => x.SetProperty(s => s.IsLocked, true)); Assert(!(await editor.PreviewAsync(p)).CanSave); });
+tests\FacultyPreferences\Program.cs:108:        await Check("Three-day plan with three lectures is honored", async () => { await using (var db = factory()) { var extra = Copy(initial[0]); extra.ScheduleID = 0; extra.DayOfWeek = "Tuesday"; extra.TimeSlotID = 3; db.Schedules.Add(extra); await db.SaveChangesAsync(); } var p = Profile(attendance: ["Sunday", "Tuesday", "Wednesday"]); await preferences.SaveAsync(p, 0); var plan = await editor.PreviewAsync(p); Assert(plan.CanSave && plan.Changes.Select(c => c.NewDay).ToHashSet().SetEquals(p.SelectedDays)); });
+tests\FacultyPreferences\Program.cs:111:        await Check("Generation actively applies saved matrices on a blank timetable", async () => { await preferences.SaveAsync(Profile(), 0); await using (var db = factory()) await db.Schedules.ExecuteDeleteAsync(); await new ScheduleService().GenerateAsync(); var rows = (await Rows()).Where(s => s.FacultyMemberID == 1).ToList(); Assert(rows.Count == 4 && rows.Count(s => s.TimeSlotID == 3) == 2, Json(rows)); Assert(rows.Select(s => s.DayOfWeek).ToHashSet().SetEquals(new[] { "Sunday", "Wednesday" })); });
+tests\FacultyPreferences\Program.cs:112:        await Check("SQL keys reject duplicate cells and invalid enum values", async () => { await preferences.SaveAsync(Profile(), 0); await using (var db = factory()) { db.FacultyPeriodPreferences.Add(new() { FacultyMemberID = 1, SemesterNumber = 1, DayOfWeek = "Sunday", TimeSlotID = 1, Level = 1 }); await Reject(async () => await db.SaveChangesAsync()); } await using var invalid = factory(); var cell = await invalid.FacultyPeriodPreferences.FirstAsync(); cell.Level = 9; await Reject(async () => await invalid.SaveChangesAsync()); });
+tests\FacultyPreferences\Program.cs:129:                db.Branches.Add(new() { BranchID = 8, BranchName = "Computer Science" }); db.StudyYears.Add(new() { StudyYearID = 4, YearName = "Fourth Year" });
+tests\FacultyPreferences\Program.cs:130:                db.Sections.Add(new() { SectionID = 4, SectionName = "A", StudyYearID = 4, BranchID = 8, StudentCount = 30 }); db.Classrooms.Add(new() { ClassroomID = 3, ClassroomNumber = "مختبر", RoomType = "Lab", Capacity = 40 });
+tests\FacultyPreferences\Program.cs:131:                foreach (int id in new[] { 5, 6 }) { db.Subjects.Add(new() { SubjectID = id, SubjectName = "عملي " + id, StudyYearID = 4, BranchID = 8, SemesterNumber = 1, PracticalHours = 2, CreditUnits = 2, RequirementType = "Core" }); db.FacultyMemberSubjects.Add(new() { FacultyMemberID = 1, SubjectID = id }); }
+tests\FacultyPreferences\Program.cs:132:                await db.SaveChangesAsync(); foreach (int id in new[] { 5, 6 }) db.Schedules.Add(new() { SubjectID = id, FacultyMemberID = 1, ClassroomID = 3, SectionID = 4, BranchID = 8, StudyYearID = 4, SemesterNumber = 1, LectureType = "Practical", DayOfWeek = id == 5 ? "Sunday" : "Wednesday", TimeSlotID = 2 }); await db.SaveChangesAsync();
+tests\FacultyPreferences\Program.cs:135:            finally { await using var db = factory(); await db.Schedules.Where(s => s.SubjectID >= 5).ExecuteDeleteAsync(); await db.FacultyMemberSubjects.Where(s => s.SubjectID >= 5).ExecuteDeleteAsync(); await db.Subjects.Where(s => s.SubjectID >= 5).ExecuteDeleteAsync(); await db.Sections.Where(s => s.SectionID == 4).ExecuteDeleteAsync(); await db.StudyYears.Where(s => s.StudyYearID == 4).ExecuteDeleteAsync(); await db.Branches.Where(b => b.BranchID == 8).ExecuteDeleteAsync(); await db.Classrooms.Where(c => c.ClassroomID == 3).ExecuteDeleteAsync(); }
+tests\FacultyPreferences\Program.cs:146:        await db.Database.ExecuteSqlRawAsync("SET IDENTITY_INSERT [Schedules] ON");
+tests\FacultyPreferences\Program.cs:147:        db.Schedules.AddRange(initial.Select(Copy)); await db.SaveChangesAsync();
+tests\FacultyPreferences\Program.cs:148:        await db.Database.ExecuteSqlRawAsync("SET IDENTITY_INSERT [Schedules] OFF"); await tx.CommitAsync();
+Business_Logic_Layer\Scheduling\FreshTimetablePlanner.cs:10:    internal sealed record Result(List<Schedule>? Schedules, string Status, IReadOnlyList<string> Diagnostics);
+Business_Logic_Layer\Importing\ExcelImportSchema.cs:11:        new("StudyYears", ["StudyYearID", "YearName"], []),
+Business_Logic_Layer\Importing\ExcelImportSchema.cs:12:        new("Branches", ["BranchID", "BranchName"], []),
+Business_Logic_Layer\Importing\ExcelImportSchema.cs:13:        new("FacultyMembers", ["FacultyMemberID", "FullName"], ["AcademicTitle"]),
+Business_Logic_Layer\Importing\ExcelImportSchema.cs:14:        new("Classrooms", ["ClassroomID", "ClassroomNumber", "Capacity", "RoomType"], []),
+Business_Logic_Layer\Importing\ExcelImportSchema.cs:15:        new("TimeSlots", ["TimeSlotID", "StartTime", "EndTime"], []),
+Business_Logic_Layer\Importing\ExcelImportSchema.cs:16:        new("Sections", ["SectionID", "SectionName", "StudentCount", "StudyYearID"], ["BranchID"]),
+Business_Logic_Layer\Importing\ExcelImportSchema.cs:17:        new("Subjects", ["SubjectID", "SubjectName", "StudyYearID", "SemesterNumber", "TheoreticalHours", "PracticalHours"], ["CreditUnits", "BranchID", "TheoreticalLectureCount", "PracticalLectureCount"]),
+Business_Logic_Layer\Importing\ExcelImportSchema.cs:18:        new("FacultyMemberSubjects", ["FacultyMemberID", "SubjectID"], ["SectionID", "LectureType"])
+Business_Logic_Layer\Importing\ExcelImportService.cs:272:        result.Lectures.AddRange(plan.Schedules.Where(s => !fixedSet.Contains(s)).Select(s => Describe(new("Generated", 0, s, false), catalog)));
+Business_Logic_Layer\Importing\ExcelImportService.cs:273:        var outstanding = Consume(requests, plan.Schedules.Where(s => !fixedSet.Contains(s)).ToList());
+Business_Logic_Layer\Importing\ExcelImportService.cs:370:                        var saved = await db.Schedules.FindAsync([row.Schedule.ScheduleID], ct)
+Business_Logic_Layer\Importing\ExcelImportService.cs:384:                    db.Schedules.Add(copy);
+Business_Logic_Layer\Importing\ExcelImportService.cs:388:                FacultyPreferenceRules.Validate(await db.Schedules.AsNoTracking().ToListAsync(ct), current.Rows<TimeSlot>().ToDictionary(p => p.TimeSlotID),
+UniversityTimetable.API\Controllers\OverviewController.cs:16:        int unassignedSubjects = (await db.Subjects.AsNoTracking()
+UniversityTimetable.API\Controllers\OverviewController.cs:17:            .Where(subject => !subject.IsDeleted && !subject.FacultyMemberSubjects.Any()).ToListAsync()).Count(subject => subject.HasWeeklyLectures);
+UniversityTimetable.API\Controllers\OverviewController.cs:19:            classrooms = await db.Classrooms.CountAsync(), subjects = await db.Subjects.CountAsync(s => !s.IsDeleted),
+UniversityTimetable.API\Controllers\OverviewController.cs:20:            facultyMembers = await db.FacultyMembers.CountAsync(), sections = await db.Sections.CountAsync(),
+UniversityTimetable.API\Controllers\OverviewController.cs:21:            schedules = await db.Schedules.CountAsync(), assignments = await db.FacultyMemberSubjects.CountAsync(),
+tests\FacultyPreferences\DayPreferenceChecks.cs:39:                var rows = await db.Schedules.Where(s => s.FacultyMemberID == 2).OrderBy(s => s.ScheduleID).ToListAsync();
+tests\FacultyPreferences\DayPreferenceChecks.cs:56:            await using (var db = factory()) await db.Schedules.Where(s => s.FacultyMemberID == 1).ExecuteUpdateAsync(x => x.SetProperty(s => s.IsLocked, true));
+tests\FacultyPreferences\DayPreferenceChecks.cs:63:            await using (var db = factory()) await db.Schedules.Where(s => s.FacultyMemberID == 1).ExecuteUpdateAsync(x => x.SetProperty(s => s.IsLocked, true));
+tests\FacultyPreferences\DayPreferenceChecks.cs:71:            await using (var db = factory()) await db.Schedules.Where(s => s.FacultyMemberID == 1).ExecuteUpdateAsync(x => x.SetProperty(s => s.IsLocked, true));
+tests\FacultyPreferences\DayPreferenceChecks.cs:93:            await using var db = factory(); Assert(!await db.FacultyPeriodPreferences.AnyAsync());
+tests\FacultyPreferences\DayPreferenceChecks.cs:98:            await using (var db = factory()) await db.Schedules.ExecuteDeleteAsync();
+tests\FacultyPreferences\DayPreferenceChecks.cs:140:                await db.Schedules.ExecuteDeleteAsync();
+tests\FacultyPreferences\DayPreferenceChecks.cs:141:                db.Classrooms.AddRange(new Classroom { ClassroomID = 3, ClassroomNumber = "Lab 1", RoomType = "Lab", Capacity = 60 },
+tests\FacultyPreferences\DayPreferenceChecks.cs:143:                await db.Subjects.Where(s => s.SubjectID == 1 || s.SubjectID == 3).ExecuteUpdateAsync(x => x.SetProperty(s => s.PracticalHours, 2));
+tests\FacultyPreferences\DayPreferenceChecks.cs:150:                db.Schedules.AddRange(practicals); await db.SaveChangesAsync();
+tests\FacultyPreferences\DayPreferenceChecks.cs:166:                await using var db = factory(); await db.Schedules.ExecuteDeleteAsync();
+tests\FacultyPreferences\DayPreferenceChecks.cs:167:                await db.Subjects.Where(s => s.SubjectID == 1 || s.SubjectID == 3).ExecuteUpdateAsync(x => x.SetProperty(s => s.PracticalHours, 0));
+tests\FacultyPreferences\DayPreferenceChecks.cs:168:                await db.Classrooms.Where(c => c.ClassroomID == 3 || c.ClassroomID == 4).ExecuteDeleteAsync();
+Business_Logic_Layer\Importing\ExcelImportTemplates.cs:25:            "FacultyMemberSubjects: optional SectionID limits that teacher to the selected section of the subject's year/branch. Blank covers all matching sections; an omitted column preserves the previous scope on re-import.",
+Business_Logic_Layer\Importing\ExcelImportTemplates.cs:26:            "FacultyMemberSubjects: optional LectureType is Theory, Practical or Both. Blank means Both; omitting the column preserves the existing component on re-import.",
+Business_Logic_Layer\Importing\ExcelImportTemplates.cs:79:        "StudyYears" => new() { ["StudyYearID"] = 1, ["YearName"] = "First Year" },
+Business_Logic_Layer\Importing\ExcelImportTemplates.cs:80:        "Branches" => new() { ["BranchID"] = 1, ["BranchName"] = "Computer Science" },
+Business_Logic_Layer\Importing\ExcelImportTemplates.cs:81:        "FacultyMembers" => new() { ["FacultyMemberID"] = 1, ["FullName"] = "أحمد محمد", ["AcademicTitle"] = "Lecturer" },
+Business_Logic_Layer\Importing\ExcelImportTemplates.cs:82:        "Classrooms" => new() { ["ClassroomID"] = 1, ["ClassroomNumber"] = "Room 101", ["Capacity"] = 60, ["RoomType"] = "Lecture" },
+Business_Logic_Layer\Importing\ExcelImportTemplates.cs:83:        "TimeSlots" => new() { ["TimeSlotID"] = 1, ["StartTime"] = "08:30", ["EndTime"] = "10:00" },
+Business_Logic_Layer\Importing\ExcelImportTemplates.cs:84:        "Sections" => new() { ["SectionID"] = 1, ["SectionName"] = "A", ["StudentCount"] = 40, ["StudyYearID"] = 1 },
+Business_Logic_Layer\Importing\ExcelImportTemplates.cs:85:        "Subjects" => new() { ["SubjectID"] = 1, ["SubjectName"] = "الرياضيات", ["StudyYearID"] = 1, ["SemesterNumber"] = 1, ["TheoreticalHours"] = 2, ["PracticalHours"] = 0, ["CreditUnits"] = 2 },
+Business_Logic_Layer\Importing\ExcelImportTemplates.cs:86:        "FacultyMemberSubjects" => new() { ["FacultyMemberID"] = 1, ["SubjectID"] = 1 },
+Business_Logic_Layer\Importing\ImportCatalog.cs:24:            (await db.Set<T>().AsNoTracking().ToListAsync(token)).Cast<object>().ToList();
+Business_Logic_Layer\Importing\ImportCatalog.cs:28:    public static string ScalarJson(object entity) => JsonSerializer.Serialize(entity.GetType().GetProperties()
+Business_Logic_Layer\Scheduling\ScheduleGenerationModels.cs:19:        List<Schedule> Schedules,
+Business_Logic_Layer\Importing\ImportedTimetableRepair.cs:154:            db.Schedules.Add(copy); await db.SaveChangesAsync(token); added++;
+tests\FacultyPreferences\AlternativesChecks.cs:39:            await using (var db = factory()) await db.Schedules.ExecuteUpdateAsync(u => u.SetProperty(s => s.IsLocked, true));
+tests\FacultyPreferences\AlternativesChecks.cs:56:            await using (var db = factory()) await db.Schedules.Where(s => s.SubjectID == 1 || s.SubjectID == 3).ExecuteUpdateAsync(u => u.SetProperty(s => s.IsLocked, true));
+UniversityTimetable.API\Controllers\SchedulingController.cs:57:        state["facultyPreferenceProfiles"] = await db.FacultySchedulingPreferences.AsNoTracking().OrderBy(p => p.FacultyMemberID).ThenBy(p => p.SemesterNumber).ToListAsync();
+UniversityTimetable.API\Controllers\SchedulingController.cs:58:        state["facultyPreferencePeriods"] = await db.FacultyPeriodPreferences.AsNoTracking().OrderBy(p => p.FacultyMemberID).ThenBy(p => p.SemesterNumber).ThenBy(p => p.DayOfWeek).ThenBy(p => p.TimeSlotID).ToListAsync();
+University Timetable and Classroom Management System\PresentationLayer\FormNavigation.cs:5:        Branches,
+University Timetable and Classroom Management System\PresentationLayer\FormNavigation.cs:6:        StudyYears,
+University Timetable and Classroom Management System\PresentationLayer\FormNavigation.cs:7:        Sections,
+University Timetable and Classroom Management System\PresentationLayer\FormNavigation.cs:8:        Subjects,
+University Timetable and Classroom Management System\PresentationLayer\FormNavigation.cs:9:        Classrooms,
+University Timetable and Classroom Management System\PresentationLayer\FormNavigation.cs:10:        TimeSlots,
+University Timetable and Classroom Management System\PresentationLayer\FormNavigation.cs:12:        FacultyMembers,
+University Timetable and Classroom Management System\PresentationLayer\FormNavigation.cs:13:        Schedules
+University Timetable and Classroom Management System\PresentationLayer\FormNavigation.cs:20:            new("btnNavigationBranches", NavigationPage.Branches),
+University Timetable and Classroom Management System\PresentationLayer\FormNavigation.cs:21:            new("btnNavigationStudyYears", NavigationPage.StudyYears),
+University Timetable and Classroom Management System\PresentationLayer\FormNavigation.cs:22:            new("btnNavigationSections", NavigationPage.Sections),
+University Timetable and Classroom Management System\PresentationLayer\FormNavigation.cs:23:            new("btnNavigationSubjects", NavigationPage.Subjects),
+University Timetable and Classroom Management System\PresentationLayer\FormNavigation.cs:24:            new("btnNavigationClassrooms", NavigationPage.Classrooms),
+University Timetable and Classroom Management System\PresentationLayer\FormNavigation.cs:25:            new("btnNavigationTimeSlots", NavigationPage.TimeSlots),
+University Timetable and Classroom Management System\PresentationLayer\FormNavigation.cs:27:            new("btnNavigationFacultyMembers", NavigationPage.FacultyMembers),
+University Timetable and Classroom Management System\PresentationLayer\FormNavigation.cs:28:            new("btnNavigationSchedules", NavigationPage.Schedules)
+University Timetable and Classroom Management System\PresentationLayer\FormNavigation.cs:68:                NavigationPage.Branches => new BranchesForm(),
+University Timetable and Classroom Management System\PresentationLayer\FormNavigation.cs:69:                NavigationPage.StudyYears => new StudyYearsForm(),
+University Timetable and Classroom Management System\PresentationLayer\FormNavigation.cs:70:                NavigationPage.Sections => new SectionsForm(),
+University Timetable and Classroom Management System\PresentationLayer\FormNavigation.cs:71:                NavigationPage.Subjects => new SubjectsForm(),
+University Timetable and Classroom Management System\PresentationLayer\FormNavigation.cs:72:                NavigationPage.Classrooms => new ClassroomsForm(),
+University Timetable and Classroom Management System\PresentationLayer\FormNavigation.cs:73:                NavigationPage.TimeSlots => new TimeSlotsForm(),
+University Timetable and Classroom Management System\PresentationLayer\FormNavigation.cs:75:                NavigationPage.FacultyMembers => new FacultyMembersForm(),
+University Timetable and Classroom Management System\PresentationLayer\FormNavigation.cs:76:                NavigationPage.Schedules => new SchedulesForm(),
+University Timetable and Classroom Management System\PresentationLayer\MainShellForm.cs:35:            ShowPage(NavigationPage.Branches);
+Business_Logic_Layer\Scheduling\ScheduleGenerationState.cs:27:        public List<Schedule> Schedules { get; } = [];
+Business_Logic_Layer\Scheduling\ScheduleGenerationState.cs:36:            periods = context?.TimeSlots.ToDictionary(p => p.TimeSlotID) ?? new Dictionary<int, TimeSlot>();
+Business_Logic_Layer\Scheduling\ScheduleGenerationState.cs:45:            (buildContext?.EnforceSectionDayLimit != true || Schedules.Concat(rows).GroupBy(s => (s.SemesterNumber, s.SectionID))
+Business_Logic_Layer\Scheduling\ScheduleGenerationState.cs:48:                FacultyPreferenceRules.Violation(entry.Value, Schedules.Concat(rows), periods) is null);
+Business_Logic_Layer\Scheduling\ScheduleGenerationState.cs:78:                !Schedules.Any(s => s.SemesterNumber == schedule.SemesterNumber && s.SectionID == schedule.SectionID && s.DayOfWeek == schedule.DayOfWeek) &&
+Business_Logic_Layer\Scheduling\ScheduleGenerationState.cs:79:                Schedules.Where(s => s.SemesterNumber == schedule.SemesterNumber && s.SectionID == schedule.SectionID)
+Business_Logic_Layer\Scheduling\ScheduleGenerationState.cs:82:                FacultyPreferenceRules.Violation(profile, Schedules.Append(schedule), periods) is not null) return false;
+Business_Logic_Layer\Scheduling\ScheduleGenerationState.cs:161:            Schedules.Add(schedule);
+Business_Logic_Layer\Scheduling\ScheduleGenerationState.cs:170:            Schedules.RemoveAll(schedulesToRemove.Contains);
+Business_Logic_Layer\Scheduling\ScheduleGenerationState.cs:179:            Schedules.Clear();
+Business_Logic_Layer\Scheduling\ScheduleGenerationState.cs:180:            Schedules.AddRange(snapshot);
+Business_Logic_Layer\Scheduling\ScheduleGenerationState.cs:186:            return Schedules.Where(existing => ScheduleConflictChecker.HasPairConflict(existing, schedule));
+Business_Logic_Layer\Scheduling\ScheduleGenerationState.cs:231:            foreach (var schedule in Schedules)
+Business_Logic_Layer\Scheduling\ScheduleGenerationState.cs:280:            var pairedPractical = Schedules
+tests\ExcelImport\Program.cs:65:        Sheet("StudyYears", ["StudyYearID", "YearName"], [1, "First Year"]),
+tests\ExcelImport\Program.cs:66:        Sheet("Branches", ["BranchID", "BranchName"], [1, "Computer Science"]),
+tests\ExcelImport\Program.cs:67:        Sheet("FacultyMembers", ["FacultyMemberID", "FullName", "AcademicTitle"], [1, "أحمد محمد", "Lecturer"], [2, "Sara Ali", "Professor"]),
+tests\ExcelImport\Program.cs:68:        Sheet("Classrooms", ["ClassroomID", "ClassroomNumber", "Capacity", "RoomType"], [1, "Room 101", 60, "Lecture"], [2, "Lab 1", 30, "Lab"]),
+tests\ExcelImport\Program.cs:69:        Sheet("TimeSlots", ["TimeSlotID", "StartTime", "EndTime"], [1, "08:30", "10:00"], [2, "10:10", "11:40"]),
+tests\ExcelImport\Program.cs:70:        Sheet("Sections", ["SectionID", "SectionName", "StudentCount", "StudyYearID"], [1, "A", 40, 1], [2, "B", 40, 1]),
+tests\ExcelImport\Program.cs:71:        Sheet("Subjects", ["SubjectID", "SubjectName", "StudyYearID", "SemesterNumber", "TheoreticalHours", "PracticalHours", "CreditUnits", "RequirementType"],
+tests\ExcelImport\Program.cs:73:        Sheet("FacultyMemberSubjects", ["FacultyMemberID", "SubjectID"], [1, 1], [2, 2])
+tests\ExcelImport\Program.cs:78:        return JsonSerializer.Serialize(await db.Schedules.OrderBy(s => s.ScheduleID).Select(s => new
+tests\ExcelImport\Program.cs:123:                await legacy.Database.ExecuteSqlRawAsync("CREATE TABLE [dbo].[Schedules] ([ScheduleID] int PRIMARY KEY, [Tag] nvarchar(20)); INSERT INTO [dbo].[Schedules] VALUES (1, N'Preserve me');");
+tests\ExcelImport\Program.cs:125:                Assert(await legacy.Database.SqlQuery<int>($"SELECT COUNT(*) AS [Value] FROM [Schedules] WHERE [ScheduleID] = 1 AND [Tag] = N'Preserve me' AND [IsLocked] = 0").SingleAsync() == 1);
+tests\ExcelImport\Program.cs:149:                    Assert(loaded.Sheets.Single(s => s.Name == "FacultyMembers").Table.Rows.Count == 2);
+tests\ExcelImport\Program.cs:172:                    var sheet = book.AddWorksheet("FacultyMembers"); sheet.Cell(1, 1).Value = "FacultyMemberID *"; sheet.Cell(1, 2).Value = "FullName";
+tests\ExcelImport\Program.cs:184:                var p = await service.ValidateAsync(ExcelImportMode.AcademicData, [Sheet("FacultyMembers", ["FullName"], ["Ahmed"])]);
+tests\ExcelImport\Program.cs:186:                await using var db = factory(); Assert(!await db.FacultyMembers.AnyAsync());
+tests\ExcelImport\Program.cs:192:                await using (var before = factory()) Assert(!await before.Subjects.AnyAsync());
+tests\ExcelImport\Program.cs:194:                await using var db = factory(); Assert((await db.FacultyMembers.FindAsync(1))!.FullName == "أحمد محمد");
+tests\ExcelImport\Program.cs:203:                var duplicate = Sheet("FacultyMembers", ["FacultyMemberID", "FullName"], [3, "أحمد محمد"]);
+tests\ExcelImport\Program.cs:205:                var change = Sheet("FacultyMembers", ["FacultyMemberID", "FullName", "AcademicTitle"], [1, "أحمد محمد", "Professor"]);
+tests\ExcelImport\Program.cs:218:                    db.StudyYears.Add(new StudyYear { StudyYearID = 2, YearName = "Second Year" });
+tests\ExcelImport\Program.cs:219:                    db.Subjects.Add(new Subject { SubjectID = 3, SubjectName = "الرياضيات", StudyYearID = 2, SemesterNumber = 1, TheoreticalHours = 1, RequirementType = "Core" });
+tests\ExcelImport\Program.cs:225:                await using (var db = factory()) { db.Subjects.Remove((await db.Subjects.FindAsync(3))!); await db.SaveChangesAsync(); }
+tests\ExcelImport\Program.cs:231:                await db.Database.ExecuteSqlRawAsync("DROP INDEX [IX_FacultyMembers_FullName] ON [FacultyMembers]");
+tests\ExcelImport\Program.cs:234:                    db.FacultyMembers.Add(new FacultyMember { FacultyMemberID = 99, FullName = "أحمد محمد" }); await db.SaveChangesAsync();
+tests\ExcelImport\Program.cs:241:                    await db.FacultyMembers.Where(x => x.FacultyMemberID == 99).ExecuteDeleteAsync();
+tests\ExcelImport\Program.cs:242:                    await db.Database.ExecuteSqlRawAsync("CREATE UNIQUE INDEX [IX_FacultyMembers_FullName] ON [FacultyMembers] ([FullName])");
+tests\ExcelImport\Program.cs:247:                var sheet = Sheet("FacultyMembers", ["معرف", "اسم"], [1, "أحمد محمد"])
+tests\ExcelImport\Program.cs:266:                    db.Classrooms.Add(new Classroom { ClassroomID = 3, ClassroomNumber = "Room 102", Capacity = 60, RoomType = "Lecture" });
+tests\ExcelImport\Program.cs:267:                    db.FacultyMemberSubjects.Add(new FacultyMemberSubject { FacultyMemberID = 2, SubjectID = 1 }); await db.SaveChangesAsync();
+tests\ExcelImport\Program.cs:282:                await using (var db = factory()) { var lab = await db.Classrooms.FindAsync(2); lab!.Capacity = 1; await db.SaveChangesAsync(); }
+tests\ExcelImport\Program.cs:286:                await using (var db = factory()) { var lab = await db.Classrooms.FindAsync(2); lab!.Capacity = 30; await db.SaveChangesAsync(); }
+tests\ExcelImport\Program.cs:321:                await using (var db = factory()) { db.Branches.Add(new Branch { BranchID = 2, BranchName = "New branch" }); await db.SaveChangesAsync(); }
+tests\ExcelImport\Program.cs:326:                var input = Sheet("FacultyMembers", ["FacultyMemberID", "FullName"], [10, "Rollback 1"], [11, "Rollback 2"]);
+tests\ExcelImport\Program.cs:331:                await using var db = factory(); Assert(!await db.FacultyMembers.AnyAsync(f => f.FacultyMemberID >= 10));
+tests\ExcelImport\Program.cs:336:                var locks = await beforeDb.Schedules.AsNoTracking().Where(s => s.IsLocked).OrderBy(s => s.ScheduleID).ToListAsync();
+tests\ExcelImport\Program.cs:339:                await using var db = factory(); Assert(await db.Schedules.CountAsync() == 6);
+tests\ExcelImport\Program.cs:340:                Assert(before == JsonSerializer.Serialize(await db.Schedules.AsNoTracking().Where(s => s.IsLocked).OrderBy(s => s.ScheduleID).ToListAsync()), "Persisted locks moved or changed IDs.");
+tests\ExcelImport\Program.cs:352:                await using var check = factory(); Assert((await check.Schedules.FindAsync(saved.ScheduleID))!.IsLocked);
+tests\ExcelImport\Program.cs:355:                var persisted = await check.Schedules.AsNoTracking().ToDictionaryAsync(s => s.ScheduleID);
+tests\ExcelImport\Program.cs:362:                var lockedIds = await db.Schedules.Where(s => s.IsLocked).Select(s => s.ScheduleID).ToListAsync();
+tests\ExcelImport\Program.cs:363:                await db.Schedules.ExecuteUpdateAsync(set => set.SetProperty(s => s.IsLocked, false));
+tests\ExcelImport\Program.cs:371:                    Assert(!await db.Schedules.AnyAsync(s => s.IsLocked), "Preservation must not set permanent locks.");
+tests\ExcelImport\Program.cs:375:                    await db.Schedules.Where(s => lockedIds.Contains(s.ScheduleID))
+tests\ExcelImport\Program.cs:382:                    [Sheet("FacultyMembers", ["FacultyMemberID", "FullName"], [20, "Cancel 1"], [21, "Cancel 2"])]);
+tests\ExcelImport\Program.cs:391:                await using var db = factory(); Assert(!await db.FacultyMembers.AnyAsync(f => f.FacultyMemberID >= 20));
+tests\ExcelImport\Program.cs:398:                    await db.Schedules.ExecuteDeleteAsync();
+tests\ExcelImport\Program.cs:399:                    var lab = await db.Classrooms.FindAsync(2); lab!.Capacity = 1; await db.SaveChangesAsync();
+tests\ExcelImport\Program.cs:419:                foreach (var item in (IEnumerable)generator.GetMethod("CreateScheduleRequests", [teachingType, typeof(Section)])!.Invoke(null, [teaching, section])!) requests.Add(item);
+tests\ExcelImport\Program.cs:430:                contextType.GetProperty("FixedSchedules")!.SetValue(context, fixedRows);
+tests\ExcelImport\Program.cs:431:                contextType.GetProperty("RequirePracticalExchange")!.SetValue(context, false);
+tests\ExcelImport\Program.cs:433:                var planned = generator.GetMethod("BuildPlan")!.Invoke(null, [requests, context])!;
+tests\ExcelImport\Program.cs:434:                var schedules = (List<Schedule>)planned.GetType().GetProperty("Schedules")!.GetValue(planned)!;
+tests\ExcelImport\Program.cs:435:                Assert(schedules.Count == fixedRows.Count && (int)planned.GetType().GetProperty("ConflictCount")!.GetValue(planned)! == 1);
+tests\ExcelImport\Program.cs:440:                stateType.GetMethod("SeedFixed")!.Invoke(state, [fixedRows]);
+tests\ExcelImport\Program.cs:444:                    try { stateType.GetMethod(call.Item1)!.Invoke(state, [call.Item2]); }
+tests\ExcelImport\Program.cs:453:                    await db.Database.ExecuteSqlRawAsync("ALTER TABLE [Subjects] WITH NOCHECK ADD CONSTRAINT [CK_Subject_Requirement_Regression] CHECK ([RequirementType] IN (N'University',N'College',N'Department'))");
+tests\ExcelImport\Program.cs:458:                await using(var db = factory()) await db.Subjects.Where(x => x.SubjectID == added.SubjectID).ExecuteUpdateAsync(set => set.SetProperty(x => x.RequirementType,"College"));
+tests\ExcelImport\Program.cs:472:                var input = Sheet("Subjects", ["SubjectID","SubjectName","StudyYearID","SemesterNumber","TheoreticalHours","PracticalHours","CreditUnits"], [41,"استيراد دون متطلب",1,1,2,0,2]);
+tests\ExcelImport\Program.cs:475:                await using(var db = factory()) await db.Subjects.Where(x => x.SubjectID == 41).ExecuteUpdateAsync(set => set.SetProperty(x => x.RequirementType,"Department"));
+tests\ExcelImport\Program.cs:479:                await using var check = factory(); Assert((await check.Subjects.FindAsync(41))!.RequirementType == "Department");
+tests\ExcelImport\Program.cs:480:                Assert(!ExcelImportSchema.Academic.Single(s => s.Name == "Subjects").Columns.Contains("RequirementType"));
+tests\ExcelImport\Program.cs:498:                await using (var db = factory()) Assert(!await db.FacultyMembers.AnyAsync(f => f.FacultyMemberID == 701));
+Business_Logic_Layer\Scheduling\ScheduleGenerator.cs:12:            var dayPlans = BuildScheduleDayPlans(requests, context.TimeSlots.Count);
+Business_Logic_Layer\Scheduling\ScheduleGenerator.cs:29:                    CreatePlacementCandidates(request, context.Classrooms, context.TimeSlots, dayPlans).ToList(),
+Business_Logic_Layer\Scheduling\ScheduleGenerator.cs:41:                FacultyPreferenceRules.ValidateMatrix(profile, context.TimeSlots);
+Business_Logic_Layer\Scheduling\ScheduleGenerator.cs:42:                if (FacultyPreferenceRules.Violation(profile, context.FixedSchedules, context.TimeSlots.ToDictionary(p => p.TimeSlotID)) is { } error)
+Business_Logic_Layer\Scheduling\ScheduleGenerator.cs:56:                context.TimeSlots,
+Business_Logic_Layer\Scheduling\ScheduleGenerator.cs:89:                    var snapshot = scheduleState.Schedules.ToList();
+Business_Logic_Layer\Scheduling\ScheduleGenerator.cs:103:                scheduleState.Schedules,
+Business_Logic_Layer\Scheduling\ScheduleGenerator.cs:470:                var snapshot = scheduleState.Schedules.ToList();
+Business_Logic_Layer\Importing\ImportLabels.cs:10:        ["StudyYears"] = "المراحل الدراسية", ["Branches"] = "الفروع", ["FacultyMembers"] = "التدريسيون",
+Business_Logic_Layer\Importing\ImportLabels.cs:11:        ["Classrooms"] = "القاعات", ["TimeSlots"] = "الفترات الزمنية", ["Sections"] = "الشعب",
+Business_Logic_Layer\Importing\ImportLabels.cs:12:        ["Subjects"] = "المواد الدراسية", ["FacultyMemberSubjects"] = "تكليفات التدريس", ["Timetable"] = "الجدول الدراسي",
+tests\DesignerLifecycle\Program.cs:37:                var descriptors = Properties.Select(name => TypeDescriptor.GetProperties(safe)[name]!).ToArray();
+tests\DesignerLifecycle\Program.cs:98:        try { TypeDescriptor.GetProperties(control)[name]!.GetValue(control); return false; }
+tests\DesignerLifecycle\Program.cs:106:                foreach (string name in Properties) TypeDescriptor.GetProperties(control)[name]!.GetValue(control);
+tests\DesignerLifecycle\Program.cs:113:        try { return Properties.Select((name, index) => Equals(TypeDescriptor.GetProperties(control)[name]!.GetValue(control), expected[index])).All(value => value); }
+Business_Logic_Layer\FacultyScheduling\FacultyScheduleEditorService.cs:17:        var rows = await db.FacultySchedulingPreferences.AsNoTracking().Where(p => p.SemesterNumber == semester).ToListAsync(token);
+Business_Logic_Layer\Scheduling\TimetableAlternativesService.cs:88:        int count = await db.Schedules.Where(s => s.SemesterNumber == semester && ids.Contains(s.ScheduleID) && s.IsLocked != locked)
+Business_Logic_Layer\FacultyScheduling\FacultyPreferenceService.cs:19:        var row = await db.FacultySchedulingPreferences.AsNoTracking().SingleOrDefaultAsync(
+Business_Logic_Layer\FacultyScheduling\FacultyPreferenceService.cs:21:        var cells = await db.FacultyPeriodPreferences.AsNoTracking().Where(p => p.FacultyMemberID == facultyId && p.SemesterNumber == semester).ToListAsync(token);
+Business_Logic_Layer\FacultyScheduling\FacultyPreferenceService.cs:38:        if (!await db.FacultyMembers.AnyAsync(f => f.FacultyMemberID == request.FacultyId, token))
+Business_Logic_Layer\FacultyScheduling\FacultyPreferenceService.cs:40:        var periods = await db.TimeSlots.Where(p => !p.IsBreak).ToListAsync(token);
+Business_Logic_Layer\FacultyScheduling\FacultyPreferenceService.cs:43:        var row = await db.FacultySchedulingPreferences.SingleOrDefaultAsync(
+Business_Logic_Layer\FacultyScheduling\FacultyPreferenceService.cs:50:            db.FacultySchedulingPreferences.Add(row);
+Business_Logic_Layer\FacultyScheduling\FacultyPreferenceService.cs:55:        await db.FacultyPeriodPreferences.Where(p => p.FacultyMemberID == request.FacultyId && p.SemesterNumber == request.Semester).ExecuteDeleteAsync(token);
+Business_Logic_Layer\FacultyScheduling\FacultyPreferenceService.cs:57:            db.FacultyPeriodPreferences.AddRange(request.PeriodPreferences.Select(p => new FacultyPeriodPreference
+Business_Logic_Layer\FacultyScheduling\FacultyPreferenceService.cs:67:        var row = await db.FacultySchedulingPreferences.SingleOrDefaultAsync(p => p.FacultyMemberID == facultyId && p.SemesterNumber == semester, token);
+tests\DesignerCompatibility\Program.cs:54:                    teachingButton.GetType().GetMethod("PerformClick")!.Invoke(teachingButton, null);
+tests\DesignerCompatibility\Program.cs:64:                    foreach (string page in new[] {"Branches", "StudyYears", "Sections", "Subjects", "Classrooms", "TimeSlots", "FacultyMembers", "FacultyAssignments", "Schedules"})
+tests\DesignerCompatibility\Program.cs:68:                        if (navigation.Enabled) navigation.GetType().GetMethod("PerformClick")!.Invoke(navigation, null);
+tests\DesignerCompatibility\Program.cs:86:                        if (page == "TimeSlots") CheckTimeSlotDefaults(content);
+tests\DesignerCompatibility\Program.cs:101:                        if (page == "Schedules")
+tests\DesignerCompatibility\Program.cs:107:                            content.GetType().GetMethod("ShowScheduleTimetableView",BindingFlags.NonPublic|BindingFlags.Instance)!.Invoke(content,null);
+tests\DesignerCompatibility\Program.cs:109:                            Save(content,$"Schedules-weekly-{width}");
+tests\DesignerCompatibility\Program.cs:122:                shell.Controls.Find("btnNavigationBranches", true).Single().GetType().GetMethod("PerformClick")!.Invoke(shell.Controls.Find("btnNavigationBranches", true).Single(), null);
+tests\DesignerCompatibility\Program.cs:163:            foreach(string page in new[]{"Branches","StudyYears","Sections","Subjects","Classrooms","TimeSlots","FacultyMembers","FacultyAssignments","Schedules"})
+tests\DesignerCompatibility\Program.cs:166:                if(navigation.Enabled)navigation.GetType().GetMethod("PerformClick")!.Invoke(navigation,null);
+tests\DesignerCompatibility\Program.cs:246:        var events = (System.ComponentModel.EventHandlerList)typeof(System.ComponentModel.Component).GetProperty("Events", BindingFlags.NonPublic | BindingFlags.Instance)!.GetValue(control)!;
+tests\DesignerCompatibility\Program.cs:253:            "Branches" => ("txtBranchId", "BranchID", "txtBranchName", "ClearBranchForm"),
+tests\DesignerCompatibility\Program.cs:254:            "StudyYears" => ("txtStudyYearId", "StudyYearID", "txtYearName", "ClearStudyYearForm"),
+tests\DesignerCompatibility\Program.cs:255:            "Sections" => ("txtSectionId", "SectionID", "txtSectionName", "ClearSectionForm"),
+tests\DesignerCompatibility\Program.cs:256:            "Subjects" => ("txtSubjectId", "SubjectID", "txtSubjectName", "ClearSubjectForm"),
+tests\DesignerCompatibility\Program.cs:257:            "Classrooms" => ("txtClassroomId", "ClassroomID", "txtClassroomNumber", "ClearClassroomForm"),
+tests\DesignerCompatibility\Program.cs:258:            "TimeSlots" => ("txtTimeSlotId", "TimeSlotID", "", "ClearTimeSlotForm"),
+tests\DesignerCompatibility\Program.cs:259:            "FacultyMembers" => ("txtFacultyMemberId", "FacultyMemberID", "txtFacultyMemberFullName", "ClearFacultyMemberForm"),
+tests\DesignerCompatibility\Program.cs:281:        page.GetType().GetMethod(field.Item4, BindingFlags.NonPublic | BindingFlags.Instance)!.Invoke(page, null);
+tests\DesignerCompatibility\Program.cs:298:            command.CommandText="SELECT TOP (1) 1 FROM Schedules WITH (TABLOCKX,HOLDLOCK)";
+tests\DesignerCompatibility\Program.cs:301:        var pending=(Task)page.GetType().GetMethod("PopulateScheduleEditorFromSelectionAsync",BindingFlags.Instance|BindingFlags.NonPublic)!.Invoke(page,null)!;
+tests\DesignerCompatibility\Program.cs:303:        page.GetType().GetMethod("ClearScheduleForm",BindingFlags.Instance|BindingFlags.NonPublic)!.Invoke(page,null);
+tests\DesignerCompatibility\Program.cs:317:        var read = (Task)service.GetType().GetMethod("GetAllAsync")!.Invoke(service, null)!;
+tests\DesignerCompatibility\Program.cs:319:        var records = (System.Collections.IEnumerable)read.GetType().GetProperty("Result")!.GetValue(read)!;
+tests\DesignerCompatibility\Program.cs:321:        var add = service.GetType().GetMethod("AddAsync")!;
+tests\DesignerCompatibility\Program.cs:323:        branch.GetType().GetProperty("BranchName")!.SetValue(branch, "Cleanup regression branch");
+tests\DesignerCompatibility\Program.cs:330:        var value=start.GetType().GetProperty("Value")!;
+tests\DesignerCompatibility\Program.cs:337:        bool accepted=(bool)page.GetType().GetMethod("TryBuildTimeSlot",BindingFlags.NonPublic|BindingFlags.Instance)!.Invoke(page,arguments)!;
+tests\DesignerCompatibility\Program.cs:339:        Check("An edited 90-minute afternoon period is accepted with minute precision", accepted && (TimeSpan)slot.GetType().GetProperty("StartTime")!.GetValue(slot)! == new TimeSpan(13,30,0) && (TimeSpan)slot.GetType().GetProperty("EndTime")!.GetValue(slot)! == new TimeSpan(15,0,0));
+tests\DesignerCompatibility\Program.cs:340:        page.GetType().GetMethod("ClearTimeSlotForm",BindingFlags.NonPublic|BindingFlags.Instance)!.Invoke(page,null);
+tests\DesignerCompatibility\Program.cs:346:        var password = input.GetType().GetProperty("PasswordChar")!;
+tests\DesignerCompatibility\Program.cs:347:        var image = button.GetType().GetProperty("Image")!;
+tests\DesignerCompatibility\Program.cs:350:        button.GetType().GetMethod("PerformClick")!.Invoke(button, null);
+tests\DesignerCompatibility\Program.cs:353:        button.GetType().GetMethod("PerformClick")!.Invoke(button, null);
+tests\DesignerCompatibility\Program.cs:383:        int id=(int)entries[0].GetType().GetProperty("ScheduleID")!.GetValue(entries[0])!;
+tests\DesignerCompatibility\Program.cs:384:        string day=(string)entries[0].GetType().GetProperty("DayOfWeek")!.GetValue(entries[0])!;
+tests\DesignerCompatibility\Program.cs:395:        var scroll=page.GetType().GetMethod("ScrollTimetableCell",BindingFlags.NonPublic|BindingFlags.Instance)!;
+tests\DesignerCompatibility\Program.cs:404:        var click=page.GetType().GetMethod("ClickTimetableCell",BindingFlags.NonPublic|BindingFlags.Instance)!;
+tests\DesignerCompatibility\Program.cs:407:        int selected=(int)grid.CurrentRow!.DataBoundItem!.GetType().GetProperty("ScheduleID")!.GetValue(grid.CurrentRow.DataBoundItem)!;
+Business_Logic_Layer\Backups\TimetableBackupService.cs:83:        Add<Subject>("Subjects",x=>subjects.Contains(x.SubjectID),x=>x.SubjectID.ToString());
+Business_Logic_Layer\Backups\TimetableBackupService.cs:84:        Add<FacultyMember>("FacultyMembers",x=>faculty.Contains(x.FacultyMemberID),x=>x.FacultyMemberID.ToString());
+Business_Logic_Layer\Backups\TimetableBackupService.cs:85:        Add<Classroom>("Classrooms",x=>classrooms.Contains(x.ClassroomID),x=>x.ClassroomID.ToString());
+Business_Logic_Layer\Backups\TimetableBackupService.cs:86:        Add<TimeSlot>("TimeSlots",x=>periods.Contains(x.TimeSlotID),x=>x.TimeSlotID.ToString());
+Business_Logic_Layer\Backups\TimetableBackupService.cs:87:        Add<Section>("Sections",x=>sections.Contains(x.SectionID),x=>x.SectionID.ToString());
+Business_Logic_Layer\Backups\TimetableBackupService.cs:88:        Add<StudyYear>("StudyYears",x=>years.Contains(x.StudyYearID),x=>x.StudyYearID.ToString());
+Business_Logic_Layer\Backups\TimetableBackupService.cs:89:        Add<Branch>("Branches",x=>branches.Contains(x.BranchID),x=>x.BranchID.ToString());
+Business_Logic_Layer\Backups\TimetableBackupService.cs:90:        Add<FacultyMemberSubject>("FacultyMemberSubjects",x=>assignments.Contains((x.FacultyMemberID,x.SubjectID)),x=>$"{x.FacultyMemberID}/{x.SubjectID}");
+Business_Logic_Layer\Backups\TimetableBackupService.cs:125:        if (saved.Table != "FacultyMemberSubjects") return false;
+Business_Logic_Layer\Backups\TimetableBackupService.cs:131:        if (!before.RootElement.TryGetProperty("SectionID", out _) &&
+Business_Logic_Layer\Backups\TimetableBackupService.cs:133:        if (!before.RootElement.TryGetProperty("LectureType", out _) &&

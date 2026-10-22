@@ -1,0 +1,5 @@
+{
+  "ConnectionStrings": {
+    "UniversityTimetable": "Server=.\\SQLEXPRESS;Database=UniversityTimetable;Trusted_Connection=True;Encrypt=False;TrustServerCertificate=True;"
+  }
+}

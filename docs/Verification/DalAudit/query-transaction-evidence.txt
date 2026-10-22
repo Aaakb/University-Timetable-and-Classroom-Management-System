@@ -1,0 +1,190 @@
+Data_Access_Layer\Scheduling\TimetableSnapshotStore.cs:10:        if (context.Database.CurrentTransaction is null) throw new InvalidOperationException("A restore transaction is required.");
+Data_Access_Layer\Scheduling\TimetableSnapshotStore.cs:11:        await context.Schedules.ExecuteDeleteAsync(token);
+Data_Access_Layer\Scheduling\TimetableSnapshotStore.cs:20:            await context.SaveChangesAsync(token);
+Business_Logic_Layer\Helpers\ManualKeySaveHelper.cs:29:                await context.SaveChangesAsync();
+Business_Logic_Layer\Helpers\ManualKeySaveHelper.cs:38:                await context.SaveChangesAsync();
+Business_Logic_Layer\Helpers\ManualKeySaveHelper.cs:43:            await using var transaction = context.Database.CurrentTransaction is null
+Business_Logic_Layer\Helpers\ManualKeySaveHelper.cs:44:                ? await context.Database.BeginTransactionAsync() : null;
+Business_Logic_Layer\Helpers\ManualKeySaveHelper.cs:54:                await context.SaveChangesAsync();
+Business_Logic_Layer\Helpers\ManualKeySaveHelper.cs:60:                if (transaction is not null) await transaction.CommitAsync();
+Data_Access_Layer\Scheduling\FacultyScheduleWriter.cs:14:        if (context.Database.CurrentTransaction is null) throw new InvalidOperationException("A transaction is required.");
+Data_Access_Layer\Scheduling\FacultyScheduleWriter.cs:17:        int removed = await context.Schedules.Where(s => ids.Contains(s.ScheduleID)).ExecuteDeleteAsync(token);
+Data_Access_Layer\Scheduling\FacultyScheduleWriter.cs:30:            await context.SaveChangesAsync(token);
+UniversityTimetable.API\Controllers\AuthController.cs:26:        var user = await db.ApplicationUsers.AsNoTracking().Where(x => x.ApplicationUserID == id)
+Data_Access_Layer\Importing\ImportTransaction.cs:13:        await using var transaction = await context.Database.BeginTransactionAsync(IsolationLevel.Serializable, token);
+Data_Access_Layer\Importing\ImportTransaction.cs:16:        await transaction.CommitAsync(token);
+Business_Logic_Layer\Services\ClassroomService.cs:12:            return await context.Classrooms.AsNoTracking()
+Business_Logic_Layer\Services\ClassroomService.cs:20:            return await context.Classrooms.AsNoTracking().FirstOrDefaultAsync(c => c.ClassroomID == id);
+Business_Logic_Layer\Services\ClassroomService.cs:42:            await using var transaction = await context.Database.BeginTransactionAsync(System.Data.IsolationLevel.Serializable);
+Business_Logic_Layer\Services\ClassroomService.cs:44:            await transaction.CommitAsync();
+Business_Logic_Layer\Services\ClassroomService.cs:52:            var lessons = await context.Schedules.Include(s => s.Section)
+Business_Logic_Layer\Services\ClassroomService.cs:58:            await context.SaveChangesAsync();
+Business_Logic_Layer\Services\ClassroomService.cs:70:            await context.SaveChangesAsync();
+Business_Logic_Layer\Maintenance\SchedulingResourceMaintenance.cs:19:            await using var transaction = await context.Database.BeginTransactionAsync(System.Data.IsolationLevel.Serializable);
+Business_Logic_Layer\Maintenance\SchedulingResourceMaintenance.cs:24:                await transaction.CommitAsync();
+Business_Logic_Layer\Maintenance\SchedulingResourceMaintenance.cs:48:            await transaction.CommitAsync();
+Business_Logic_Layer\Services\BranchService.cs:12:            return await context.Branches.AsNoTracking().ToListAsync();
+Business_Logic_Layer\Services\BranchService.cs:18:            return await context.Branches.AsNoTracking().FirstOrDefaultAsync(b => b.BranchID == id);
+Business_Logic_Layer\Services\BranchService.cs:47:            await context.SaveChangesAsync();
+Business_Logic_Layer\Services\BranchService.cs:59:            await context.SaveChangesAsync();
+Business_Logic_Layer\Services\AuthService.cs:26:                .AsNoTracking()
+Business_Logic_Layer\Services\TimeSlotService.cs:26:                .AsNoTracking()
+Business_Logic_Layer\Services\TimeSlotService.cs:38:                .AsNoTracking()
+Business_Logic_Layer\Services\TimeSlotService.cs:47:            await using var transaction = await context.Database.BeginTransactionAsync(System.Data.IsolationLevel.Serializable);
+Business_Logic_Layer\Services\TimeSlotService.cs:50:            await transaction.CommitAsync();
+Business_Logic_Layer\Services\TimeSlotService.cs:67:            await using var transaction = await context.Database.BeginTransactionAsync(System.Data.IsolationLevel.Serializable);
+Business_Logic_Layer\Services\TimeSlotService.cs:69:            await transaction.CommitAsync();
+Business_Logic_Layer\Services\TimeSlotService.cs:79:            await context.SaveChangesAsync();
+Business_Logic_Layer\Services\TimeSlotService.cs:91:            await context.SaveChangesAsync();
+Business_Logic_Layer\Services\TimeSlotService.cs:113:                .AsNoTracking()
+Business_Logic_Layer\Services\ScheduleService.cs:13:                .Include(s => s.Subject)
+Business_Logic_Layer\Services\ScheduleService.cs:14:                .Include(s => s.FacultyMember)
+Business_Logic_Layer\Services\ScheduleService.cs:15:                .Include(s => s.Classroom)
+Business_Logic_Layer\Services\ScheduleService.cs:16:                .Include(s => s.TimeSlot)
+Business_Logic_Layer\Services\ScheduleService.cs:17:                .Include(s => s.StudyYear)
+Business_Logic_Layer\Services\ScheduleService.cs:18:                .Include(s => s.Branch)
+Business_Logic_Layer\Services\ScheduleService.cs:19:                .Include(s => s.Section)
+Business_Logic_Layer\Services\ScheduleService.cs:20:                .AsNoTracking()
+Business_Logic_Layer\Services\ScheduleService.cs:37:            var query = context.ScheduleDetails.AsNoTracking().AsQueryable();
+Business_Logic_Layer\Services\ScheduleService.cs:53:                var scheduleIds = context.Schedules.AsNoTracking().AsQueryable();
+Business_Logic_Layer\Services\ScheduleService.cs:91:                .Include(s => s.Subject)
+Business_Logic_Layer\Services\ScheduleService.cs:92:                .Include(s => s.FacultyMember)
+Business_Logic_Layer\Services\ScheduleService.cs:93:                .Include(s => s.Classroom)
+Business_Logic_Layer\Services\ScheduleService.cs:94:                .Include(s => s.TimeSlot)
+Business_Logic_Layer\Services\ScheduleService.cs:95:                .Include(s => s.StudyYear)
+Business_Logic_Layer\Services\ScheduleService.cs:96:                .Include(s => s.Branch)
+Business_Logic_Layer\Services\ScheduleService.cs:97:                .Include(s => s.Section)
+Business_Logic_Layer\Services\ScheduleService.cs:98:                .AsNoTracking()
+Business_Logic_Layer\Services\ScheduleService.cs:105:            await using var transaction = await context.Database.BeginTransactionAsync(System.Data.IsolationLevel.Serializable);
+Business_Logic_Layer\Services\ScheduleService.cs:108:            await context.SaveChangesAsync();
+Business_Logic_Layer\Services\ScheduleService.cs:109:            await transaction.CommitAsync();
+Business_Logic_Layer\Services\ScheduleService.cs:116:            await using var transaction = await context.Database.BeginTransactionAsync(System.Data.IsolationLevel.Serializable);
+Business_Logic_Layer\Services\ScheduleService.cs:123:            await context.SaveChangesAsync();
+Business_Logic_Layer\Services\ScheduleService.cs:124:            await transaction.CommitAsync();
+Business_Logic_Layer\Services\ScheduleService.cs:135:            await context.SaveChangesAsync();
+Business_Logic_Layer\Services\ScheduleService.cs:144:            await context.SaveChangesAsync();
+Business_Logic_Layer\Services\ScheduleService.cs:155:            await using var transaction = await context.Database.BeginTransactionAsync(System.Data.IsolationLevel.Serializable);
+Business_Logic_Layer\Services\ScheduleService.cs:156:            var preferences = FacultyPreferenceRules.FromRows(await context.FacultySchedulingPreferences.AsNoTracking().ToListAsync(),
+Business_Logic_Layer\Services\ScheduleService.cs:157:                await context.FacultyPeriodPreferences.AsNoTracking().ToListAsync());
+Business_Logic_Layer\Services\ScheduleService.cs:159:                .AsNoTracking()
+Business_Logic_Layer\Services\ScheduleService.cs:164:                .Include(fms => fms.Subject)
+Business_Logic_Layer\Services\ScheduleService.cs:167:                .AsNoTracking()
+Business_Logic_Layer\Services\ScheduleService.cs:172:                .Include(section => section.StudyYear)
+Business_Logic_Layer\Services\ScheduleService.cs:173:                .Include(section => section.Branch)
+Business_Logic_Layer\Services\ScheduleService.cs:174:                .AsNoTracking()
+Business_Logic_Layer\Services\ScheduleService.cs:183:                .AsNoTracking()
+Business_Logic_Layer\Services\ScheduleService.cs:192:                .AsNoTracking()
+Business_Logic_Layer\Services\ScheduleService.cs:460:                await context.SaveChangesAsync();
+Business_Logic_Layer\Services\ScheduleService.cs:475:            await context.SaveChangesAsync();
+Business_Logic_Layer\Services\ScheduleService.cs:476:            await transaction.CommitAsync();
+Business_Logic_Layer\Services\ScheduleService.cs:523:                .AsNoTracking()
+Business_Logic_Layer\Services\ScheduleService.cs:534:                ? await context.Schedules.AsNoTracking().FirstOrDefaultAsync(s => s.ScheduleID == schedule.ScheduleID)
+Business_Logic_Layer\Services\ScheduleService.cs:553:                .AsNoTracking()
+Business_Logic_Layer\Services\ScheduleService.cs:561:            var lecturePeriods = await context.TimeSlots.AsNoTracking().Where(slot => !slot.IsBreak).ToListAsync();
+Business_Logic_Layer\Services\ScheduleService.cs:575:                .AsNoTracking()
+Business_Logic_Layer\Services\ScheduleService.cs:616:                var profileRows = await context.FacultySchedulingPreferences.AsNoTracking().Where(p =>
+Business_Logic_Layer\Services\ScheduleService.cs:620:                    var otherLectures = await context.Schedules.AsNoTracking().Where(s =>
+Business_Logic_Layer\Services\ScheduleService.cs:623:                    var cells = await context.FacultyPeriodPreferences.AsNoTracking().Where(p => p.FacultyMemberID == schedule.FacultyMemberID && p.SemesterNumber == schedule.SemesterNumber).ToListAsync();
+Business_Logic_Layer\Services\SubjectService.cs:14:                .Include(s => s.StudyYear)
+Business_Logic_Layer\Services\SubjectService.cs:15:                .Include(s => s.Branch)
+Business_Logic_Layer\Services\SubjectService.cs:16:                .AsNoTracking()
+Business_Logic_Layer\Services\SubjectService.cs:31:                .Include(s => s.StudyYear)
+Business_Logic_Layer\Services\SubjectService.cs:32:                .Include(s => s.Branch)
+Business_Logic_Layer\Services\SubjectService.cs:33:                .AsNoTracking()
+Business_Logic_Layer\Services\SubjectService.cs:58:            await using var transaction = await context.Database.BeginTransactionAsync(System.Data.IsolationLevel.Serializable);
+Business_Logic_Layer\Services\SubjectService.cs:60:            await transaction.CommitAsync();
+Business_Logic_Layer\Services\SubjectService.cs:73:                .Select(a => a.Section!).AsNoTracking().ToListAsync();
+Business_Logic_Layer\Services\SubjectService.cs:92:                var otherSchedules = await context.Schedules.AsNoTracking()
+Business_Logic_Layer\Services\SubjectService.cs:110:            await context.SaveChangesAsync();
+Business_Logic_Layer\Services\SubjectService.cs:124:            await context.SaveChangesAsync();
+Business_Logic_Layer\Maintenance\FourthYearPracticalMaintenance.cs:14:        await using var transaction = await db.Database.BeginTransactionAsync(IsolationLevel.Serializable, token);
+Business_Logic_Layer\Maintenance\FourthYearPracticalMaintenance.cs:15:        var sections = await db.Sections.AsNoTracking().ToDictionaryAsync(s => s.SectionID, token);
+Business_Logic_Layer\Maintenance\FourthYearPracticalMaintenance.cs:16:        var subjects = await db.Subjects.AsNoTracking().ToDictionaryAsync(s => s.SubjectID, token);
+Business_Logic_Layer\Maintenance\FourthYearPracticalMaintenance.cs:45:        await db.SaveChangesAsync(token);
+Business_Logic_Layer\Maintenance\FourthYearPracticalMaintenance.cs:48:        await transaction.CommitAsync(token);
+Business_Logic_Layer\Backups\TimetableBackupService.cs:29:        await using var transaction = await db.Database.BeginTransactionAsync(IsolationLevel.Serializable,token);
+Business_Logic_Layer\Backups\TimetableBackupService.cs:32:        await transaction.CommitAsync(token);
+Business_Logic_Layer\Backups\TimetableBackupService.cs:40:        await using var transaction = await db.Database.BeginTransactionAsync(IsolationLevel.Serializable,token);
+Business_Logic_Layer\Backups\TimetableBackupService.cs:43:        await transaction.CommitAsync(token);
+Business_Logic_Layer\Backups\TimetableBackupService.cs:54:        await using var transaction = await db.Database.BeginTransactionAsync(IsolationLevel.Serializable,token);
+Business_Logic_Layer\Backups\TimetableBackupService.cs:66:        await transaction.CommitAsync(token);
+UniversityTimetable.API\Controllers\OverviewController.cs:16:        int unassignedSubjects = (await db.Subjects.AsNoTracking()
+Business_Logic_Layer\Services\StudyYearService.cs:12:            var studyYears = await context.StudyYears.AsNoTracking().ToListAsync();
+Business_Logic_Layer\Services\StudyYearService.cs:23:            return await context.StudyYears.AsNoTracking().FirstOrDefaultAsync(sy => sy.StudyYearID == id);
+Business_Logic_Layer\Services\StudyYearService.cs:52:            await context.SaveChangesAsync();
+Business_Logic_Layer\Services\StudyYearService.cs:64:            await context.SaveChangesAsync();
+Business_Logic_Layer\FacultyScheduling\FacultyDayPreferenceService.cs:19:        await using var transaction = await db.Database.BeginTransactionAsync(IsolationLevel.Serializable, token);
+Business_Logic_Layer\FacultyScheduling\FacultyDayPreferenceService.cs:25:            await transaction.CommitAsync(token);
+Business_Logic_Layer\FacultyScheduling\FacultyDayPreferenceService.cs:53:        await transaction.CommitAsync(token);
+Business_Logic_Layer\Importing\AcademicExcelImport.cs:213:                    var subject = await db.Subjects.AsNoTracking().SingleAsync(s => s.SubjectID == x.SubjectID);
+Business_Logic_Layer\Importing\AcademicExcelImport.cs:214:                    var section = await db.Sections.AsNoTracking().SingleOrDefaultAsync(s => s.SectionID == x.SectionID);
+Business_Logic_Layer\Importing\AcademicExcelImport.cs:229:                await db.SaveChangesAsync(); break;
+Business_Logic_Layer\Services\SectionService.cs:13:                .Include(s => s.StudyYear)
+Business_Logic_Layer\Services\SectionService.cs:14:                .Include(s => s.Branch)
+Business_Logic_Layer\Services\SectionService.cs:15:                .AsNoTracking()
+Business_Logic_Layer\Services\SectionService.cs:23:                .Include(s => s.StudyYear)
+Business_Logic_Layer\Services\SectionService.cs:24:                .Include(s => s.Branch)
+Business_Logic_Layer\Services\SectionService.cs:25:                .AsNoTracking()
+Business_Logic_Layer\Services\SectionService.cs:48:            await using var transaction = await context.Database.BeginTransactionAsync(System.Data.IsolationLevel.Serializable);
+Business_Logic_Layer\Services\SectionService.cs:50:            await transaction.CommitAsync();
+Business_Logic_Layer\Services\SectionService.cs:58:                .Select(a => a.Subject).AsNoTracking().ToListAsync();
+Business_Logic_Layer\Services\SectionService.cs:62:            var lessons = await context.Schedules.Include(s => s.Classroom)
+Business_Logic_Layer\Services\SectionService.cs:70:            await context.SaveChangesAsync();
+Business_Logic_Layer\Services\SectionService.cs:82:            await context.SaveChangesAsync();
+Business_Logic_Layer\Services\FacultyMemberSubjectService.cs:13:                .Include(fms => fms.FacultyMember)
+Business_Logic_Layer\Services\FacultyMemberSubjectService.cs:14:                .Include(fms => fms.Subject)
+Business_Logic_Layer\Services\FacultyMemberSubjectService.cs:15:                    .ThenInclude(subject => subject.StudyYear)
+Business_Logic_Layer\Services\FacultyMemberSubjectService.cs:16:                .Include(fms => fms.Subject)
+Business_Logic_Layer\Services\FacultyMemberSubjectService.cs:17:                    .ThenInclude(subject => subject.Branch)
+Business_Logic_Layer\Services\FacultyMemberSubjectService.cs:18:                .Include(fms => fms.Section)
+Business_Logic_Layer\Services\FacultyMemberSubjectService.cs:19:                .AsNoTracking()
+Business_Logic_Layer\Services\FacultyMemberSubjectService.cs:27:                .Include(fms => fms.FacultyMember)
+Business_Logic_Layer\Services\FacultyMemberSubjectService.cs:28:                .Include(fms => fms.Subject)
+Business_Logic_Layer\Services\FacultyMemberSubjectService.cs:29:                .Include(fms => fms.Section)
+Business_Logic_Layer\Services\FacultyMemberSubjectService.cs:30:                .AsNoTracking()
+Business_Logic_Layer\Services\FacultyMemberSubjectService.cs:40:            await context.SaveChangesAsync();
+Business_Logic_Layer\Services\FacultyMemberSubjectService.cs:50:            await using var transaction = await context.Database.BeginTransactionAsync(System.Data.IsolationLevel.Serializable);
+Business_Logic_Layer\Services\FacultyMemberSubjectService.cs:73:                await context.SaveChangesAsync();
+Business_Logic_Layer\Services\FacultyMemberSubjectService.cs:74:                await transaction.CommitAsync();
+Business_Logic_Layer\Services\FacultyMemberSubjectService.cs:81:            await context.SaveChangesAsync();
+Business_Logic_Layer\Services\FacultyMemberSubjectService.cs:82:            await transaction.CommitAsync();
+Business_Logic_Layer\Services\FacultyMemberSubjectService.cs:90:            await using var transaction = await context.Database.BeginTransactionAsync(System.Data.IsolationLevel.Serializable);
+Business_Logic_Layer\Services\FacultyMemberSubjectService.cs:99:            await context.SaveChangesAsync();
+Business_Logic_Layer\Services\FacultyMemberSubjectService.cs:100:            await transaction.CommitAsync();
+Business_Logic_Layer\Services\FacultyMemberSubjectService.cs:127:            var subject = await context.Subjects.AsNoTracking().FirstOrDefaultAsync(s => s.SubjectID == entity.SubjectID && !s.IsDeleted);
+Business_Logic_Layer\Services\FacultyMemberSubjectService.cs:135:                var section = await context.Sections.AsNoTracking().FirstOrDefaultAsync(s => s.SectionID == entity.SectionID);
+Business_Logic_Layer\Services\FacultyMemberService.cs:12:            return await context.FacultyMembers.AsNoTracking().ToListAsync();
+Business_Logic_Layer\Services\FacultyMemberService.cs:18:            return await context.FacultyMembers.AsNoTracking().FirstOrDefaultAsync(f => f.FacultyMemberID == id);
+Business_Logic_Layer\Services\FacultyMemberService.cs:47:            await context.SaveChangesAsync();
+Business_Logic_Layer\Services\FacultyMemberService.cs:59:            await context.SaveChangesAsync();
+UniversityTimetable.API\Controllers\SchedulingController.cs:57:        state["facultyPreferenceProfiles"] = await db.FacultySchedulingPreferences.AsNoTracking().OrderBy(p => p.FacultyMemberID).ThenBy(p => p.SemesterNumber).ToListAsync();
+UniversityTimetable.API\Controllers\SchedulingController.cs:58:        state["facultyPreferencePeriods"] = await db.FacultyPeriodPreferences.AsNoTracking().OrderBy(p => p.FacultyMemberID).ThenBy(p => p.SemesterNumber).ThenBy(p => p.DayOfWeek).ThenBy(p => p.TimeSlotID).ToListAsync();
+Business_Logic_Layer\Importing\ExcelImportService.cs:374:                            saved.IsLocked = true; await db.SaveChangesAsync(ct); updated++;
+Business_Logic_Layer\Importing\ExcelImportService.cs:385:                    await db.SaveChangesAsync(ct);
+Business_Logic_Layer\Importing\ExcelImportService.cs:388:                FacultyPreferenceRules.Validate(await db.Schedules.AsNoTracking().ToListAsync(ct), current.Rows<TimeSlot>().ToDictionary(p => p.TimeSlotID),
+Business_Logic_Layer\FacultyScheduling\FacultyPreferenceService.cs:18:        await using var tx = await db.Database.BeginTransactionAsync(IsolationLevel.Serializable, token);
+Business_Logic_Layer\FacultyScheduling\FacultyPreferenceService.cs:19:        var row = await db.FacultySchedulingPreferences.AsNoTracking().SingleOrDefaultAsync(
+Business_Logic_Layer\FacultyScheduling\FacultyPreferenceService.cs:21:        var cells = await db.FacultyPeriodPreferences.AsNoTracking().Where(p => p.FacultyMemberID == facultyId && p.SemesterNumber == semester).ToListAsync(token);
+Business_Logic_Layer\FacultyScheduling\FacultyPreferenceService.cs:22:        await tx.CommitAsync(token);
+Business_Logic_Layer\FacultyScheduling\FacultyPreferenceService.cs:29:        await using var tx = await db.Database.BeginTransactionAsync(IsolationLevel.Serializable, token);
+Business_Logic_Layer\FacultyScheduling\FacultyPreferenceService.cs:31:        await tx.CommitAsync(token);
+Business_Logic_Layer\FacultyScheduling\FacultyPreferenceService.cs:54:        await db.SaveChangesAsync(token);
+Business_Logic_Layer\FacultyScheduling\FacultyPreferenceService.cs:55:        await db.FacultyPeriodPreferences.Where(p => p.FacultyMemberID == request.FacultyId && p.SemesterNumber == request.Semester).ExecuteDeleteAsync(token);
+Business_Logic_Layer\FacultyScheduling\FacultyPreferenceService.cs:59:        await db.SaveChangesAsync(token);
+Business_Logic_Layer\FacultyScheduling\FacultyPreferenceService.cs:66:        await using var tx = await db.Database.BeginTransactionAsync(IsolationLevel.Serializable, token);
+Business_Logic_Layer\FacultyScheduling\FacultyPreferenceService.cs:69:        if (row is not null) { db.Remove(row); await db.SaveChangesAsync(token); }
+Business_Logic_Layer\FacultyScheduling\FacultyPreferenceService.cs:70:        await tx.CommitAsync(token);
+Business_Logic_Layer\FacultyScheduling\FacultyScheduleEditorService.cs:17:        var rows = await db.FacultySchedulingPreferences.AsNoTracking().Where(p => p.SemesterNumber == semester).ToListAsync(token);
+Business_Logic_Layer\FacultyScheduling\FacultyScheduleEditorService.cs:24:        await using var transaction = await db.Database.BeginTransactionAsync(IsolationLevel.Serializable, token);
+Business_Logic_Layer\FacultyScheduling\FacultyScheduleEditorService.cs:26:        await transaction.CommitAsync(token);
+Business_Logic_Layer\FacultyScheduling\FacultyScheduleEditorService.cs:147:        await using var transaction = await db.Database.BeginTransactionAsync(IsolationLevel.Serializable, token);
+Business_Logic_Layer\FacultyScheduling\FacultyScheduleEditorService.cs:157:        await transaction.CommitAsync(token);
+Business_Logic_Layer\Importing\ImportCatalog.cs:24:            (await db.Set<T>().AsNoTracking().ToListAsync(token)).Cast<object>().ToList();
+Business_Logic_Layer\Importing\ImportedTimetableRepair.cs:154:            db.Schedules.Add(copy); await db.SaveChangesAsync(token); added++;
+Business_Logic_Layer\Scheduling\TimetableAlternativesService.cs:17:        await using var db = factory(); await using var tx = await db.Database.BeginTransactionAsync(IsolationLevel.Serializable, token);
+Business_Logic_Layer\Scheduling\TimetableAlternativesService.cs:18:        var data = await ImportCatalog.LoadAsync(db, token); await tx.CommitAsync(token); return data;
+Business_Logic_Layer\Scheduling\TimetableAlternativesService.cs:70:        await using var db = factory(); await using var tx = await db.Database.BeginTransactionAsync(IsolationLevel.Serializable, token);
+Business_Logic_Layer\Scheduling\TimetableAlternativesService.cs:79:        await tx.CommitAsync(token); return changed.Count;
+Business_Logic_Layer\Scheduling\TimetableAlternativesService.cs:84:        await using var db = factory(); await using var tx = await db.Database.BeginTransactionAsync(IsolationLevel.Serializable, token);
+Business_Logic_Layer\Scheduling\TimetableAlternativesService.cs:89:            .ExecuteUpdateAsync(update => update.SetProperty(s => s.IsLocked, locked), token);
+Business_Logic_Layer\Scheduling\TimetableAlternativesService.cs:90:        await tx.CommitAsync(token); return count;

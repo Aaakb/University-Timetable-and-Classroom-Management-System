@@ -1,4 +1,4 @@
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Data_Access_Layer;
 using University_Timetable_and_Classroom_Management_System.Models;
 
@@ -27,20 +27,32 @@ namespace University_Timetable_and_Classroom_Management_System.BusinessLayer
         {
             await using var context = new AppDbContext();
             studyYear.StudyYearID = await AutoKeyGenerator.NextAsync(context.StudyYears.Select(sy => sy.StudyYearID));
+            return await AddInContextAsync(context, studyYear);
+        }
+
+        internal static async Task<StudyYear> AddInContextAsync(AppDbContext context, StudyYear studyYear)
+        {
             await ValidateAsync(context, studyYear, false);
             await context.StudyYears.AddAsync(studyYear);
             await ManualKeySaveHelper.SaveWithManualKeyAsync(context, "[StudyYears]");
             return studyYear;
         }
 
+
         public async Task<StudyYear> UpdateAsync(StudyYear studyYear)
         {
             await using var context = new AppDbContext();
+            return await UpdateInContextAsync(context, studyYear);
+        }
+
+        internal static async Task<StudyYear> UpdateInContextAsync(AppDbContext context, StudyYear studyYear)
+        {
             await ValidateAsync(context, studyYear, true);
             context.StudyYears.Update(studyYear);
             await context.SaveChangesAsync();
             return studyYear;
         }
+
 
         public async Task DeleteAsync(int id)
         {
@@ -54,22 +66,8 @@ namespace University_Timetable_and_Classroom_Management_System.BusinessLayer
 
         private static async Task ValidateAsync(AppDbContext context, StudyYear studyYear, bool isUpdate)
         {
-            if (studyYear.StudyYearID <= 0)
-            {
-                throw new ArgumentException("Study year ID is required.");
-            }
-
-            var idExists = await context.StudyYears.AnyAsync(sy => sy.StudyYearID == studyYear.StudyYearID);
-
-            if (!isUpdate && idExists)
-            {
-                throw new ArgumentException("Study year ID already exists.");
-            }
-
-            if (isUpdate && !idExists)
-            {
-                throw new KeyNotFoundException("Study year not found.");
-            }
+            await InputValidation.RecordIdAsync(studyYear.StudyYearID, isUpdate,
+                () => context.StudyYears.AnyAsync(sy => sy.StudyYearID == studyYear.StudyYearID), "Study year");
 
             if (string.IsNullOrWhiteSpace(studyYear.YearName))
             {
@@ -77,6 +75,7 @@ namespace University_Timetable_and_Classroom_Management_System.BusinessLayer
             }
 
             studyYear.YearName = studyYear.YearName.Trim();
+            InputValidation.TextLength(studyYear.YearName, 50, "Study year name");
             var exists = await context.StudyYears.AnyAsync(sy =>
                 sy.YearName == studyYear.YearName && (!isUpdate || sy.StudyYearID != studyYear.StudyYearID));
 

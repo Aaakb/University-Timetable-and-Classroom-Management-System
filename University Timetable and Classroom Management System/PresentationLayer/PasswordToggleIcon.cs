@@ -15,7 +15,7 @@ namespace University_Timetable_and_Classroom_Management_System
             button.Image = Create(passwordVisible);
             button.ImageAlign = HorizontalAlignment.Center;
             button.ImageSize = new Size(22, 22);
-            button.AccessibleName = passwordVisible ? "Hide password" : "Show password";
+            button.AccessibleName = passwordVisible ? "إخفاء كلمة المرور" : "إظهار كلمة المرور";
 
             previousImage?.Dispose();
         }

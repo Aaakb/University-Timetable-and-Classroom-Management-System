@@ -10,117 +10,10 @@ namespace University_Timetable_and_Classroom_Management_System
         private void ConfigureScheduleGrid()
         {
             dgvSchedules.AutoGenerateColumns = false;
-            dgvSchedules.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dgvSchedules.BackgroundColor = Color.White;
-            dgvSchedules.BorderStyle = BorderStyle.None;
-            dgvSchedules.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
-            dgvSchedules.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dgvSchedules.ColumnHeadersHeight = 48;
-            dgvSchedules.EnableHeadersVisualStyles = false;
-            dgvSchedules.RowTemplate.Height = 46;
-            dgvSchedules.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            GridStyle.Apply(dgvSchedules);
+            dgvSchedules.ReadOnly = false;
+            foreach (DataGridViewColumn column in dgvSchedules.Columns) column.ReadOnly = column != colLockStatus;
+            GridRowNumbers.Attach(dgvSchedules, colRowNumber);
             dgvSchedules.DataSource = scheduleBindingSource;
-            colScheduleId.DataPropertyName = nameof(ScheduleRow.ScheduleID);
-            colScheduleId.Visible = false;
-            EnsureSemesterColumn();
-            colDayOfWeek.DataPropertyName = nameof(ScheduleRow.DayOfWeek);
-            colSubject.DataPropertyName = nameof(ScheduleRow.SubjectName);
-            colFacultyMember.DataPropertyName = nameof(ScheduleRow.FacultyMemberName);
-            colClassroom.DataPropertyName = nameof(ScheduleRow.ClassroomName);
-            colTimeSlot.DataPropertyName = nameof(ScheduleRow.TimeSlotName);
-            colTimeSlot.HeaderText = "Time";
-            colStudyYear.DataPropertyName = nameof(ScheduleRow.StudyYearName);
-            colBranch.DataPropertyName = nameof(ScheduleRow.BranchName);
-            colSection.DataPropertyName = nameof(ScheduleRow.SectionName);
-            ApplyScheduleGridColumnLayout();
-        }
-
-        private void EnsureSemesterColumn()
-        {
-            if (dgvSchedules.Columns.Contains("colSemester"))
-            {
-                return;
-            }
-
-            var column = new DataGridViewTextBoxColumn
-            {
-                DataPropertyName = nameof(ScheduleRow.SemesterNumber),
-                FillWeight = 58F,
-                HeaderText = "Semester",
-                Name = "colSemester",
-                ReadOnly = true
-            };
-
-            dgvSchedules.Columns.Insert(1, column);
-
-            dgvSchedules.Columns.Insert(4, new DataGridViewTextBoxColumn
-            {
-                DataPropertyName = nameof(ScheduleRow.GroupName),
-                FillWeight = 56F,
-                HeaderText = "Group",
-                Name = "colGroupName",
-                ReadOnly = true
-            });
-
-            dgvSchedules.Columns.Insert(5, new DataGridViewTextBoxColumn
-            {
-                DataPropertyName = nameof(ScheduleRow.LectureType),
-                FillWeight = 64F,
-                HeaderText = "Type",
-                Name = "colLectureType",
-                ReadOnly = true
-            });
-
-            colDayOfWeek.DisplayIndex = 0;
-            colTimeSlot.DisplayIndex = 1;
-            colSubject.DisplayIndex = 2;
-            colFacultyMember.DisplayIndex = 3;
-            colClassroom.DisplayIndex = 4;
-            dgvSchedules.Columns["colLectureType"].DisplayIndex = 5;
-            colSection.DisplayIndex = 6;
-            dgvSchedules.Columns["colGroupName"].DisplayIndex = 7;
-            colStudyYear.DisplayIndex = 8;
-            colBranch.DisplayIndex = 9;
-            column.DisplayIndex = 10;
-        }
-
-        private void ApplyScheduleGridColumnLayout()
-        {
-            SetGridColumn(colDayOfWeek, "Day", 78);
-            SetGridColumn(colTimeSlot, "Time", 138);
-            SetGridColumn(colSubject, "Subject", 230);
-            SetGridColumn(colFacultyMember, "Teacher", 170);
-            SetGridColumn(colClassroom, "Room", 110);
-            SetGridColumn(dgvSchedules.Columns["colLectureType"], "Type", 92);
-            SetGridColumn(colSection, "Section", 86);
-            SetGridColumn(dgvSchedules.Columns["colGroupName"], "Group", 64);
-            SetGridColumn(colStudyYear, "Year", 90);
-            SetGridColumn(colBranch, "Branch", 105);
-            SetGridColumn(dgvSchedules.Columns["colSemester"], "Semester", 70);
-
-            colStudyYear.Visible = false;
-            colBranch.Visible = false;
-            dgvSchedules.Columns["colSemester"].Visible = false;
-
-            dgvSchedules.DefaultCellStyle.Padding = new Padding(6, 0, 6, 0);
-            dgvSchedules.ColumnHeadersDefaultCellStyle.Padding = new Padding(6, 0, 6, 0);
-            dgvSchedules.DefaultCellStyle.Font = new Font("Segoe UI", 11F);
-            dgvSchedules.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI Semibold", 11F, FontStyle.Bold);
-            dgvSchedules.RowsDefaultCellStyle.BackColor = Color.White;
-            dgvSchedules.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(248, 250, 252);
-            dgvSchedules.DefaultCellStyle.SelectionBackColor = Color.FromArgb(37, 99, 235);
-            dgvSchedules.DefaultCellStyle.SelectionForeColor = Color.White;
-            dgvSchedules.ColumnHeadersHeight = 48;
-            dgvSchedules.RowTemplate.Height = 46;
-        }
-
-        private static void SetGridColumn(DataGridViewColumn column, string headerText, float fillWeight)
-        {
-            column.HeaderText = headerText;
-            column.FillWeight = fillWeight;
-            column.MinimumWidth = 48;
-            column.SortMode = DataGridViewColumnSortMode.NotSortable;
         }
 
         private void StyleScheduleRows(HashSet<int> conflictingScheduleIds)
@@ -154,14 +47,16 @@ namespace University_Timetable_and_Classroom_Management_System
 
         private void ApplyScheduleFilters()
         {
+            if (IsScheduleUiUnavailable) return;
             var visibleRows = GetFilteredRows()
                 .OrderBy(row => row.SemesterNumber)
+                .ThenBy(row => DayOrder(row.DayOfWeek))
+                .ThenBy(row => row.StartTime)
                 .ThenBy(row => StudyYearOrder(row.StudyYearName))
                 .ThenBy(row => row.BranchName)
                 .ThenBy(row => row.SectionName)
-                .ThenBy(row => DayOrder(row.DayOfWeek))
-                .ThenBy(row => row.StartTime)
                 .ThenBy(row => row.GroupName)
+                .ThenBy(row => row.ScheduleID)
                 .ToList();
 
             var allConflictingScheduleIds = GetConflictingScheduleIds(scheduleRows);
@@ -174,7 +69,7 @@ namespace University_Timetable_and_Classroom_Management_System
 
         private void ApplySectionFilterSelection()
         {
-            if (isUpdatingScheduleLookups)
+            if (IsScheduleUiUnavailable || isUpdatingScheduleLookups)
             {
                 return;
             }
@@ -189,6 +84,7 @@ namespace University_Timetable_and_Classroom_Management_System
                 {
                     isUpdatingScheduleLookups = true;
                     SelectComboValue(cmbStudyYearFilter, section.StudyYearID);
+                    BindGroupFilterCombo();
                     isUpdatingScheduleLookups = false;
                 }
             }
@@ -198,7 +94,7 @@ namespace University_Timetable_and_Classroom_Management_System
 
         private void ApplyStudyYearFilterSelection()
         {
-            if (isUpdatingScheduleLookups)
+            if (IsScheduleUiUnavailable || isUpdatingScheduleLookups)
             {
                 return;
             }
@@ -218,6 +114,7 @@ namespace University_Timetable_and_Classroom_Management_System
 
             isUpdatingScheduleLookups = true;
             BindSectionFilterCombo(selectedStudyYearId, selectedSectionId);
+            BindGroupFilterCombo();
             isUpdatingScheduleLookups = false;
 
             ApplyScheduleFilters();
@@ -256,7 +153,7 @@ namespace University_Timetable_and_Classroom_Management_System
 
         private static string FormatSection(Section section)
         {
-            string year = section.StudyYear?.YearName ?? "Year";
+            string year = ArabicUi.Display(section.StudyYear?.YearName ?? "المرحلة");
 
             return section.Branch is null
                 ? $"{section.SectionName} - {year}"
@@ -265,13 +162,13 @@ namespace University_Timetable_and_Classroom_Management_System
 
         private static int DayOrder(string day)
         {
-            return day switch
+            return day.Trim().ToLowerInvariant() switch
             {
-                "Sunday" => 1,
-                "Monday" => 2,
-                "Tuesday" => 3,
-                "Wednesday" => 4,
-                "Thursday" => 5,
+                "sunday" => 1,
+                "monday" => 2,
+                "tuesday" => 3,
+                "wednesday" => 4,
+                "thursday" => 5,
                 _ => 99
             };
         }

@@ -1,0 +1,276 @@
+{
+  "baseCommit": "0f60f3ced9c8698f0e19cf65e27fd578625cf366",
+  "initialGitStatus": "clean",
+  "finalTestSuites": [
+    {
+      "project": "TimetableRegression",
+      "exitCode": 0,
+      "log": ".tmp/PresentationBllRefactoring/final-TimetableRegression.log"
+    },
+    {
+      "project": "PracticalExchange",
+      "exitCode": 0,
+      "log": ".tmp/PresentationBllRefactoring/final-PracticalExchange.log"
+    },
+    {
+      "project": "AssignmentLectureTypes",
+      "exitCode": 0,
+      "log": ".tmp/PresentationBllRefactoring/final-AssignmentLectureTypes.log"
+    },
+    {
+      "project": "AssignmentScopes",
+      "exitCode": 0,
+      "log": ".tmp/PresentationBllRefactoring/final-AssignmentScopes.log"
+    },
+    {
+      "project": "FourthYearPractical",
+      "exitCode": 0,
+      "log": ".tmp/PresentationBllRefactoring/final-FourthYearPractical.log"
+    },
+    {
+      "project": "SubjectLectureCounts",
+      "exitCode": 0,
+      "log": ".tmp/PresentationBllRefactoring/final-SubjectLectureCounts.log"
+    },
+    {
+      "project": "FacultyPreferences",
+      "exitCode": 0,
+      "log": ".tmp/PresentationBllRefactoring/final-FacultyPreferences.log"
+    },
+    {
+      "project": "FacultyScheduleEditor",
+      "exitCode": 0,
+      "log": ".tmp/PresentationBllRefactoring/final-FacultyScheduleEditor.log"
+    },
+    {
+      "project": "ImportedTimetableRepair",
+      "exitCode": 0,
+      "log": ".tmp/PresentationBllRefactoring/final-ImportedTimetableRepair.log"
+    },
+    {
+      "project": "ExcelImport",
+      "exitCode": 0,
+      "log": ".tmp/PresentationBllRefactoring/final-ExcelImport.log"
+    },
+    {
+      "project": "ApplicationAudit",
+      "exitCode": 0,
+      "log": ".tmp/PresentationBllRefactoring/final-ApplicationAudit.log"
+    },
+    {
+      "project": "EditorActions",
+      "exitCode": 0,
+      "log": ".tmp/PresentationBllRefactoring/final-EditorActions.log"
+    },
+    {
+      "project": "RowNumbering",
+      "exitCode": 0,
+      "log": ".tmp/PresentationBllRefactoring/final-RowNumbering.log"
+    },
+    {
+      "project": "ManualFacultySelection",
+      "exitCode": 0,
+      "log": ".tmp/PresentationBllRefactoring/final-ManualFacultySelection.log"
+    },
+    {
+      "project": "DesignerLifecycle",
+      "exitCode": 0,
+      "log": ".tmp/PresentationBllRefactoring/final-DesignerLifecycle.log"
+    },
+    {
+      "project": "ArabicInterfaces",
+      "exitCode": 0,
+      "log": ".tmp/PresentationBllRefactoring/final-ArabicInterfaces.log"
+    },
+    {
+      "project": "DesignerCompatibility",
+      "exitCode": 0,
+      "log": ".tmp\\PresentationBllRefactoring\\final-DesignerCompatibility-repeat.log",
+      "firstAttemptExitCode": 1,
+      "firstAttemptLog": ".tmp/PresentationBllRefactoring/final-DesignerCompatibility.log"
+    },
+    {
+      "project": "PdfExport",
+      "exitCode": 0,
+      "log": ".tmp\\PresentationBllRefactoring\\final-PdfExport-corrected.log",
+      "firstAttemptExitCode": 1,
+      "firstAttemptLog": ".tmp/PresentationBllRefactoring/final-PdfExport.log"
+    },
+    {
+      "project": "PdfImport",
+      "exitCode": 0,
+      "log": ".tmp/PresentationBllRefactoring/final-PdfImport.log"
+    },
+    {
+      "project": "Navigation",
+      "exitCode": 0,
+      "log": ".tmp/PresentationBllRefactoring/final-Navigation.log"
+    }
+  ],
+  "ruleComparisonCases": 538,
+  "ruleComparisonIdentical": true,
+  "fullGenerationChecks": 17,
+  "productionDataIdentical": true,
+  "eventBindingsUnchanged": true,
+  "productionCode": {
+    "files": 21,
+    "added": 185,
+    "deleted": 387
+  },
+  "testCode": {
+    "files": 6,
+    "added": 203,
+    "deleted": 13
+  },
+  "changedFiles": [
+    {
+      "file": "Business_Logic_Layer/Rules/AcademicStructureRules.cs",
+      "added": 15,
+      "deleted": 0
+    },
+    {
+      "file": "Business_Logic_Layer/Rules/InputValidation.cs",
+      "added": 14,
+      "deleted": 0
+    },
+    {
+      "file": "Business_Logic_Layer/Services/BranchService.cs",
+      "added": 5,
+      "deleted": 21
+    },
+    {
+      "file": "Business_Logic_Layer/Services/ClassroomService.cs",
+      "added": 4,
+      "deleted": 19
+    },
+    {
+      "file": "Business_Logic_Layer/Services/FacultyMemberService.cs",
+      "added": 5,
+      "deleted": 21
+    },
+    {
+      "file": "Business_Logic_Layer/Services/SchedulePdfExportService.cs",
+      "added": 2,
+      "deleted": 17
+    },
+    {
+      "file": "Business_Logic_Layer/Services/ScheduleService.cs",
+      "added": 2,
+      "deleted": 16
+    },
+    {
+      "file": "Business_Logic_Layer/Services/SectionService.cs",
+      "added": 4,
+      "deleted": 19
+    },
+    {
+      "file": "Business_Logic_Layer/Services/StudyYearService.cs",
+      "added": 5,
+      "deleted": 21
+    },
+    {
+      "file": "Business_Logic_Layer/Services/SubjectService.cs",
+      "added": 3,
+      "deleted": 18
+    },
+    {
+      "file": "Business_Logic_Layer/Services/TimeSlotService.cs",
+      "added": 3,
+      "deleted": 17
+    },
+    {
+      "file": "University Timetable and Classroom Management System/PresentationLayer/BranchesForm.cs",
+      "added": 9,
+      "deleted": 23
+    },
+    {
+      "file": "University Timetable and Classroom Management System/PresentationLayer/ClassroomsForm.cs",
+      "added": 16,
+      "deleted": 27
+    },
+    {
+      "file": "University Timetable and Classroom Management System/PresentationLayer/FacultyMemberSubjectsForm.cs",
+      "added": 9,
+      "deleted": 23
+    },
+    {
+      "file": "University Timetable and Classroom Management System/PresentationLayer/FacultyMembersForm.cs",
+      "added": 9,
+      "deleted": 23
+    },
+    {
+      "file": "University Timetable and Classroom Management System/PresentationLayer/SchedulesForm.Actions.cs",
+      "added": 9,
+      "deleted": 22
+    },
+    {
+      "file": "University Timetable and Classroom Management System/PresentationLayer/SectionsForm.cs",
+      "added": 10,
+      "deleted": 31
+    },
+    {
+      "file": "University Timetable and Classroom Management System/PresentationLayer/StudyYearsForm.cs",
+      "added": 9,
+      "deleted": 23
+    },
+    {
+      "file": "University Timetable and Classroom Management System/PresentationLayer/SubjectsForm.cs",
+      "added": 9,
+      "deleted": 23
+    },
+    {
+      "file": "University Timetable and Classroom Management System/PresentationLayer/TimeSlotsForm.cs",
+      "added": 9,
+      "deleted": 23
+    },
+    {
+      "file": "tests/ApplicationAudit/Program.cs",
+      "added": 17,
+      "deleted": 6
+    },
+    {
+      "file": "tests/DesignerCompatibility/Program.cs",
+      "added": 5,
+      "deleted": 5
+    },
+    {
+      "file": "tests/ExcelImport/Program.cs",
+      "added": 1,
+      "deleted": 1
+    },
+    {
+      "file": "tests/PdfExport/Program.cs",
+      "added": 1,
+      "deleted": 1
+    },
+    {
+      "file": "University Timetable and Classroom Management System/PresentationLayer/Common/EditorAction.cs",
+      "added": 34,
+      "deleted": 0
+    },
+    {
+      "file": "tests/PresentationBllRefactoring/PresentationBllRefactoring.csproj",
+      "added": 12,
+      "deleted": 0
+    },
+    {
+      "file": "tests/PresentationBllRefactoring/Program.cs",
+      "added": 167,
+      "deleted": 0
+    }
+  ],
+  "auditBefore": {
+    "files": 153,
+    "methods": 904
+  },
+  "auditAfter": {
+    "files": 154,
+    "methods": 907
+  },
+  "longOrComplexBefore": 66,
+  "longOrComplexAfter": 65,
+  "exactDuplicateGroupsBefore": 4,
+  "exactDuplicateGroupsAfter": 2,
+  "manualVisualStudioDesignerVerified": false,
+  "manualDesignerNote": "Computer Use stopped with the physical Escape key; no designer open/save/reopen success is claimed."
+}

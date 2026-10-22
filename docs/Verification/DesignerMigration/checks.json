@@ -1,0 +1,626 @@
+{
+  "count": 124,
+  "failures": 0,
+  "checks": [
+    {
+      "name": "ExcelImportForm runtime constructs and renders without showing",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ExcelImportForm runtime preserves initial UI properties",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "ExcelImportForm runtime preserves every original control bound",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Excel runtime keeps the three original field heights through designer minimums",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ExcelImportForm keeps runtime event wiring",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "ExcelImportForm design constructs and renders without showing",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ExcelImportForm design preserves initial UI properties",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "ExcelImportForm design preserves every original control bound",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Excel design keeps the three original field heights through designer minimums",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ExcelImportForm exposes InitializeComponent for the designer",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ExcelImportForm designer does not instantiate a database service",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ExcelImportForm designer has no application event handlers",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Excel mode 0 keeps canonical enum",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Excel mode 0 keeps canonical schema choices",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Excel mode 0 loads in-memory workbook",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Excel mode 0 preserves mapping column types",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Excel mode 0 preserves source rows and mapped values",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Excel mode 0 keeps appropriate fields",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Excel mode 0 keeps generation and save workflow",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Excel mode 0 rejects duplicate target mappings",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Excel mode 1 keeps canonical enum",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Excel mode 1 keeps canonical schema choices",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Excel mode 1 loads in-memory workbook",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Excel mode 1 preserves mapping column types",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Excel mode 1 preserves source rows and mapped values",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Excel mode 1 keeps appropriate fields",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Excel mode 1 keeps generation and save workflow",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Excel mode 1 rejects duplicate target mappings",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Excel mode 2 keeps canonical enum",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Excel mode 2 keeps canonical schema choices",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Excel mode 2 loads in-memory workbook",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Excel mode 2 preserves mapping column types",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Excel mode 2 preserves source rows and mapped values",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Excel mode 2 keeps appropriate fields",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Excel mode 2 keeps generation and save workflow",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Excel mode 2 preserves editable canonical lock column",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Excel mode 2 preserves result tab caption",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Excel mode 2 rejects duplicate target mappings",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Excel mode 3 keeps canonical enum",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Excel mode 3 keeps canonical schema choices",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Excel mode 3 loads in-memory workbook",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Excel mode 3 preserves mapping column types",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Excel mode 3 preserves source rows and mapped values",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Excel mode 3 keeps appropriate fields",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Excel mode 3 keeps generation and save workflow",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Excel mode 3 preserves editable canonical lock column",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Excel mode 3 preserves result tab caption",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Excel mode 3 rejects duplicate target mappings",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "FacultyPreferencesForm runtime constructs and renders without showing",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "FacultyPreferencesForm runtime preserves initial UI properties",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "FacultyPreferencesForm runtime preserves every original control bound",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Preferences runtime keeps the two original field heights through designer minimums",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Preferences runtime contains five static teaching-day cards",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Preferences runtime maps Sunday to its Arabic day card",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Preferences runtime Sunday has all three levels",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Preferences runtime Sunday keeps all three canonical availability values",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Preferences runtime maps Monday to its Arabic day card",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Preferences runtime Monday has all three levels",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Preferences runtime Monday keeps all three canonical availability values",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Preferences runtime maps Tuesday to its Arabic day card",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Preferences runtime Tuesday has all three levels",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Preferences runtime Tuesday keeps all three canonical availability values",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Preferences runtime maps Wednesday to its Arabic day card",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Preferences runtime Wednesday has all three levels",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Preferences runtime Wednesday keeps all three canonical availability values",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Preferences runtime maps Thursday to its Arabic day card",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Preferences runtime Thursday has all three levels",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Preferences runtime Thursday keeps all three canonical availability values",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Preferences runtime keeps canonical day mappings",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "FacultyPreferencesForm keeps runtime event wiring",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "FacultyPreferencesForm design constructs and renders without showing",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "FacultyPreferencesForm design preserves initial UI properties",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "FacultyPreferencesForm design preserves every original control bound",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Preferences design keeps the two original field heights through designer minimums",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Preferences designer contains five static teaching-day cards",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Preferences designer maps Sunday to its Arabic day card",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Preferences designer Sunday has all three levels",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Preferences designer Sunday defaults to allowed",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Preferences designer maps Monday to its Arabic day card",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Preferences designer Monday has all three levels",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Preferences designer Monday defaults to allowed",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Preferences designer maps Tuesday to its Arabic day card",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Preferences designer Tuesday has all three levels",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Preferences designer Tuesday defaults to allowed",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Preferences designer maps Wednesday to its Arabic day card",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Preferences designer Wednesday has all three levels",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Preferences designer Wednesday defaults to allowed",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Preferences designer maps Thursday to its Arabic day card",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Preferences designer Thursday has all three levels",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Preferences designer Thursday defaults to allowed",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "FacultyPreferencesForm exposes InitializeComponent for the designer",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "FacultyPreferencesForm designer does not instantiate a database service",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "FacultyPreferencesForm designer has no application event handlers",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "FacultyScheduleEditorForm runtime constructs and renders without showing",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "FacultyScheduleEditorForm runtime preserves initial UI properties",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "FacultyScheduleEditorForm runtime preserves every original control bound",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Editor runtime keeps the three original field heights through designer minimums",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "FacultyScheduleEditorForm keeps runtime event wiring",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "FacultyScheduleEditorForm design constructs and renders without showing",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "FacultyScheduleEditorForm design preserves initial UI properties",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "FacultyScheduleEditorForm design preserves every original control bound",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Editor design keeps the three original field heights through designer minimums",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "FacultyScheduleEditorForm exposes InitializeComponent for the designer",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "FacultyScheduleEditorForm designer does not instantiate a database service",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "FacultyScheduleEditorForm designer has no application event handlers",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "TimetableAlternativesForm runtime constructs and renders without showing",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "TimetableAlternativesForm runtime preserves initial UI properties",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "TimetableAlternativesForm runtime preserves every original control bound",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "TimetableAlternativesForm keeps runtime event wiring",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "TimetableAlternativesForm design constructs and renders without showing",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "TimetableAlternativesForm design preserves initial UI properties",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "TimetableAlternativesForm design preserves every original control bound",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "TimetableAlternativesForm exposes InitializeComponent for the designer",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "TimetableAlternativesForm designer does not instantiate a database service",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "TimetableAlternativesForm designer has no application event handlers",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Shell designer contains exactly one btnExcelImport",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Shell designer places btnExcelImport in row 11",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Shell designer contains exactly one btnFacultyScheduleEditor",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Shell designer places btnFacultyScheduleEditor in row 12",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Shell designer contains exactly one btnTimetableAlternatives",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Shell designer places btnTimetableAlternatives in row 13",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Shell designer keeps footer after all commands",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Shell designer does not create a runtime page",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Shell designer has no application event handlers",
+      "passed": true,
+      "detail": null
+    }
+  ]
+}

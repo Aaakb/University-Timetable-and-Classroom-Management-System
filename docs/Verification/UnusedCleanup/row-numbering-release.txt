@@ -1,0 +1,97 @@
+PASS BranchesForm uses a static unbound number column
+PASS BranchesForm preserves hidden bound key columns
+PASS BranchesForm initial noncontiguous keys
+PASS BranchesForm does not rewrite database IDs
+PASS BranchesForm after filtering
+PASS BranchesForm after sorting
+PASS BranchesForm sorting retains correct entity identity
+PASS BranchesForm empty list
+PASS BranchesForm after reload
+PASS StudyYearsForm uses a static unbound number column
+PASS StudyYearsForm preserves hidden bound key columns
+PASS StudyYearsForm initial noncontiguous keys
+PASS StudyYearsForm does not rewrite database IDs
+PASS StudyYearsForm after filtering
+PASS StudyYearsForm after sorting
+PASS StudyYearsForm sorting retains correct entity identity
+PASS StudyYearsForm empty list
+PASS StudyYearsForm after reload
+PASS SectionsForm uses a static unbound number column
+PASS SectionsForm preserves hidden bound key columns
+PASS SectionsForm initial noncontiguous keys
+PASS SectionsForm does not rewrite database IDs
+PASS SectionsForm after filtering
+PASS SectionsForm after sorting
+PASS SectionsForm sorting retains correct entity identity
+PASS SectionsForm empty list
+PASS SectionsForm after reload
+PASS SubjectsForm uses a static unbound number column
+PASS SubjectsForm preserves hidden bound key columns
+PASS SubjectsForm initial noncontiguous keys
+PASS SubjectsForm does not rewrite database IDs
+PASS SubjectsForm after filtering
+PASS SubjectsForm after sorting
+PASS SubjectsForm sorting retains correct entity identity
+PASS SubjectsForm empty list
+PASS SubjectsForm after reload
+PASS ClassroomsForm uses a static unbound number column
+PASS ClassroomsForm preserves hidden bound key columns
+PASS ClassroomsForm initial noncontiguous keys
+PASS ClassroomsForm does not rewrite database IDs
+PASS ClassroomsForm after filtering
+PASS ClassroomsForm after sorting
+PASS ClassroomsForm sorting retains correct entity identity
+PASS ClassroomsForm empty list
+PASS ClassroomsForm after reload
+PASS TimeSlotsForm uses a static unbound number column
+PASS TimeSlotsForm preserves hidden bound key columns
+PASS TimeSlotsForm initial noncontiguous keys
+PASS TimeSlotsForm does not rewrite database IDs
+PASS TimeSlotsForm after filtering
+PASS TimeSlotsForm after sorting
+PASS TimeSlotsForm sorting retains correct entity identity
+PASS TimeSlotsForm empty list
+PASS TimeSlotsForm after reload
+PASS FacultyMembersForm uses a static unbound number column
+PASS FacultyMembersForm preserves hidden bound key columns
+PASS FacultyMembersForm initial noncontiguous keys
+PASS FacultyMembersForm does not rewrite database IDs
+PASS FacultyMembersForm after filtering
+PASS FacultyMembersForm after sorting
+PASS FacultyMembersForm sorting retains correct entity identity
+PASS FacultyMembersForm empty list
+PASS FacultyMembersForm after reload
+PASS FacultyMemberSubjectsForm uses a static unbound number column
+PASS FacultyMemberSubjectsForm preserves hidden bound key columns
+PASS FacultyMemberSubjectsForm initial noncontiguous keys
+PASS FacultyMemberSubjectsForm does not rewrite database IDs
+PASS FacultyMemberSubjectsForm after filtering
+PASS FacultyMemberSubjectsForm after sorting
+PASS FacultyMemberSubjectsForm sorting retains correct entity identity
+PASS FacultyMemberSubjectsForm empty list
+PASS FacultyMemberSubjectsForm after reload
+PASS SchedulesForm uses a static unbound number column
+PASS SchedulesForm preserves hidden bound key columns
+PASS SchedulesForm initial noncontiguous keys
+PASS SchedulesForm does not rewrite database IDs
+PASS SchedulesForm after filtering
+PASS SchedulesForm after sorting
+PASS SchedulesForm sorting retains correct entity identity
+PASS SchedulesForm empty list
+PASS SchedulesForm after reload
+PASS Unbound insertion
+PASS Unbound deletion
+PASS Unbound sorting
+PASS Unbound sorting retains keys
+PASS Hidden rows are excluded
+PASS Restored hidden row
+PASS Repeated attachment
+PASS BindingList initial
+PASS BindingList insertion
+PASS BindingList deletion
+PASS BindingList permanent IDs remain unchanged
+PASS Selecting No. 1 populates permanent branch ID 208
+PASS Branch update/delete target actual key
+PASS Selecting No. 1 populates permanent subject ID 104
+PASS Subject update/delete target actual key
+SUMMARY 96 checks, 0 failures; no database connections or writes

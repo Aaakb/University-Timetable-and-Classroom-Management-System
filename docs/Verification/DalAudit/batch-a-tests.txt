@@ -1,0 +1,52 @@
+PASS Successful edit saves, reloads, clears and reports on the original UI thread
+PASS Navigation during before start prevents access to the disposed editor
+PASS Navigation during pending save prevents access to the disposed editor
+PASS Navigation during pending reload prevents access to the disposed editor
+PASS Failure in synchronous save preserves the original exception and restores actions
+PASS Failure in asynchronous save preserves the original exception and restores actions
+PASS Failure in reload preserves the original exception and restores actions
+PASS Failure in success callback preserves the original exception and restores actions
+PASS An error-display failure propagates after restoring action state
+PASS Branch: id=0, update=False, exists=False
+PASS Branch: id=-1, update=True, exists=True
+PASS Branch: id=1, update=False, exists=True
+PASS Branch: id=1, update=True, exists=False
+PASS Branch: id=1, update=False, exists=False
+PASS Branch: id=1, update=True, exists=True
+PASS Classroom: id=0, update=False, exists=False
+PASS Classroom: id=-1, update=True, exists=True
+PASS Classroom: id=1, update=False, exists=True
+PASS Classroom: id=1, update=True, exists=False
+PASS Classroom: id=1, update=False, exists=False
+PASS Classroom: id=1, update=True, exists=True
+PASS Faculty member: id=0, update=False, exists=False
+PASS Faculty member: id=-1, update=True, exists=True
+PASS Faculty member: id=1, update=False, exists=True
+PASS Faculty member: id=1, update=True, exists=False
+PASS Faculty member: id=1, update=False, exists=False
+PASS Faculty member: id=1, update=True, exists=True
+PASS Section: id=0, update=False, exists=False
+PASS Section: id=-1, update=True, exists=True
+PASS Section: id=1, update=False, exists=True
+PASS Section: id=1, update=True, exists=False
+PASS Section: id=1, update=False, exists=False
+PASS Section: id=1, update=True, exists=True
+PASS Study year: id=0, update=False, exists=False
+PASS Study year: id=-1, update=True, exists=True
+PASS Study year: id=1, update=False, exists=True
+PASS Study year: id=1, update=True, exists=False
+PASS Study year: id=1, update=False, exists=False
+PASS Study year: id=1, update=True, exists=True
+PASS Subject: id=0, update=False, exists=False
+PASS Subject: id=-1, update=True, exists=True
+PASS Subject: id=1, update=False, exists=True
+PASS Subject: id=1, update=True, exists=False
+PASS Subject: id=1, update=False, exists=False
+PASS Subject: id=1, update=True, exists=True
+PASS Time slot: id=0, update=False, exists=False
+PASS Time slot: id=-1, update=True, exists=True
+PASS Time slot: id=1, update=False, exists=True
+PASS Time slot: id=1, update=True, exists=False
+PASS Time slot: id=1, update=False, exists=False
+PASS Time slot: id=1, update=True, exists=True
+SUMMARY 51 checks; 0 failures

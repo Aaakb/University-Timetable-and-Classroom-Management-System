@@ -1,0 +1,305 @@
+Data_Access_Layer\DatabaseConnection.cs:3:    public static class DatabaseConnection
+Data_Access_Layer\Scheduling\TimetableSnapshotStore.cs:6:public static class TimetableSnapshotStore
+Data_Access_Layer\Scheduling\TimetableSnapshotStore.cs:8:    public static async Task ReplaceAsync(AppDbContext context, IReadOnlyList<Schedule> rows, CancellationToken token)
+Data_Access_Layer\Scheduling\SubjectLectureCountSchema.cs:5:public static class SubjectLectureCountSchema
+Data_Access_Layer\Scheduling\SubjectLectureCountSchema.cs:7:    public static Task EnsureAsync(AppDbContext context) => context.Database.ExecuteSqlRawAsync("""
+Data_Access_Layer\Scheduling\SubjectDeletionSchema.cs:5:public static class SubjectDeletionSchema
+Data_Access_Layer\Scheduling\SubjectDeletionSchema.cs:7:    public static async Task EnsureAsync(AppDbContext context)
+Data_Access_Layer\Scheduling\FacultyScheduleWriter.cs:6:public static class FacultyScheduleWriter
+Data_Access_Layer\Scheduling\FacultyScheduleWriter.cs:11:    public static async Task ReplacePlacementsAsync(AppDbContext context, IReadOnlyList<Schedule> changed,
+Data_Access_Layer\Scheduling\FacultyPreferenceSchema.cs:5:public static class FacultyPreferenceSchema
+Data_Access_Layer\Scheduling\FacultyPreferenceSchema.cs:7:    public static Task EnsureAsync(AppDbContext context) => context.Database.ExecuteSqlRawAsync("""
+Data_Access_Layer\Scheduling\FacultyAssignmentScopeSchema.cs:5:public static class FacultyAssignmentScopeSchema
+Data_Access_Layer\Scheduling\FacultyAssignmentScopeSchema.cs:7:    public static async Task EnsureAsync(AppDbContext db)
+Data_Access_Layer\Importing\ScheduleLockSchema.cs:5:public static class ScheduleLockSchema
+Data_Access_Layer\Importing\ScheduleLockSchema.cs:7:    public static Task EnsureAsync(AppDbContext context) => context.Database.ExecuteSqlRawAsync("""
+UniversityTimetable.API\Program.cs:15:    Environment.SetEnvironmentVariable(DatabaseConnection.EnvironmentVariableName, configuredConnection);
+UniversityTimetable.API\Program.cs:91:await using (var preferenceSchemaContext = new AppDbContext())
+UniversityTimetable.API\Program.cs:92:    await FacultyPreferenceSchema.EnsureAsync(preferenceSchemaContext);
+tests\ApplicationAudit\Program.cs:39:        await using var c=new AppDbContext();
+tests\ApplicationAudit\Program.cs:44:        string sourceText=DatabaseConnection.ConnectionString;
+tests\ApplicationAudit\Program.cs:66:        builder.InitialCatalog=name;Environment.SetEnvironmentVariable(DatabaseConnection.EnvironmentVariableName,builder.ConnectionString);
+tests\ApplicationAudit\Program.cs:78:            await using var copy=new AppDbContext();
+tests\ApplicationAudit\Program.cs:220:                await using var copy=new AppDbContext();
+tests\ApplicationAudit\Program.cs:228:            finally{await using var c=new AppDbContext();await c.ApplicationUsers.Where(u=>u.UserName==name).ExecuteDeleteAsync();}
+Data_Access_Layer\Importing\ImportTransaction.cs:7:public static class ImportTransaction
+Data_Access_Layer\Importing\ImportTransaction.cs:9:    public static async Task<T> ExecuteAsync<T>(Func<AppDbContext> createContext,
+Data_Access_Layer\Importing\ImportTransaction.cs:10:        Func<AppDbContext, CancellationToken, Task<T>> operation, CancellationToken token = default)
+Business_Logic_Layer\Services\AuthService.cs:24:            await using var context = new AppDbContext();
+Business_Logic_Layer\Services\AuthService.cs:54:            await using var context = new AppDbContext();
+Business_Logic_Layer\Services\TimeSlotService.cs:24:            await using var context = new AppDbContext();
+Business_Logic_Layer\Services\TimeSlotService.cs:36:            await using var context = new AppDbContext();
+Business_Logic_Layer\Services\TimeSlotService.cs:46:            await using var context = new AppDbContext();
+Business_Logic_Layer\Services\TimeSlotService.cs:54:        internal static async Task<TimeSlot> AddInContextAsync(AppDbContext context, TimeSlot timeSlot)
+Business_Logic_Layer\Services\TimeSlotService.cs:66:            await using var context = new AppDbContext();
+Business_Logic_Layer\Services\TimeSlotService.cs:73:        internal static async Task<TimeSlot> UpdateInContextAsync(AppDbContext context, TimeSlot timeSlot)
+Business_Logic_Layer\Services\TimeSlotService.cs:86:            await using var context = new AppDbContext();
+Business_Logic_Layer\Services\TimeSlotService.cs:94:        private static async Task ValidateAsync(AppDbContext context, TimeSlot timeSlot, bool isUpdate)
+Business_Logic_Layer\Services\SubjectService.cs:11:            await using var context = new AppDbContext();
+Business_Logic_Layer\Services\SubjectService.cs:29:            await using var context = new AppDbContext();
+Business_Logic_Layer\Services\SubjectService.cs:39:            await using var context = new AppDbContext();
+Business_Logic_Layer\Services\SubjectService.cs:44:        internal static async Task<Subject> AddInContextAsync(AppDbContext context, Subject subject)
+Business_Logic_Layer\Services\SubjectService.cs:57:            await using var context = new AppDbContext();
+Business_Logic_Layer\Services\SubjectService.cs:64:        internal static async Task<Subject> UpdateInContextAsync(AppDbContext context, Subject subject)
+Business_Logic_Layer\Services\SubjectService.cs:117:            await using var context = new AppDbContext();
+Business_Logic_Layer\Services\SubjectService.cs:127:        private static async Task ValidateAsync(AppDbContext context, Subject subject, bool isUpdate)
+Business_Logic_Layer\Services\StudyYearService.cs:11:            await using var context = new AppDbContext();
+Business_Logic_Layer\Services\StudyYearService.cs:22:            await using var context = new AppDbContext();
+Business_Logic_Layer\Services\StudyYearService.cs:28:            await using var context = new AppDbContext();
+Business_Logic_Layer\Services\StudyYearService.cs:33:        internal static async Task<StudyYear> AddInContextAsync(AppDbContext context, StudyYear studyYear)
+Business_Logic_Layer\Services\StudyYearService.cs:44:            await using var context = new AppDbContext();
+Business_Logic_Layer\Services\StudyYearService.cs:48:        internal static async Task<StudyYear> UpdateInContextAsync(AppDbContext context, StudyYear studyYear)
+Business_Logic_Layer\Services\StudyYearService.cs:59:            await using var context = new AppDbContext();
+Business_Logic_Layer\Services\StudyYearService.cs:67:        private static async Task ValidateAsync(AppDbContext context, StudyYear studyYear, bool isUpdate)
+Business_Logic_Layer\Services\SectionService.cs:11:            await using var context = new AppDbContext();
+Business_Logic_Layer\Services\SectionService.cs:21:            await using var context = new AppDbContext();
+Business_Logic_Layer\Services\SectionService.cs:31:            await using var context = new AppDbContext();
+Business_Logic_Layer\Services\SectionService.cs:36:        internal static async Task<Section> AddInContextAsync(AppDbContext context, Section section)
+Business_Logic_Layer\Services\SectionService.cs:47:            await using var context = new AppDbContext();
+Business_Logic_Layer\Services\SectionService.cs:54:        internal static async Task<Section> UpdateInContextAsync(AppDbContext context, Section section)
+Business_Logic_Layer\Services\SectionService.cs:77:            await using var context = new AppDbContext();
+Business_Logic_Layer\Services\SectionService.cs:85:        private static async Task ValidateAsync(AppDbContext context, Section section, bool isUpdate)
+Business_Logic_Layer\Helpers\ManualKeySaveHelper.cs:20:        public static async Task SaveWithManualKeyAsync(AppDbContext context, string tableName)
+tools\RestoreRoomConfiguration\Program.cs:14:var connection=new SqlConnectionStringBuilder(DatabaseConnection.ConnectionString){InitialCatalog=args[1]};
+tools\RestoreRoomConfiguration\Program.cs:15:Environment.SetEnvironmentVariable(DatabaseConnection.EnvironmentVariableName,connection.ConnectionString);
+tools\RestoreRoomConfiguration\Program.cs:22:async Task<object> Catalog(AppDbContext db){var task=(Task)catalogType.GetMethod("LoadAsync")!.Invoke(null,[db,CancellationToken.None])!;await task;return task.GetType().GetProperty("Result")!.GetValue(task)!;}
+tools\RestoreRoomConfiguration\Program.cs:25:await using var db=new AppDbContext();
+tools\RestoreRoomConfiguration\Program.cs:120:await FacultyScheduleWriter.ReplacePlacementsAsync(db,changed);
+Business_Logic_Layer\Services\ScheduleService.cs:11:            await using var context = new AppDbContext();
+Business_Logic_Layer\Services\ScheduleService.cs:36:            await using var context = new AppDbContext();
+Business_Logic_Layer\Services\ScheduleService.cs:89:            await using var context = new AppDbContext();
+Business_Logic_Layer\Services\ScheduleService.cs:104:            await using var context = new AppDbContext();
+Business_Logic_Layer\Services\ScheduleService.cs:115:            await using var context = new AppDbContext();
+Business_Logic_Layer\Services\ScheduleService.cs:130:            await using var context = new AppDbContext();
+Business_Logic_Layer\Services\ScheduleService.cs:140:            await using var context = new AppDbContext();
+Business_Logic_Layer\Services\ScheduleService.cs:154:            await using var context = new AppDbContext();
+Business_Logic_Layer\Services\ScheduleService.cs:505:        internal static Task ValidateAsync(AppDbContext context, Schedule schedule, bool isUpdate, bool checkConflicts = true) =>
+Business_Logic_Layer\Services\ScheduleService.cs:510:        internal static Task ValidateBackupLectureAsync(AppDbContext context, Schedule schedule) =>
+Business_Logic_Layer\Services\ScheduleService.cs:513:        private static async Task ValidateCoreAsync(AppDbContext context, Schedule schedule, bool isUpdate, bool checkConflicts, bool restoringBackup)
+Business_Logic_Layer\Services\ScheduleService.cs:631:        private static async Task EnsureNoConflictsAsync(AppDbContext context, Schedule schedule, bool isUpdate)
+Business_Logic_Layer\Services\ScheduleService.cs:650:            AppDbContext context,
+Data_Access_Layer\DbContext\appDbContext.cs:6:    public class AppDbContext : DbContext
+Data_Access_Layer\DbContext\appDbContext.cs:8:        public AppDbContext()
+Data_Access_Layer\DbContext\appDbContext.cs:12:        public AppDbContext(DbContextOptions<AppDbContext> options)
+Data_Access_Layer\DbContext\appDbContext.cs:35:                optionsBuilder.UseSqlServer(DatabaseConnection.ConnectionString);
+Business_Logic_Layer\Backups\TimetableBackupService.cs:14:    private readonly Func<AppDbContext> factory;
+Business_Logic_Layer\Backups\TimetableBackupService.cs:15:    public TimetableBackupService() : this(() => new AppDbContext()) { }
+Business_Logic_Layer\Backups\TimetableBackupService.cs:16:    public TimetableBackupService(Func<AppDbContext> factory) => this.factory = factory;
+Business_Logic_Layer\Backups\TimetableBackupService.cs:19:    internal static async Task<TimetableBackupInfo> SaveSnapshotAsync(AppDbContext db, string path)
+Business_Logic_Layer\Backups\TimetableBackupService.cs:62:        await TimetableSnapshotStore.ReplaceAsync(db,restored,token);
+Business_Logic_Layer\Backups\TimetableBackupService.cs:93:    private static async Task<List<string>> ValidateAsync(TimetableBackupPayload payload,ImportCatalog catalog,AppDbContext db,CancellationToken token)
+Business_Logic_Layer\Services\FacultyMemberSubjectService.cs:11:            await using var context = new AppDbContext();
+Business_Logic_Layer\Services\FacultyMemberSubjectService.cs:25:            await using var context = new AppDbContext();
+Business_Logic_Layer\Services\FacultyMemberSubjectService.cs:37:            await using var context = new AppDbContext();
+Business_Logic_Layer\Services\FacultyMemberSubjectService.cs:49:            await using var context = new AppDbContext();
+Business_Logic_Layer\Services\FacultyMemberSubjectService.cs:89:            await using var context = new AppDbContext();
+Business_Logic_Layer\Services\FacultyMemberSubjectService.cs:103:        private static async Task EnsureAssignmentIsUnusedAsync(AppDbContext context, int facultyMemberId, int subjectId)
+Business_Logic_Layer\Services\FacultyMemberSubjectService.cs:116:            AppDbContext context,
+Business_Logic_Layer\Maintenance\SchedulingResourceMaintenance.cs:11:        public static async Task InitializeNewDatabaseAsync(AppDbContext context)
+Business_Logic_Layer\Maintenance\SchedulingResourceMaintenance.cs:17:        private static async Task<int> EnsureDefaultTimeSlotsAsync(AppDbContext context)
+Business_Logic_Layer\Maintenance\SchedulingResourceMaintenance.cs:52:        private static async Task<int> SeedDefaultClassroomsAsync(AppDbContext context)
+Business_Logic_Layer\Services\FacultyMemberService.cs:11:            await using var context = new AppDbContext();
+Business_Logic_Layer\Services\FacultyMemberService.cs:17:            await using var context = new AppDbContext();
+Business_Logic_Layer\Services\FacultyMemberService.cs:23:            await using var context = new AppDbContext();
+Business_Logic_Layer\Services\FacultyMemberService.cs:28:        internal static async Task<FacultyMember> AddInContextAsync(AppDbContext context, FacultyMember facultyMember)
+Business_Logic_Layer\Services\FacultyMemberService.cs:39:            await using var context = new AppDbContext();
+Business_Logic_Layer\Services\FacultyMemberService.cs:43:        internal static async Task<FacultyMember> UpdateInContextAsync(AppDbContext context, FacultyMember facultyMember)
+Business_Logic_Layer\Services\FacultyMemberService.cs:54:            await using var context = new AppDbContext();
+Business_Logic_Layer\Services\FacultyMemberService.cs:62:        private static async Task ValidateAsync(AppDbContext context, FacultyMember facultyMember, bool isUpdate)
+Business_Logic_Layer\Services\ClassroomService.cs:11:            await using var context = new AppDbContext();
+Business_Logic_Layer\Services\ClassroomService.cs:19:            await using var context = new AppDbContext();
+Business_Logic_Layer\Services\ClassroomService.cs:25:            await using var context = new AppDbContext();
+Business_Logic_Layer\Services\ClassroomService.cs:30:        internal static async Task<Classroom> AddInContextAsync(AppDbContext context, Classroom classroom)
+Business_Logic_Layer\Services\ClassroomService.cs:41:            await using var context = new AppDbContext();
+Business_Logic_Layer\Services\ClassroomService.cs:48:        internal static async Task<Classroom> UpdateInContextAsync(AppDbContext context, Classroom classroom)
+Business_Logic_Layer\Services\ClassroomService.cs:65:            await using var context = new AppDbContext();
+Business_Logic_Layer\Services\ClassroomService.cs:73:        private static async Task ValidateAsync(AppDbContext context, Classroom classroom, bool isUpdate)
+Business_Logic_Layer\Services\BranchService.cs:11:            await using var context = new AppDbContext();
+Business_Logic_Layer\Services\BranchService.cs:17:            await using var context = new AppDbContext();
+Business_Logic_Layer\Services\BranchService.cs:23:            await using var context = new AppDbContext();
+Business_Logic_Layer\Services\BranchService.cs:28:        internal static async Task<Branch> AddInContextAsync(AppDbContext context, Branch branch)
+Business_Logic_Layer\Services\BranchService.cs:39:            await using var context = new AppDbContext();
+Business_Logic_Layer\Services\BranchService.cs:43:        internal static async Task<Branch> UpdateInContextAsync(AppDbContext context, Branch branch)
+Business_Logic_Layer\Services\BranchService.cs:54:            await using var context = new AppDbContext();
+Business_Logic_Layer\Services\BranchService.cs:62:        private static async Task ValidateAsync(AppDbContext context, Branch branch, bool isUpdate)
+Business_Logic_Layer\Maintenance\FourthYearPracticalMaintenance.cs:13:        await using var db = new AppDbContext();
+tools\AssignmentScopeUpgrade\Program.cs:6:await using var db = new AppDbContext();
+tools\AssignmentScopeUpgrade\Program.cs:22:await FacultyAssignmentScopeSchema.EnsureAsync(db);
+Business_Logic_Layer\FacultyScheduling\FacultyDayPreferenceService.cs:50:        await FacultyScheduleWriter.ReplacePlacementsAsync(db, changed, token);
+Business_Logic_Layer\Maintenance\DatabaseMaintenanceService.cs:10:            await using var context = new AppDbContext();
+Business_Logic_Layer\Maintenance\DatabaseMaintenanceService.cs:20:            await SubjectDeletionSchema.EnsureAsync(context);
+Business_Logic_Layer\Maintenance\DatabaseMaintenanceService.cs:21:            await SubjectLectureCountSchema.EnsureAsync(context);
+Business_Logic_Layer\Maintenance\DatabaseMaintenanceService.cs:22:            await FacultyAssignmentScopeSchema.EnsureAsync(context);
+Business_Logic_Layer\Maintenance\DatabaseMaintenanceService.cs:24:            await ScheduleLockSchema.EnsureAsync(context);
+Business_Logic_Layer\Maintenance\DatabaseMaintenanceService.cs:25:            await FacultyPreferenceSchema.EnsureAsync(context);
+Business_Logic_Layer\Maintenance\DatabaseMaintenanceService.cs:35:        private static async Task EnsureApplicationUsersTableAsync(AppDbContext context)
+Business_Logic_Layer\Maintenance\DatabaseMaintenanceService.cs:59:        private static async Task EnsureSubjectsSchemaAsync(AppDbContext context)
+Business_Logic_Layer\Maintenance\DatabaseMaintenanceService.cs:91:        private static async Task EnsureSchedulesSchemaAsync(AppDbContext context)
+Business_Logic_Layer\Maintenance\DatabaseMaintenanceService.cs:128:        private static async Task NormalizeScheduleDataAsync(AppDbContext context)
+Business_Logic_Layer\Maintenance\DatabaseMaintenanceService.cs:198:        private static async Task RebuildScheduleIndexesAsync(AppDbContext context)
+Business_Logic_Layer\Maintenance\DatabaseMaintenanceService.cs:286:        private static async Task RecreateScheduleDetailsViewAsync(AppDbContext context)
+tools\ImportFacultyDays\Program.cs:15:var connection=new SqlConnectionStringBuilder(DatabaseConnection.ConnectionString){InitialCatalog=args[1]};
+tools\ImportFacultyDays\Program.cs:16:Environment.SetEnvironmentVariable(DatabaseConnection.EnvironmentVariableName,connection.ConnectionString);
+tools\ImportFacultyDays\Program.cs:27:async Task<object> Catalog(AppDbContext db){var task=(Task)catalogType.GetMethod("LoadAsync")!.Invoke(null,[db,CancellationToken.None])!;await task;return task.GetType().GetProperty("Result")!.GetValue(task)!;}
+tools\ImportFacultyDays\Program.cs:30:await using var db=new AppDbContext();
+tools\ImportFacultyDays\Program.cs:85:await FacultyScheduleWriter.ReplacePlacementsAsync(db,changed);
+UniversityTimetable.API\Controllers\SchedulingController.cs:56:        await using var db = new AppDbContext();
+Business_Logic_Layer\FacultyScheduling\FacultyPreferenceService.cs:11:    private readonly Func<AppDbContext> factory;
+Business_Logic_Layer\FacultyScheduling\FacultyPreferenceService.cs:12:    public FacultyPreferenceService() : this(() => new AppDbContext()) { }
+Business_Logic_Layer\FacultyScheduling\FacultyPreferenceService.cs:13:    public FacultyPreferenceService(Func<AppDbContext> factory) => this.factory = factory;
+Business_Logic_Layer\FacultyScheduling\FacultyPreferenceService.cs:35:    internal static async Task<FacultyPreferenceProfile> SaveInTransactionAsync(AppDbContext db, FacultyScheduleRequest request, long expectedRevision, CancellationToken token)
+UniversityTimetable.API\Controllers\OverviewController.cs:15:        await using var db = new AppDbContext();
+tools\AdoptPdfAssignments\Program.cs:17:var connection = new SqlConnectionStringBuilder(DatabaseConnection.ConnectionString) { InitialCatalog = args[1] };
+tools\AdoptPdfAssignments\Program.cs:18:Environment.SetEnvironmentVariable(DatabaseConnection.EnvironmentVariableName, connection.ConnectionString);
+tools\AdoptPdfAssignments\Program.cs:23:async Task<object> Catalog(AppDbContext db)
+tools\AdoptPdfAssignments\Program.cs:31:await using var db = new AppDbContext();
+tools\AdoptPdfAssignments\Program.cs:33:await FacultyAssignmentScopeSchema.EnsureAsync(db);
+tools\AdoptPdfAssignments\Program.cs:34:await FacultyAssignmentScopeSchema.EnsureAsync(db);
+tools\AdoptPdfAssignments\Program.cs:110:await FacultyScheduleWriter.ReplacePlacementsAsync(db, changedRows);
+tests\AssignmentScopes\Program.cs:14:var connection = new SqlConnectionStringBuilder(DatabaseConnection.ConnectionString) { InitialCatalog = database };
+tests\AssignmentScopes\Program.cs:15:Environment.SetEnvironmentVariable(DatabaseConnection.EnvironmentVariableName, connection.ConnectionString);
+tests\AssignmentScopes\Program.cs:20:async Task<List<Schedule>> Rows() { await using var db = new AppDbContext(); return await db.Schedules.AsNoTracking().OrderBy(s => s.ScheduleID).ToListAsync(); }
+tests\AssignmentScopes\Program.cs:23:await using (var db = new AppDbContext())
+tests\AssignmentScopes\Program.cs:46:    await FacultyAssignmentScopeSchema.EnsureAsync(db);
+tests\AssignmentScopes\Program.cs:47:    await FacultyAssignmentScopeSchema.EnsureAsync(db);
+tests\AssignmentScopes\Program.cs:84:await using (var db = new AppDbContext()) await db.FacultyMemberSubjects.ExecuteUpdateAsync(s => s.SetProperty(a => a.SectionID, (int?)null));
+tests\AssignmentScopes\Program.cs:99:await using (var db = new AppDbContext())
+tests\AssignmentScopes\Program.cs:104:await using (var db = new AppDbContext()) await db.Schedules.ExecuteDeleteAsync();
+tests\AssignmentScopes\Program.cs:124:await using (var db = new AppDbContext())
+tests\AssignmentScopes\Program.cs:144:        using var db = new AppDbContext();
+Business_Logic_Layer\Scheduling\TimetableAlternativesService.cs:11:    private readonly Func<AppDbContext> factory;
+Business_Logic_Layer\Scheduling\TimetableAlternativesService.cs:12:    public TimetableAlternativesService() : this(() => new AppDbContext()) { }
+Business_Logic_Layer\Scheduling\TimetableAlternativesService.cs:13:    public TimetableAlternativesService(Func<AppDbContext> factory) => this.factory = factory;
+Business_Logic_Layer\Scheduling\TimetableAlternativesService.cs:77:        await FacultyScheduleWriter.ReplacePlacementsAsync(db, changed, token);
+tests\WeeklyPdfImport\WeeklyVerification.cs:69:        var options = new DbContextOptionsBuilder<AppDbContext>().UseSqlServer(connection.ConnectionString).Options;
+tests\WeeklyPdfImport\WeeklyVerification.cs:70:        Func<AppDbContext> factory = () => new(options); var service = new ExcelImportService(factory);
+UniversityTimetable.API\Controllers\AuthController.cs:24:        await using var db = new AppDbContext();
+Business_Logic_Layer\FacultyScheduling\FacultyScheduleEditorService.cs:10:    private readonly Func<AppDbContext> factory;
+Business_Logic_Layer\FacultyScheduling\FacultyScheduleEditorService.cs:11:    public FacultyScheduleEditorService() : this(() => new AppDbContext()) { }
+Business_Logic_Layer\FacultyScheduling\FacultyScheduleEditorService.cs:12:    public FacultyScheduleEditorService(Func<AppDbContext> factory) => this.factory = factory;
+Business_Logic_Layer\FacultyScheduling\FacultyScheduleEditorService.cs:154:        await FacultyScheduleWriter.ReplacePlacementsAsync(db, changed, token);
+Business_Logic_Layer\FacultyScheduling\FacultyScheduleEditorService.cs:160:    private async Task ValidatePlanAsync(ImportCatalog data, FacultyScheduleRequest request, IReadOnlyList<Schedule> plan, CancellationToken token, bool wholeSemester = false, AppDbContext? validationDb = null)
+tests\FacultyPreferences\Program.cs:12:    static Func<AppDbContext> factory = null!;
+tests\FacultyPreferences\Program.cs:64:        Environment.SetEnvironmentVariable(DatabaseConnection.EnvironmentVariableName, connection.ConnectionString);
+tests\FacultyPreferences\Program.cs:65:        factory = () => new AppDbContext(new DbContextOptionsBuilder<AppDbContext>().UseSqlServer(connection.ConnectionString).Options);
+tests\FacultyPreferences\Program.cs:70:            await FacultyPreferenceSchema.EnsureAsync(db); await FacultyPreferenceSchema.EnsureAsync(db);
+tests\FacultyPreferences\Program.cs:86:            await FacultyPreferenceSchema.EnsureAsync(db); await FacultyPreferenceSchema.EnsureAsync(db);
+tests\FacultyPreferences\Program.cs:143:    internal static async Task Restore(AppDbContext db)
+Business_Logic_Layer\Importing\AcademicExcelImport.cs:192:    public static async Task SaveAsync(AppDbContext db, AcademicImportRow row)
+tests\AssignmentLectureTypes\Program.cs:13:var connection = new SqlConnectionStringBuilder(DatabaseConnection.ConnectionString) { InitialCatalog = database };
+tests\AssignmentLectureTypes\Program.cs:14:Environment.SetEnvironmentVariable(DatabaseConnection.EnvironmentVariableName, connection.ConnectionString);
+tests\AssignmentLectureTypes\Program.cs:19:async Task<List<Schedule>> Rows() { await using var db = new AppDbContext(); return await db.Schedules.AsNoTracking().OrderBy(s => s.ScheduleID).ToListAsync(); }
+tests\AssignmentLectureTypes\Program.cs:21:await using (var db = new AppDbContext())
+tests\AssignmentLectureTypes\Program.cs:42:    await FacultyAssignmentScopeSchema.EnsureAsync(db);
+tests\AssignmentLectureTypes\Program.cs:43:    await FacultyAssignmentScopeSchema.EnsureAsync(db);
+tests\AssignmentLectureTypes\Program.cs:81:await using (var db = new AppDbContext()) await db.FacultyMemberSubjects.ExecuteUpdateAsync(a => a.SetProperty(x => x.LectureType,"Both"));
+tests\AssignmentLectureTypes\Program.cs:98:await using(var db=new AppDbContext()) await db.Schedules.ExecuteDeleteAsync();
+Business_Logic_Layer\Importing\ExcelImportService.cs:10:    private readonly Func<AppDbContext> createContext;
+Business_Logic_Layer\Importing\ExcelImportService.cs:11:    public ExcelImportService() : this(() => new AppDbContext()) { }
+Business_Logic_Layer\Importing\ExcelImportService.cs:12:    public ExcelImportService(Func<AppDbContext> createContext) => this.createContext = createContext;
+Business_Logic_Layer\Importing\ExcelImportService.cs:67:    private static async Task ParseTimetableAsync(AppDbContext db, IReadOnlyList<ExcelSheetData> sheets,
+Business_Logic_Layer\Importing\ExcelImportService.cs:342:        return await ImportTransaction.ExecuteAsync(createContext, async (db, ct) =>
+tools\FourthYearPractical\Program.cs:7:await using var db = new AppDbContext();
+Business_Logic_Layer\Importing\ImportCatalog.cs:14:    public static async Task<ImportCatalog> LoadAsync(AppDbContext db, CancellationToken token)
+tests\FacultyPreferences\DayPreferenceChecks.cs:80:            var options = new DbContextOptionsBuilder<AppDbContext>().UseSqlServer(db.Database.GetConnectionString()).AddInterceptors(new FailDayScheduleWrite()).Options;
+tests\FacultyPreferences\DayPreferenceChecks.cs:81:            var failing = new FacultyScheduleEditorService(() => new AppDbContext(options));
+Business_Logic_Layer\Importing\ImportedTimetableRepair.cs:14:    private static async Task ValidateMovableRepairRowAsync(AppDbContext db, ImportCatalog catalog, Schedule row)
+Business_Logic_Layer\Importing\ImportedTimetableRepair.cs:102:    private static async Task ValidateRepairPlanAsync(AppDbContext db, ImportCatalog catalog, ExcelImportPreview preview, CancellationToken token)
+Business_Logic_Layer\Importing\ImportedTimetableRepair.cs:141:    private static async Task<ImportSaveResult> SaveRepairedAsync(AppDbContext db, ImportCatalog catalog, ExcelImportPreview preview, CancellationToken token)
+Business_Logic_Layer\Importing\ImportedTimetableRepair.cs:147:        await FacultyScheduleWriter.ReplacePlacementsAsync(db, changed, token);
+Business_Logic_Layer\Scheduling\ScheduleConflictChecker.cs:10:            AppDbContext context,
+Business_Logic_Layer\Scheduling\ScheduleConflictChecker.cs:23:            AppDbContext context,
+Business_Logic_Layer\Scheduling\ScheduleConflictChecker.cs:36:            AppDbContext context,
+tests\WebIntegration\Program.cs:28:    await using var db = new AppDbContext();
+tests\WebIntegration\Program.cs:42:    await using (var db = new AppDbContext()) testUserId = await db.ApplicationUsers.Where(x => x.UserName == marker).Select(x => x.ApplicationUserID).SingleAsync();
+tests\WebIntegration\Program.cs:141:    await using var db = new AppDbContext();
+tests\WebIntegration\Program.cs:173:    await using var db = new AppDbContext();
+tests\GenerationDiagnostics\Program.cs:10:var source = new SqlConnectionStringBuilder(DatabaseConnection.ConnectionString);
+tests\GenerationDiagnostics\Program.cs:34:Environment.SetEnvironmentVariable(DatabaseConnection.EnvironmentVariableName, source.ConnectionString);
+tests\GenerationDiagnostics\Program.cs:36:await using (var check = new AppDbContext())
+tests\ExcelImport\Program.cs:20:    private static Func<AppDbContext> factory = null!;
+tests\ExcelImport\Program.cs:104:        var options = new DbContextOptionsBuilder<AppDbContext>().UseSqlServer(connection.ConnectionString).AddInterceptors(fault).Options;
+tests\ExcelImport\Program.cs:105:        factory = () => new AppDbContext(options);
+tests\ExcelImport\Program.cs:109:        var oldConnection = Environment.GetEnvironmentVariable(DatabaseConnection.EnvironmentVariableName);
+tests\ExcelImport\Program.cs:110:        Environment.SetEnvironmentVariable(DatabaseConnection.EnvironmentVariableName, connection.ConnectionString);
+tests\ExcelImport\Program.cs:122:                await using var legacy = new AppDbContext(new DbContextOptionsBuilder<AppDbContext>().UseSqlServer(legacyConnection.ConnectionString).Options);
+tests\ExcelImport\Program.cs:124:                await ScheduleLockSchema.EnsureAsync(legacy); await ScheduleLockSchema.EnsureAsync(legacy);
+tests\ExcelImport\Program.cs:345:                await using (var db = factory()) { await ScheduleLockSchema.EnsureAsync(db); await ScheduleLockSchema.EnsureAsync(db); }
+tests\ExcelImport\Program.cs:508:        finally { Environment.SetEnvironmentVariable(DatabaseConnection.EnvironmentVariableName, oldConnection); }
+tests\FullGenerationPreferences\Program.cs:12:var connection=new SqlConnectionStringBuilder(DatabaseConnection.ConnectionString){InitialCatalog=args[0]};
+tests\FullGenerationPreferences\Program.cs:13:Environment.SetEnvironmentVariable(DatabaseConnection.EnvironmentVariableName,connection.ConnectionString);
+tests\FullGenerationPreferences\Program.cs:17:async Task<List<Schedule>> Rows(){await using var db=new AppDbContext();return await db.Schedules.AsNoTracking().OrderBy(s=>s.ScheduleID).ToListAsync();}
+tests\FullGenerationPreferences\Program.cs:23:    await using var db=new AppDbContext();var task=(Task)catalogType.GetMethod("LoadAsync")!.Invoke(null,[db,CancellationToken.None])!;
+tests\FullGenerationPreferences\Program.cs:30:await using(var db=new AppDbContext())
+tests\FullGenerationPreferences\Program.cs:43:        await using var db=new AppDbContext();
+tests\FullGenerationPreferences\Program.cs:63:    await using(var db=new AppDbContext())foreach(var row in rows)await(Task)validate.Invoke(null,[db,row,true,true])!;
+tests\FullGenerationPreferences\Program.cs:70:await using(var db=new AppDbContext())teacher=await db.FacultyMembers.Where(f=>f.FullName=="حنان عبد الولي").Select(f=>f.FacultyMemberID).SingleAsync();
+tests\FinalTimetableImport\Program.cs:8:var connection = new SqlConnectionStringBuilder(DatabaseConnection.ConnectionString);
+tests\FinalTimetableImport\Program.cs:12:await using var db = new AppDbContext();
+tests\FacultyScheduleEditor\Program.cs:13:    static Func<AppDbContext> factory = null!;
+tests\FacultyScheduleEditor\Program.cs:32:        await FacultyScheduleWriter.ReplacePlacementsAsync(db, initial.Select(Copy).ToList());
+tests\FacultyScheduleEditor\Program.cs:56:        Environment.SetEnvironmentVariable(DatabaseConnection.EnvironmentVariableName, connection.ConnectionString);
+tests\FacultyScheduleEditor\Program.cs:57:        var options = new DbContextOptionsBuilder<AppDbContext>().UseSqlServer(connection.ConnectionString).AddInterceptors(fault).Options;
+tests\FacultyScheduleEditor\Program.cs:58:        factory = () => new AppDbContext(options); service = new(factory);
+tests\FacultyScheduleEditor\Program.cs:163:            await FacultyScheduleWriter.ReplacePlacementsAsync(db,pair);
+tests\TimetableRegression\Program.cs:43:        await using var context=new AppDbContext();
+tests\TimetableRegression\Program.cs:48:        await using var c = new AppDbContext();
+tests\TimetableRegression\Program.cs:58:        Environment.SetEnvironmentVariable(DatabaseConnection.EnvironmentVariableName,connection.ConnectionString);
+tests\TimetableRegression\Program.cs:99:            await using var context=new AppDbContext();
+tests\TimetableRegression\Program.cs:178:        await using var context=new AppDbContext();
+tests\TimetableRegression\Program.cs:184:        string? previous=Environment.GetEnvironmentVariable(DatabaseConnection.EnvironmentVariableName);
+tests\TimetableRegression\Program.cs:195:            Environment.SetEnvironmentVariable(DatabaseConnection.EnvironmentVariableName,connection.ConnectionString);
+tests\TimetableRegression\Program.cs:196:            await using(var context=new AppDbContext())
+tests\TimetableRegression\Program.cs:206:        finally{Environment.SetEnvironmentVariable(DatabaseConnection.EnvironmentVariableName,previous);}
+tests\TimetableRegression\Program.cs:261:            await using(var context=new AppDbContext())
+tests\TimetableRegression\Program.cs:278:                await using var context=new AppDbContext();context.TimeSlots.AddRange(removed);await context.SaveChangesAsync();
+tests\TimetableRegression\Program.cs:283:            await using(var context=new AppDbContext()){context.TimeSlots.Add(bad);await context.SaveChangesAsync();}
+tests\TimetableRegression\Program.cs:294:            finally{await using var context=new AppDbContext();context.TimeSlots.Remove(await context.TimeSlots.SingleAsync(slot=>slot.TimeSlotID==bad.TimeSlotID));await context.SaveChangesAsync();}
+tests\TimetableRegression\Program.cs:358:        Environment.SetEnvironmentVariable(DatabaseConnection.EnvironmentVariableName,connection.ConnectionString);
+tests\FourthYearPractical\Program.cs:12:var connection = new SqlConnectionStringBuilder(DatabaseConnection.ConnectionString) { InitialCatalog = database };
+tests\FourthYearPractical\Program.cs:13:Environment.SetEnvironmentVariable(DatabaseConnection.EnvironmentVariableName, connection.ConnectionString);
+tests\FourthYearPractical\Program.cs:17:async Task<List<Schedule>> Rows() { await using var db = new AppDbContext(); return await db.Schedules.AsNoTracking().OrderBy(s => s.ScheduleID).ToListAsync(); }
+tests\FourthYearPractical\Program.cs:20:await using (var db = new AppDbContext())
+tests\FourthYearPractical\Program.cs:58:await using (var db = new AppDbContext()) await db.Classrooms.Where(c => c.ClassroomID == 1).ExecuteUpdateAsync(s => s.SetProperty(c => c.Capacity, 15));
+tests\FourthYearPractical\Program.cs:62:await using (var db = new AppDbContext())
+tests\FourthYearPractical\Program.cs:69:await using (var db = new AppDbContext()) await db.Schedules.Where(s => s.IsLocked).ExecuteUpdateAsync(s => s.SetProperty(c => c.IsLocked, false));
+tests\TimetableRegression\DynamicResourceChecks.cs:12:        string? previousConnection = Environment.GetEnvironmentVariable(DatabaseConnection.EnvironmentVariableName);
+tests\TimetableRegression\DynamicResourceChecks.cs:22:        Environment.SetEnvironmentVariable(DatabaseConnection.EnvironmentVariableName, connection.ConnectionString);
+tests\TimetableRegression\DynamicResourceChecks.cs:30:            Environment.SetEnvironmentVariable(DatabaseConnection.EnvironmentVariableName, previousConnection);
+tests\TimetableRegression\DynamicResourceChecks.cs:185:            await using (var context = new AppDbContext())
+tests\TimetableRegression\DynamicResourceChecks.cs:198:        await using var context = new AppDbContext();
+tests\IncrementalGeneration\Program.cs:8:Environment.SetEnvironmentVariable(DatabaseConnection.EnvironmentVariableName,$"Server=localhost;Database={database};Integrated Security=True;Encrypt=False;TrustServerCertificate=True");
+tests\IncrementalGeneration\Program.cs:9:async Task<List<Schedule>> Rows(){await using var db=new AppDbContext();return await db.Schedules.AsNoTracking().OrderBy(s=>s.ScheduleID).ToListAsync();}
+tests\IncrementalGeneration\Program.cs:13:await using(var db=new AppDbContext())
+tests\IncrementalGeneration\Program.cs:38:await using(var db=new AppDbContext())foreach(var row in after)await(Task)validate.Invoke(null,new object[]{db,row,true,true})!;
+tests\IncrementalGeneration\Program.cs:41:await using(var db=new AppDbContext())
+tests\SchedulePdfExport\Program.cs:28:await using var db = new AppDbContext();
+tests\ImportedTimetableRepair\Program.cs:16:    private static Func<AppDbContext> factory = null!;
+tests\ImportedTimetableRepair\Program.cs:77:        var options = new DbContextOptionsBuilder<AppDbContext>().UseSqlServer(connection.ConnectionString).AddInterceptors(fault).Options;
+tests\ImportedTimetableRepair\Program.cs:78:        factory = () => new AppDbContext(options); service = new(factory);
+tests\TimetableBackups\Program.cs:15:    static Func<AppDbContext> factory=null!;
+tests\TimetableBackups\Program.cs:72:        Environment.SetEnvironmentVariable(DatabaseConnection.EnvironmentVariableName,connection);
+tests\TimetableBackups\Program.cs:73:        var options=new DbContextOptionsBuilder<AppDbContext>().UseSqlServer(connection).AddInterceptors(fault).Options;
+tests\TimetableBackups\Program.cs:74:        factory=()=>new AppDbContext(options);service=new(factory);
+tests\PracticalExchange\Program.cs:26:        Environment.SetEnvironmentVariable(DatabaseConnection.EnvironmentVariableName, connection.ConnectionString);
+tests\SubjectLectureCounts\Program.cs:26:        var connection = new SqlConnectionStringBuilder(DatabaseConnection.ConnectionString) { InitialCatalog = database };
+tests\SubjectLectureCounts\Program.cs:27:        Environment.SetEnvironmentVariable(DatabaseConnection.EnvironmentVariableName, connection.ConnectionString);
+tests\SubjectLectureCounts\Program.cs:71:        await using (var db = new AppDbContext())
+tests\SubjectLectureCounts\Program.cs:76:            await SubjectLectureCountSchema.EnsureAsync(db);
+tests\SubjectLectureCounts\Program.cs:77:            await SubjectLectureCountSchema.EnsureAsync(db);
+tests\SubjectLectureCounts\Program.cs:88:            await SubjectDeletionSchema.EnsureAsync(db);
+tests\SubjectLectureCounts\Program.cs:89:            await SubjectDeletionSchema.EnsureAsync(db);
+tests\SubjectLectureCounts\Program.cs:106:        await using (var db = new AppDbContext())
+tests\SubjectLectureCounts\Program.cs:115:        await using (var db = new AppDbContext())
+tests\SubjectLectureCounts\Program.cs:207:        await using var db = new AppDbContext();
+tests\SubjectLectureCounts\Program.cs:265:        await using (var db = new AppDbContext())
+tests\SubjectLectureCounts\Program.cs:273:        await using (var db = new AppDbContext())
+tests\SubjectLectureCounts\Program.cs:282:            await using var db = new AppDbContext();
+tests\SubjectLectureCounts\Program.cs:286:        await using (var db = new AppDbContext()) await db.FacultyMemberSubjects.ExecuteDeleteAsync();
+tests\SubjectLectureCounts\Program.cs:298:        await using (var db = new AppDbContext())
+tests\SubjectLectureCounts\Program.cs:348:            await using (var db = new AppDbContext())
+tests\SubjectLectureCounts\Program.cs:365:            await using var context = new AppDbContext();
+tests\SubjectLectureCounts\Program.cs:387:            await using var db = new AppDbContext();
+tests\SchedulingCapacity\Program.cs:74:var builder=new SqlConnectionStringBuilder(DatabaseConnection.ConnectionString);string clone="UniversityTimetable_Capacity_"+Guid.NewGuid().ToString("N")[..8];
+tests\SchedulingCapacity\Program.cs:85:builder.InitialCatalog=clone;Environment.SetEnvironmentVariable(DatabaseConnection.EnvironmentVariableName,builder.ConnectionString);File.WriteAllText(Path.Combine(output,"database.txt"),clone);
+tests\SchedulingCapacity\Program.cs:86:Fixture fixtureData;await using(var context=new AppDbContext()){

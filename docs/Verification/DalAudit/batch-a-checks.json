@@ -1,0 +1,257 @@
+[
+  {
+    "name": "Successful edit saves, reloads, clears and reports on the original UI thread",
+    "passed": true,
+    "error": null
+  },
+  {
+    "name": "Navigation during before start prevents access to the disposed editor",
+    "passed": true,
+    "error": null
+  },
+  {
+    "name": "Navigation during pending save prevents access to the disposed editor",
+    "passed": true,
+    "error": null
+  },
+  {
+    "name": "Navigation during pending reload prevents access to the disposed editor",
+    "passed": true,
+    "error": null
+  },
+  {
+    "name": "Failure in synchronous save preserves the original exception and restores actions",
+    "passed": true,
+    "error": null
+  },
+  {
+    "name": "Failure in asynchronous save preserves the original exception and restores actions",
+    "passed": true,
+    "error": null
+  },
+  {
+    "name": "Failure in reload preserves the original exception and restores actions",
+    "passed": true,
+    "error": null
+  },
+  {
+    "name": "Failure in success callback preserves the original exception and restores actions",
+    "passed": true,
+    "error": null
+  },
+  {
+    "name": "An error-display failure propagates after restoring action state",
+    "passed": true,
+    "error": null
+  },
+  {
+    "name": "Branch: id=0, update=False, exists=False",
+    "passed": true,
+    "error": null
+  },
+  {
+    "name": "Branch: id=-1, update=True, exists=True",
+    "passed": true,
+    "error": null
+  },
+  {
+    "name": "Branch: id=1, update=False, exists=True",
+    "passed": true,
+    "error": null
+  },
+  {
+    "name": "Branch: id=1, update=True, exists=False",
+    "passed": true,
+    "error": null
+  },
+  {
+    "name": "Branch: id=1, update=False, exists=False",
+    "passed": true,
+    "error": null
+  },
+  {
+    "name": "Branch: id=1, update=True, exists=True",
+    "passed": true,
+    "error": null
+  },
+  {
+    "name": "Classroom: id=0, update=False, exists=False",
+    "passed": true,
+    "error": null
+  },
+  {
+    "name": "Classroom: id=-1, update=True, exists=True",
+    "passed": true,
+    "error": null
+  },
+  {
+    "name": "Classroom: id=1, update=False, exists=True",
+    "passed": true,
+    "error": null
+  },
+  {
+    "name": "Classroom: id=1, update=True, exists=False",
+    "passed": true,
+    "error": null
+  },
+  {
+    "name": "Classroom: id=1, update=False, exists=False",
+    "passed": true,
+    "error": null
+  },
+  {
+    "name": "Classroom: id=1, update=True, exists=True",
+    "passed": true,
+    "error": null
+  },
+  {
+    "name": "Faculty member: id=0, update=False, exists=False",
+    "passed": true,
+    "error": null
+  },
+  {
+    "name": "Faculty member: id=-1, update=True, exists=True",
+    "passed": true,
+    "error": null
+  },
+  {
+    "name": "Faculty member: id=1, update=False, exists=True",
+    "passed": true,
+    "error": null
+  },
+  {
+    "name": "Faculty member: id=1, update=True, exists=False",
+    "passed": true,
+    "error": null
+  },
+  {
+    "name": "Faculty member: id=1, update=False, exists=False",
+    "passed": true,
+    "error": null
+  },
+  {
+    "name": "Faculty member: id=1, update=True, exists=True",
+    "passed": true,
+    "error": null
+  },
+  {
+    "name": "Section: id=0, update=False, exists=False",
+    "passed": true,
+    "error": null
+  },
+  {
+    "name": "Section: id=-1, update=True, exists=True",
+    "passed": true,
+    "error": null
+  },
+  {
+    "name": "Section: id=1, update=False, exists=True",
+    "passed": true,
+    "error": null
+  },
+  {
+    "name": "Section: id=1, update=True, exists=False",
+    "passed": true,
+    "error": null
+  },
+  {
+    "name": "Section: id=1, update=False, exists=False",
+    "passed": true,
+    "error": null
+  },
+  {
+    "name": "Section: id=1, update=True, exists=True",
+    "passed": true,
+    "error": null
+  },
+  {
+    "name": "Study year: id=0, update=False, exists=False",
+    "passed": true,
+    "error": null
+  },
+  {
+    "name": "Study year: id=-1, update=True, exists=True",
+    "passed": true,
+    "error": null
+  },
+  {
+    "name": "Study year: id=1, update=False, exists=True",
+    "passed": true,
+    "error": null
+  },
+  {
+    "name": "Study year: id=1, update=True, exists=False",
+    "passed": true,
+    "error": null
+  },
+  {
+    "name": "Study year: id=1, update=False, exists=False",
+    "passed": true,
+    "error": null
+  },
+  {
+    "name": "Study year: id=1, update=True, exists=True",
+    "passed": true,
+    "error": null
+  },
+  {
+    "name": "Subject: id=0, update=False, exists=False",
+    "passed": true,
+    "error": null
+  },
+  {
+    "name": "Subject: id=-1, update=True, exists=True",
+    "passed": true,
+    "error": null
+  },
+  {
+    "name": "Subject: id=1, update=False, exists=True",
+    "passed": true,
+    "error": null
+  },
+  {
+    "name": "Subject: id=1, update=True, exists=False",
+    "passed": true,
+    "error": null
+  },
+  {
+    "name": "Subject: id=1, update=False, exists=False",
+    "passed": true,
+    "error": null
+  },
+  {
+    "name": "Subject: id=1, update=True, exists=True",
+    "passed": true,
+    "error": null
+  },
+  {
+    "name": "Time slot: id=0, update=False, exists=False",
+    "passed": true,
+    "error": null
+  },
+  {
+    "name": "Time slot: id=-1, update=True, exists=True",
+    "passed": true,
+    "error": null
+  },
+  {
+    "name": "Time slot: id=1, update=False, exists=True",
+    "passed": true,
+    "error": null
+  },
+  {
+    "name": "Time slot: id=1, update=True, exists=False",
+    "passed": true,
+    "error": null
+  },
+  {
+    "name": "Time slot: id=1, update=False, exists=False",
+    "passed": true,
+    "error": null
+  },
+  {
+    "name": "Time slot: id=1, update=True, exists=True",
+    "passed": true,
+    "error": null
+  }
+]

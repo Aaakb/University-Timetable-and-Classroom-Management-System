@@ -1,0 +1,170 @@
+{
+  "count": 27,
+  "failures": 0,
+  "checks": [
+    {
+      "name": "BranchesForm avoids cascading layout work",
+      "passed": true
+    },
+    {
+      "name": "BranchesForm keeps its Arabic captions and RTL",
+      "passed": true
+    },
+    {
+      "name": "BranchesForm resumes normal layout after setup",
+      "passed": true
+    },
+    {
+      "name": "StudyYearsForm avoids cascading layout work",
+      "passed": true
+    },
+    {
+      "name": "StudyYearsForm keeps its Arabic captions and RTL",
+      "passed": true
+    },
+    {
+      "name": "StudyYearsForm resumes normal layout after setup",
+      "passed": true
+    },
+    {
+      "name": "SectionsForm avoids cascading layout work",
+      "passed": true
+    },
+    {
+      "name": "SectionsForm keeps its Arabic captions and RTL",
+      "passed": true
+    },
+    {
+      "name": "SectionsForm resumes normal layout after setup",
+      "passed": true
+    },
+    {
+      "name": "SubjectsForm avoids cascading layout work",
+      "passed": true
+    },
+    {
+      "name": "SubjectsForm keeps its Arabic captions and RTL",
+      "passed": true
+    },
+    {
+      "name": "SubjectsForm resumes normal layout after setup",
+      "passed": true
+    },
+    {
+      "name": "ClassroomsForm avoids cascading layout work",
+      "passed": true
+    },
+    {
+      "name": "ClassroomsForm keeps its Arabic captions and RTL",
+      "passed": true
+    },
+    {
+      "name": "ClassroomsForm resumes normal layout after setup",
+      "passed": true
+    },
+    {
+      "name": "TimeSlotsForm avoids cascading layout work",
+      "passed": true
+    },
+    {
+      "name": "TimeSlotsForm keeps its Arabic captions and RTL",
+      "passed": true
+    },
+    {
+      "name": "TimeSlotsForm resumes normal layout after setup",
+      "passed": true
+    },
+    {
+      "name": "FacultyMembersForm avoids cascading layout work",
+      "passed": true
+    },
+    {
+      "name": "FacultyMembersForm keeps its Arabic captions and RTL",
+      "passed": true
+    },
+    {
+      "name": "FacultyMembersForm resumes normal layout after setup",
+      "passed": true
+    },
+    {
+      "name": "FacultyMemberSubjectsForm avoids cascading layout work",
+      "passed": true
+    },
+    {
+      "name": "FacultyMemberSubjectsForm keeps its Arabic captions and RTL",
+      "passed": true
+    },
+    {
+      "name": "FacultyMemberSubjectsForm resumes normal layout after setup",
+      "passed": true
+    },
+    {
+      "name": "SchedulesForm avoids cascading layout work",
+      "passed": true
+    },
+    {
+      "name": "SchedulesForm keeps its Arabic captions and RTL",
+      "passed": true
+    },
+    {
+      "name": "SchedulesForm resumes normal layout after setup",
+      "passed": true
+    }
+  ],
+  "measurements": [
+    {
+      "name": "BranchesForm",
+      "controls": 34,
+      "layouts": 25,
+      "milliseconds": 12.2624
+    },
+    {
+      "name": "StudyYearsForm",
+      "controls": 34,
+      "layouts": 24,
+      "milliseconds": 15.488
+    },
+    {
+      "name": "SectionsForm",
+      "controls": 44,
+      "layouts": 31,
+      "milliseconds": 23.6491
+    },
+    {
+      "name": "SubjectsForm",
+      "controls": 58,
+      "layouts": 40,
+      "milliseconds": 47.7558
+    },
+    {
+      "name": "ClassroomsForm",
+      "controls": 41,
+      "layouts": 30,
+      "milliseconds": 27.1547
+    },
+    {
+      "name": "TimeSlotsForm",
+      "controls": 34,
+      "layouts": 25,
+      "milliseconds": 10.3486
+    },
+    {
+      "name": "FacultyMembersForm",
+      "controls": 37,
+      "layouts": 27,
+      "milliseconds": 49.1356
+    },
+    {
+      "name": "FacultyMemberSubjectsForm",
+      "controls": 47,
+      "layouts": 22,
+      "milliseconds": 28.0016
+    },
+    {
+      "name": "SchedulesForm",
+      "controls": 69,
+      "layouts": 39,
+      "milliseconds": 80.4732
+    }
+  ]
+}

@@ -1,0 +1,57 @@
+[
+  {
+    "project": "TimetableRegression",
+    "exitCode": 0,
+    "log": ".tmp/PresentationBllRefactoring/baseline-TimetableRegression.log"
+  },
+  {
+    "project": "PracticalExchange",
+    "exitCode": 0,
+    "log": ".tmp/PresentationBllRefactoring/baseline-PracticalExchange.log"
+  },
+  {
+    "project": "AssignmentLectureTypes",
+    "exitCode": 0,
+    "log": ".tmp/PresentationBllRefactoring/baseline-AssignmentLectureTypes.log"
+  },
+  {
+    "project": "AssignmentScopes",
+    "exitCode": 0,
+    "log": ".tmp/PresentationBllRefactoring/baseline-AssignmentScopes.log"
+  },
+  {
+    "project": "FourthYearPractical",
+    "exitCode": 0,
+    "log": ".tmp/PresentationBllRefactoring/baseline-FourthYearPractical.log"
+  },
+  {
+    "project": "SubjectLectureCounts",
+    "exitCode": 0,
+    "log": ".tmp/PresentationBllRefactoring/baseline-SubjectLectureCounts.log"
+  },
+  {
+    "project": "FacultyPreferences",
+    "exitCode": 0,
+    "log": ".tmp/PresentationBllRefactoring/baseline-FacultyPreferences.log"
+  },
+  {
+    "project": "FacultyScheduleEditor",
+    "exitCode": 0,
+    "log": ".tmp/PresentationBllRefactoring/baseline-FacultyScheduleEditor.log"
+  },
+  {
+    "project": "ImportedTimetableRepair",
+    "exitCode": 0,
+    "log": ".tmp/PresentationBllRefactoring/baseline-ImportedTimetableRepair.log"
+  },
+  {
+    "project": "ExcelImport",
+    "exitCode": 1,
+    "log": ".tmp/PresentationBllRefactoring/baseline-ExcelImport.log"
+  },
+  {
+    "project": "ApplicationAudit",
+    "exitCode": 1,
+    "log": ".tmp/PresentationBllRefactoring/baseline-ApplicationAudit.log"
+  }
+]

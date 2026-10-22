@@ -1,0 +1,31 @@
+ M Business_Logic_Layer/Rules/AcademicStructureRules.cs
+ M Business_Logic_Layer/Rules/InputValidation.cs
+ M Business_Logic_Layer/Services/BranchService.cs
+ M Business_Logic_Layer/Services/ClassroomService.cs
+ M Business_Logic_Layer/Services/FacultyMemberService.cs
+ M Business_Logic_Layer/Services/SchedulePdfExportService.cs
+ M Business_Logic_Layer/Services/ScheduleService.cs
+ M Business_Logic_Layer/Services/SectionService.cs
+ M Business_Logic_Layer/Services/StudyYearService.cs
+ M Business_Logic_Layer/Services/SubjectService.cs
+ M Business_Logic_Layer/Services/TimeSlotService.cs
+ M "University Timetable and Classroom Management System/PresentationLayer/BranchesForm.cs"
+ M "University Timetable and Classroom Management System/PresentationLayer/ClassroomsForm.cs"
+ M "University Timetable and Classroom Management System/PresentationLayer/FacultyMemberSubjectsForm.cs"
+ M "University Timetable and Classroom Management System/PresentationLayer/FacultyMembersForm.cs"
+ M "University Timetable and Classroom Management System/PresentationLayer/SchedulesForm.Actions.cs"
+ M "University Timetable and Classroom Management System/PresentationLayer/SectionsForm.cs"
+ M "University Timetable and Classroom Management System/PresentationLayer/StudyYearsForm.cs"
+ M "University Timetable and Classroom Management System/PresentationLayer/SubjectsForm.cs"
+ M "University Timetable and Classroom Management System/PresentationLayer/TimeSlotsForm.cs"
+ M tests/ApplicationAudit/Program.cs
+ M tests/DesignerCompatibility/Program.cs
+ M tests/ExcelImport/Program.cs
+ M tests/PdfExport/Program.cs
+?? Business_Logic_Layer.zip
+?? Data_Access_Layer.zip
+?? "University Timetable and Classroom Management System/PresentationLayer/Common/EditorAction.cs"
+?? docs/PRESENTATION_BLL_REFACTORING_REPORT.md
+?? docs/Verification/DalAudit/
+?? docs/Verification/PresentationBllRefactoring/
+?? tests/PresentationBllRefactoring/

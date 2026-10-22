@@ -30,7 +30,18 @@ namespace University_Timetable_and_Classroom_Management_System.BusinessLayer
                 return;
             }
 
-            await using var transaction = await context.Database.BeginTransactionAsync();
+            int identityColumns = await context.Database.SqlQuery<int>(
+                $"SELECT COUNT(*) AS [Value] FROM sys.identity_columns WHERE object_id = OBJECT_ID({tableName})")
+                .SingleAsync();
+            if (identityColumns == 0)
+            {
+                await context.SaveChangesAsync();
+                return;
+            }
+
+            // Reuse the caller's transaction so validation and saving remain atomic.
+            await using var transaction = context.Database.CurrentTransaction is null
+                ? await context.Database.BeginTransactionAsync() : null;
             var identityInsertEnabled = false;
 
             try
@@ -46,12 +57,7 @@ namespace University_Timetable_and_Classroom_Management_System.BusinessLayer
                 await context.Database.ExecuteSqlRawAsync($"SET IDENTITY_INSERT {tableName} OFF");
 #pragma warning restore EF1002
                 identityInsertEnabled = false;
-                await transaction.CommitAsync();
-            }
-            catch (Exception ex) when (!identityInsertEnabled && IsNoIdentityColumnError(ex))
-            {
-                await transaction.RollbackAsync();
-                await context.SaveChangesAsync();
+                if (transaction is not null) await transaction.CommitAsync();
             }
             catch
             {
@@ -73,17 +79,5 @@ namespace University_Timetable_and_Classroom_Management_System.BusinessLayer
             }
         }
 
-        private static bool IsNoIdentityColumnError(Exception exception)
-        {
-            for (var current = exception; current is not null; current = current.InnerException)
-            {
-                if (current.Message.Contains("does not have the identity property", StringComparison.OrdinalIgnoreCase))
-                {
-                    return true;
-                }
-            }
-
-            return false;
-        }
     }
 }

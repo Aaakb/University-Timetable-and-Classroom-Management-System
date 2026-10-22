@@ -1,0 +1,23 @@
+DAL audit baseline — 2026-10-23, Asia/Baghdad
+Source files were not changed by the audit.
+
+Command: dotnet build "University Timetable Management System.slnx" --no-restore --nologo
+Exit code: 0
+Built: Models, Data_Access_Layer, Business_Logic_Layer, UniversityTimetable.API, Presentation_Layer
+Build succeeded. 0 Warning(s), 0 Error(s). Elapsed: 00:00:02.99.
+This is a baseline compile with existing restored assets, not a database test.
+
+Command: dotnet run --project tests/PresentationBllRefactoring/PresentationBllRefactoring.csproj --no-restore --no-launch-profile
+Exit code: 1
+NETSDK1004: project.assets.json was missing for this test harness.
+
+Command: dotnet run --project tests/PresentationBllRefactoring/PresentationBllRefactoring.csproj --no-launch-profile
+Exit code: 0
+SUMMARY 51 checks; 0 failures
+Detailed results: baseline-checks.json
+Coverage: 9 editor action/control-flow checks, 42 BLL RecordId validation checks.
+No database connection is used by these checks. They do not establish DAL integration safety.
+
+SQL-backed harnesses were inspected but not executed because their setup performs database/schema creation or other DDL.
+No application startup, migration, schema command, CRUD, backup or restore was executed.
+Database schema, stored data, runtime relationship loading, runtime DI resolution, transaction behavior and scheduling queries remain unverified at runtime.

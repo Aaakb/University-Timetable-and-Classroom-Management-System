@@ -1,0 +1,7 @@
+PASS: all 132 lessons round-trip through ScheduleService validation without changes.
+PASS: first-year practical sessions still require an explicit group.
+PASS: whole-section practical uses all 30 seats, not half the section.
+PASS: whole-section practical blocks overlapping subgroup lessons.
+PASS: all 132 lessons appear in the display view with faculty names.
+PASS: all 145 retained semester-2 lessons satisfy the updated room and capacity rules.
+PASS: application startup preserves all 277 saved lessons.

@@ -94,6 +94,9 @@ namespace University_Timetable_and_Classroom_Management_System.BusinessLayer
                 return "Enter the user name.";
             }
 
+            if (fullName.Length > 150 || userName.Length > 50)
+                return "Full name must be 150 characters or fewer, and user name 50 characters or fewer.";
+
             if (userName.Length < 3)
             {
                 return "User name must be at least 3 characters.";

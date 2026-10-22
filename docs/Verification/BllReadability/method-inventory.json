@@ -1,0 +1,3194 @@
+[
+  {
+    "File": "Business_Logic_Layer\\Services\\TimeSlotService.cs",
+    "Method": "ValidateLectureRange",
+    "Line": 11,
+    "Lines": 10,
+    "Parameters": 2,
+    "BranchNodes": 2
+  },
+  {
+    "File": "Business_Logic_Layer\\Services\\TimeSlotService.cs",
+    "Method": "GetAllAsync",
+    "Line": 22,
+    "Lines": 11,
+    "Parameters": 0,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Services\\TimeSlotService.cs",
+    "Method": "GetByIdAsync",
+    "Line": 34,
+    "Lines": 9,
+    "Parameters": 1,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Services\\TimeSlotService.cs",
+    "Method": "AddAsync",
+    "Line": 44,
+    "Lines": 9,
+    "Parameters": 1,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Services\\TimeSlotService.cs",
+    "Method": "AddInContextAsync",
+    "Line": 54,
+    "Lines": 8,
+    "Parameters": 2,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Services\\TimeSlotService.cs",
+    "Method": "UpdateAsync",
+    "Line": 64,
+    "Lines": 8,
+    "Parameters": 1,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Services\\TimeSlotService.cs",
+    "Method": "UpdateInContextAsync",
+    "Line": 73,
+    "Lines": 9,
+    "Parameters": 2,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Services\\TimeSlotService.cs",
+    "Method": "DeleteAsync",
+    "Line": 84,
+    "Lines": 9,
+    "Parameters": 1,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Services\\TimeSlotService.cs",
+    "Method": "ValidateAsync",
+    "Line": 94,
+    "Lines": 33,
+    "Parameters": 3,
+    "BranchNodes": 2
+  },
+  {
+    "File": "Business_Logic_Layer\\Services\\SubjectService.cs",
+    "Method": "GetAllAsync",
+    "Line": 9,
+    "Lines": 17,
+    "Parameters": 0,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Services\\SubjectService.cs",
+    "Method": "GetByIdAsync",
+    "Line": 27,
+    "Lines": 9,
+    "Parameters": 1,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Services\\SubjectService.cs",
+    "Method": "AddAsync",
+    "Line": 37,
+    "Lines": 6,
+    "Parameters": 1,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Services\\SubjectService.cs",
+    "Method": "AddInContextAsync",
+    "Line": 44,
+    "Lines": 9,
+    "Parameters": 2,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Services\\SubjectService.cs",
+    "Method": "UpdateAsync",
+    "Line": 55,
+    "Lines": 8,
+    "Parameters": 1,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Services\\SubjectService.cs",
+    "Method": "UpdateInContextAsync",
+    "Line": 64,
+    "Lines": 49,
+    "Parameters": 2,
+    "BranchNodes": 7
+  },
+  {
+    "File": "Business_Logic_Layer\\Services\\SubjectService.cs",
+    "Method": "DeleteAsync",
+    "Line": 115,
+    "Lines": 11,
+    "Parameters": 1,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Services\\SubjectService.cs",
+    "Method": "ValidateAsync",
+    "Line": 127,
+    "Lines": 59,
+    "Parameters": 3,
+    "BranchNodes": 8
+  },
+  {
+    "File": "Business_Logic_Layer\\Services\\StudyYearService.cs",
+    "Method": "GetAllAsync",
+    "Line": 9,
+    "Lines": 10,
+    "Parameters": 0,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Services\\StudyYearService.cs",
+    "Method": "GetByIdAsync",
+    "Line": 20,
+    "Lines": 5,
+    "Parameters": 1,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Services\\StudyYearService.cs",
+    "Method": "AddAsync",
+    "Line": 26,
+    "Lines": 6,
+    "Parameters": 1,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Services\\StudyYearService.cs",
+    "Method": "AddInContextAsync",
+    "Line": 33,
+    "Lines": 7,
+    "Parameters": 2,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Services\\StudyYearService.cs",
+    "Method": "UpdateAsync",
+    "Line": 42,
+    "Lines": 5,
+    "Parameters": 1,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Services\\StudyYearService.cs",
+    "Method": "UpdateInContextAsync",
+    "Line": 48,
+    "Lines": 7,
+    "Parameters": 2,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Services\\StudyYearService.cs",
+    "Method": "DeleteAsync",
+    "Line": 57,
+    "Lines": 9,
+    "Parameters": 1,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Services\\StudyYearService.cs",
+    "Method": "ValidateAsync",
+    "Line": 67,
+    "Lines": 20,
+    "Parameters": 3,
+    "BranchNodes": 2
+  },
+  {
+    "File": "Business_Logic_Layer\\Services\\SectionService.cs",
+    "Method": "GetAllAsync",
+    "Line": 9,
+    "Lines": 9,
+    "Parameters": 0,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Services\\SectionService.cs",
+    "Method": "GetByIdAsync",
+    "Line": 19,
+    "Lines": 9,
+    "Parameters": 1,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Services\\SectionService.cs",
+    "Method": "AddAsync",
+    "Line": 29,
+    "Lines": 6,
+    "Parameters": 1,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Services\\SectionService.cs",
+    "Method": "AddInContextAsync",
+    "Line": 36,
+    "Lines": 7,
+    "Parameters": 2,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Services\\SectionService.cs",
+    "Method": "UpdateAsync",
+    "Line": 45,
+    "Lines": 8,
+    "Parameters": 1,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Services\\SectionService.cs",
+    "Method": "UpdateInContextAsync",
+    "Line": 54,
+    "Lines": 19,
+    "Parameters": 2,
+    "BranchNodes": 3
+  },
+  {
+    "File": "Business_Logic_Layer\\Services\\SectionService.cs",
+    "Method": "DeleteAsync",
+    "Line": 75,
+    "Lines": 9,
+    "Parameters": 1,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Services\\SectionService.cs",
+    "Method": "ValidateAsync",
+    "Line": 85,
+    "Lines": 58,
+    "Parameters": 3,
+    "BranchNodes": 8
+  },
+  {
+    "File": "Business_Logic_Layer\\Services\\ScheduleService.cs",
+    "Method": "GetAllAsync",
+    "Line": 9,
+    "Lines": 14,
+    "Parameters": 0,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Services\\ScheduleService.cs",
+    "Method": "GetScheduleDetailsAsync",
+    "Line": 24,
+    "Lines": 4,
+    "Parameters": 0,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Services\\ScheduleService.cs",
+    "Method": "GetScheduleDetailsByFiltersAsync",
+    "Line": 29,
+    "Lines": 57,
+    "Parameters": 5,
+    "BranchNodes": 6
+  },
+  {
+    "File": "Business_Logic_Layer\\Services\\ScheduleService.cs",
+    "Method": "GetByIdAsync",
+    "Line": 87,
+    "Lines": 14,
+    "Parameters": 1,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Services\\ScheduleService.cs",
+    "Method": "AddAsync",
+    "Line": 102,
+    "Lines": 10,
+    "Parameters": 1,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Services\\ScheduleService.cs",
+    "Method": "UpdateAsync",
+    "Line": 113,
+    "Lines": 14,
+    "Parameters": 1,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Services\\ScheduleService.cs",
+    "Method": "DeleteAsync",
+    "Line": 128,
+    "Lines": 9,
+    "Parameters": 1,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Services\\ScheduleService.cs",
+    "Method": "SetLockedAsync",
+    "Line": 138,
+    "Lines": 8,
+    "Parameters": 2,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Services\\ScheduleService.cs",
+    "Method": "GenerateAsync",
+    "Line": 147,
+    "Lines": 1,
+    "Parameters": 0,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Services\\ScheduleService.cs",
+    "Method": "RegenerateAsync",
+    "Line": 149,
+    "Lines": 2,
+    "Parameters": 1,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Services\\ScheduleService.cs",
+    "Method": "BuildTimetableAsync",
+    "Line": 152,
+    "Lines": 352,
+    "Parameters": 2,
+    "BranchNodes": 53
+  },
+  {
+    "File": "Business_Logic_Layer\\Services\\ScheduleService.cs",
+    "Method": "ValidateAsync",
+    "Line": 505,
+    "Lines": 2,
+    "Parameters": 4,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Services\\ScheduleService.cs",
+    "Method": "ValidateBackupLectureAsync",
+    "Line": 510,
+    "Lines": 2,
+    "Parameters": 2,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Services\\ScheduleService.cs",
+    "Method": "ValidateCoreAsync",
+    "Line": 513,
+    "Lines": 117,
+    "Parameters": 5,
+    "BranchNodes": 19
+  },
+  {
+    "File": "Business_Logic_Layer\\Services\\ScheduleService.cs",
+    "Method": "EnsureNoConflictsAsync",
+    "Line": 631,
+    "Lines": 17,
+    "Parameters": 3,
+    "BranchNodes": 3
+  },
+  {
+    "File": "Business_Logic_Layer\\Services\\ScheduleService.cs",
+    "Method": "CanFacultyTeachSubjectAsync",
+    "Line": 649,
+    "Lines": 12,
+    "Parameters": 5,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Services\\ScheduleService.cs",
+    "Method": "EnsureBaseSectionIsUsed",
+    "Line": 662,
+    "Lines": 14,
+    "Parameters": 1,
+    "BranchNodes": 2
+  },
+  {
+    "File": "Business_Logic_Layer\\Services\\ScheduleService.cs",
+    "Method": "IsSchedulableSection",
+    "Line": 677,
+    "Lines": 4,
+    "Parameters": 1,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Services\\ScheduleService.cs",
+    "Method": "NormalizeLectureTypeAndGroup",
+    "Line": 682,
+    "Lines": 30,
+    "Parameters": 2,
+    "BranchNodes": 5
+  },
+  {
+    "File": "Business_Logic_Layer\\Services\\ScheduleService.cs",
+    "Method": "IsValidGroupForSection",
+    "Line": 713,
+    "Lines": 18,
+    "Parameters": 2,
+    "BranchNodes": 2
+  },
+  {
+    "File": "Business_Logic_Layer\\Services\\ScheduleService.cs",
+    "Method": "NormalizeLectureType",
+    "Line": 732,
+    "Lines": 15,
+    "Parameters": 1,
+    "BranchNodes": 2
+  },
+  {
+    "File": "Business_Logic_Layer\\Services\\ScheduleService.cs",
+    "Method": "StudyYearOrder",
+    "Line": 748,
+    "Lines": 4,
+    "Parameters": 1,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Services\\SchedulePdfExportService.cs",
+    "Method": "ExportAsync",
+    "Line": 30,
+    "Lines": 6,
+    "Parameters": 3,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Services\\SchedulePdfExportService.cs",
+    "Method": "BuildPdf",
+    "Line": 37,
+    "Lines": 15,
+    "Parameters": 2,
+    "BranchNodes": 1
+  },
+  {
+    "File": "Business_Logic_Layer\\Services\\SchedulePdfExportService.cs",
+    "Method": "LoadWindowsNativeLibraries",
+    "Line": 53,
+    "Lines": 30,
+    "Parameters": 0,
+    "BranchNodes": 10
+  },
+  {
+    "File": "Business_Logic_Layer\\Services\\SchedulePdfExportService.cs",
+    "Method": "BuildPages",
+    "Line": 84,
+    "Lines": 33,
+    "Parameters": 2,
+    "BranchNodes": 6
+  },
+  {
+    "File": "Business_Logic_Layer\\Services\\SchedulePdfExportService.cs",
+    "Method": "WritePageTitle",
+    "Line": 118,
+    "Lines": 12,
+    "Parameters": 2,
+    "BranchNodes": 3
+  },
+  {
+    "File": "Business_Logic_Layer\\Services\\SchedulePdfExportService.cs",
+    "Method": "DrawTable",
+    "Line": 131,
+    "Lines": 50,
+    "Parameters": 5,
+    "BranchNodes": 6
+  },
+  {
+    "File": "Business_Logic_Layer\\Services\\SchedulePdfExportService.cs",
+    "Method": "WriteHeader",
+    "Line": 182,
+    "Lines": 11,
+    "Parameters": 3,
+    "BranchNodes": 1
+  },
+  {
+    "File": "Business_Logic_Layer\\Services\\SchedulePdfExportService.cs",
+    "Method": "WriteBreakCells",
+    "Line": 194,
+    "Lines": 13,
+    "Parameters": 5,
+    "BranchNodes": 1
+  },
+  {
+    "File": "Business_Logic_Layer\\Services\\SchedulePdfExportService.cs",
+    "Method": "WriteLectureCells",
+    "Line": 208,
+    "Lines": 31,
+    "Parameters": 8,
+    "BranchNodes": 2
+  },
+  {
+    "File": "Business_Logic_Layer\\Services\\SchedulePdfExportService.cs",
+    "Method": "WriteCellEntries",
+    "Line": 240,
+    "Lines": 44,
+    "Parameters": 6,
+    "BranchNodes": 7
+  },
+  {
+    "File": "Business_Logic_Layer\\Services\\SchedulePdfExportService.cs",
+    "Method": "GetPageDays",
+    "Line": 285,
+    "Lines": 9,
+    "Parameters": 1,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Services\\SchedulePdfExportService.cs",
+    "Method": "BuildTimeline",
+    "Line": 295,
+    "Lines": 39,
+    "Parameters": 1,
+    "BranchNodes": 3
+  },
+  {
+    "File": "Business_Logic_Layer\\Services\\SchedulePdfExportService.cs",
+    "Method": "HasConfiguredBreak",
+    "Line": 335,
+    "Lines": 4,
+    "Parameters": 0,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Services\\SchedulePdfExportService.cs",
+    "Method": "GetCellMaxLength",
+    "Line": 340,
+    "Lines": 4,
+    "Parameters": 1,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Services\\SchedulePdfExportService.cs",
+    "Method": "BuildTypeLabel",
+    "Line": 345,
+    "Lines": 6,
+    "Parameters": 1,
+    "BranchNodes": 1
+  },
+  {
+    "File": "Business_Logic_Layer\\Services\\SchedulePdfExportService.cs",
+    "Method": "BuildGroupLabel",
+    "Line": 352,
+    "Lines": 8,
+    "Parameters": 1,
+    "BranchNodes": 1
+  },
+  {
+    "File": "Business_Logic_Layer\\Services\\SchedulePdfExportService.cs",
+    "Method": "NormalizeBranch",
+    "Line": 361,
+    "Lines": 6,
+    "Parameters": 1,
+    "BranchNodes": 1
+  },
+  {
+    "File": "Business_Logic_Layer\\Services\\SchedulePdfExportService.cs",
+    "Method": "CleanSection",
+    "Line": 368,
+    "Lines": 4,
+    "Parameters": 1,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Services\\SchedulePdfExportService.cs",
+    "Method": "ParseDisplayTime",
+    "Line": 373,
+    "Lines": 11,
+    "Parameters": 1,
+    "BranchNodes": 1
+  },
+  {
+    "File": "Business_Logic_Layer\\Services\\SchedulePdfExportService.cs",
+    "Method": "FormatDisplayTime",
+    "Line": 385,
+    "Lines": 4,
+    "Parameters": 1,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Services\\SchedulePdfExportService.cs",
+    "Method": "StudyYearOrder",
+    "Line": 390,
+    "Lines": 4,
+    "Parameters": 1,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Services\\SchedulePdfExportService.cs",
+    "Method": "DayOrder",
+    "Line": 395,
+    "Lines": 4,
+    "Parameters": 1,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Services\\SchedulePdfExportService.cs",
+    "Method": "DayColumnX",
+    "Line": 400,
+    "Lines": 2,
+    "Parameters": 2,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Services\\SchedulePdfExportService.cs",
+    "Method": "DisplayDay",
+    "Line": 403,
+    "Lines": 9,
+    "Parameters": 1,
+    "BranchNodes": 6
+  },
+  {
+    "File": "Business_Logic_Layer\\Services\\SchedulePdfExportService.cs",
+    "Method": "BuildAcademicContext",
+    "Line": 413,
+    "Lines": 20,
+    "Parameters": 1,
+    "BranchNodes": 10
+  },
+  {
+    "File": "Business_Logic_Layer\\Services\\SchedulePdfExportService.cs",
+    "Method": "DrawVerticalLines",
+    "Line": 434,
+    "Lines": 10,
+    "Parameters": 4,
+    "BranchNodes": 1
+  },
+  {
+    "File": "Business_Logic_Layer\\Services\\SchedulePdfExportService.cs",
+    "Method": "WriteText",
+    "Line": 445,
+    "Lines": 8,
+    "Parameters": 7,
+    "BranchNodes": 1
+  },
+  {
+    "File": "Business_Logic_Layer\\Services\\SchedulePdfExportService.cs",
+    "Method": "ParseColor",
+    "Line": 454,
+    "Lines": 5,
+    "Parameters": 1,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Services\\SchedulePdfExportService.cs",
+    "Method": "DrawFilledRect",
+    "Line": 460,
+    "Lines": 5,
+    "Parameters": 6,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Services\\SchedulePdfExportService.cs",
+    "Method": "DrawRect",
+    "Line": 466,
+    "Lines": 5,
+    "Parameters": 6,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Services\\SchedulePdfExportService.cs",
+    "Method": "DrawLine",
+    "Line": 472,
+    "Lines": 5,
+    "Parameters": 6,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Services\\SchedulePdfExportService.cs",
+    "Method": "Shorten",
+    "Line": 478,
+    "Lines": 5,
+    "Parameters": 2,
+    "BranchNodes": 2
+  },
+  {
+    "File": "Business_Logic_Layer\\Services\\FacultyMemberSubjectService.cs",
+    "Method": "GetAllAsync",
+    "Line": 9,
+    "Lines": 13,
+    "Parameters": 0,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Services\\FacultyMemberSubjectService.cs",
+    "Method": "GetByIdAsync",
+    "Line": 23,
+    "Lines": 11,
+    "Parameters": 2,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Services\\FacultyMemberSubjectService.cs",
+    "Method": "AddAsync",
+    "Line": 35,
+    "Lines": 8,
+    "Parameters": 1,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Services\\FacultyMemberSubjectService.cs",
+    "Method": "UpdateAsync",
+    "Line": 44,
+    "Lines": 42,
+    "Parameters": 3,
+    "BranchNodes": 4
+  },
+  {
+    "File": "Business_Logic_Layer\\Services\\FacultyMemberSubjectService.cs",
+    "Method": "DeleteAsync",
+    "Line": 87,
+    "Lines": 15,
+    "Parameters": 2,
+    "BranchNodes": 1
+  },
+  {
+    "File": "Business_Logic_Layer\\Services\\FacultyMemberSubjectService.cs",
+    "Method": "EnsureAssignmentIsUnusedAsync",
+    "Line": 103,
+    "Lines": 11,
+    "Parameters": 3,
+    "BranchNodes": 1
+  },
+  {
+    "File": "Business_Logic_Layer\\Services\\FacultyMemberSubjectService.cs",
+    "Method": "ValidateAsync",
+    "Line": 115,
+    "Lines": 39,
+    "Parameters": 4,
+    "BranchNodes": 5
+  },
+  {
+    "File": "Business_Logic_Layer\\Services\\FacultyMemberService.cs",
+    "Method": "GetAllAsync",
+    "Line": 9,
+    "Lines": 5,
+    "Parameters": 0,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Services\\FacultyMemberService.cs",
+    "Method": "GetByIdAsync",
+    "Line": 15,
+    "Lines": 5,
+    "Parameters": 1,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Services\\FacultyMemberService.cs",
+    "Method": "AddAsync",
+    "Line": 21,
+    "Lines": 6,
+    "Parameters": 1,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Services\\FacultyMemberService.cs",
+    "Method": "AddInContextAsync",
+    "Line": 28,
+    "Lines": 7,
+    "Parameters": 2,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Services\\FacultyMemberService.cs",
+    "Method": "UpdateAsync",
+    "Line": 37,
+    "Lines": 5,
+    "Parameters": 1,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Services\\FacultyMemberService.cs",
+    "Method": "UpdateInContextAsync",
+    "Line": 43,
+    "Lines": 7,
+    "Parameters": 2,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Services\\FacultyMemberService.cs",
+    "Method": "DeleteAsync",
+    "Line": 52,
+    "Lines": 9,
+    "Parameters": 1,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Services\\FacultyMemberService.cs",
+    "Method": "ValidateAsync",
+    "Line": 62,
+    "Lines": 26,
+    "Parameters": 3,
+    "BranchNodes": 3
+  },
+  {
+    "File": "Business_Logic_Layer\\Services\\ClassroomService.cs",
+    "Method": "GetAllAsync",
+    "Line": 9,
+    "Lines": 7,
+    "Parameters": 0,
+    "BranchNodes": 1
+  },
+  {
+    "File": "Business_Logic_Layer\\Services\\ClassroomService.cs",
+    "Method": "GetByIdAsync",
+    "Line": 17,
+    "Lines": 5,
+    "Parameters": 1,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Services\\ClassroomService.cs",
+    "Method": "AddAsync",
+    "Line": 23,
+    "Lines": 6,
+    "Parameters": 1,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Services\\ClassroomService.cs",
+    "Method": "AddInContextAsync",
+    "Line": 30,
+    "Lines": 7,
+    "Parameters": 2,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Services\\ClassroomService.cs",
+    "Method": "UpdateAsync",
+    "Line": 39,
+    "Lines": 8,
+    "Parameters": 1,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Services\\ClassroomService.cs",
+    "Method": "UpdateInContextAsync",
+    "Line": 48,
+    "Lines": 13,
+    "Parameters": 2,
+    "BranchNodes": 1
+  },
+  {
+    "File": "Business_Logic_Layer\\Services\\ClassroomService.cs",
+    "Method": "DeleteAsync",
+    "Line": 63,
+    "Lines": 9,
+    "Parameters": 1,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Services\\ClassroomService.cs",
+    "Method": "ValidateAsync",
+    "Line": 73,
+    "Lines": 28,
+    "Parameters": 3,
+    "BranchNodes": 3
+  },
+  {
+    "File": "Business_Logic_Layer\\Services\\BranchService.cs",
+    "Method": "GetAllAsync",
+    "Line": 9,
+    "Lines": 5,
+    "Parameters": 0,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Services\\BranchService.cs",
+    "Method": "GetByIdAsync",
+    "Line": 15,
+    "Lines": 5,
+    "Parameters": 1,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Services\\BranchService.cs",
+    "Method": "AddAsync",
+    "Line": 21,
+    "Lines": 6,
+    "Parameters": 1,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Services\\BranchService.cs",
+    "Method": "AddInContextAsync",
+    "Line": 28,
+    "Lines": 7,
+    "Parameters": 2,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Services\\BranchService.cs",
+    "Method": "UpdateAsync",
+    "Line": 37,
+    "Lines": 5,
+    "Parameters": 1,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Services\\BranchService.cs",
+    "Method": "UpdateInContextAsync",
+    "Line": 43,
+    "Lines": 7,
+    "Parameters": 2,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Services\\BranchService.cs",
+    "Method": "DeleteAsync",
+    "Line": 52,
+    "Lines": 9,
+    "Parameters": 1,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Services\\BranchService.cs",
+    "Method": "ValidateAsync",
+    "Line": 62,
+    "Lines": 20,
+    "Parameters": 3,
+    "BranchNodes": 2
+  },
+  {
+    "File": "Business_Logic_Layer\\Services\\AuthService.cs",
+    "Method": "SignInAsync",
+    "Line": 15,
+    "Lines": 21,
+    "Parameters": 2,
+    "BranchNodes": 2
+  },
+  {
+    "File": "Business_Logic_Layer\\Services\\AuthService.cs",
+    "Method": "RegisterAsync",
+    "Line": 37,
+    "Lines": 43,
+    "Parameters": 4,
+    "BranchNodes": 2
+  },
+  {
+    "File": "Business_Logic_Layer\\Services\\AuthService.cs",
+    "Method": "ValidateRegistration",
+    "Line": 81,
+    "Lines": 36,
+    "Parameters": 4,
+    "BranchNodes": 6
+  },
+  {
+    "File": "Business_Logic_Layer\\Services\\AuthService.cs",
+    "Method": "NormalizeUserName",
+    "Line": 118,
+    "Lines": 4,
+    "Parameters": 1,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Services\\AuthService.cs",
+    "Method": "HashPassword",
+    "Line": 123,
+    "Lines": 12,
+    "Parameters": 1,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Services\\AuthService.cs",
+    "Method": "VerifyPassword",
+    "Line": 136,
+    "Lines": 13,
+    "Parameters": 3,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Services\\AuthService.cs",
+    "Method": "Success",
+    "Line": 153,
+    "Lines": 4,
+    "Parameters": 2,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Services\\AuthService.cs",
+    "Method": "Failed",
+    "Line": 158,
+    "Lines": 4,
+    "Parameters": 1,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Scheduling\\TimetableAlternativesService.cs",
+    "Method": "SnapshotAsync",
+    "Line": 15,
+    "Lines": 5,
+    "Parameters": 1,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Scheduling\\TimetableAlternativesService.cs",
+    "Method": "GetCurrentAsync",
+    "Line": 20,
+    "Lines": 6,
+    "Parameters": 2,
+    "BranchNodes": 1
+  },
+  {
+    "File": "Business_Logic_Layer\\Scheduling\\TimetableAlternativesService.cs",
+    "Method": "GenerateAsync",
+    "Line": 26,
+    "Lines": 41,
+    "Parameters": 2,
+    "BranchNodes": 14
+  },
+  {
+    "File": "Business_Logic_Layer\\Scheduling\\TimetableAlternativesService.cs",
+    "Method": "SaveAsync",
+    "Line": 67,
+    "Lines": 14,
+    "Parameters": 3,
+    "BranchNodes": 4
+  },
+  {
+    "File": "Business_Logic_Layer\\Scheduling\\TimetableAlternativesService.cs",
+    "Method": "SetLocksAsync",
+    "Line": 81,
+    "Lines": 11,
+    "Parameters": 5,
+    "BranchNodes": 3
+  },
+  {
+    "File": "Business_Logic_Layer\\Scheduling\\TimetableAlternativesService.cs",
+    "Method": "ValidateAsync",
+    "Line": 92,
+    "Lines": 20,
+    "Parameters": 4,
+    "BranchNodes": 6
+  },
+  {
+    "File": "Business_Logic_Layer\\Scheduling\\TimetableAlternativesService.cs",
+    "Method": "Describe",
+    "Line": 112,
+    "Lines": 24,
+    "Parameters": 6,
+    "BranchNodes": 3
+  },
+  {
+    "File": "Business_Logic_Layer\\Scheduling\\ScheduleRoomSelector.cs",
+    "Method": "HasCapacity",
+    "Line": 7,
+    "Lines": 4,
+    "Parameters": 2,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Scheduling\\ScheduleRoomSelector.cs",
+    "Method": "HasCapacity",
+    "Line": 12,
+    "Lines": 4,
+    "Parameters": 3,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Scheduling\\ScheduleRoomSelector.cs",
+    "Method": "GetRequiredCapacity",
+    "Line": 17,
+    "Lines": 10,
+    "Parameters": 2,
+    "BranchNodes": 1
+  },
+  {
+    "File": "Business_Logic_Layer\\Scheduling\\ScheduleRoomSelector.cs",
+    "Method": "EnsureMatchesLectureType",
+    "Line": 28,
+    "Lines": 14,
+    "Parameters": 2,
+    "BranchNodes": 2
+  },
+  {
+    "File": "Business_Logic_Layer\\Scheduling\\ScheduleRoomSelector.cs",
+    "Method": "GetTargetClassrooms",
+    "Line": 43,
+    "Lines": 12,
+    "Parameters": 3,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Scheduling\\ScheduleRoomSelector.cs",
+    "Method": "MatchesLectureType",
+    "Line": 56,
+    "Lines": 8,
+    "Parameters": 2,
+    "BranchNodes": 1
+  },
+  {
+    "File": "Business_Logic_Layer\\Scheduling\\ScheduleRequirementMatcher.cs",
+    "Method": "Remaining",
+    "Line": 7,
+    "Lines": 15,
+    "Parameters": 2,
+    "BranchNodes": 2
+  },
+  {
+    "File": "Business_Logic_Layer\\Scheduling\\ScheduleGenerator.cs",
+    "Method": "BuildPlan",
+    "Line": 7,
+    "Lines": 100,
+    "Parameters": 2,
+    "BranchNodes": 13
+  },
+  {
+    "File": "Business_Logic_Layer\\Scheduling\\ScheduleGenerator.cs",
+    "Method": "PlacePracticalExchangeBlocks",
+    "Line": 108,
+    "Lines": 96,
+    "Parameters": 5,
+    "BranchNodes": 16
+  },
+  {
+    "File": "Business_Logic_Layer\\Scheduling\\ScheduleGenerator.cs",
+    "Method": "TryPlaceSinglePracticalSubject",
+    "Line": 205,
+    "Lines": 19,
+    "Parameters": 3,
+    "BranchNodes": 4
+  },
+  {
+    "File": "Business_Logic_Layer\\Scheduling\\ScheduleGenerator.cs",
+    "Method": "FindExchangeCounterpart",
+    "Line": 225,
+    "Lines": 15,
+    "Parameters": 4,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Scheduling\\ScheduleGenerator.cs",
+    "Method": "TryPlacePracticalExchangeBlock",
+    "Line": 241,
+    "Lines": 65,
+    "Parameters": 6,
+    "BranchNodes": 8
+  },
+  {
+    "File": "Business_Logic_Layer\\Scheduling\\ScheduleGenerator.cs",
+    "Method": "GetSameSlotExchangeCandidates",
+    "Line": 307,
+    "Lines": 12,
+    "Parameters": 2,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Scheduling\\ScheduleGenerator.cs",
+    "Method": "GetNextSlotExchangeCandidates",
+    "Line": 320,
+    "Lines": 17,
+    "Parameters": 3,
+    "BranchNodes": 1
+  },
+  {
+    "File": "Business_Logic_Layer\\Scheduling\\ScheduleGenerator.cs",
+    "Method": "TryBuildExchangeSchedules",
+    "Line": 338,
+    "Lines": 46,
+    "Parameters": 10,
+    "BranchNodes": 5
+  },
+  {
+    "File": "Business_Logic_Layer\\Scheduling\\ScheduleGenerator.cs",
+    "Method": "IsGroupedPracticalRequest",
+    "Line": 385,
+    "Lines": 5,
+    "Parameters": 1,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Scheduling\\ScheduleGenerator.cs",
+    "Method": "IsPracticalRequest",
+    "Line": 391,
+    "Lines": 2,
+    "Parameters": 1,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Scheduling\\ScheduleGenerator.cs",
+    "Method": "CanExchangePracticals",
+    "Line": 394,
+    "Lines": 10,
+    "Parameters": 2,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Scheduling\\ScheduleGenerator.cs",
+    "Method": "TryPlaceFast",
+    "Line": 405,
+    "Lines": 18,
+    "Parameters": 3,
+    "BranchNodes": 2
+  },
+  {
+    "File": "Business_Logic_Layer\\Scheduling\\ScheduleGenerator.cs",
+    "Method": "TryPlaceWithRepair",
+    "Line": 424,
+    "Lines": 84,
+    "Parameters": 5,
+    "BranchNodes": 12
+  },
+  {
+    "File": "Business_Logic_Layer\\Scheduling\\ScheduleGenerator.cs",
+    "Method": "CreateOrderedPlacements",
+    "Line": 509,
+    "Lines": 28,
+    "Parameters": 3,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Scheduling\\ScheduleGenerator.cs",
+    "Method": "BuildScheduleDayPlans",
+    "Line": 538,
+    "Lines": 20,
+    "Parameters": 2,
+    "BranchNodes": 1
+  },
+  {
+    "File": "Business_Logic_Layer\\Scheduling\\ScheduleGenerator.cs",
+    "Method": "CountRequiredScheduleBlocks",
+    "Line": 559,
+    "Lines": 21,
+    "Parameters": 1,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Scheduling\\ScheduleGenerator.cs",
+    "Method": "CreateScheduleDayPlanKey",
+    "Line": 581,
+    "Lines": 7,
+    "Parameters": 1,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Scheduling\\ScheduleGenerator.cs",
+    "Method": "FindPlanForSchedule",
+    "Line": 589,
+    "Lines": 11,
+    "Parameters": 2,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Scheduling\\ScheduleGenerator.cs",
+    "Method": "CreatePlacementCandidates",
+    "Line": 601,
+    "Lines": 30,
+    "Parameters": 4,
+    "BranchNodes": 4
+  },
+  {
+    "File": "Business_Logic_Layer\\Scheduling\\ScheduleGenerator.cs",
+    "Method": "BuildSchedule",
+    "Line": 632,
+    "Lines": 23,
+    "Parameters": 3,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Scheduling\\ScheduleGenerator.cs",
+    "Method": "CalculateRequestDifficulty",
+    "Line": 656,
+    "Lines": 19,
+    "Parameters": 1,
+    "BranchNodes": 2
+  },
+  {
+    "File": "Business_Logic_Layer\\Scheduling\\ScheduleGenerator.cs",
+    "Method": "CreateScheduleRequests",
+    "Line": 676,
+    "Lines": 13,
+    "Parameters": 3,
+    "BranchNodes": 3
+  },
+  {
+    "File": "Business_Logic_Layer\\Scheduling\\ScheduleGenerator.cs",
+    "Method": "CreateScheduleRequests",
+    "Line": 690,
+    "Lines": 61,
+    "Parameters": 2,
+    "BranchNodes": 6
+  },
+  {
+    "File": "Business_Logic_Layer\\Scheduling\\ScheduleGenerator.cs",
+    "Method": "CalculateTheoryLessonCount",
+    "Line": 752,
+    "Lines": 4,
+    "Parameters": 1,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Scheduling\\ScheduleGenerator.cs",
+    "Method": "CalculatePracticalLessonCount",
+    "Line": 757,
+    "Lines": 4,
+    "Parameters": 1,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Scheduling\\ScheduleGenerator.cs",
+    "Method": "GetPracticalGroupsForSection",
+    "Line": 762,
+    "Lines": 4,
+    "Parameters": 1,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Scheduling\\ScheduleGenerationState.cs",
+    "Method": "TryRepairStep",
+    "Line": 38,
+    "Lines": 6,
+    "Parameters": 0,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Scheduling\\ScheduleGenerationState.cs",
+    "Method": "CanPlaceTogether",
+    "Line": 44,
+    "Lines": 5,
+    "Parameters": 1,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Scheduling\\ScheduleGenerationState.cs",
+    "Method": "SeedFixed",
+    "Line": 50,
+    "Lines": 9,
+    "Parameters": 1,
+    "BranchNodes": 2
+  },
+  {
+    "File": "Business_Logic_Layer\\Scheduling\\ScheduleGenerationState.cs",
+    "Method": "IsFixed",
+    "Line": 60,
+    "Lines": 1,
+    "Parameters": 1,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Scheduling\\ScheduleGenerationState.cs",
+    "Method": "GetOrderedFacultyOptions",
+    "Line": 62,
+    "Lines": 12,
+    "Parameters": 3,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Scheduling\\ScheduleGenerationState.cs",
+    "Method": "CanPlace",
+    "Line": 75,
+    "Lines": 24,
+    "Parameters": 1,
+    "BranchNodes": 4
+  },
+  {
+    "File": "Business_Logic_Layer\\Scheduling\\ScheduleGenerationState.cs",
+    "Method": "HasSameSubjectSectionOnDay",
+    "Line": 100,
+    "Lines": 12,
+    "Parameters": 1,
+    "BranchNodes": 1
+  },
+  {
+    "File": "Business_Logic_Layer\\Scheduling\\ScheduleGenerationState.cs",
+    "Method": "ScorePlacement",
+    "Line": 113,
+    "Lines": 40,
+    "Parameters": 2,
+    "BranchNodes": 8
+  },
+  {
+    "File": "Business_Logic_Layer\\Scheduling\\ScheduleGenerationState.cs",
+    "Method": "VariationOrder",
+    "Line": 154,
+    "Lines": 4,
+    "Parameters": 4,
+    "BranchNodes": 1
+  },
+  {
+    "File": "Business_Logic_Layer\\Scheduling\\ScheduleGenerationState.cs",
+    "Method": "Add",
+    "Line": 159,
+    "Lines": 5,
+    "Parameters": 1,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Scheduling\\ScheduleGenerationState.cs",
+    "Method": "RemoveRange",
+    "Line": 165,
+    "Lines": 8,
+    "Parameters": 1,
+    "BranchNodes": 1
+  },
+  {
+    "File": "Business_Logic_Layer\\Scheduling\\ScheduleGenerationState.cs",
+    "Method": "ResetTo",
+    "Line": 174,
+    "Lines": 9,
+    "Parameters": 1,
+    "BranchNodes": 1
+  },
+  {
+    "File": "Business_Logic_Layer\\Scheduling\\ScheduleGenerationState.cs",
+    "Method": "GetConflictingSchedules",
+    "Line": 184,
+    "Lines": 4,
+    "Parameters": 1,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Scheduling\\ScheduleGenerationState.cs",
+    "Method": "AddIndexes",
+    "Line": 189,
+    "Lines": 26,
+    "Parameters": 1,
+    "BranchNodes": 1
+  },
+  {
+    "File": "Business_Logic_Layer\\Scheduling\\ScheduleGenerationState.cs",
+    "Method": "RebuildIndexes",
+    "Line": 216,
+    "Lines": 20,
+    "Parameters": 0,
+    "BranchNodes": 1
+  },
+  {
+    "File": "Business_Logic_Layer\\Scheduling\\ScheduleGenerationState.cs",
+    "Method": "ClassroomTimeKey",
+    "Line": 237,
+    "Lines": 4,
+    "Parameters": 1,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Scheduling\\ScheduleGenerationState.cs",
+    "Method": "FacultyTimeKey",
+    "Line": 242,
+    "Lines": 4,
+    "Parameters": 1,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Scheduling\\ScheduleGenerationState.cs",
+    "Method": "SectionTimeKey",
+    "Line": 247,
+    "Lines": 4,
+    "Parameters": 1,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Scheduling\\ScheduleGenerationState.cs",
+    "Method": "SectionGroupTimeKey",
+    "Line": 252,
+    "Lines": 4,
+    "Parameters": 1,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Scheduling\\ScheduleGenerationState.cs",
+    "Method": "SectionDayKey",
+    "Line": 257,
+    "Lines": 4,
+    "Parameters": 1,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Scheduling\\ScheduleGenerationState.cs",
+    "Method": "SubjectDayKey",
+    "Line": 262,
+    "Lines": 4,
+    "Parameters": 1,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Scheduling\\ScheduleGenerationState.cs",
+    "Method": "SubjectGroupDayKey",
+    "Line": 267,
+    "Lines": 4,
+    "Parameters": 1,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Scheduling\\ScheduleGenerationState.cs",
+    "Method": "GetPracticalPairingScore",
+    "Line": 272,
+    "Lines": 29,
+    "Parameters": 1,
+    "BranchNodes": 3
+  },
+  {
+    "File": "Business_Logic_Layer\\Scheduling\\ScheduleGenerationState.cs",
+    "Method": "GetCompactDayScore",
+    "Line": 302,
+    "Lines": 22,
+    "Parameters": 2,
+    "BranchNodes": 7
+  },
+  {
+    "File": "Business_Logic_Layer\\Scheduling\\ScheduleGenerationState.cs",
+    "Method": "GetTargetDayCount",
+    "Line": 325,
+    "Lines": 16,
+    "Parameters": 1,
+    "BranchNodes": 2
+  },
+  {
+    "File": "Business_Logic_Layer\\Scheduling\\ScheduleGenerationState.cs",
+    "Method": "Count",
+    "Line": 342,
+    "Lines": 5,
+    "Parameters": 2,
+    "BranchNodes": 1
+  },
+  {
+    "File": "Business_Logic_Layer\\Scheduling\\ScheduleGenerationState.cs",
+    "Method": "Increment",
+    "Line": 348,
+    "Lines": 5,
+    "Parameters": 2,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Scheduling\\ScheduleGenerationModels.cs",
+    "Method": "From",
+    "Line": 47,
+    "Lines": 9,
+    "Parameters": 1,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Scheduling\\ScheduleFacultySelector.cs",
+    "Method": "GetOrderedFacultyOptions",
+    "Line": 5,
+    "Lines": 12,
+    "Parameters": 5,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Scheduling\\ScheduleFacultySelector.cs",
+    "Method": "Count",
+    "Line": 18,
+    "Lines": 5,
+    "Parameters": 2,
+    "BranchNodes": 1
+  },
+  {
+    "File": "Business_Logic_Layer\\Scheduling\\ScheduleConflictChecker.cs",
+    "Method": "HasClassroomConflictAsync",
+    "Line": 9,
+    "Lines": 12,
+    "Parameters": 3,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Scheduling\\ScheduleConflictChecker.cs",
+    "Method": "HasFacultyConflictAsync",
+    "Line": 22,
+    "Lines": 12,
+    "Parameters": 3,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Scheduling\\ScheduleConflictChecker.cs",
+    "Method": "HasSectionOrGroupConflictAsync",
+    "Line": 35,
+    "Lines": 20,
+    "Parameters": 3,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Scheduling\\ScheduleConflictChecker.cs",
+    "Method": "HasAnyPairConflict",
+    "Line": 56,
+    "Lines": 15,
+    "Parameters": 1,
+    "BranchNodes": 3
+  },
+  {
+    "File": "Business_Logic_Layer\\Scheduling\\ScheduleConflictChecker.cs",
+    "Method": "HasPairConflict",
+    "Line": 72,
+    "Lines": 12,
+    "Parameters": 2,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Scheduling\\ScheduleConflictChecker.cs",
+    "Method": "NormalizeGroupName",
+    "Line": 85,
+    "Lines": 6,
+    "Parameters": 1,
+    "BranchNodes": 1
+  },
+  {
+    "File": "Business_Logic_Layer\\Scheduling\\FreshTimetablePlanner.cs",
+    "Method": "CompleteAsync",
+    "Line": 12,
+    "Lines": 55,
+    "Parameters": 4,
+    "BranchNodes": 5
+  },
+  {
+    "File": "Business_Logic_Layer\\Rules\\SubjectLectureRules.cs",
+    "Method": "Validate",
+    "Line": 7,
+    "Lines": 6,
+    "Parameters": 1,
+    "BranchNodes": 1
+  },
+  {
+    "File": "Business_Logic_Layer\\Rules\\SubjectLectureRules.cs",
+    "Method": "ValidateSavedLectures",
+    "Line": 14,
+    "Lines": 11,
+    "Parameters": 2,
+    "BranchNodes": 3
+  },
+  {
+    "File": "Business_Logic_Layer\\Rules\\ScheduleTimingRules.cs",
+    "Method": "IsValidLectureRange",
+    "Line": 18,
+    "Lines": 6,
+    "Parameters": 2,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Rules\\ScheduleTimingRules.cs",
+    "Method": "EnsureCompatibleLectureSlots",
+    "Line": 25,
+    "Lines": 13,
+    "Parameters": 1,
+    "BranchNodes": 4
+  },
+  {
+    "File": "Business_Logic_Layer\\Rules\\ScheduleDayRules.cs",
+    "Method": "EnsureSectionDayLimit",
+    "Line": 7,
+    "Lines": 40,
+    "Parameters": 4,
+    "BranchNodes": 17
+  },
+  {
+    "File": "Business_Logic_Layer\\Rules\\ScheduleDayRules.cs",
+    "Method": "GetSchedulingDays",
+    "Line": 57,
+    "Lines": 11,
+    "Parameters": 1,
+    "BranchNodes": 5
+  },
+  {
+    "File": "Business_Logic_Layer\\Rules\\ScheduleDayRules.cs",
+    "Method": "GetSchedulingDays",
+    "Line": 69,
+    "Lines": 9,
+    "Parameters": 2,
+    "BranchNodes": 1
+  },
+  {
+    "File": "Business_Logic_Layer\\Rules\\ScheduleDayRules.cs",
+    "Method": "GetSchedulingDays",
+    "Line": 79,
+    "Lines": 11,
+    "Parameters": 1,
+    "BranchNodes": 5
+  },
+  {
+    "File": "Business_Logic_Layer\\Rules\\ScheduleDayRules.cs",
+    "Method": "NormalizeDayName",
+    "Line": 91,
+    "Lines": 6,
+    "Parameters": 1,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Rules\\ScheduleDayRules.cs",
+    "Method": "GetDayOrder",
+    "Line": 98,
+    "Lines": 12,
+    "Parameters": 1,
+    "BranchNodes": 6
+  },
+  {
+    "File": "Business_Logic_Layer\\Rules\\InputValidation.cs",
+    "Method": "RecordIdAsync",
+    "Line": 5,
+    "Lines": 13,
+    "Parameters": 4,
+    "BranchNodes": 3
+  },
+  {
+    "File": "Business_Logic_Layer\\Rules\\InputValidation.cs",
+    "Method": "TextLength",
+    "Line": 19,
+    "Lines": 5,
+    "Parameters": 3,
+    "BranchNodes": 1
+  },
+  {
+    "File": "Business_Logic_Layer\\Rules\\FacultyAssignmentRules.cs",
+    "Method": "NormalizeLectureType",
+    "Line": 7,
+    "Lines": 7,
+    "Parameters": 1,
+    "BranchNodes": 4
+  },
+  {
+    "File": "Business_Logic_Layer\\Rules\\FacultyAssignmentRules.cs",
+    "Method": "Covers",
+    "Line": 15,
+    "Lines": 3,
+    "Parameters": 4,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Rules\\FacultyAssignmentRules.cs",
+    "Method": "FacultyIds",
+    "Line": 19,
+    "Lines": 2,
+    "Parameters": 4,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Rules\\FacultyAssignmentRules.cs",
+    "Method": "Matches",
+    "Line": 22,
+    "Lines": 3,
+    "Parameters": 2,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Rules\\ClassroomRules.cs",
+    "Method": "IsDefaultSharedLab",
+    "Line": 13,
+    "Lines": 1,
+    "Parameters": 1,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Rules\\ClassroomRules.cs",
+    "Method": "IsSharedLab",
+    "Line": 15,
+    "Lines": 2,
+    "Parameters": 1,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Rules\\ClassroomRules.cs",
+    "Method": "IsLab",
+    "Line": 18,
+    "Lines": 2,
+    "Parameters": 1,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Rules\\ClassroomRules.cs",
+    "Method": "NormalizeRoomType",
+    "Line": 21,
+    "Lines": 16,
+    "Parameters": 2,
+    "BranchNodes": 4
+  },
+  {
+    "File": "Business_Logic_Layer\\Rules\\AcademicStructureRules.cs",
+    "Method": "AllowsWholeSectionPractical",
+    "Line": 8,
+    "Lines": 1,
+    "Parameters": 1,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Rules\\AcademicStructureRules.cs",
+    "Method": "UsesGeneralSections",
+    "Line": 10,
+    "Lines": 4,
+    "Parameters": 1,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Rules\\AcademicStructureRules.cs",
+    "Method": "UsesBranches",
+    "Line": 15,
+    "Lines": 4,
+    "Parameters": 1,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Rules\\AcademicStructureRules.cs",
+    "Method": "IsGeneralSectionValid",
+    "Line": 20,
+    "Lines": 12,
+    "Parameters": 1,
+    "BranchNodes": 1
+  },
+  {
+    "File": "Business_Logic_Layer\\Rules\\AcademicStructureRules.cs",
+    "Method": "GetStudyYearOrder",
+    "Line": 33,
+    "Lines": 11,
+    "Parameters": 1,
+    "BranchNodes": 5
+  },
+  {
+    "File": "Business_Logic_Layer\\Rules\\AcademicStructureRules.cs",
+    "Method": "GetAllowedSectionNames",
+    "Line": 45,
+    "Lines": 9,
+    "Parameters": 1,
+    "BranchNodes": 3
+  },
+  {
+    "File": "Business_Logic_Layer\\Rules\\AcademicStructureRules.cs",
+    "Method": "GetAllowedPracticalGroupNames",
+    "Line": 55,
+    "Lines": 4,
+    "Parameters": 1,
+    "BranchNodes": 1
+  },
+  {
+    "File": "Business_Logic_Layer\\Rules\\AcademicStructureRules.cs",
+    "Method": "GetAllowedPracticalGroupNames",
+    "Line": 60,
+    "Lines": 4,
+    "Parameters": 2,
+    "BranchNodes": 1
+  },
+  {
+    "File": "Business_Logic_Layer\\Rules\\AcademicStructureRules.cs",
+    "Method": "GetAllowedPracticalGroupNames",
+    "Line": 65,
+    "Lines": 9,
+    "Parameters": 1,
+    "BranchNodes": 3
+  },
+  {
+    "File": "Business_Logic_Layer\\Rules\\AcademicStructureRules.cs",
+    "Method": "GetBaseSectionName",
+    "Line": 75,
+    "Lines": 11,
+    "Parameters": 1,
+    "BranchNodes": 3
+  },
+  {
+    "File": "Business_Logic_Layer\\Rules\\AcademicStructureRules.cs",
+    "Method": "FormatAllowedSectionNames",
+    "Line": 87,
+    "Lines": 5,
+    "Parameters": 1,
+    "BranchNodes": 1
+  },
+  {
+    "File": "Business_Logic_Layer\\Rules\\AcademicStructureRules.cs",
+    "Method": "SectionMatchesSubject",
+    "Line": 93,
+    "Lines": 23,
+    "Parameters": 4,
+    "BranchNodes": 2
+  },
+  {
+    "File": "Business_Logic_Layer\\Maintenance\\SchedulingResourceMaintenance.cs",
+    "Method": "InitializeNewDatabaseAsync",
+    "Line": 11,
+    "Lines": 5,
+    "Parameters": 1,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Maintenance\\SchedulingResourceMaintenance.cs",
+    "Method": "EnsureDefaultTimeSlotsAsync",
+    "Line": 17,
+    "Lines": 34,
+    "Parameters": 1,
+    "BranchNodes": 3
+  },
+  {
+    "File": "Business_Logic_Layer\\Maintenance\\SchedulingResourceMaintenance.cs",
+    "Method": "SeedDefaultClassroomsAsync",
+    "Line": 52,
+    "Lines": 54,
+    "Parameters": 1,
+    "BranchNodes": 4
+  },
+  {
+    "File": "Business_Logic_Layer\\Maintenance\\SchedulingResourceMaintenance.cs",
+    "Method": "CreateClassroom",
+    "Line": 107,
+    "Lines": 15,
+    "Parameters": 5,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Maintenance\\SchedulingResourceMaintenance.cs",
+    "Method": "NextAvailableId",
+    "Line": 123,
+    "Lines": 12,
+    "Parameters": 1,
+    "BranchNodes": 1
+  },
+  {
+    "File": "Business_Logic_Layer\\Maintenance\\SchedulingResourceMaintenance.cs",
+    "Method": "NextClassroomName",
+    "Line": 136,
+    "Lines": 15,
+    "Parameters": 2,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Maintenance\\SchedulingResourceMaintenance.cs",
+    "Method": "IsLab",
+    "Line": 152,
+    "Lines": 4,
+    "Parameters": 1,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Maintenance\\SchedulingResourceMaintenance.cs",
+    "Method": "IsLectureRoom",
+    "Line": 157,
+    "Lines": 4,
+    "Parameters": 1,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Maintenance\\FourthYearPracticalMaintenance.cs",
+    "Method": "ApplyAsync",
+    "Line": 11,
+    "Lines": 40,
+    "Parameters": 2,
+    "BranchNodes": 7
+  },
+  {
+    "File": "Business_Logic_Layer\\Maintenance\\DatabaseMaintenanceService.cs",
+    "Method": "ApplyPendingFixesAsync",
+    "Line": 8,
+    "Lines": 26,
+    "Parameters": 0,
+    "BranchNodes": 2
+  },
+  {
+    "File": "Business_Logic_Layer\\Maintenance\\DatabaseMaintenanceService.cs",
+    "Method": "EnsureApplicationUsersTableAsync",
+    "Line": 35,
+    "Lines": 23,
+    "Parameters": 1,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Maintenance\\DatabaseMaintenanceService.cs",
+    "Method": "EnsureSubjectsSchemaAsync",
+    "Line": 59,
+    "Lines": 31,
+    "Parameters": 1,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Maintenance\\DatabaseMaintenanceService.cs",
+    "Method": "EnsureSchedulesSchemaAsync",
+    "Line": 91,
+    "Lines": 36,
+    "Parameters": 1,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Maintenance\\DatabaseMaintenanceService.cs",
+    "Method": "NormalizeScheduleDataAsync",
+    "Line": 128,
+    "Lines": 69,
+    "Parameters": 1,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Maintenance\\DatabaseMaintenanceService.cs",
+    "Method": "RebuildScheduleIndexesAsync",
+    "Line": 198,
+    "Lines": 87,
+    "Parameters": 1,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Maintenance\\DatabaseMaintenanceService.cs",
+    "Method": "RecreateScheduleDetailsViewAsync",
+    "Line": 286,
+    "Lines": 56,
+    "Parameters": 1,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\FacultyScheduling\\SchedulingCpSupport.cs",
+    "Method": "AddSectionDayLimits",
+    "Line": 10,
+    "Lines": 37,
+    "Parameters": 4,
+    "BranchNodes": 5
+  },
+  {
+    "File": "Business_Logic_Layer\\FacultyScheduling\\SchedulingCpSupport.cs",
+    "Method": "AddResourceConstraints",
+    "Line": 48,
+    "Lines": 15,
+    "Parameters": 2,
+    "BranchNodes": 6
+  },
+  {
+    "File": "Business_Logic_Layer\\FacultyScheduling\\SchedulingCpSupport.cs",
+    "Method": "AddProfiles",
+    "Line": 64,
+    "Lines": 49,
+    "Parameters": 5,
+    "BranchNodes": 11
+  },
+  {
+    "File": "Business_Logic_Layer\\FacultyScheduling\\SchedulingCpSupport.cs",
+    "Method": "PreferenceQuality",
+    "Line": 115,
+    "Lines": 24,
+    "Parameters": 5,
+    "BranchNodes": 4
+  },
+  {
+    "File": "Business_Logic_Layer\\FacultyScheduling\\SchedulingCpSupport.cs",
+    "Method": "MinimizePriorities",
+    "Line": 142,
+    "Lines": 17,
+    "Parameters": 2,
+    "BranchNodes": 2
+  },
+  {
+    "File": "Business_Logic_Layer\\FacultyScheduling\\SchedulingCpSupport.cs",
+    "Method": "Quality",
+    "Line": 161,
+    "Lines": 53,
+    "Parameters": 6,
+    "BranchNodes": 8
+  },
+  {
+    "File": "Business_Logic_Layer\\FacultyScheduling\\ScheduleQualityAnalyzer.cs",
+    "Method": "Analyze",
+    "Line": 7,
+    "Lines": 38,
+    "Parameters": 4,
+    "BranchNodes": 6
+  },
+  {
+    "File": "Business_Logic_Layer\\FacultyScheduling\\FacultySchedulingRuntime.cs",
+    "Method": "EnsureAvailable",
+    "Line": 11,
+    "Lines": 4,
+    "Parameters": 0,
+    "BranchNodes": 1
+  },
+  {
+    "File": "Business_Logic_Layer\\FacultyScheduling\\FacultySchedulingRuntime.cs",
+    "Method": "Check",
+    "Line": 15,
+    "Lines": 13,
+    "Parameters": 0,
+    "BranchNodes": 1
+  },
+  {
+    "File": "Business_Logic_Layer\\FacultyScheduling\\FacultySchedulingRuntime.cs",
+    "Method": "LoadNativeRuntime",
+    "Line": 28,
+    "Lines": 34,
+    "Parameters": 0,
+    "BranchNodes": 8
+  },
+  {
+    "File": "Business_Logic_Layer\\FacultyScheduling\\FacultySchedulingRuntime.cs",
+    "Method": "LoadLibraryExW",
+    "Line": 62,
+    "Lines": 2,
+    "Parameters": 3,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\FacultyScheduling\\FacultySchedulingRuntime.cs",
+    "Method": "FreeLibrary",
+    "Line": 64,
+    "Lines": 3,
+    "Parameters": 1,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\FacultyScheduling\\FacultyScheduleEditorService.cs",
+    "Method": "GetConfiguredFacultyAsync",
+    "Line": 14,
+    "Lines": 7,
+    "Parameters": 2,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\FacultyScheduling\\FacultyScheduleEditorService.cs",
+    "Method": "SnapshotAsync",
+    "Line": 21,
+    "Lines": 8,
+    "Parameters": 1,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\FacultyScheduling\\FacultyScheduleEditorService.cs",
+    "Method": "GetLookupsAsync",
+    "Line": 29,
+    "Lines": 7,
+    "Parameters": 1,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\FacultyScheduling\\FacultyScheduleEditorService.cs",
+    "Method": "GetCurrentAsync",
+    "Line": 36,
+    "Lines": 6,
+    "Parameters": 3,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\FacultyScheduling\\FacultyScheduleEditorService.cs",
+    "Method": "PreviewAsync",
+    "Line": 42,
+    "Lines": 6,
+    "Parameters": 3,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\FacultyScheduling\\FacultyScheduleEditorService.cs",
+    "Method": "PreviewAsync",
+    "Line": 48,
+    "Lines": 46,
+    "Parameters": 4,
+    "BranchNodes": 10
+  },
+  {
+    "File": "Business_Logic_Layer\\FacultyScheduling\\FacultyScheduleEditorService.cs",
+    "Method": "GetAlternativesAsync",
+    "Line": 94,
+    "Lines": 19,
+    "Parameters": 2,
+    "BranchNodes": 4
+  },
+  {
+    "File": "Business_Logic_Layer\\FacultyScheduling\\FacultyScheduleEditorService.cs",
+    "Method": "FindFeasibleAdjustmentsAsync",
+    "Line": 114,
+    "Lines": 22,
+    "Parameters": 2,
+    "BranchNodes": 8
+  },
+  {
+    "File": "Business_Logic_Layer\\FacultyScheduling\\FacultyScheduleEditorService.cs",
+    "Method": "GoalTitle",
+    "Line": 136,
+    "Lines": 5,
+    "Parameters": 1,
+    "BranchNodes": 4
+  },
+  {
+    "File": "Business_Logic_Layer\\FacultyScheduling\\FacultyScheduleEditorService.cs",
+    "Method": "ArabicDay",
+    "Line": 141,
+    "Lines": 1,
+    "Parameters": 1,
+    "BranchNodes": 6
+  },
+  {
+    "File": "Business_Logic_Layer\\FacultyScheduling\\FacultyScheduleEditorService.cs",
+    "Method": "SaveAsync",
+    "Line": 142,
+    "Lines": 18,
+    "Parameters": 3,
+    "BranchNodes": 5
+  },
+  {
+    "File": "Business_Logic_Layer\\FacultyScheduling\\FacultyScheduleEditorService.cs",
+    "Method": "ValidatePlanAsync",
+    "Line": 160,
+    "Lines": 36,
+    "Parameters": 6,
+    "BranchNodes": 9
+  },
+  {
+    "File": "Business_Logic_Layer\\FacultyScheduling\\FacultyScheduleEditorService.cs",
+    "Method": "Period",
+    "Line": 196,
+    "Lines": 1,
+    "Parameters": 1,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\FacultyScheduling\\FacultyScheduleEditorService.cs",
+    "Method": "View",
+    "Line": 197,
+    "Lines": 7,
+    "Parameters": 2,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\FacultyScheduling\\FacultyPreferenceService.cs",
+    "Method": "GetAsync",
+    "Line": 15,
+    "Lines": 10,
+    "Parameters": 3,
+    "BranchNodes": 1
+  },
+  {
+    "File": "Business_Logic_Layer\\FacultyScheduling\\FacultyPreferenceService.cs",
+    "Method": "SaveAsync",
+    "Line": 26,
+    "Lines": 8,
+    "Parameters": 3,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\FacultyScheduling\\FacultyPreferenceService.cs",
+    "Method": "SaveInTransactionAsync",
+    "Line": 35,
+    "Lines": 27,
+    "Parameters": 4,
+    "BranchNodes": 5
+  },
+  {
+    "File": "Business_Logic_Layer\\FacultyScheduling\\FacultyPreferenceService.cs",
+    "Method": "DeleteAsync",
+    "Line": 63,
+    "Lines": 9,
+    "Parameters": 4,
+    "BranchNodes": 2
+  },
+  {
+    "File": "Business_Logic_Layer\\FacultyScheduling\\FacultyPreferenceRules.cs",
+    "Method": "Normalize",
+    "Line": 8,
+    "Lines": 42,
+    "Parameters": 1,
+    "BranchNodes": 12
+  },
+  {
+    "File": "Business_Logic_Layer\\FacultyScheduling\\FacultyPreferenceRules.cs",
+    "Method": "FromCatalog",
+    "Line": 51,
+    "Lines": 4,
+    "Parameters": 1,
+    "BranchNodes": 2
+  },
+  {
+    "File": "Business_Logic_Layer\\FacultyScheduling\\FacultyPreferenceRules.cs",
+    "Method": "FromRows",
+    "Line": 56,
+    "Lines": 23,
+    "Parameters": 2,
+    "BranchNodes": 4
+  },
+  {
+    "File": "Business_Logic_Layer\\FacultyScheduling\\FacultyPreferenceRules.cs",
+    "Method": "Level",
+    "Line": 80,
+    "Lines": 8,
+    "Parameters": 3,
+    "BranchNodes": 2
+  },
+  {
+    "File": "Business_Logic_Layer\\FacultyScheduling\\FacultyPreferenceRules.cs",
+    "Method": "ValidateMatrix",
+    "Line": 88,
+    "Lines": 8,
+    "Parameters": 2,
+    "BranchNodes": 2
+  },
+  {
+    "File": "Business_Logic_Layer\\FacultyScheduling\\FacultyPreferenceRules.cs",
+    "Method": "Allows",
+    "Line": 96,
+    "Lines": 6,
+    "Parameters": 3,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\FacultyScheduling\\FacultyPreferenceRules.cs",
+    "Method": "Violation",
+    "Line": 103,
+    "Lines": 28,
+    "Parameters": 4,
+    "BranchNodes": 9
+  },
+  {
+    "File": "Business_Logic_Layer\\FacultyScheduling\\FacultyPreferenceRules.cs",
+    "Method": "Duration",
+    "Line": 131,
+    "Lines": 1,
+    "Parameters": 1,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\FacultyScheduling\\FacultyPreferenceRules.cs",
+    "Method": "Validate",
+    "Line": 132,
+    "Lines": 8,
+    "Parameters": 3,
+    "BranchNodes": 2
+  },
+  {
+    "File": "Business_Logic_Layer\\FacultyScheduling\\FacultyPreferenceMeasurement.cs",
+    "Method": "Compare",
+    "Line": 13,
+    "Lines": 22,
+    "Parameters": 4,
+    "BranchNodes": 1
+  },
+  {
+    "File": "Business_Logic_Layer\\FacultyScheduling\\FacultyPracticalExchange.cs",
+    "Method": "Scopes",
+    "Line": 10,
+    "Lines": 21,
+    "Parameters": 2,
+    "BranchNodes": 4
+  },
+  {
+    "File": "Business_Logic_Layer\\FacultyScheduling\\FacultyPracticalExchange.cs",
+    "Method": "CanExchange",
+    "Line": 31,
+    "Lines": 12,
+    "Parameters": 3,
+    "BranchNodes": 1
+  },
+  {
+    "File": "Business_Logic_Layer\\FacultyScheduling\\FacultyPracticalExchange.cs",
+    "Method": "Validate",
+    "Line": 43,
+    "Lines": 14,
+    "Parameters": 3,
+    "BranchNodes": 5
+  },
+  {
+    "File": "Business_Logic_Layer\\FacultyScheduling\\FacultyPracticalExchange.cs",
+    "Method": "UnpairedCount",
+    "Line": 58,
+    "Lines": 9,
+    "Parameters": 1,
+    "BranchNodes": 1
+  },
+  {
+    "File": "Business_Logic_Layer\\FacultyScheduling\\FacultyDayPreferenceService.cs",
+    "Method": "SaveDayPreferencesAndOptimizeAsync",
+    "Line": 13,
+    "Lines": 43,
+    "Parameters": 3,
+    "BranchNodes": 6
+  },
+  {
+    "File": "Business_Logic_Layer\\FacultyScheduling\\FacultyCpSatPlanner.cs",
+    "Method": "Copy",
+    "Line": 14,
+    "Lines": 7,
+    "Parameters": 1,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\FacultyScheduling\\FacultyCpSatPlanner.cs",
+    "Method": "Solve",
+    "Line": 21,
+    "Lines": 5,
+    "Parameters": 4,
+    "BranchNodes": 1
+  },
+  {
+    "File": "Business_Logic_Layer\\FacultyScheduling\\FacultyCpSatPlanner.cs",
+    "Method": "SolveCore",
+    "Line": 26,
+    "Lines": 200,
+    "Parameters": 4,
+    "BranchNodes": 54
+  },
+  {
+    "File": "Business_Logic_Layer\\Backups\\TimetableBackupService.cs",
+    "Method": "SaveSnapshotAsync",
+    "Line": 19,
+    "Lines": 7,
+    "Parameters": 2,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Backups\\TimetableBackupService.cs",
+    "Method": "SaveAsync",
+    "Line": 26,
+    "Lines": 10,
+    "Parameters": 2,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Backups\\TimetableBackupService.cs",
+    "Method": "PreviewRestoreAsync",
+    "Line": 36,
+    "Lines": 12,
+    "Parameters": 2,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Backups\\TimetableBackupService.cs",
+    "Method": "RestoreAsync",
+    "Line": 48,
+    "Lines": 21,
+    "Parameters": 4,
+    "BranchNodes": 5
+  },
+  {
+    "File": "Business_Logic_Layer\\Backups\\TimetableBackupService.cs",
+    "Method": "CreatePayload",
+    "Line": 69,
+    "Lines": 5,
+    "Parameters": 2,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Backups\\TimetableBackupService.cs",
+    "Method": "References",
+    "Line": 74,
+    "Lines": 19,
+    "Parameters": 2,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Backups\\TimetableBackupService.cs",
+    "Method": "ValidateAsync",
+    "Line": 93,
+    "Lines": 28,
+    "Parameters": 4,
+    "BranchNodes": 9
+  },
+  {
+    "File": "Business_Logic_Layer\\Backups\\TimetableBackupService.cs",
+    "Method": "Checksum",
+    "Line": 121,
+    "Lines": 1,
+    "Parameters": 1,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Backups\\TimetableBackupService.cs",
+    "Method": "ReferenceMatches",
+    "Line": 122,
+    "Lines": 15,
+    "Parameters": 2,
+    "BranchNodes": 4
+  },
+  {
+    "File": "Business_Logic_Layer\\Backups\\TimetableBackupService.cs",
+    "Method": "Info",
+    "Line": 137,
+    "Lines": 1,
+    "Parameters": 2,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Backups\\TimetableBackupService.cs",
+    "Method": "ReadAsync",
+    "Line": 138,
+    "Lines": 15,
+    "Parameters": 2,
+    "BranchNodes": 6
+  },
+  {
+    "File": "Business_Logic_Layer\\Backups\\TimetableBackupService.cs",
+    "Method": "WriteAsync",
+    "Line": 153,
+    "Lines": 17,
+    "Parameters": 4,
+    "BranchNodes": 1
+  },
+  {
+    "File": "Business_Logic_Layer\\Backups\\TimetableBackupModels.cs",
+    "Method": "From",
+    "Line": 23,
+    "Lines": 2,
+    "Parameters": 1,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Backups\\TimetableBackupModels.cs",
+    "Method": "ToEntity",
+    "Line": 25,
+    "Lines": 3,
+    "Parameters": 0,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Helpers\\ManualKeySaveHelper.cs",
+    "Method": "SaveWithManualKeyAsync",
+    "Line": 20,
+    "Lines": 61,
+    "Parameters": 2,
+    "BranchNodes": 8
+  },
+  {
+    "File": "Business_Logic_Layer\\Helpers\\AutoKeyGenerator.cs",
+    "Method": "NextAsync",
+    "Line": 7,
+    "Lines": 6,
+    "Parameters": 1,
+    "BranchNodes": 1
+  },
+  {
+    "File": "Business_Logic_Layer\\Helpers\\AutoKeyGenerator.cs",
+    "Method": "FirstAvailableAsync",
+    "Line": 14,
+    "Lines": 24,
+    "Parameters": 1,
+    "BranchNodes": 3
+  },
+  {
+    "File": "Business_Logic_Layer\\Importing\\WeeklyPdfTimetableReader.cs",
+    "Method": "Value",
+    "Line": 20,
+    "Lines": 1,
+    "Parameters": 1,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Importing\\WeeklyPdfTimetableReader.cs",
+    "Method": "Key",
+    "Line": 21,
+    "Lines": 1,
+    "Parameters": 1,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Importing\\WeeklyPdfTimetableReader.cs",
+    "Method": "X",
+    "Line": 22,
+    "Lines": 1,
+    "Parameters": 1,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Importing\\WeeklyPdfTimetableReader.cs",
+    "Method": "Y",
+    "Line": 23,
+    "Lines": 1,
+    "Parameters": 1,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Importing\\WeeklyPdfTimetableReader.cs",
+    "Method": "Latin",
+    "Line": 24,
+    "Lines": 1,
+    "Parameters": 1,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Importing\\WeeklyPdfTimetableReader.cs",
+    "Method": "GroupValue",
+    "Line": 25,
+    "Lines": 1,
+    "Parameters": 1,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Importing\\WeeklyPdfTimetableReader.cs",
+    "Method": "Group",
+    "Line": 26,
+    "Lines": 1,
+    "Parameters": 1,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Importing\\WeeklyPdfTimetableReader.cs",
+    "Method": "WithoutGroup",
+    "Line": 27,
+    "Lines": 1,
+    "Parameters": 1,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Importing\\WeeklyPdfTimetableReader.cs",
+    "Method": "English",
+    "Line": 28,
+    "Lines": 1,
+    "Parameters": 1,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Importing\\WeeklyPdfTimetableReader.cs",
+    "Method": "Arabic",
+    "Line": 29,
+    "Lines": 1,
+    "Parameters": 1,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Importing\\WeeklyPdfTimetableReader.cs",
+    "Method": "TryRead",
+    "Line": 31,
+    "Lines": 167,
+    "Parameters": 4,
+    "BranchNodes": 55
+  },
+  {
+    "File": "Business_Logic_Layer\\Importing\\WeeklyPdfTimetableReader.cs",
+    "Method": "IsRoomToken",
+    "Line": 198,
+    "Lines": 1,
+    "Parameters": 1,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Importing\\WeeklyPdfTimetableReader.cs",
+    "Method": "Lines",
+    "Line": 199,
+    "Lines": 10,
+    "Parameters": 1,
+    "BranchNodes": 2
+  },
+  {
+    "File": "Business_Logic_Layer\\Importing\\PdfTableReader.cs",
+    "Method": "Read",
+    "Line": 16,
+    "Lines": 92,
+    "Parameters": 2,
+    "BranchNodes": 24
+  },
+  {
+    "File": "Business_Logic_Layer\\Importing\\PdfTableReader.cs",
+    "Method": "Lines",
+    "Line": 109,
+    "Lines": 14,
+    "Parameters": 2,
+    "BranchNodes": 2
+  },
+  {
+    "File": "Business_Logic_Layer\\Importing\\PdfTableReader.cs",
+    "Method": "Cells",
+    "Line": 123,
+    "Lines": 12,
+    "Parameters": 1,
+    "BranchNodes": 2
+  },
+  {
+    "File": "Business_Logic_Layer\\Importing\\PdfTableReader.cs",
+    "Method": "IsHeader",
+    "Line": 135,
+    "Lines": 5,
+    "Parameters": 1,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Importing\\PdfTableReader.cs",
+    "Method": "Text",
+    "Line": 140,
+    "Lines": 6,
+    "Parameters": 1,
+    "BranchNodes": 1
+  },
+  {
+    "File": "Business_Logic_Layer\\Importing\\PdfTableReader.cs",
+    "Method": "IsArabic",
+    "Line": 146,
+    "Lines": 1,
+    "Parameters": 1,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Importing\\PdfTableReader.cs",
+    "Method": "WordText",
+    "Line": 147,
+    "Lines": 18,
+    "Parameters": 1,
+    "BranchNodes": 4
+  },
+  {
+    "File": "Business_Logic_Layer\\Importing\\PdfTableReader.cs",
+    "Method": "Clean",
+    "Line": 165,
+    "Lines": 3,
+    "Parameters": 1,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Importing\\ImportValues.cs",
+    "Method": "Text",
+    "Line": 8,
+    "Lines": 8,
+    "Parameters": 2,
+    "BranchNodes": 2
+  },
+  {
+    "File": "Business_Logic_Layer\\Importing\\ImportValues.cs",
+    "Method": "Int",
+    "Line": 16,
+    "Lines": 2,
+    "Parameters": 1,
+    "BranchNodes": 1
+  },
+  {
+    "File": "Business_Logic_Layer\\Importing\\ImportValues.cs",
+    "Method": "OptionalInt",
+    "Line": 18,
+    "Lines": 1,
+    "Parameters": 1,
+    "BranchNodes": 1
+  },
+  {
+    "File": "Business_Logic_Layer\\Importing\\ImportValues.cs",
+    "Method": "Number",
+    "Line": 19,
+    "Lines": 2,
+    "Parameters": 1,
+    "BranchNodes": 1
+  },
+  {
+    "File": "Business_Logic_Layer\\Importing\\ImportValues.cs",
+    "Method": "Bool",
+    "Line": 21,
+    "Lines": 11,
+    "Parameters": 2,
+    "BranchNodes": 4
+  },
+  {
+    "File": "Business_Logic_Layer\\Importing\\ImportValues.cs",
+    "Method": "Time",
+    "Line": 32,
+    "Lines": 8,
+    "Parameters": 1,
+    "BranchNodes": 2
+  },
+  {
+    "File": "Business_Logic_Layer\\Importing\\ImportLabels.cs",
+    "Method": "Display",
+    "Line": 38,
+    "Lines": 1,
+    "Parameters": 1,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Importing\\ImportLabels.cs",
+    "Method": "MatchColumn",
+    "Line": 40,
+    "Lines": 5,
+    "Parameters": 2,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Importing\\ImportLabels.cs",
+    "Method": "MatchSheet",
+    "Line": 46,
+    "Lines": 2,
+    "Parameters": 1,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Importing\\ImportLabels.cs",
+    "Method": "NormalizeReference",
+    "Line": 51,
+    "Lines": 8,
+    "Parameters": 1,
+    "BranchNodes": 2
+  },
+  {
+    "File": "Business_Logic_Layer\\Importing\\ImportLabels.cs",
+    "Method": "Normalize",
+    "Line": 60,
+    "Lines": 2,
+    "Parameters": 1,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Importing\\ImportFileReader.cs",
+    "Method": "Read",
+    "Line": 5,
+    "Lines": 10,
+    "Parameters": 2,
+    "BranchNodes": 3
+  },
+  {
+    "File": "Business_Logic_Layer\\Importing\\ImportedTimetableRepairPlanner.cs",
+    "Method": "Solve",
+    "Line": 17,
+    "Lines": 272,
+    "Parameters": 9,
+    "BranchNodes": 71
+  },
+  {
+    "File": "Business_Logic_Layer\\Importing\\ImportedTimetableRepair.cs",
+    "Method": "CloneRow",
+    "Line": 8,
+    "Lines": 1,
+    "Parameters": 1,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Importing\\ImportedTimetableRepair.cs",
+    "Method": "SamePlacement",
+    "Line": 9,
+    "Lines": 1,
+    "Parameters": 2,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Importing\\ImportedTimetableRepair.cs",
+    "Method": "SameLectureIdentity",
+    "Line": 10,
+    "Lines": 3,
+    "Parameters": 2,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Importing\\ImportedTimetableRepair.cs",
+    "Method": "ValidateMovableRepairRowAsync",
+    "Line": 14,
+    "Lines": 10,
+    "Parameters": 3,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Importing\\ImportedTimetableRepair.cs",
+    "Method": "RepairFixedRows",
+    "Line": 25,
+    "Lines": 5,
+    "Parameters": 2,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Importing\\ImportedTimetableRepair.cs",
+    "Method": "InspectRepairConflicts",
+    "Line": 30,
+    "Lines": 24,
+    "Parameters": 2,
+    "BranchNodes": 7
+  },
+  {
+    "File": "Business_Logic_Layer\\Importing\\ImportedTimetableRepair.cs",
+    "Method": "RepairTimetableAsync",
+    "Line": 55,
+    "Lines": 46,
+    "Parameters": 3,
+    "BranchNodes": 9
+  },
+  {
+    "File": "Business_Logic_Layer\\Importing\\ImportedTimetableRepair.cs",
+    "Method": "ValidateRepairPlanAsync",
+    "Line": 102,
+    "Lines": 38,
+    "Parameters": 4,
+    "BranchNodes": 9
+  },
+  {
+    "File": "Business_Logic_Layer\\Importing\\ImportedTimetableRepair.cs",
+    "Method": "SaveRepairedAsync",
+    "Line": 141,
+    "Lines": 17,
+    "Parameters": 4,
+    "BranchNodes": 1
+  },
+  {
+    "File": "Business_Logic_Layer\\Importing\\ImportCatalog.cs",
+    "Method": "Rows",
+    "Line": 13,
+    "Lines": 1,
+    "Parameters": 0,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Importing\\ImportCatalog.cs",
+    "Method": "LoadAsync",
+    "Line": 14,
+    "Lines": 12,
+    "Parameters": 2,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Importing\\ImportCatalog.cs",
+    "Method": "Version",
+    "Line": 26,
+    "Lines": 2,
+    "Parameters": 0,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Importing\\ImportCatalog.cs",
+    "Method": "ScalarJson",
+    "Line": 28,
+    "Lines": 3,
+    "Parameters": 1,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Importing\\ImportCatalog.cs",
+    "Method": "Hash",
+    "Line": 31,
+    "Lines": 1,
+    "Parameters": 1,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Importing\\ImportCatalog.cs",
+    "Method": "Same",
+    "Line": 32,
+    "Lines": 1,
+    "Parameters": 2,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Importing\\ImportCatalog.cs",
+    "Method": "LectureKey",
+    "Line": 33,
+    "Lines": 1,
+    "Parameters": 1,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Importing\\ImportCatalog.cs",
+    "Method": "Put",
+    "Line": 34,
+    "Lines": 6,
+    "Parameters": 2,
+    "BranchNodes": 1
+  },
+  {
+    "File": "Business_Logic_Layer\\Importing\\ExcelWorkbookReader.cs",
+    "Method": "Read",
+    "Line": 9,
+    "Lines": 71,
+    "Parameters": 2,
+    "BranchNodes": 19
+  },
+  {
+    "File": "Business_Logic_Layer\\Importing\\ExcelImportTemplates.cs",
+    "Method": "Create",
+    "Line": 7,
+    "Lines": 45,
+    "Parameters": 2,
+    "BranchNodes": 3
+  },
+  {
+    "File": "Business_Logic_Layer\\Importing\\ExcelImportTemplates.cs",
+    "Method": "AddDataSheet",
+    "Line": 52,
+    "Lines": 25,
+    "Parameters": 5,
+    "BranchNodes": 5
+  },
+  {
+    "File": "Business_Logic_Layer\\Importing\\ExcelImportTemplates.cs",
+    "Method": "Sample",
+    "Line": 77,
+    "Lines": 12,
+    "Parameters": 2,
+    "BranchNodes": 9
+  },
+  {
+    "File": "Business_Logic_Layer\\Importing\\ExcelImportService.cs",
+    "Method": "ValidateAsync",
+    "Line": 14,
+    "Lines": 44,
+    "Parameters": 5,
+    "BranchNodes": 10
+  },
+  {
+    "File": "Business_Logic_Layer\\Importing\\ExcelImportService.cs",
+    "Method": "CheckColumns",
+    "Line": 59,
+    "Lines": 7,
+    "Parameters": 3,
+    "BranchNodes": 1
+  },
+  {
+    "File": "Business_Logic_Layer\\Importing\\ExcelImportService.cs",
+    "Method": "ParseTimetableAsync",
+    "Line": 67,
+    "Lines": 86,
+    "Parameters": 5,
+    "BranchNodes": 26
+  },
+  {
+    "File": "Business_Logic_Layer\\Importing\\ExcelImportService.cs",
+    "Method": "Resolve",
+    "Line": 154,
+    "Lines": 46,
+    "Parameters": 5,
+    "BranchNodes": 13
+  },
+  {
+    "File": "Business_Logic_Layer\\Importing\\ExcelImportService.cs",
+    "Method": "TranslateDay",
+    "Line": 200,
+    "Lines": 5,
+    "Parameters": 1,
+    "BranchNodes": 6
+  },
+  {
+    "File": "Business_Logic_Layer\\Importing\\ExcelImportService.cs",
+    "Method": "TranslateType",
+    "Line": 205,
+    "Lines": 5,
+    "Parameters": 1,
+    "BranchNodes": 3
+  },
+  {
+    "File": "Business_Logic_Layer\\Importing\\ExcelImportService.cs",
+    "Method": "ConflictMessage",
+    "Line": 210,
+    "Lines": 5,
+    "Parameters": 3,
+    "BranchNodes": 2
+  },
+  {
+    "File": "Business_Logic_Layer\\Importing\\ExcelImportService.cs",
+    "Method": "CheckWeeklyRequirements",
+    "Line": 216,
+    "Lines": 23,
+    "Parameters": 2,
+    "BranchNodes": 3
+  },
+  {
+    "File": "Business_Logic_Layer\\Importing\\ExcelImportService.cs",
+    "Method": "GenerateRemainingAsync",
+    "Line": 240,
+    "Lines": 53,
+    "Parameters": 2,
+    "BranchNodes": 10
+  },
+  {
+    "File": "Business_Logic_Layer\\Importing\\ExcelImportService.cs",
+    "Method": "FixedLectures",
+    "Line": 294,
+    "Lines": 2,
+    "Parameters": 2,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Importing\\ExcelImportService.cs",
+    "Method": "Describe",
+    "Line": 297,
+    "Lines": 13,
+    "Parameters": 2,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Importing\\ExcelImportService.cs",
+    "Method": "CreateRequests",
+    "Line": 311,
+    "Lines": 21,
+    "Parameters": 2,
+    "BranchNodes": 6
+  },
+  {
+    "File": "Business_Logic_Layer\\Importing\\ExcelImportService.cs",
+    "Method": "Consume",
+    "Line": 332,
+    "Lines": 2,
+    "Parameters": 2,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Importing\\ExcelImportService.cs",
+    "Method": "SaveAsync",
+    "Line": 335,
+    "Lines": 59,
+    "Parameters": 4,
+    "BranchNodes": 12
+  },
+  {
+    "File": "Business_Logic_Layer\\Importing\\ExcelImportService.cs",
+    "Method": "Copy",
+    "Line": 394,
+    "Lines": 6,
+    "Parameters": 1,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Importing\\ExcelImportService.cs",
+    "Method": "ContentVersion",
+    "Line": 400,
+    "Lines": 10,
+    "Parameters": 1,
+    "BranchNodes": 0
+  },
+  {
+    "File": "Business_Logic_Layer\\Importing\\ExcelImportService.cs",
+    "Method": "EnsureUntampered",
+    "Line": 410,
+    "Lines": 5,
+    "Parameters": 1,
+    "BranchNodes": 1
+  },
+  {
+    "File": "Business_Logic_Layer\\Importing\\ExcelImportSchema.cs",
+    "Method": "For",
+    "Line": 23,
+    "Lines": 2,
+    "Parameters": 1,
+    "BranchNodes": 1
+  },
+  {
+    "File": "Business_Logic_Layer\\Importing\\ExcelImportModels.cs",
+    "Method": "MapColumns",
+    "Line": 25,
+    "Lines": 14,
+    "Parameters": 1,
+    "BranchNodes": 4
+  },
+  {
+    "File": "Business_Logic_Layer\\Importing\\AcademicExcelImport.cs",
+    "Method": "Prepare",
+    "Line": 9,
+    "Lines": 52,
+    "Parameters": 4,
+    "BranchNodes": 15
+  },
+  {
+    "File": "Business_Logic_Layer\\Importing\\AcademicExcelImport.cs",
+    "Method": "Parse",
+    "Line": 62,
+    "Lines": 12,
+    "Parameters": 2,
+    "BranchNodes": 11
+  },
+  {
+    "File": "Business_Logic_Layer\\Importing\\AcademicExcelImport.cs",
+    "Method": "Empty",
+    "Line": 74,
+    "Lines": 1,
+    "Parameters": 1,
+    "BranchNodes": 1
+  },
+  {
+    "File": "Business_Logic_Layer\\Importing\\AcademicExcelImport.cs",
+    "Method": "Key",
+    "Line": 75,
+    "Lines": 3,
+    "Parameters": 1,
+    "BranchNodes": 1
+  },
+  {
+    "File": "Business_Logic_Layer\\Importing\\AcademicExcelImport.cs",
+    "Method": "NormalizeAndCheck",
+    "Line": 79,
+    "Lines": 54,
+    "Parameters": 2,
+    "BranchNodes": 19
+  },
+  {
+    "File": "Business_Logic_Layer\\Importing\\AcademicExcelImport.cs",
+    "Method": "Structure",
+    "Line": 133,
+    "Lines": 7,
+    "Parameters": 3,
+    "BranchNodes": 4
+  },
+  {
+    "File": "Business_Logic_Layer\\Importing\\AcademicExcelImport.cs",
+    "Method": "CheckUnique",
+    "Line": 140,
+    "Lines": 17,
+    "Parameters": 3,
+    "BranchNodes": 9
+  },
+  {
+    "File": "Business_Logic_Layer\\Importing\\AcademicExcelImport.cs",
+    "Method": "CheckLinkedSchedules",
+    "Line": 157,
+    "Lines": 34,
+    "Parameters": 3,
+    "BranchNodes": 10
+  },
+  {
+    "File": "Business_Logic_Layer\\Importing\\AcademicExcelImport.cs",
+    "Method": "SaveAsync",
+    "Line": 192,
+    "Lines": 40,
+    "Parameters": 2,
+    "BranchNodes": 21
+  }
+]

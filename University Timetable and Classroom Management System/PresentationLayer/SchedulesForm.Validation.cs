@@ -1,4 +1,4 @@
-﻿using University_Timetable_and_Classroom_Management_System.BusinessLayer;
+using University_Timetable_and_Classroom_Management_System.BusinessLayer;
 using University_Timetable_and_Classroom_Management_System.Models;
 
 namespace University_Timetable_and_Classroom_Management_System
@@ -18,13 +18,15 @@ namespace University_Timetable_and_Classroom_Management_System
         {
             return new Schedule
             {
-                DayOfWeek = cmbDayOfWeek.Text.Trim(),
+                DayOfWeek = GetSelectedPlainText(cmbDayOfWeek)?.Trim() ?? string.Empty,
                 SubjectID = GetSelectedRequiredId(cmbSubject),
                 FacultyMemberID = GetSelectedRequiredId(cmbFacultyMember),
                 ClassroomID = GetSelectedRequiredId(cmbClassroom),
                 TimeSlotID = GetSelectedRequiredId(cmbTimeSlot),
                 LectureType = GetSelectedPlainText(cmbLectureType) ?? "Theory",
-                GroupName = GetSelectedPlainText(cmbGroupName),
+                GroupName = sectionsLookup.Any(section => section.SectionID == GetSelectedOptionalId(cmbSection) &&
+                    AcademicStructureRules.AllowsWholeSectionPractical(section.StudyYearID))
+                    ? null : GetSelectedPlainText(cmbGroupName),
                 StudyYearID = GetSelectedOptionalId(cmbStudyYear),
                 BranchID = GetSelectedOptionalId(cmbBranch),
                 SectionID = GetSelectedOptionalId(cmbSection)
@@ -55,9 +57,11 @@ namespace University_Timetable_and_Classroom_Management_System
             }
 
             if (string.Equals(schedule.LectureType, "Practical", StringComparison.OrdinalIgnoreCase) &&
-                string.IsNullOrWhiteSpace(schedule.GroupName))
+                string.IsNullOrWhiteSpace(schedule.GroupName) &&
+                !sectionsLookup.Any(section => section.SectionID == schedule.SectionID &&
+                    AcademicStructureRules.AllowsWholeSectionPractical(section.StudyYearID)))
             {
-                ShowInformation("Select a group for practical sessions.");
+                ShowInformation("اختر مجموعة للمحاضرات العملية.");
                 cmbGroupName.Focus();
                 return false;
             }
@@ -78,7 +82,7 @@ namespace University_Timetable_and_Classroom_Management_System
                 schedule.StudyYearID.HasValue &&
                 subject.StudyYearID != schedule.StudyYearID.Value)
             {
-                ShowInformation("The selected subject does not belong to the selected section study year.");
+                ShowInformation("المادة المحددة لا تنتمي إلى مرحلة الشعبة المحددة.");
                 return false;
             }
 
@@ -86,7 +90,7 @@ namespace University_Timetable_and_Classroom_Management_System
                 schedule.BranchID.HasValue &&
                 subject.BranchID.Value != schedule.BranchID.Value)
             {
-                ShowInformation("The selected subject does not belong to the selected section branch.");
+                ShowInformation("المادة المحددة لا تنتمي إلى فرع الشعبة المحددة.");
                 return false;
             }
 
@@ -98,7 +102,7 @@ namespace University_Timetable_and_Classroom_Management_System
                     section.BranchID,
                     section.SectionName))
             {
-                ShowInformation("The selected section is not valid for this subject.");
+                ShowInformation("الشعبة المحددة غير مناسبة لهذه المادة.");
                 return false;
             }
 

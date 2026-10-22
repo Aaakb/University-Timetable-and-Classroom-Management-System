@@ -4,8 +4,11 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>net8.0-windows</TargetFramework>
     <RootNamespace>University_Timetable_and_Classroom_Management_System</RootNamespace>
+    <Product>University Timetable Management System</Product>
+    <AssemblyTitle>University Timetable Management System</AssemblyTitle>
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
+    <ApplicationHighDpiMode>PerMonitorV2</ApplicationHighDpiMode>
     <ImplicitUsings>enable</ImplicitUsings>
     <ApplicationIcon>Assets\AppIcon.ico</ApplicationIcon>
   </PropertyGroup>
@@ -19,40 +22,74 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="database-settings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </None>
     <Content Include="Assets\AppIcon.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Assets\AppLogo.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Assets\AppLogoSquare.png">
+    <Content Include="..\Templates\Excel\*.xlsx" Link="Templates\Excel\%(Filename)%(Extension)">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="PresentationLayer\ExcelImportForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="PresentationLayer\ExcelImportForm.Designer.cs">
+      <DependentUpon>ExcelImportForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </Compile>
+    <Compile Update="PresentationLayer\TimetableAlternativesForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="PresentationLayer\TimetableAlternativesForm.Designer.cs">
+      <DependentUpon>TimetableAlternativesForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </Compile>
+    <Compile Update="PresentationLayer\FacultyScheduleEditorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="PresentationLayer\FacultyScheduleEditorForm.Designer.cs">
+      <DependentUpon>FacultyScheduleEditorForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </Compile>
+    <Compile Update="PresentationLayer\FacultyPreferencesForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="PresentationLayer\FacultyPreferencesForm.Designer.cs">
+      <DependentUpon>FacultyPreferencesForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </Compile>
     <Compile Update="PresentationLayer\BranchesForm.cs">
-      <SubType>Code</SubType>
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="PresentationLayer\ClassroomsForm.cs">
-      <SubType>Code</SubType>
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="PresentationLayer\FacultyMembersForm.cs">
-      <SubType>Code</SubType>
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="PresentationLayer\FacultyMemberSubjectsForm.cs">
-      <SubType>Code</SubType>
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="PresentationLayer\MainShellForm.cs">
-      <SubType>Code</SubType>
+      <SubType>Form</SubType>
     </Compile>
     <Compile Update="PresentationLayer\LoginForm.cs">
-      <SubType>Code</SubType>
+      <SubType>Form</SubType>
     </Compile>
     <Compile Update="PresentationLayer\RegisterForm.cs">
-      <SubType>Code</SubType>
+      <SubType>Form</SubType>
     </Compile>
     <Compile Update="PresentationLayer\SchedulesForm.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="PresentationLayer\SchedulesForm.Resizing.cs">
+      <DependentUpon>SchedulesForm.cs</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="PresentationLayer\SchedulesForm.Actions.cs">
@@ -80,16 +117,60 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="PresentationLayer\SectionsForm.cs">
-      <SubType>Code</SubType>
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="PresentationLayer\StudyYearsForm.cs">
-      <SubType>Code</SubType>
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="PresentationLayer\SubjectsForm.cs">
-      <SubType>Code</SubType>
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="PresentationLayer\TimeSlotsForm.cs">
-      <SubType>Code</SubType>
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="PresentationLayer\BranchesForm.Designer.cs">
+      <DependentUpon>BranchesForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </Compile>
+    <Compile Update="PresentationLayer\ClassroomsForm.Designer.cs">
+      <DependentUpon>ClassroomsForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </Compile>
+    <Compile Update="PresentationLayer\FacultyMembersForm.Designer.cs">
+      <DependentUpon>FacultyMembersForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </Compile>
+    <Compile Update="PresentationLayer\FacultyMemberSubjectsForm.Designer.cs">
+      <DependentUpon>FacultyMemberSubjectsForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </Compile>
+    <Compile Update="PresentationLayer\LoginForm.Designer.cs">
+      <DependentUpon>LoginForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </Compile>
+    <Compile Update="PresentationLayer\MainShellForm.Designer.cs">
+      <DependentUpon>MainShellForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </Compile>
+    <Compile Update="PresentationLayer\RegisterForm.Designer.cs">
+      <DependentUpon>RegisterForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </Compile>
+    <Compile Update="PresentationLayer\SectionsForm.Designer.cs">
+      <DependentUpon>SectionsForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </Compile>
+    <Compile Update="PresentationLayer\StudyYearsForm.Designer.cs">
+      <DependentUpon>StudyYearsForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </Compile>
+    <Compile Update="PresentationLayer\SubjectsForm.Designer.cs">
+      <DependentUpon>SubjectsForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </Compile>
+    <Compile Update="PresentationLayer\TimeSlotsForm.Designer.cs">
+      <DependentUpon>TimeSlotsForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </Compile>
   </ItemGroup>
 
@@ -101,6 +182,9 @@
   <ItemGroup>
     <EmbeddedResource Include="PresentationLayer\BranchesForm.resx" />
     <EmbeddedResource Include="PresentationLayer\ClassroomsForm.resx" />
+    <EmbeddedResource Include="PresentationLayer\ExcelImportForm.resx" />
+    <EmbeddedResource Include="PresentationLayer\FacultyScheduleEditorForm.resx" />
+    <EmbeddedResource Include="PresentationLayer\FacultyPreferencesForm.resx" />
     <EmbeddedResource Include="PresentationLayer\FacultyMembersForm.resx" />
     <EmbeddedResource Include="PresentationLayer\FacultyMemberSubjectsForm.resx" />
     <EmbeddedResource Include="PresentationLayer\LoginForm.resx" />
@@ -108,5 +192,9 @@
     <EmbeddedResource Include="PresentationLayer\RegisterForm.resx" />
     <EmbeddedResource Include="PresentationLayer\SchedulesForm.resx" />
     <EmbeddedResource Include="PresentationLayer\SectionsForm.resx" />
+    <EmbeddedResource Include="PresentationLayer\StudyYearsForm.resx" />
+    <EmbeddedResource Include="PresentationLayer\SubjectsForm.resx" />
+    <EmbeddedResource Include="PresentationLayer\TimeSlotsForm.resx" />
+    <EmbeddedResource Include="PresentationLayer\TimetableAlternativesForm.resx" />
   </ItemGroup>
 </Project>

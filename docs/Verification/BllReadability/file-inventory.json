@@ -1,0 +1,312 @@
+[
+  {
+    "File": "Business_Logic_Layer\\Services\\TimeSlotService.cs",
+    "Lines": 128,
+    "SHA256": "56EE694A1FD463A109B6881865973FFAE337B847DDDC79EBE3F3C309CB8D2F9B"
+  },
+  {
+    "File": "Business_Logic_Layer\\Services\\SubjectService.cs",
+    "Lines": 187,
+    "SHA256": "57E85E8E75142DD1157E012271E72E7DCDB58D495EEFFF738DB0339DC9318BE6"
+  },
+  {
+    "File": "Business_Logic_Layer\\Services\\StudyYearService.cs",
+    "Lines": 88,
+    "SHA256": "22623365018DC3CD2812A8F6B0AFF72158D5B0AE5B4E83B6B503E2CEB559A8BE"
+  },
+  {
+    "File": "Business_Logic_Layer\\Services\\SectionService.cs",
+    "Lines": 144,
+    "SHA256": "C84DC82E56C82506DB49F7FB33B953EABDD4679C18E050CAFC7CE096B2116319"
+  },
+  {
+    "File": "Business_Logic_Layer\\Services\\ScheduleService.cs",
+    "Lines": 755,
+    "SHA256": "02627D86DF64D602996C397D6808EED2B9E63BE15B82472D97A12F7ECBEA0448"
+  },
+  {
+    "File": "Business_Logic_Layer\\Services\\SchedulePdfExportService.cs",
+    "Lines": 518,
+    "SHA256": "C3FD8905A5DD5FB498F75D7F248262FCAA50D209A3B4EC6147E6471D4F31B6D7"
+  },
+  {
+    "File": "Business_Logic_Layer\\Services\\FacultyMemberSubjectService.cs",
+    "Lines": 155,
+    "SHA256": "A1F3B25D81CBF02767F905DB30B5FE5DC9C048813023B5A686C73F82B3DBB5BA"
+  },
+  {
+    "File": "Business_Logic_Layer\\Services\\FacultyMemberService.cs",
+    "Lines": 89,
+    "SHA256": "70BDFBB8CA1CC9C5CC182C006E6A4F798FFAD0FAC00EE9B61D162248C813486D"
+  },
+  {
+    "File": "Business_Logic_Layer\\Services\\ClassroomService.cs",
+    "Lines": 103,
+    "SHA256": "32E3BC60A92582BB3010CD1B7D127F54A062348F12764AED6E80CBB7FE4D61CE"
+  },
+  {
+    "File": "Business_Logic_Layer\\Services\\BranchService.cs",
+    "Lines": 83,
+    "SHA256": "FD17D64FFB6C8CA066622305F0733A723EC23992CA91E54916BC76CD6CD571E8"
+  },
+  {
+    "File": "Business_Logic_Layer\\Services\\AuthService.cs",
+    "Lines": 163,
+    "SHA256": "FA78D8174659F57AA33A04BEB08030C3157A36FCE75CCDC63C20E154E08CD229"
+  },
+  {
+    "File": "Business_Logic_Layer\\Scheduling\\TimetableAlternativesService.cs",
+    "Lines": 136,
+    "SHA256": "A2A35D5749FA8BA26CF5C8706EF0D41D2BF8FB0C5C6991774776CBAD8FCBE34B"
+  },
+  {
+    "File": "Business_Logic_Layer\\Scheduling\\TimetableAlternativeModels.cs",
+    "Lines": 26,
+    "SHA256": "5473F33A1B4EF4C53D16DC2B3DBFF6356B80DF2F85664E41996D52EC74ED7675"
+  },
+  {
+    "File": "Business_Logic_Layer\\Scheduling\\ScheduleRoomSelector.cs",
+    "Lines": 65,
+    "SHA256": "F64C5C806941AAC9DC1D744107C7D1996AE22202B525B388E621016C7D0BBC01"
+  },
+  {
+    "File": "Business_Logic_Layer\\Scheduling\\ScheduleRequirementMatcher.cs",
+    "Lines": 22,
+    "SHA256": "60A56E473FC558621311F19B9AA22038A7FAAE8C3D98936FB6BD6BBA0D1525D8"
+  },
+  {
+    "File": "Business_Logic_Layer\\Scheduling\\ScheduleGenerator.cs",
+    "Lines": 768,
+    "SHA256": "3C32162C92DFB45F953A6775BAEC21002CF320E18C26DAD7DC9CB268D7F202CD"
+  },
+  {
+    "File": "Business_Logic_Layer\\Scheduling\\ScheduleGenerationState.cs",
+    "Lines": 354,
+    "SHA256": "49D97D6F009E63299A883C83FDF727278C9F55F6C06D9F5C696A566E91D674DF"
+  },
+  {
+    "File": "Business_Logic_Layer\\Scheduling\\ScheduleGenerationResult.cs",
+    "Lines": 27,
+    "SHA256": "E721311B328AD7036C48144200A37B6127B89771BDF4D7E95326FCBDA39C0B40"
+  },
+  {
+    "File": "Business_Logic_Layer\\Scheduling\\ScheduleGenerationModels.cs",
+    "Lines": 67,
+    "SHA256": "D35BB11503E3EBCF616095F4B7E0207C9C7D861417748B29219635C2C1BB633D"
+  },
+  {
+    "File": "Business_Logic_Layer\\Scheduling\\ScheduleFacultySelector.cs",
+    "Lines": 24,
+    "SHA256": "9FAAC6A9ABBB259EFE1797D363345E88F4E284318FD672504F532C28B8755232"
+  },
+  {
+    "File": "Business_Logic_Layer\\Scheduling\\ScheduleConflictChecker.cs",
+    "Lines": 92,
+    "SHA256": "9D1A7FF8CA92F796534A777BD08D16BD465F295855CDCEA99AB1D26D1A66AAF2"
+  },
+  {
+    "File": "Business_Logic_Layer\\Scheduling\\ScheduleBuildContext.cs",
+    "Lines": 21,
+    "SHA256": "0ACE61027C5AE01AA4F5FFE82EB84E9CE2F2B70292714634CA4D91983D22DD09"
+  },
+  {
+    "File": "Business_Logic_Layer\\Scheduling\\FreshTimetablePlanner.cs",
+    "Lines": 67,
+    "SHA256": "3D8A3D705EE1CC25B2AEE4D6155722E5A8BFA47A639C02E3F76DD13EE55713F5"
+  },
+  {
+    "File": "Business_Logic_Layer\\Rules\\SubjectLectureRules.cs",
+    "Lines": 25,
+    "SHA256": "A6AEC016C0F25A59B5124FAD9DA47F0661E39B00877D08B7A41D6512019DB78D"
+  },
+  {
+    "File": "Business_Logic_Layer\\Rules\\ScheduleTimingRules.cs",
+    "Lines": 39,
+    "SHA256": "5C725EB41A9F5E3DCEF6E0487970CA2501074050C4578860D3CA11EFDDD08E43"
+  },
+  {
+    "File": "Business_Logic_Layer\\Rules\\ScheduleDayRules.cs",
+    "Lines": 111,
+    "SHA256": "91C3E762AB6642709111CB6F6DA5714565851731846AADC26EC706B03753ECFC"
+  },
+  {
+    "File": "Business_Logic_Layer\\Rules\\InputValidation.cs",
+    "Lines": 25,
+    "SHA256": "D7445E563166C761AE6E8E62713B1A8DDC4D8C0513099DC03D092839E23C7111"
+  },
+  {
+    "File": "Business_Logic_Layer\\Rules\\FacultyAssignmentRules.cs",
+    "Lines": 25,
+    "SHA256": "40A6C09A2CA978BC19A1A875A0DAEBAF36204F3CA286E629C6703374F2DE272B"
+  },
+  {
+    "File": "Business_Logic_Layer\\Rules\\ClassroomRules.cs",
+    "Lines": 38,
+    "SHA256": "809F0FF918F6DE293798D84BA9F331DA3884AF1ACCA86B1AA0C1ECBA7436115B"
+  },
+  {
+    "File": "Business_Logic_Layer\\Rules\\AcademicStructureRules.cs",
+    "Lines": 117,
+    "SHA256": "900FDD190602C9348A57656F62259512C85AB57A247B97696C808DA26F16B323"
+  },
+  {
+    "File": "Business_Logic_Layer\\Maintenance\\SchedulingResourceMaintenance.cs",
+    "Lines": 163,
+    "SHA256": "BA838721ADAFF42293B7743F04EFB7F14897113F5E6BAF874EC19BD089F3E51D"
+  },
+  {
+    "File": "Business_Logic_Layer\\Backups\\TimetableBackupService.cs",
+    "Lines": 170,
+    "SHA256": "50A16509AD4DA8B7AE5951F7E94EA1FE54822F7ADE0285E437510DFDBFE87764"
+  },
+  {
+    "File": "Business_Logic_Layer\\Maintenance\\FourthYearPracticalMaintenance.cs",
+    "Lines": 53,
+    "SHA256": "DBDB043818D2E50ABAD8906D4B12D165699C571A98D4C526DB2AFFA46594AA68"
+  },
+  {
+    "File": "Business_Logic_Layer\\Maintenance\\DatabaseMaintenanceService.cs",
+    "Lines": 343,
+    "SHA256": "9A590A828B6BDAD230614604E7CEF1A3840B9600AD90728F1533D2B256E89AD6"
+  },
+  {
+    "File": "Business_Logic_Layer\\Helpers\\ManualKeySaveHelper.cs",
+    "Lines": 83,
+    "SHA256": "380D007AF8088B4390F850F009D8DB943CFBEAC0AF5AFB2EDBC754FC25D26B1C"
+  },
+  {
+    "File": "Business_Logic_Layer\\Helpers\\AutoKeyGenerator.cs",
+    "Lines": 39,
+    "SHA256": "7379048FA48C06F302DD7B3826BF90D4D6F5F8C43A2D33FE4406A16E074A1E94"
+  },
+  {
+    "File": "Business_Logic_Layer\\Backups\\TimetableBackupModels.cs",
+    "Lines": 32,
+    "SHA256": "2A0ED70E63ABAA000BE76489D06DEEA5515E87922703C7184FBC316ECB497BD2"
+  },
+  {
+    "File": "Business_Logic_Layer\\Importing\\WeeklyPdfTimetableReader.cs",
+    "Lines": 209,
+    "SHA256": "7F312CFFD5A16BF71B88CCE4C67EED54337E5178D0342B23A0DD4D8CA2AAEFBD"
+  },
+  {
+    "File": "Business_Logic_Layer\\Importing\\PdfTableReader.cs",
+    "Lines": 168,
+    "SHA256": "4EC565EABD158AE534F62937DF443C59C6C5A2C29A7CA6E0E71A3614DE9BE3C6"
+  },
+  {
+    "File": "Business_Logic_Layer\\Importing\\ImportValues.cs",
+    "Lines": 40,
+    "SHA256": "9ACB4F09BFBC6AB0FF54051DA3FCFBE1CDADF25938BA4D2A41134DCD64BC8CEE"
+  },
+  {
+    "File": "Business_Logic_Layer\\Importing\\ImportLabels.cs",
+    "Lines": 62,
+    "SHA256": "51BAFFFC315A31EB236D4B238FC5CECDBCC5C2D1DACEE74495C2025AC99F7B6B"
+  },
+  {
+    "File": "Business_Logic_Layer\\Importing\\ImportFileReader.cs",
+    "Lines": 15,
+    "SHA256": "77D1BE7776846D11410DF4317CF1874573115D73F1EBDAE2A2F438ED5E8000F4"
+  },
+  {
+    "File": "Business_Logic_Layer\\Importing\\ImportedTimetableRepairPlanner.cs",
+    "Lines": 289,
+    "SHA256": "BC40AD3623211245647EFF8398B826A6EAA8064B25FF66BC53D268EF49ED3178"
+  },
+  {
+    "File": "Business_Logic_Layer\\Importing\\ImportedTimetableRepair.cs",
+    "Lines": 158,
+    "SHA256": "2B9B2F41CEAD05CB3445E2937AF8F584E21DFD9CEFDBFDB44952C6C42DF4FA80"
+  },
+  {
+    "File": "Business_Logic_Layer\\Importing\\ImportCatalog.cs",
+    "Lines": 40,
+    "SHA256": "017B7BE479DDF8188C6284B0C307B33D7BF5B6CF4E50F92FFAC2BF503C4FA7C4"
+  },
+  {
+    "File": "Business_Logic_Layer\\Importing\\ExcelWorkbookReader.cs",
+    "Lines": 80,
+    "SHA256": "7756CD8480834ED33B3B11F932325BACC91506E38C7260DD8B414999C190A0B0"
+  },
+  {
+    "File": "Business_Logic_Layer\\Importing\\ExcelImportTemplates.cs",
+    "Lines": 89,
+    "SHA256": "D8F13C3DBF7F987AD8DE3389D310584B8340FD3F9B6EEB7ECF6FA0E6F54595AA"
+  },
+  {
+    "File": "Business_Logic_Layer\\Importing\\ExcelImportService.cs",
+    "Lines": 415,
+    "SHA256": "AA0AAEDC111587AFC620964E8A6966CDF980AED8897D71774147FCEDF977A503"
+  },
+  {
+    "File": "Business_Logic_Layer\\Importing\\ExcelImportSchema.cs",
+    "Lines": 25,
+    "SHA256": "5011AE9E5366E54EFED772CB913DCC95F158CC290DD2618B5767D9D8C6EF1D90"
+  },
+  {
+    "File": "Business_Logic_Layer\\Importing\\ExcelImportModels.cs",
+    "Lines": 74,
+    "SHA256": "8E65DF6B7FF0C684EDCFEEC4262953485F67D922E81282C8CE91AA205E7F537A"
+  },
+  {
+    "File": "Business_Logic_Layer\\Importing\\AcademicExcelImport.cs",
+    "Lines": 232,
+    "SHA256": "6A9B94951FB3E052AF6E36252437121DF773F485164F63445B0CD0C2A810B63D"
+  },
+  {
+    "File": "Business_Logic_Layer\\FacultyScheduling\\SchedulingCpSupport.cs",
+    "Lines": 214,
+    "SHA256": "5F3C73FAA02199FCE2EB2D508FF46F6BFA42D29150E04F3967F9A60FBF091A2F"
+  },
+  {
+    "File": "Business_Logic_Layer\\FacultyScheduling\\ScheduleQualityAnalyzer.cs",
+    "Lines": 45,
+    "SHA256": "D23DF4308DFD021D5D22973022CDEE5C26DCD1D6C1AA14A509DF29857B28FD5A"
+  },
+  {
+    "File": "Business_Logic_Layer\\FacultyScheduling\\FacultySchedulingRuntime.cs",
+    "Lines": 67,
+    "SHA256": "743C1FB14EEE8ABEA5BF52B4937F2839528A729F93EED7E9AFD330BA49423AC1"
+  },
+  {
+    "File": "Business_Logic_Layer\\FacultyScheduling\\FacultyScheduleModels.cs",
+    "Lines": 72,
+    "SHA256": "B7CAD34B2934E5D2FE9D68E7FF72A621824E521C0107DE71AE5990ECE0D2DD9C"
+  },
+  {
+    "File": "Business_Logic_Layer\\FacultyScheduling\\FacultyScheduleEditorService.cs",
+    "Lines": 204,
+    "SHA256": "BE54C6CEBE7B0F017C916DB84E60D265CA4BAEC17F6E70AF2455A8D3FE744657"
+  },
+  {
+    "File": "Business_Logic_Layer\\FacultyScheduling\\FacultyPreferenceService.cs",
+    "Lines": 72,
+    "SHA256": "2E6FCCB359F59B6105B27CC79C5E685943284505DD23BD7E6520FFBE07A9A777"
+  },
+  {
+    "File": "Business_Logic_Layer\\FacultyScheduling\\FacultyPreferenceRules.cs",
+    "Lines": 140,
+    "SHA256": "1B8B0371E101E51CCE6CC77F42E90A42E50146E906DBC5A1E5FB0BA34C8C338F"
+  },
+  {
+    "File": "Business_Logic_Layer\\FacultyScheduling\\FacultyPreferenceMeasurement.cs",
+    "Lines": 35,
+    "SHA256": "A13CE824D9ED2705B20424A582F681EA1485D67057478D0344F0AD72FD759255"
+  },
+  {
+    "File": "Business_Logic_Layer\\FacultyScheduling\\FacultyPracticalExchange.cs",
+    "Lines": 67,
+    "SHA256": "61FAB4A12CD5AF3048554FA247788CE14A24568C52792A6BCD03C956B2081AF2"
+  },
+  {
+    "File": "Business_Logic_Layer\\FacultyScheduling\\FacultyDayPreferenceService.cs",
+    "Lines": 56,
+    "SHA256": "9F1BCB021C2B7AC505D3714DB76C901932E0D042BEF94C8AA40293FEBABBE388"
+  },
+  {
+    "File": "Business_Logic_Layer\\FacultyScheduling\\FacultyCpSatPlanner.cs",
+    "Lines": 226,
+    "SHA256": "CBE399288AFAB7D7FB55732223058EB077A0D96025B915138BCF92A7B8F0456D"
+  }
+]

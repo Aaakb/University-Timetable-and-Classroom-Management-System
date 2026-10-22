@@ -1,0 +1,68 @@
+[
+  {
+    "Path": "Data_Access_Layer\\Data_Access_Layer.csproj",
+    "Lines": 18,
+    "Bytes": 520,
+    "SHA256": "E28A705E181C8BEE87E9CCBCCF1A504A475DE90917E0D863449BA8F7F5B34DDB"
+  },
+  {
+    "Path": "Data_Access_Layer\\DatabaseConnection.cs",
+    "Lines": 11,
+    "Bytes": 451,
+    "SHA256": "7466C610CE23C784DE949087B1B654E2E79D3792C3950EB2DEB997256F09E410"
+  },
+  {
+    "Path": "Data_Access_Layer\\Scheduling\\TimetableSnapshotStore.cs",
+    "Lines": 29,
+    "Bytes": 1488,
+    "SHA256": "B58039560EB4B3D619EF6AE325681E20A92398882A90691EBA25DF1BAD88E58A"
+  },
+  {
+    "Path": "Data_Access_Layer\\Scheduling\\SubjectLectureCountSchema.cs",
+    "Lines": 16,
+    "Bytes": 643,
+    "SHA256": "D86ACD96753215C583E604CF27DB91ECF46A83AFB41B1E74CA2AB8B0673CBE3C"
+  },
+  {
+    "Path": "Data_Access_Layer\\Scheduling\\SubjectDeletionSchema.cs",
+    "Lines": 32,
+    "Bytes": 1562,
+    "SHA256": "4D2ABC2EB143020029A2DCF203A3631E00D9F97978FA74D16F30312AA448DBBB"
+  },
+  {
+    "Path": "Data_Access_Layer\\Scheduling\\FacultyScheduleWriter.cs",
+    "Lines": 47,
+    "Bytes": 2228,
+    "SHA256": "281C099DD9B846F69CF5DF6C078D3F63D2852F337C5AA05B1D68F34659535BF9"
+  },
+  {
+    "Path": "Data_Access_Layer\\Scheduling\\FacultyPreferenceSchema.cs",
+    "Lines": 36,
+    "Bytes": 2168,
+    "SHA256": "5DCFE871DD65BEB21DB3B6DCA1C9327F7048F1FB6F50370941018F2583929302"
+  },
+  {
+    "Path": "Data_Access_Layer\\Scheduling\\FacultyAssignmentScopeSchema.cs",
+    "Lines": 26,
+    "Bytes": 1672,
+    "SHA256": "78C98B8911F171ECF13AFE2ACCA23755157DC1EE51A0461BFFFC58BF3A4BEB77"
+  },
+  {
+    "Path": "Data_Access_Layer\\DbContext\\appDbContext.cs",
+    "Lines": 346,
+    "Bytes": 13862,
+    "SHA256": "5D68573EE1092AACE0C59CB4C2AE43B78C83F560E93B71444D6DDF0D844B79E1"
+  },
+  {
+    "Path": "Data_Access_Layer\\Importing\\ScheduleLockSchema.cs",
+    "Lines": 13,
+    "Bytes": 497,
+    "SHA256": "9973758B49A02A42B18C90A01C451899FAA861D2993CB6F8B1D3C14D0B3AF02C"
+  },
+  {
+    "Path": "Data_Access_Layer\\Importing\\ImportTransaction.cs",
+    "Lines": 20,
+    "Bytes": 840,
+    "SHA256": "9EFFDDB66D2BB739E60E9236C0EE072427D00F2B8D52B98251191DD704EA502B"
+  }
+]

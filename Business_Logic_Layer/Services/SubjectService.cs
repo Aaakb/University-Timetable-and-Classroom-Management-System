@@ -1,4 +1,4 @@
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Data_Access_Layer;
 using University_Timetable_and_Classroom_Management_System.Models;
 
@@ -10,6 +10,7 @@ namespace University_Timetable_and_Classroom_Management_System.BusinessLayer
         {
             await using var context = new AppDbContext();
             var subjects = await context.Subjects
+                .Where(s => !s.IsDeleted)
                 .Include(s => s.StudyYear)
                 .Include(s => s.Branch)
                 .AsNoTracking()
@@ -30,27 +31,86 @@ namespace University_Timetable_and_Classroom_Management_System.BusinessLayer
                 .Include(s => s.StudyYear)
                 .Include(s => s.Branch)
                 .AsNoTracking()
-                .FirstOrDefaultAsync(s => s.SubjectID == id);
+                .FirstOrDefaultAsync(s => s.SubjectID == id && !s.IsDeleted);
         }
 
         public async Task<Subject> AddAsync(Subject subject)
         {
             await using var context = new AppDbContext();
             subject.SubjectID = await AutoKeyGenerator.FirstAvailableAsync(context.Subjects.Select(s => s.SubjectID));
+            return await AddInContextAsync(context, subject);
+        }
+
+        internal static async Task<Subject> AddInContextAsync(AppDbContext context, Subject subject)
+        {
+            subject.IsDeleted = false;
+            subject.RequirementType = Subject.DefaultRequirementType;
             await ValidateAsync(context, subject, false);
             await context.Subjects.AddAsync(subject);
             await ManualKeySaveHelper.SaveWithManualKeyAsync(context, "[Subjects]");
             return subject;
         }
 
+
         public async Task<Subject> UpdateAsync(Subject subject)
         {
             await using var context = new AppDbContext();
+            await using var transaction = await context.Database.BeginTransactionAsync(System.Data.IsolationLevel.Serializable);
+            var result = await UpdateInContextAsync(context, subject);
+            await transaction.CommitAsync();
+            return result;
+        }
+
+        internal static async Task<Subject> UpdateInContextAsync(AppDbContext context, Subject subject)
+        {
+            var existing = await context.Subjects.SingleOrDefaultAsync(s => s.SubjectID == subject.SubjectID && !s.IsDeleted)
+                ?? throw new KeyNotFoundException("Subject not found.");
+            // The retired field is no longer edited; preserve historical metadata.
+            subject.RequirementType = existing.RequirementType;
+            subject.IsDeleted = false;
             await ValidateAsync(context, subject, true);
-            context.Subjects.Update(subject);
+            var assignedSections = await context.FacultyMemberSubjects.Where(a => a.SubjectID == subject.SubjectID && a.SectionID != null)
+                .Select(a => a.Section!).AsNoTracking().ToListAsync();
+            if (assignedSections.Any(section => !FacultyAssignmentRules.Matches(subject, section)))
+                throw new ArgumentException("للمادة تكليفات مرتبطة بشعب محددة؛ عدّل التكليفات قبل تغيير مرحلة المادة أو تخصصها.");
+            var linkedSchedules = await context.Schedules.Where(s => s.SubjectID == subject.SubjectID).ToListAsync();
+            SubjectLectureRules.ValidateSavedLectures(subject, linkedSchedules);
+            if (linkedSchedules.Any(s => s.LectureType == "Practical") && subject.EffectivePracticalLectureCount <= 0 ||
+                linkedSchedules.Any(s => s.LectureType == "Theory") && subject.EffectiveTheoreticalLectureCount <= 0)
+            {
+                throw new ArgumentException("Remove the linked lessons before removing this subject's theory or practical component.");
+            }
+
+            if (linkedSchedules.Count > 0 &&
+                (existing.StudyYearID != subject.StudyYearID || existing.BranchID != subject.BranchID))
+            {
+                throw new ArgumentException("Remove this subject's scheduled lessons before changing its study year or branch.");
+            }
+
+            if (linkedSchedules.Any(s => s.SemesterNumber != subject.SemesterNumber))
+            {
+                var otherSchedules = await context.Schedules.AsNoTracking()
+                    .Where(s => s.SubjectID != subject.SubjectID && s.SemesterNumber == subject.SemesterNumber)
+                    .ToListAsync();
+                foreach (var schedule in linkedSchedules)
+                {
+                    schedule.SemesterNumber = subject.SemesterNumber;
+                    if (otherSchedules.Any(other => ScheduleConflictChecker.HasPairConflict(schedule, other)))
+                    {
+                        throw new ArgumentException("The semester change conflicts with an existing room, faculty, or section booking. The subject and its timetable have been kept unchanged.");
+                    }
+                }
+                if (ScheduleConflictChecker.HasAnyPairConflict(linkedSchedules))
+                {
+                    throw new ArgumentException("This subject's lessons would conflict in the selected semester. The subject and its timetable have been kept unchanged.");
+                }
+            }
+
+            context.Entry(existing).CurrentValues.SetValues(subject);
             await context.SaveChangesAsync();
             return subject;
         }
+
 
         public async Task DeleteAsync(int id)
         {
@@ -58,47 +118,32 @@ namespace University_Timetable_and_Classroom_Management_System.BusinessLayer
             var subject = await context.Subjects.FindAsync(id)
                 ?? throw new KeyNotFoundException("Subject not found.");
 
-            context.Subjects.Remove(subject);
+            // Keep the referenced record so assignments and saved lectures retain
+            // their original subject and remain valid after removal from the list.
+            subject.IsDeleted = true;
             await context.SaveChangesAsync();
         }
 
         private static async Task ValidateAsync(AppDbContext context, Subject subject, bool isUpdate)
         {
-            if (subject.SubjectID <= 0)
-            {
-                throw new ArgumentException("Subject ID is required.");
-            }
-
-            var idExists = await context.Subjects.AnyAsync(s => s.SubjectID == subject.SubjectID);
-
-            if (!isUpdate && idExists)
-            {
-                throw new ArgumentException("Subject ID already exists.");
-            }
-
-            if (isUpdate && !idExists)
-            {
-                throw new KeyNotFoundException("Subject not found.");
-            }
+            SubjectLectureRules.Validate(subject);
+            await InputValidation.RecordIdAsync(subject.SubjectID, isUpdate,
+                () => context.Subjects.AnyAsync(s => s.SubjectID == subject.SubjectID), "Subject");
 
             if (string.IsNullOrWhiteSpace(subject.SubjectName))
             {
                 throw new ArgumentException("Subject name is required.");
             }
 
-            if (subject.SemesterNumber <= 0)
+            if (subject.SemesterNumber is not (1 or 2))
             {
-                throw new ArgumentException("Semester number must be greater than zero.");
+                throw new ArgumentException("Semester number must be 1 or 2.");
             }
 
-            if (subject.TheoreticalHours < 0 || subject.PracticalHours < 0 || subject.CreditUnits < 0)
+            if (!double.IsFinite(subject.TheoreticalHours) || !double.IsFinite(subject.PracticalHours) ||
+                !double.IsFinite(subject.CreditUnits) || subject.TheoreticalHours < 0 || subject.PracticalHours < 0 || subject.CreditUnits < 0)
             {
-                throw new ArgumentException("Hours and credit units cannot be negative.");
-            }
-
-            if (string.IsNullOrWhiteSpace(subject.RequirementType))
-            {
-                throw new ArgumentException("Requirement type is required.");
+                throw new ArgumentException("Hours and credit units must be finite numbers that are zero or greater.");
             }
 
             if (!await context.StudyYears.AnyAsync(sy => sy.StudyYearID == subject.StudyYearID))
@@ -123,17 +168,19 @@ namespace University_Timetable_and_Classroom_Management_System.BusinessLayer
             }
 
             subject.SubjectName = subject.SubjectName.Trim();
-            subject.RequirementType = subject.RequirementType.Trim();
+            InputValidation.TextLength(subject.SubjectName, 100, "Subject name");
 
             var exists = await context.Subjects.AnyAsync(s =>
+                !s.IsDeleted &&
                 s.SubjectName == subject.SubjectName &&
                 s.StudyYearID == subject.StudyYearID &&
+                s.BranchID == subject.BranchID &&
                 s.SemesterNumber == subject.SemesterNumber &&
                 (!isUpdate || s.SubjectID != subject.SubjectID));
 
             if (exists)
             {
-                throw new ArgumentException("Subject already exists in the same study year and semester.");
+                throw new ArgumentException("Subject already exists in the same study year, branch, and semester.");
             }
         }
     }

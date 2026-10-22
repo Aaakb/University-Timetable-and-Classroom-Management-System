@@ -1,4 +1,4 @@
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Data_Access_Layer;
 using University_Timetable_and_Classroom_Management_System.Models;
 
@@ -22,20 +22,32 @@ namespace University_Timetable_and_Classroom_Management_System.BusinessLayer
         {
             await using var context = new AppDbContext();
             facultyMember.FacultyMemberID = await AutoKeyGenerator.NextAsync(context.FacultyMembers.Select(f => f.FacultyMemberID));
+            return await AddInContextAsync(context, facultyMember);
+        }
+
+        internal static async Task<FacultyMember> AddInContextAsync(AppDbContext context, FacultyMember facultyMember)
+        {
             await ValidateAsync(context, facultyMember, false);
             await context.FacultyMembers.AddAsync(facultyMember);
             await ManualKeySaveHelper.SaveWithManualKeyAsync(context, "[FacultyMembers]");
             return facultyMember;
         }
 
+
         public async Task<FacultyMember> UpdateAsync(FacultyMember facultyMember)
         {
             await using var context = new AppDbContext();
+            return await UpdateInContextAsync(context, facultyMember);
+        }
+
+        internal static async Task<FacultyMember> UpdateInContextAsync(AppDbContext context, FacultyMember facultyMember)
+        {
             await ValidateAsync(context, facultyMember, true);
             context.FacultyMembers.Update(facultyMember);
             await context.SaveChangesAsync();
             return facultyMember;
         }
+
 
         public async Task DeleteAsync(int id)
         {
@@ -49,22 +61,8 @@ namespace University_Timetable_and_Classroom_Management_System.BusinessLayer
 
         private static async Task ValidateAsync(AppDbContext context, FacultyMember facultyMember, bool isUpdate)
         {
-            if (facultyMember.FacultyMemberID <= 0)
-            {
-                throw new ArgumentException("Faculty member ID is required.");
-            }
-
-            var idExists = await context.FacultyMembers.AnyAsync(f => f.FacultyMemberID == facultyMember.FacultyMemberID);
-
-            if (!isUpdate && idExists)
-            {
-                throw new ArgumentException("Faculty member ID already exists.");
-            }
-
-            if (isUpdate && !idExists)
-            {
-                throw new KeyNotFoundException("Faculty member not found.");
-            }
+            await InputValidation.RecordIdAsync(facultyMember.FacultyMemberID, isUpdate,
+                () => context.FacultyMembers.AnyAsync(f => f.FacultyMemberID == facultyMember.FacultyMemberID), "Faculty member");
 
             if (string.IsNullOrWhiteSpace(facultyMember.FullName))
             {
@@ -72,6 +70,8 @@ namespace University_Timetable_and_Classroom_Management_System.BusinessLayer
             }
 
             facultyMember.FullName = facultyMember.FullName.Trim();
+            InputValidation.TextLength(facultyMember.FullName, 100, "Faculty member name");
+            InputValidation.TextLength(facultyMember.AcademicTitle, 50, "Academic title");
             facultyMember.AcademicTitle = string.IsNullOrWhiteSpace(facultyMember.AcademicTitle)
                 ? null
                 : facultyMember.AcademicTitle.Trim();

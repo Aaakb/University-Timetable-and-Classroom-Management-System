@@ -1,0 +1,37 @@
+[
+  {
+    "file": "arabic.pdf",
+    "pages": 1,
+    "identicalRenderedPages": true
+  },
+  {
+    "file": "empty.pdf",
+    "pages": 1,
+    "identicalRenderedPages": true
+  },
+  {
+    "file": "english.pdf",
+    "pages": 1,
+    "identicalRenderedPages": true
+  },
+  {
+    "file": "mixed.pdf",
+    "pages": 1,
+    "identicalRenderedPages": true
+  },
+  {
+    "file": "multiple-pages.pdf",
+    "pages": 2,
+    "identicalRenderedPages": true
+  },
+  {
+    "file": "repeated.pdf",
+    "pages": 1,
+    "identicalRenderedPages": true
+  },
+  {
+    "file": "pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp\\\u062c\u062f\u0648\u0644.pdf",
+    "pages": 1,
+    "identicalRenderedPages": true
+  }
+]

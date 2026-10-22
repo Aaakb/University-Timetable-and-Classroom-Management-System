@@ -1,0 +1,26 @@
+[
+  {
+    "ProjectAssets": "Data_Access_Layer/obj/project.assets.json",
+    "PackageEntriesCompared": 55,
+    "ChangedPackageEntries": [],
+    "CoreStillResolved": true
+  },
+  {
+    "ProjectAssets": "Business_Logic_Layer/obj/project.assets.json",
+    "PackageEntriesCompared": 82,
+    "ChangedPackageEntries": [],
+    "CoreStillResolved": true
+  },
+  {
+    "ProjectAssets": "UniversityTimetable.API/obj/project.assets.json",
+    "PackageEntriesCompared": 82,
+    "ChangedPackageEntries": [],
+    "CoreStillResolved": true
+  },
+  {
+    "ProjectAssets": "University Timetable and Classroom Management System/obj/project.assets.json",
+    "PackageEntriesCompared": 85,
+    "ChangedPackageEntries": [],
+    "CoreStillResolved": true
+  }
+]

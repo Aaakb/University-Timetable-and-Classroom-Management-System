@@ -1,0 +1,62 @@
+[
+  {
+    "table": "dbo.ApplicationUsers",
+    "count": 1,
+    "sha256": "B131FA92C88645FF7F466834B6966950C2E84C2B5817EAF23A24D18EE45F25B6"
+  },
+  {
+    "table": "dbo.Branches",
+    "count": 3,
+    "sha256": "D1481C17FA874459F8D3F23A53142FCFFB594BE38291FE7AF98BB388194C3B4D"
+  },
+  {
+    "table": "dbo.Classrooms",
+    "count": 11,
+    "sha256": "8AFC012DAA3EF4469685EEBFBAD295A7B57E5DFC8B382773E5989FF9C02F46B3"
+  },
+  {
+    "table": "dbo.FacultyMembers",
+    "count": 50,
+    "sha256": "DD484F3296BF187A3141BF425F78A4D301AA307CC402DEBB10E57A7B43D6C1A9"
+  },
+  {
+    "table": "dbo.FacultyMemberSubjects",
+    "count": 150,
+    "sha256": "7E90DD3F9AE55E408D9C66E6A87F2AD3533FAF908BA94DA2DD08298BBCA2E661"
+  },
+  {
+    "table": "dbo.FacultyPeriodPreferences",
+    "count": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "table": "dbo.FacultySchedulingPreferences",
+    "count": 50,
+    "sha256": "DA186450193B0DB0CB0F16F656E3F181781082059FC7B6621BA7925B34B2CFBC"
+  },
+  {
+    "table": "dbo.Schedules",
+    "count": 263,
+    "sha256": "56BE9BF4F68EBC4038D35D8EC07D59655570594D140FE0C0900E81D75DF10C7D"
+  },
+  {
+    "table": "dbo.Sections",
+    "count": 10,
+    "sha256": "1B28DD0CDC130ECD4190E1C2A48FBB7E05F09CC31B06D10F06AF7623288E00DD"
+  },
+  {
+    "table": "dbo.StudyYears",
+    "count": 4,
+    "sha256": "992450E8EF7CA3B6BE3E72FE2AD404D9240F03474BC4804E6F02670EB3453293"
+  },
+  {
+    "table": "dbo.Subjects",
+    "count": 100,
+    "sha256": "95C1E1446619EEBCDF83E54C6F2A65DE9B26296BFB61096E785C1029B80759D2"
+  },
+  {
+    "table": "dbo.TimeSlots",
+    "count": 3,
+    "sha256": "E1CEA8343220670D5753F410F1451F89691AAAA55795AC14EEA0539764D96A3F"
+  }
+]

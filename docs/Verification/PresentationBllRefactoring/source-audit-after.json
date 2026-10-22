@@ -1,0 +1,2617 @@
+{
+  "files": [
+    {
+      "path": "Business_Logic_Layer\\Backups\\TimetableBackupModels.cs",
+      "lines": 33,
+      "methods": 2,
+      "events": [],
+      "catches": [],
+      "dependencies": [
+        "University_Timetable_and_Classroom_Management_System.Models"
+      ]
+    },
+    {
+      "path": "Business_Logic_Layer\\Backups\\TimetableBackupService.cs",
+      "lines": 171,
+      "methods": 12,
+      "events": [],
+      "catches": [
+        {
+          "line": 116,
+          "body": "catch(ArgumentException e){issues.Add($\u0022\u0627\u0644\u0645\u062D\u0627\u0636\u0631\u0629 #{row.ScheduleID}: {e.Message}\u0022);}"
+        },
+        {
+          "line": 143,
+          "body": "catch(JsonException e){throw new ArgumentException(\u0022\u0645\u0644\u0641 \u0627\u0644\u0646\u0633\u062E\u0629 \u063A\u064A\u0631 \u0635\u0627\u0644\u062D \u0623\u0648 \u063A\u064A\u0631 \u0645\u0643\u062A\u0645\u0644.\u0022,e);}"
+        }
+      ],
+      "dependencies": [
+        "System.Data",
+        "System.Text.Json",
+        "Data_Access_Layer",
+        "Microsoft.EntityFrameworkCore",
+        "University_Timetable_and_Classroom_Management_System.Models"
+      ]
+    },
+    {
+      "path": "Business_Logic_Layer\\FacultyScheduling\\FacultyCpSatPlanner.cs",
+      "lines": 227,
+      "methods": 3,
+      "events": [],
+      "catches": [
+        {
+          "line": 24,
+          "body": "catch (SearchLimitException) { return new(\u0022Unknown\u0022, null, [], [\u0022\u0628\u0644\u063A \u0627\u0644\u0628\u062D\u062B \u062D\u062F \u0627\u0644\u0648\u0642\u062A \u0623\u0648 \u062D\u062C\u0645 \u0627\u0644\u062E\u064A\u0627\u0631\u0627\u062A\u061B \u0644\u0645 \u062A\u062B\u0628\u062A \u0627\u0633\u062A\u062D\u0627\u0644\u0629 \u0627\u0644\u062D\u0644.\u0022]); }"
+        }
+      ],
+      "dependencies": [
+        "System.Diagnostics",
+        "System.Globalization",
+        "Google.OrTools.Sat",
+        "University_Timetable_and_Classroom_Management_System.Models"
+      ]
+    },
+    {
+      "path": "Business_Logic_Layer\\FacultyScheduling\\FacultyDayPreferenceService.cs",
+      "lines": 57,
+      "methods": 1,
+      "events": [],
+      "catches": [],
+      "dependencies": [
+        "System.Data",
+        "Data_Access_Layer",
+        "Microsoft.EntityFrameworkCore",
+        "University_Timetable_and_Classroom_Management_System.Models"
+      ]
+    },
+    {
+      "path": "Business_Logic_Layer\\FacultyScheduling\\FacultyPracticalExchange.cs",
+      "lines": 68,
+      "methods": 4,
+      "events": [],
+      "catches": [],
+      "dependencies": [
+        "University_Timetable_and_Classroom_Management_System.Models"
+      ]
+    },
+    {
+      "path": "Business_Logic_Layer\\FacultyScheduling\\FacultyPreferenceMeasurement.cs",
+      "lines": 36,
+      "methods": 1,
+      "events": [],
+      "catches": [],
+      "dependencies": [
+        "University_Timetable_and_Classroom_Management_System.Models"
+      ]
+    },
+    {
+      "path": "Business_Logic_Layer\\FacultyScheduling\\FacultyPreferenceRules.cs",
+      "lines": 141,
+      "methods": 9,
+      "events": [],
+      "catches": [
+        {
+          "line": 71,
+          "body": "catch (Exception ex) when (ex is JsonException or ArgumentException)\n            { throw new InvalidOperationException($\u0022\u062A\u0639\u0630\u0631 \u0642\u0631\u0627\u0621\u0629 \u062A\u0641\u0636\u064A\u0644\u0627\u062A \u0627\u0644\u062A\u062F\u0631\u064A\u0633\u064A #{row.FacultyMemberID}\u061B \u0623\u0639\u062F \u062D\u0641\u0638\u0647\u0627 \u0645\u0646 \u0634\u0627\u0634\u0629 \u0623\u064A\u0627\u0645 \u0627\u0644\u062A\u062F\u0631\u064A\u0633\u064A.\u0022, ex); }"
+        }
+      ],
+      "dependencies": [
+        "System.Text.Json",
+        "University_Timetable_and_Classroom_Management_System.Models"
+      ]
+    },
+    {
+      "path": "Business_Logic_Layer\\FacultyScheduling\\FacultyPreferenceService.cs",
+      "lines": 73,
+      "methods": 4,
+      "events": [],
+      "catches": [],
+      "dependencies": [
+        "System.Data",
+        "System.Text.Json",
+        "Data_Access_Layer",
+        "Microsoft.EntityFrameworkCore",
+        "University_Timetable_and_Classroom_Management_System.Models"
+      ]
+    },
+    {
+      "path": "Business_Logic_Layer\\FacultyScheduling\\FacultyScheduleEditorService.cs",
+      "lines": 205,
+      "methods": 14,
+      "events": [],
+      "catches": [],
+      "dependencies": [
+        "System.Data",
+        "Data_Access_Layer",
+        "Microsoft.EntityFrameworkCore",
+        "University_Timetable_and_Classroom_Management_System.Models"
+      ]
+    },
+    {
+      "path": "Business_Logic_Layer\\FacultyScheduling\\FacultyScheduleModels.cs",
+      "lines": 73,
+      "methods": 0,
+      "events": [],
+      "catches": [],
+      "dependencies": [
+        "University_Timetable_and_Classroom_Management_System.Models"
+      ]
+    },
+    {
+      "path": "Business_Logic_Layer\\FacultyScheduling\\FacultySchedulingRuntime.cs",
+      "lines": 68,
+      "methods": 5,
+      "events": [],
+      "catches": [
+        {
+          "line": 54,
+          "body": "catch\n        {\n            FreeLibrary(handle);\n            throw;\n        }"
+        }
+      ],
+      "dependencies": [
+        "System.ComponentModel",
+        "System.Runtime.InteropServices",
+        "Google.OrTools.Sat"
+      ]
+    },
+    {
+      "path": "Business_Logic_Layer\\FacultyScheduling\\ScheduleQualityAnalyzer.cs",
+      "lines": 46,
+      "methods": 1,
+      "events": [
+        "seats \u002B= count * (double)minutes",
+        "capacity \u002B= rooms[row.ClassroomID].Capacity * (double)minutes"
+      ],
+      "catches": [],
+      "dependencies": [
+        "University_Timetable_and_Classroom_Management_System.Models"
+      ]
+    },
+    {
+      "path": "Business_Logic_Layer\\FacultyScheduling\\SchedulingCpSupport.cs",
+      "lines": 215,
+      "methods": 6,
+      "events": [
+        "bound \u002B= 2L * totalMinutes"
+      ],
+      "catches": [
+        {
+          "line": 155,
+          "body": "catch (OverflowException) { throw new ArgumentException(\u0022\u0646\u0637\u0627\u0642 \u0627\u0644\u062A\u062D\u0633\u064A\u0646 \u0643\u0628\u064A\u0631 \u062C\u062F\u064B\u0627\u061B \u0642\u0644\u0644 \u0639\u062F\u062F \u0627\u0644\u0645\u062D\u0627\u0636\u0631\u0627\u062A \u0627\u0644\u0645\u062A\u0627\u062D\u0629 \u0644\u0644\u062A\u062D\u0631\u064A\u0643.\u0022); }"
+        }
+      ],
+      "dependencies": [
+        "Google.OrTools.Sat",
+        "University_Timetable_and_Classroom_Management_System.Models"
+      ]
+    },
+    {
+      "path": "Business_Logic_Layer\\Helpers\\AutoKeyGenerator.cs",
+      "lines": 40,
+      "methods": 2,
+      "events": [],
+      "catches": [],
+      "dependencies": [
+        "Microsoft.EntityFrameworkCore"
+      ]
+    },
+    {
+      "path": "Business_Logic_Layer\\Helpers\\ManualKeySaveHelper.cs",
+      "lines": 84,
+      "methods": 1,
+      "events": [],
+      "catches": [
+        {
+          "line": 62,
+          "body": "catch\r\n            {\r\n                if (identityInsertEnabled)\r\n                {\r\n                    try\r\n                    {\r\n#pragma warning disable EF1002\r\n                        await context.Database.ExecuteSqlRawAsync($\u0022SET IDENTITY_INSERT {tableName} OFF\u0022);\r\n#pragma warning restore EF1002\r\n                    }\r\n                    catch\r\n                    {\r\n                        // Keep the original database error visible to the caller.\r\n                    }\r\n                }\r\n\r\n                throw;\r\n            }"
+        },
+        {
+          "line": 72,
+          "body": "catch\r\n                    {\r\n                        // Keep the original database error visible to the caller.\r\n                    }"
+        }
+      ],
+      "dependencies": [
+        "Data_Access_Layer",
+        "Microsoft.EntityFrameworkCore"
+      ]
+    },
+    {
+      "path": "Business_Logic_Layer\\Importing\\AcademicExcelImport.cs",
+      "lines": 233,
+      "methods": 9,
+      "events": [],
+      "catches": [
+        {
+          "line": 52,
+          "body": "catch (Exception ex) when (ex is ArgumentException or InvalidOperationException)\r\n                {\r\n                    preview.Issues.Add(new(sheet.SourceName, sourceRow, \u0022\u0022, ex.Message));\r\n                }"
+        }
+      ],
+      "dependencies": [
+        "Data_Access_Layer",
+        "Microsoft.EntityFrameworkCore",
+        "University_Timetable_and_Classroom_Management_System.Models"
+      ]
+    },
+    {
+      "path": "Business_Logic_Layer\\Importing\\ExcelImportModels.cs",
+      "lines": 75,
+      "methods": 1,
+      "events": [],
+      "catches": [],
+      "dependencies": [
+        "System.Data",
+        "University_Timetable_and_Classroom_Management_System.Models"
+      ]
+    },
+    {
+      "path": "Business_Logic_Layer\\Importing\\ExcelImportSchema.cs",
+      "lines": 26,
+      "methods": 1,
+      "events": [],
+      "catches": [],
+      "dependencies": []
+    },
+    {
+      "path": "Business_Logic_Layer\\Importing\\ExcelImportService.cs",
+      "lines": 416,
+      "methods": 17,
+      "events": [],
+      "catches": [
+        {
+          "line": 38,
+          "body": "catch (ArgumentException ex) { preview.Issues.Add(new(\u0022Timetable\u0022, 0, \u0022\u0022, ex.Message)); }"
+        },
+        {
+          "line": 52,
+          "body": "catch (ArgumentException ex) { preview.Issues.Add(new(\u0022Timetable\u0022, 0, \u0022\u0022, ex.Message)); }"
+        },
+        {
+          "line": 148,
+          "body": "catch (Exception ex) when (ex is ArgumentException or InvalidOperationException or KeyNotFoundException)\r\n                { preview.Issues.Add(new(sheet.Name, r, \u0022\u0022, ex.Message)); }"
+        },
+        {
+          "line": 358,
+          "body": "catch (Exception ex) when (ex is ArgumentException or InvalidOperationException or DbUpdateException)\r\n                    { throw new InvalidOperationException($\u0022{row.Sheet}, row {row.Row}: {ex.Message}. The whole import was rolled back.\u0022, ex); }"
+        }
+      ],
+      "dependencies": [
+        "System.Data",
+        "Data_Access_Layer",
+        "Microsoft.EntityFrameworkCore",
+        "University_Timetable_and_Classroom_Management_System.Models"
+      ]
+    },
+    {
+      "path": "Business_Logic_Layer\\Importing\\ExcelImportTemplates.cs",
+      "lines": 90,
+      "methods": 3,
+      "events": [],
+      "catches": [],
+      "dependencies": [
+        "ClosedXML.Excel"
+      ]
+    },
+    {
+      "path": "Business_Logic_Layer\\Importing\\ExcelWorkbookReader.cs",
+      "lines": 81,
+      "methods": 1,
+      "events": [],
+      "catches": [
+        {
+          "line": 22,
+          "body": "catch (IOException ex) when ((ex.HResult \u0026 0xffff) is 32 or 33)\n        {\n            throw new IOException(\u0022\u062A\u0639\u0630\u0651\u0631 \u0642\u0631\u0627\u0621\u0629 \u0645\u0644\u0641 Excel \u0644\u0623\u0646 \u0628\u0631\u0646\u0627\u0645\u062C\u0627\u064B \u0622\u062E\u0631 \u064A\u0645\u0646\u0639 \u0627\u0644\u0648\u0635\u0648\u0644 \u0625\u0644\u064A\u0647. \u0627\u062D\u0641\u0638 \u0627\u0644\u0645\u0644\u0641 \u0648\u0623\u063A\u0644\u0642\u0647 \u0641\u064A Excel\u060C \u062B\u0645 \u0623\u0639\u062F \u0627\u0644\u0645\u062D\u0627\u0648\u0644\u0629\u060C \u0623\u0648 \u0627\u0633\u062A\u0648\u0631\u062F \u0646\u0633\u062E\u0629 \u0645\u0646\u0647 \u0628\u0627\u0633\u0645 \u062C\u062F\u064A\u062F.\u0022, ex);\n        }"
+        }
+      ],
+      "dependencies": [
+        "System.Data",
+        "System.Globalization",
+        "ClosedXML.Excel"
+      ]
+    },
+    {
+      "path": "Business_Logic_Layer\\Importing\\ImportCatalog.cs",
+      "lines": 41,
+      "methods": 8,
+      "events": [],
+      "catches": [],
+      "dependencies": [
+        "System.Security.Cryptography",
+        "System.Text",
+        "System.Text.Json",
+        "Data_Access_Layer",
+        "Microsoft.EntityFrameworkCore",
+        "University_Timetable_and_Classroom_Management_System.Models"
+      ]
+    },
+    {
+      "path": "Business_Logic_Layer\\Importing\\ImportedTimetableRepair.cs",
+      "lines": 159,
+      "methods": 9,
+      "events": [],
+      "catches": [],
+      "dependencies": [
+        "Data_Access_Layer",
+        "University_Timetable_and_Classroom_Management_System.Models"
+      ]
+    },
+    {
+      "path": "Business_Logic_Layer\\Importing\\ImportedTimetableRepairPlanner.cs",
+      "lines": 290,
+      "methods": 1,
+      "events": [],
+      "catches": [
+        {
+          "line": 287,
+          "body": "catch (SearchLimitException) { return new(\u0022Unknown\u0022, null); }"
+        }
+      ],
+      "dependencies": [
+        "System.Diagnostics",
+        "System.Globalization",
+        "Google.OrTools.Sat",
+        "University_Timetable_and_Classroom_Management_System.Models"
+      ]
+    },
+    {
+      "path": "Business_Logic_Layer\\Importing\\ImportFileReader.cs",
+      "lines": 16,
+      "methods": 1,
+      "events": [],
+      "catches": [],
+      "dependencies": []
+    },
+    {
+      "path": "Business_Logic_Layer\\Importing\\ImportLabels.cs",
+      "lines": 63,
+      "methods": 5,
+      "events": [],
+      "catches": [],
+      "dependencies": [
+        "System.Text",
+        "System.Text.RegularExpressions"
+      ]
+    },
+    {
+      "path": "Business_Logic_Layer\\Importing\\ImportValues.cs",
+      "lines": 41,
+      "methods": 6,
+      "events": [],
+      "catches": [],
+      "dependencies": [
+        "System.Data",
+        "System.Globalization"
+      ]
+    },
+    {
+      "path": "Business_Logic_Layer\\Importing\\PdfTableReader.cs",
+      "lines": 169,
+      "methods": 8,
+      "events": [
+        "totalRows \u002B= weekly.Table.Rows.Count"
+      ],
+      "catches": [
+        {
+          "line": 103,
+          "body": "catch (Exception ex) when (ex is not (ArgumentException or OperationCanceledException or IOException or UnauthorizedAccessException))\n        {\n            throw new ArgumentException(\u0022\u062A\u0639\u0630\u0651\u0631\u062A \u0642\u0631\u0627\u0621\u0629 \u0645\u0644\u0641 PDF. \u062A\u0623\u0643\u062F \u0645\u0646 \u0633\u0644\u0627\u0645\u062A\u0647 \u0648\u0623\u0646\u0647 \u063A\u064A\u0631 \u0645\u062D\u0645\u064A \u0628\u0643\u0644\u0645\u0629 \u0645\u0631\u0648\u0631.\u0022, ex);\n        }"
+        }
+      ],
+      "dependencies": [
+        "System.Data",
+        "System.Globalization",
+        "System.Text",
+        "System.Text.RegularExpressions",
+        "UglyToad.PdfPig",
+        "UglyToad.PdfPig.Content"
+      ]
+    },
+    {
+      "path": "Business_Logic_Layer\\Importing\\WeeklyPdfTimetableReader.cs",
+      "lines": 210,
+      "methods": 13,
+      "events": [
+        "i \u002B= 2"
+      ],
+      "catches": [],
+      "dependencies": [
+        "System.Data",
+        "System.Globalization",
+        "System.Text.RegularExpressions",
+        "UglyToad.PdfPig.Content"
+      ]
+    },
+    {
+      "path": "Business_Logic_Layer\\Maintenance\\DatabaseMaintenanceService.cs",
+      "lines": 344,
+      "methods": 7,
+      "events": [],
+      "catches": [],
+      "dependencies": [
+        "Data_Access_Layer",
+        "Microsoft.EntityFrameworkCore"
+      ]
+    },
+    {
+      "path": "Business_Logic_Layer\\Maintenance\\FourthYearPracticalMaintenance.cs",
+      "lines": 54,
+      "methods": 1,
+      "events": [],
+      "catches": [],
+      "dependencies": [
+        "System.Data",
+        "Data_Access_Layer",
+        "Microsoft.EntityFrameworkCore",
+        "University_Timetable_and_Classroom_Management_System.Models"
+      ]
+    },
+    {
+      "path": "Business_Logic_Layer\\Maintenance\\SchedulingResourceMaintenance.cs",
+      "lines": 164,
+      "methods": 8,
+      "events": [],
+      "catches": [],
+      "dependencies": [
+        "Data_Access_Layer",
+        "Microsoft.EntityFrameworkCore",
+        "University_Timetable_and_Classroom_Management_System.Models"
+      ]
+    },
+    {
+      "path": "Business_Logic_Layer\\Rules\\AcademicStructureRules.cs",
+      "lines": 118,
+      "methods": 12,
+      "events": [],
+      "catches": [],
+      "dependencies": [
+        "University_Timetable_and_Classroom_Management_System.Models"
+      ]
+    },
+    {
+      "path": "Business_Logic_Layer\\Rules\\ClassroomRules.cs",
+      "lines": 39,
+      "methods": 4,
+      "events": [],
+      "catches": [],
+      "dependencies": [
+        "University_Timetable_and_Classroom_Management_System.Models"
+      ]
+    },
+    {
+      "path": "Business_Logic_Layer\\Rules\\FacultyAssignmentRules.cs",
+      "lines": 26,
+      "methods": 4,
+      "events": [],
+      "catches": [],
+      "dependencies": [
+        "University_Timetable_and_Classroom_Management_System.Models"
+      ]
+    },
+    {
+      "path": "Business_Logic_Layer\\Rules\\InputValidation.cs",
+      "lines": 26,
+      "methods": 2,
+      "events": [],
+      "catches": [],
+      "dependencies": []
+    },
+    {
+      "path": "Business_Logic_Layer\\Rules\\ScheduleDayRules.cs",
+      "lines": 112,
+      "methods": 6,
+      "events": [],
+      "catches": [],
+      "dependencies": []
+    },
+    {
+      "path": "Business_Logic_Layer\\Rules\\ScheduleTimingRules.cs",
+      "lines": 40,
+      "methods": 2,
+      "events": [],
+      "catches": [],
+      "dependencies": [
+        "University_Timetable_and_Classroom_Management_System.Models"
+      ]
+    },
+    {
+      "path": "Business_Logic_Layer\\Rules\\SubjectLectureRules.cs",
+      "lines": 26,
+      "methods": 2,
+      "events": [],
+      "catches": [],
+      "dependencies": [
+        "University_Timetable_and_Classroom_Management_System.Models"
+      ]
+    },
+    {
+      "path": "Business_Logic_Layer\\Scheduling\\FreshTimetablePlanner.cs",
+      "lines": 68,
+      "methods": 1,
+      "events": [],
+      "catches": [],
+      "dependencies": [
+        "University_Timetable_and_Classroom_Management_System.Models"
+      ]
+    },
+    {
+      "path": "Business_Logic_Layer\\Scheduling\\ScheduleBuildContext.cs",
+      "lines": 22,
+      "methods": 0,
+      "events": [],
+      "catches": [],
+      "dependencies": [
+        "University_Timetable_and_Classroom_Management_System.Models"
+      ]
+    },
+    {
+      "path": "Business_Logic_Layer\\Scheduling\\ScheduleConflictChecker.cs",
+      "lines": 93,
+      "methods": 6,
+      "events": [],
+      "catches": [],
+      "dependencies": [
+        "Data_Access_Layer",
+        "Microsoft.EntityFrameworkCore",
+        "University_Timetable_and_Classroom_Management_System.Models"
+      ]
+    },
+    {
+      "path": "Business_Logic_Layer\\Scheduling\\ScheduleFacultySelector.cs",
+      "lines": 25,
+      "methods": 2,
+      "events": [],
+      "catches": [],
+      "dependencies": []
+    },
+    {
+      "path": "Business_Logic_Layer\\Scheduling\\ScheduleGenerationModels.cs",
+      "lines": 68,
+      "methods": 1,
+      "events": [],
+      "catches": [],
+      "dependencies": [
+        "University_Timetable_and_Classroom_Management_System.Models"
+      ]
+    },
+    {
+      "path": "Business_Logic_Layer\\Scheduling\\ScheduleGenerationResult.cs",
+      "lines": 28,
+      "methods": 0,
+      "events": [],
+      "catches": [],
+      "dependencies": []
+    },
+    {
+      "path": "Business_Logic_Layer\\Scheduling\\ScheduleGenerationState.cs",
+      "lines": 355,
+      "methods": 27,
+      "events": [
+        "preferenceScore \u002B= 2 * FacultyPreferenceRules.Duration(candidate.TimeSlot) * 100",
+        "preferenceScore \u002B= 10000",
+        "preferenceScore \u002B= 150",
+        "preferenceScore \u002B= 1500"
+      ],
+      "catches": [],
+      "dependencies": [
+        "University_Timetable_and_Classroom_Management_System.Models"
+      ]
+    },
+    {
+      "path": "Business_Logic_Layer\\Scheduling\\ScheduleGenerator.cs",
+      "lines": 769,
+      "methods": 26,
+      "events": [
+        "conflictCount \u002B= pendingPlans.Count(plan =\u003E IsGroupedPracticalRequest(plan.Request) \u0026\u0026\r\n                !pairedRequestIds.Contains(ScheduleRequestIdentity.From(plan.Request)))",
+        "difficulty \u002B= 40",
+        "difficulty \u002B= 20",
+        "difficulty \u002B= request.Subject.StudyYearID * 10",
+        "difficulty \u002B= Math.Max(0, 6 - request.FacultyMemberIds.Count) * 8"
+      ],
+      "catches": [],
+      "dependencies": [
+        "University_Timetable_and_Classroom_Management_System.Models"
+      ]
+    },
+    {
+      "path": "Business_Logic_Layer\\Scheduling\\ScheduleRequirementMatcher.cs",
+      "lines": 23,
+      "methods": 1,
+      "events": [],
+      "catches": [],
+      "dependencies": [
+        "University_Timetable_and_Classroom_Management_System.Models"
+      ]
+    },
+    {
+      "path": "Business_Logic_Layer\\Scheduling\\ScheduleRoomSelector.cs",
+      "lines": 66,
+      "methods": 6,
+      "events": [],
+      "catches": [],
+      "dependencies": [
+        "University_Timetable_and_Classroom_Management_System.Models"
+      ]
+    },
+    {
+      "path": "Business_Logic_Layer\\Scheduling\\TimetableAlternativeModels.cs",
+      "lines": 27,
+      "methods": 0,
+      "events": [],
+      "catches": [],
+      "dependencies": [
+        "University_Timetable_and_Classroom_Management_System.Models"
+      ]
+    },
+    {
+      "path": "Business_Logic_Layer\\Scheduling\\TimetableAlternativesService.cs",
+      "lines": 137,
+      "methods": 7,
+      "events": [
+        "penalty \u002B= FacultyPreferenceRules.Duration(periods[row.TimeSlotID]) / 30m"
+      ],
+      "catches": [],
+      "dependencies": [
+        "System.Data",
+        "System.Diagnostics",
+        "Data_Access_Layer",
+        "Microsoft.EntityFrameworkCore",
+        "University_Timetable_and_Classroom_Management_System.Models"
+      ]
+    },
+    {
+      "path": "Business_Logic_Layer\\Services\\AuthService.cs",
+      "lines": 164,
+      "methods": 8,
+      "events": [],
+      "catches": [],
+      "dependencies": [
+        "System.Security.Cryptography",
+        "Data_Access_Layer",
+        "Microsoft.EntityFrameworkCore",
+        "University_Timetable_and_Classroom_Management_System.Models"
+      ]
+    },
+    {
+      "path": "Business_Logic_Layer\\Services\\BranchService.cs",
+      "lines": 84,
+      "methods": 8,
+      "events": [],
+      "catches": [],
+      "dependencies": [
+        "Microsoft.EntityFrameworkCore",
+        "Data_Access_Layer",
+        "University_Timetable_and_Classroom_Management_System.Models"
+      ]
+    },
+    {
+      "path": "Business_Logic_Layer\\Services\\ClassroomService.cs",
+      "lines": 104,
+      "methods": 8,
+      "events": [],
+      "catches": [],
+      "dependencies": [
+        "Microsoft.EntityFrameworkCore",
+        "Data_Access_Layer",
+        "University_Timetable_and_Classroom_Management_System.Models"
+      ]
+    },
+    {
+      "path": "Business_Logic_Layer\\Services\\FacultyMemberService.cs",
+      "lines": 90,
+      "methods": 8,
+      "events": [],
+      "catches": [],
+      "dependencies": [
+        "Microsoft.EntityFrameworkCore",
+        "Data_Access_Layer",
+        "University_Timetable_and_Classroom_Management_System.Models"
+      ]
+    },
+    {
+      "path": "Business_Logic_Layer\\Services\\FacultyMemberSubjectService.cs",
+      "lines": 156,
+      "methods": 7,
+      "events": [],
+      "catches": [],
+      "dependencies": [
+        "Microsoft.EntityFrameworkCore",
+        "Data_Access_Layer",
+        "University_Timetable_and_Classroom_Management_System.Models"
+      ]
+    },
+    {
+      "path": "Business_Logic_Layer\\Services\\SchedulePdfExportService.cs",
+      "lines": 519,
+      "methods": 32,
+      "events": [
+        "typeAndGroup \u002B= $\u0022 {group}\u0022"
+      ],
+      "catches": [],
+      "dependencies": [
+        "System.Globalization",
+        "System.Runtime.InteropServices",
+        "SkiaSharp",
+        "Topten.RichTextKit"
+      ]
+    },
+    {
+      "path": "Business_Logic_Layer\\Services\\ScheduleService.cs",
+      "lines": 756,
+      "methods": 22,
+      "events": [
+        "details \u002B= $\u0022{Environment.NewLine}And {planningResult.PracticalExchangeIssues.Count - 6} more section(s).\u0022",
+        "skippedCount \u002B= planningResult.NoClassroomCount \u002B planningResult.ConflictCount",
+        "noClassroomCount \u002B= planningResult.NoClassroomCount",
+        "conflictCount \u002B= planningResult.ConflictCount"
+      ],
+      "catches": [],
+      "dependencies": [
+        "Microsoft.EntityFrameworkCore",
+        "Data_Access_Layer",
+        "University_Timetable_and_Classroom_Management_System.Models"
+      ]
+    },
+    {
+      "path": "Business_Logic_Layer\\Services\\SectionService.cs",
+      "lines": 145,
+      "methods": 8,
+      "events": [],
+      "catches": [],
+      "dependencies": [
+        "Microsoft.EntityFrameworkCore",
+        "Data_Access_Layer",
+        "University_Timetable_and_Classroom_Management_System.Models"
+      ]
+    },
+    {
+      "path": "Business_Logic_Layer\\Services\\StudyYearService.cs",
+      "lines": 89,
+      "methods": 8,
+      "events": [],
+      "catches": [],
+      "dependencies": [
+        "Microsoft.EntityFrameworkCore",
+        "Data_Access_Layer",
+        "University_Timetable_and_Classroom_Management_System.Models"
+      ]
+    },
+    {
+      "path": "Business_Logic_Layer\\Services\\SubjectService.cs",
+      "lines": 188,
+      "methods": 8,
+      "events": [],
+      "catches": [],
+      "dependencies": [
+        "Microsoft.EntityFrameworkCore",
+        "Data_Access_Layer",
+        "University_Timetable_and_Classroom_Management_System.Models"
+      ]
+    },
+    {
+      "path": "Business_Logic_Layer\\Services\\TimeSlotService.cs",
+      "lines": 129,
+      "methods": 9,
+      "events": [],
+      "catches": [],
+      "dependencies": [
+        "Microsoft.EntityFrameworkCore",
+        "Data_Access_Layer",
+        "University_Timetable_and_Classroom_Management_System.Models"
+      ]
+    },
+    {
+      "path": "University Timetable and Classroom Management System\\Program.cs",
+      "lines": 73,
+      "methods": 2,
+      "events": [],
+      "catches": [
+        {
+          "line": 14,
+          "body": "catch (Exception ex) { Console.Error.WriteLine(ex); Environment.ExitCode = 1; }"
+        },
+        {
+          "line": 54,
+          "body": "catch (Exception ex)\r\n            {\r\n                if (silent)\r\n                {\r\n                    Console.Error.WriteLine(ex);\r\n                }\r\n                else\r\n                {\r\n                    UiMessages.ShowError(\r\n                        null,\r\n                        $\u0022\u062A\u0639\u0630\u0631 \u0625\u0643\u0645\u0627\u0644 \u062A\u062D\u062F\u064A\u062B \u0642\u0627\u0639\u062F\u0629 \u0627\u0644\u0628\u064A\u0627\u0646\u0627\u062A.\\n\\n{UiMessages.GetUserSafeExceptionMessage(ex)}\u0022,\r\n                        \u0022\u062A\u062D\u062F\u064A\u062B \u0642\u0627\u0639\u062F\u0629 \u0627\u0644\u0628\u064A\u0627\u0646\u0627\u062A\u0022);\r\n                }\r\n\r\n                return false;\r\n            }"
+        }
+      ],
+      "dependencies": [
+        "University_Timetable_and_Classroom_Management_System.BusinessLayer"
+      ]
+    },
+    {
+      "path": "University Timetable and Classroom Management System\\PresentationLayer\\ArabicUi.cs",
+      "lines": 103,
+      "methods": 5,
+      "events": [
+        "combo.Format \u002B= (_, e) =\u003E\n            {\n                if (e.ListItem is string value) e.Value = Display(value);\n                else if (e.ListItem is ComboOption option \u0026\u0026\n                    (combo.Name.Contains(\u0022StudyYear\u0022, StringComparison.OrdinalIgnoreCase) || option.Text == \u0022All\u0022))\n                    e.Value = Display(option.Text);\n            }",
+        "grid.CellFormatting \u002B= (_, e) =\u003E\n            {\n                if (e.ColumnIndex \u003E= 0 \u0026\u0026 e.Value is string value \u0026\u0026 DisplayColumns.Contains(grid.Columns[e.ColumnIndex].DataPropertyName))\n                    e.Value = Display(value);\n            }"
+      ],
+      "catches": [],
+      "dependencies": [
+        "System.Globalization",
+        "Guna.UI2.WinForms"
+      ]
+    },
+    {
+      "path": "University Timetable and Classroom Management System\\PresentationLayer\\ArabicUiText.cs",
+      "lines": 115,
+      "methods": 1,
+      "events": [],
+      "catches": [],
+      "dependencies": [
+        "System.Text.RegularExpressions"
+      ]
+    },
+    {
+      "path": "University Timetable and Classroom Management System\\PresentationLayer\\BranchesForm.cs",
+      "lines": 208,
+      "methods": 15,
+      "events": [
+        "dgvBranches.SelectionChanged \u002B= (_, _) =\u003E PopulateBranchEditorFromSelection()",
+        "btnAddBranch.Click \u002B= async (_, _) =\u003E await AddBranchAsync()",
+        "btnUpdateBranch.Click \u002B= async (_, _) =\u003E await UpdateBranchAsync()",
+        "btnDeleteBranch.Click \u002B= async (_, _) =\u003E await DeleteBranchAsync()"
+      ],
+      "catches": [
+        {
+          "line": 57,
+          "body": "catch (Exception ex)\r\n            {\r\n                ShowError(\u0022\u062A\u0639\u0630\u0631 \u062A\u062D\u0645\u064A\u0644 \u0627\u0644\u0641\u0631\u0648\u0639.\u0022, ex);\r\n            }"
+        }
+      ],
+      "dependencies": [
+        "University_Timetable_and_Classroom_Management_System.BusinessLayer",
+        "University_Timetable_and_Classroom_Management_System.Models"
+      ]
+    },
+    {
+      "path": "University Timetable and Classroom Management System\\PresentationLayer\\BranchesForm.Designer.cs",
+      "lines": 764,
+      "methods": 2,
+      "events": [],
+      "catches": [],
+      "dependencies": []
+    },
+    {
+      "path": "University Timetable and Classroom Management System\\PresentationLayer\\ClassroomsForm.cs",
+      "lines": 234,
+      "methods": 15,
+      "events": [
+        "dgvClassrooms.SelectionChanged \u002B= (_, _) =\u003E PopulateClassroomEditorFromSelection()",
+        "btnAddClassroom.Click \u002B= async (_, _) =\u003E await AddClassroomAsync()",
+        "btnUpdateClassroom.Click \u002B= async (_, _) =\u003E await UpdateClassroomAsync()",
+        "btnDeleteClassroom.Click \u002B= async (_, _) =\u003E await DeleteClassroomAsync()"
+      ],
+      "catches": [
+        {
+          "line": 64,
+          "body": "catch (Exception ex)\r\n            {\r\n                ShowError(\u0022\u062A\u0639\u0630\u0631 \u062A\u062D\u0645\u064A\u0644 \u0627\u0644\u0642\u0627\u0639\u0627\u062A.\u0022, ex);\r\n            }"
+        }
+      ],
+      "dependencies": [
+        "University_Timetable_and_Classroom_Management_System.BusinessLayer",
+        "University_Timetable_and_Classroom_Management_System.Models"
+      ]
+    },
+    {
+      "path": "University Timetable and Classroom Management System\\PresentationLayer\\ClassroomsForm.Designer.cs",
+      "lines": 887,
+      "methods": 2,
+      "events": [],
+      "catches": [],
+      "dependencies": []
+    },
+    {
+      "path": "University Timetable and Classroom Management System\\PresentationLayer\\DesignerEnvironment.cs",
+      "lines": 16,
+      "methods": 1,
+      "events": [],
+      "catches": [],
+      "dependencies": [
+        "System.ComponentModel"
+      ]
+    },
+    {
+      "path": "University Timetable and Classroom Management System\\PresentationLayer\\DesignerHtmlLabel.cs",
+      "lines": 134,
+      "methods": 5,
+      "events": [
+        "TextChanged \u002B= (_, _) =\u003E Size = MeasureArabicText()",
+        "FontChanged \u002B= (_, _) =\u003E Size = MeasureArabicText()"
+      ],
+      "catches": [],
+      "dependencies": [
+        "System.ComponentModel"
+      ]
+    },
+    {
+      "path": "University Timetable and Classroom Management System\\PresentationLayer\\ExcelImportForm.cs",
+      "lines": 516,
+      "methods": 20,
+      "events": [
+        "entity.Format \u002B= (_, e) =\u003E e.Value = ImportLabels.Display(e.ListItem?.ToString() ?? \u0022\u0022)",
+        "sheet.Format \u002B= (_, e) =\u003E e.Value = ImportLabels.Display(e.ListItem?.ToString() ?? \u0022\u0022)",
+        "grid.DataBindingComplete \u002B= (_, _) =\u003E TranslateHeaders(grid)",
+        "grid.CellFormatting \u002B= (_, e) =\u003E\r\n            {\r\n                if (e.Value is string value \u0026\u0026 (grid != data || grid.Columns[e.ColumnIndex].DataPropertyName is \u0022Day\u0022 or \u0022LectureType\u0022))\r\n                { e.Value = ImportLabels.Display(value); e.FormattingApplied = true; }\r\n            }",
+        "open.Click \u002B= async (_, _) =\u003E await OpenAsync()",
+        "template.Click \u002B= async (_, _) =\u003E await TemplateAsync()",
+        "validate.Click \u002B= async (_, _) =\u003E await RunAsync(ValidateWorkbookAsync)",
+        "generate.Click \u002B= async (_, _) =\u003E await RunAsync(async token =\u003E\r\n        {\r\n            if (preview is null) return;\r\n            var validated = preview;\r\n            var selectedMode = Mode;\r\n            double seconds = (double)repairTimeLimit.Value;\r\n            preview = await Task.Run(() =\u003E selectedMode == ExcelImportMode.RepairTimetable\r\n                ? service.RepairTimetableAsync(validated, seconds, token) : service.GenerateRemainingAsync(validated, token), token);\r\n            ShowPreview();\r\n            tabs.SelectedIndex = preview.IsValid ? 3 : 2;\r\n        })",
+        "save.Click \u002B= async (_, _) =\u003E\r\n        {\r\n            if (preview is null) return;\r\n            if (MessageBox.Show(this,\r\n                $\u0022\u0647\u0644 \u062A\u0631\u064A\u062F \u062D\u0641\u0638 \u0627\u0644\u0628\u064A\u0627\u0646\u0627\u062A \u0627\u0644\u062A\u064A \u062A\u0645 \u0627\u0644\u062A\u062D\u0642\u0642 \u0645\u0646\u0647\u0627\u061F\\n\\n\u0625\u0636\u0627\u0641\u0627\u062A: {preview.Changes.Count(c =\u003E c.Action == \u0022Add\u0022)}\\n\u062A\u062D\u062F\u064A\u062B\u0627\u062A \u0623\u0648 \u062A\u062B\u0628\u064A\u062A: {preview.Changes.Count(c =\u003E c.Action is \u0022Update\u0022 or \u0022Lock existing\u0022)}\\n\u062F\u0648\u0646 \u062A\u063A\u064A\u064A\u0631: {preview.Changes.Count(c =\u003E c.Action == \u0022Unchanged\u0022)}\\n\u0627\u0644\u0645\u062D\u0627\u0636\u0631\u0627\u062A \u0627\u0644\u0645\u0639\u0627\u062F \u062A\u0648\u0632\u064A\u0639\u0647\u0627: {preview.PlacementChanges.Count(c =\u003E c.Changed)}\\n\\n\u062A\u064F\u062D\u0641\u0638 \u062C\u0645\u064A\u0639 \u0627\u0644\u062A\u063A\u064A\u064A\u0631\u0627\u062A \u0645\u0639\u0627\u064B.\u0022,\r\n                \u0022\u062A\u0623\u0643\u064A\u062F \u0627\u0644\u0627\u0633\u062A\u064A\u0631\u0627\u062F\u0022, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) != DialogResult.Yes) return;\r\n            await RunAsync(async token =\u003E\r\n            {\r\n                var validated = preview;\r\n                var reporter = new Progress\u003Cstring\u003E(_ =\u003E status.Text = \u0022\u062C\u0627\u0631\u064D \u062D\u0641\u0638 \u0627\u0644\u0628\u064A\u0627\u0646\u0627\u062A \u0627\u0644\u062A\u064A \u062A\u0645 \u0627\u0644\u062A\u062D\u0642\u0642 \u0645\u0646\u0647\u0627\u2026\u0022);\r\n                var saved = await Task.Run(() =\u003E service.SaveAsync(validated, true, reporter, token), token);\r\n                HasSavedChanges |= saved.Added \u002B saved.Updated \u003E 0;\r\n                preview = null;\r\n                status.Text = $\u0022\u0627\u0643\u062A\u0645\u0644 \u0627\u0644\u0627\u0633\u062A\u064A\u0631\u0627\u062F: {saved.Added} \u0625\u0636\u0627\u0641\u0629\u060C {saved.Updated} \u062A\u062D\u062F\u064A\u062B\u060C {saved.Unchanged} \u062F\u0648\u0646 \u062A\u063A\u064A\u064A\u0631.\u0022;\r\n                MessageBox.Show(this, status.Text, \u0022\u0627\u0633\u062A\u064A\u0631\u0627\u062F \u0627\u0644\u0628\u064A\u0627\u0646\u0627\u062A\u0022, MessageBoxButtons.OK, MessageBoxIcon.Information);\r\n            });\r\n        }",
+        "cancel.Click \u002B= (_, _) =\u003E cancellation?.Cancel()",
+        "mode.SelectedIndexChanged \u002B= (_, _) =\u003E { InvalidatePreview(); maps.Clear(); UpdateMode(); BindSheet(); }",
+        "sheet.SelectedIndexChanged \u002B= (_, _) =\u003E { InvalidatePreview(); BindSheet(); }",
+        "entity.SelectedIndexChanged \u002B= (_, _) =\u003E { if (!binding) { InvalidatePreview(); BindMapping(); } }",
+        "allSheets.CheckedChanged \u002B= (_, _) =\u003E { InvalidatePreview(); UpdateMode(); }",
+        "updates.CheckedChanged \u002B= (_, _) =\u003E InvalidatePreview()",
+        "semester.ValueChanged \u002B= (_, _) =\u003E InvalidatePreview()",
+        "repairTimeLimit.ValueChanged \u002B= (_, _) =\u003E InvalidatePreview()",
+        "studySession.SelectedIndexChanged \u002B= (_, _) =\u003E { if (!binding) { InvalidatePreview(); BindWorkbookSheets(); } }",
+        "data.CellValueChanged \u002B= (_, _) =\u003E InvalidatePreview()",
+        "data.CurrentCellDirtyStateChanged \u002B= (_, _) =\u003E { if (data.IsCurrentCellDirty) data.CommitEdit(DataGridViewDataErrorContexts.Commit); }",
+        "mapping.CurrentCellDirtyStateChanged \u002B= (_, _) =\u003E { if (mapping.IsCurrentCellDirty) mapping.CommitEdit(DataGridViewDataErrorContexts.Commit); }",
+        "mapping.CellValueChanged \u002B= (_, e) =\u003E\r\n        {\r\n            if (binding || e.RowIndex \u003C 0 || SelectedSheet is null) return;\r\n            var row = mapping.Rows[e.RowIndex];\r\n            maps[SelectedSheet.Name][(string)row.Cells[0].Value] = Convert.ToString(row.Cells[1].Value) ?? \u0022\u0022;\r\n            InvalidatePreview();\r\n        }",
+        "data.DataError \u002B= (_, e) =\u003E { e.ThrowException = false; status.Text = \u0022\u0635\u062D\u0651\u062D \u0642\u064A\u0645\u0629 \u0627\u0644\u062E\u0644\u064A\u0629 \u063A\u064A\u0631 \u0627\u0644\u0635\u0627\u0644\u062D\u0629 \u0642\u0628\u0644 \u0627\u0644\u062A\u062D\u0642\u0642.\u0022; }",
+        "FormClosing \u002B= (_, e) =\u003E\r\n        {\r\n            if (busy) { e.Cancel = true; cancellation?.Cancel(); status.Text = \u0022\u062C\u0627\u0631\u064D \u0625\u064A\u0642\u0627\u0641 \u0627\u0644\u0639\u0645\u0644\u064A\u0629 \u0627\u0644\u062D\u0627\u0644\u064A\u0629\u2026\u0022; }\r\n        }",
+        "data.RowPostPaint \u002B= PaintSourceRow"
+      ],
+      "catches": [
+        {
+          "line": 253,
+          "body": "catch (OperationCanceledException) { preview = null; status.Text = \u0022\u0623\u064F\u0644\u063A\u064A\u062A \u0627\u0644\u0639\u0645\u0644\u064A\u0629 \u062F\u0648\u0646 \u062D\u0641\u0638 \u062A\u063A\u064A\u064A\u0631\u0627\u062A \u0627\u0644\u0627\u0633\u062A\u064A\u0631\u0627\u062F.\u0022; }"
+        },
+        {
+          "line": 254,
+          "body": "catch (Exception ex)\r\n        {\r\n            preview = null; status.Text = \u0022\u062A\u0639\u0630\u0651\u0631 \u0625\u0643\u0645\u0627\u0644 \u0627\u0644\u0639\u0645\u0644\u064A\u0629: \u0022 \u002B ImportUiText.Message(ex.Message);\r\n            MessageBox.Show(this, ImportUiText.Message(ex.Message), \u0022\u0627\u0633\u062A\u064A\u0631\u0627\u062F \u0627\u0644\u0628\u064A\u0627\u0646\u0627\u062A\u0022, MessageBoxButtons.OK, MessageBoxIcon.Error);\r\n        }"
+        },
+        {
+          "line": 328,
+          "body": "catch (ArgumentException) { /* Leave invalid text for row validation. */ }"
+        }
+      ],
+      "dependencies": [
+        "System.Data",
+        "University_Timetable_and_Classroom_Management_System.BusinessLayer"
+      ]
+    },
+    {
+      "path": "University Timetable and Classroom Management System\\PresentationLayer\\FacultyMembersForm.cs",
+      "lines": 220,
+      "methods": 16,
+      "events": [
+        "dgvFacultyMembers.SelectionChanged \u002B= (_, _) =\u003E PopulateFacultyMemberEditorFromSelection()",
+        "btnAddFacultyMember.Click \u002B= async (_, _) =\u003E await AddFacultyMemberAsync()",
+        "btnUpdateFacultyMember.Click \u002B= async (_, _) =\u003E await UpdateFacultyMemberAsync()",
+        "btnDeleteFacultyMember.Click \u002B= async (_, _) =\u003E await DeleteFacultyMemberAsync()"
+      ],
+      "catches": [
+        {
+          "line": 57,
+          "body": "catch (Exception ex)\r\n            {\r\n                ShowError(\u0022\u062A\u0639\u0630\u0631 \u062A\u062D\u0645\u064A\u0644 \u0627\u0644\u062A\u062F\u0631\u064A\u0633\u064A\u064A\u0646.\u0022, ex);\r\n            }"
+        }
+      ],
+      "dependencies": [
+        "University_Timetable_and_Classroom_Management_System.BusinessLayer",
+        "University_Timetable_and_Classroom_Management_System.Models"
+      ]
+    },
+    {
+      "path": "University Timetable and Classroom Management System\\PresentationLayer\\FacultyMembersForm.Designer.cs",
+      "lines": 842,
+      "methods": 2,
+      "events": [
+        "btnClearFacultyMemberForm.Click \u002B= btnClearFacultyMemberForm_Click"
+      ],
+      "catches": [],
+      "dependencies": []
+    },
+    {
+      "path": "University Timetable and Classroom Management System\\PresentationLayer\\FacultyMemberSubjectsForm.cs",
+      "lines": 355,
+      "methods": 22,
+      "events": [
+        "dgvFacultyMemberSubjects.SelectionChanged \u002B= (_, _) =\u003E PopulateAssignmentEditorFromSelection()",
+        "btnAddAssignment.Click \u002B= async (_, _) =\u003E await AddAssignmentAsync()",
+        "btnUpdateAssignment.Click \u002B= async (_, _) =\u003E await UpdateAssignmentAsync()",
+        "btnDeleteAssignment.Click \u002B= async (_, _) =\u003E await DeleteAssignmentAsync()",
+        "btnClearAssignmentForm.Click \u002B= (_, _) =\u003E ClearAssignmentForm()",
+        "cmbAssignmentStudyYear.SelectedIndexChanged \u002B= (_, _) =\u003E ApplyAssignmentYearSelection()",
+        "cmbAssignmentBranch.SelectedIndexChanged \u002B= (_, _) =\u003E ApplyAssignmentBranchSelection()",
+        "cmbSubject.SelectedIndexChanged \u002B= (_, _) =\u003E { if (!bindingAssignmentScope) BindAssignmentSections(); }"
+      ],
+      "catches": [
+        {
+          "line": 69,
+          "body": "catch (Exception ex)\r\n            {\r\n                ShowError(\u0022\u062A\u0639\u0630\u0631 \u062A\u062D\u062F\u064A\u062B \u0627\u0644\u062A\u0643\u0644\u064A\u0641\u0627\u062A \u0627\u0644\u062A\u062F\u0631\u064A\u0633\u064A\u0629.\u0022, ex);\r\n            }"
+        }
+      ],
+      "dependencies": [
+        "University_Timetable_and_Classroom_Management_System.BusinessLayer",
+        "University_Timetable_and_Classroom_Management_System.Models"
+      ]
+    },
+    {
+      "path": "University Timetable and Classroom Management System\\PresentationLayer\\FacultyMemberSubjectsForm.Designer.cs",
+      "lines": 744,
+      "methods": 2,
+      "events": [],
+      "catches": [],
+      "dependencies": []
+    },
+    {
+      "path": "University Timetable and Classroom Management System\\PresentationLayer\\FacultyMemberSubjectsForm.Scope.cs",
+      "lines": 100,
+      "methods": 6,
+      "events": [],
+      "catches": [],
+      "dependencies": [
+        "Guna.UI2.WinForms",
+        "University_Timetable_and_Classroom_Management_System.BusinessLayer",
+        "University_Timetable_and_Classroom_Management_System.Models"
+      ]
+    },
+    {
+      "path": "University Timetable and Classroom Management System\\PresentationLayer\\FacultyPreferencesForm.cs",
+      "lines": 220,
+      "methods": 15,
+      "events": [
+        "faculty.SelectedIndexChanged \u002B= async (_, _) =\u003E await ChangeSelectionAsync()",
+        "semester.SelectedIndexChanged \u002B= async (_, _) =\u003E await ChangeSelectionAsync()",
+        "enabled.CheckedChanged \u002B= (_, _) =\u003E { dayCards.Enabled = enabled.Checked \u0026\u0026 !busy; Edited(); }",
+        "save.Click \u002B= async (_, _) =\u003E await SaveAsync()",
+        "reload.Click \u002B= async (_, _) =\u003E { if (CanDiscard()) await RunAsync(async token =\u003E { await RefreshFacultyListAsync(token); await LoadFacultyAsync(token); }); }",
+        "cancel.Click \u002B= (_, _) =\u003E cancellation?.Cancel()",
+        "close.Click \u002B= (_, _) =\u003E Close()",
+        "FormClosing \u002B= (_, e) =\u003E { if (busy) { e.Cancel = true; cancellation?.Cancel(); } else if (!CanDiscard()) e.Cancel = true; }",
+        "Shown \u002B= async (_, _) =\u003E await RunAsync(async token =\u003E\r\n        {\r\n            lookups = await service.GetLookupsAsync(token);\r\n            foreach (var day in lookups.Days)\r\n            {\r\n                dayCards.ColumnStyles.Add(new(SizeType.Percent, 20));\r\n                var card = new TableLayoutPanel { Dock = DockStyle.Fill, ColumnCount = 1, RowCount = 2, Padding = new(5), Margin = new(3), BackColor = Color.FromArgb(244, 247, 250) };\r\n                card.ColumnStyles.Add(new(SizeType.Percent, 100)); card.RowStyles.Add(new(SizeType.Absolute, 27)); card.RowStyles.Add(new(SizeType.Percent, 100));\r\n                card.Controls.Add(new Label { Text = ImportLabels.Display(day), Dock = DockStyle.Fill, Font = new(\u0022Segoe UI\u0022, 11, FontStyle.Bold), TextAlign = ContentAlignment.MiddleCenter });\r\n                var choice = Combo(\u0022dayPreference_\u0022 \u002B day, 130); choice.Dock = DockStyle.Top;\r\n                choice.DataSource = levels.ToArray(); choice.DisplayMember = nameof(LevelChoice.Text); choice.ValueMember = nameof(LevelChoice.Value);\r\n                choice.SelectedValue = FacultyPreferenceLevel.Preferred;\r\n                choice.SelectedIndexChanged \u002B= (_, _) =\u003E { PaintDay(choice); Edited(); };\r\n                days.Add(day, choice); card.Controls.Add(choice); dayCards.Controls.Add(card);\r\n            }\r\n            await RefreshFacultyListAsync(token);\r\n            if (faculty.Items.Count \u003E 0) { binding = true; faculty.SelectedIndex = 0; activeFaculty = ((FacultyChoice)faculty.SelectedItem!).Id; binding = false; }\r\n            await LoadFacultyAsync(token);\r\n        })",
+        "choice.SelectedIndexChanged \u002B= (_, _) =\u003E { PaintDay(choice); Edited(); }"
+      ],
+      "catches": [
+        {
+          "line": 188,
+          "body": "catch (OperationCanceledException) { status.Text = \u0022\u0623\u064F\u0644\u063A\u064A\u062A \u0627\u0644\u0639\u0645\u0644\u064A\u0629. \u0644\u0645 \u064A\u064F\u062D\u0641\u0638 \u062A\u063A\u064A\u064A\u0631 \u062C\u0632\u0626\u064A \u0644\u0644\u062A\u0641\u0636\u064A\u0644\u0627\u062A \u0623\u0648 \u0627\u0644\u062C\u062F\u0648\u0644.\u0022; }"
+        },
+        {
+          "line": 189,
+          "body": "catch (Exception ex) { status.Text = ex.Message; MessageBox.Show(this, ex.Message, Text, MessageBoxButtons.OK, MessageBoxIcon.Warning); }"
+        }
+      ],
+      "dependencies": [
+        "System.Data",
+        "University_Timetable_and_Classroom_Management_System.BusinessLayer"
+      ]
+    },
+    {
+      "path": "University Timetable and Classroom Management System\\PresentationLayer\\FacultyScheduleEditorForm.cs",
+      "lines": 201,
+      "methods": 14,
+      "events": [
+        "reload.Click \u002B= async (_, _) =\u003E await RunAsync(LoadCurrentAsync)",
+        "inspect.Click \u002B= async (_, _) =\u003E await MakePreviewAsync(true)",
+        "generate.Click \u002B= async (_, _) =\u003E await MakePreviewAsync(false)",
+        "save.Click \u002B= async (_, _) =\u003E\r\n        {\r\n            if (preview?.CanSave != true) return;\r\n            var approved = preview;\r\n            if (MessageBox.Show(this, $\u0022\u062D\u0641\u0638 {approved.Changes.Count(c =\u003E c.Changed)} \u062A\u063A\u064A\u064A\u0631\u064B\u0627 \u0644\u0645\u062D\u0627\u0636\u0631\u0627\u062A \u0627\u0644\u062A\u062F\u0631\u064A\u0633\u064A \u0627\u0644\u0645\u062D\u062F\u062F \u0641\u0642\u0637\u061F\\n\u0022 \u002B\r\n                $\u0022\u0627\u0644\u0645\u062D\u0627\u0636\u0631\u0627\u062A \u062E\u0627\u0631\u062C \u0627\u0644\u0623\u064A\u0627\u0645 \u0627\u0644\u0645\u0641\u0636\u0644\u0629: {approved.Changes.Count(c =\u003E c.OutsidePreferredDays)}\\n\u062A\u0628\u0642\u0649 \u0647\u0648\u064A\u0627\u062A \u0627\u0644\u0645\u062D\u0627\u0636\u0631\u0627\u062A \u0648\u062C\u062F\u0627\u0648\u0644 \u0627\u0644\u0622\u062E\u0631\u064A\u0646 \u0645\u062D\u0641\u0648\u0638\u0629.\u0022,\r\n                \u0022\u062A\u0623\u0643\u064A\u062F \u0627\u0644\u062D\u0641\u0638\u0022, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) != DialogResult.Yes) return;\r\n            await RunAsync(async token =\u003E\r\n            {\r\n                int count = await service.SaveAsync(approved, true, token);\r\n                HasSavedChanges |= count \u003E 0;\r\n                await LoadCurrentAsync(token);\r\n                status.Text = $\u0022\u062A\u0645 \u062D\u0641\u0638 {count} \u062A\u063A\u064A\u064A\u0631\u064B\u0627. \u0628\u0642\u064A\u062A \u0645\u062D\u0627\u0636\u0631\u0627\u062A \u0627\u0644\u0622\u062E\u0631\u064A\u0646 \u062F\u0648\u0646 \u062A\u0639\u062F\u064A\u0644.\u0022;\r\n            });\r\n        }",
+        "cancel.Click \u002B= (_, _) =\u003E { if (busy) cancellation?.Cancel(); else InvalidatePreview(); }",
+        "close.Click \u002B= (_, _) =\u003E Close()",
+        "faculty.SelectedIndexChanged \u002B= async (_, _) =\u003E { if (!binding \u0026\u0026 !busy) await RunAsync(LoadCurrentAsync); }",
+        "faculty.TextChanged \u002B= (_, _) =\u003E { if (!binding \u0026\u0026 !busy) InvalidatePreview(); }",
+        "semester.SelectedIndexChanged \u002B= async (_, _) =\u003E { if (!binding \u0026\u0026 !busy) await RunAsync(LoadCurrentAsync); }",
+        "mode.SelectedIndexChanged \u002B= (_, _) =\u003E InvalidatePreview()",
+        "timeLimit.ValueChanged \u002B= (_, _) =\u003E InvalidatePreview()",
+        "preferredDays.ItemCheck \u002B= (_, _) =\u003E InvalidatePreview()",
+        "unavailableDays.ItemCheck \u002B= (_, _) =\u003E InvalidatePreview()",
+        "preferredPeriods.ItemCheck \u002B= (_, _) =\u003E InvalidatePreview()",
+        "FormClosing \u002B= (_, e) =\u003E { if (busy) { e.Cancel = true; cancellation?.Cancel(); status.Text = \u0022\u062C\u0627\u0631\u064D \u0625\u064A\u0642\u0627\u0641 \u0627\u0644\u0639\u0645\u0644\u064A\u0629 \u062F\u0648\u0646 \u062D\u0641\u0638 \u062C\u0632\u0626\u064A\u2026\u0022; } }",
+        "Shown \u002B= async (_, _) =\u003E await RunAsync(async token =\u003E\r\n        {\r\n            var lookups = await service.GetLookupsAsync(token);\r\n            binding = true;\r\n            try\r\n            {\r\n                faculty.Items.AddRange(lookups.Faculty.Cast\u003Cobject\u003E().ToArray());\r\n                foreach (string day in lookups.Days) { preferredDays.Items.Add(new Choice(day, Day(day))); unavailableDays.Items.Add(new Choice(day, Day(day))); }\r\n                preferredPeriods.DisplayMember = nameof(FacultyEditorOption.Name); preferredPeriods.Items.AddRange(lookups.Periods.Cast\u003Cobject\u003E().ToArray());\r\n                if (faculty.Items.Count \u003E 0) faculty.SelectedIndex = 0;\r\n            }\r\n            finally { binding = false; }\r\n            await LoadCurrentAsync(token);\r\n        })",
+        "grid.DataBindingComplete \u002B= (_, _) =\u003E\r\n        {\r\n            Headers(grid);\r\n            foreach (DataGridViewRow row in grid.Rows)\r\n                if (row.DataBoundItem is FacultyLectureChange change)\r\n                    row.DefaultCellStyle.BackColor = change.OutsidePreferredDays ? Color.FromArgb(255, 237, 213) : change.Changed ? Color.FromArgb(219, 234, 254) : Color.White;\r\n            grid.ClearSelection();\r\n        }",
+        "grid.CellFormatting \u002B= (_, e) =\u003E\r\n        {\r\n            if (e.ColumnIndex \u003C 0 || e.Value is not string text) return;\r\n            string field = grid.Columns[e.ColumnIndex].DataPropertyName;\r\n            if (field.EndsWith(\u0022Period\u0022, StringComparison.Ordinal)) { e.Value = \u0022\\u200e\u0022 \u002B text \u002B \u0022\\u200e\u0022; e.FormattingApplied = true; }\r\n            else if (field.EndsWith(\u0022Day\u0022, StringComparison.Ordinal)) { e.Value = Day(text); e.FormattingApplied = true; }\r\n            else if (field == \u0022LectureType\u0022) { e.Value = text == \u0022Practical\u0022 ? \u0022\u0639\u0645\u0644\u064A\u0022 : \u0022\u0646\u0638\u0631\u064A\u0022; e.FormattingApplied = true; }\r\n        }"
+      ],
+      "catches": [
+        {
+          "line": 158,
+          "body": "catch (OperationCanceledException) { InvalidatePreview(); status.Text = \u0022\u0623\u064F\u0644\u063A\u064A\u062A \u0627\u0644\u0639\u0645\u0644\u064A\u0629 \u062F\u0648\u0646 \u062D\u0641\u0638 \u062A\u063A\u064A\u064A\u0631\u0627\u062A \u062C\u0632\u0626\u064A\u0629.\u0022; }"
+        },
+        {
+          "line": 159,
+          "body": "catch (Exception ex) { InvalidatePreview(); status.Text = ex.Message; MessageBox.Show(this, ex.Message, \u0022\u062A\u063A\u064A\u064A\u0631 \u0623\u064A\u0627\u0645 \u0627\u0644\u062A\u062F\u0631\u064A\u0633\u064A\u0022, MessageBoxButtons.OK, MessageBoxIcon.Warning); }"
+        }
+      ],
+      "dependencies": [
+        "University_Timetable_and_Classroom_Management_System.BusinessLayer"
+      ]
+    },
+    {
+      "path": "University Timetable and Classroom Management System\\PresentationLayer\\FormNavigation.cs",
+      "lines": 120,
+      "methods": 5,
+      "events": [
+        "button.Click \u002B= (_, _) =\u003E\r\n                    {\r\n                        if (button.Tag is NavigationPage page)\r\n                        {\r\n                            shell.ShowPage(page);\r\n                        }\r\n                    }"
+      ],
+      "catches": [],
+      "dependencies": []
+    },
+    {
+      "path": "University Timetable and Classroom Management System\\PresentationLayer\\GridRowNumbers.cs",
+      "lines": 83,
+      "methods": 8,
+      "events": [
+        "grid.DataBindingComplete \u002B= OnDataBindingComplete",
+        "grid.Sorted \u002B= OnSorted",
+        "grid.RowsAdded \u002B= OnRowsAdded",
+        "grid.RowsRemoved \u002B= OnRowsRemoved",
+        "grid.RowStateChanged \u002B= OnRowStateChanged",
+        "grid.Disposed \u002B= OnDisposed"
+      ],
+      "catches": [],
+      "dependencies": [
+        "System.Runtime.CompilerServices"
+      ]
+    },
+    {
+      "path": "University Timetable and Classroom Management System\\PresentationLayer\\ImportUiText.cs",
+      "lines": 111,
+      "methods": 1,
+      "events": [],
+      "catches": [],
+      "dependencies": [
+        "System.Text.RegularExpressions",
+        "University_Timetable_and_Classroom_Management_System.BusinessLayer"
+      ]
+    },
+    {
+      "path": "University Timetable and Classroom Management System\\PresentationLayer\\LoginForm.cs",
+      "lines": 124,
+      "methods": 6,
+      "events": [
+        "ClientSizeChanged \u002B= (_, _) =\u003E ArrangeLoginCard()",
+        "pnlContent.SizeChanged \u002B= (_, _) =\u003E ArrangeLoginCard()",
+        "pnlCard.SizeChanged \u002B= (_, _) =\u003E ArrangeLoginCard()",
+        "Shown \u002B= (_, _) =\u003E txtUserName.Focus()",
+        "btnSignIn.Click \u002B= async (_, _) =\u003E await SignInAsync()",
+        "btnCreateAccount.Click \u002B= (_, _) =\u003E OpenRegisterForm()",
+        "btnTogglePassword.Click \u002B= (_, _) =\u003E TogglePasswordVisibility()",
+        "txtPassword.KeyDown \u002B= async (_, e) =\u003E\r\n            {\r\n                if (e.KeyCode == Keys.Enter)\r\n                {\r\n                    e.SuppressKeyPress = true;\r\n                    await SignInAsync();\r\n                }\r\n            }"
+      ],
+      "catches": [
+        {
+          "line": 78,
+          "body": "catch (Exception ex)\r\n            {\r\n                UiMessages.ShowError(this, \u0022\u062A\u0639\u0630\u0631 \u062A\u0633\u062C\u064A\u0644 \u0627\u0644\u062F\u062E\u0648\u0644.\u0022, \u0022\u062A\u0633\u062C\u064A\u0644 \u0627\u0644\u062F\u062E\u0648\u0644\u0022, ex);\r\n            }"
+        }
+      ],
+      "dependencies": [
+        "University_Timetable_and_Classroom_Management_System.BusinessLayer"
+      ]
+    },
+    {
+      "path": "University Timetable and Classroom Management System\\PresentationLayer\\LoginForm.Designer.cs",
+      "lines": 453,
+      "methods": 2,
+      "events": [],
+      "catches": [],
+      "dependencies": []
+    },
+    {
+      "path": "University Timetable and Classroom Management System\\PresentationLayer\\MainShellForm.cs",
+      "lines": 164,
+      "methods": 6,
+      "events": [
+        "pnlPageHost.Resize \u002B= (_, _) =\u003E ResizeActivePage()",
+        "button.Click \u002B= (_, _) =\u003E\r\n            {\r\n                using var import = new ExcelImportForm();\r\n                import.ShowDialog(this);\r\n                // Reload the page lookups after an academic or timetable import.\r\n                if (import.HasSavedChanges) ShowPage(currentPage);\r\n            }",
+        "button.Click \u002B= (_, _) =\u003E\r\n            {\r\n                using var editor = new FacultyPreferencesForm();\r\n                editor.ShowDialog(this);\r\n                if (editor.HasSavedChanges) ShowPage(currentPage);\r\n            }",
+        "button.Click \u002B= (_, _) =\u003E { using var dialog = new TimetableAlternativesForm(); dialog.ShowDialog(this); if (dialog.HasSavedChanges) ShowPage(currentPage); }"
+      ],
+      "catches": [],
+      "dependencies": []
+    },
+    {
+      "path": "University Timetable and Classroom Management System\\PresentationLayer\\MainShellForm.Designer.cs",
+      "lines": 484,
+      "methods": 2,
+      "events": [],
+      "catches": [],
+      "dependencies": [
+        "System.Drawing",
+        "System.Windows.Forms"
+      ]
+    },
+    {
+      "path": "University Timetable and Classroom Management System\\PresentationLayer\\PasswordToggleIcon.cs",
+      "lines": 53,
+      "methods": 2,
+      "events": [],
+      "catches": [],
+      "dependencies": [
+        "System.Drawing",
+        "System.Drawing.Drawing2D"
+      ]
+    },
+    {
+      "path": "University Timetable and Classroom Management System\\PresentationLayer\\RegisterForm.cs",
+      "lines": 125,
+      "methods": 6,
+      "events": [
+        "ClientSizeChanged \u002B= (_, _) =\u003E ArrangeRegisterCard()",
+        "pnlCard.SizeChanged \u002B= (_, _) =\u003E ArrangeRegisterCard()",
+        "Shown \u002B= (_, _) =\u003E txtFullName.Focus()",
+        "btnCreateAccount.Click \u002B= async (_, _) =\u003E await CreateAccountAsync()",
+        "btnCancel.Click \u002B= (_, _) =\u003E Close()",
+        "btnTogglePassword.Click \u002B= (_, _) =\u003E TogglePasswordVisibility()",
+        "btnToggleConfirmPassword.Click \u002B= (_, _) =\u003E ToggleConfirmPasswordVisibility()",
+        "txtConfirmPassword.KeyDown \u002B= async (_, e) =\u003E\r\n            {\r\n                if (e.KeyCode == Keys.Enter)\r\n                {\r\n                    e.SuppressKeyPress = true;\r\n                    await CreateAccountAsync();\r\n                }\r\n            }"
+      ],
+      "catches": [
+        {
+          "line": 83,
+          "body": "catch (Exception ex)\r\n            {\r\n                UiMessages.ShowError(this, \u0022\u062A\u0639\u0630\u0631 \u0625\u0646\u0634\u0627\u0621 \u0627\u0644\u062D\u0633\u0627\u0628.\u0022, \u0022\u0625\u0646\u0634\u0627\u0621 \u062D\u0633\u0627\u0628\u0022, ex);\r\n            }"
+        }
+      ],
+      "dependencies": [
+        "System.ComponentModel",
+        "University_Timetable_and_Classroom_Management_System.BusinessLayer"
+      ]
+    },
+    {
+      "path": "University Timetable and Classroom Management System\\PresentationLayer\\RegisterForm.Designer.cs",
+      "lines": 497,
+      "methods": 2,
+      "events": [],
+      "catches": [],
+      "dependencies": []
+    },
+    {
+      "path": "University Timetable and Classroom Management System\\PresentationLayer\\ResponsiveCardPanel.cs",
+      "lines": 18,
+      "methods": 1,
+      "events": [],
+      "catches": [],
+      "dependencies": []
+    },
+    {
+      "path": "University Timetable and Classroom Management System\\PresentationLayer\\ResponsiveFlowPanel.cs",
+      "lines": 19,
+      "methods": 1,
+      "events": [],
+      "catches": [],
+      "dependencies": []
+    },
+    {
+      "path": "University Timetable and Classroom Management System\\PresentationLayer\\ResponsiveWorkspacePanel.cs",
+      "lines": 42,
+      "methods": 5,
+      "events": [
+        "viewport.ClientSizeChanged \u002B= ParentSizeChanged"
+      ],
+      "catches": [],
+      "dependencies": []
+    },
+    {
+      "path": "University Timetable and Classroom Management System\\PresentationLayer\\SchedulesForm.Actions.cs",
+      "lines": 315,
+      "methods": 11,
+      "events": [],
+      "catches": [
+        {
+          "line": 26,
+          "body": "catch (Exception ex)\r\n            {\r\n                ShowError(\u0022\u062A\u0639\u0630\u0631 \u062A\u0648\u0644\u064A\u062F \u0627\u0644\u062C\u062F\u0648\u0644.\u0022, ex);\r\n            }"
+        },
+        {
+          "line": 207,
+          "body": "catch (Exception ex)\r\n            {\r\n                ShowError(\u0022\u062A\u0639\u0630\u0631 \u062A\u0635\u062F\u064A\u0631 \u0627\u0644\u062C\u062F\u0648\u0644 \u0625\u0644\u0649 PDF.\u0022, ex);\r\n            }"
+        },
+        {
+          "line": 262,
+          "body": "catch (Exception ex)\r\n            {\r\n                if (!IsDisposed \u0026\u0026 !Disposing)\r\n                    ShowError(\u0022\u062A\u0639\u0630\u0631 \u062A\u062D\u0645\u064A\u0644 \u0627\u0644\u0645\u062D\u0627\u0636\u0631\u0629 \u0627\u0644\u0645\u062D\u062F\u062F\u0629.\u0022, ex);\r\n            }"
+        }
+      ],
+      "dependencies": [
+        "System.Windows.Forms",
+        "University_Timetable_and_Classroom_Management_System.BusinessLayer"
+      ]
+    },
+    {
+      "path": "University Timetable and Classroom Management System\\PresentationLayer\\SchedulesForm.Backup.cs",
+      "lines": 73,
+      "methods": 3,
+      "events": [],
+      "catches": [
+        {
+          "line": 27,
+          "body": "catch(Exception ex){ShowTimetableBackupError(\u0022\u062A\u0639\u0630\u0651\u0631 \u062D\u0641\u0638 \u0646\u0633\u062E\u0629 \u0627\u0644\u062C\u062F\u0648\u0644.\u0022,ex);}"
+        },
+        {
+          "line": 63,
+          "body": "catch(Exception ex){ShowTimetableBackupError(\u0022\u062A\u0639\u0630\u0651\u0631\u062A \u0627\u0633\u062A\u0639\u0627\u062F\u0629 \u0627\u0644\u062C\u062F\u0648\u0644\u061B \u0644\u0645 \u064A\u064F\u062D\u0641\u0638 \u0627\u0633\u062A\u0628\u062F\u0627\u0644 \u062C\u0632\u0626\u064A.\u0022,ex);}"
+        }
+      ],
+      "dependencies": [
+        "University_Timetable_and_Classroom_Management_System.BusinessLayer"
+      ]
+    },
+    {
+      "path": "University Timetable and Classroom Management System\\PresentationLayer\\SchedulesForm.cs",
+      "lines": 105,
+      "methods": 4,
+      "events": [
+        "pnlWorkspace.Resize \u002B= (_, _) =\u003E ResizeScheduleWorkspace()",
+        "btnGenerateSchedule.Click \u002B= async (_, _) =\u003E await GenerateScheduleAsync()",
+        "btnBackupTimetable.Click \u002B= async (_, _) =\u003E await SaveTimetableBackupAsync()",
+        "btnRestoreTimetable.Click \u002B= async (_, _) =\u003E await RestoreTimetableBackupAsync()",
+        "dgvSchedules.CurrentCellDirtyStateChanged \u002B= async (_, _) =\u003E await SaveScheduleLockCheckboxAsync()",
+        "btnAddSchedule.Click \u002B= async (_, _) =\u003E await AddScheduleAsync()",
+        "btnUpdateSchedule.Click \u002B= async (_, _) =\u003E await UpdateScheduleAsync()",
+        "btnDeleteSchedule.Click \u002B= async (_, _) =\u003E await DeleteScheduleAsync()",
+        "btnClearScheduleForm.Click \u002B= (_, _) =\u003E ClearScheduleForm()",
+        "btnExportSchedulePdf.Click \u002B= async (_, _) =\u003E await ExportSchedulePdfAsync()",
+        "btnScheduleGridView.Click \u002B= (_, _) =\u003E ShowScheduleGridView()",
+        "btnScheduleTimetableView.Click \u002B= (_, _) =\u003E ShowScheduleTimetableView()",
+        "dgvSchedules.SelectionChanged \u002B= async (_, _) =\u003E await PopulateScheduleEditorFromSelectionAsync()",
+        "cmbSubject.SelectedIndexChanged \u002B= (_, _) =\u003E ApplySubjectSelection()",
+        "cmbStudyYear.SelectedIndexChanged \u002B= (_, _) =\u003E ApplyStudyYearSelection()",
+        "cmbBranch.SelectedIndexChanged \u002B= (_, _) =\u003E ApplyBranchSelection()",
+        "cmbSection.SelectedIndexChanged \u002B= (_, _) =\u003E ApplySectionSelection()",
+        "cmbFacultyFilter.SelectedIndexChanged \u002B= (_, _) =\u003E ApplyScheduleFilters()",
+        "cmbSectionFilter.SelectedIndexChanged \u002B= (_, _) =\u003E ApplySectionFilterSelection()",
+        "cmbStudyYearFilter.SelectedIndexChanged \u002B= (_, _) =\u003E ApplyStudyYearFilterSelection()",
+        "cmbSemesterFilter.SelectedIndexChanged \u002B= (_, _) =\u003E ApplyScheduleFilters()",
+        "cmbGroupFilter.SelectedIndexChanged \u002B= (_, _) =\u003E ApplyScheduleFilters()",
+        "cmbLectureType.SelectedIndexChanged \u002B= (_, _) =\u003E ApplyLectureTypeSelection()"
+      ],
+      "catches": [
+        {
+          "line": 55,
+          "body": "catch (Exception ex)\r\n            {\r\n                ShowError(\u0022\u062A\u0639\u0630\u0631 \u062A\u062D\u0645\u064A\u0644 \u0634\u0627\u0634\u0629 \u0627\u0644\u062C\u062F\u0648\u0644 \u0627\u0644\u062F\u0631\u0627\u0633\u064A.\u0022, ex);\r\n            }"
+        }
+      ],
+      "dependencies": [
+        "University_Timetable_and_Classroom_Management_System.BusinessLayer",
+        "University_Timetable_and_Classroom_Management_System.Models"
+      ]
+    },
+    {
+      "path": "University Timetable and Classroom Management System\\PresentationLayer\\SchedulesForm.Designer.cs",
+      "lines": 1651,
+      "methods": 2,
+      "events": [],
+      "catches": [],
+      "dependencies": []
+    },
+    {
+      "path": "University Timetable and Classroom Management System\\PresentationLayer\\SchedulesForm.Grid.cs",
+      "lines": 249,
+      "methods": 15,
+      "events": [],
+      "catches": [],
+      "dependencies": [
+        "University_Timetable_and_Classroom_Management_System.Models",
+        "System.Drawing",
+        "System.Windows.Forms"
+      ]
+    },
+    {
+      "path": "University Timetable and Classroom Management System\\PresentationLayer\\SchedulesForm.Loading.cs",
+      "lines": 520,
+      "methods": 32,
+      "events": [],
+      "catches": [
+        {
+          "line": 22,
+          "body": "catch (Exception ex)\r\n            {\r\n                ShowError(\u0022\u062A\u0639\u0630\u0631 \u062A\u062D\u062F\u064A\u062B \u0628\u064A\u0627\u0646\u0627\u062A \u0627\u0644\u062C\u062F\u0648\u0644.\u0022, ex);\r\n            }"
+        }
+      ],
+      "dependencies": [
+        "Guna.UI2.WinForms",
+        "University_Timetable_and_Classroom_Management_System.BusinessLayer",
+        "University_Timetable_and_Classroom_Management_System.Models"
+      ]
+    },
+    {
+      "path": "University Timetable and Classroom Management System\\PresentationLayer\\SchedulesForm.Locks.cs",
+      "lines": 37,
+      "methods": 1,
+      "events": [],
+      "catches": [
+        {
+          "line": 25,
+          "body": "catch (Exception ex)\n        {\n            if (!IsScheduleUiUnavailable)\n            {\n                try { await LoadSchedulesAsync(); }\n                catch { /* Show the original failure even if reloading is unavailable. */ }\n            }\n            ShowError(\u0022\u062A\u0639\u0630\u0651\u0631 \u062A\u063A\u064A\u064A\u0631 \u062A\u062B\u0628\u064A\u062A \u0627\u0644\u0645\u062D\u0627\u0636\u0631\u0629.\u0022, ex);\n        }"
+        },
+        {
+          "line": 30,
+          "body": "catch { /* Show the original failure even if reloading is unavailable. */ }"
+        }
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "University Timetable and Classroom Management System\\PresentationLayer\\SchedulesForm.Resizing.cs",
+      "lines": 112,
+      "methods": 4,
+      "events": [
+        "y \u002B= Px(62)",
+        "x \u002B= button.Width \u002B Px(10)"
+      ],
+      "catches": [],
+      "dependencies": [
+        "Guna.UI2.WinForms"
+      ]
+    },
+    {
+      "path": "University Timetable and Classroom Management System\\PresentationLayer\\SchedulesForm.Timetable.cs",
+      "lines": 270,
+      "methods": 18,
+      "events": [
+        "dgvTimetable.DpiChangedAfterParent \u002B= (_, _) =\u003E\r\n            {\r\n                foreach (DataGridViewRow row in dgvTimetable.Rows) row.Height = TimetableRowHeight;\r\n                timetableCellOffsets.Clear();\r\n                dgvTimetable.Invalidate();\r\n            }",
+        "dgvTimetable.CellPainting \u002B= PaintTimetableCell",
+        "dgvTimetable.CellMouseClick \u002B= ClickTimetableCell",
+        "dgvTimetable.CellMouseMove \u002B= (_, e) =\u003E\r\n            {\r\n                if (e.Button == MouseButtons.Left) ScrollTimetableTrack(e);\r\n            }"
+      ],
+      "catches": [],
+      "dependencies": [
+        "System.Drawing.Drawing2D",
+        "Guna.UI2.WinForms"
+      ]
+    },
+    {
+      "path": "University Timetable and Classroom Management System\\PresentationLayer\\SchedulesForm.Validation.cs",
+      "lines": 124,
+      "methods": 5,
+      "events": [],
+      "catches": [],
+      "dependencies": [
+        "University_Timetable_and_Classroom_Management_System.BusinessLayer",
+        "University_Timetable_and_Classroom_Management_System.Models"
+      ]
+    },
+    {
+      "path": "University Timetable and Classroom Management System\\PresentationLayer\\ScheduleTimetableGrid.cs",
+      "lines": 15,
+      "methods": 1,
+      "events": [],
+      "catches": [],
+      "dependencies": []
+    },
+    {
+      "path": "University Timetable and Classroom Management System\\PresentationLayer\\SectionsForm.cs",
+      "lines": 399,
+      "methods": 28,
+      "events": [
+        "dgvSections.SelectionChanged \u002B= (_, _) =\u003E PopulateSectionEditorFromSelection()",
+        "cmbStudyYear.SelectedIndexChanged \u002B= (_, _) =\u003E ApplyStudyYearRulesToEditor()",
+        "cmbBranch.SelectedIndexChanged \u002B= (_, _) =\u003E ApplyBranchSelectionToSectionName()",
+        "btnAddSection.Click \u002B= async (_, _) =\u003E await AddSectionAsync()",
+        "btnUpdateSection.Click \u002B= async (_, _) =\u003E await UpdateSectionAsync()",
+        "btnDeleteSection.Click \u002B= async (_, _) =\u003E await DeleteSectionAsync()"
+      ],
+      "catches": [
+        {
+          "line": 63,
+          "body": "catch (Exception ex)\r\n            {\r\n                ShowError(\u0022\u062A\u0639\u0630\u0631 \u062A\u062D\u062F\u064A\u062B \u0627\u0644\u0634\u0639\u0628.\u0022, ex);\r\n            }"
+        }
+      ],
+      "dependencies": [
+        "University_Timetable_and_Classroom_Management_System.BusinessLayer",
+        "University_Timetable_and_Classroom_Management_System.Models"
+      ]
+    },
+    {
+      "path": "University Timetable and Classroom Management System\\PresentationLayer\\SectionsForm.Designer.cs",
+      "lines": 959,
+      "methods": 2,
+      "events": [],
+      "catches": [],
+      "dependencies": []
+    },
+    {
+      "path": "University Timetable and Classroom Management System\\PresentationLayer\\StudyYearsForm.cs",
+      "lines": 208,
+      "methods": 15,
+      "events": [
+        "dgvStudyYears.SelectionChanged \u002B= (_, _) =\u003E PopulateStudyYearEditorFromSelection()",
+        "btnAddStudyYear.Click \u002B= async (_, _) =\u003E await AddStudyYearAsync()",
+        "btnUpdateStudyYear.Click \u002B= async (_, _) =\u003E await UpdateStudyYearAsync()",
+        "btnDeleteStudyYear.Click \u002B= async (_, _) =\u003E await DeleteStudyYearAsync()"
+      ],
+      "catches": [
+        {
+          "line": 57,
+          "body": "catch (Exception ex)\r\n            {\r\n                ShowError(\u0022\u062A\u0639\u0630\u0631 \u062A\u062D\u0645\u064A\u0644 \u0627\u0644\u0645\u0631\u0627\u062D\u0644 \u0627\u0644\u062F\u0631\u0627\u0633\u064A\u0629.\u0022, ex);\r\n            }"
+        }
+      ],
+      "dependencies": [
+        "University_Timetable_and_Classroom_Management_System.BusinessLayer",
+        "University_Timetable_and_Classroom_Management_System.Models"
+      ]
+    },
+    {
+      "path": "University Timetable and Classroom Management System\\PresentationLayer\\StudyYearsForm.Designer.cs",
+      "lines": 735,
+      "methods": 2,
+      "events": [],
+      "catches": [],
+      "dependencies": []
+    },
+    {
+      "path": "University Timetable and Classroom Management System\\PresentationLayer\\SubjectsForm.cs",
+      "lines": 539,
+      "methods": 34,
+      "events": [
+        "dgvSubjects.SelectionChanged \u002B= (_, _) =\u003E PopulateSubjectEditorFromSelection()",
+        "btnAddSubject.Click \u002B= async (_, _) =\u003E await AddSubjectAsync()",
+        "btnUpdateSubject.Click \u002B= async (_, _) =\u003E await UpdateSubjectAsync()",
+        "btnDeleteSubject.Click \u002B= async (_, _) =\u003E await DeleteSubjectAsync()",
+        "cmbStudyYear.SelectedIndexChanged \u002B= (_, _) =\u003E ApplyStudyYearRulesToEditor()",
+        "cmbStudyYearFilter.SelectedIndexChanged \u002B= (_, _) =\u003E ApplyStudyYearFilterSelection()",
+        "cmbBranchFilter.SelectedIndexChanged \u002B= (_, _) =\u003E ApplySubjectFilters()",
+        "txtTheoreticalLectureCount.TextChanged \u002B= (_, _) =\u003E\r\n            {\r\n                if (!updatingLectureCounts) theoreticalCountIsManual = !string.IsNullOrWhiteSpace(txtTheoreticalLectureCount.Text);\r\n            }",
+        "txtPracticalLectureCount.TextChanged \u002B= (_, _) =\u003E\r\n            {\r\n                if (!updatingLectureCounts) practicalCountIsManual = !string.IsNullOrWhiteSpace(txtPracticalLectureCount.Text);\r\n            }",
+        "linkResetLectureCounts.LinkClicked \u002B= (_, _) =\u003E ResetLectureCounts()"
+      ],
+      "catches": [
+        {
+          "line": 83,
+          "body": "catch (Exception ex)\r\n            {\r\n                ShowError(\u0022\u062A\u0639\u0630\u0631 \u062A\u062D\u062F\u064A\u062B \u0627\u0644\u0645\u0648\u0627\u062F.\u0022, ex);\r\n            }"
+        }
+      ],
+      "dependencies": [
+        "System.Globalization",
+        "Guna.UI2.WinForms",
+        "University_Timetable_and_Classroom_Management_System.BusinessLayer",
+        "University_Timetable_and_Classroom_Management_System.Models"
+      ]
+    },
+    {
+      "path": "University Timetable and Classroom Management System\\PresentationLayer\\SubjectsForm.Designer.cs",
+      "lines": 1261,
+      "methods": 2,
+      "events": [],
+      "catches": [],
+      "dependencies": []
+    },
+    {
+      "path": "University Timetable and Classroom Management System\\PresentationLayer\\TimeDisplay.cs",
+      "lines": 20,
+      "methods": 2,
+      "events": [],
+      "catches": [],
+      "dependencies": [
+        "System.Globalization"
+      ]
+    },
+    {
+      "path": "University Timetable and Classroom Management System\\PresentationLayer\\TimeSlotsForm.cs",
+      "lines": 241,
+      "methods": 17,
+      "events": [
+        "dgvTimeSlots.CellFormatting \u002B= FormatTimeSlotCell",
+        "dgvTimeSlots.SelectionChanged \u002B= (_, _) =\u003E PopulateTimeSlotEditorFromSelection()",
+        "btnAddTimeSlot.Click \u002B= async (_, _) =\u003E await AddTimeSlotAsync()",
+        "btnUpdateTimeSlot.Click \u002B= async (_, _) =\u003E await UpdateTimeSlotAsync()",
+        "btnDeleteTimeSlot.Click \u002B= async (_, _) =\u003E await DeleteTimeSlotAsync()"
+      ],
+      "catches": [
+        {
+          "line": 58,
+          "body": "catch (Exception ex)\r\n            {\r\n                ShowError(\u0022\u062A\u0639\u0630\u0631 \u062A\u062D\u0645\u064A\u0644 \u0627\u0644\u0641\u062A\u0631\u0627\u062A \u0627\u0644\u062F\u0631\u0627\u0633\u064A\u0629.\u0022, ex);\r\n            }"
+        },
+        {
+          "line": 150,
+          "body": "catch (ArgumentException ex)\r\n            {\r\n                UiMessages.ShowWarning(this, ex.Message, \u0022\u0627\u0644\u0641\u062A\u0631\u0627\u062A \u0627\u0644\u062F\u0631\u0627\u0633\u064A\u0629\u0022);\r\n                dtpStartTime.Focus();\r\n                return false;\r\n            }"
+        }
+      ],
+      "dependencies": [
+        "University_Timetable_and_Classroom_Management_System.BusinessLayer",
+        "University_Timetable_and_Classroom_Management_System.Models"
+      ]
+    },
+    {
+      "path": "University Timetable and Classroom Management System\\PresentationLayer\\TimeSlotsForm.Designer.cs",
+      "lines": 754,
+      "methods": 2,
+      "events": [],
+      "catches": [],
+      "dependencies": []
+    },
+    {
+      "path": "University Timetable and Classroom Management System\\PresentationLayer\\TimetableAlternativesForm.cs",
+      "lines": 131,
+      "methods": 10,
+      "events": [
+        "comparison.CurrentCellChanged \u002B= (_, _) =\u003E { if (!binding \u0026\u0026 comparison.CurrentRow?.Tag is TimetableAlternative option) { selected = option; BindSelection(); UpdateActions(); } }",
+        "facultyFilter.SelectedIndexChanged \u002B= (_, _) =\u003E { if (!binding) BindSelection(); }",
+        "semester.SelectedIndexChanged \u002B= async (_, _) =\u003E { if (!busy) await RunAsync(LoadAsync); }",
+        "generate.Click \u002B= async (_, _) =\u003E await RunAsync(async token =\u003E\n        {\n            var result = await service.GenerateAsync(new(semester.SelectedIndex \u002B 1, 3, (double)seconds.Value), token);\n            current = result.Current; BindComparison(result.Alternatives); status.Text = result.Message;\n            if (result.Alternatives.Count \u003E 0) { comparison.CurrentCell = comparison.Rows[1].Cells[0]; selected = result.Alternatives[0]; BindSelection(); tabs.SelectedIndex = 1; }\n        })",
+        "save.Click \u002B= async (_, _) =\u003E\n        {\n            if (selected is null || ReferenceEquals(selected, current)) return; var approved = selected;\n            if (MessageBox.Show(this, $\u0022\u0627\u0639\u062A\u0645\u0627\u062F \u00AB{approved.Title}\u00BB \u0648\u062A\u063A\u064A\u064A\u0631 {approved.Metrics.ChangedLectures} \u0645\u062D\u0627\u0636\u0631\u0629 \u0644\u062F\u0649 {approved.Metrics.AffectedFaculty} \u062A\u062F\u0631\u064A\u0633\u064A\u064A\u0646\u061F\u0022, \u0022\u0627\u0639\u062A\u0645\u0627\u062F \u0627\u0644\u062C\u062F\u0648\u0644\u0022, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) != DialogResult.Yes) return;\n            await RunAsync(async token =\u003E { int count = await service.SaveAsync(approved, true, token); HasSavedChanges |= count \u003E 0; await LoadAsync(token); status.Text = $\u0022\u062A\u0645 \u0627\u0639\u062A\u0645\u0627\u062F \u0627\u0644\u0628\u062F\u064A\u0644 \u0648\u062D\u0641\u0638 {count} \u062A\u063A\u064A\u064A\u0631\u064B\u0627\u060C \u0645\u0639 \u0627\u0644\u062D\u0641\u0627\u0638 \u0639\u0644\u0649 \u0647\u0648\u064A\u0627\u062A \u0627\u0644\u0645\u062D\u0627\u0636\u0631\u0627\u062A \u0648\u0627\u0644\u0623\u0642\u0641\u0627\u0644.\u0022; });\n        }",
+        "unlock.Click \u002B= async (_, _) =\u003E\n        {\n            if (current is null) return;\n            var ids = original.SelectedRows.Cast\u003CDataGridViewRow\u003E().Where(r =\u003E r.Tag is TimetableAlternativeLecture { Locked: true }).Select(r =\u003E ((TimetableAlternativeLecture)r.Tag!).Id).ToArray();\n            if (ids.Length == 0) { status.Text = \u0022\u0627\u062E\u062A\u0631 \u0627\u0644\u0645\u062D\u0627\u0636\u0631\u0627\u062A \u0627\u0644\u0645\u062B\u0628\u062A\u0629 \u0627\u0644\u062A\u064A \u062A\u0633\u0645\u062D \u0628\u062A\u062D\u0631\u064A\u0643\u0647\u0627 \u0645\u0646 \u0627\u0644\u062C\u062F\u0648\u0644 \u0627\u0644\u062D\u0627\u0644\u064A.\u0022; return; }\n            if (MessageBox.Show(this, $\u0022\u0625\u0644\u063A\u0627\u0621 \u062A\u062B\u0628\u064A\u062A {ids.Length} \u0645\u062D\u0627\u0636\u0631\u0629 \u0645\u062D\u062F\u062F\u0629 \u0644\u0644\u0633\u0645\u0627\u062D \u0628\u062A\u062D\u0631\u064A\u0643\u0647\u0627 \u0641\u064A \u0627\u0644\u0628\u062D\u062B\u061F\\n\u0647\u0630\u0627 \u064A\u062D\u0641\u0638 \u062D\u0627\u0644\u0629 \u0627\u0644\u062A\u062B\u0628\u064A\u062A \u0641\u0642\u0637 \u0648\u0644\u0627 \u064A\u063A\u064A\u0651\u0631 \u0645\u0648\u0627\u0639\u064A\u062F\u0647\u0627.\u0022, \u0022\u062A\u0639\u062F\u064A\u0644 \u0635\u0631\u064A\u062D \u0644\u0644\u0623\u0642\u0641\u0627\u0644\u0022, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) != DialogResult.Yes) return;\n            string version = current.Version;\n            await RunAsync(async token =\u003E { await service.SetLocksAsync(semester.SelectedIndex \u002B 1, ids, false, version, token); HasSavedChanges = true; await LoadAsync(token); });\n        }",
+        "reload.Click \u002B= async (_, _) =\u003E await RunAsync(LoadAsync)",
+        "showCurrent.Click \u002B= (_, _) =\u003E { if (current is not null) { comparison.CurrentCell = comparison.Rows[0].Cells[0]; selected = current; BindSelection(); tabs.SelectedIndex = 0; UpdateActions(); } }",
+        "cancel.Click \u002B= (_, _) =\u003E cancellation?.Cancel()",
+        "close.Click \u002B= (_, _) =\u003E Close()",
+        "FormClosing \u002B= (_, e) =\u003E { if (busy) { e.Cancel = true; cancellation?.Cancel(); } }",
+        "Shown \u002B= async (_, _) =\u003E await RunAsync(LoadAsync)"
+      ],
+      "catches": [
+        {
+          "line": 121,
+          "body": "catch (OperationCanceledException) { status.Text = \u0022\u0623\u064F\u0644\u063A\u064A\u062A \u0627\u0644\u0639\u0645\u0644\u064A\u0629 \u062F\u0648\u0646 \u062D\u0641\u0638 \u062C\u0632\u0626\u064A.\u0022; }"
+        },
+        {
+          "line": 122,
+          "body": "catch (Exception ex) { status.Text = ex.Message; MessageBox.Show(this, ex.Message, Text, MessageBoxButtons.OK, MessageBoxIcon.Warning); }"
+        }
+      ],
+      "dependencies": [
+        "University_Timetable_and_Classroom_Management_System.BusinessLayer"
+      ]
+    },
+    {
+      "path": "University Timetable and Classroom Management System\\PresentationLayer\\UiMessages.cs",
+      "lines": 86,
+      "methods": 8,
+      "events": [],
+      "catches": [],
+      "dependencies": [
+        "Microsoft.Data.SqlClient",
+        "Microsoft.EntityFrameworkCore"
+      ]
+    },
+    {
+      "path": "University Timetable and Classroom Management System\\PresentationLayer\\WindowSizing.cs",
+      "lines": 50,
+      "methods": 4,
+      "events": [
+        "form.Shown \u002B= (_, _) =\u003E\n            {\n                monitor = Screen.FromControl(form).DeviceName;\n                FitToWorkingArea(form);\n            }",
+        "form.LocationChanged \u002B= (_, _) =\u003E\n            {\n                if (monitor is null || form.IsDisposed || !form.IsHandleCreated) return;\n                string nextMonitor = Screen.FromControl(form).DeviceName;\n                if (monitor == nextMonitor) return;\n                monitor = nextMonitor;\n                FitToWorkingArea(form);\n            }",
+        "form.DpiChanged \u002B= (_, _) =\u003E\n            {\n                if (!form.IsDisposed \u0026\u0026 form.IsHandleCreated)\n                    form.BeginInvoke((Action)(() =\u003E FitToWorkingArea(form)));\n            }"
+      ],
+      "catches": [],
+      "dependencies": []
+    },
+    {
+      "path": "University Timetable and Classroom Management System\\PresentationLayer\\Common\\ComboBoxHelper.cs",
+      "lines": 100,
+      "methods": 7,
+      "events": [],
+      "catches": [],
+      "dependencies": [
+        "Guna.UI2.WinForms"
+      ]
+    },
+    {
+      "path": "University Timetable and Classroom Management System\\PresentationLayer\\Common\\ComboOption.cs",
+      "lines": 5,
+      "methods": 0,
+      "events": [],
+      "catches": [],
+      "dependencies": []
+    },
+    {
+      "path": "University Timetable and Classroom Management System\\PresentationLayer\\Common\\EditorAction.cs",
+      "lines": 35,
+      "methods": 1,
+      "events": [],
+      "catches": [
+        {
+          "line": 25,
+          "body": "catch (Exception ex)\n        {\n            showError(ex);\n        }"
+        }
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "University Timetable and Classroom Management System\\PresentationLayer\\ScheduleFiltering\\ScheduleFilterCriteria.cs",
+      "lines": 20,
+      "methods": 0,
+      "events": [],
+      "catches": [],
+      "dependencies": []
+    },
+    {
+      "path": "University Timetable and Classroom Management System\\PresentationLayer\\ScheduleFiltering\\ScheduleFilterService.cs",
+      "lines": 75,
+      "methods": 8,
+      "events": [],
+      "catches": [],
+      "dependencies": [
+        "University_Timetable_and_Classroom_Management_System.BusinessLayer"
+      ]
+    },
+    {
+      "path": "University Timetable and Classroom Management System\\PresentationLayer\\ViewModels\\ScheduleRow.cs",
+      "lines": 64,
+      "methods": 1,
+      "events": [],
+      "catches": [],
+      "dependencies": [
+        "University_Timetable_and_Classroom_Management_System.Models"
+      ]
+    },
+    {
+      "path": "Data_Access_Layer\\DatabaseConnection.cs",
+      "lines": 12,
+      "methods": 0,
+      "events": [],
+      "catches": [],
+      "dependencies": []
+    },
+    {
+      "path": "Data_Access_Layer\\DbContext\\appDbContext.cs",
+      "lines": 347,
+      "methods": 2,
+      "events": [],
+      "catches": [],
+      "dependencies": [
+        "Microsoft.EntityFrameworkCore",
+        "University_Timetable_and_Classroom_Management_System.Models"
+      ]
+    },
+    {
+      "path": "Data_Access_Layer\\Importing\\ImportTransaction.cs",
+      "lines": 21,
+      "methods": 1,
+      "events": [],
+      "catches": [],
+      "dependencies": [
+        "System.Data",
+        "Microsoft.EntityFrameworkCore"
+      ]
+    },
+    {
+      "path": "Data_Access_Layer\\Importing\\ScheduleLockSchema.cs",
+      "lines": 14,
+      "methods": 1,
+      "events": [],
+      "catches": [],
+      "dependencies": [
+        "Microsoft.EntityFrameworkCore"
+      ]
+    },
+    {
+      "path": "Data_Access_Layer\\Scheduling\\FacultyAssignmentScopeSchema.cs",
+      "lines": 27,
+      "methods": 1,
+      "events": [],
+      "catches": [],
+      "dependencies": [
+        "Microsoft.EntityFrameworkCore"
+      ]
+    },
+    {
+      "path": "Data_Access_Layer\\Scheduling\\FacultyPreferenceSchema.cs",
+      "lines": 37,
+      "methods": 1,
+      "events": [],
+      "catches": [],
+      "dependencies": [
+        "Microsoft.EntityFrameworkCore"
+      ]
+    },
+    {
+      "path": "Data_Access_Layer\\Scheduling\\FacultyScheduleWriter.cs",
+      "lines": 48,
+      "methods": 1,
+      "events": [],
+      "catches": [
+        {
+          "line": 37,
+          "body": "catch\r\n        {\r\n            if (enabled)\r\n            {\r\n                try { await context.Database.ExecuteSqlRawAsync(\u0022SET IDENTITY_INSERT [Schedules] OFF\u0022, CancellationToken.None); }\r\n                catch { /* Preserve the original error; caller rolls back and disposes the connection. */ }\r\n            }\r\n            throw;\r\n        }"
+        },
+        {
+          "line": 42,
+          "body": "catch { /* Preserve the original error; caller rolls back and disposes the connection. */ }"
+        }
+      ],
+      "dependencies": [
+        "Microsoft.EntityFrameworkCore",
+        "University_Timetable_and_Classroom_Management_System.Models"
+      ]
+    },
+    {
+      "path": "Data_Access_Layer\\Scheduling\\SubjectDeletionSchema.cs",
+      "lines": 33,
+      "methods": 1,
+      "events": [],
+      "catches": [],
+      "dependencies": [
+        "Microsoft.EntityFrameworkCore"
+      ]
+    },
+    {
+      "path": "Data_Access_Layer\\Scheduling\\SubjectLectureCountSchema.cs",
+      "lines": 17,
+      "methods": 1,
+      "events": [],
+      "catches": [],
+      "dependencies": [
+        "Microsoft.EntityFrameworkCore"
+      ]
+    },
+    {
+      "path": "Data_Access_Layer\\Scheduling\\TimetableSnapshotStore.cs",
+      "lines": 30,
+      "methods": 1,
+      "events": [],
+      "catches": [
+        {
+          "line": 23,
+          "body": "catch\n        {\n            if (enabled) { try { await context.Database.ExecuteSqlRawAsync(\u0022SET IDENTITY_INSERT [Schedules] OFF\u0022,CancellationToken.None); } catch { /* Preserve original failure; caller rolls back. */ } }\n            throw;\n        }"
+        },
+        {
+          "line": 25,
+          "body": "catch { /* Preserve original failure; caller rolls back. */ }"
+        }
+      ],
+      "dependencies": [
+        "Microsoft.EntityFrameworkCore",
+        "University_Timetable_and_Classroom_Management_System.Models"
+      ]
+    },
+    {
+      "path": "Models\\Entities\\ApplicationUser.cs",
+      "lines": 20,
+      "methods": 0,
+      "events": [],
+      "catches": [],
+      "dependencies": []
+    },
+    {
+      "path": "Models\\Entities\\Branch.cs",
+      "lines": 16,
+      "methods": 0,
+      "events": [],
+      "catches": [],
+      "dependencies": []
+    },
+    {
+      "path": "Models\\Entities\\Classroom.cs",
+      "lines": 16,
+      "methods": 0,
+      "events": [],
+      "catches": [],
+      "dependencies": []
+    },
+    {
+      "path": "Models\\Entities\\FacultyMember.cs",
+      "lines": 16,
+      "methods": 0,
+      "events": [],
+      "catches": [],
+      "dependencies": []
+    },
+    {
+      "path": "Models\\Entities\\FacultyMemberSubject.cs",
+      "lines": 22,
+      "methods": 0,
+      "events": [],
+      "catches": [],
+      "dependencies": []
+    },
+    {
+      "path": "Models\\Entities\\FacultyPeriodPreference.cs",
+      "lines": 11,
+      "methods": 0,
+      "events": [],
+      "catches": [],
+      "dependencies": []
+    },
+    {
+      "path": "Models\\Entities\\FacultySchedulingPreference.cs",
+      "lines": 13,
+      "methods": 0,
+      "events": [],
+      "catches": [],
+      "dependencies": []
+    },
+    {
+      "path": "Models\\Entities\\Schedule.cs",
+      "lines": 46,
+      "methods": 0,
+      "events": [],
+      "catches": [],
+      "dependencies": []
+    },
+    {
+      "path": "Models\\Entities\\ScheduleDetailsView.cs",
+      "lines": 49,
+      "methods": 0,
+      "events": [],
+      "catches": [],
+      "dependencies": []
+    },
+    {
+      "path": "Models\\Entities\\Section.cs",
+      "lines": 22,
+      "methods": 0,
+      "events": [],
+      "catches": [],
+      "dependencies": []
+    },
+    {
+      "path": "Models\\Entities\\StudyYear.cs",
+      "lines": 16,
+      "methods": 0,
+      "events": [],
+      "catches": [],
+      "dependencies": []
+    },
+    {
+      "path": "Models\\Entities\\Subject.cs",
+      "lines": 51,
+      "methods": 0,
+      "events": [],
+      "catches": [],
+      "dependencies": []
+    },
+    {
+      "path": "Models\\Entities\\TimeSlot.cs",
+      "lines": 16,
+      "methods": 0,
+      "events": [],
+      "catches": [],
+      "dependencies": []
+    },
+    {
+      "path": "UniversityTimetable.API\\ApiInfrastructure.cs",
+      "lines": 66,
+      "methods": 6,
+      "events": [],
+      "catches": [
+        {
+          "line": 20,
+          "body": "catch (Exception ex) when (!context.Response.HasStarted)\n        {\n            var (status, message) = ex switch\n            {\n                ApiFailure e =\u003E (e.Status, e.Message),\n                AntiforgeryValidationException =\u003E (400, \u0022\u0627\u0646\u062A\u0647\u062A \u0635\u0644\u0627\u062D\u064A\u0629 \u0631\u0645\u0632 \u0627\u0644\u062D\u0645\u0627\u064A\u0629. \u0623\u0639\u062F \u062A\u062D\u0645\u064A\u0644 \u0627\u0644\u0635\u0641\u062D\u0629 \u062B\u0645 \u062D\u0627\u0648\u0644 \u0645\u062C\u062F\u062F\u064B\u0627.\u0022),\n                ValidationException or ArgumentException =\u003E (400, ex.Message),\n                KeyNotFoundException =\u003E (404, ex.Message),\n                JsonException =\u003E (400, \u0022\u0635\u064A\u063A\u0629 \u0627\u0644\u0628\u064A\u0627\u0646\u0627\u062A \u063A\u064A\u0631 \u0635\u062D\u064A\u062D\u0629.\u0022),\n                DbUpdateConcurrencyException =\u003E (409, \u0022\u062A\u063A\u064A\u0631 \u0627\u0644\u0633\u062C\u0644. \u062D\u062F\u0651\u062B \u0627\u0644\u0628\u064A\u0627\u0646\u0627\u062A \u0642\u0628\u0644 \u0627\u0644\u0645\u062D\u0627\u0648\u0644\u0629 \u0645\u062C\u062F\u062F\u064B\u0627.\u0022),\n                DbUpdateException =\u003E (409, \u0022\u062A\u0639\u0630\u0631 \u0627\u0644\u062D\u0641\u0638: \u062A\u062D\u0642\u0642 \u0645\u0646 \u0627\u0644\u062A\u0643\u0631\u0627\u0631 \u0648\u0627\u0644\u0633\u062C\u0644\u0627\u062A \u0627\u0644\u0645\u0631\u062A\u0628\u0637\u0629\u060C \u062B\u0645 \u062D\u062F\u0651\u062B \u0627\u0644\u0628\u064A\u0627\u0646\u0627\u062A.\u0022),\n                SqlException e when e.Number is 1205 or 1222 =\u003E (409, \u0022\u0627\u0644\u0628\u064A\u0627\u0646\u0627\u062A \u0645\u0633\u062A\u062E\u062F\u0645\u0629 \u062D\u0627\u0644\u064A\u064B\u0627. \u062D\u062F\u0651\u062B \u0627\u0644\u0635\u0641\u062D\u0629 \u0648\u062D\u0627\u0648\u0644 \u0645\u062C\u062F\u062F\u064B\u0627.\u0022),\n                SqlException =\u003E (503, \u0022\u062A\u0639\u0630\u0631 \u0627\u0644\u0627\u062A\u0635\u0627\u0644 \u0628\u0642\u0627\u0639\u062F\u0629 \u0627\u0644\u0628\u064A\u0627\u0646\u0627\u062A \u0623\u0648 \u0625\u062A\u0645\u0627\u0645 \u0627\u0644\u0637\u0644\u0628. \u062A\u062D\u0642\u0642 \u0645\u0646 \u062E\u062F\u0645\u0629 SQL Server \u0648\u0627\u0644\u0625\u0639\u062F\u0627\u062F\u0627\u062A.\u0022),\n                _ =\u003E (500, \u0022\u062A\u0639\u0630\u0631 \u0625\u062A\u0645\u0627\u0645 \u0627\u0644\u0639\u0645\u0644\u064A\u0629. \u0631\u0627\u062C\u0639 \u0633\u062C\u0644 \u0627\u0644\u062E\u0627\u062F\u0645 \u0628\u0627\u0633\u062A\u062E\u062F\u0627\u0645 \u0631\u0642\u0645 \u0627\u0644\u062A\u062A\u0628\u0639.\u0022)\n            };\n            // Do not log exception text: provider messages can contain submitted data.\n            logger.LogWarning(\u0022API failure {Type}, status {Status}, trace {Trace}\u0022, ex.GetType().Name, status, context.TraceIdentifier);\n            context.Response.StatusCode = status;\n            await context.Response.WriteAsJsonAsync(new { title = message, status, traceId = context.TraceIdentifier });\n        }"
+        }
+      ],
+      "dependencies": [
+        "System.ComponentModel.DataAnnotations",
+        "System.Security.Cryptography",
+        "System.Text.Json",
+        "Microsoft.AspNetCore.Antiforgery",
+        "Microsoft.Data.SqlClient",
+        "Microsoft.EntityFrameworkCore"
+      ]
+    },
+    {
+      "path": "UniversityTimetable.API\\Dtos.cs",
+      "lines": 93,
+      "methods": 16,
+      "events": [],
+      "catches": [],
+      "dependencies": [
+        "System.ComponentModel.DataAnnotations",
+        "University_Timetable_and_Classroom_Management_System.Models"
+      ]
+    },
+    {
+      "path": "UniversityTimetable.API\\Program.cs",
+      "lines": 96,
+      "methods": 0,
+      "events": [],
+      "catches": [],
+      "dependencies": [
+        "System.Net",
+        "System.Threading.RateLimiting",
+        "Data_Access_Layer",
+        "Microsoft.AspNetCore.Antiforgery",
+        "Microsoft.AspNetCore.Authentication.Cookies",
+        "Microsoft.AspNetCore.RateLimiting",
+        "University_Timetable_and_Classroom_Management_System.BusinessLayer",
+        "UniversityTimetable.API"
+      ]
+    },
+    {
+      "path": "UniversityTimetable.API\\ResourceCatalog.cs",
+      "lines": 125,
+      "methods": 17,
+      "events": [],
+      "catches": [],
+      "dependencies": [
+        "System.ComponentModel.DataAnnotations",
+        "System.Text.Json",
+        "System.Text.Json.Serialization",
+        "University_Timetable_and_Classroom_Management_System.BusinessLayer",
+        "University_Timetable_and_Classroom_Management_System.Models"
+      ]
+    },
+    {
+      "path": "UniversityTimetable.API\\Controllers\\AuthController.cs",
+      "lines": 64,
+      "methods": 5,
+      "events": [],
+      "catches": [],
+      "dependencies": [
+        "System.ComponentModel.DataAnnotations",
+        "System.Security.Claims",
+        "Data_Access_Layer",
+        "Microsoft.AspNetCore.Antiforgery",
+        "Microsoft.AspNetCore.Authentication",
+        "Microsoft.AspNetCore.Authentication.Cookies",
+        "Microsoft.AspNetCore.Authorization",
+        "Microsoft.AspNetCore.Mvc",
+        "Microsoft.AspNetCore.RateLimiting",
+        "Microsoft.EntityFrameworkCore",
+        "University_Timetable_and_Classroom_Management_System.BusinessLayer"
+      ]
+    },
+    {
+      "path": "UniversityTimetable.API\\Controllers\\FacultyPreferencesController.cs",
+      "lines": 67,
+      "methods": 5,
+      "events": [],
+      "catches": [
+        {
+          "line": 34,
+          "body": "catch (InvalidOperationException ex) { throw new ApiFailure(409, ex.Message); }"
+        },
+        {
+          "line": 43,
+          "body": "catch (InvalidOperationException ex) { throw new ApiFailure(409, ex.Message); }"
+        },
+        {
+          "line": 62,
+          "body": "catch (InvalidOperationException ex) { throw new ApiFailure(409, ex.Message); }"
+        }
+      ],
+      "dependencies": [
+        "System.Security.Claims",
+        "Microsoft.AspNetCore.Authorization",
+        "Microsoft.AspNetCore.Mvc",
+        "Microsoft.Extensions.Caching.Memory",
+        "University_Timetable_and_Classroom_Management_System.BusinessLayer"
+      ]
+    },
+    {
+      "path": "UniversityTimetable.API\\Controllers\\OverviewController.cs",
+      "lines": 47,
+      "methods": 2,
+      "events": [],
+      "catches": [],
+      "dependencies": [
+        "Data_Access_Layer",
+        "Microsoft.AspNetCore.Authorization",
+        "Microsoft.AspNetCore.Mvc",
+        "Microsoft.EntityFrameworkCore",
+        "University_Timetable_and_Classroom_Management_System.BusinessLayer"
+      ]
+    },
+    {
+      "path": "UniversityTimetable.API\\Controllers\\ResourcesController.cs",
+      "lines": 60,
+      "methods": 6,
+      "events": [],
+      "catches": [],
+      "dependencies": [
+        "System.Text.Json",
+        "Microsoft.AspNetCore.Authorization",
+        "Microsoft.AspNetCore.Mvc"
+      ]
+    },
+    {
+      "path": "UniversityTimetable.API\\Controllers\\SchedulingController.cs",
+      "lines": 90,
+      "methods": 6,
+      "events": [],
+      "catches": [],
+      "dependencies": [
+        "System.ComponentModel.DataAnnotations",
+        "Microsoft.AspNetCore.Authorization",
+        "Microsoft.AspNetCore.Mvc",
+        "University_Timetable_and_Classroom_Management_System.BusinessLayer",
+        "University_Timetable_and_Classroom_Management_System.Models",
+        "Data_Access_Layer",
+        "Microsoft.EntityFrameworkCore"
+      ]
+    },
+    {
+      "path": "UniversityTimetable.API\\Controllers\\TimetableAlternativesController.cs",
+      "lines": 50,
+      "methods": 4,
+      "events": [],
+      "catches": [
+        {
+          "line": 28,
+          "body": "catch (InvalidOperationException ex) { throw new ApiFailure(409, ex.Message); }"
+        },
+        {
+          "line": 38,
+          "body": "catch (InvalidOperationException ex) { throw new ApiFailure(409, ex.Message); }"
+        },
+        {
+          "line": 46,
+          "body": "catch (InvalidOperationException ex) { throw new ApiFailure(409, ex.Message); }"
+        }
+      ],
+      "dependencies": [
+        "System.Security.Claims",
+        "Microsoft.AspNetCore.Authorization",
+        "Microsoft.AspNetCore.Mvc",
+        "Microsoft.Extensions.Caching.Memory",
+        "University_Timetable_and_Classroom_Management_System.BusinessLayer"
+      ]
+    }
+  ],
+  "longMethods": [
+    {
+      "file": "University Timetable and Classroom Management System\\PresentationLayer\\SchedulesForm.Designer.cs",
+      "name": "InitializeComponent",
+      "line": 17,
+      "lines": 1544,
+      "branches": 0
+    },
+    {
+      "file": "University Timetable and Classroom Management System\\PresentationLayer\\SubjectsForm.Designer.cs",
+      "name": "InitializeComponent",
+      "line": 17,
+      "lines": 1179,
+      "branches": 0
+    },
+    {
+      "file": "University Timetable and Classroom Management System\\PresentationLayer\\SectionsForm.Designer.cs",
+      "name": "InitializeComponent",
+      "line": 17,
+      "lines": 892,
+      "branches": 0
+    },
+    {
+      "file": "University Timetable and Classroom Management System\\PresentationLayer\\ClassroomsForm.Designer.cs",
+      "name": "InitializeComponent",
+      "line": 17,
+      "lines": 824,
+      "branches": 0
+    },
+    {
+      "file": "University Timetable and Classroom Management System\\PresentationLayer\\FacultyMembersForm.Designer.cs",
+      "name": "InitializeComponent",
+      "line": 17,
+      "lines": 783,
+      "branches": 0
+    },
+    {
+      "file": "University Timetable and Classroom Management System\\PresentationLayer\\BranchesForm.Designer.cs",
+      "name": "InitializeComponent",
+      "line": 17,
+      "lines": 709,
+      "branches": 0
+    },
+    {
+      "file": "University Timetable and Classroom Management System\\PresentationLayer\\TimeSlotsForm.Designer.cs",
+      "name": "InitializeComponent",
+      "line": 17,
+      "lines": 697,
+      "branches": 0
+    },
+    {
+      "file": "University Timetable and Classroom Management System\\PresentationLayer\\FacultyMemberSubjectsForm.Designer.cs",
+      "name": "InitializeComponent",
+      "line": 17,
+      "lines": 687,
+      "branches": 0
+    },
+    {
+      "file": "University Timetable and Classroom Management System\\PresentationLayer\\StudyYearsForm.Designer.cs",
+      "name": "InitializeComponent",
+      "line": 17,
+      "lines": 680,
+      "branches": 0
+    },
+    {
+      "file": "University Timetable and Classroom Management System\\PresentationLayer\\RegisterForm.Designer.cs",
+      "name": "InitializeComponent",
+      "line": 17,
+      "lines": 455,
+      "branches": 0
+    },
+    {
+      "file": "University Timetable and Classroom Management System\\PresentationLayer\\MainShellForm.Designer.cs",
+      "name": "InitializeComponent",
+      "line": 20,
+      "lines": 441,
+      "branches": 0
+    },
+    {
+      "file": "University Timetable and Classroom Management System\\PresentationLayer\\LoginForm.Designer.cs",
+      "name": "InitializeComponent",
+      "line": 17,
+      "lines": 412,
+      "branches": 0
+    },
+    {
+      "file": "Business_Logic_Layer\\Services\\ScheduleService.cs",
+      "name": "BuildTimetableAsync",
+      "line": 152,
+      "lines": 352,
+      "branches": 47
+    },
+    {
+      "file": "Data_Access_Layer\\DbContext\\appDbContext.cs",
+      "name": "OnModelCreating",
+      "line": 39,
+      "lines": 306,
+      "branches": 0
+    },
+    {
+      "file": "Business_Logic_Layer\\Importing\\ImportedTimetableRepairPlanner.cs",
+      "name": "Solve",
+      "line": 17,
+      "lines": 272,
+      "branches": 66
+    },
+    {
+      "file": "Business_Logic_Layer\\FacultyScheduling\\FacultyCpSatPlanner.cs",
+      "name": "SolveCore",
+      "line": 26,
+      "lines": 200,
+      "branches": 54
+    },
+    {
+      "file": "Business_Logic_Layer\\Importing\\WeeklyPdfTimetableReader.cs",
+      "name": "TryRead",
+      "line": 31,
+      "lines": 167,
+      "branches": 55
+    },
+    {
+      "file": "Business_Logic_Layer\\Services\\ScheduleService.cs",
+      "name": "ValidateCoreAsync",
+      "line": 513,
+      "lines": 117,
+      "branches": 19
+    },
+    {
+      "file": "Business_Logic_Layer\\Scheduling\\ScheduleGenerator.cs",
+      "name": "BuildPlan",
+      "line": 7,
+      "lines": 100,
+      "branches": 13
+    },
+    {
+      "file": "Business_Logic_Layer\\Scheduling\\ScheduleGenerator.cs",
+      "name": "PlacePracticalExchangeBlocks",
+      "line": 108,
+      "lines": 96,
+      "branches": 16
+    },
+    {
+      "file": "Business_Logic_Layer\\Importing\\PdfTableReader.cs",
+      "name": "Read",
+      "line": 16,
+      "lines": 92,
+      "branches": 24
+    },
+    {
+      "file": "Business_Logic_Layer\\Maintenance\\DatabaseMaintenanceService.cs",
+      "name": "RebuildScheduleIndexesAsync",
+      "line": 198,
+      "lines": 87,
+      "branches": 0
+    },
+    {
+      "file": "Business_Logic_Layer\\Importing\\ExcelImportService.cs",
+      "name": "ParseTimetableAsync",
+      "line": 67,
+      "lines": 86,
+      "branches": 26
+    },
+    {
+      "file": "Business_Logic_Layer\\Scheduling\\ScheduleGenerator.cs",
+      "name": "TryPlaceWithRepair",
+      "line": 424,
+      "lines": 84,
+      "branches": 12
+    },
+    {
+      "file": "Business_Logic_Layer\\Importing\\ExcelWorkbookReader.cs",
+      "name": "Read",
+      "line": 9,
+      "lines": 71,
+      "branches": 15
+    },
+    {
+      "file": "Business_Logic_Layer\\Maintenance\\DatabaseMaintenanceService.cs",
+      "name": "NormalizeScheduleDataAsync",
+      "line": 128,
+      "lines": 69,
+      "branches": 0
+    },
+    {
+      "file": "Business_Logic_Layer\\Scheduling\\ScheduleGenerator.cs",
+      "name": "TryPlacePracticalExchangeBlock",
+      "line": 241,
+      "lines": 65,
+      "branches": 8
+    },
+    {
+      "file": "University Timetable and Classroom Management System\\PresentationLayer\\SubjectsForm.cs",
+      "name": "TryBuildSubject",
+      "line": 224,
+      "lines": 65,
+      "branches": 10
+    },
+    {
+      "file": "Business_Logic_Layer\\Helpers\\ManualKeySaveHelper.cs",
+      "name": "SaveWithManualKeyAsync",
+      "line": 20,
+      "lines": 61,
+      "branches": 8
+    },
+    {
+      "file": "Business_Logic_Layer\\Scheduling\\ScheduleGenerator.cs",
+      "name": "CreateScheduleRequests",
+      "line": 690,
+      "lines": 61,
+      "branches": 6
+    },
+    {
+      "file": "University Timetable and Classroom Management System\\PresentationLayer\\ExcelImportForm.cs",
+      "name": "ShowPreview",
+      "line": 420,
+      "lines": 61,
+      "branches": 12
+    },
+    {
+      "file": "University Timetable and Classroom Management System\\PresentationLayer\\SectionsForm.cs",
+      "name": "TryBuildSection",
+      "line": 167,
+      "lines": 61,
+      "branches": 8
+    },
+    {
+      "file": "University Timetable and Classroom Management System\\PresentationLayer\\SchedulesForm.Actions.cs",
+      "name": "BuildGenerationMessage",
+      "line": 46,
+      "lines": 60,
+      "branches": 10
+    },
+    {
+      "file": "Business_Logic_Layer\\Importing\\ExcelImportService.cs",
+      "name": "SaveAsync",
+      "line": 335,
+      "lines": 59,
+      "branches": 12
+    },
+    {
+      "file": "Business_Logic_Layer\\Services\\SubjectService.cs",
+      "name": "ValidateAsync",
+      "line": 127,
+      "lines": 59,
+      "branches": 8
+    },
+    {
+      "file": "Business_Logic_Layer\\Services\\SectionService.cs",
+      "name": "ValidateAsync",
+      "line": 85,
+      "lines": 58,
+      "branches": 8
+    },
+    {
+      "file": "Business_Logic_Layer\\Services\\ScheduleService.cs",
+      "name": "GetScheduleDetailsByFiltersAsync",
+      "line": 29,
+      "lines": 57,
+      "branches": 6
+    },
+    {
+      "file": "Business_Logic_Layer\\Maintenance\\DatabaseMaintenanceService.cs",
+      "name": "RecreateScheduleDetailsViewAsync",
+      "line": 286,
+      "lines": 56,
+      "branches": 0
+    },
+    {
+      "file": "Business_Logic_Layer\\Scheduling\\FreshTimetablePlanner.cs",
+      "name": "CompleteAsync",
+      "line": 12,
+      "lines": 55,
+      "branches": 5
+    },
+    {
+      "file": "University Timetable and Classroom Management System\\PresentationLayer\\SchedulesForm.Actions.cs",
+      "name": "PopulateScheduleEditorFromSelectionAsync",
+      "line": 213,
+      "lines": 55,
+      "branches": 5
+    },
+    {
+      "file": "Business_Logic_Layer\\Importing\\AcademicExcelImport.cs",
+      "name": "NormalizeAndCheck",
+      "line": 79,
+      "lines": 54,
+      "branches": 19
+    },
+    {
+      "file": "Business_Logic_Layer\\Maintenance\\SchedulingResourceMaintenance.cs",
+      "name": "SeedDefaultClassroomsAsync",
+      "line": 52,
+      "lines": 54,
+      "branches": 4
+    },
+    {
+      "file": "Business_Logic_Layer\\FacultyScheduling\\SchedulingCpSupport.cs",
+      "name": "Quality",
+      "line": 161,
+      "lines": 53,
+      "branches": 8
+    },
+    {
+      "file": "Business_Logic_Layer\\Importing\\ExcelImportService.cs",
+      "name": "GenerateRemainingAsync",
+      "line": 240,
+      "lines": 53,
+      "branches": 10
+    },
+    {
+      "file": "University Timetable and Classroom Management System\\PresentationLayer\\ExcelImportForm.cs",
+      "name": "BindSheet",
+      "line": 307,
+      "lines": 53,
+      "branches": 13
+    },
+    {
+      "file": "Business_Logic_Layer\\Importing\\AcademicExcelImport.cs",
+      "name": "Prepare",
+      "line": 9,
+      "lines": 52,
+      "branches": 15
+    },
+    {
+      "file": "University Timetable and Classroom Management System\\PresentationLayer\\SchedulesForm.Timetable.cs",
+      "name": "PaintTimetableCell",
+      "line": 68,
+      "lines": 52,
+      "branches": 10
+    },
+    {
+      "file": "Business_Logic_Layer\\Services\\SchedulePdfExportService.cs",
+      "name": "DrawTable",
+      "line": 131,
+      "lines": 50,
+      "branches": 6
+    },
+    {
+      "file": "Business_Logic_Layer\\FacultyScheduling\\SchedulingCpSupport.cs",
+      "name": "AddProfiles",
+      "line": 64,
+      "lines": 49,
+      "branches": 11
+    },
+    {
+      "file": "Business_Logic_Layer\\Services\\SubjectService.cs",
+      "name": "UpdateInContextAsync",
+      "line": 64,
+      "lines": 49,
+      "branches": 7
+    },
+    {
+      "file": "University Timetable and Classroom Management System\\PresentationLayer\\ArabicUi.cs",
+      "name": "Configure",
+      "line": 45,
+      "lines": 49,
+      "branches": 12
+    },
+    {
+      "file": "University Timetable and Classroom Management System\\PresentationLayer\\SchedulesForm.Resizing.cs",
+      "name": "ResizeScheduleWorkspace",
+      "line": 21,
+      "lines": 49,
+      "branches": 1
+    },
+    {
+      "file": "Business_Logic_Layer\\FacultyScheduling\\FacultyScheduleEditorService.cs",
+      "name": "PreviewAsync",
+      "line": 48,
+      "lines": 46,
+      "branches": 10
+    },
+    {
+      "file": "Business_Logic_Layer\\Importing\\ExcelImportService.cs",
+      "name": "Resolve",
+      "line": 154,
+      "lines": 46,
+      "branches": 6
+    },
+    {
+      "file": "Business_Logic_Layer\\Importing\\ImportedTimetableRepair.cs",
+      "name": "RepairTimetableAsync",
+      "line": 55,
+      "lines": 46,
+      "branches": 9
+    },
+    {
+      "file": "Business_Logic_Layer\\Scheduling\\ScheduleGenerator.cs",
+      "name": "TryBuildExchangeSchedules",
+      "line": 338,
+      "lines": 46,
+      "branches": 5
+    },
+    {
+      "file": "University Timetable and Classroom Management System\\PresentationLayer\\SchedulesForm.Loading.cs",
+      "name": "LoadLookupsAsync",
+      "line": 32,
+      "lines": 46,
+      "branches": 9
+    },
+    {
+      "file": "Business_Logic_Layer\\Importing\\ExcelImportTemplates.cs",
+      "name": "Create",
+      "line": 7,
+      "lines": 45,
+      "branches": 3
+    },
+    {
+      "file": "University Timetable and Classroom Management System\\PresentationLayer\\ArabicUiText.cs",
+      "name": "Message",
+      "line": 69,
+      "lines": 45,
+      "branches": 9
+    },
+    {
+      "file": "University Timetable and Classroom Management System\\PresentationLayer\\ImportUiText.cs",
+      "name": "Message",
+      "line": 65,
+      "lines": 45,
+      "branches": 17
+    },
+    {
+      "file": "Business_Logic_Layer\\Importing\\ExcelImportService.cs",
+      "name": "ValidateAsync",
+      "line": 14,
+      "lines": 44,
+      "branches": 10
+    },
+    {
+      "file": "Business_Logic_Layer\\FacultyScheduling\\FacultyPreferenceRules.cs",
+      "name": "Normalize",
+      "line": 8,
+      "lines": 42,
+      "branches": 12
+    },
+    {
+      "file": "Business_Logic_Layer\\Scheduling\\TimetableAlternativesService.cs",
+      "name": "GenerateAsync",
+      "line": 26,
+      "lines": 41,
+      "branches": 11
+    },
+    {
+      "file": "Business_Logic_Layer\\Importing\\AcademicExcelImport.cs",
+      "name": "SaveAsync",
+      "line": 192,
+      "lines": 40,
+      "branches": 21
+    },
+    {
+      "file": "Business_Logic_Layer\\Importing\\AcademicExcelImport.cs",
+      "name": "CheckLinkedSchedules",
+      "line": 157,
+      "lines": 34,
+      "branches": 10
+    }
+  ],
+  "duplicates": [
+    [
+      {
+        "file": "Business_Logic_Layer\\Rules\\ScheduleDayRules.cs",
+        "name": "GetDayOrder",
+        "line": 98,
+        "lines": 12
+      },
+      {
+        "file": "University Timetable and Classroom Management System\\PresentationLayer\\SchedulesForm.Grid.cs",
+        "name": "DayOrder",
+        "line": 163,
+        "lines": 12
+      }
+    ],
+    [
+      {
+        "file": "University Timetable and Classroom Management System\\PresentationLayer\\LoginForm.cs",
+        "name": "TogglePasswordVisibility",
+        "line": 115,
+        "lines": 6
+      },
+      {
+        "file": "University Timetable and Classroom Management System\\PresentationLayer\\RegisterForm.cs",
+        "name": "TogglePasswordVisibility",
+        "line": 109,
+        "lines": 6
+      }
+    ]
+  ],
+  "totals": {
+    "files": 154,
+    "methods": 907
+  }
+}

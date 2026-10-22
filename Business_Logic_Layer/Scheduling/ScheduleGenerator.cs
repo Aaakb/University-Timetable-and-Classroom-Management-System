@@ -1,17 +1,28 @@
-using University_Timetable_and_Classroom_Management_System.Models;
+﻿using University_Timetable_and_Classroom_Management_System.Models;
 
 namespace University_Timetable_and_Classroom_Management_System.BusinessLayer
 {
     internal static class ScheduleGenerator
     {
-        private const int MaxExchangeAnchorCandidates = 12;
-        private const int MaxExchangePairCandidates = 2;
-
         public static SchedulePlanningResult BuildPlan(
             IReadOnlyList<ScheduleGenerationRequest> requests,
             ScheduleBuildContext context)
         {
+            context.CancellationToken.ThrowIfCancellationRequested();
             var dayPlans = BuildScheduleDayPlans(requests, context.TimeSlots.Count);
+            if (context.Preferences.Count > 0 || context.UseAllTeachingDays && context.FixedSchedules.Count > 0)
+            {
+                // Pending requests alone do not describe the occupied days of an
+                // imported timetable. Broaden candidates only on explicit retry;
+                // the original practical exchange/placement algorithms stay intact.
+                dayPlans = dayPlans.ToDictionary(entry => entry.Key, entry => entry.Value with
+                {
+                    Days = ScheduleDayRules.AllDays,
+                    TargetDayCount = context.FixedSchedules.Count == 0 ? entry.Value.TargetDayCount : Math.Min(ScheduleDayRules.AllDays.Count,
+                        context.FixedSchedules.Where(s => s.SectionID == entry.Key.SectionID &&
+                            s.SemesterNumber == entry.Key.SemesterNumber).Select(s => s.DayOfWeek).Distinct().Count() + 1)
+                });
+            }
             var requestPlans = requests
                 .Select(request => new ScheduleRequestPlan(
                     request,
@@ -24,19 +35,34 @@ namespace University_Timetable_and_Classroom_Management_System.BusinessLayer
                 .Where(plan => plan.Candidates.Count > 0)
                 .ToList();
 
-            var scheduleState = new ScheduleGenerationState(dayPlans);
+            var scheduleState = new ScheduleGenerationState(dayPlans, context);
+            foreach (var profile in context.Preferences.Values)
+            {
+                FacultyPreferenceRules.ValidateMatrix(profile, context.TimeSlots);
+                if (FacultyPreferenceRules.Violation(profile, context.FixedSchedules, context.TimeSlots.ToDictionary(p => p.TimeSlotID)) is { } error)
+                    throw new ArgumentException($"تفضيلات التدريسي #{profile.FacultyId}: {error}. أعد تنظيم الجدول الموجود أولًا.");
+            }
+            scheduleState.SeedFixed(context.FixedSchedules);
             int conflictCount = 0;
             var pairedRequestIds = new HashSet<ScheduleRequestIdentity>();
 
-            PlacePracticalExchangeBlocks(
-                pendingPlans,
+            // A partial import may contain only one member of a practical pair.
+            // Reuse the normal placement/repair path for remaining group sessions.
+            bool completePartialGroups = context.FixedSchedules.Count > 0 && !context.RequirePracticalExchange;
+            var exchangeIssues = completePartialGroups ? new List<string>() : PlacePracticalExchangeBlocks(
+                requestPlans,
                 scheduleState,
-                pairedRequestIds);
+                pairedRequestIds,
+                context.TimeSlots,
+                context.RequirePracticalExchange);
+            if (!completePartialGroups) conflictCount += pendingPlans.Count(plan => IsGroupedPracticalRequest(plan.Request) &&
+                !pairedRequestIds.Contains(ScheduleRequestIdentity.From(plan.Request)));
 
             var unresolvedPlans = new List<ScheduleRequestPlan>();
 
             foreach (var plan in pendingPlans
-                .Where(plan => !pairedRequestIds.Contains(ScheduleRequestIdentity.From(plan.Request)))
+                // Only subgroup practicals need exchange blocks; full sections use ordinary placement.
+                .Where(plan => !IsGroupedPracticalRequest(plan.Request) || completePartialGroups)
                 .OrderBy(plan => plan.Candidates.Count)
                 .ThenByDescending(plan => plan.DifficultyScore)
                 .ThenBy(plan => plan.Request.Subject.SemesterNumber)
@@ -44,6 +70,7 @@ namespace University_Timetable_and_Classroom_Management_System.BusinessLayer
                 .ThenBy(plan => plan.Request.Subject.SubjectName)
                 .ThenBy(plan => plan.Request.Section.SectionName))
             {
+                context.CancellationToken.ThrowIfCancellationRequested();
                 if (TryPlaceFast(plan, scheduleState, avoidSameSubjectDay: true))
                 {
                     continue;
@@ -54,7 +81,17 @@ namespace University_Timetable_and_Classroom_Management_System.BusinessLayer
 
             foreach (var plan in unresolvedPlans)
             {
-                if (TryPlaceWithRepair(plan, pendingPlans, scheduleState, remainingDepth: 2))
+                context.CancellationToken.ThrowIfCancellationRequested();
+                bool placed = false;
+                foreach (int depth in new[] { 1, 2, 3, 4, 6 })
+                {
+                    if (!scheduleState.TryRepairStep()) break;
+                    var snapshot = scheduleState.Schedules.ToList();
+                    if (TryPlaceWithRepair(plan, pendingPlans, scheduleState, depth, context.RequirePracticalExchange))
+                    { placed = true; break; }
+                    scheduleState.ResetTo(snapshot);
+                }
+                if (placed)
                 {
                     continue;
                 }
@@ -65,14 +102,17 @@ namespace University_Timetable_and_Classroom_Management_System.BusinessLayer
             return new SchedulePlanningResult(
                 scheduleState.Schedules,
                 noClassroomCount,
-                conflictCount);
+                conflictCount) { PracticalExchangeIssues = exchangeIssues };
         }
 
-        private static void PlacePracticalExchangeBlocks(
+        private static List<string> PlacePracticalExchangeBlocks(
             IReadOnlyList<ScheduleRequestPlan> pendingPlans,
             ScheduleGenerationState scheduleState,
-            HashSet<ScheduleRequestIdentity> pairedRequestIds)
+            HashSet<ScheduleRequestIdentity> pairedRequestIds,
+            IReadOnlyCollection<TimeSlot> timeSlots,
+            bool requirePracticalExchange)
         {
+            var issues = new List<string>();
             var practicalPlans = pendingPlans
                 .Where(plan => IsGroupedPracticalRequest(plan.Request))
                 .OrderBy(plan => plan.Request.Subject.SemesterNumber)
@@ -82,55 +122,104 @@ namespace University_Timetable_and_Classroom_Management_System.BusinessLayer
                 .ThenBy(plan => plan.Request.GroupName)
                 .ToList();
 
-            foreach (var firstPlan in practicalPlans)
+            foreach (var scope in practicalPlans.GroupBy(plan => new
+                {
+                    plan.Request.Section.SectionID,
+                    plan.Request.Subject.SemesterNumber,
+                    plan.Request.LessonNumber
+                }))
             {
-                var firstIdentity = ScheduleRequestIdentity.From(firstPlan.Request);
-
-                if (pairedRequestIds.Contains(firstIdentity))
+                var plans = scope.OrderBy(plan => plan.Candidates.Count)
+                    .ThenBy(plan => plan.Request.FacultyMemberIds.Count)
+                    .ThenBy(plan => plan.Request.Subject.SubjectName).ToList();
+                var section = plans[0].Request.Section;
+                var groups = AcademicStructureRules.GetAllowedPracticalGroupNames(section.StudyYearID, section.SectionName);
+                string label = $"Section {section.SectionName} (ID {section.SectionID}), semester {scope.Key.SemesterNumber}";
+                if (groups.Count != 2 || plans.Any(plan =>
+                    !groups.Contains(plan.Request.GroupName ?? string.Empty, StringComparer.OrdinalIgnoreCase)) ||
+                    plans.GroupBy(plan => plan.Request.Subject.SubjectID).Any(subject =>
+                        subject.Count() != 2 || subject.Select(p => p.Request.GroupName)
+                            .Distinct(StringComparer.OrdinalIgnoreCase).Count() != 2))
                 {
+                    issues.Add($"{label}: each practical subject needs both groups of the section.");
                     continue;
                 }
 
-                var secondPlan = practicalPlans.FirstOrDefault(candidate =>
-                    !pairedRequestIds.Contains(ScheduleRequestIdentity.From(candidate.Request)) &&
-                    CanExchangePracticals(firstPlan.Request, candidate.Request));
-
-                if (secondPlan is null)
+                foreach (var firstPlan in plans.Where(plan => string.Equals(
+                    plan.Request.GroupName, groups[0], StringComparison.OrdinalIgnoreCase)))
                 {
-                    continue;
+                    var firstIdentity = ScheduleRequestIdentity.From(firstPlan.Request);
+                    if (pairedRequestIds.Contains(firstIdentity)) continue;
+                    foreach (var secondPlan in plans.Where(candidate =>
+                        !pairedRequestIds.Contains(ScheduleRequestIdentity.From(candidate.Request)) &&
+                        CanExchangePracticals(firstPlan.Request, candidate.Request)))
+                    {
+                        var thirdPlan = FindExchangeCounterpart(plans, firstPlan.Request,
+                            secondPlan.Request.GroupName, pairedRequestIds);
+                        var fourthPlan = FindExchangeCounterpart(plans, secondPlan.Request,
+                            firstPlan.Request.GroupName, pairedRequestIds);
+                        if (thirdPlan is null || fourthPlan is null ||
+                            !TryPlacePracticalExchangeBlock(firstPlan, secondPlan, thirdPlan, fourthPlan,
+                                scheduleState, timeSlots)) continue;
+
+                        foreach (var placed in new[] { firstPlan, secondPlan, thirdPlan, fourthPlan })
+                            pairedRequestIds.Add(ScheduleRequestIdentity.From(placed.Request));
+                        break;
+                    }
                 }
 
-                var thirdPlan = FindExchangeCounterpart(
-                    practicalPlans,
-                    firstPlan.Request,
-                    secondPlan.Request.GroupName,
-                    pairedRequestIds);
-                var fourthPlan = FindExchangeCounterpart(
-                    practicalPlans,
-                    secondPlan.Request,
-                    firstPlan.Request.GroupName,
-                    pairedRequestIds);
-
-                if (thirdPlan is null || fourthPlan is null)
+                var remaining = plans.Where(plan => !pairedRequestIds.Contains(ScheduleRequestIdentity.From(plan.Request))).ToList();
+                if (plans.Select(plan => plan.Request.Subject.SubjectID).Distinct().Count() % 2 == 1 &&
+                    remaining.Count == 2 && remaining.Select(plan => plan.Request.Subject.SubjectID).Distinct().Count() == 1)
                 {
-                    continue;
+                    var firstGroup = remaining.Single(plan => string.Equals(plan.Request.GroupName, groups[0], StringComparison.OrdinalIgnoreCase));
+                    var secondGroup = remaining.Single(plan => string.Equals(plan.Request.GroupName, groups[1], StringComparison.OrdinalIgnoreCase));
+                    if (TryPlaceSinglePracticalSubject(firstGroup, secondGroup, scheduleState))
+                        foreach (var placed in remaining)
+                            pairedRequestIds.Add(ScheduleRequestIdentity.From(placed.Request));
                 }
-
-                if (!TryPlacePracticalExchangeBlock(
-                    firstPlan,
-                    secondPlan,
-                    thirdPlan,
-                    fourthPlan,
-                    scheduleState))
+                if (!requirePracticalExchange)
                 {
-                    continue;
+                    // Prefer complete exchanges, but both groups may use other free periods.
+                    foreach (var subject in plans
+                        .Where(plan => !pairedRequestIds.Contains(ScheduleRequestIdentity.From(plan.Request)))
+                        .GroupBy(plan => plan.Request.Subject.SubjectID))
+                    {
+                        var pair = subject.ToList();
+                        if (pair.Count == 2 && TryPlaceSinglePracticalSubject(pair[0], pair[1], scheduleState))
+                            foreach (var placed in pair)
+                                pairedRequestIds.Add(ScheduleRequestIdentity.From(placed.Request));
+                    }
                 }
-
-                pairedRequestIds.Add(firstIdentity);
-                pairedRequestIds.Add(ScheduleRequestIdentity.From(secondPlan.Request));
-                pairedRequestIds.Add(ScheduleRequestIdentity.From(thirdPlan.Request));
-                pairedRequestIds.Add(ScheduleRequestIdentity.From(fourthPlan.Request));
+                var unplaced = plans.Where(plan => !pairedRequestIds.Contains(ScheduleRequestIdentity.From(plan.Request)))
+                    .Select(plan => plan.Request.Subject.SubjectName).Distinct().ToArray();
+                if (unplaced.Length > 0)
+                    issues.Add(requirePracticalExchange
+                        ? $"{label}: no complete exchange for {string.Join(", ", unplaced)}. " +
+                          "Paired subjects need two suitable labs, two different teachers and consecutive periods on one day. An odd remaining subject needs two separate available group sessions."
+                        : $"{label}: no available sessions for both groups of {string.Join(", ", unplaced)}.");
             }
+            return issues;
+        }
+
+        private static bool TryPlaceSinglePracticalSubject(
+            ScheduleRequestPlan firstGroup,
+            ScheduleRequestPlan secondGroup,
+            ScheduleGenerationState scheduleState)
+        {
+            foreach (var first in CreateOrderedPlacements(firstGroup, scheduleState, avoidSameSubjectDay: true))
+            {
+                if (!scheduleState.CanPlace(first.Schedule)) continue;
+                foreach (var second in CreateOrderedPlacements(secondGroup, scheduleState, avoidSameSubjectDay: true))
+                {
+                    if (!scheduleState.CanPlaceTogether([first.Schedule, second.Schedule])) continue;
+                    // Both groups must fit, but may use different days, periods, labs or assigned teachers.
+                    scheduleState.Add(first.Schedule);
+                    scheduleState.Add(second.Schedule);
+                    return true;
+                }
+            }
+            return false;
         }
 
         private static ScheduleRequestPlan? FindExchangeCounterpart(
@@ -142,6 +231,7 @@ namespace University_Timetable_and_Classroom_Management_System.BusinessLayer
             return practicalPlans.FirstOrDefault(plan =>
                 !pairedRequestIds.Contains(ScheduleRequestIdentity.From(plan.Request)) &&
                 plan.Request.Subject.SubjectID == sourceRequest.Subject.SubjectID &&
+                plan.Request.Subject.SemesterNumber == sourceRequest.Subject.SemesterNumber &&
                 plan.Request.Section.SectionID == sourceRequest.Section.SectionID &&
                 plan.Request.LessonNumber == sourceRequest.LessonNumber &&
                 string.Equals(plan.Request.LectureType, sourceRequest.LectureType, StringComparison.OrdinalIgnoreCase) &&
@@ -153,15 +243,16 @@ namespace University_Timetable_and_Classroom_Management_System.BusinessLayer
             ScheduleRequestPlan secondPlan,
             ScheduleRequestPlan thirdPlan,
             ScheduleRequestPlan fourthPlan,
-            ScheduleGenerationState scheduleState)
+            ScheduleGenerationState scheduleState,
+            IReadOnlyCollection<TimeSlot> timeSlots)
         {
             var firstCandidates = firstPlan.Candidates
                 .Where(candidate => ScheduleRoomSelector.MatchesLectureType(candidate.Classroom, firstPlan.Request.LectureType))
-                .OrderBy(candidate => ScheduleDayRules.GetDayOrder(candidate.DayOfWeek))
+                .OrderBy(candidate => scheduleState.VariationOrder(candidate.DayOfWeek, candidate.TimeSlot.TimeSlotID, candidate.Classroom.ClassroomID))
+                .ThenBy(candidate => ScheduleDayRules.GetDayOrder(candidate.DayOfWeek))
                 .ThenBy(candidate => candidate.TimeSlot.StartTime)
                 .ThenBy(candidate => candidate.Classroom.Capacity)
                 .ThenBy(candidate => candidate.Classroom.ClassroomNumber)
-                .Take(MaxExchangeAnchorCandidates)
                 .ToList();
 
             foreach (var firstCandidate in firstCandidates)
@@ -173,9 +264,11 @@ namespace University_Timetable_and_Classroom_Management_System.BusinessLayer
                         continue;
                     }
 
-                    foreach (var thirdCandidate in GetNextSlotExchangeCandidates(firstCandidate, thirdPlan.Candidates))
+                    foreach (var thirdCandidate in GetNextSlotExchangeCandidates(firstCandidate, thirdPlan.Candidates, timeSlots)
+                        .Where(candidate => candidate.Classroom.ClassroomID == firstCandidate.Classroom.ClassroomID))
                     {
-                        foreach (var fourthCandidate in GetSameSlotExchangeCandidates(thirdCandidate, fourthPlan.Candidates))
+                        foreach (var fourthCandidate in GetSameSlotExchangeCandidates(thirdCandidate, fourthPlan.Candidates)
+                            .Where(candidate => candidate.Classroom.ClassroomID == secondCandidate.Classroom.ClassroomID))
                         {
                             if (thirdCandidate.Classroom.ClassroomID == fourthCandidate.Classroom.ClassroomID)
                             {
@@ -221,32 +314,25 @@ namespace University_Timetable_and_Classroom_Management_System.BusinessLayer
                     candidate.TimeSlot.StartTime == firstCandidate.TimeSlot.StartTime &&
                     candidate.TimeSlot.TimeSlotID == firstCandidate.TimeSlot.TimeSlotID)
                 .OrderBy(candidate => candidate.Classroom.Capacity)
-                .ThenBy(candidate => candidate.Classroom.ClassroomNumber)
-                .Take(MaxExchangePairCandidates);
+                .ThenBy(candidate => candidate.Classroom.ClassroomNumber);
         }
 
         private static IEnumerable<SchedulePlacementCandidate> GetNextSlotExchangeCandidates(
             SchedulePlacementCandidate firstCandidate,
-            IEnumerable<SchedulePlacementCandidate> nextCandidates)
+            IEnumerable<SchedulePlacementCandidate> nextCandidates,
+            IReadOnlyCollection<TimeSlot> timeSlots)
         {
-            var laterCandidates = nextCandidates
-                .Where(candidate =>
-                    candidate.DayOfWeek == firstCandidate.DayOfWeek &&
-                    candidate.TimeSlot.StartTime > firstCandidate.TimeSlot.StartTime)
-                .ToList();
-
-            if (laterCandidates.Count == 0)
+            var nextPeriod = timeSlots.Where(slot => !slot.IsBreak && slot.StartTime > firstCandidate.TimeSlot.StartTime)
+                .OrderBy(slot => slot.StartTime).FirstOrDefault();
+            if (nextPeriod is null)
             {
                 return [];
             }
-
-            var nextStart = laterCandidates.Min(candidate => candidate.TimeSlot.StartTime);
-
-            return laterCandidates
-                .Where(candidate => candidate.TimeSlot.StartTime == nextStart)
+            return nextCandidates
+                .Where(candidate => candidate.DayOfWeek == firstCandidate.DayOfWeek &&
+                    candidate.TimeSlot.TimeSlotID == nextPeriod.TimeSlotID)
                 .OrderBy(candidate => candidate.Classroom.Capacity)
-                .ThenBy(candidate => candidate.Classroom.ClassroomNumber)
-                .Take(MaxExchangePairCandidates);
+                .ThenBy(candidate => candidate.Classroom.ClassroomNumber);
         }
 
         private static bool TryBuildExchangeSchedules(
@@ -268,39 +354,28 @@ namespace University_Timetable_and_Classroom_Management_System.BusinessLayer
                 firstPlan.Request.Subject.SemesterNumber,
                 firstCandidate.DayOfWeek))
             {
+                if (!thirdPlan.Request.FacultyMemberIds.Contains(firstFacultyId)) continue;
                 foreach (int secondFacultyId in scheduleState.GetOrderedFacultyOptions(
                     secondPlan.Request.FacultyMemberIds,
                     secondPlan.Request.Subject.SemesterNumber,
                     secondCandidate.DayOfWeek))
                 {
-                    foreach (int thirdFacultyId in scheduleState.GetOrderedFacultyOptions(
-                        thirdPlan.Request.FacultyMemberIds,
-                        thirdPlan.Request.Subject.SemesterNumber,
-                        thirdCandidate.DayOfWeek))
+                    if (firstFacultyId == secondFacultyId || !fourthPlan.Request.FacultyMemberIds.Contains(secondFacultyId)) continue;
+                    var proposedSchedules = new List<Schedule>
                     {
-                        foreach (int fourthFacultyId in scheduleState.GetOrderedFacultyOptions(
-                            fourthPlan.Request.FacultyMemberIds,
-                            fourthPlan.Request.Subject.SemesterNumber,
-                            fourthCandidate.DayOfWeek))
-                        {
-                            var proposedSchedules = new List<Schedule>
-                            {
-                                BuildSchedule(firstPlan.Request, firstCandidate, firstFacultyId),
-                                BuildSchedule(secondPlan.Request, secondCandidate, secondFacultyId),
-                                BuildSchedule(thirdPlan.Request, thirdCandidate, thirdFacultyId),
-                                BuildSchedule(fourthPlan.Request, fourthCandidate, fourthFacultyId)
-                            };
+                        BuildSchedule(firstPlan.Request, firstCandidate, firstFacultyId),
+                        BuildSchedule(secondPlan.Request, secondCandidate, secondFacultyId),
+                        BuildSchedule(thirdPlan.Request, thirdCandidate, firstFacultyId),
+                        BuildSchedule(fourthPlan.Request, fourthCandidate, secondFacultyId)
+                    };
 
-                            if (proposedSchedules.Any(schedule => !scheduleState.CanPlace(schedule)) ||
-                                ScheduleConflictChecker.HasAnyPairConflict(proposedSchedules))
-                            {
-                                continue;
-                            }
-
-                            schedules = proposedSchedules;
-                            return true;
-                        }
+                    if (!scheduleState.CanPlaceTogether(proposedSchedules))
+                    {
+                        continue;
                     }
+
+                    schedules = proposedSchedules;
+                    return true;
                 }
             }
 
@@ -309,9 +384,12 @@ namespace University_Timetable_and_Classroom_Management_System.BusinessLayer
 
         private static bool IsGroupedPracticalRequest(ScheduleGenerationRequest request)
         {
-            return string.Equals(request.LectureType, "Practical", StringComparison.OrdinalIgnoreCase) &&
+            return IsPracticalRequest(request) &&
                 !string.IsNullOrWhiteSpace(request.GroupName);
         }
+
+        private static bool IsPracticalRequest(ScheduleGenerationRequest request) =>
+            string.Equals(request.LectureType, "Practical", StringComparison.OrdinalIgnoreCase);
 
         private static bool CanExchangePracticals(
             ScheduleGenerationRequest first,
@@ -347,10 +425,12 @@ namespace University_Timetable_and_Classroom_Management_System.BusinessLayer
             ScheduleRequestPlan plan,
             IReadOnlyList<ScheduleRequestPlan> allPlans,
             ScheduleGenerationState scheduleState,
-            int remainingDepth)
+            int remainingDepth,
+            bool preservePracticalExchange)
         {
             foreach (var placement in CreateOrderedPlacements(plan, scheduleState, avoidSameSubjectDay: true))
             {
+                if (!scheduleState.TryRepairStep()) return false;
                 if (scheduleState.CanPlace(placement.Schedule))
                 {
                     scheduleState.Add(placement.Schedule);
@@ -366,11 +446,17 @@ namespace University_Timetable_and_Classroom_Management_System.BusinessLayer
                     .Take(2)
                     .ToList();
 
+                if (conflictingSchedules.Any(scheduleState.IsFixed)) continue;
+
                 if (conflictingSchedules.Count == 0 ||
                     scheduleState.GetConflictingSchedules(placement.Schedule).Skip(2).Any())
                 {
                     continue;
                 }
+
+                // Strict mode protects exchange blocks; flexible mode can move either group.
+                if (preservePracticalExchange && conflictingSchedules.Any(schedule => string.Equals(schedule.LectureType,
+                    "Practical", StringComparison.OrdinalIgnoreCase))) continue;
 
                 var conflictingPlans = conflictingSchedules
                     .Select(schedule => FindPlanForSchedule(allPlans, schedule))
@@ -400,7 +486,7 @@ namespace University_Timetable_and_Classroom_Management_System.BusinessLayer
                     .ThenByDescending(item => item.DifficultyScore))
                 {
                     if (TryPlaceFast(conflictingPlan, scheduleState, avoidSameSubjectDay: true) ||
-                        TryPlaceWithRepair(conflictingPlan, allPlans, scheduleState, remainingDepth - 1))
+                        TryPlaceWithRepair(conflictingPlan, allPlans, scheduleState, remainingDepth - 1, preservePracticalExchange))
                     {
                         continue;
                     }
@@ -441,6 +527,8 @@ namespace University_Timetable_and_Classroom_Management_System.BusinessLayer
                     placement.Schedule,
                     scheduleState.ScorePlacement(placement.Schedule, placement.Candidate)))
                 .OrderBy(placement => placement.Score)
+                .ThenBy(placement => scheduleState.VariationOrder(placement.Schedule.DayOfWeek, placement.Schedule.TimeSlotID,
+                    placement.Schedule.ClassroomID, placement.Schedule.FacultyMemberID))
                 .ThenBy(placement => ScheduleDayRules.GetDayOrder(placement.Schedule.DayOfWeek))
                 .ThenBy(placement => placement.Schedule.TimeSlotID)
                 .ThenBy(placement => placement.Schedule.ClassroomID)
@@ -586,10 +674,25 @@ namespace University_Timetable_and_Classroom_Management_System.BusinessLayer
         }
 
         public static IEnumerable<ScheduleGenerationRequest> CreateScheduleRequests(
+            Subject subject, Section section, IEnumerable<FacultyMemberSubject> assignments)
+        {
+            var scoped = assignments.Where(a => FacultyAssignmentRules.Covers(a, subject.SubjectID, section.SectionID)).ToList();
+            foreach (var request in CreateScheduleRequests(new SubjectTeachingAssignment(subject,
+                scoped.Select(a => a.FacultyMemberID).Distinct().ToList()), section))
+            {
+                var ids = FacultyAssignmentRules.FacultyIds(scoped, subject.SubjectID, section.SectionID, request.LectureType);
+                if (ids.Count == 0)
+                    throw new ArgumentException($"لا يوجد تكليف {(request.LectureType == "Theory" ? "نظري" : "عملي")} لمادة «{subject.SubjectName}» للشعبة {section.SectionName}. أكمل التكليفات قبل التوليد؛ بقي الجدول محفوظًا.");
+                yield return request with { FacultyMemberIds = ids };
+            }
+        }
+
+        public static IEnumerable<ScheduleGenerationRequest> CreateScheduleRequests(
             SubjectTeachingAssignment teachingAssignment,
             Section section)
         {
             var subject = teachingAssignment.Subject;
+            SubjectLectureRules.Validate(subject);
             int theoryLessons = CalculateTheoryLessonCount(subject);
 
             foreach (int lessonNumber in Enumerable.Range(1, theoryLessons))
@@ -648,28 +751,17 @@ namespace University_Timetable_and_Classroom_Management_System.BusinessLayer
 
         private static int CalculateTheoryLessonCount(Subject subject)
         {
-            if (subject.TheoreticalHours > 0)
-            {
-                return 1;
-            }
-
-            if (subject.PracticalHours > 0)
-            {
-                return 0;
-            }
-
-            var fallbackHours = subject.CreditUnits > 0 ? subject.CreditUnits : 1;
-            return 1;
+            return subject.EffectiveTheoreticalLectureCount;
         }
 
         private static int CalculatePracticalLessonCount(Subject subject)
         {
-            return subject.PracticalHours > 0 ? 1 : 0;
+            return subject.EffectivePracticalLectureCount;
         }
 
         private static IReadOnlyList<string> GetPracticalGroupsForSection(Section section)
         {
-            return AcademicStructureRules.GetAllowedPracticalGroupNames(section.SectionName);
+            return AcademicStructureRules.GetAllowedPracticalGroupNames(section.StudyYearID, section.SectionName);
         }
 
     }

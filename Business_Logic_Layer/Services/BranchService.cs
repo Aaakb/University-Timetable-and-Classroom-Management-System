@@ -1,4 +1,4 @@
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Data_Access_Layer;
 using University_Timetable_and_Classroom_Management_System.Models;
 
@@ -22,20 +22,32 @@ namespace University_Timetable_and_Classroom_Management_System.BusinessLayer
         {
             await using var context = new AppDbContext();
             branch.BranchID = await AutoKeyGenerator.NextAsync(context.Branches.Select(b => b.BranchID));
+            return await AddInContextAsync(context, branch);
+        }
+
+        internal static async Task<Branch> AddInContextAsync(AppDbContext context, Branch branch)
+        {
             await ValidateAsync(context, branch, false);
             await context.Branches.AddAsync(branch);
             await ManualKeySaveHelper.SaveWithManualKeyAsync(context, "[Branches]");
             return branch;
         }
 
+
         public async Task<Branch> UpdateAsync(Branch branch)
         {
             await using var context = new AppDbContext();
+            return await UpdateInContextAsync(context, branch);
+        }
+
+        internal static async Task<Branch> UpdateInContextAsync(AppDbContext context, Branch branch)
+        {
             await ValidateAsync(context, branch, true);
             context.Branches.Update(branch);
             await context.SaveChangesAsync();
             return branch;
         }
+
 
         public async Task DeleteAsync(int id)
         {
@@ -49,22 +61,8 @@ namespace University_Timetable_and_Classroom_Management_System.BusinessLayer
 
         private static async Task ValidateAsync(AppDbContext context, Branch branch, bool isUpdate)
         {
-            if (branch.BranchID <= 0)
-            {
-                throw new ArgumentException("Branch ID is required.");
-            }
-
-            var idExists = await context.Branches.AnyAsync(b => b.BranchID == branch.BranchID);
-
-            if (!isUpdate && idExists)
-            {
-                throw new ArgumentException("Branch ID already exists.");
-            }
-
-            if (isUpdate && !idExists)
-            {
-                throw new KeyNotFoundException("Branch not found.");
-            }
+            await InputValidation.RecordIdAsync(branch.BranchID, isUpdate,
+                () => context.Branches.AnyAsync(b => b.BranchID == branch.BranchID), "Branch");
 
             if (string.IsNullOrWhiteSpace(branch.BranchName))
             {
@@ -72,6 +70,7 @@ namespace University_Timetable_and_Classroom_Management_System.BusinessLayer
             }
 
             branch.BranchName = branch.BranchName.Trim();
+            InputValidation.TextLength(branch.BranchName, 100, "Branch name");
             var exists = await context.Branches.AnyAsync(b =>
                 b.BranchName == branch.BranchName && (!isUpdate || b.BranchID != branch.BranchID));
 
