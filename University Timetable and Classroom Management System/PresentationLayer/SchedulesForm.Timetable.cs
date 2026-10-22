@@ -1,70 +1,177 @@
-using System.Drawing;
-using System.Windows.Forms;
+﻿using System.Drawing.Drawing2D;
 using Guna.UI2.WinForms;
 
 namespace University_Timetable_and_Classroom_Management_System
 {
     public partial class SchedulesForm
     {
-        private const int TimetableHeaderHeight = 42;
-        private const int TimetableRowHeight = 164;
-        private const int TimetableTimeColumnWidth = 142;
-        private const int TimetableCardHeight = 68;
-        private const int TimetableCardPadding = 8;
+        private int TimetableRowHeight => TimetablePixels(164);
+        private int TimetableCardHeight => TimetablePixels(68);
+        private int TimetableStep => TimetablePixels(74);
+        private int TimetablePixels(int value) => WindowSizing.Pixels(dgvTimetable, value);
+        private readonly Dictionary<(int Row, int Column), int> timetableCellOffsets = new();
 
-        private void ConfigureScheduleTimetableView()
+        private void ConfigureTimetableEvents()
         {
-            btnScheduleGridView = CreateScheduleViewButton("Grid", true);
-            btnScheduleTimetableView = CreateScheduleViewButton("Timetable", false);
-
-            pnlTimetableHost = new Panel
+            dgvTimetable.AutoGenerateColumns = false;
+            dgvTimetable.DpiChangedAfterParent += (_, _) =>
             {
-                Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right,
-                AutoScroll = true,
-                BackColor = Color.White,
-                Location = dgvSchedules.Location,
-                Size = dgvSchedules.Size,
-                Visible = false
+                foreach (DataGridViewRow row in dgvTimetable.Rows) row.Height = TimetableRowHeight;
+                timetableCellOffsets.Clear();
+                dgvTimetable.Invalidate();
             };
-
-            tblScheduleTimetable = new TableLayoutPanel
+            dgvTimetable.CellPainting += PaintTimetableCell;
+            dgvTimetable.CellMouseClick += ClickTimetableCell;
+            dgvTimetable.CellMouseMove += (_, e) =>
             {
-                AutoSize = false,
-                BackColor = Color.White,
-                CellBorderStyle = TableLayoutPanelCellBorderStyle.Single,
-                Location = new Point(0, 0),
-                Margin = Padding.Empty,
-                Padding = Padding.Empty
+                if (e.Button == MouseButtons.Left) ScrollTimetableTrack(e);
             };
-
-            pnlTimetableHost.Controls.Add(tblScheduleTimetable);
-            pnlSchedulesTable.Controls.Add(pnlTimetableHost);
-            pnlSchedulesTable.Controls.Add(btnScheduleGridView);
-            pnlSchedulesTable.Controls.Add(btnScheduleTimetableView);
-
-            ConfigureScheduleTableHeader();
-            ApplyScheduleViewButtonStyles();
+            dgvTimetable.ScrollEntryCell = ScrollTimetableCell;
         }
 
-        private static Guna2Button CreateScheduleViewButton(string text, bool selected)
+        private void RenderScheduleTimetable(IReadOnlyList<ScheduleRow> rows, HashSet<int> conflicts)
         {
-            var button = new Guna2Button
+            dgvTimetable.SuspendLayout();
+            try
             {
-                Anchor = AnchorStyles.Top | AnchorStyles.Right,
-                BorderColor = Color.FromArgb(203, 213, 225),
-                BorderRadius = 8,
-                BorderThickness = 1,
-                Cursor = Cursors.Hand,
-                FillColor = selected ? Color.FromArgb(15, 23, 42) : Color.White,
-                Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold),
-                ForeColor = selected ? Color.White : Color.FromArgb(51, 65, 85),
-                HoverState = { FillColor = selected ? Color.FromArgb(30, 41, 59) : Color.FromArgb(248, 250, 252) },
-                Size = new Size(88, 32),
-                Text = text
-            };
-
-            return button;
+                dgvTimetable.Rows.Clear();
+                timetableCellOffsets.Clear();
+                var days = GetTimetableDays(rows);
+                foreach (DataGridViewColumn column in dgvTimetable.Columns)
+                    if (column != colTimetableTime) column.Visible = days.Contains(column.DataPropertyName, StringComparer.OrdinalIgnoreCase);
+                bool includeSemester = rows.Select(row => row.SemesterNumber).Distinct().Take(2).Count() > 1;
+                var slots = GetTimetableTimeSlots(rows, includeSemester);
+                if (slots.Count == 0) dgvTimetable.Rows[dgvTimetable.Rows.Add()].Cells[colTimetableTime.Index].Value = "-";
+                foreach (var slot in slots)
+                {
+                    int index = dgvTimetable.Rows.Add();
+                    var gridRow = dgvTimetable.Rows[index];
+                    gridRow.Cells[colTimetableTime.Index].Value = slot.Label;
+                    gridRow.Height = TimetableRowHeight;
+                    foreach (DataGridViewColumn column in dgvTimetable.Columns)
+                    {
+                        if (column == colTimetableTime) continue;
+                        var entries = rows.Where(row => row.SemesterNumber == slot.SemesterNumber && row.TimeSlotID == slot.TimeSlotId &&
+                            string.Equals(row.DayOfWeek, column.DataPropertyName, StringComparison.OrdinalIgnoreCase))
+                            .OrderBy(row => row.SectionName).ThenBy(row => row.GroupName).ThenBy(row => row.SubjectName).ToList();
+                        gridRow.Cells[column.Index].Tag = new TimetableCell(entries, conflicts);
+                        gridRow.Cells[column.Index].Value = string.Join(Environment.NewLine, entries.Select(row => row.SubjectName));
+                        gridRow.Cells[column.Index].ToolTipText = string.Join(Environment.NewLine + Environment.NewLine,
+                            entries.Select(row => $"{row.SubjectName}{Environment.NewLine}{row.FacultyMemberName}{Environment.NewLine}{row.ClassroomName} | {row.SectionName} | {BuildTimetableTypeLabel(row)}"));
+                    }
+                }
+                dgvTimetable.ClearSelection();
+            }
+            finally { dgvTimetable.ResumeLayout(); }
         }
+
+        private void PaintTimetableCell(object? sender, DataGridViewCellPaintingEventArgs e)
+        {
+            if (e.RowIndex < 0 || e.ColumnIndex < 0 || e.ColumnIndex == colTimetableTime.Index || e.Graphics is null) return;
+            e.PaintBackground(e.CellBounds, false);
+            e.Paint(e.CellBounds, DataGridViewPaintParts.Border);
+            var cell = dgvTimetable.Rows[e.RowIndex].Cells[e.ColumnIndex].Tag as TimetableCell;
+            if (cell is null || cell.Entries.Count == 0)
+            {
+                TextRenderer.DrawText(e.Graphics, "-", dgvTimetable.DefaultCellStyle.Font,
+                    new Rectangle(e.CellBounds.X, e.CellBounds.Y + 6, e.CellBounds.Width, 30), Color.FromArgb(148, 163, 184),
+                    TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter | TextFormatFlags.PreserveGraphicsClipping);
+                e.Handled = true;
+                return;
+            }
+            GraphicsState state = e.Graphics.Save();
+            e.Graphics.SetClip(Rectangle.Inflate(e.CellBounds, -1, -1), CombineMode.Intersect);
+            int offset = timetableCellOffsets.GetValueOrDefault((e.RowIndex, e.ColumnIndex));
+            int cardWidth = Math.Max(TimetablePixels(150), e.CellBounds.Width - TimetablePixels(32));
+            var font = dgvTimetable.DefaultCellStyle.Font ?? Font;
+            using var titleFont = new Font(font, FontStyle.Bold);
+            for (int i = 0; i < cell.Entries.Count; i++)
+            {
+                var entry = cell.Entries[i];
+                bool conflict = cell.Conflicts.Contains(entry.ScheduleID);
+                bool practical = entry.LectureType == "Practical";
+                var bounds = new Rectangle(e.CellBounds.X + TimetablePixels(6), e.CellBounds.Y + TimetablePixels(6) + i * TimetableStep - offset, cardWidth, TimetableCardHeight);
+                Color fill = conflict ? Color.FromArgb(254, 242, 242) : practical ? Color.FromArgb(240, 253, 244) : Color.FromArgb(239, 246, 255);
+                Color border = conflict ? Color.FromArgb(248, 113, 113) : practical ? Color.FromArgb(34, 197, 94) : Color.FromArgb(96, 165, 250);
+                using var path = RoundedTimetableCard(bounds);
+                using var brush = new SolidBrush(fill);
+                using var pen = new Pen(border);
+                e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+                e.Graphics.FillPath(brush, path);
+                e.Graphics.DrawPath(pen, path);
+                DrawTimetableLine(e.Graphics, (entry.IsLocked ? "مثبتة | " : "") + entry.SubjectName, titleFont, bounds, 5, Color.FromArgb(15, 23, 42));
+                DrawTimetableLine(e.Graphics, entry.FacultyMemberName, font, bounds, 24, Color.FromArgb(51, 65, 85));
+                DrawTimetableLine(e.Graphics, $"{entry.ClassroomName} | {entry.SectionName} | {BuildTimetableTypeLabel(entry)}", font, bounds, 43,
+                    conflict ? Color.FromArgb(185, 28, 28) : Color.FromArgb(71, 85, 105));
+            }
+            int maxOffset = Math.Max(0, cell.Entries.Count * TimetableStep + TimetablePixels(6) - e.CellBounds.Height);
+            if (maxOffset > 0)
+            {
+                var track = new Rectangle(e.CellBounds.Right - TimetablePixels(16), e.CellBounds.Top + TimetablePixels(2), TimetablePixels(12), e.CellBounds.Height - TimetablePixels(4));
+                using var trackBrush = new SolidBrush(Color.FromArgb(241, 245, 249));
+                using var thumbBrush = new SolidBrush(Color.FromArgb(148, 163, 184));
+                e.Graphics.FillRectangle(trackBrush, track);
+                int thumbHeight = Math.Max(TimetablePixels(20), track.Height * track.Height / (track.Height + maxOffset));
+                e.Graphics.FillRectangle(thumbBrush, new Rectangle(track.X + TimetablePixels(2), track.Y + offset * (track.Height - thumbHeight) / maxOffset, TimetablePixels(8), thumbHeight));
+            }
+            e.Graphics.Restore(state);
+            e.Handled = true;
+        }
+
+        private GraphicsPath RoundedTimetableCard(Rectangle bounds)
+        {
+            var path = new GraphicsPath();
+            int diameter = TimetablePixels(12);
+            path.AddArc(bounds.X, bounds.Y, diameter, diameter, 180, 90);
+            path.AddArc(bounds.Right - diameter - 1, bounds.Y, diameter, diameter, 270, 90);
+            path.AddArc(bounds.Right - diameter - 1, bounds.Bottom - diameter - 1, diameter, diameter, 0, 90);
+            path.AddArc(bounds.X, bounds.Bottom - diameter - 1, diameter, diameter, 90, 90);
+            path.CloseFigure();
+            return path;
+        }
+
+        private void DrawTimetableLine(Graphics graphics, string text, Font font, Rectangle card, int top, Color color)
+        {
+            TextRenderer.DrawText(graphics, text, font, new Rectangle(card.X + TimetablePixels(8), card.Y + TimetablePixels(top), Math.Max(TimetablePixels(80), card.Width - TimetablePixels(16)), Math.Max(TimetablePixels(17), font.Height)), color,
+                TextFormatFlags.Right | TextFormatFlags.RightToLeft | TextFormatFlags.VerticalCenter | TextFormatFlags.EndEllipsis | TextFormatFlags.SingleLine | TextFormatFlags.NoPrefix | TextFormatFlags.PreserveGraphicsClipping);
+        }
+
+        private bool ScrollTimetableCell(MouseEventArgs e)
+        {
+            var hit = dgvTimetable.HitTest(e.X, e.Y);
+            if (hit.RowIndex < 0 || hit.ColumnIndex < 0 || hit.ColumnIndex == colTimetableTime.Index || dgvTimetable.Rows[hit.RowIndex].Cells[hit.ColumnIndex].Tag is not TimetableCell cell) return false;
+            int height = dgvTimetable.Rows[hit.RowIndex].Height;
+            int max = Math.Max(0, cell.Entries.Count * TimetableStep + TimetablePixels(6) - height);
+            if (max == 0) return false;
+            var key = (hit.RowIndex, hit.ColumnIndex);
+            timetableCellOffsets[key] = Math.Clamp(timetableCellOffsets.GetValueOrDefault(key) - Math.Sign(e.Delta) * TimetableStep, 0, max);
+            dgvTimetable.InvalidateCell(hit.ColumnIndex, hit.RowIndex);
+            return true;
+        }
+
+        private void ClickTimetableCell(object? sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (ScrollTimetableTrack(e)) return;
+            if (e.RowIndex < 0 || e.ColumnIndex < 0 || e.ColumnIndex == colTimetableTime.Index || dgvTimetable.Rows[e.RowIndex].Cells[e.ColumnIndex].Tag is not TimetableCell cell) return;
+            int y = e.Y - TimetablePixels(6) + timetableCellOffsets.GetValueOrDefault((e.RowIndex, e.ColumnIndex));
+            int cardWidth = Math.Max(TimetablePixels(150), dgvTimetable.Columns[e.ColumnIndex].Width - TimetablePixels(32));
+            if (y < 0 || y % TimetableStep >= TimetableCardHeight || e.X < TimetablePixels(6) || e.X > cardWidth + TimetablePixels(6)) return;
+            int index = y / TimetableStep;
+            if (index >= 0 && index < cell.Entries.Count) SelectScheduleRowById(cell.Entries[index].ScheduleID);
+        }
+
+        private bool ScrollTimetableTrack(DataGridViewCellMouseEventArgs e)
+        {
+            if (e.RowIndex < 0 || e.ColumnIndex < 0 || e.ColumnIndex == colTimetableTime.Index || dgvTimetable.Rows[e.RowIndex].Cells[e.ColumnIndex].Tag is not TimetableCell cell) return false;
+            int height = dgvTimetable.Rows[e.RowIndex].Height;
+            int maximum = Math.Max(0, cell.Entries.Count * TimetableStep + TimetablePixels(6) - height);
+            if (maximum == 0 || e.X < dgvTimetable.Columns[e.ColumnIndex].Width - TimetablePixels(16)) return false;
+            timetableCellOffsets[(e.RowIndex, e.ColumnIndex)] = Math.Clamp((e.Y - TimetablePixels(2)) * maximum / Math.Max(1, height - TimetablePixels(4)), 0, maximum);
+            dgvTimetable.InvalidateCell(e.ColumnIndex, e.RowIndex);
+            return true;
+        }
+
+        private sealed record TimetableCell(IReadOnlyList<ScheduleRow> Entries, HashSet<int> Conflicts);
 
         private void ShowScheduleGridView()
         {
@@ -95,87 +202,10 @@ namespace University_Timetable_and_Classroom_Management_System
             button.FillColor = selected ? Color.FromArgb(15, 23, 42) : Color.White;
             button.ForeColor = selected ? Color.White : Color.FromArgb(51, 65, 85);
             button.HoverState.FillColor = selected ? Color.FromArgb(30, 41, 59) : Color.FromArgb(248, 250, 252);
-        }
-
-        private void RenderScheduleTimetable(
-            IReadOnlyList<ScheduleRow> rows,
-            HashSet<int> conflictingScheduleIds)
-        {
-            if (tblScheduleTimetable is null)
-            {
-                return;
-            }
-
-            tblScheduleTimetable.SuspendLayout();
-            tblScheduleTimetable.Controls.Clear();
-            tblScheduleTimetable.ColumnStyles.Clear();
-            tblScheduleTimetable.RowStyles.Clear();
-
-            var days = GetTimetableDays(rows);
-            bool showSemesterInTimeSlot = rows.Select(row => row.SemesterNumber).Distinct().Take(2).Count() > 1;
-            var timeSlots = GetTimetableTimeSlots(rows, showSemesterInTimeSlot);
-            tblScheduleTimetable.ColumnCount = days.Count + 1;
-            tblScheduleTimetable.RowCount = timeSlots.Count + 1;
-            tblScheduleTimetable.Width = Math.Max(pnlTimetableHost.ClientSize.Width - 2, 920);
-            tblScheduleTimetable.Height = TimetableHeaderHeight + Math.Max(1, timeSlots.Count) * TimetableRowHeight;
-
-            tblScheduleTimetable.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, TimetableTimeColumnWidth));
-            float dayWidth = 100F / Math.Max(1, days.Count);
-
-            for (int i = 0; i < days.Count; i++)
-            {
-                tblScheduleTimetable.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, dayWidth));
-            }
-
-            tblScheduleTimetable.RowStyles.Add(new RowStyle(SizeType.Absolute, TimetableHeaderHeight));
-            tblScheduleTimetable.Controls.Add(CreateTimetableHeaderCell("Time"), 0, 0);
-
-            for (int dayIndex = 0; dayIndex < days.Count; dayIndex++)
-            {
-                tblScheduleTimetable.Controls.Add(CreateTimetableHeaderCell(days[dayIndex]), dayIndex + 1, 0);
-            }
-
-            if (timeSlots.Count == 0)
-            {
-                AddEmptyTimetableRow(days.Count);
-                tblScheduleTimetable.ResumeLayout();
-                return;
-            }
-
-            for (int slotIndex = 0; slotIndex < timeSlots.Count; slotIndex++)
-            {
-                var slot = timeSlots[slotIndex];
-                int tableRow = slotIndex + 1;
-                tblScheduleTimetable.RowStyles.Add(new RowStyle(SizeType.Absolute, TimetableRowHeight));
-                tblScheduleTimetable.Controls.Add(CreateTimetableTimeCell(slot.Label), 0, tableRow);
-
-                for (int dayIndex = 0; dayIndex < days.Count; dayIndex++)
-                {
-                    var entries = rows
-                        .Where(row => row.SemesterNumber == slot.SemesterNumber &&
-                            row.TimeSlotID == slot.TimeSlotId &&
-                            string.Equals(row.DayOfWeek, days[dayIndex], StringComparison.OrdinalIgnoreCase))
-                        .OrderBy(row => row.SectionName)
-                        .ThenBy(row => row.GroupName)
-                        .ThenBy(row => row.SubjectName)
-                        .ToList();
-
-                    tblScheduleTimetable.Controls.Add(CreateTimetableEntryCell(entries, conflictingScheduleIds), dayIndex + 1, tableRow);
-                }
-            }
-
-            tblScheduleTimetable.ResumeLayout();
-        }
-
-        private void AddEmptyTimetableRow(int dayCount)
-        {
-            tblScheduleTimetable.RowStyles.Add(new RowStyle(SizeType.Absolute, TimetableRowHeight));
-            tblScheduleTimetable.Controls.Add(CreateTimetableTimeCell("-"), 0, 1);
-
-            for (int column = 1; column <= dayCount; column++)
-            {
-                tblScheduleTimetable.Controls.Add(CreateEmptyTimetableCell(), column, 1);
-            }
+            button.HoverState.ForeColor = selected ? Color.White : Color.FromArgb(51, 65, 85);
+            button.DisabledState.BorderColor = Color.FromArgb(203, 213, 225);
+            button.DisabledState.FillColor = selected ? Color.FromArgb(15, 23, 42) : Color.White;
+            button.DisabledState.ForeColor = selected ? Color.White : Color.FromArgb(51, 65, 85);
         }
 
         private static List<string> GetTimetableDays(IReadOnlyCollection<ScheduleRow> rows)
@@ -203,7 +233,7 @@ namespace University_Timetable_and_Classroom_Management_System
                     group.Key.TimeSlotID,
                     group.Min(row => row.StartTime),
                     includeSemesterLabel
-                        ? $"Semester {group.Key.SemesterNumber}{Environment.NewLine}{group.First().TimeSlotName}"
+                        ? $"الفصل {group.Key.SemesterNumber}{Environment.NewLine}{group.First().TimeSlotName}"
                         : group.First().TimeSlotName))
                 .OrderBy(slot => slot.SemesterNumber)
                 .ThenBy(slot => slot.StartTime)
@@ -211,197 +241,11 @@ namespace University_Timetable_and_Classroom_Management_System
                 .ToList();
         }
 
-        private static Control CreateTimetableHeaderCell(string text)
-        {
-            return new Label
-            {
-                BackColor = Color.FromArgb(15, 23, 42),
-                Dock = DockStyle.Fill,
-                Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold),
-                ForeColor = Color.White,
-                Margin = Padding.Empty,
-                Text = text,
-                TextAlign = ContentAlignment.MiddleCenter
-            };
-        }
-
-        private static Control CreateTimetableTimeCell(string text)
-        {
-            return new Label
-            {
-                BackColor = Color.FromArgb(248, 250, 252),
-                Dock = DockStyle.Fill,
-                Font = new Font("Segoe UI Semibold", 9.5F, FontStyle.Bold),
-                ForeColor = Color.FromArgb(37, 99, 235),
-                Margin = Padding.Empty,
-                Padding = new Padding(8, 0, 8, 0),
-                Text = text,
-                TextAlign = ContentAlignment.MiddleCenter
-            };
-        }
-
-        private Control CreateTimetableEntryCell(IReadOnlyList<ScheduleRow> entries, HashSet<int> conflicts)
-        {
-            var panel = new FlowLayoutPanel
-            {
-                AutoScroll = true,
-                AutoScrollMargin = new Size(0, 8),
-                BackColor = Color.White,
-                BorderStyle = entries.Count > 1 ? BorderStyle.FixedSingle : BorderStyle.None,
-                Dock = DockStyle.Fill,
-                FlowDirection = FlowDirection.TopDown,
-                Margin = Padding.Empty,
-                Padding = new Padding(6),
-                WrapContents = false
-            };
-
-            panel.Resize += (_, _) => ResizeTimetableCards(panel);
-
-            if (entries.Count == 0)
-            {
-                panel.Controls.Add(CreateEmptyTimetableLabel());
-                return panel;
-            }
-
-            foreach (var entry in entries)
-            {
-                panel.Controls.Add(CreateTimetableCard(entry, conflicts.Contains(entry.ScheduleID)));
-            }
-
-            ResizeTimetableCards(panel);
-            return panel;
-        }
-
-        private static void ResizeTimetableCards(FlowLayoutPanel panel)
-        {
-            int cardWidth = Math.Max(
-                150,
-                panel.ClientSize.Width -
-                    panel.Padding.Horizontal -
-                    SystemInformation.VerticalScrollBarWidth -
-                    4);
-
-            foreach (Guna2Panel card in panel.Controls.OfType<Guna2Panel>())
-            {
-                card.Width = cardWidth;
-
-                foreach (Label label in card.Controls.OfType<Label>())
-                {
-                    label.Width = Math.Max(80, card.ClientSize.Width - TimetableCardPadding * 2);
-                }
-            }
-        }
-
-        private static Control CreateEmptyTimetableCell()
-        {
-            var panel = new Panel
-            {
-                BackColor = Color.White,
-                Dock = DockStyle.Fill,
-                Margin = Padding.Empty
-            };
-
-            panel.Controls.Add(CreateEmptyTimetableLabel());
-            return panel;
-        }
-
-        private static Label CreateEmptyTimetableLabel()
-        {
-            return new Label
-            {
-                AutoSize = false,
-                Dock = DockStyle.Top,
-                Font = new Font("Segoe UI", 9F),
-                ForeColor = Color.FromArgb(148, 163, 184),
-                Height = 30,
-                Text = "-",
-                TextAlign = ContentAlignment.MiddleCenter
-            };
-        }
-
-        private Guna2Panel CreateTimetableCard(ScheduleRow row, bool hasConflict)
-        {
-            bool isPractical = string.Equals(row.LectureType, "Practical", StringComparison.OrdinalIgnoreCase);
-            var card = new Guna2Panel
-            {
-                BorderColor = hasConflict
-                    ? Color.FromArgb(248, 113, 113)
-                    : isPractical
-                        ? Color.FromArgb(34, 197, 94)
-                        : Color.FromArgb(96, 165, 250),
-                BorderRadius = 6,
-                BorderThickness = 1,
-                Cursor = Cursors.Hand,
-                FillColor = hasConflict
-                    ? Color.FromArgb(254, 242, 242)
-                    : isPractical
-                        ? Color.FromArgb(240, 253, 244)
-                        : Color.FromArgb(239, 246, 255),
-                Height = TimetableCardHeight,
-                Margin = new Padding(0, 0, 0, 6),
-                Padding = new Padding(8),
-                Tag = row.ScheduleID,
-                Width = 220
-            };
-
-            var title = CreateTimetableCardLabel(row.SubjectName, TimetableCardPadding, 5, FontStyle.Bold, Color.FromArgb(15, 23, 42));
-            var teacher = CreateTimetableCardLabel(row.FacultyMemberName, TimetableCardPadding, 24, FontStyle.Regular, Color.FromArgb(51, 65, 85));
-            var details = CreateTimetableCardLabel(
-                $"{row.ClassroomName} | {row.SectionName} | {BuildTimetableTypeLabel(row)}",
-                TimetableCardPadding,
-                43,
-                FontStyle.Regular,
-                hasConflict ? Color.FromArgb(185, 28, 28) : Color.FromArgb(71, 85, 105));
-
-            card.Controls.Add(details);
-            card.Controls.Add(teacher);
-            card.Controls.Add(title);
-
-            string toolTip = $"{row.SubjectName}{Environment.NewLine}{row.FacultyMemberName}{Environment.NewLine}{row.ClassroomName} | {row.SectionName} | {row.LectureType} | {row.GroupName}";
-            scheduleToolTip.SetToolTip(card, toolTip);
-            scheduleToolTip.SetToolTip(title, toolTip);
-            scheduleToolTip.SetToolTip(teacher, toolTip);
-            scheduleToolTip.SetToolTip(details, toolTip);
-
-            AttachTimetableCardSelection(card, row.ScheduleID);
-            return card;
-        }
-
-        private static Label CreateTimetableCardLabel(
-            string text,
-            int x,
-            int y,
-            FontStyle fontStyle,
-            Color foreColor)
-        {
-            return new Label
-            {
-                AutoEllipsis = true,
-                BackColor = Color.Transparent,
-                Font = new Font("Segoe UI", 8.5F, fontStyle),
-                ForeColor = foreColor,
-                Location = new Point(x, y),
-                Size = new Size(204, 17),
-                Text = text,
-                TextAlign = ContentAlignment.MiddleLeft
-            };
-        }
-
         private static string BuildTimetableTypeLabel(ScheduleRow row)
         {
             return string.Equals(row.GroupName, "All", StringComparison.OrdinalIgnoreCase)
-                ? row.LectureType
-                : $"{row.LectureType} {row.GroupName}";
-        }
-
-        private void AttachTimetableCardSelection(Control control, int scheduleId)
-        {
-            control.Click += (_, _) => SelectScheduleRowById(scheduleId);
-
-            foreach (Control child in control.Controls)
-            {
-                AttachTimetableCardSelection(child, scheduleId);
-            }
+                ? ArabicUi.Display(row.LectureType)
+                : $"{ArabicUi.Display(row.LectureType)} {row.GroupName}";
         }
 
         private void SelectScheduleRowById(int scheduleId)

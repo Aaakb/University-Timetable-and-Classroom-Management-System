@@ -39,7 +39,8 @@ namespace University_Timetable_and_Classroom_Management_System
 
             string normalizedGroup = groupName.Trim().ToUpperInvariant();
 
-            if (string.Equals(row.LectureType, "Practical", StringComparison.OrdinalIgnoreCase))
+            if (string.Equals(row.LectureType, "Practical", StringComparison.OrdinalIgnoreCase) &&
+                !string.IsNullOrWhiteSpace(row.GroupName) && row.GroupName != "All")
             {
                 return string.Equals(row.GroupName, normalizedGroup, StringComparison.OrdinalIgnoreCase);
             }

@@ -22,20 +22,34 @@ namespace University_Timetable_and_Classroom_Management_System.BusinessLayer
         {
             await using var context = new AppDbContext();
             branch.BranchID = await AutoKeyGenerator.NextAsync(context.Branches.Select(b => b.BranchID));
+            var result = await AddInContextAsync(context, branch);
+            return result;
+        }
+
+        internal static async Task<Branch> AddInContextAsync(AppDbContext context, Branch branch)
+        {
             await ValidateAsync(context, branch, false);
             await context.Branches.AddAsync(branch);
             await ManualKeySaveHelper.SaveWithManualKeyAsync(context, "[Branches]");
             return branch;
         }
 
+
         public async Task<Branch> UpdateAsync(Branch branch)
         {
             await using var context = new AppDbContext();
+            var result = await UpdateInContextAsync(context, branch);
+            return result;
+        }
+
+        internal static async Task<Branch> UpdateInContextAsync(AppDbContext context, Branch branch)
+        {
             await ValidateAsync(context, branch, true);
             context.Branches.Update(branch);
             await context.SaveChangesAsync();
             return branch;
         }
+
 
         public async Task DeleteAsync(int id)
         {
@@ -72,6 +86,7 @@ namespace University_Timetable_and_Classroom_Management_System.BusinessLayer
             }
 
             branch.BranchName = branch.BranchName.Trim();
+            InputValidation.TextLength(branch.BranchName, 100, "Branch name");
             var exists = await context.Branches.AnyAsync(b =>
                 b.BranchName == branch.BranchName && (!isUpdate || b.BranchID != branch.BranchID));
 

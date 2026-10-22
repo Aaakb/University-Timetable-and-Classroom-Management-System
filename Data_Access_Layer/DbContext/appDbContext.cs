@@ -25,6 +25,8 @@ namespace Data_Access_Layer
         public DbSet<Schedule> Schedules { get; set; } = null!;
         public DbSet<ScheduleDetailsView> ScheduleDetails { get; set; } = null!;
         public DbSet<ApplicationUser> ApplicationUsers { get; set; } = null!;
+        public DbSet<FacultySchedulingPreference> FacultySchedulingPreferences { get; set; } = null!;
+        public DbSet<FacultyPeriodPreference> FacultyPeriodPreferences { get; set; } = null!;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -37,6 +39,28 @@ namespace Data_Access_Layer
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<FacultyPeriodPreference>(entity =>
+            {
+                entity.ToTable("FacultyPeriodPreferences", table =>
+                {
+                    table.HasCheckConstraint("CK_FacultyPeriodPreferences_Level", "[Level] IN (0, 1, 2)");
+                    table.HasCheckConstraint("CK_FacultyPeriodPreferences_Day", "[DayOfWeek] IN ('Sunday','Monday','Tuesday','Wednesday','Thursday')");
+                });
+                entity.HasKey(p => new { p.FacultyMemberID, p.SemesterNumber, p.DayOfWeek, p.TimeSlotID });
+                entity.Property(p => p.DayOfWeek).HasMaxLength(20);
+                entity.HasOne<FacultySchedulingPreference>().WithMany().HasForeignKey(p => new { p.FacultyMemberID, p.SemesterNumber }).OnDelete(DeleteBehavior.Cascade);
+                entity.HasOne<TimeSlot>().WithMany().HasForeignKey(p => p.TimeSlotID).OnDelete(DeleteBehavior.Restrict);
+            });
+
+            modelBuilder.Entity<FacultySchedulingPreference>(entity =>
+            {
+                entity.ToTable("FacultySchedulingPreferences");
+                entity.HasKey(e => new { e.FacultyMemberID, e.SemesterNumber });
+                entity.Property(e => e.SettingsJson).IsRequired();
+                entity.Property(e => e.Revision).IsConcurrencyToken();
+                entity.HasOne<FacultyMember>().WithMany().HasForeignKey(e => e.FacultyMemberID)
+                    .OnDelete(DeleteBehavior.Cascade);
+            });
 
             modelBuilder.Entity<Branch>(entity =>
             {
@@ -97,7 +121,9 @@ namespace Data_Access_Layer
             {
                 entity.ToTable("Subjects");
                 entity.HasKey(e => e.SubjectID);
-                entity.HasIndex(e => new { e.SubjectName, e.StudyYearID, e.BranchID, e.SemesterNumber }).IsUnique();
+                entity.HasIndex(e => new { e.SubjectName, e.StudyYearID, e.BranchID, e.SemesterNumber }).IsUnique()
+                    .HasFilter("[IsDeleted] = 0");
+                entity.Property(e => e.IsDeleted).HasDefaultValue(false);
 
                 entity.Property(e => e.SubjectID)
                     .ValueGeneratedNever();
@@ -209,6 +235,7 @@ namespace Data_Access_Layer
             {
                 entity.ToTable("Schedules");
                 entity.HasKey(e => e.ScheduleID);
+                entity.Property(e => e.IsLocked).HasDefaultValue(false).IsRequired();
                 entity.HasIndex(e => new { e.ClassroomID, e.SemesterNumber, e.DayOfWeek, e.TimeSlotID })
                     .IsUnique()
                     .HasDatabaseName("UQ_Classroom_Semester_Time");

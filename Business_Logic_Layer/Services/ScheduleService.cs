@@ -26,11 +26,6 @@ namespace University_Timetable_and_Classroom_Management_System.BusinessLayer
             return await GetScheduleDetailsByFiltersAsync(null, null, null, null, null);
         }
 
-        public async Task<List<ScheduleDetailsView>> GetScheduleDetailsBySemesterAsync(int semesterNumber)
-        {
-            return await GetScheduleDetailsByFiltersAsync(semesterNumber, null, null, null, null);
-        }
-
         public async Task<List<ScheduleDetailsView>> GetScheduleDetailsByFiltersAsync(
             int? semesterNumber,
             int? studyYearId,
@@ -107,35 +102,27 @@ namespace University_Timetable_and_Classroom_Management_System.BusinessLayer
         public async Task<Schedule> AddAsync(Schedule schedule)
         {
             await using var context = new AppDbContext();
+            await using var transaction = await context.Database.BeginTransactionAsync(System.Data.IsolationLevel.Serializable);
             await ValidateAsync(context, schedule, false);
             await context.Schedules.AddAsync(schedule);
             await context.SaveChangesAsync();
+            await transaction.CommitAsync();
             return schedule;
         }
 
         public async Task<Schedule> UpdateAsync(Schedule schedule)
         {
             await using var context = new AppDbContext();
+            await using var transaction = await context.Database.BeginTransactionAsync(System.Data.IsolationLevel.Serializable);
             await ValidateAsync(context, schedule, true);
-            context.Schedules.Update(schedule);
+            var existing = await context.Schedules.FindAsync(schedule.ScheduleID)
+                ?? throw new KeyNotFoundException("Schedule not found.");
+            // The ordinary editor has no lock field; retain the persisted lock.
+            schedule.IsLocked = existing.IsLocked;
+            context.Entry(existing).CurrentValues.SetValues(schedule);
             await context.SaveChangesAsync();
+            await transaction.CommitAsync();
             return schedule;
-        }
-
-        public bool IsClassroomCapacityEnough(int classroomId, int sectionId)
-        {
-            using var context = new AppDbContext();
-
-            var classroom = context.Classrooms
-                .AsNoTracking()
-                .FirstOrDefault(item => item.ClassroomID == classroomId);
-            var section = context.Sections
-                .AsNoTracking()
-                .FirstOrDefault(item => item.SectionID == sectionId);
-
-            return classroom is not null &&
-                section is not null &&
-                ScheduleRoomSelector.HasCapacity(classroom, section);
         }
 
         public async Task DeleteAsync(int id)
@@ -148,14 +135,30 @@ namespace University_Timetable_and_Classroom_Management_System.BusinessLayer
             await context.SaveChangesAsync();
         }
 
-        public async Task<ScheduleGenerationResult> GenerateAsync()
+        public async Task SetLockedAsync(int id, bool locked)
         {
             await using var context = new AppDbContext();
-            var resourceResult = await SchedulingResourceMaintenance.EnsureOfficialResourcesAsync(context);
+            var schedule = await context.Schedules.FindAsync(id)
+                ?? throw new KeyNotFoundException("Schedule not found.");
+            schedule.IsLocked = locked;
+            await context.SaveChangesAsync();
+        }
 
-            var subjects = await context.Subjects
+        public Task<ScheduleGenerationResult> GenerateAsync() => BuildTimetableAsync(regenerate: false, null);
+
+        public Task<ScheduleGenerationResult> RegenerateAsync(string? safetyBackupPath = null) =>
+            BuildTimetableAsync(regenerate: true, safetyBackupPath);
+
+        private async Task<ScheduleGenerationResult> BuildTimetableAsync(bool regenerate, string? safetyBackupPath)
+        {
+            await using var context = new AppDbContext();
+            await using var transaction = await context.Database.BeginTransactionAsync(System.Data.IsolationLevel.Serializable);
+            var preferences = FacultyPreferenceRules.FromRows(await context.FacultySchedulingPreferences.AsNoTracking().ToListAsync(),
+                await context.FacultyPeriodPreferences.AsNoTracking().ToListAsync());
+            var allSubjects = await context.Subjects
                 .AsNoTracking()
                 .ToListAsync();
+            var subjects = allSubjects.Where(subject => subject.HasWeeklyLectures).ToList();
 
             var assignments = await context.FacultyMemberSubjects
                 .Include(fms => fms.Subject)
@@ -163,8 +166,11 @@ namespace University_Timetable_and_Classroom_Management_System.BusinessLayer
                 .ThenBy(fms => fms.Subject.SubjectName)
                 .AsNoTracking()
                 .ToListAsync();
+            assignments.RemoveAll(assignment => !assignment.Subject.HasWeeklyLectures);
 
             var sections = (await context.Sections
+                .Include(section => section.StudyYear)
+                .Include(section => section.Branch)
                 .AsNoTracking()
                 .OrderBy(section => section.StudyYearID)
                 .ThenBy(section => section.BranchID)
@@ -179,15 +185,19 @@ namespace University_Timetable_and_Classroom_Management_System.BusinessLayer
                 .ThenBy(classroom => classroom.ClassroomNumber)
                 .ToListAsync();
 
-            var timeSlots = (await context.TimeSlots
+            if (classrooms.Count == 0)
+                throw new ArgumentException("Add classrooms before generating. The existing timetable has been kept.");
+
+            var timeSlots = await context.TimeSlots
                 .AsNoTracking()
                 .Where(slot => !slot.IsBreak)
                 .OrderBy(slot => slot.StartTime)
-                .ToListAsync())
-                .Where(ScheduleTimingRules.IsOfficialLectureSlot)
-                .ToList();
+                .ToListAsync();
+            ScheduleTimingRules.EnsureCompatibleLectureSlots(timeSlots);
 
             var existingSchedules = await context.Schedules.ToListAsync();
+            var generationInput = regenerate ? existingSchedules.Where(s => s.IsLocked).ToList() : existingSchedules;
+            int variationSeed = regenerate ? Random.Shared.Next(1, int.MaxValue) : 0;
             var generatedSchedules = new List<Schedule>();
             int skippedCount = 0;
             int missingSectionCount = 0;
@@ -201,6 +211,15 @@ namespace University_Timetable_and_Classroom_Management_System.BusinessLayer
                 .Select(assignment => assignment.SubjectID)
                 .ToHashSet();
             int unassignedSubjectsCount = subjects.Count(subject => !assignedSubjectIds.Contains(subject.SubjectID));
+
+            var unassignedPractical = subjects.Where(subject => subject.EffectivePracticalLectureCount > 0 &&
+                !assignedSubjectIds.Contains(subject.SubjectID)).ToList();
+            if (unassignedPractical.Count > 0)
+                throw new ArgumentException("Assign teachers to all practical subjects before generating: " +
+                    string.Join(", ", unassignedPractical.Select(subject => subject.SubjectName)) +
+                    ". The existing timetable has been kept.");
+            if (unassignedSubjectsCount > 0)
+                throw new ArgumentException("Assign teachers to all subjects before generating. The existing timetable has been kept.");
 
             var subjectTeachingAssignments = assignments
                 .GroupBy(assignment => assignment.SubjectID)
@@ -228,6 +247,8 @@ namespace University_Timetable_and_Classroom_Management_System.BusinessLayer
 
                     if (matchingSections.Count == 0)
                     {
+                        if (subject.EffectivePracticalLectureCount > 0)
+                            throw new ArgumentException($"Add matching sections for practical subject {subject.SubjectName} before generating. The existing timetable has been kept.");
                         skippedCount++;
                         missingSectionCount++;
                     }
@@ -242,21 +263,191 @@ namespace University_Timetable_and_Classroom_Management_System.BusinessLayer
                 .ThenBy(request => request.Section.SectionName)
                 .ToList();
 
+            if (missingSectionCount > 0)
+                throw new ArgumentException("Add matching sections for all subjects before generating. The existing timetable has been kept.");
+
+            // Retain valid placements for this run without setting permanent locks.
+            // Explicit locks win conflicts; otherwise use stable IDs for repeatable repairs.
+            var retainedSchedules = new List<Schedule>();
+            var displacedSchedules = new List<Schedule>();
+            foreach (var existing in generationInput.OrderByDescending(s => s.IsLocked).ThenBy(s => s.ScheduleID))
+            {
+                string original = ImportCatalog.ScalarJson(existing);
+                await ValidateAsync(context, existing, true, checkConflicts: false);
+                if (original != ImportCatalog.ScalarJson(existing))
+                    throw new ArgumentException("An existing lecture needs manual correction. The existing timetable has been kept.");
+
+                if (retainedSchedules.Any(saved => ScheduleConflictChecker.HasPairConflict(saved, existing)))
+                {
+                    if (existing.IsLocked)
+                        throw new ArgumentException("Locked lectures conflict. The existing timetable has been kept.");
+                    displacedSchedules.Add(existing);
+                }
+                else retainedSchedules.Add(existing);
+            }
+
+            // Repair every displaced lecture, including extra lessons and whole-section
+            // practicals in an imported timetable. Never silently drop them.
+            var repairRequests = displacedSchedules.Select((lecture, index) => new ScheduleGenerationRequest(
+                allSubjects.Single(subject => subject.SubjectID == lecture.SubjectID),
+                new[] { lecture.FacultyMemberID },
+                sections.Single(section => section.SectionID == lecture.SectionID),
+                scheduleRequests.Count + index + 1, 1, lecture.LectureType, lecture.GroupName)).ToList();
+            var remainingRequests = ScheduleRequirementMatcher.Remaining(scheduleRequests, generationInput);
+            remainingRequests.AddRange(repairRequests);
             var planningResult = ScheduleGenerator.BuildPlan(
-                scheduleRequests,
-                new ScheduleBuildContext(classrooms, timeSlots));
+                remainingRequests,
+                new ScheduleBuildContext(classrooms, timeSlots)
+                { RequirePracticalExchange = false, EnforceSectionDayLimit = regenerate,
+                    FixedSchedules = retainedSchedules, Preferences = preferences, VariationSeed = variationSeed });
+
+            bool Complete(SchedulePlanningResult plan) => plan.PracticalExchangeIssues.Count == 0 &&
+                plan.NoClassroomCount == 0 && plan.ConflictCount == 0 &&
+                ScheduleRequirementMatcher.Remaining(remainingRequests, plan.Schedules.Except(retainedSchedules).ToList()).Count == 0;
+            if (regenerate && !Complete(planningResult))
+            {
+                // Variation must not make an otherwise feasible baseline fail.
+                var baseline = ScheduleGenerator.BuildPlan(remainingRequests,
+                    new ScheduleBuildContext(classrooms, timeSlots)
+                    { RequirePracticalExchange = false, EnforceSectionDayLimit = false,
+                        FixedSchedules = retainedSchedules, Preferences = preferences });
+                if (Complete(baseline)) planningResult = baseline;
+            }
+            if (retainedSchedules.Count > 0 && remainingRequests.Count > 0 && !Complete(planningResult))
+            {
+                var expanded = ScheduleGenerator.BuildPlan(remainingRequests,
+                    new ScheduleBuildContext(classrooms, timeSlots)
+                    { RequirePracticalExchange = false, EnforceSectionDayLimit = regenerate, FixedSchedules = retainedSchedules,
+                        UseAllTeachingDays = true, Preferences = preferences, VariationSeed = variationSeed });
+                if (Complete(expanded)) planningResult = expanded;
+            }
+
+            if (planningResult.PracticalExchangeIssues.Count > 0)
+            {
+                string details = string.Join(Environment.NewLine, planningResult.PracticalExchangeIssues.Take(6));
+                if (planningResult.PracticalExchangeIssues.Count > 6)
+                    details += $"{Environment.NewLine}And {planningResult.PracticalExchangeIssues.Count - 6} more section(s).";
+                throw new ArgumentException("Unable to place all practical groups. " +
+                    "The existing timetable has been kept." + Environment.NewLine + details);
+            }
 
             generatedSchedules.AddRange(planningResult.Schedules);
             skippedCount += planningResult.NoClassroomCount + planningResult.ConflictCount;
             noClassroomCount += planningResult.NoClassroomCount;
             conflictCount += planningResult.ConflictCount;
 
-            await using var transaction = await context.Database.BeginTransactionAsync();
+            if (generatedSchedules.Count == 0)
+            {
+                throw new ArgumentException("No lessons could be generated. Check subject hours, teaching assignments, sections, rooms, and time slots. The existing timetable has been kept.");
+            }
 
-            context.Schedules.RemoveRange(existingSchedules);
-            await context.SaveChangesAsync();
+            if (skippedCount > 0 || ScheduleRequirementMatcher.Remaining(scheduleRequests, generatedSchedules).Count > 0)
+            {
+                var unresolved = ScheduleRequirementMatcher.Remaining(remainingRequests,
+                    generatedSchedules.Except(retainedSchedules).ToList());
+                string details = string.Join(Environment.NewLine, unresolved.Take(8).Select(r =>
+                    regenerate
+                        ? $"{r.Subject.SubjectName}: المرحلة {r.Subject.StudyYearID}، الشعبة {r.Section.SectionName}، الفصل {r.Subject.SemesterNumber}، " +
+                            (r.LectureType == "Practical" ? "عملي" : "نظري") + (string.IsNullOrWhiteSpace(r.GroupName) ? "" : $"، المجموعة {r.GroupName}")
+                        : $"{r.Subject.SubjectName}: year {r.Subject.StudyYearID}, section {r.Section.SectionName}, semester {r.Subject.SemesterNumber}, {r.LectureType}" +
+                            (string.IsNullOrWhiteSpace(r.GroupName) ? "" : $", group {r.GroupName}")));
+                string failure = regenerate
+                    ? $"تعذر توزيع {unresolved.Count} من أصل {remainingRequests.Count} محاضرة في الجدول الجديد. راجع أعداد المحاضرات والتكليفات والقاعات والفترات والتفضيلات. بقي الجدول الحالي محفوظًا."
+                    : $"Unable to place {unresolved.Count} of {remainingRequests.Count} additional lessons without moving existing lectures. " +
+                    "No complete solution was found within the current resources and search limits. The existing timetable has been kept." +
+                    Environment.NewLine;
+                throw new ArgumentException(failure + Environment.NewLine + details);
+            }
 
-            await context.Schedules.AddRangeAsync(generatedSchedules);
+            var newPlacements = generatedSchedules.Except(retainedSchedules).ToList();
+            if ((regenerate || preferences.Values.Any(p => p.HasScoredPreferences)) && newPlacements.Count > 0)
+            {
+                var catalog = await ImportCatalog.LoadAsync(context, default);
+                foreach (var batch in newPlacements.GroupBy(s => s.SemesterNumber).ToList())
+                {
+                    var batchRows = batch.ToList();
+                    var optimizationRows = batchRows;
+                    if (regenerate)
+                    {
+                        var semesterRows = generatedSchedules.Where(s => s.SemesterNumber == batch.Key).ToList();
+                        var affected = semesterRows.GroupBy(s => s.SectionID).Where(g =>
+                            g.Select(s => s.DayOfWeek).Distinct().Count() > ScheduleDayRules.MaximumSectionTeachingDays).Select(g => g.Key).ToHashSet();
+                        foreach (var preference in preferences.Where(p => p.Key.Semester == batch.Key))
+                        {
+                            var own = semesterRows.Where(s => s.FacultyMemberID == preference.Key.Faculty).ToList();
+                            if (FacultyPreferenceRules.Violation(preference.Value, own, timeSlots.ToDictionary(p => p.TimeSlotID), requireAttendance: true) is not null ||
+                                own.Any(s => FacultyPreferenceRules.Level(preference.Value, s.DayOfWeek, s.TimeSlotID) == FacultyPreferenceLevel.Preferred))
+                                foreach (var lecture in own) affected.Add(lecture.SectionID);
+                        }
+                        optimizationRows = batchRows.Where(s => affected.Contains(s.SectionID)).ToList();
+                        if (optimizationRows.Count == 0) continue;
+                    }
+                    System.Diagnostics.Trace.WriteLine($"Generation optimization: semester={batch.Key}, movable={optimizationRows.Count}, total={batchRows.Count}");
+                    var optimized = await Task.Run(() => ImportedTimetableRepairPlanner.Solve(catalog,
+                        optimizationRows.Select(s => new TimetableImportRow("Generated", 0, s, s.IsLocked)).ToList(),
+                        generatedSchedules.Except(optimizationRows).ToList(), 20, default, optimizePreferences: true,
+                        allowFacultyReassignment: regenerate, requirePracticalExchange: !regenerate));
+                    if (regenerate && optimized.Plan is null && optimizationRows.Count < batchRows.Count)
+                    {
+                        optimizationRows = batchRows;
+                        optimized = await Task.Run(() => ImportedTimetableRepairPlanner.Solve(catalog,
+                            batchRows.Select(s => new TimetableImportRow("Generated", 0, s, s.IsLocked)).ToList(),
+                            generatedSchedules.Except(batchRows).ToList(), 40, default, optimizePreferences: true,
+                            allowFacultyReassignment: true, requirePracticalExchange: false));
+                    }
+                    if (optimized.Plan is null)
+                    {
+                        string reason = optimized.Status == "Infeasible"
+                            ? "لا يوجد توزيع يجمع القيود الحالية للفصل الدراسي " + batch.Key + "."
+                            : "لم يكتمل البحث عن توزيع للفصل الدراسي " + batch.Key + " خلال المهلة. هذا لا يثبت استحالة الحل.";
+                        string constraints = optimized.Diagnostics.Count == 0 ? "" : "\nالقيود التي يتعذر جمعها مع الموارد والتكليفات الحالية:\n" + string.Join("\n", optimized.Diagnostics.Take(6));
+                        string teachers = string.Join("\n", preferences.Where(p => p.Key.Semester == batch.Key).Take(4).Select(p =>
+                            "التدريسي «" + catalog.Rows<FacultyMember>().Single(f => f.FacultyMemberID == p.Key.Faculty).FullName + "»: الأيام المسموحة " +
+                            string.Join("، ", p.Value.SelectedDays.Select(day => day switch { "Sunday" => "الأحد", "Monday" => "الاثنين", "Tuesday" => "الثلاثاء", "Wednesday" => "الأربعاء", "Thursday" => "الخميس", _ => day }))));
+                        throw new ArgumentException(reason + constraints + (teachers.Length == 0 ? "" : "\n" + teachers) +
+                            "\nراجع الأيام المتاحة والفترات والقاعات والتكليفات للشعب المذكورة، ثم أعد المحاولة. بقي الجدول الحالي محفوظًا دون تغيير.");
+                    }
+                    for (int i = 0; i < optimizationRows.Count; i++)
+                    {
+                        optimizationRows[i].DayOfWeek = optimized.Plan[i].DayOfWeek;
+                        optimizationRows[i].TimeSlotID = optimized.Plan[i].TimeSlotID;
+                        optimizationRows[i].ClassroomID = optimized.Plan[i].ClassroomID;
+                        optimizationRows[i].FacultyMemberID = optimized.Plan[i].FacultyMemberID;
+                    }
+                }
+            }
+            FacultyPreferenceRules.Validate(generatedSchedules, timeSlots.ToDictionary(p => p.TimeSlotID), preferences);
+            if (regenerate || preferences.Values.Any(p => p.HasScoredPreferences))
+                ScheduleDayRules.EnsureSectionDayLimit(generatedSchedules, sections);
+
+            string? backupPath = null;
+            if (regenerate && existingSchedules.Count > 0)
+            {
+                if (safetyBackupPath is null)
+                {
+                    Directory.CreateDirectory(TimetableBackupService.AutomaticBackupDirectory);
+                    safetyBackupPath = Path.Combine(TimetableBackupService.AutomaticBackupDirectory,
+                        $"BeforeGenerate-{DateTime.Now:yyyyMMdd-HHmmss}-{Guid.NewGuid():N}.uttbackup.json");
+                }
+                // Back up the same serializable snapshot used to generate the plan.
+                // Any backup or database failure leaves every saved lecture intact.
+                backupPath = (await TimetableBackupService.SaveSnapshotAsync(context, safetyBackupPath)).Path;
+                context.Schedules.RemoveRange(existingSchedules.Where(s => !s.IsLocked));
+                await context.SaveChangesAsync();
+            }
+            foreach (var displaced in displacedSchedules)
+            {
+                var replacement = newPlacements.FirstOrDefault(lecture =>
+                    lecture.SubjectID == displaced.SubjectID && lecture.SectionID == displaced.SectionID &&
+                    lecture.SemesterNumber == displaced.SemesterNumber && lecture.LectureType == displaced.LectureType &&
+                    lecture.GroupName == displaced.GroupName && lecture.FacultyMemberID == displaced.FacultyMemberID)
+                    ?? throw new ArgumentException("A conflicting lecture could not be repaired. The existing timetable has been kept.");
+                replacement.ScheduleID = displaced.ScheduleID;
+                context.Entry(displaced).CurrentValues.SetValues(replacement);
+                newPlacements.Remove(replacement);
+            }
+            // Retained rows (explicit locks in fresh mode) keep their IDs and placements.
+            await context.Schedules.AddRangeAsync(newPlacements);
             await context.SaveChangesAsync();
             await transaction.CommitAsync();
 
@@ -272,13 +463,30 @@ namespace University_Timetable_and_Classroom_Management_System.BusinessLayer
                 timeSlots.Count,
                 classrooms.Count,
                 sections.Count,
-                resourceResult.AddedTimeSlots,
-                resourceResult.AddedClassrooms,
-                resourceResult.AddedFacultyMembers,
-                resourceResult.AddedFacultySubjectAssignments);
+                // Generation consumes configured resources; it never creates them.
+                0,
+                0,
+                0,
+                0)
+            {
+                PreservedCount = retainedSchedules.Count,
+                AddedCount = newPlacements.Count,
+                RepairedCount = displacedSchedules.Count,
+                IsRegenerated = regenerate,
+                ReplacedCount = regenerate ? existingSchedules.Count - retainedSchedules.Count : 0,
+                SafetyBackupPath = backupPath
+            };
         }
 
-        private static async Task ValidateAsync(AppDbContext context, Schedule schedule, bool isUpdate)
+        internal static Task ValidateAsync(AppDbContext context, Schedule schedule, bool isUpdate, bool checkConflicts = true) =>
+            ValidateCoreAsync(context, schedule, isUpdate, checkConflicts, restoringBackup: false);
+
+        // Called only after the backup checksum and all academic reference values
+        // have been verified. An archived lecture may no longer exist in the new table.
+        internal static Task ValidateBackupLectureAsync(AppDbContext context, Schedule schedule) =>
+            ValidateCoreAsync(context, schedule, isUpdate: true, checkConflicts: false, restoringBackup: true);
+
+        private static async Task ValidateCoreAsync(AppDbContext context, Schedule schedule, bool isUpdate, bool checkConflicts, bool restoringBackup)
         {
             if (string.IsNullOrWhiteSpace(schedule.DayOfWeek))
             {
@@ -296,12 +504,23 @@ namespace University_Timetable_and_Classroom_Management_System.BusinessLayer
                 throw new ArgumentException("Subject does not exist.");
             }
 
+            // Only an existing lecture may retain a deleted subject. Its identity
+            // stays fixed even when its placement is changed by the timetable editor.
+            var archivedOriginal = subject.IsDeleted && restoringBackup ? schedule : subject.IsDeleted && isUpdate
+                ? await context.Schedules.AsNoTracking().FirstOrDefaultAsync(s => s.ScheduleID == schedule.ScheduleID)
+                : null;
+            if (subject.IsDeleted && (archivedOriginal is null ||
+                archivedOriginal.SubjectID != schedule.SubjectID || archivedOriginal.FacultyMemberID != schedule.FacultyMemberID ||
+                archivedOriginal.SectionID != schedule.SectionID || archivedOriginal.LectureType != schedule.LectureType ||
+                archivedOriginal.GroupName != schedule.GroupName))
+                throw new ArgumentException("هذه المادة محذوفة من القائمة. يمكن الاحتفاظ بمحاضراتها المحفوظة ونقل مواعيدها فقط؛ لا يمكن إضافة محاضرات جديدة لها أو تغيير هوية محاضراتها.");
+
             if (!await context.FacultyMembers.AnyAsync(f => f.FacultyMemberID == schedule.FacultyMemberID))
             {
                 throw new ArgumentException("Faculty member does not exist.");
             }
 
-            if (!await CanFacultyTeachSubjectAsync(context, schedule.FacultyMemberID, schedule.SubjectID))
+            if (!subject.IsDeleted && !await CanFacultyTeachSubjectAsync(context, schedule.FacultyMemberID, schedule.SubjectID))
             {
                 throw new ArgumentException("The selected faculty member is not assigned to teach this subject.");
             }
@@ -315,10 +534,13 @@ namespace University_Timetable_and_Classroom_Management_System.BusinessLayer
                 throw new ArgumentException("Classroom does not exist.");
             }
 
-            if (!await context.TimeSlots.AnyAsync(t => t.TimeSlotID == schedule.TimeSlotID))
+            var lecturePeriods = await context.TimeSlots.AsNoTracking().Where(slot => !slot.IsBreak).ToListAsync();
+            if (!lecturePeriods.Any(slot => slot.TimeSlotID == schedule.TimeSlotID))
             {
                 throw new ArgumentException("Time slot does not exist.");
             }
+
+            ScheduleTimingRules.EnsureCompatibleLectureSlots(lecturePeriods);
 
             if (!schedule.SectionID.HasValue)
             {
@@ -336,6 +558,9 @@ namespace University_Timetable_and_Classroom_Management_System.BusinessLayer
 
             EnsureBaseSectionIsUsed(section);
             NormalizeLectureTypeAndGroup(schedule, section);
+            if (schedule.LectureType == "Practical" && subject.EffectivePracticalLectureCount <= 0 ||
+                schedule.LectureType == "Theory" && subject.EffectiveTheoreticalLectureCount <= 0)
+                throw new ArgumentException("The selected subject does not have this lecture type.");
             ScheduleRoomSelector.EnsureMatchesLectureType(classroom, schedule.LectureType);
 
             if (!ScheduleRoomSelector.HasCapacity(classroom, section, schedule.GroupName))
@@ -361,7 +586,22 @@ namespace University_Timetable_and_Classroom_Management_System.BusinessLayer
             schedule.BranchID = subject.BranchID ?? section.BranchID;
             schedule.SemesterNumber = subject.SemesterNumber;
 
-            await EnsureNoConflictsAsync(context, schedule, isUpdate);
+            if (checkConflicts)
+            {
+                await EnsureNoConflictsAsync(context, schedule, isUpdate);
+                var profileRows = await context.FacultySchedulingPreferences.AsNoTracking().Where(p =>
+                    p.FacultyMemberID == schedule.FacultyMemberID && p.SemesterNumber == schedule.SemesterNumber).ToListAsync();
+                if (profileRows.Count > 0)
+                {
+                    var otherLectures = await context.Schedules.AsNoTracking().Where(s =>
+                        s.FacultyMemberID == schedule.FacultyMemberID && s.SemesterNumber == schedule.SemesterNumber &&
+                        (!isUpdate || s.ScheduleID != schedule.ScheduleID)).ToListAsync();
+                    var cells = await context.FacultyPeriodPreferences.AsNoTracking().Where(p => p.FacultyMemberID == schedule.FacultyMemberID && p.SemesterNumber == schedule.SemesterNumber).ToListAsync();
+                    foreach (var profile in FacultyPreferenceRules.FromRows(profileRows, cells).Values)
+                        if (FacultyPreferenceRules.Violation(profile, otherLectures.Append(schedule), lecturePeriods.ToDictionary(p => p.TimeSlotID)) is { } violation)
+                            throw new ArgumentException(violation);
+                }
+            }
         }
 
         private static async Task EnsureNoConflictsAsync(AppDbContext context, Schedule schedule, bool isUpdate)
@@ -445,7 +685,7 @@ namespace University_Timetable_and_Classroom_Management_System.BusinessLayer
         {
             if (string.IsNullOrWhiteSpace(groupName))
             {
-                return false;
+                return AcademicStructureRules.AllowsWholeSectionPractical(section.StudyYearID);
             }
 
             string normalizedGroupName = groupName.Trim().ToUpperInvariant();

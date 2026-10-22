@@ -1,0 +1,86 @@
+[
+  {
+    "name": "Branches load is actually deferred",
+    "passed": true
+  },
+  {
+    "name": "StudyYears load is actually deferred",
+    "passed": true
+  },
+  {
+    "name": "Sections load is actually deferred",
+    "passed": true
+  },
+  {
+    "name": "Subjects load is actually deferred",
+    "passed": true
+  },
+  {
+    "name": "Classrooms load is actually deferred",
+    "passed": true
+  },
+  {
+    "name": "TimeSlots load is actually deferred",
+    "passed": true
+  },
+  {
+    "name": "FacultyMembers load is actually deferred",
+    "passed": true
+  },
+  {
+    "name": "FacultyAssignments load is actually deferred",
+    "passed": true
+  },
+  {
+    "name": "Schedules load is actually deferred",
+    "passed": true
+  },
+  {
+    "name": "Navigation disposes all nine pages while their reads are pending",
+    "passed": true
+  },
+  {
+    "name": "Branches deferred load completes safely after disposal",
+    "passed": true
+  },
+  {
+    "name": "StudyYears deferred load completes safely after disposal",
+    "passed": true
+  },
+  {
+    "name": "Sections deferred load completes safely after disposal",
+    "passed": true
+  },
+  {
+    "name": "Subjects deferred load completes safely after disposal",
+    "passed": true
+  },
+  {
+    "name": "Classrooms deferred load completes safely after disposal",
+    "passed": true
+  },
+  {
+    "name": "TimeSlots deferred load completes safely after disposal",
+    "passed": true
+  },
+  {
+    "name": "FacultyMembers deferred load completes safely after disposal",
+    "passed": true
+  },
+  {
+    "name": "FacultyAssignments deferred load completes safely after disposal",
+    "passed": true
+  },
+  {
+    "name": "Schedules deferred load completes safely after disposal",
+    "passed": true
+  },
+  {
+    "name": "The current page still loads and displays subjects",
+    "passed": true
+  },
+  {
+    "name": "Deferred navigation never accesses disposed controls",
+    "passed": true
+  }
+]

@@ -22,20 +22,34 @@ namespace University_Timetable_and_Classroom_Management_System.BusinessLayer
         {
             await using var context = new AppDbContext();
             facultyMember.FacultyMemberID = await AutoKeyGenerator.NextAsync(context.FacultyMembers.Select(f => f.FacultyMemberID));
+            var result = await AddInContextAsync(context, facultyMember);
+            return result;
+        }
+
+        internal static async Task<FacultyMember> AddInContextAsync(AppDbContext context, FacultyMember facultyMember)
+        {
             await ValidateAsync(context, facultyMember, false);
             await context.FacultyMembers.AddAsync(facultyMember);
             await ManualKeySaveHelper.SaveWithManualKeyAsync(context, "[FacultyMembers]");
             return facultyMember;
         }
 
+
         public async Task<FacultyMember> UpdateAsync(FacultyMember facultyMember)
         {
             await using var context = new AppDbContext();
+            var result = await UpdateInContextAsync(context, facultyMember);
+            return result;
+        }
+
+        internal static async Task<FacultyMember> UpdateInContextAsync(AppDbContext context, FacultyMember facultyMember)
+        {
             await ValidateAsync(context, facultyMember, true);
             context.FacultyMembers.Update(facultyMember);
             await context.SaveChangesAsync();
             return facultyMember;
         }
+
 
         public async Task DeleteAsync(int id)
         {
@@ -72,6 +86,8 @@ namespace University_Timetable_and_Classroom_Management_System.BusinessLayer
             }
 
             facultyMember.FullName = facultyMember.FullName.Trim();
+            InputValidation.TextLength(facultyMember.FullName, 100, "Faculty member name");
+            InputValidation.TextLength(facultyMember.AcademicTitle, 50, "Academic title");
             facultyMember.AcademicTitle = string.IsNullOrWhiteSpace(facultyMember.AcademicTitle)
                 ? null
                 : facultyMember.AcademicTitle.Trim();

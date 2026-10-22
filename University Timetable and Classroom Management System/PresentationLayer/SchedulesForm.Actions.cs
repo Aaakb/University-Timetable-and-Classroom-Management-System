@@ -1,4 +1,4 @@
-﻿using System.Windows.Forms;
+using System.Windows.Forms;
 using University_Timetable_and_Classroom_Management_System.BusinessLayer;
 
 namespace University_Timetable_and_Classroom_Management_System
@@ -7,7 +7,7 @@ namespace University_Timetable_and_Classroom_Management_System
     {
         private async Task GenerateScheduleAsync()
         {
-            if (!ConfirmScheduleGeneration())
+            if (IsScheduleUiUnavailable || !ConfirmScheduleGeneration())
             {
                 return;
             }
@@ -16,13 +16,16 @@ namespace University_Timetable_and_Classroom_Management_System
 
             try
             {
-                var result = await scheduleService.GenerateAsync();
+                var result = await scheduleService.RegenerateAsync();
+                if (IsScheduleUiUnavailable) return;
                 await LoadSchedulesAsync();
+                if (IsScheduleUiUnavailable) return;
+                ClearScheduleForm();
                 ShowInformation(BuildGenerationMessage(result));
             }
             catch (Exception ex)
             {
-                ShowError("Unable to generate schedule.", ex);
+                ShowError("تعذر توليد الجدول.", ex);
             }
             finally
             {
@@ -34,63 +37,68 @@ namespace University_Timetable_and_Classroom_Management_System
         {
             var confirmation = UiMessages.Confirm(
                 this,
-                "This will generate schedule records automatically. Continue?",
-                "Generate Timetable");
+                "سيُنشأ جدول جديد للفصلين من المواد والتكليفات الحالية، بغض النظر عن الفلاتر. ستبقى المحاضرات المثبتة في مواقعها.\n\nتُحفظ نسخة تلقائية من الجدول الحالي قبل الاستبدال، وإذا فشل التوليد يبقى الجدول الحالي كما هو.\n\nهل تريد توليد جدول جديد؟",
+                "توليد جدول جديد");
 
             return confirmation == DialogResult.Yes;
         }
 
         private static string BuildGenerationMessage(ScheduleGenerationResult result)
         {
+            if (result.IsRegenerated)
+                return $"اكتمل توليد جدول جديد للفصلين. إجمالي المحاضرات: {result.CreatedCount}.\n" +
+                    $"المحاضرات الجديدة: {result.AddedCount}، المحاضرات المثبتة المحتفظ بها: {result.PreservedCount}." +
+                    (result.SafetyBackupPath is null ? "" : "\n\nنسخة الجدول السابق:\n" + result.SafetyBackupPath +
+                        "\nيمكنك الرجوع إليها باستخدام «استعادة نسخة».");
             var message = new List<string>
             {
-                $"Generation completed. Created: {result.CreatedCount}, Skipped: {result.SkippedCount}.",
-                $"Required subject-section lessons: {result.RequiredCount}.",
-                $"Available setup: {result.TimeSlotCount} time slots, {result.ClassroomCount} classrooms, {result.SectionCount} sections."
+                $"اكتمل التوليد. إجمالي المحاضرات: {result.CreatedCount}.",
+                $"المضافة: {result.AddedCount}، المحتفظ بها: {result.PreservedCount}، المصححة: {result.RepairedCount}، المتبقية: {result.SkippedCount}.",
+                $"الموارد المتاحة: {result.TimeSlotCount} فترة، {result.ClassroomCount} قاعة، {result.SectionCount} شعبة."
             };
 
             if (result.AddedTimeSlotCount > 0 || result.AddedClassroomCount > 0)
             {
-                message.Add($"Auto-added resources: {result.AddedTimeSlotCount} time slot(s), {result.AddedClassroomCount} classroom/lab(s).");
+                message.Add($"الموارد المضافة تلقائياً: {result.AddedTimeSlotCount} فترة، {result.AddedClassroomCount} قاعة أو مختبر.");
             }
 
             if (result.AddedFacultyMemberCount > 0 || result.AddedFacultySubjectAssignmentCount > 0)
             {
-                message.Add($"Auto-added teaching coverage: {result.AddedFacultyMemberCount} faculty member(s), {result.AddedFacultySubjectAssignmentCount} subject assignment(s).");
+                message.Add($"التغطية التدريسية المضافة تلقائياً: {result.AddedFacultyMemberCount} تدريسي، {result.AddedFacultySubjectAssignmentCount} تكليف تدريسي.");
             }
 
             if (result.SkippedCount == 0 && result.UnassignedSubjectsCount == 0)
             {
-                message.Add("The generated schedule is complete.");
+                message.Add("الجدول الناتج مكتمل.");
                 return string.Join(Environment.NewLine, message);
             }
 
             message.Add("");
-            message.Add("To create a complete schedule, check:");
+            message.Add("لإكمال الجدول، راجع ما يأتي:");
 
             if (result.UnassignedSubjectsCount > 0)
             {
-                message.Add($"- Assign faculty members to {result.UnassignedSubjectsCount} subject(s).");
+                message.Add($"- كلّف تدريسيين بتدريس {result.UnassignedSubjectsCount} مادة.");
             }
 
             if (result.MissingSectionCount > 0)
             {
-                message.Add($"- Add matching sections for {result.MissingSectionCount} subject assignment(s).");
+                message.Add($"- أضف شعباً مناسبة لعدد {result.MissingSectionCount} من التكليفات.");
             }
 
             if (result.NoClassroomCount > 0)
             {
-                message.Add($"- Add classrooms or increase classroom capacity for {result.NoClassroomCount} lesson(s).");
+                message.Add($"- أضف قاعات أو زِد سعتها لتغطية {result.NoClassroomCount} محاضرة.");
             }
 
             if (result.ConflictCount > 0)
             {
-                message.Add($"- Add more non-break time slots, classrooms, or faculty coverage for {result.ConflictCount} conflicted lesson(s).");
+                message.Add($"- أضف فترات أو قاعات أو تكليفات تدريسية لحل تعارض {result.ConflictCount} محاضرة.");
             }
 
             if (result.DuplicateAssignmentCount > 0)
             {
-                message.Add($"- Remove {result.DuplicateAssignmentCount} duplicate faculty-subject assignment(s).");
+                message.Add($"- احذف {result.DuplicateAssignmentCount} تكليفاً تدريسياً مكرراً.");
             }
 
             return string.Join(Environment.NewLine, message);
@@ -98,6 +106,7 @@ namespace University_Timetable_and_Classroom_Management_System
 
         private async Task AddScheduleAsync()
         {
+            if (IsScheduleUiUnavailable) return;
             if (!TryBuildSchedule(out var schedule))
             {
                 return;
@@ -110,9 +119,10 @@ namespace University_Timetable_and_Classroom_Management_System
 
         private async Task UpdateScheduleAsync()
         {
+            if (IsScheduleUiUnavailable) return;
             if (!TryGetSelectedScheduleId(out int scheduleId) || !TryBuildSchedule(out var schedule))
             {
-                ShowInformation("Select a schedule row before updating.");
+                ShowInformation("اختر محاضرة من الجدول قبل التعديل.");
                 return;
             }
 
@@ -125,13 +135,14 @@ namespace University_Timetable_and_Classroom_Management_System
 
         private async Task DeleteScheduleAsync()
         {
+            if (IsScheduleUiUnavailable) return;
             if (!TryGetSelectedScheduleId(out int scheduleId))
             {
-                ShowInformation("Select a schedule row before deleting.");
+                ShowInformation("اختر محاضرة من الجدول قبل الحذف.");
                 return;
             }
 
-            var confirmation = UiMessages.ConfirmDeletion(this, "Delete Schedule");
+            var confirmation = UiMessages.ConfirmDeletion(this, "حذف المحاضرة");
 
             if (confirmation != DialogResult.Yes)
             {
@@ -145,18 +156,21 @@ namespace University_Timetable_and_Classroom_Management_System
 
         private async Task ExecuteScheduleActionAsync(Func<Task> action, string successMessage)
         {
+            if (IsScheduleUiUnavailable) return;
             SetScheduleActionsEnabled(false);
 
             try
             {
                 await action();
+                if (IsScheduleUiUnavailable) return;
                 await LoadSchedulesAsync();
+                if (IsScheduleUiUnavailable) return;
                 ClearScheduleForm();
                 ShowInformation(successMessage);
             }
             catch (Exception ex)
             {
-                ShowError("Unable to complete the schedule operation.", ex);
+                ShowError("تعذر إتمام العملية على المحاضرة.", ex);
             }
             finally
             {
@@ -166,6 +180,7 @@ namespace University_Timetable_and_Classroom_Management_System
 
         private async Task ExportSchedulePdfAsync()
         {
+            if (IsScheduleUiUnavailable) return;
             var rows = GetFilteredRows()
                 .Select(row => new SchedulePdfRow(
                     row.SemesterNumber,
@@ -184,9 +199,9 @@ namespace University_Timetable_and_Classroom_Management_System
 
             using var dialog = new SaveFileDialog
             {
-                Filter = "PDF files (*.pdf)|*.pdf",
+                Filter = "ملفات PDF (*.pdf)|*.pdf",
                 FileName = $"Schedule-{DateTime.Now:yyyyMMdd-HHmm}.pdf",
-                Title = "Export schedule to PDF"
+                Title = "تصدير الجدول إلى PDF"
             };
 
             if (dialog.ShowDialog(this) != DialogResult.OK)
@@ -196,18 +211,32 @@ namespace University_Timetable_and_Classroom_Management_System
 
             try
             {
-                await schedulePdfExportService.ExportAsync(dialog.FileName, rows);
-                ShowInformation("Schedule exported successfully.");
+                string? facultyName = GetSelectedOptionalId(cmbFacultyFilter) is int facultyId
+                    ? facultyMembersLookup.FirstOrDefault(faculty => faculty.FacultyMemberID == facultyId)?.FullName
+                    : null;
+                await schedulePdfExportService.ExportAsync(dialog.FileName, rows, new SchedulePdfExportOptions(facultyName));
+                ShowInformation("تم تصدير الجدول بنجاح.");
             }
             catch (Exception ex)
             {
-                ShowError("Unable to export schedule PDF.", ex);
+                ShowError("تعذر تصدير الجدول إلى PDF.", ex);
             }
         }
 
         private async Task PopulateScheduleEditorFromSelectionAsync()
         {
-            if (dgvSchedules.CurrentRow?.DataBoundItem is not ScheduleRow row)
+            if (IsDisposed || Disposing || isUpdatingScheduleLookups || dgvSchedules.IsDisposed || dgvSchedules.Disposing)
+            {
+                return;
+            }
+            int loadVersion = ++scheduleEditorLoadVersion;
+
+            // A BindingSource is disposed before its grid by the standard Designer
+            // Dispose method. SelectionChanged can still fire while its list is empty.
+            var selectedRow = dgvSchedules.CurrentRow;
+            if (selectedRow is null || !selectedRow.Selected || selectedRow.Index < 0 ||
+                selectedRow.Index >= scheduleBindingSource.Count ||
+                scheduleBindingSource[selectedRow.Index] is not ScheduleRow row)
             {
                 return;
             }
@@ -216,61 +245,79 @@ namespace University_Timetable_and_Classroom_Management_System
             {
                 var schedule = await scheduleService.GetByIdAsync(row.ScheduleID);
 
-                if (schedule is null)
+                if (schedule is null || loadVersion != scheduleEditorLoadVersion || IsDisposed || Disposing || dgvSchedules.IsDisposed ||
+                    scheduleBindingSource.Count == 0 || !ReferenceEquals(dgvSchedules.CurrentRow, selectedRow))
                 {
                     return;
                 }
 
-                txtScheduleId.Text = schedule.ScheduleID.ToString();
-                cmbDayOfWeek.SelectedItem = schedule.DayOfWeek;
-                SelectComboValue(cmbClassroom, schedule.ClassroomID);
-                SelectComboValue(cmbTimeSlot, schedule.TimeSlotID);
-                SelectComboValue(cmbStudyYear, schedule.StudyYearID);
-                SelectComboValue(cmbBranch, schedule.BranchID);
-                BindSectionsCombo(schedule.StudyYearID, schedule.BranchID, schedule.SectionID);
-                BindSubjectsCombo(schedule.StudyYearID, schedule.BranchID, schedule.SubjectID);
-                BindFacultyMembersForSubject(schedule.SubjectID, schedule.FacultyMemberID);
-                SelectComboValue(cmbSection, schedule.SectionID);
-                ConfigureLectureOptionsForSubject(
-                    subjectsLookup.FirstOrDefault(subject => subject.SubjectID == schedule.SubjectID),
-                    schedule.LectureType);
-                BindGroupNameCombo(schedule.GroupName);
+                isUpdatingScheduleLookups = true;
+                try
+                {
+                    txtScheduleId.Text = schedule.ScheduleID.ToString();
+                    cmbDayOfWeek.SelectedItem = schedule.DayOfWeek;
+                    SelectComboValue(cmbClassroom, schedule.ClassroomID);
+                    SelectComboValue(cmbTimeSlot, schedule.TimeSlotID);
+                    SelectComboValue(cmbStudyYear, schedule.StudyYearID);
+                    SelectComboValue(cmbBranch, schedule.BranchID);
+                    BindSectionsCombo(schedule.StudyYearID, schedule.BranchID, schedule.SectionID);
+                    BindSubjectsCombo(schedule.StudyYearID, schedule.BranchID, schedule.SubjectID);
+                    BindFacultyMembersForSubject(schedule.SubjectID, schedule.FacultyMemberID);
+                    SelectComboValue(cmbSection, schedule.SectionID);
+                    ConfigureLectureOptionsForSubject(
+                        subjectsLookup.FirstOrDefault(subject => subject.SubjectID == schedule.SubjectID),
+                        schedule.LectureType);
+                    BindGroupNameCombo(schedule.GroupName ?? "الشعبة كاملة");
+                    cmbBranch.Enabled = !AcademicStructureRules.UsesGeneralSections(schedule.StudyYearID ?? 0);
+                }
+                finally { isUpdatingScheduleLookups = false; }
             }
             catch (Exception ex)
             {
-                ShowError("Unable to load the selected schedule.", ex);
+                if (!IsDisposed && !Disposing)
+                    ShowError("تعذر تحميل المحاضرة المحددة.", ex);
             }
         }
 
         private void ClearScheduleForm()
         {
-            txtScheduleId.Clear();
-            ClearCombo(cmbSubject);
-            ClearCombo(cmbFacultyMember);
-            ClearCombo(cmbClassroom);
-            ClearCombo(cmbTimeSlot);
-            ClearCombo(cmbDayOfWeek);
-            ClearCombo(cmbStudyYear);
-            ClearCombo(cmbBranch);
-            cmbBranch.Enabled = true;
-            BindSectionsCombo();
-            BindSubjectsCombo();
-            ClearCombo(cmbSection);
-            BindFacultyMembersForSubject(null);
-            ConfigureLectureOptionsForSubject(null, "Theory");
-            BindGroupNameCombo();
-            ClearCombo(cmbGroupName);
-            dgvSchedules.ClearSelection();
+            if (IsScheduleUiUnavailable) return;
+            scheduleEditorLoadVersion++;
+            isUpdatingScheduleLookups = true;
+            try
+            {
+                txtScheduleId.Clear();
+                ClearCombo(cmbSubject);
+                ClearCombo(cmbFacultyMember);
+                ClearCombo(cmbClassroom);
+                ClearCombo(cmbTimeSlot);
+                ClearCombo(cmbDayOfWeek);
+                ClearCombo(cmbStudyYear);
+                ClearCombo(cmbBranch);
+                cmbBranch.Enabled = true;
+                BindSectionsCombo();
+                BindSubjectsCombo();
+                ClearCombo(cmbSection);
+                BindFacultyMembersForSubject(null);
+                ConfigureLectureOptionsForSubject(null, "Theory");
+                BindGroupNameCombo();
+                ClearCombo(cmbGroupName);
+                dgvSchedules.ClearSelection();
+            }
+            finally { isUpdatingScheduleLookups = false; }
         }
 
         private void SetScheduleActionsEnabled(bool enabled)
         {
+            if (IsScheduleUiUnavailable) return;
             btnGenerateSchedule.Enabled = enabled;
             btnAddSchedule.Enabled = enabled;
             btnUpdateSchedule.Enabled = enabled;
             btnDeleteSchedule.Enabled = enabled;
             btnClearScheduleForm.Enabled = enabled;
             btnExportSchedulePdf.Enabled = enabled;
+            btnBackupTimetable.Enabled = enabled;
+            btnRestoreTimetable.Enabled = enabled;
             btnScheduleGridView.Enabled = enabled;
             btnScheduleTimetableView.Enabled = enabled;
             dgvSchedules.Enabled = enabled;

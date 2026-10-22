@@ -1,10 +1,15 @@
-using University_Timetable_and_Classroom_Management_System.Models;
+﻿using University_Timetable_and_Classroom_Management_System.Models;
 
 namespace University_Timetable_and_Classroom_Management_System.BusinessLayer
 {
     internal sealed class ScheduleGenerationState
     {
         private readonly IReadOnlyDictionary<ScheduleDayPlanKey, ScheduleDayPlan> dayPlans;
+        private readonly IReadOnlyDictionary<(int Faculty, int Semester), FacultyScheduleRequest> preferences;
+        private readonly IReadOnlyDictionary<int, TimeSlot> periods;
+        private readonly System.Diagnostics.Stopwatch repairClock = System.Diagnostics.Stopwatch.StartNew();
+        private readonly ScheduleBuildContext? buildContext;
+        private int repairAttempts;
         private readonly HashSet<(int ClassroomID, int SemesterNumber, string DayOfWeek, int TimeSlotID)> classroomBusy = [];
         private readonly HashSet<(int FacultyMemberID, int SemesterNumber, string DayOfWeek, int TimeSlotID)> facultyBusy = [];
         private readonly HashSet<(int? StudyYearID, int? BranchID, int? SectionID, int SemesterNumber, string DayOfWeek, int TimeSlotID)> sectionAnyBusy = [];
@@ -20,11 +25,39 @@ namespace University_Timetable_and_Classroom_Management_System.BusinessLayer
         private readonly Dictionary<(int SemesterNumber, string DayOfWeek, int TimeSlotID), int> slotLoads = [];
 
         public List<Schedule> Schedules { get; } = [];
+        private readonly HashSet<Schedule> fixedSchedules = [];
 
-        public ScheduleGenerationState(IReadOnlyDictionary<ScheduleDayPlanKey, ScheduleDayPlan> dayPlans)
+        public ScheduleGenerationState(IReadOnlyDictionary<ScheduleDayPlanKey, ScheduleDayPlan> dayPlans) : this(dayPlans, null) { }
+        public ScheduleGenerationState(IReadOnlyDictionary<ScheduleDayPlanKey, ScheduleDayPlan> dayPlans, ScheduleBuildContext? context)
         {
             this.dayPlans = dayPlans;
+            buildContext = context;
+            preferences = context?.Preferences ?? new Dictionary<(int, int), FacultyScheduleRequest>();
+            periods = context?.TimeSlots.ToDictionary(p => p.TimeSlotID) ?? new Dictionary<int, TimeSlot>();
         }
+        public bool TryRepairStep()
+        {
+            buildContext?.CancellationToken.ThrowIfCancellationRequested();
+            return ++repairAttempts <= (buildContext?.RepairAttemptLimit ?? 20000) &&
+                repairClock.Elapsed.TotalSeconds < (buildContext?.RepairTimeLimitSeconds ?? 20);
+        }
+        public bool CanPlaceTogether(IReadOnlyList<Schedule> rows) => rows.All(CanPlace) &&
+            (buildContext?.EnforceSectionDayLimit != true || Schedules.Concat(rows).GroupBy(s => (s.SemesterNumber, s.SectionID))
+                .All(g => g.Select(s => s.DayOfWeek).Distinct().Count() <= ScheduleDayRules.MaximumSectionTeachingDays)) &&
+            !ScheduleConflictChecker.HasAnyPairConflict(rows) && preferences.All(entry =>
+                FacultyPreferenceRules.Violation(entry.Value, Schedules.Concat(rows), periods) is null);
+
+        public void SeedFixed(IEnumerable<Schedule> schedules)
+        {
+            foreach (var schedule in schedules)
+            {
+                if (!CanPlace(schedule)) throw new ArgumentException("Fixed lectures conflict with one another.");
+                fixedSchedules.Add(schedule);
+                Add(schedule);
+            }
+        }
+
+        public bool IsFixed(Schedule schedule) => fixedSchedules.Contains(schedule);
 
         public IEnumerable<int> GetOrderedFacultyOptions(
             IReadOnlyList<int> facultyMemberIds,
@@ -41,6 +74,12 @@ namespace University_Timetable_and_Classroom_Management_System.BusinessLayer
 
         public bool CanPlace(Schedule schedule)
         {
+            if (buildContext?.EnforceSectionDayLimit == true &&
+                !Schedules.Any(s => s.SemesterNumber == schedule.SemesterNumber && s.SectionID == schedule.SectionID && s.DayOfWeek == schedule.DayOfWeek) &&
+                Schedules.Where(s => s.SemesterNumber == schedule.SemesterNumber && s.SectionID == schedule.SectionID)
+                    .Select(s => s.DayOfWeek).Distinct().Count() >= ScheduleDayRules.MaximumSectionTeachingDays) return false;
+            if (preferences.TryGetValue((schedule.FacultyMemberID, schedule.SemesterNumber), out var profile) &&
+                FacultyPreferenceRules.Violation(profile, Schedules.Append(schedule), periods) is not null) return false;
             if (classroomBusy.Contains(ClassroomTimeKey(schedule)) ||
                 facultyBusy.Contains(FacultyTimeKey(schedule)))
             {
@@ -83,6 +122,22 @@ namespace University_Timetable_and_Classroom_Management_System.BusinessLayer
             int sameSubjectDayPenalty = HasSameSubjectSectionOnDay(schedule) ? 180 : 0;
             int practicalPairingScore = GetPracticalPairingScore(schedule);
             int compactDayScore = GetCompactDayScore(schedule, sectionDayLoad);
+            int preferenceScore = 0;
+            if (preferences.TryGetValue((schedule.FacultyMemberID, schedule.SemesterNumber), out var profile))
+            {
+                if (profile.HasScoredPreferences)
+                {
+                    if (FacultyPreferenceRules.Level(profile, schedule.DayOfWeek, schedule.TimeSlotID) == FacultyPreferenceLevel.Preferred)
+                        preferenceScore += 2 * FacultyPreferenceRules.Duration(candidate.TimeSlot) * 100;
+                    int attended = facultyDayLoads.Keys.Count(k => k.FacultyMemberID == schedule.FacultyMemberID && k.SemesterNumber == schedule.SemesterNumber);
+                    if (profile.UsePreferenceMatrix && facultyDayLoad == 0 && attended < profile.SelectedDays.Count) preferenceScore -= 100000;
+                }
+                if (!profile.SelectedDays.Contains(schedule.DayOfWeek)) preferenceScore += 10000;
+                if (profile.PreferredPeriodIds!.Count > 0 && !profile.PreferredPeriodIds.Contains(schedule.TimeSlotID)) preferenceScore += 150;
+                if (profile.TargetTeachingDays.HasValue && facultyDayLoad == 0 &&
+                    facultyDayLoads.Keys.Count(k => k.FacultyMemberID == schedule.FacultyMemberID && k.SemesterNumber == schedule.SemesterNumber) >= profile.TargetTeachingDays)
+                    preferenceScore += 1500;
+            }
 
             return
                 facultyDayLoad * 45 +
@@ -92,8 +147,14 @@ namespace University_Timetable_and_Classroom_Management_System.BusinessLayer
                 sameSubjectDayPenalty +
                 practicalPairingScore +
                 compactDayScore +
+                preferenceScore +
                 ScheduleDayRules.GetDayOrder(schedule.DayOfWeek);
         }
+
+        public uint VariationOrder(string day, int period, int room, int faculty = 0) =>
+            buildContext?.VariationSeed is > 0
+                ? unchecked((uint)HashCode.Combine(buildContext.VariationSeed, day, period, room, faculty))
+                : 0;
 
         public void Add(Schedule schedule)
         {
@@ -104,14 +165,19 @@ namespace University_Timetable_and_Classroom_Management_System.BusinessLayer
         public void RemoveRange(IEnumerable<Schedule> schedules)
         {
             var schedulesToRemove = schedules.ToHashSet();
+            if (schedulesToRemove.Overlaps(fixedSchedules))
+                throw new InvalidOperationException("Locked lectures cannot be removed by generation.");
             Schedules.RemoveAll(schedulesToRemove.Contains);
             RebuildIndexes();
         }
 
         public void ResetTo(IEnumerable<Schedule> schedules)
         {
+            var snapshot = schedules.ToList();
+            if (!fixedSchedules.IsSubsetOf(snapshot))
+                throw new InvalidOperationException("A generation snapshot cannot discard locked lectures.");
             Schedules.Clear();
-            Schedules.AddRange(schedules);
+            Schedules.AddRange(snapshot);
             RebuildIndexes();
         }
 

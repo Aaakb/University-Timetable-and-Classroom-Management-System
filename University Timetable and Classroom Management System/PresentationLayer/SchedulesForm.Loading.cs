@@ -1,4 +1,4 @@
-﻿using Guna.UI2.WinForms;
+using Guna.UI2.WinForms;
 using University_Timetable_and_Classroom_Management_System.BusinessLayer;
 using University_Timetable_and_Classroom_Management_System.Models;
 
@@ -8,17 +8,20 @@ namespace University_Timetable_and_Classroom_Management_System
     {
         private async Task RefreshSchedulesAsync()
         {
+            if (IsScheduleUiUnavailable) return;
             SetScheduleActionsEnabled(false);
 
             try
             {
                 await LoadLookupsAsync();
+                if (IsScheduleUiUnavailable) return;
                 await LoadSchedulesAsync();
+                if (IsScheduleUiUnavailable) return;
                 ClearScheduleForm();
             }
             catch (Exception ex)
             {
-                ShowError("Unable to refresh schedule data.", ex);
+                ShowError("تعذر تحديث بيانات الجدول.", ex);
             }
             finally
             {
@@ -28,14 +31,33 @@ namespace University_Timetable_and_Classroom_Management_System
 
         private async Task LoadLookupsAsync()
         {
-            subjectsLookup = await subjectService.GetAllAsync();
-            facultyMembersLookup = await facultyMemberService.GetAllAsync();
-            facultySubjectAssignmentsLookup = await facultyMemberSubjectService.GetAllAsync();
+            if (IsScheduleUiUnavailable) return;
+
+            // Navigation disposes the old page while database reads are pending.
+            // Finish the current read, then stop before querying or binding more.
+            var subjects = await subjectService.GetAllAsync();
+            if (IsScheduleUiUnavailable) return;
+            var facultyMembers = await facultyMemberService.GetAllAsync();
+            if (IsScheduleUiUnavailable) return;
+            var assignments = await facultyMemberSubjectService.GetAllAsync();
+            if (IsScheduleUiUnavailable) return;
             var classrooms = await classroomService.GetAllAsync();
+            if (IsScheduleUiUnavailable) return;
             var timeSlots = await timeSlotService.GetAllAsync();
-            studyYearsLookup = await studyYearService.GetAllAsync();
-            branchesLookup = await branchService.GetAllAsync();
-            sectionsLookup = await sectionService.GetAllAsync();
+            if (IsScheduleUiUnavailable) return;
+            var studyYears = await studyYearService.GetAllAsync();
+            if (IsScheduleUiUnavailable) return;
+            var branches = await branchService.GetAllAsync();
+            if (IsScheduleUiUnavailable) return;
+            var sections = await sectionService.GetAllAsync();
+            if (IsScheduleUiUnavailable) return;
+
+            subjectsLookup = subjects;
+            facultyMembersLookup = facultyMembers;
+            facultySubjectAssignmentsLookup = assignments;
+            studyYearsLookup = studyYears;
+            branchesLookup = branches;
+            sectionsLookup = sections;
 
             BindSubjectsCombo();
             BindFacultyMembersForSubject(null);
@@ -45,8 +67,8 @@ namespace University_Timetable_and_Classroom_Management_System
             BindCombo(cmbBranch, branchesLookup.Select(branch => new ComboOption(branch.BranchID, branch.BranchName)));
             BindSectionsCombo();
 
-            BindFilterCombo(cmbFacultyFilter, facultyMembersLookup.Select(faculty => new ComboOption(faculty.FacultyMemberID, faculty.FullName)), "All faculty");
-            BindFilterCombo(cmbStudyYearFilter, studyYearsLookup.Select(studyYear => new ComboOption(studyYear.StudyYearID, studyYear.YearName)), "All study years");
+            BindFilterCombo(cmbFacultyFilter, facultyMembersLookup.Select(faculty => new ComboOption(faculty.FacultyMemberID, faculty.FullName)), "جميع التدريسيين");
+            BindFilterCombo(cmbStudyYearFilter, studyYearsLookup.Select(studyYear => new ComboOption(studyYear.StudyYearID, studyYear.YearName)), "جميع المراحل");
             BindSectionFilterCombo();
             BindDayCombos();
             BindSemesterFilterCombo();
@@ -56,15 +78,19 @@ namespace University_Timetable_and_Classroom_Management_System
 
         private async Task LoadSchedulesAsync()
         {
+            if (IsScheduleUiUnavailable) return;
             var schedules = await scheduleService.GetScheduleDetailsAsync();
+            if (IsScheduleUiUnavailable) return;
             scheduleRows = schedules
                 .Select(ScheduleRow.FromDetails)
-                .OrderBy(row => StudyYearOrder(row.StudyYearName))
-                .ThenBy(row => row.BranchName)
-                .ThenBy(row => row.SectionName)
-                .ThenBy(row => row.SemesterNumber)
+                .OrderBy(row => row.SemesterNumber)
                 .ThenBy(row => DayOrder(row.DayOfWeek))
                 .ThenBy(row => row.StartTime)
+                .ThenBy(row => StudyYearOrder(row.StudyYearName))
+                .ThenBy(row => row.BranchName)
+                .ThenBy(row => row.SectionName)
+                .ThenBy(row => row.GroupName)
+                .ThenBy(row => row.ScheduleID)
                 .ToList();
 
             ApplyScheduleFilters();
@@ -72,6 +98,7 @@ namespace University_Timetable_and_Classroom_Management_System
 
         private async Task LoadFormAsync()
         {
+            if (IsScheduleUiUnavailable) return;
             await RefreshSchedulesAsync();
         }
 
@@ -110,7 +137,7 @@ namespace University_Timetable_and_Classroom_Management_System
                 .ThenBy(section => section.SectionName)
                 .Select(section => new ComboOption(section.SectionID, FormatSection(section)));
 
-            BindFilterCombo(cmbSectionFilter, sections, "All sections");
+            BindFilterCombo(cmbSectionFilter, sections, "جميع الشعب");
             SelectComboValue(cmbSectionFilter, selectedSectionId);
         }
 
@@ -119,10 +146,10 @@ namespace University_Timetable_and_Classroom_Management_System
             BindFilterCombo(
                 cmbSemesterFilter,
                 [
-                    new ComboOption(1, "Semester 1"),
-                    new ComboOption(2, "Semester 2")
+                    new ComboOption(1, "الفصل الأول"),
+                    new ComboOption(2, "الفصل الثاني")
                 ],
-                "All semesters");
+                "جميع الفصول");
         }
 
         private void BindGroupFilterCombo()
@@ -135,12 +162,15 @@ namespace University_Timetable_and_Classroom_Management_System
 
         private void BindGroupNameCombo(string? selectedGroupName = null)
         {
+            if (IsScheduleUiUnavailable) return;
             string? currentSelection = selectedGroupName ?? GetSelectedPlainText(cmbGroupName);
             var section = GetSelectedOptionalId(cmbSection) is int sectionId
                 ? sectionsLookup.FirstOrDefault(item => item.SectionID == sectionId)
                 : null;
 
             cmbGroupName.Items.Clear();
+            if (section != null && AcademicStructureRules.AllowsWholeSectionPractical(section.StudyYearID))
+                cmbGroupName.Items.Add("الشعبة كاملة");
             cmbGroupName.Items.AddRange(GetAllowedGroupsForSection(section).Cast<object>().ToArray());
             SelectComboText(cmbGroupName, currentSelection);
             ApplyLectureTypeSelection();
@@ -148,7 +178,7 @@ namespace University_Timetable_and_Classroom_Management_System
 
         private void ApplySubjectSelection()
         {
-            if (isUpdatingScheduleLookups)
+            if (IsScheduleUiUnavailable || isUpdatingScheduleLookups)
             {
                 return;
             }
@@ -168,10 +198,8 @@ namespace University_Timetable_and_Classroom_Management_System
             isUpdatingScheduleLookups = true;
             SelectComboValue(cmbStudyYear, subject.StudyYearID);
 
-            if (subject.BranchID.HasValue)
-            {
-                SelectComboValue(cmbBranch, subject.BranchID);
-            }
+            SelectComboValue(cmbBranch, subject.BranchID);
+            cmbBranch.Enabled = !AcademicStructureRules.UsesGeneralSections(subject.StudyYearID);
 
             BindSectionsCombo(subject.StudyYearID, subject.BranchID);
             BindFacultyMembersForSubject(subject.SubjectID);
@@ -182,7 +210,7 @@ namespace University_Timetable_and_Classroom_Management_System
 
         private void ApplyStudyYearSelection()
         {
-            if (isUpdatingScheduleLookups)
+            if (IsScheduleUiUnavailable || isUpdatingScheduleLookups)
             {
                 return;
             }
@@ -213,7 +241,7 @@ namespace University_Timetable_and_Classroom_Management_System
 
         private void ApplyBranchSelection()
         {
-            if (isUpdatingScheduleLookups)
+            if (IsScheduleUiUnavailable || isUpdatingScheduleLookups)
             {
                 return;
             }
@@ -239,7 +267,7 @@ namespace University_Timetable_and_Classroom_Management_System
 
         private void ApplySectionSelection()
         {
-            if (isUpdatingScheduleLookups)
+            if (IsScheduleUiUnavailable || isUpdatingScheduleLookups)
             {
                 return;
             }
@@ -255,28 +283,31 @@ namespace University_Timetable_and_Classroom_Management_System
             }
 
             int? selectedSubjectId = GetSelectedOptionalId(cmbSubject);
+            string? selectedLectureType = GetSelectedPlainText(cmbLectureType);
+            string? selectedGroupName = GetSelectedPlainText(cmbGroupName);
 
             isUpdatingScheduleLookups = true;
             SelectComboValue(cmbStudyYear, section.StudyYearID);
             SelectComboValue(cmbBranch, section.BranchID);
             BindSubjectsCombo(section.StudyYearID, section.BranchID, selectedSubjectId);
-            BindFacultyMembersForSubject(selectedSubjectId);
-            ConfigureLectureOptionsForSubject(GetSelectedSubject());
+            BindFacultyMembersForSubject(GetSelectedOptionalId(cmbSubject));
+            ConfigureLectureOptionsForSubject(GetSelectedSubject(), selectedLectureType);
             cmbBranch.Enabled = !AcademicStructureRules.UsesGeneralSections(section.StudyYearID);
-            BindGroupNameCombo();
+            BindGroupNameCombo(selectedGroupName);
             isUpdatingScheduleLookups = false;
         }
 
         private void ApplyLectureTypeSelection()
         {
+            if (IsScheduleUiUnavailable) return;
             var selectedSubject = GetSelectedSubject();
             bool isPractical = string.Equals(
                 GetSelectedPlainText(cmbLectureType),
                 "Practical",
                 StringComparison.OrdinalIgnoreCase);
-            bool canChoosePractical = selectedSubject?.PracticalHours > 0;
+            bool canChoosePractical = selectedSubject?.EffectivePracticalLectureCount > 0;
             bool shouldShowLectureType = selectedSubject is null ||
-                (selectedSubject.TheoreticalHours > 0 && selectedSubject.PracticalHours > 0);
+                (selectedSubject.EffectiveTheoreticalLectureCount > 0 && selectedSubject.EffectivePracticalLectureCount > 0);
 
             lblLectureType.Visible = shouldShowLectureType;
             cmbLectureType.Visible = shouldShowLectureType;
@@ -292,6 +323,7 @@ namespace University_Timetable_and_Classroom_Management_System
 
         private void BindFacultyMembersForSubject(int? subjectId, int? selectedFacultyMemberId = null)
         {
+            int? currentFacultyMemberId = GetSelectedOptionalId(cmbFacultyMember);
             var facultyMembers = subjectId.HasValue
                 ? facultySubjectAssignmentsLookup
                     .Where(assignment => assignment.SubjectID == subjectId.Value)
@@ -311,9 +343,13 @@ namespace University_Timetable_and_Classroom_Management_System
             {
                 SelectComboValue(cmbFacultyMember, selectedFacultyMemberId);
             }
-            else if (options.Count == 1)
+            else if (options.Count > 0)
             {
-                SelectComboValue(cmbFacultyMember, options[0].Id);
+                // Keep a valid choice when section/subject lookups are rebound.
+                // Otherwise select an assigned teacher immediately, even if several exist.
+                int? facultyMemberId = options.Any(option => option.Id == currentFacultyMemberId)
+                    ? currentFacultyMemberId : options[0].Id;
+                SelectComboValue(cmbFacultyMember, facultyMemberId);
             }
         }
 
@@ -405,20 +441,16 @@ namespace University_Timetable_and_Classroom_Management_System
                 yield break;
             }
 
-            if (subject.TheoreticalHours > 0)
+            if (subject.EffectiveTheoreticalLectureCount > 0)
             {
                 yield return "Theory";
             }
 
-            if (subject.PracticalHours > 0)
+            if (subject.EffectivePracticalLectureCount > 0)
             {
                 yield return "Practical";
             }
 
-            if (subject.TheoreticalHours <= 0 && subject.PracticalHours <= 0)
-            {
-                yield return "Theory";
-            }
         }
 
         private Subject? GetSelectedSubject()

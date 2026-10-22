@@ -2,6 +2,9 @@ namespace University_Timetable_and_Classroom_Management_System.BusinessLayer
 {
     public static class AcademicStructureRules
     {
+        // The final fourth-year timetable includes practical sessions for the entire section.
+        public static bool AllowsWholeSectionPractical(int studyYearId) => studyYearId == 4;
+
         public static bool UsesGeneralSections(int studyYearId)
         {
             return studyYearId is 1 or 2;

@@ -4,6 +4,8 @@ namespace University_Timetable_and_Classroom_Management_System.Models
     {
         public int ScheduleID { get; set; }
 
+        public bool IsLocked { get; set; }
+
         public int SubjectID { get; set; }
 
         public int FacultyMemberID { get; set; }

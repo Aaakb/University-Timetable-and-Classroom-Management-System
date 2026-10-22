@@ -1,4 +1,4 @@
-namespace University_Timetable_and_Classroom_Management_System.BusinessLayer
+﻿namespace University_Timetable_and_Classroom_Management_System.BusinessLayer
 {
     public sealed record ScheduleGenerationResult(
         int CreatedCount,
@@ -15,5 +15,13 @@ namespace University_Timetable_and_Classroom_Management_System.BusinessLayer
         int AddedTimeSlotCount,
         int AddedClassroomCount,
         int AddedFacultyMemberCount,
-        int AddedFacultySubjectAssignmentCount);
+        int AddedFacultySubjectAssignmentCount)
+    {
+        public int PreservedCount { get; init; }
+        public int AddedCount { get; init; }
+        public int RepairedCount { get; init; }
+        public bool IsRegenerated { get; init; }
+        public int ReplacedCount { get; init; }
+        public string? SafetyBackupPath { get; init; }
+    }
 }

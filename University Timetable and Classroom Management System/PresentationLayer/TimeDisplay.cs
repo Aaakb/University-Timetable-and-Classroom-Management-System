@@ -13,7 +13,7 @@ namespace University_Timetable_and_Classroom_Management_System
 
         public static string FormatRange(TimeSpan startTime, TimeSpan endTime)
         {
-            return $"{Format(startTime)} - {Format(endTime)}";
+            return $"\u200E{Format(startTime)} - {Format(endTime)}\u200E";
         }
     }
 }

@@ -1,10 +1,11 @@
-using University_Timetable_and_Classroom_Management_System.Models;
+﻿using University_Timetable_and_Classroom_Management_System.Models;
 
 namespace University_Timetable_and_Classroom_Management_System
 {
     internal sealed class ScheduleRow
     {
         public int ScheduleID { get; init; }
+        public bool IsLocked { get; set; }
         public int SubjectID { get; init; }
         public int FacultyMemberID { get; init; }
         public int ClassroomID { get; init; }
@@ -28,45 +29,12 @@ namespace University_Timetable_and_Classroom_Management_System
         public string GroupName { get; init; } = "All";
         public string LectureType { get; init; } = "Theory";
 
-        public static ScheduleRow FromSchedule(Schedule schedule)
-        {
-            string timeSlotName = schedule.TimeSlot is null
-                ? "-"
-                : TimeDisplay.FormatRange(schedule.TimeSlot.StartTime, schedule.TimeSlot.EndTime);
-
-            return new ScheduleRow
-            {
-                ScheduleID = schedule.ScheduleID,
-                SubjectID = schedule.SubjectID,
-                FacultyMemberID = schedule.FacultyMemberID,
-                ClassroomID = schedule.ClassroomID,
-                TimeSlotID = schedule.TimeSlotID,
-                SemesterNumber = schedule.SemesterNumber,
-                StudyYearID = schedule.StudyYearID,
-                BranchID = schedule.BranchID,
-                SectionID = schedule.SectionID,
-                DayOfWeek = schedule.DayOfWeek,
-                SubjectName = schedule.Subject?.SubjectName ?? "-",
-                FacultyMemberName = schedule.FacultyMember?.FullName ?? "-",
-                ClassroomName = schedule.Classroom?.ClassroomNumber ?? "-",
-                TimeSlotName = timeSlotName,
-                StartTime = schedule.TimeSlot?.StartTime ?? TimeSpan.Zero,
-                EndTime = schedule.TimeSlot?.EndTime ?? TimeSpan.Zero,
-                StartTimeText = schedule.TimeSlot is null ? "-" : TimeDisplay.Format(schedule.TimeSlot.StartTime),
-                EndTimeText = schedule.TimeSlot is null ? "-" : TimeDisplay.Format(schedule.TimeSlot.EndTime),
-                StudyYearName = schedule.StudyYear?.YearName ?? "-",
-                BranchName = schedule.Branch?.BranchName ?? "-",
-                SectionName = FormatScheduleSection(schedule),
-                GroupName = string.IsNullOrWhiteSpace(schedule.GroupName) ? "All" : schedule.GroupName,
-                LectureType = schedule.LectureType
-            };
-        }
-
         public static ScheduleRow FromDetails(ScheduleDetailsView details)
         {
             return new ScheduleRow
             {
                 ScheduleID = details.ScheduleID,
+                IsLocked = details.IsLocked,
                 SubjectID = details.SubjectID,
                 FacultyMemberID = details.FacultyMemberID,
                 ClassroomID = details.ClassroomID,
@@ -90,21 +58,6 @@ namespace University_Timetable_and_Classroom_Management_System
                 GroupName = string.IsNullOrWhiteSpace(details.GroupName) ? "All" : details.GroupName,
                 LectureType = details.LectureType
             };
-        }
-
-        private static string FormatScheduleSection(Schedule schedule)
-        {
-            if (schedule.Section is null)
-            {
-                return "-";
-            }
-
-            string year = schedule.StudyYear?.YearName ?? schedule.Section.StudyYear?.YearName ?? "Year";
-            string? branch = schedule.Branch?.BranchName ?? schedule.Section.Branch?.BranchName;
-
-            return string.IsNullOrWhiteSpace(branch)
-                ? $"{schedule.Section.SectionName} - {year}"
-                : $"{schedule.Section.SectionName} - {year} - {branch}";
         }
     }
 }

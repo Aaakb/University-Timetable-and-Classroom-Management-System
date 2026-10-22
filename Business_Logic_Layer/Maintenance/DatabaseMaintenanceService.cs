@@ -8,7 +8,7 @@ namespace University_Timetable_and_Classroom_Management_System.BusinessLayer
         public async Task ApplyPendingFixesAsync()
         {
             await using var context = new AppDbContext();
-            await context.Database.EnsureCreatedAsync();
+            bool databaseCreated = await context.Database.EnsureCreatedAsync();
 
             if (!context.Database.IsSqlServer())
             {
@@ -17,11 +17,18 @@ namespace University_Timetable_and_Classroom_Management_System.BusinessLayer
 
             await EnsureApplicationUsersTableAsync(context);
             await EnsureSubjectsSchemaAsync(context);
+            await SubjectDeletionSchema.EnsureAsync(context);
+            await SubjectLectureCountSchema.EnsureAsync(context);
             await EnsureSchedulesSchemaAsync(context);
+            await ScheduleLockSchema.EnsureAsync(context);
+            await FacultyPreferenceSchema.EnsureAsync(context);
             await NormalizeScheduleDataAsync(context);
             await RebuildScheduleIndexesAsync(context);
             await RecreateScheduleDetailsViewAsync(context);
-            await SchedulingResourceMaintenance.EnsureOfficialResourcesAsync(context);
+            // Defaults belong only to initial setup. An existing empty resource table
+            // may be the user's deliberate configuration, not missing seed data.
+            if (databaseCreated)
+                await SchedulingResourceMaintenance.InitializeNewDatabaseAsync(context);
         }
 
         private static async Task EnsureApplicationUsersTableAsync(AppDbContext context)
@@ -285,6 +292,7 @@ namespace University_Timetable_and_Classroom_Management_System.BusinessLayer
                         AS
                         SELECT
                             schedule.[ScheduleID],
+                            schedule.[IsLocked],
                             schedule.[SubjectID],
                             schedule.[FacultyMemberID],
                             schedule.[ClassroomID],

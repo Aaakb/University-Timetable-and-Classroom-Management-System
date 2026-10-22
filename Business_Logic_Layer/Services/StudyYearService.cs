@@ -27,20 +27,34 @@ namespace University_Timetable_and_Classroom_Management_System.BusinessLayer
         {
             await using var context = new AppDbContext();
             studyYear.StudyYearID = await AutoKeyGenerator.NextAsync(context.StudyYears.Select(sy => sy.StudyYearID));
+            var result = await AddInContextAsync(context, studyYear);
+            return result;
+        }
+
+        internal static async Task<StudyYear> AddInContextAsync(AppDbContext context, StudyYear studyYear)
+        {
             await ValidateAsync(context, studyYear, false);
             await context.StudyYears.AddAsync(studyYear);
             await ManualKeySaveHelper.SaveWithManualKeyAsync(context, "[StudyYears]");
             return studyYear;
         }
 
+
         public async Task<StudyYear> UpdateAsync(StudyYear studyYear)
         {
             await using var context = new AppDbContext();
+            var result = await UpdateInContextAsync(context, studyYear);
+            return result;
+        }
+
+        internal static async Task<StudyYear> UpdateInContextAsync(AppDbContext context, StudyYear studyYear)
+        {
             await ValidateAsync(context, studyYear, true);
             context.StudyYears.Update(studyYear);
             await context.SaveChangesAsync();
             return studyYear;
         }
+
 
         public async Task DeleteAsync(int id)
         {
@@ -77,6 +91,7 @@ namespace University_Timetable_and_Classroom_Management_System.BusinessLayer
             }
 
             studyYear.YearName = studyYear.YearName.Trim();
+            InputValidation.TextLength(studyYear.YearName, 50, "Study year name");
             var exists = await context.StudyYears.AnyAsync(sy =>
                 sy.YearName == studyYear.YearName && (!isUpdate || sy.StudyYearID != studyYear.StudyYearID));
 

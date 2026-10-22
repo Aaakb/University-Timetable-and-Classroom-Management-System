@@ -1,0 +1,98 @@
+[
+  {
+    "name": "Normal generation produces a complete timetable",
+    "passed": true
+  },
+  {
+    "name": "Regeneration does not duplicate lessons",
+    "passed": true
+  },
+  {
+    "name": "No assignments preserves every existing schedule field",
+    "passed": true
+  },
+  {
+    "name": "No matching sections preserves previous timetable",
+    "passed": true
+  },
+  {
+    "name": "Semester move updates all linked lessons and preserves their IDs",
+    "passed": true
+  },
+  {
+    "name": "Subject name edit preserves timetable",
+    "passed": true
+  },
+  {
+    "name": "Scheduled subject year change is safely rejected",
+    "passed": true
+  },
+  {
+    "name": "Invalid semester is rejected",
+    "passed": true
+  },
+  {
+    "name": "Conflicting semester move rolls back subject and all lessons",
+    "passed": true
+  },
+  {
+    "name": "Semester move permits parallel practical groups with separate staff and rooms",
+    "passed": true
+  },
+  {
+    "name": "Unscheduled subject can change semester",
+    "passed": true
+  },
+  {
+    "name": "PDF English Arabic mixed empty and multi-page exports",
+    "passed": true
+  },
+  {
+    "name": "A 90-minute afternoon period can be added and read",
+    "passed": true
+  },
+  {
+    "name": "Startup maintenance preserves all configured periods and IDs",
+    "passed": true
+  },
+  {
+    "name": "A scheduled period can shorten to 60 minutes without changing lesson IDs",
+    "passed": true
+  },
+  {
+    "name": "The last morning period can extend beyond the old workday",
+    "passed": true
+  },
+  {
+    "name": "An overlapping edit is rejected without changing periods or lessons",
+    "passed": true
+  },
+  {
+    "name": "Duplicate periods and gaps below ten minutes are rejected",
+    "passed": true
+  },
+  {
+    "name": "A new 120-minute period with an exact ten-minute gap is accepted",
+    "passed": true
+  },
+  {
+    "name": "Invalid persisted times are rejected without a partial write",
+    "passed": true
+  },
+  {
+    "name": "Generation uses a custom-only calendar without restoring the fixed periods",
+    "passed": true
+  },
+  {
+    "name": "Legacy overlapping periods remain visible and scheduling is safely rejected",
+    "passed": true
+  },
+  {
+    "name": "Deleting an unused initial period does not make startup recreate it",
+    "passed": true
+  },
+  {
+    "name": "Identity tables support atomic flexible-period add and update",
+    "passed": true
+  }
+]

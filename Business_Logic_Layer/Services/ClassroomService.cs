@@ -9,7 +9,9 @@ namespace University_Timetable_and_Classroom_Management_System.BusinessLayer
         public async Task<List<Classroom>> GetAllAsync()
         {
             await using var context = new AppDbContext();
-            return await context.Classrooms.AsNoTracking().ToListAsync();
+            return await context.Classrooms.AsNoTracking()
+                .OrderBy(c => c.RoomType == "Lecture" ? 0 : 1)
+                .ThenBy(c => c.ClassroomNumber).ToListAsync();
         }
 
         public async Task<Classroom?> GetByIdAsync(int id)
@@ -22,20 +24,42 @@ namespace University_Timetable_and_Classroom_Management_System.BusinessLayer
         {
             await using var context = new AppDbContext();
             classroom.ClassroomID = await AutoKeyGenerator.NextAsync(context.Classrooms.Select(c => c.ClassroomID));
+            var result = await AddInContextAsync(context, classroom);
+            return result;
+        }
+
+        internal static async Task<Classroom> AddInContextAsync(AppDbContext context, Classroom classroom)
+        {
             await ValidateAsync(context, classroom, false);
             await context.Classrooms.AddAsync(classroom);
             await ManualKeySaveHelper.SaveWithManualKeyAsync(context, "[Classrooms]");
             return classroom;
         }
 
+
         public async Task<Classroom> UpdateAsync(Classroom classroom)
         {
             await using var context = new AppDbContext();
+            await using var transaction = await context.Database.BeginTransactionAsync(System.Data.IsolationLevel.Serializable);
+            var result = await UpdateInContextAsync(context, classroom);
+            await transaction.CommitAsync();
+            return result;
+        }
+
+        internal static async Task<Classroom> UpdateInContextAsync(AppDbContext context, Classroom classroom)
+        {
             await ValidateAsync(context, classroom, true);
-            context.Classrooms.Update(classroom);
+            var existing = await context.Classrooms.SingleAsync(c => c.ClassroomID == classroom.ClassroomID);
+            var lessons = await context.Schedules.Include(s => s.Section)
+                .Where(s => s.ClassroomID == classroom.ClassroomID).ToListAsync();
+            if (lessons.Any(s => !ScheduleRoomSelector.MatchesLectureType(classroom, s.LectureType) ||
+                !ScheduleRoomSelector.HasCapacity(classroom, s.Section!, s.GroupName)))
+                throw new ArgumentException("This change would make the classroom unsuitable for a saved lesson. Move those lessons before changing its type or reducing its capacity.");
+            context.Entry(existing).CurrentValues.SetValues(classroom);
             await context.SaveChangesAsync();
             return classroom;
         }
+
 
         public async Task DeleteAsync(int id)
         {
@@ -77,7 +101,8 @@ namespace University_Timetable_and_Classroom_Management_System.BusinessLayer
             }
 
             classroom.ClassroomNumber = classroom.ClassroomNumber.Trim();
-            classroom.RoomType = NormalizeRoomType(classroom.RoomType, classroom.ClassroomNumber);
+            InputValidation.TextLength(classroom.ClassroomNumber, 20, "Classroom number");
+            classroom.RoomType = ClassroomRules.NormalizeRoomType(classroom.RoomType, classroom.ClassroomNumber);
 
             var exists = await context.Classrooms.AnyAsync(c =>
                 c.ClassroomNumber == classroom.ClassroomNumber &&
@@ -89,18 +114,5 @@ namespace University_Timetable_and_Classroom_Management_System.BusinessLayer
             }
         }
 
-        private static string NormalizeRoomType(string? roomType, string classroomNumber)
-        {
-            string value = roomType?.Trim() ?? string.Empty;
-
-            if (value.Contains("Lab", StringComparison.OrdinalIgnoreCase) ||
-                value.Contains("Laboratory", StringComparison.OrdinalIgnoreCase) ||
-                classroomNumber.Contains("Lab", StringComparison.OrdinalIgnoreCase))
-            {
-                return "Lab";
-            }
-
-            return "Lecture";
-        }
     }
 }

@@ -1,0 +1,89 @@
+{
+  "database": "UniversityTimetable_OriginalExchange_278bd911",
+  "results": [
+    {
+      "name": "A groups exchange two subjects in one day and consecutive periods",
+      "passed": true
+    },
+    {
+      "name": "B groups exchange two subjects in one day and consecutive periods",
+      "passed": true
+    },
+    {
+      "name": "A single odd subject teaches the two groups separately",
+      "passed": true
+    },
+    {
+      "name": "The odd-subject exception can use different days with only one daily period",
+      "passed": true
+    },
+    {
+      "name": "The odd-subject exception can use different labs on different days",
+      "passed": true
+    },
+    {
+      "name": "Three subjects form an exchange plus one separate odd-subject block",
+      "passed": true
+    },
+    {
+      "name": "Two paired subjects cannot fall back to single sessions with the same teacher",
+      "passed": true
+    },
+    {
+      "name": "One lab cannot accommodate a two-subject exchange",
+      "passed": true
+    },
+    {
+      "name": "One period cannot produce a partial exchange",
+      "passed": true
+    },
+    {
+      "name": "A missing counterpart group cannot produce partial bookings",
+      "passed": true
+    },
+    {
+      "name": "A group belonging to another section is rejected",
+      "passed": true
+    },
+    {
+      "name": "Independent semesters never exchange subjects with each other",
+      "passed": true
+    },
+    {
+      "name": "Independent branches retain their own group blocks",
+      "passed": true
+    },
+    {
+      "name": "The planner tries another partner when the first partner shares a teacher",
+      "passed": true
+    },
+    {
+      "name": "Busy early labs do not hide later available labs",
+      "passed": true
+    },
+    {
+      "name": "Theory repair never splits an existing practical exchange",
+      "passed": true
+    },
+    {
+      "name": "Missing labs report failure instead of distributing practical groups elsewhere",
+      "passed": true
+    },
+    {
+      "name": "SQL generation saves both groups of an odd subject",
+      "passed": true
+    },
+    {
+      "name": "SQL unassigned practical rejection preserves every timetable field",
+      "passed": true
+    },
+    {
+      "name": "SQL impossible exchange preserves every timetable field",
+      "passed": true
+    },
+    {
+      "name": "SQL successful exchange persists four complete nonconflicting bookings",
+      "passed": true
+    }
+  ]
+}

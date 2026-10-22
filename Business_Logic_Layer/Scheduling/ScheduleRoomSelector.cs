@@ -36,7 +36,7 @@ namespace University_Timetable_and_Classroom_Management_System.BusinessLayer
                 throw new ArgumentException("Practical sessions must be assigned to a lab.");
             }
 
-            throw new ArgumentException("Theory sessions must be assigned to a lecture room.");
+            throw new ArgumentException("Theory sessions must be assigned to a lecture room or a shared lab.");
         }
 
         public static List<Classroom> GetTargetClassrooms(
@@ -54,12 +54,11 @@ namespace University_Timetable_and_Classroom_Management_System.BusinessLayer
 
         public static bool MatchesLectureType(Classroom classroom, string lectureType)
         {
-            bool isLab = string.Equals(classroom.RoomType, "Lab", StringComparison.OrdinalIgnoreCase) ||
-                classroom.ClassroomNumber.Contains("Lab", StringComparison.OrdinalIgnoreCase);
+            bool isLab = ClassroomRules.IsLab(classroom);
 
             return string.Equals(lectureType, "Practical", StringComparison.OrdinalIgnoreCase)
                 ? isLab
-                : !isLab;
+                : !isLab || ClassroomRules.IsSharedLab(classroom);
         }
     }
 }

@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#102c3b"><meta name="description" content="نظام إدارة الجداول الجامعية">
+  <meta name="application-name" content="University Timetable Management System">
+  <title>University Timetable Management System</title>
+  <link rel="manifest" href="/manifest.webmanifest"><link rel="icon" href="/icons/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/icons/icon-192.png"><link rel="stylesheet" href="/css/app.css">
+  <script type="module" src="/js/app.js"></script>
+</head>
+<body>
+  <a class="skip" href="#main">انتقل إلى المحتوى</a>
+  <div id="connection" role="status" hidden>أنت غير متصل. لا يمكن تحميل البيانات أو حفظ التغييرات.</div>
+  <div id="auth" class="auth-layout">
+    <section class="auth-story"><div class="brand"><img src="/icons/icon.svg" alt="" width="48" height="48"><span>نظام إدارة الجداول الجامعية<small dir="ltr">University Timetable Management System</small></span></div>
+      <div><span class="eyebrow">مساحة واحدة لتنظيم اليوم الدراسي</span><h1>كل محاضرة.<br>في مكانها الصحيح.</h1><p>نظّم القاعات والمواد والتكليفات التدريسية، وتابع جدول الجامعة من أي شاشة.</p><div class="story-grid" aria-hidden="true"><span>الأحد</span><span>الإثنين</span><span>الثلاثاء</span><b>محاضرات نظرية</b><b>مختبرات عملية</b><b>جداول منظمة</b></div></div>
+      <small>نظام إدارة الجداول الجامعية</small>
+    </section>
+    <main class="auth-panel"><form id="auth-form" class="auth-card"><span class="eyebrow">مرحبًا بك</span><h2 id="auth-title">تسجيل الدخول</h2><p id="auth-description">استخدم حسابك الحالي في تطبيق الجامعة.</p>
+      <label id="full-name-label" hidden>الاسم الكامل<input name="fullName" autocomplete="name" maxlength="150"></label>
+      <label>اسم المستخدم<input name="userName" autocomplete="username" required maxlength="50" dir="auto"></label>
+      <label>كلمة المرور<input name="password" type="password" autocomplete="current-password" required maxlength="512"></label>
+      <label id="confirm-label" hidden>تأكيد كلمة المرور<input name="confirmPassword" type="password" autocomplete="new-password" maxlength="512"></label>
+      <div id="auth-error" class="error" role="alert" hidden></div><button type="submit" class="primary" id="auth-submit">تسجيل الدخول</button>
+      <button type="button" id="auth-switch" class="text-button">ليس لديك حساب؟ إنشاء حساب</button>
+      <p class="fine">تُستخدم الحسابات وقاعدة البيانات نفسها في تطبيق سطح المكتب.</p>
+    </form></main>
+  </div>
+  <div id="application" class="app-layout" hidden>
+    <aside id="sidebar"><a class="brand" href="#dashboard"><img src="/icons/icon.svg" alt="" width="42" height="42"><span>نظام إدارة الجداول الجامعية<small dir="ltr">University Timetable Management System</small></span></a><p class="nav-caption">مساحة العمل</p><nav id="navigation" aria-label="التنقل الرئيسي"></nav><div class="sidebar-footer"><span class="status-dot"></span> قاعدة بيانات مشتركة<small>تظهر تغييرات سطح المكتب عند التحديث</small></div></aside>
+    <div class="workspace"><header class="topbar"><button id="menu" class="icon-button" aria-label="فتح القائمة" aria-expanded="false">☰</button><span class="breadcrumb">إدارة الجامعة <span>/</span> <b id="breadcrumb">نظرة عامة</b></span><div class="account"><button id="install" class="secondary" hidden>تثبيت التطبيق</button><span id="user-name"></span><button id="logout" class="text-button">خروج</button></div></header>
+      <main id="main" tabindex="-1"><div class="page-heading"><div><span class="eyebrow" id="page-kicker">مساحة العمل</span><h1 id="page-title">نظرة عامة</h1><p id="page-description">كل ما تحتاجه لتنظيم الفصل الدراسي.</p></div><div class="actions"><button id="refresh" class="secondary">↻ تحديث البيانات</button><button id="add" class="primary" hidden>+ إضافة سجل</button></div></div>
+        <div id="loading" role="status" hidden>جارٍ تحميل البيانات…</div><div id="page-error" class="error" role="alert" hidden></div>
+        <section id="dashboard"></section>
+        <section id="management" hidden><div class="panel"><div class="toolbar"><label class="search-label"><span>البحث</span><input id="search" type="search" placeholder="ابحث في السجلات…" maxlength="200"></label><div id="special-actions" class="actions"></div></div><div id="filters" class="filters"></div><div class="table-meta"><span id="result-count"></span><span id="view-note">البيانات المحفوظة في النظام</span></div><div id="table-host" class="table-scroll"></div><div id="pagination" class="pagination"></div></div></section>
+      </main><footer class="workspace-footer"><span dir="ltr">University Timetable Management System</span><span id="last-refresh">—</span></footer>
+    </div>
+  </div>
+  <dialog id="editor" aria-labelledby="editor-title"><form id="editor-form"><div class="dialog-heading"><div><span class="eyebrow">إدارة البيانات</span><h2 id="editor-title"></h2></div><button type="button" class="icon-button" id="close-editor" aria-label="إغلاق">×</button></div><div id="editor-fields" class="form-grid"></div><div id="editor-error" class="error" role="alert" hidden></div><div class="dialog-footer"><button type="button" id="cancel-editor" class="secondary">إلغاء</button><button type="submit" class="primary" id="save">حفظ التغييرات</button></div></form></dialog>
+  <dialog id="confirmation" aria-labelledby="confirm-title"><form method="dialog"><h2 id="confirm-title">تأكيد العملية</h2><p id="confirm-message"></p><div class="dialog-footer"><button value="cancel" class="secondary">إلغاء</button><button value="yes" class="danger">تأكيد</button></div></form></dialog>
+  <div id="toast" role="status" hidden></div><div id="update-banner" hidden>يتوفر إصدار جديد. احفظ عملك أولًا. <button id="update-app" class="secondary">تحديث التطبيق</button></div>
+  <noscript>يجب تفعيل JavaScript لاستخدام هذا التطبيق.</noscript>
+</body></html>

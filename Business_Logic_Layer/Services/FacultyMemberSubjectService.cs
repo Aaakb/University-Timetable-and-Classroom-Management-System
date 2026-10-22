@@ -45,6 +45,7 @@ namespace University_Timetable_and_Classroom_Management_System.BusinessLayer
             FacultyMemberSubject entity)
         {
             await using var context = new AppDbContext();
+            await using var transaction = await context.Database.BeginTransactionAsync(System.Data.IsolationLevel.Serializable);
             var item = await context.FacultyMemberSubjects.FindAsync(currentFacultyMemberId, currentSubjectId)
                 ?? throw new KeyNotFoundException("Faculty member subject assignment not found.");
 
@@ -54,8 +55,8 @@ namespace University_Timetable_and_Classroom_Management_System.BusinessLayer
             }
 
             await ValidateAsync(context, entity, currentFacultyMemberId, currentSubjectId);
+            await EnsureAssignmentIsUnusedAsync(context, currentFacultyMemberId, currentSubjectId);
 
-            await using var transaction = await context.Database.BeginTransactionAsync();
             context.FacultyMemberSubjects.Remove(item);
             await context.FacultyMemberSubjects.AddAsync(entity);
             await context.SaveChangesAsync();
@@ -67,11 +68,29 @@ namespace University_Timetable_and_Classroom_Management_System.BusinessLayer
         public async Task DeleteAsync(int facultyMemberId, int subjectId)
         {
             await using var context = new AppDbContext();
+            await using var transaction = await context.Database.BeginTransactionAsync(System.Data.IsolationLevel.Serializable);
             var item = await context.FacultyMemberSubjects.FindAsync(facultyMemberId, subjectId)
                 ?? throw new KeyNotFoundException("Faculty member subject assignment not found.");
 
+            // Archived lectures refer to the subject and teacher directly. Removing
+            // this assignment must not remove or invalidate those saved lectures.
+            if (!await context.Subjects.AnyAsync(s => s.SubjectID == subjectId && s.IsDeleted))
+                await EnsureAssignmentIsUnusedAsync(context, facultyMemberId, subjectId);
             context.FacultyMemberSubjects.Remove(item);
             await context.SaveChangesAsync();
+            await transaction.CommitAsync();
+        }
+
+        private static async Task EnsureAssignmentIsUnusedAsync(AppDbContext context, int facultyMemberId, int subjectId)
+        {
+            int count = await context.Schedules.CountAsync(s => s.FacultyMemberID == facultyMemberId && s.SubjectID == subjectId);
+            if (count > 0)
+            {
+                string subjectName = await context.Subjects.Where(s => s.SubjectID == subjectId).Select(s => s.SubjectName).SingleAsync();
+                throw new ArgumentException($"التكليف لمادة «{subjectName}» مرتبط بعدد {count} من المحاضرات المحفوظة. " +
+                    "غيّر التدريسي في هذه المحاضرات أو احذفها قبل تغيير التكليف أو حذفه. " +
+                    "إذا حذفت المادة من قائمة المواد، يمكنك حذف تكليفها مع إبقاء محاضراتها السابقة.");
+            }
         }
 
         private static async Task ValidateAsync(
@@ -85,7 +104,7 @@ namespace University_Timetable_and_Classroom_Management_System.BusinessLayer
                 throw new ArgumentException("Faculty member does not exist.");
             }
 
-            if (!await context.Subjects.AnyAsync(s => s.SubjectID == entity.SubjectID))
+            if (!await context.Subjects.AnyAsync(s => s.SubjectID == entity.SubjectID && !s.IsDeleted))
             {
                 throw new ArgumentException("Subject does not exist.");
             }

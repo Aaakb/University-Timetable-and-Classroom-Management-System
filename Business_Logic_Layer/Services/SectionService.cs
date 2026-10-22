@@ -30,20 +30,44 @@ namespace University_Timetable_and_Classroom_Management_System.BusinessLayer
         {
             await using var context = new AppDbContext();
             section.SectionID = await AutoKeyGenerator.NextAsync(context.Sections.Select(s => s.SectionID));
+            var result = await AddInContextAsync(context, section);
+            return result;
+        }
+
+        internal static async Task<Section> AddInContextAsync(AppDbContext context, Section section)
+        {
             await ValidateAsync(context, section, false);
             await context.Sections.AddAsync(section);
             await ManualKeySaveHelper.SaveWithManualKeyAsync(context, "[Sections]");
             return section;
         }
 
+
         public async Task<Section> UpdateAsync(Section section)
         {
             await using var context = new AppDbContext();
+            await using var transaction = await context.Database.BeginTransactionAsync(System.Data.IsolationLevel.Serializable);
+            var result = await UpdateInContextAsync(context, section);
+            await transaction.CommitAsync();
+            return result;
+        }
+
+        internal static async Task<Section> UpdateInContextAsync(AppDbContext context, Section section)
+        {
             await ValidateAsync(context, section, true);
-            context.Sections.Update(section);
+            var existing = await context.Sections.SingleAsync(s => s.SectionID == section.SectionID);
+            var lessons = await context.Schedules.Include(s => s.Classroom)
+                .Where(s => s.SectionID == section.SectionID).ToListAsync();
+            if (lessons.Count > 0 && (existing.StudyYearID != section.StudyYearID ||
+                existing.BranchID != section.BranchID || !string.Equals(existing.SectionName, section.SectionName, StringComparison.OrdinalIgnoreCase)))
+                throw new ArgumentException("Remove this section's saved lessons before changing its study year, branch, or name.");
+            if (lessons.Any(s => !ScheduleRoomSelector.HasCapacity(s.Classroom, section, s.GroupName)))
+                throw new ArgumentException("The new student count exceeds the capacity of a room used by this section. Move those lessons before increasing the count.");
+            context.Entry(existing).CurrentValues.SetValues(section);
             await context.SaveChangesAsync();
             return section;
         }
+
 
         public async Task DeleteAsync(int id)
         {
@@ -115,6 +139,7 @@ namespace University_Timetable_and_Classroom_Management_System.BusinessLayer
             }
 
             section.SectionName = section.SectionName.Trim();
+            InputValidation.TextLength(section.SectionName, 50, "Section name");
             var exists = await context.Sections.AnyAsync(s =>
                 s.StudyYearID == section.StudyYearID &&
                 s.BranchID == section.BranchID &&

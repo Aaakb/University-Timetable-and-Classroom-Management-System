@@ -1,4 +1,4 @@
-using University_Timetable_and_Classroom_Management_System.Models;
+﻿using University_Timetable_and_Classroom_Management_System.Models;
 
 namespace University_Timetable_and_Classroom_Management_System.BusinessLayer
 {
@@ -18,7 +18,10 @@ namespace University_Timetable_and_Classroom_Management_System.BusinessLayer
     internal sealed record SchedulePlanningResult(
         List<Schedule> Schedules,
         int NoClassroomCount,
-        int ConflictCount);
+        int ConflictCount)
+    {
+        public IReadOnlyList<string> PracticalExchangeIssues { get; init; } = [];
+    }
 
     internal sealed record ScheduleRequestPlan(
         ScheduleGenerationRequest Request,

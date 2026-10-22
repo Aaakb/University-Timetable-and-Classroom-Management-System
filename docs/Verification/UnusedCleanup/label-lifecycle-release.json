@@ -1,0 +1,406 @@
+{
+  "count": 80,
+  "failures": 0,
+  "checks": [
+    {
+      "name": "Original Guna label reproduces four disposed getter failures",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "All four properties remain editable in the Properties window",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Designer defaults remain unchanged",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Designer edits update the live Guna renderer",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Property requests during teardown retain their values",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Property requests after teardown retain their values",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Repeated disposal remains safe",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "LoginForm uses the safe designer label for every HTML label",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "LoginForm properties are readable before handles are created",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "LoginForm properties are readable with handles",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "LoginForm properties are readable during disposal callbacks",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "LoginForm properties are readable after the designer form closes",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "LoginForm repeated form disposal remains safe",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "RegisterForm uses the safe designer label for every HTML label",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "RegisterForm properties are readable before handles are created",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "RegisterForm properties are readable with handles",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "RegisterForm properties are readable during disposal callbacks",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "RegisterForm properties are readable after the designer form closes",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "RegisterForm repeated form disposal remains safe",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "MainShellForm uses the safe designer label for every HTML label",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "MainShellForm properties are readable before handles are created",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "MainShellForm properties are readable with handles",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "MainShellForm properties are readable during disposal callbacks",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "MainShellForm properties are readable after the designer form closes",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "MainShellForm repeated form disposal remains safe",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "BranchesForm uses the safe designer label for every HTML label",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "BranchesForm properties are readable before handles are created",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "BranchesForm properties are readable with handles",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "BranchesForm properties are readable during disposal callbacks",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "BranchesForm properties are readable after the designer form closes",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "BranchesForm repeated form disposal remains safe",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "StudyYearsForm uses the safe designer label for every HTML label",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "StudyYearsForm properties are readable before handles are created",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "StudyYearsForm properties are readable with handles",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "StudyYearsForm properties are readable during disposal callbacks",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "StudyYearsForm properties are readable after the designer form closes",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "StudyYearsForm repeated form disposal remains safe",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "SectionsForm uses the safe designer label for every HTML label",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "SectionsForm properties are readable before handles are created",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "SectionsForm properties are readable with handles",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "SectionsForm properties are readable during disposal callbacks",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "SectionsForm properties are readable after the designer form closes",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "SectionsForm repeated form disposal remains safe",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "SubjectsForm uses the safe designer label for every HTML label",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "SubjectsForm properties are readable before handles are created",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "SubjectsForm properties are readable with handles",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "SubjectsForm properties are readable during disposal callbacks",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "SubjectsForm properties are readable after the designer form closes",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "SubjectsForm repeated form disposal remains safe",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "ClassroomsForm uses the safe designer label for every HTML label",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "ClassroomsForm properties are readable before handles are created",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "ClassroomsForm properties are readable with handles",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "ClassroomsForm properties are readable during disposal callbacks",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "ClassroomsForm properties are readable after the designer form closes",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "ClassroomsForm repeated form disposal remains safe",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "TimeSlotsForm uses the safe designer label for every HTML label",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "TimeSlotsForm properties are readable before handles are created",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "TimeSlotsForm properties are readable with handles",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "TimeSlotsForm properties are readable during disposal callbacks",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "TimeSlotsForm properties are readable after the designer form closes",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "TimeSlotsForm repeated form disposal remains safe",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "FacultyMembersForm uses the safe designer label for every HTML label",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "FacultyMembersForm properties are readable before handles are created",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "FacultyMembersForm properties are readable with handles",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "FacultyMembersForm properties are readable during disposal callbacks",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "FacultyMembersForm properties are readable after the designer form closes",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "FacultyMembersForm repeated form disposal remains safe",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "FacultyMemberSubjectsForm uses the safe designer label for every HTML label",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "FacultyMemberSubjectsForm properties are readable before handles are created",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "FacultyMemberSubjectsForm properties are readable with handles",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "FacultyMemberSubjectsForm properties are readable during disposal callbacks",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "FacultyMemberSubjectsForm properties are readable after the designer form closes",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "FacultyMemberSubjectsForm repeated form disposal remains safe",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "SchedulesForm uses the safe designer label for every HTML label",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "SchedulesForm properties are readable before handles are created",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "SchedulesForm properties are readable with handles",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "SchedulesForm properties are readable during disposal callbacks",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "SchedulesForm properties are readable after the designer form closes",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "SchedulesForm repeated form disposal remains safe",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "The lifecycle sweep covers all 120 labels in all 12 screens",
+      "passed": true,
+      "error": null
+    }
+  ]
+}

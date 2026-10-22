@@ -6,10 +6,17 @@ namespace University_Timetable_and_Classroom_Management_System
     {
         public static void Bind(Guna2ComboBox combo, IEnumerable<ComboOption> options, int selectedIndex = -1)
         {
-            combo.DataSource = options.ToList();
-            combo.DisplayMember = nameof(ComboOption.Text);
-            combo.ValueMember = nameof(ComboOption.Id);
-            combo.SelectedIndex = selectedIndex;
+            combo.BeginUpdate();
+            try
+            {
+                // Set display metadata before binding so intermediate paints do
+                // not expose ComboOption.ToString() instead of the item caption.
+                combo.DisplayMember = nameof(ComboOption.Text);
+                combo.ValueMember = nameof(ComboOption.Id);
+                combo.DataSource = options.ToList();
+                combo.SelectedIndex = selectedIndex;
+            }
+            finally { combo.EndUpdate(); }
         }
 
         public static int GetSelectedRequiredId(Guna2ComboBox combo)

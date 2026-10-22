@@ -1,4 +1,4 @@
-﻿using University_Timetable_and_Classroom_Management_System.BusinessLayer;
+using University_Timetable_and_Classroom_Management_System.BusinessLayer;
 using University_Timetable_and_Classroom_Management_System.Models;
 
 namespace University_Timetable_and_Classroom_Management_System
@@ -16,7 +16,6 @@ namespace University_Timetable_and_Classroom_Management_System
         private readonly BranchService branchService = new();
         private readonly SectionService sectionService = new();
         private readonly ScheduleFilterService scheduleFilterService = new();
-        private readonly BindingSource scheduleBindingSource = new();
 
         private List<ScheduleRow> scheduleRows = [];
         private List<Subject> subjectsLookup = [];
@@ -26,40 +25,28 @@ namespace University_Timetable_and_Classroom_Management_System
         private List<Branch> branchesLookup = [];
         private List<Section> sectionsLookup = [];
         private bool isUpdatingScheduleLookups;
-        private Guna.UI2.WinForms.Guna2ComboBox cmbSemesterFilter = null!;
-        private Guna.UI2.WinForms.Guna2HtmlLabel lblSemesterFilter = null!;
-        private Guna.UI2.WinForms.Guna2ComboBox cmbGroupFilter = null!;
-        private Guna.UI2.WinForms.Guna2HtmlLabel lblGroupFilter = null!;
-        private Guna.UI2.WinForms.Guna2HtmlLabel lblPageTitle = null!;
-        private Guna.UI2.WinForms.Guna2HtmlLabel lblPageSubtitle = null!;
-        private Guna.UI2.WinForms.Guna2ComboBox cmbLectureType = null!;
-        private Guna.UI2.WinForms.Guna2HtmlLabel lblLectureType = null!;
-        private Guna.UI2.WinForms.Guna2ComboBox cmbGroupName = null!;
-        private Guna.UI2.WinForms.Guna2HtmlLabel lblGroupName = null!;
-        private Guna.UI2.WinForms.Guna2Button btnScheduleGridView = null!;
-        private Guna.UI2.WinForms.Guna2Button btnScheduleTimetableView = null!;
-        private Panel pnlTimetableHost = null!;
-        private TableLayoutPanel tblScheduleTimetable = null!;
-        private readonly ToolTip scheduleToolTip = new();
         private bool isTimetableView;
+        private int scheduleEditorLoadVersion;
+
+        private bool IsScheduleUiUnavailable => IsDisposed || Disposing;
 
         public SchedulesForm()
         {
             InitializeComponent();
-            ConfigureScheduleFilterControls();
-            ConfigureLectureTypeAndGroupControls();
-            ConfigureSchedulePageHeader();
-            ConfigureScheduleLayoutEnhancements();
-            ConfigureScheduleCommands();
-            ConfigureNavigation();
+            btnGenerateSchedule.Text = "توليد جدول جديد";
+            if (DesignerEnvironment.IsDesignTime(this)) return;
+            ArabicUi.Apply(this);
             ConfigureScheduleGrid();
-            ConfigureScheduleTimetableView();
             ConfigureScheduleEvents();
+            ConfigureTimetableEvents();
+            pnlWorkspace.Resize += (_, _) => ResizeScheduleWorkspace();
+            ResizeScheduleWorkspace();
         }
 
         protected override async void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
+            if (DesignerEnvironment.IsDesignTime(this) || IsScheduleUiUnavailable) return;
 
             try
             {
@@ -67,119 +54,17 @@ namespace University_Timetable_and_Classroom_Management_System
             }
             catch (Exception ex)
             {
-                ShowError("Unable to load schedule form.", ex);
+                ShowError("تعذر تحميل شاشة الجدول الدراسي.", ex);
             }
         }
 
-        private void ConfigureNavigation()
-        {
-            FormNavigation.ConfigureSidebar(this, pnlSidebar, NavigationPage.Schedules);
-        }
-
-        private void ConfigureScheduleCommands()
-        {
-            btnGenerateSchedule.Text = "Generate Timetable";
-            btnClearScheduleForm.Text = "Clear Form";
-            lblEditorTitle.Text = "Manual Schedule Entry";
-            lblTableTitle.Text = "Timetable Records";
-            lblFacultyMember.Text = "Teacher";
-            lblLectureType.Text = "Type";
-            lblDayOfWeek.Text = "Day";
-            lblTimeSlot.Text = "Time";
-            lblClassroom.Text = "Room";
-            lblStudyYear.Text = "Year";
-            lblSemesterFilter.Text = "Semester";
-            lblStudyYearFilter.Text = "Year";
-            lblSectionFilter.Text = "Section";
-            lblGroupFilter.Text = "Group";
-            lblFacultyFilter.Text = "Faculty";
-
-            btnGenerateSchedule.FillColor = Color.FromArgb(234, 88, 12);
-            btnGenerateSchedule.HoverState.FillColor = Color.FromArgb(194, 65, 12);
-            btnGenerateSchedule.Font = new Font("Segoe UI Semibold", 10.5F, FontStyle.Bold);
-        }
-
-        private static Guna.UI2.WinForms.Guna2Panel CreateScheduleGroupPanel(string title, Point location, Size size)
-        {
-            var panel = new Guna.UI2.WinForms.Guna2Panel
-            {
-                Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right,
-                BackColor = Color.Transparent,
-                BorderColor = Color.FromArgb(226, 232, 240),
-                BorderRadius = 8,
-                BorderThickness = 1,
-                FillColor = Color.FromArgb(248, 250, 252),
-                Location = location,
-                Size = size
-            };
-
-            panel.Controls.Add(new Guna.UI2.WinForms.Guna2HtmlLabel
-            {
-                BackColor = Color.Transparent,
-                Font = new Font("Segoe UI Semibold", 9.5F, FontStyle.Bold),
-                ForeColor = Color.FromArgb(24, 38, 62),
-                Location = new Point(16, 5),
-                Text = title
-            });
-
-            return panel;
-        }
-
-        private static Guna.UI2.WinForms.Guna2Panel CreateCommandGroupPanel(Point location, Size size)
-        {
-            return new Guna.UI2.WinForms.Guna2Panel
-            {
-                Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right,
-                BackColor = Color.Transparent,
-                FillColor = Color.Transparent,
-                Location = location,
-                Size = size
-            };
-        }
-
-        private static Guna.UI2.WinForms.Guna2HtmlLabel CreateEditorLabel(
-            string text,
-            Point location,
-            string name)
-        {
-            return new Guna.UI2.WinForms.Guna2HtmlLabel
-            {
-                BackColor = Color.Transparent,
-                Font = new Font("Segoe UI Semibold", 9.5F, FontStyle.Bold),
-                ForeColor = Color.FromArgb(51, 65, 85),
-                Location = location,
-                Name = name,
-                Size = new Size(90, 19),
-                Text = text
-            };
-        }
-
-        private static Guna.UI2.WinForms.Guna2ComboBox CreateEditorComboBox(Point location, string name)
-        {
-            var combo = new Guna.UI2.WinForms.Guna2ComboBox
-            {
-                BackColor = Color.Transparent,
-                BorderColor = Color.FromArgb(203, 213, 225),
-                BorderRadius = 8,
-                DrawMode = DrawMode.OwnerDrawFixed,
-                DropDownStyle = ComboBoxStyle.DropDownList,
-                FocusedColor = Color.FromArgb(37, 99, 235),
-                Font = new Font("Segoe UI", 10F),
-                ForeColor = Color.FromArgb(15, 23, 42),
-                HoverState = { BorderColor = Color.FromArgb(59, 130, 246) },
-                ItemHeight = 36,
-                Location = location,
-                Name = name,
-                Size = new Size(160, 42)
-            };
-
-            combo.FocusedState.BorderColor = Color.FromArgb(37, 99, 235);
-            return combo;
-        }
 
         private void ConfigureScheduleEvents()
         {
             btnGenerateSchedule.Click += async (_, _) => await GenerateScheduleAsync();
+            btnBackupTimetable.Click += async (_, _) => await SaveTimetableBackupAsync();
+            btnRestoreTimetable.Click += async (_, _) => await RestoreTimetableBackupAsync();
+            dgvSchedules.CurrentCellDirtyStateChanged += async (_, _) => await SaveScheduleLockCheckboxAsync();
             btnAddSchedule.Click += async (_, _) => await AddScheduleAsync();
             btnUpdateSchedule.Click += async (_, _) => await UpdateScheduleAsync();
             btnDeleteSchedule.Click += async (_, _) => await DeleteScheduleAsync();
@@ -203,12 +88,16 @@ namespace University_Timetable_and_Classroom_Management_System
 
         private void ShowInformation(string message)
         {
-            UiMessages.ShowInformation(this, message, "Schedule");
+            if (IsScheduleUiUnavailable) return;
+            UiMessages.ShowInformation(this, message, "الجدول الدراسي");
         }
+
+
 
         private void ShowError(string message, Exception ex)
         {
-            UiMessages.ShowError(this, message, "Schedule", ex);
+            if (IsScheduleUiUnavailable) return;
+            UiMessages.ShowError(this, message, "الجدول الدراسي", ex);
         }
 
     }

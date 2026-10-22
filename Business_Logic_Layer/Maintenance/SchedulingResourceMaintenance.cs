@@ -6,70 +6,38 @@ namespace University_Timetable_and_Classroom_Management_System.BusinessLayer
 {
     internal static class SchedulingResourceMaintenance
     {
-        private const int MinimumLectureRoomCount = 5;
-        private const int MinimumLabCount = 6;
         private const int DefaultCapacity = 40;
 
-        public static async Task<SchedulingResourceMaintenanceResult> EnsureOfficialResourcesAsync(AppDbContext context)
+        public static async Task InitializeNewDatabaseAsync(AppDbContext context)
         {
-            int addedTimeSlots = await EnsureOfficialTimeSlotsAsync(context);
-            await NormalizeClassroomsAsync(context);
-            int addedClassrooms = await EnsureMinimumClassroomsAsync(context);
-
-            return new SchedulingResourceMaintenanceResult(
-                addedTimeSlots,
-                addedClassrooms,
-                0,
-                0);
+            await EnsureDefaultTimeSlotsAsync(context);
+            await SeedDefaultClassroomsAsync(context);
         }
 
-        private static async Task<int> EnsureOfficialTimeSlotsAsync(AppDbContext context)
+        private static async Task<int> EnsureDefaultTimeSlotsAsync(AppDbContext context)
         {
+            await using var transaction = await context.Database.BeginTransactionAsync(System.Data.IsolationLevel.Serializable);
             var timeSlots = await context.TimeSlots.ToListAsync();
-            var lectureSlots = timeSlots
-                .Where(slot => !slot.IsBreak)
-                .OrderBy(slot => slot.StartTime)
-                .ThenBy(slot => slot.TimeSlotID)
-                .ToList();
+            // Defaults initialize an empty timetable; saved periods belong to the user.
+            if (timeSlots.Any(slot => !slot.IsBreak))
+            {
+                await transaction.CommitAsync();
+                return 0;
+            }
             var usedIds = timeSlots.Select(slot => slot.TimeSlotID).ToHashSet();
             int addedCount = 0;
-            int updatedCount = 0;
-
-            foreach (var officialSlot in ScheduleTimingRules.OfficialLectureSlots)
+            foreach (var defaultSlot in ScheduleTimingRules.DefaultLectureSlots)
             {
-                bool exists = timeSlots.Any(slot =>
-                    !slot.IsBreak &&
-                    slot.StartTime == officialSlot.Start &&
-                    slot.EndTime == officialSlot.End);
-
-                if (exists)
-                {
-                    continue;
-                }
-
-                var reusableSlot = lectureSlots.FirstOrDefault(slot =>
-                    !ScheduleTimingRules.IsOfficialLectureSlot(slot));
-
-                if (reusableSlot is not null)
-                {
-                    reusableSlot.StartTime = officialSlot.Start;
-                    reusableSlot.EndTime = officialSlot.End;
-                    reusableSlot.IsBreak = false;
-                    updatedCount++;
-                    continue;
-                }
-
                 var timeSlot = new TimeSlot
                 {
                     TimeSlotID = NextAvailableId(usedIds),
-                    StartTime = officialSlot.Start,
-                    EndTime = officialSlot.End,
+                    StartTime = defaultSlot.Start,
+                    EndTime = defaultSlot.End,
                     IsBreak = false
                 };
 
                 await context.TimeSlots.AddAsync(timeSlot);
                 timeSlots.Add(timeSlot);
-                lectureSlots.Add(timeSlot);
                 addedCount++;
             }
 
@@ -77,15 +45,11 @@ namespace University_Timetable_and_Classroom_Management_System.BusinessLayer
             {
                 await ManualKeySaveHelper.SaveWithManualKeyAsync(context, "[TimeSlots]");
             }
-            else if (updatedCount > 0)
-            {
-                await context.SaveChangesAsync();
-            }
-
-            return addedCount + updatedCount;
+            await transaction.CommitAsync();
+            return addedCount;
         }
 
-        private static async Task<int> EnsureMinimumClassroomsAsync(AppDbContext context)
+        private static async Task<int> SeedDefaultClassroomsAsync(AppDbContext context)
         {
             var classrooms = await context.Classrooms.ToListAsync();
             var usedIds = classrooms.Select(classroom => classroom.ClassroomID).ToHashSet();
@@ -101,7 +65,7 @@ namespace University_Timetable_and_Classroom_Management_System.BusinessLayer
             int labCount = classrooms.Count(IsLab);
             int addedCount = 0;
 
-            while (lectureRoomCount < MinimumLectureRoomCount)
+            while (lectureRoomCount < ClassroomRules.LectureRoomCount)
             {
                 var classroom = CreateClassroom(
                     usedIds,
@@ -116,13 +80,14 @@ namespace University_Timetable_and_Classroom_Management_System.BusinessLayer
                 addedCount++;
             }
 
-            while (labCount < MinimumLabCount)
+            while (labCount < ClassroomRules.LabCount)
             {
                 var classroom = CreateClassroom(
                     usedIds,
                     usedNames,
                     "Lab",
-                    "Lab",
+                    labCount >= ClassroomRules.LabCount - ClassroomRules.SharedLabCount
+                        ? ClassroomRules.SharedLabType : "Lab",
                     capacity);
 
                 await context.Classrooms.AddAsync(classroom);
@@ -137,79 +102,6 @@ namespace University_Timetable_and_Classroom_Management_System.BusinessLayer
             }
 
             return addedCount;
-        }
-
-        private static async Task NormalizeClassroomsAsync(AppDbContext context)
-        {
-            var classrooms = await context.Classrooms
-                .OrderBy(classroom => classroom.ClassroomID)
-                .ToListAsync();
-
-            if (classrooms.Count == 0)
-            {
-                return;
-            }
-
-            var lectureRooms = classrooms
-                .Where(classroom => !IsLab(classroom))
-                .OrderBy(classroom => classroom.ClassroomID)
-                .ToList();
-
-            var labs = classrooms
-                .Where(IsLab)
-                .OrderBy(classroom => classroom.ClassroomID)
-                .ToList();
-
-            bool needsRename = NeedsClassroomNormalization(lectureRooms, "Lecture Hall", "Lecture") ||
-                NeedsClassroomNormalization(labs, "Lab", "Lab");
-
-            if (!needsRename)
-            {
-                return;
-            }
-
-            foreach (var classroom in classrooms)
-            {
-                classroom.ClassroomNumber = $"__RoomTemp_{classroom.ClassroomID}";
-            }
-
-            await context.SaveChangesAsync();
-
-            RenameClassroomGroup(lectureRooms, "Lecture Hall", "Lecture");
-            RenameClassroomGroup(labs, "Lab", "Lab");
-
-            await context.SaveChangesAsync();
-        }
-
-        private static bool NeedsClassroomNormalization(
-            IReadOnlyList<Classroom> classrooms,
-            string namePrefix,
-            string roomType)
-        {
-            for (int index = 0; index < classrooms.Count; index++)
-            {
-                string expectedName = $"{namePrefix} {index + 1:00}";
-
-                if (!string.Equals(classrooms[index].ClassroomNumber, expectedName, StringComparison.OrdinalIgnoreCase) ||
-                    !string.Equals(classrooms[index].RoomType, roomType, StringComparison.OrdinalIgnoreCase))
-                {
-                    return true;
-                }
-            }
-
-            return false;
-        }
-
-        private static void RenameClassroomGroup(
-            IReadOnlyList<Classroom> classrooms,
-            string namePrefix,
-            string roomType)
-        {
-            for (int index = 0; index < classrooms.Count; index++)
-            {
-                classrooms[index].ClassroomNumber = $"{namePrefix} {index + 1:00}";
-                classrooms[index].RoomType = roomType;
-            }
         }
 
         private static Classroom CreateClassroom(
@@ -259,8 +151,7 @@ namespace University_Timetable_and_Classroom_Management_System.BusinessLayer
 
         private static bool IsLab(Classroom classroom)
         {
-            return string.Equals(classroom.RoomType, "Lab", StringComparison.OrdinalIgnoreCase) ||
-                classroom.ClassroomNumber.Contains("Lab", StringComparison.OrdinalIgnoreCase);
+            return ClassroomRules.IsLab(classroom);
         }
 
         private static bool IsLectureRoom(Classroom classroom)
@@ -268,11 +159,5 @@ namespace University_Timetable_and_Classroom_Management_System.BusinessLayer
             return !IsLab(classroom);
         }
     }
-
-    internal sealed record SchedulingResourceMaintenanceResult(
-        int AddedTimeSlots,
-        int AddedClassrooms,
-        int AddedFacultyMembers,
-        int AddedFacultySubjectAssignments);
 
 }
