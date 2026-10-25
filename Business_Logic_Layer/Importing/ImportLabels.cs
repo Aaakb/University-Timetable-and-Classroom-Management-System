@@ -8,7 +8,7 @@ public static class ImportLabels
     private static readonly Dictionary<string, string> Labels = new(StringComparer.OrdinalIgnoreCase)
     {
         ["StudyYears"] = "المراحل الدراسية", ["Branches"] = "الفروع", ["FacultyMembers"] = "التدريسيون",
-        ["NamedAssignments"] = "التدريسيون والمواد بالأسماء (دون تكليفات)", ["Skipped"] = "تم التخطي",
+        ["NamedAssignments"] = "التدريسيون والمواد بالأسماء", ["Skipped"] = "تم التخطي",
         ["Classrooms"] = "القاعات", ["TimeSlots"] = "الفترات الزمنية", ["Sections"] = "الشعب",
         ["Subjects"] = "المواد الدراسية", ["FacultyMemberSubjects"] = "تكليفات التدريس", ["Timetable"] = "الجدول الدراسي",
         ["StudyYearID"] = "معرف المرحلة", ["YearName"] = "اسم المرحلة", ["BranchID"] = "معرف الفرع",
@@ -43,6 +43,9 @@ public static class ImportLabels
         string normalized = Normalize(header);
         return columns.FirstOrDefault(column => Normalize(column) == normalized || Normalize(Display(column)) == normalized ||
             (column == "SubjectName" && normalized == Normalize("المادة")) ||
+            (column == "StudyYear" && new[] { "المرحلة الدراسية", "المرحله", "المرحله الدراسيه", "المرحلة الدراسيه", "اسم المرحلة", "الصف", "StudyYearID", "Year", "Stage" }.Any(alias => normalized == Normalize(alias))) ||
+            (column == "FacultyName" && new[] { "التدريسي", "اسم الاستاذ", "اسم المدرس", "FullName" }.Any(alias => normalized == Normalize(alias))) ||
+            (column == "SubjectName" && new[] { "اسم المادة الدراسية", "المادة الدراسية" }.Any(alias => normalized == Normalize(alias))) ||
             (column == "Branch" && normalized == Normalize("التخصص")) ||
             (column == "StudySession" && normalized == Normalize("الدراسة")));
     }

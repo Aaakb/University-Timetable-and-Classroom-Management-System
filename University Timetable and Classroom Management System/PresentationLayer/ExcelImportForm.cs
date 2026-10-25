@@ -13,7 +13,7 @@ public partial class ExcelImportForm : Form
     private ExcelImportPreview? preview;
     private bool busy, binding;
     private CancellationTokenSource? cancellation;
-    private ExcelImportMode Mode => (ExcelImportMode)Math.Max(0, mode.SelectedIndex);
+    private ExcelImportMode Mode => ExcelImportMode.AcademicData;
     private ExcelSheetData? SelectedSheet => workbook?.Sheets.FirstOrDefault(s => s.Name == sheet.SelectedItem?.ToString());
 
     public ExcelImportForm()
@@ -59,22 +59,11 @@ public partial class ExcelImportForm : Form
             preview = await Task.Run(() => service.ValidateSkippingInvalidAcademicRowsAsync(sheets, allowUpdates, token), token);
             ShowPreview(); tabs.SelectedIndex = 2;
         });
-        generate.Click += async (_, _) => await RunAsync(async token =>
-        {
-            if (preview is null) return;
-            var validated = preview;
-            var selectedMode = Mode;
-            double seconds = (double)repairTimeLimit.Value;
-            preview = await Task.Run(() => selectedMode == ExcelImportMode.RepairTimetable
-                ? service.RepairTimetableAsync(validated, seconds, token) : service.GenerateRemainingAsync(validated, token), token);
-            ShowPreview();
-            tabs.SelectedIndex = preview.IsValid ? 3 : 2;
-        });
         save.Click += async (_, _) =>
         {
             if (preview is null) return;
             if (MessageBox.Show(this,
-                $"هل تريد حفظ البيانات التي تم التحقق منها؟\n\nإضافات: {preview.Changes.Count(c => c.Action == "Add")}\nتحديثات أو تثبيت: {preview.Changes.Count(c => c.Action is "Update" or "Lock existing")}\nدون تغيير: {preview.Changes.Count(c => c.Action == "Unchanged")}\nصفوف المشاكل المتخطاة: {preview.SkippedRows.Select(i => (i.Sheet, i.Row)).Distinct().Count()}\nالمحاضرات المعاد توزيعها: {preview.PlacementChanges.Count(c => c.Changed)}\n\nتُحفظ جميع التغييرات المعروضة معاً؛ لا تُحفظ الصفوف المتخطاة.",
+                $"هل تريد حفظ البيانات التي تم التحقق منها؟\n\nإضافات: {preview.Changes.Count(c => c.Action == "Add")}\nتحديثات: {preview.Changes.Count(c => c.Action is "Update" or "Lock existing")}\nدون تغيير: {preview.Changes.Count(c => c.Action == "Unchanged")}\nصفوف المشاكل المتخطاة: {preview.SkippedRows.Select(i => (i.Sheet, i.Row)).Distinct().Count()}\n\nتُحفظ جميع التغييرات المعروضة معاً؛ لا تُحفظ الصفوف المتخطاة.",
                 "تأكيد الاستيراد", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) != DialogResult.Yes) return;
             await RunAsync(async token =>
             {
@@ -115,18 +104,9 @@ public partial class ExcelImportForm : Form
 
     private void UpdateMode()
     {
-        entity.Enabled = Mode == ExcelImportMode.AcademicData && !allSheets.Checked && !busy;
-        updates.Visible = entity.Visible = Mode == ExcelImportMode.AcademicData;
-        allSheets.Visible = Mode is ExcelImportMode.AcademicData or ExcelImportMode.RepairTimetable;
-        allSheets.Text = Mode == ExcelImportMode.RepairTimetable ? "إصلاح جميع الأوراق / الصفحات" : "استيراد التدريسيين والمواد من جميع الأوراق";
-        entityField.Visible = Mode == ExcelImportMode.AcademicData;
-        semesterField.Visible = Mode != ExcelImportMode.AcademicData;
-        semester.Enabled = Mode != ExcelImportMode.AcademicData && !busy;
-        repairTimeField.Visible = Mode == ExcelImportMode.RepairTimetable;
-        studySessionField.Visible = Mode != ExcelImportMode.AcademicData && workbook?.Sheets.Any(s => s.IsWeeklyTimetable) == true;
-        generate.Visible = Mode is ExcelImportMode.Hybrid or ExcelImportMode.RepairTimetable;
-        generate.Text = Mode == ExcelImportMode.RepairTimetable ? "إصلاح الجدول المستورد" : "توليد المحاضرات المتبقية";
-        tabs.TabPages[3].Text = Mode == ExcelImportMode.RepairTimetable ? "٤. المقارنة قبل وبعد الإصلاح" : "٤. الجدول المكتمل";
+        entity.Enabled = !allSheets.Checked && !busy;
+        updates.Visible = entity.Visible = entityField.Visible = allSheets.Visible = true;
+        allSheets.Text = "استيراد التدريسيين والمواد من جميع الأوراق";
         UpdateActions();
     }
     private void InvalidatePreview()
@@ -143,8 +123,7 @@ public partial class ExcelImportForm : Form
         validate.Enabled = !busy && workbook is not null;
         skipProblems.Visible = Mode == ExcelImportMode.AcademicData;
         skipProblems.Enabled = !busy && preview?.Issues.Any(i => i.Row > 1) == true;
-        generate.Enabled = !busy && preview?.IsValid == true && !preview.GenerationCompleted;
-        save.Enabled = !busy && preview?.IsValid == true && preview.Changes.Count > 0 && (Mode is not (ExcelImportMode.Hybrid or ExcelImportMode.RepairTimetable) || preview.GenerationCompleted);
+        save.Enabled = !busy && preview?.IsValid == true && preview.Changes.Count > 0;
     }
     private async Task RunAsync(Func<CancellationToken, Task> operation)
     {
@@ -171,11 +150,11 @@ public partial class ExcelImportForm : Form
     }
     private async Task OpenAsync()
     {
-        using var dialog = new OpenFileDialog { Title = "اختر ملف Excel أو PDF للاستيراد", Filter = "الملفات المدعومة (*.xlsx;*.pdf)|*.xlsx;*.pdf|ملفات Excel (*.xlsx)|*.xlsx|ملفات PDF (*.pdf)|*.pdf", CheckFileExists = true };
+        using var dialog = new OpenFileDialog { Title = "اختر ملف Excel للتدريسيين والمواد", Filter = "ملفات Excel (*.xlsx)|*.xlsx", CheckFileExists = true };
         if (dialog.ShowDialog(this) != DialogResult.OK) return;
         await RunAsync(async token =>
         {
-            var loaded = await Task.Run(() => ImportFileReader.Read(dialog.FileName, token), token);
+            var loaded = await Task.Run(() => ExcelWorkbookReader.Read(dialog.FileName, token), token);
             LoadWorkbook(loaded, dialog.FileName);
         });
     }
@@ -183,8 +162,6 @@ public partial class ExcelImportForm : Form
     {
         workbook = loaded; preview = null; maps.Clear();
         report.DataSource = result.DataSource = null;
-        if (Mode == ExcelImportMode.AcademicData && loaded.Sheets.All(s => s.SuggestedSchemaName == "Timetable"))
-            mode.SelectedIndex = loaded.Sheets.Any(s => s.IsWeeklyTimetable) ? 3 : 1;
         if (Mode == ExcelImportMode.AcademicData && loaded.Sheets.Any(s => s.SuggestedSchemaName is null && ImportLabels.MatchSheet(s.Name) is null)) allSheets.Checked = false;
         binding = true; studySession.SelectedIndex = 0; binding = false;
         BindWorkbookSheets();
@@ -193,7 +170,7 @@ public partial class ExcelImportForm : Form
             ? "تم تحويل الجدول الأسبوعي إلى محاضرات. اختر نطاق الدراسة، وراجع أسماء التدريسيين والقاعات وأوقات الانتهاء والملاحظات قبل التحقق."
             : "تمت قراءة الملف. راجع البيانات واربط الأعمدة عند الحاجة، ثم اضغط التحقق من البيانات.";
         if (loaded.Sheets.Any(s => s.SuggestedSchemaName == ExcelImportSchema.NamedAssignments.Name))
-            status.Text = "تم اكتشاف قائمة التدريسيين والمواد بالأسماء. تُضاف السجلات بشكل مستقل دون إنشاء تكليفات. تُستبعد الصفوف المسائية، وتحتاج المادة الجديدة المرحلة والفصل الدراسي.";
+            status.Text = "يُستورد اسم التدريسي واسم المادة فقط. تُتخطى الأسماء الموجودة، وتظهر المواد الجديدة كغير مصنفة دون إنشاء تكليفات.";
         UpdateMode();
         UpdateActions();
     }
@@ -334,58 +311,8 @@ public partial class ExcelImportForm : Form
             .Concat(preview.Changes.Select(c => new { c.Sheet, c.Row, Status = c.Action, Detail = c.Key }))
             .Concat(preview.UnscheduledLectures.Select(x => new { Sheet = "Generated", Row = 0, Status = "Unscheduled", Detail = ImportUiText.Message(x) })).ToList();
         report.DataSource = lines;
-        if (Mode == ExcelImportMode.RepairTimetable && preview.GenerationCompleted)
-        {
-            result.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None;
-            result.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.None;
-            result.RowTemplate.Height = 60;
-            result.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
-            result.RowHeadersVisible = false;
-            result.DataSource = preview.PlacementChanges.Select(c => new
-            {
-                c.SubjectName, c.FacultyName, c.SectionName, c.GroupName, c.Locked,
-                BeforePlacement = $"{ImportLabels.Display(c.BeforeDay)}، \u200e{c.BeforePeriod}\u200e\nالقاعة: {c.BeforeClassroom}",
-                AfterPlacement = $"{ImportLabels.Display(c.AfterDay)}، \u200e{c.AfterPeriod}\u200e\nالقاعة: {c.AfterClassroom}", c.Changed
-            }).ToList();
-            foreach (DataGridViewColumn column in result.Columns)
-            {
-                int weight = column.Name is "BeforePlacement" or "AfterPlacement" ? 25 : column.Name is "SubjectName" or "FacultyName" ? 13 : 6;
-                int minimum = column.Name is "BeforePlacement" or "AfterPlacement" ? 180 : column.Name is "SubjectName" or "FacultyName" ? 100 : 55;
-                column.Width = Math.Max(minimum, Math.Max(700, result.ClientSize.Width - 4) * weight / 100);
-                column.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
-            }
-            result.Columns["SectionName"].HeaderText = "الشعبة";
-            result.Columns["GroupName"].HeaderText = "المجموعة";
-            result.Columns["Locked"].HeaderText = "مثبتة";
-            result.Columns["Changed"].HeaderText = "تغيّر";
-            foreach (DataGridViewRow row in result.Rows)
-            {
-                row.Height = 60;
-                if (row.Cells["Changed"].Value is true) row.DefaultCellStyle.BackColor = Color.FromArgb(220, 252, 231);
-            }
-        }
-        else
-        {
-            result.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
-            result.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.None;
-            result.DefaultCellStyle.WrapMode = DataGridViewTriState.False;
-            result.RowHeadersVisible = true;
-            result.DataSource = preview.Lectures.Select(l => new
-            {
-                l.Locked, l.Sheet, l.Row, l.SubjectName, l.FacultyName, l.ClassroomName,
-                l.Schedule.DayOfWeek, l.Period, l.SectionName, l.Schedule.LectureType, l.Schedule.GroupName, l.Schedule.SemesterNumber
-            }).ToList();
-        }
-        if (Mode == ExcelImportMode.RepairTimetable)
-        {
-            status.Text = preview.GenerationCompleted
-                ? $"اكتمل الإصلاح: {preview.Lectures.Count} محاضرة، {preview.PlacementChanges.Count(c => c.Changed)} تغييراً. راجع المقارنة قبل الحفظ."
-                : $"الأخطاء المانعة: {preview.Issues.Count} • تعارضات قابلة للإصلاح: {preview.RepairableConflicts.Count}. ثبّت الصفوف المطلوبة ثم اضغط إصلاح الجدول المستورد.";
-            return;
-        }
         status.Text = $"الأخطاء: {preview.Issues.Count}  •  صفوف المشاكل المتخطاة: {preview.SkippedRows.Select(i => (i.Sheet, i.Row)).Distinct().Count()}  •  السجلات المراجعة: {preview.Changes.Count}. " +
-            (Mode == ExcelImportMode.Hybrid ? $"المحاضرات المتبقية: {preview.RemainingLectureCount}. يمكنك تعديل تثبيت المحاضرات في المعاينة ثم إعادة التحقق." :
-                preview.Issues.Any(i => i.Row > 1) ? "صحح الصفوف أو اضغط «تخطي الصفوف ذات المشاكل» ثم راجع البقية قبل الحفظ." : "راجع التغييرات قبل تأكيد الاستيراد.");
+            (preview.Issues.Any(i => i.Row > 1) ? "صحح الصفوف أو اضغط «تخطي الصفوف ذات المشاكل» ثم راجع البقية قبل الحفظ." : "راجع التغييرات قبل تأكيد الاستيراد.");
     }
     private async Task TemplateAsync()
     {

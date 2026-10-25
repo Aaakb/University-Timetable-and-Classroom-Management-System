@@ -1,4 +1,4 @@
-using System.Drawing;
+﻿using System.Drawing;
 using System.Windows.Forms;
 
 #nullable disable
@@ -377,7 +377,7 @@ namespace University_Timetable_and_Classroom_Management_System
             // btnExcelImport
             //
             btnExcelImport.Name = "btnExcelImport";
-            btnExcelImport.Text = "استيراد Excel / PDF";
+            btnExcelImport.Text = "استيراد التدريسيين والمواد";
             btnExcelImport.Dock = DockStyle.Fill;
             btnExcelImport.Size = new Size(219, 53);
             btnExcelImport.Margin = new Padding(0, 0, 0, 16);

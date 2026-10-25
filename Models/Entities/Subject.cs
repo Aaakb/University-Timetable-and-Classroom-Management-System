@@ -7,6 +7,10 @@
         public string SubjectName { get; set; } = string.Empty;
         public bool IsDeleted { get; set; }
 
+        // Reserved classification for subjects imported by name before academic details are supplied.
+        public const int UnclassifiedStudyYearId = 0;
+        [System.ComponentModel.DataAnnotations.Schema.NotMapped]
+        public bool IsUnclassified => StudyYearID == UnclassifiedStudyYearId;
         public int StudyYearID { get; set; }
 
         public int SemesterNumber { get; set; }
@@ -31,7 +35,7 @@
         [System.ComponentModel.DataAnnotations.Schema.NotMapped]
         public int EffectivePracticalLectureCount => PracticalLectureCount ?? DefaultPracticalLectureCount;
         [System.ComponentModel.DataAnnotations.Schema.NotMapped]
-        public bool HasWeeklyLectures => !IsDeleted && (EffectiveTheoreticalLectureCount > 0 || EffectivePracticalLectureCount > 0);
+        public bool HasWeeklyLectures => !IsDeleted && !IsUnclassified && (EffectiveTheoreticalLectureCount > 0 || EffectivePracticalLectureCount > 0);
 
         // Retained only for compatibility with existing database constraints.
         public const string DefaultRequirementType = "University";

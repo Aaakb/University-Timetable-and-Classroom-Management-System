@@ -113,7 +113,7 @@ namespace University_Timetable_and_Classroom_Management_System
             this.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.RightToLeftLayout = true;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "استيراد Excel وPDF والجدولة الهجينة";
+            this.Text = "استيراد التدريسيين والمواد من Excel";
             this.MaximizeBox = true;
             this.MinimizeBox = true;
             this.ShowIcon = true;
@@ -189,7 +189,7 @@ namespace University_Timetable_and_Classroom_Management_System
             lblHeading.Size = new System.Drawing.Size(280, 36);
             lblHeading.TabIndex = 0;
             lblHeading.TabStop = false;
-            lblHeading.Text = "استيراد البيانات والجداول";
+            lblHeading.Text = "استيراد التدريسيين والمواد";
             lblHeading.Name = "lblHeading";
             lblHeading.Visible = true;
             lblHeading.Enabled = true;
@@ -212,7 +212,7 @@ namespace University_Timetable_and_Classroom_Management_System
             lblDescription.Size = new System.Drawing.Size(388, 19);
             lblDescription.TabIndex = 1;
             lblDescription.TabStop = false;
-            lblDescription.Text = "Excel وPDF  •  معاينة البيانات ← ربط الأعمدة ← التحقق ← الحفظ";
+            lblDescription.Text = "Excel  •  معاينة البيانات ← ربط الأعمدة ← التحقق ← الحفظ";
             lblDescription.Name = "lblDescription";
             lblDescription.Visible = true;
             lblDescription.Enabled = true;
@@ -260,7 +260,7 @@ namespace University_Timetable_and_Classroom_Management_System
             open.Size = new System.Drawing.Size(188, 40);
             open.TabIndex = 0;
             open.TabStop = true;
-            open.Text = "فتح ملف Excel أو PDF…";
+            open.Text = "فتح ملف Excel…";
             open.Name = "openImportFile";
             open.Visible = true;
             open.Enabled = true;
@@ -375,7 +375,7 @@ namespace University_Timetable_and_Classroom_Management_System
             mode.DropDownWidth = 210;
             mode.MaxDropDownItems = 8;
             mode.Sorted = false;
-            mode.Items.AddRange(new object[] { "التدريسيون والمواد فقط", "جدول دراسي جاهز", "الجدولة الهجينة", "إصلاح الجدول المستورد" });
+            mode.Items.AddRange(new object[] { "التدريسيون والمواد فقط" });
             
             // flow2
             flow2.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left;
@@ -413,7 +413,7 @@ namespace University_Timetable_and_Classroom_Management_System
             lblCaption2.Size = new System.Drawing.Size(102, 19);
             lblCaption2.TabIndex = 0;
             lblCaption2.TabStop = false;
-            lblCaption2.Text = "الورقة / الصفحة";
+            lblCaption2.Text = "ورقة Excel";
             lblCaption2.Name = "lblCaption2";
             lblCaption2.Visible = true;
             lblCaption2.Enabled = true;
@@ -529,7 +529,7 @@ namespace University_Timetable_and_Classroom_Management_System
             allSheets.Size = new System.Drawing.Size(212, 23);
             allSheets.TabIndex = 5;
             allSheets.TabStop = true;
-            allSheets.Text = "استيراد جميع الجداول الأكاديمية";
+            allSheets.Text = "استيراد التدريسيين والمواد من جميع الأوراق";
             allSheets.Name = "allSheets";
             allSheets.Visible = true;
             allSheets.Enabled = true;
@@ -1463,13 +1463,9 @@ namespace University_Timetable_and_Classroom_Management_System
             heading.Controls.Add(lblDescription, -1, -1);
             toolbar.Controls.Add(open);
             toolbar.Controls.Add(template);
-            toolbar.Controls.Add(flow);
             toolbar.Controls.Add(flow2);
             toolbar.Controls.Add(entityField);
             toolbar.Controls.Add(allSheets);
-            toolbar.Controls.Add(semesterField);
-            toolbar.Controls.Add(repairTimeField);
-            toolbar.Controls.Add(studySessionField);
             toolbar.Controls.Add(updates);
             toolbar.Controls.Add(fileSummary);
             flow.Controls.Add(lblCaption);
@@ -1487,7 +1483,6 @@ namespace University_Timetable_and_Classroom_Management_System
             tabs.Controls.Add(tabPreview);
             tabs.Controls.Add(tabMapping);
             tabs.Controls.Add(tabReport);
-            tabs.Controls.Add(tabResult);
             tabPreview.Controls.Add(data);
             tabMapping.Controls.Add(mapping);
             tabReport.Controls.Add(report);
@@ -1496,7 +1491,6 @@ namespace University_Timetable_and_Classroom_Management_System
             footer.Controls.Add(flow3, 0, 1);
             flow3.Controls.Add(validate);
             flow3.Controls.Add(skipProblems);
-            flow3.Controls.Add(generate);
             flow3.Controls.Add(save);
             flow3.Controls.Add(cancel);
             

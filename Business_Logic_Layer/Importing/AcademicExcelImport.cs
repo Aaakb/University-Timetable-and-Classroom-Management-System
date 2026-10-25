@@ -113,7 +113,9 @@ internal static class AcademicExcelImport
                 break;
             case Subject x:
                 SubjectLectureRules.Validate(x);
-                Structure(x.StudyYearID, x.BranchID, c);
+                if (!x.IsUnclassified) Structure(x.StudyYearID, x.BranchID, c);
+                if (x.IsUnclassified && (x.BranchID.HasValue || x.HasWeeklyLectures || x.TheoreticalLectureCount != 0 || x.PracticalLectureCount != 0))
+                    throw new ArgumentException("المادة المستوردة بالاسم تبقى دون محاضرات لحين استكمال بياناتها.");
                 if (x.SemesterNumber is not (1 or 2)) throw new ArgumentException("SemesterNumber must be 1 or 2.");
                 InputValidation.TextLength(x.SubjectName, 100, "SubjectName");
                 if (c.Rows<FacultyMemberSubject>().Where(a => a.SubjectID == x.SubjectID && a.SectionID.HasValue).Any(a =>
@@ -201,7 +203,7 @@ internal static class AcademicExcelImport
             case Classroom x: if (update) await ClassroomService.UpdateInContextAsync(db, x); else await ClassroomService.AddInContextAsync(db, x); break;
             case TimeSlot x: if (update) await TimeSlotService.UpdateInContextAsync(db, x); else await TimeSlotService.AddInContextAsync(db, x); break;
             case Section x: if (update) await SectionService.UpdateInContextAsync(db, x); else await SectionService.AddInContextAsync(db, x); break;
-            case Subject x: if (update) await SubjectService.UpdateInContextAsync(db, x); else await SubjectService.AddInContextAsync(db, x); break;
+            case Subject x: if (update) await SubjectService.UpdateInContextAsync(db, x); else if (x.IsUnclassified) await SubjectService.AddNameOnlyInContextAsync(db, x); else await SubjectService.AddInContextAsync(db, x); break;
             case FacultyMemberSubject x:
                 x.LectureType = FacultyAssignmentRules.NormalizeLectureType(x.LectureType);
                 if (update && await db.Schedules.AnyAsync(s => s.FacultyMemberID == x.FacultyMemberID &&

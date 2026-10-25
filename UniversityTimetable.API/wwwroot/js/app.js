@@ -1,4 +1,4 @@
-import { api, all, refreshCsrf } from './api.js';
+﻿import { api, all, refreshCsrf } from './api.js';
 import { modules, days, types, keyOf, lectureCounts } from './schema.js';
 
 const $ = id => document.getElementById(id);
@@ -53,7 +53,7 @@ $('menu').onclick=()=>{ const open=document.body.classList.toggle('menu-open'); 
 $('navigation').innerHTML='<a href="#dashboard" data-route="dashboard"><span class="nav-icon">◈</span>نظرة عامة</a>'+Object.entries(modules).map(([route,m])=>`<a href="#${route}" data-route="${route}"><span class="nav-icon">${m.icon}</span>${m.title}</a>`).join('');
 $('navigation').insertAdjacentHTML('beforeend', '<a href="/preferences.html"><span class="nav-icon">★</span>تفضيلات التدريسيين</a>');
 $('navigation').insertAdjacentHTML('beforeend', '<a href="/alternatives.html"><span class="nav-icon">▦</span>جداول بديلة</a>');
-$('navigation').insertAdjacentHTML('beforeend', '<a href="/data-transfer.html"><span class="nav-icon">⇧</span>استيراد Excel / PDF</a><a href="/data-transfer.html#backups"><span class="nav-icon">▤</span>حفظ واستعادة الجدول</a>');
+$('navigation').insertAdjacentHTML('beforeend', '<a href="/data-transfer.html"><span class="nav-icon">⇧</span>استيراد التدريسيين والمواد</a><a href="/data-transfer.html#backups"><span class="nav-icon">▤</span>حفظ واستعادة الجدول</a>');
 async function navigate() {
   if (!state.authenticated) return;
   const route=location.hash.slice(1)||'dashboard'; state.route=modules[route]?route:'dashboard';

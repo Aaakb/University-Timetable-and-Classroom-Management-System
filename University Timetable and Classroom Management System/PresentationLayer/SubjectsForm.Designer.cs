@@ -1,4 +1,4 @@
-#nullable disable
+﻿#nullable disable
 
 namespace University_Timetable_and_Classroom_Management_System
 {
@@ -291,7 +291,7 @@ namespace University_Timetable_and_Classroom_Management_System
             //
             // colSemester
             //
-            colSemester.DataPropertyName = "SemesterNumber";
+            colSemester.DataPropertyName = "SemesterDisplay";
             colSemester.FillWeight = 55F;
             colSemester.HeaderText = "الفصل الدراسي";
             colSemester.MinimumWidth = 94;

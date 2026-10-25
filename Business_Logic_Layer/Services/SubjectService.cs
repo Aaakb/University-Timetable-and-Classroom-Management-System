@@ -52,6 +52,18 @@ namespace University_Timetable_and_Classroom_Management_System.BusinessLayer
         }
 
 
+        internal static async Task<Subject> AddNameOnlyInContextAsync(AppDbContext context, Subject subject)
+        {
+            if (!subject.IsUnclassified || subject.BranchID.HasValue || subject.TheoreticalLectureCount != 0 || subject.PracticalLectureCount != 0)
+                throw new ArgumentException("Name-only subjects must remain unclassified without weekly lectures.");
+            if (!await context.StudyYears.AnyAsync(y => y.StudyYearID == Subject.UnclassifiedStudyYearId))
+            {
+                context.StudyYears.Add(new StudyYear { StudyYearID = Subject.UnclassifiedStudyYearId, YearName = "غير مصنفة" });
+                await context.SaveChangesAsync();
+            }
+            return await AddInContextAsync(context, subject);
+        }
+
         public async Task<Subject> UpdateAsync(Subject subject)
         {
             await using var context = new AppDbContext();

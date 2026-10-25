@@ -318,7 +318,8 @@ namespace University_Timetable_and_Classroom_Management_System
             SelectComboValue(cmbStudyYear, row.StudyYearID);
             SelectComboValue(cmbBranch, row.BranchID);
             ApplyStudyYearRulesToEditor();
-            SelectComboText(cmbSemester, row.SemesterNumber.ToString());
+            if (row.StudyYearID == Subject.UnclassifiedStudyYearId) ClearCombo(cmbSemester);
+            else SelectComboText(cmbSemester, row.SemesterNumber.ToString());
             updatingLectureCounts = true;
             try
             {
@@ -504,6 +505,7 @@ namespace University_Timetable_and_Classroom_Management_System
             public string StudyYearName { get; init; } = string.Empty;
             public string BranchName { get; init; } = string.Empty;
             public int SemesterNumber { get; init; }
+            public string SemesterDisplay => StudyYearID == Subject.UnclassifiedStudyYearId ? "غير محدد" : SemesterNumber.ToString();
             public double TheoreticalHours { get; init; }
             public double PracticalHours { get; init; }
             public double CreditUnits { get; init; }
@@ -521,7 +523,7 @@ namespace University_Timetable_and_Classroom_Management_System
                     StudyYearID = subject.StudyYearID,
                     BranchID = subject.BranchID,
                     StudyYearName = subject.StudyYear?.YearName ?? "-",
-                    BranchName = subject.Branch?.BranchName ?? "عام",
+                    BranchName = subject.IsUnclassified ? "غير محدد" : subject.Branch?.BranchName ?? "عام",
                     SemesterNumber = subject.SemesterNumber,
                     TheoreticalHours = subject.TheoreticalHours,
                     PracticalHours = subject.PracticalHours,

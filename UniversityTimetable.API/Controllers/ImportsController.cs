@@ -1,4 +1,4 @@
-using System.Data;
+﻿using System.Data;
 using System.IO.Compression;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
@@ -26,7 +26,7 @@ public sealed class ImportsController(IMemoryCache cache, MutationGate gate) : C
         ? session : throw new ApiFailure(409, "انتهت جلسة الاستيراد. أعد فتح الملف.");
 
     [HttpGet("schemas")]
-    public object Schemas() => ExcelImportSchema.AcademicInputs.Append(ExcelImportSchema.Timetable).Select(s => new
+    public object Schemas() => ExcelImportSchema.AcademicInputs.Select(s => new
     {
         s.Name, label = ImportLabels.Display(s.Name), s.Required,
         columns = s.Columns.Select(c => new { name = c, label = ImportLabels.Display(c) })
@@ -35,7 +35,7 @@ public sealed class ImportsController(IMemoryCache cache, MutationGate gate) : C
     [HttpGet("template")]
     public async Task<IActionResult> Template([FromQuery] ExcelImportMode mode, CancellationToken token)
     {
-        if (!Enum.IsDefined(mode)) throw new ArgumentException("نوع الاستيراد غير صالح.");
+        if (mode != ExcelImportMode.AcademicData) throw new ArgumentException("الاستيراد متاح للتدريسيين والمواد فقط.");
         string path = Path.Combine(Path.GetTempPath(), Guid.NewGuid() + ".xlsx");
         try
         {
@@ -51,7 +51,7 @@ public sealed class ImportsController(IMemoryCache cache, MutationGate gate) : C
         string path = Path.Combine(Path.GetTempPath(), Guid.NewGuid() + Path.GetExtension(file.FileName).ToLowerInvariant());
         try
         {
-            await TransferFiles.WriteAsync(file, path, [".xlsx", ".pdf"], token);
+            await TransferFiles.WriteAsync(file, path, [".xlsx"], token);
             ExcelWorkbookData workbook;
             try
             {
@@ -64,15 +64,9 @@ public sealed class ImportsController(IMemoryCache cache, MutationGate gate) : C
                 workbook = await Task.Run(() => ImportFileReader.Read(path, token), token);
             }
             catch (Exception ex) when (ex is not OperationCanceledException)
-            { throw new ArgumentException("تعذرت قراءة الملف. تحقق من سلامته وأنه Excel أو PDF نصي قابل للقراءة."); }
+            { throw new ArgumentException("تعذرت قراءة الملف. تحقق من سلامته وأنه Excel بصيغة .xlsx."); }
             if (workbook.Sheets.Count > 100 || workbook.Sheets.Sum(s => (long)s.Table.Rows.Count * s.Table.Columns.Count) > 500000)
                 throw new ArgumentException("الملف يحتوي بيانات كثيرة. قسّمه إلى ملفات أصغر.");
-            foreach (var sheet in workbook.Sheets)
-                if (!sheet.Table.Columns.Cast<DataColumn>().Any(c => ImportLabels.MatchColumn(c.ColumnName, ["Locked"]) is not null))
-                {
-                    sheet.Table.Columns.Add("Locked", typeof(string));
-                    foreach (DataRow row in sheet.Table.Rows) row["Locked"] = "FALSE";
-                }
             string id = Guid.NewGuid().ToString("N");
             cache.Set("import:" + id, new Session(Owner, workbook), new MemoryCacheEntryOptions { Size = 1, AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(20) });
             return new { id, sheets = workbook.Sheets.Select((s, index) => new
@@ -81,7 +75,7 @@ public sealed class ImportsController(IMemoryCache cache, MutationGate gate) : C
                 schema = s.SuggestedSchemaName ?? ImportLabels.MatchSheet(s.Name),
                 columns = s.Table.Columns.Cast<DataColumn>().Select(c => c.ColumnName),
                 rows = s.Table.Rows.Cast<DataRow>().Select(r => r.ItemArray.Select(v => Convert.ToString(v) ?? "")),
-                mappings = ExcelImportSchema.AcademicInputs.Append(ExcelImportSchema.Timetable).ToDictionary(schema => schema.Name,
+                mappings = ExcelImportSchema.AcademicInputs.ToDictionary(schema => schema.Name,
                     schema => s.Table.Columns.Cast<DataColumn>().Select(c => ImportLabels.MatchColumn(c.ColumnName, schema.Columns) ?? "").ToArray())
             }) };
         }
@@ -94,7 +88,7 @@ public sealed class ImportsController(IMemoryCache cache, MutationGate gate) : C
         using var lease = await gate.EnterAsync(token);
         var session = Find(request.Id);
         session.Preview = null;
-        if (!Enum.IsDefined(request.Mode) || request.Semester is not (1 or 2)) throw new ArgumentException("خيارات الاستيراد غير صالحة.");
+        if (request.Mode != ExcelImportMode.AcademicData || request.Semester is not (1 or 2)) throw new ArgumentException("خيارات الاستيراد غير صالحة.");
         if (request.Sheets is null || request.Sheets.Count == 0 || request.Sheets.Count > session.Workbook.Sheets.Count ||
             request.Sheets.Select(s => s.Index).Distinct().Count() != request.Sheets.Count) throw new ArgumentException("اختر أوراق الاستيراد دون تكرار.");
         var sheets = new List<ExcelSheetData>();
@@ -127,24 +121,6 @@ public sealed class ImportsController(IMemoryCache cache, MutationGate gate) : C
             ? await service.ValidateSkippingInvalidAcademicRowsAsync(sheets, request.UpdateExisting, token)
             : await service.ValidateAsync(request.Mode, sheets, request.UpdateExisting, request.Semester, token);
         return Preview(session);
-    }
-
-    [HttpPost("generate")]
-    public async Task<object> Generate(ImportGeneration request, CancellationToken token)
-    {
-        using var lease = await gate.EnterAsync(token);
-        var session = Find(request.Id);
-        var validated = RequirePreview(session, request.Revision);
-        if (request.Seconds is < 1 or > 120 || !double.IsFinite(request.Seconds)) throw new ArgumentException("مهلة البحث يجب أن تكون بين 1 و120 ثانية.");
-        if (session.Mode is not (ExcelImportMode.Hybrid or ExcelImportMode.RepairTimetable)) throw new ArgumentException("لا يتطلب هذا الاستيراد توليدًا.");
-        session.Preview = null;
-        try
-        {
-            session.Preview = await Task.Run(() => session.Mode == ExcelImportMode.RepairTimetable
-                ? service.RepairTimetableAsync(validated, request.Seconds, token) : service.GenerateRemainingAsync(validated, token), token);
-            return Preview(session);
-        }
-        catch (InvalidOperationException) { throw new ApiFailure(409, "تغيرت البيانات أو تعذر إكمال المعاينة. أعد التحقق من الملف."); }
     }
 
     [HttpPost("save")]

@@ -7,8 +7,8 @@ public sealed record ImportSheetSchema(string Name, string[] Required, string[] 
 public static class ExcelImportSchema
 {
     public static ImportSheetSchema NamedAssignments { get; } = new("NamedAssignments",
-        [], ["FacultyName", "SubjectName", "StudyYear", "Branch", "StudySession", "SemesterNumber", "TheoreticalHours", "PracticalHours", "CreditUnits", "AcademicTitle"]);
-    public static IEnumerable<ImportSheetSchema> AcademicInputs => Academic.Where(s => s.Name is "FacultyMembers" or "Subjects").Append(NamedAssignments);
+        [], ["FacultyName", "SubjectName"]);
+    public static IEnumerable<ImportSheetSchema> AcademicInputs => [NamedAssignments];
     public static IReadOnlyList<ImportSheetSchema> Academic { get; } =
     [
         new("StudyYears", ["StudyYearID", "YearName"], []),
@@ -24,5 +24,5 @@ public static class ExcelImportSchema
         ["Day", "TimeSlot", "Subject", "Faculty", "Classroom", "Section", "LectureType", "SemesterNumber"],
         ["GroupName", "StudyYear", "Branch", "Locked", "ScheduleID", "EndTime", "StudySession", "SourceText", "ImportNote"]);
     public static IEnumerable<ImportSheetSchema> For(ExcelImportMode mode)
-        => mode == ExcelImportMode.AcademicData ? AcademicInputs.Where(s => s.Name != NamedAssignments.Name) : [Timetable];
+        => mode == ExcelImportMode.AcademicData ? AcademicInputs : [Timetable];
 }

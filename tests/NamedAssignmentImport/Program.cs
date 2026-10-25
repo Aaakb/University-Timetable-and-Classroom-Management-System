@@ -27,13 +27,22 @@ internal static class Program
         Run().GetAwaiter().GetResult();
         ApplicationConfiguration.Initialize();
         using var form = new ExcelImportForm();
+        var mode = (ComboBox)form.GetType().GetField("mode", BindingFlags.Instance | BindingFlags.NonPublic)!.GetValue(form)!;
+        Check(mode.Items.Count == 1, "Import UI has only the faculty and subjects mode");
+        var tabs = (TabControl)form.GetType().GetField("tabs", BindingFlags.Instance | BindingFlags.NonPublic)!.GetValue(form)!;
+        Check(tabs.TabPages.Count == 3, "Timetable generation and repair tab is removed");
+        var generate = (Control)form.GetType().GetField("generate", BindingFlags.Instance | BindingFlags.NonPublic)!.GetValue(form)!;
+        Check(generate.Parent is null, "Timetable generation action is removed from the form");
+        bool pdfRejected = false;
+        try { ImportFileReader.Read("unsupported.pdf"); } catch (ArgumentException) { pdfRejected = true; }
+        Check(pdfRejected, "PDF import is rejected before reading the file");
         var book = new ExcelWorkbookData(); var roster = Roster(["موجود", "General", "الأولى", "عام", "صباحي"]);
         book.Sheets.Add(new(roster.Name, roster.Table, roster.SourceRows) { SuggestedSchemaName = "NamedAssignments" });
         form.GetType().GetMethod("LoadWorkbook", BindingFlags.Instance | BindingFlags.NonPublic)!.Invoke(form, [book, "roster.xlsx"]);
         var entity = (ComboBox)form.GetType().GetField("entity", BindingFlags.Instance | BindingFlags.NonPublic)!.GetValue(form)!;
         Check(entity.SelectedItem?.ToString() == "NamedAssignments", "UI automatically selects the named morning roster schema");
         var prepared = (List<ExcelSheetData>)form.GetType().GetMethod("PrepareSheets", BindingFlags.Instance | BindingFlags.NonPublic)!.Invoke(form, null)!;
-        Check(prepared.Single().Table.Columns.Contains("StudySession") && prepared.Single().Table.Columns.Contains("SubjectName"), "UI maps all Arabic roster headers without manual IDs");
+        Check(prepared.Single().Table.Columns.Count == 2 && prepared.Single().Table.Columns.Contains("SubjectName"), "UI maps only the two name columns and ignores academic details");
         form.Size = new(1180, 800); form.Show(); Application.DoEvents(); form.PerformLayout();
         var problemPreview = new ExcelImportPreview(); problemPreview.Issues.Add(new(roster.SourceName, 2, "", "مادة تحتاج مراجعة"));
         form.GetType().GetField("preview", BindingFlags.Instance | BindingFlags.NonPublic)!.SetValue(form, problemPreview);
@@ -66,39 +75,44 @@ internal static class Program
         var service = new ExcelImportService();
         try
         {
-            var sheet = Roster(["موجود", "General", "الأولى", "عام", "صباحي"],
-                ["جديد", "Security", "الثالثة", "CYS", "صباحي"],
-                ["مسائي فقط", "Security", "الثالثة", "CYS", "مسائي"],
-                ["جديد", "Security", "الثالثة", "CYS", "صباحي"]);
+            var names = new DataTable(); names.Columns.Add("اسم التدريسي"); names.Columns.Add("المادة");
+            names.Rows.Add("جديد", "مادة جديدة"); names.Rows.Add("جديد", "مادة جديدة");
+            names.Rows.Add("موجود", "General"); names.Rows.Add("منفرد", ""); names.Rows.Add("", "مادة منفردة");
+            var sheet = new ExcelSheetData("Names", names, [2,3,4,5,6]);
             var preview = await service.ValidateAsync(ExcelImportMode.AcademicData, [sheet]);
-            Check(preview.IsValid && preview.Changes.Count == 1, "Roster imports only one new teacher and never assignments");
+            Check(preview.IsValid && preview.Changes.Count == 4, "Only two name columns import new faculty and subjects with no academic requirements");
+            await using (var db = new AppDbContext()) Check(await db.Subjects.CountAsync() == 2 && await db.FacultyMembers.CountAsync() == 1, "Validation writes nothing");
             await service.SaveAsync(preview, true);
+            await using (var db = new AppDbContext())
+            {
+                Check(await db.FacultyMembers.CountAsync() == 3 && await db.Subjects.CountAsync() == 4, "Names saved and duplicates skipped within the file and database");
+                var imported = await db.Subjects.Where(s => s.StudyYearID == Subject.UnclassifiedStudyYearId).ToListAsync();
+                Check(imported.Count == 2 && imported.All(s => !s.HasWeeklyLectures && s.EffectiveTheoreticalLectureCount == 0 && s.EffectivePracticalLectureCount == 0), "Name-only subjects remain unclassified and have no schedule requirements");
+                Check(await db.FacultyMemberSubjects.CountAsync() == 1, "Import creates no teaching assignments");
+                Check((await db.FacultyMemberSubjects.SingleAsync()).SectionID == 1, "Existing assignment remains unchanged");
+                Check((await db.Subjects.FindAsync(1))!.SemesterNumber == 2, "Existing subject scope stays unchanged");
+                Check((await db.FacultyMembers.FindAsync(1))!.AcademicTitle == "Lecturer", "Existing teacher details stay unchanged");
+            }
             var repeated = await service.ValidateAsync(ExcelImportMode.AcademicData, [sheet]);
-            Check(repeated.IsValid && repeated.Changes.Count == 0, "Reimport does not duplicate existing names");
-
-            var newMaterial = Roster(["", "New material", "الأولى", "عام", ""]);
-            var missingTerm = await service.ValidateAsync(ExcelImportMode.AcademicData, [newMaterial]);
-            Check(!missingTerm.IsValid && missingTerm.Issues.Any(i => i.Message.Contains("الفصل الدراسي")), "New subject needs an explicit semester");
-            newMaterial.Table.Columns.Add("الفصل الدراسي"); newMaterial.Table.Rows[0]["الفصل الدراسي"] = "1";
-            var materialPreview = await service.ValidateAsync(ExcelImportMode.AcademicData, [newMaterial]);
-            Check(materialPreview.IsValid && materialPreview.Changes.Count == 1, "Subject alone imports without a teacher");
-            await service.SaveAsync(materialPreview, true);
-
-            var teacher = new DataTable(); teacher.Columns.Add("اسم التدريسي"); teacher.Rows.Add("تدريسي منفرد");
-            var teacherPreview = await service.ValidateAsync(ExcelImportMode.AcademicData, [new("Names", teacher, [2])]);
-            Check(teacherPreview.IsValid && teacherPreview.Changes.Count == 1, "Teacher alone requires no subject or session columns");
-            await service.SaveAsync(teacherPreview, true);
-            var assignment = new DataTable(); assignment.Columns.Add("FacultyMemberID"); assignment.Columns.Add("SubjectID"); assignment.Rows.Add("2", "1");
-            var ignored = await service.ValidateAsync(ExcelImportMode.AcademicData, [new("FacultyMemberSubjects", assignment, [2])]);
-            Check(ignored.IsValid && ignored.Changes.Count == 0 && ignored.ReadingNotes.Count > 0, "Assignment sheets are ignored explicitly");
-            Check(!ExcelImportSchema.AcademicInputs.Any(s => s.Name == "FacultyMemberSubjects"), "Desktop and web schema choices exclude assignments");
-            Check(ExcelImportSchema.For(ExcelImportMode.AcademicData).Select(s => s.Name).Order().SequenceEqual(new[] { "FacultyMembers", "Subjects" }), "Template contains only faculty and subjects");
-            await using var db = new AppDbContext();
-            Check(await db.FacultyMembers.CountAsync() == 3 && await db.Subjects.CountAsync() == 3, "Independent faculty and material records are saved");
-            Check(await db.FacultyMemberSubjects.CountAsync() == 1, "No new assignments are saved");
-            var existing = await db.FacultyMemberSubjects.SingleAsync();
-            Check(existing.SectionID == 1 && existing.LectureType == "Theory", "Existing assignments stay unchanged");
-            Check((await db.Subjects.FindAsync(1))!.SemesterNumber == 2, "Existing subjects retain their semester");
+            Check(repeated.IsValid && repeated.Changes.Count == 0, "Reimport adds nothing");
+            var extra = Roster(["موجود", "General", "invalid year", "invalid branch", "invalid session"]);
+            Check((await service.ValidateAsync(ExcelImportMode.AcademicData, [extra])).IsValid, "Additional columns are ignored even when invalid");
+            Check(ExcelImportSchema.AcademicInputs.Single().Columns.SequenceEqual(new[] { "FacultyName", "SubjectName" }), "All import interfaces expose only name fields");
+            string path = Path.Combine(Path.GetTempPath(), Guid.NewGuid() + ".xlsx");
+            try
+            {
+                ExcelImportTemplates.Create(path, ExcelImportMode.AcademicData);
+                var template = ExcelWorkbookReader.Read(path);
+                Check(template.Sheets.Single().Table.Columns.Count == 2, "Excel template has only two columns");
+            }
+            finally { File.Delete(path); }
+            var list = await new SubjectService().GetAllAsync();
+            Check(list.Any(s => s.SubjectName == "مادة جديدة"), "Imported names appear in the normal subject list");
+            Check(!(await new StudyYearService().GetAllAsync()).Any(y => y.StudyYearID == 0), "Reserved classification is not offered as an academic study year");
+            var promoted = list.Single(s => s.SubjectName == "مادة جديدة");
+            promoted.StudyYearID = 1; promoted.SemesterNumber = 2; promoted.TheoreticalLectureCount = 1;
+            await new SubjectService().UpdateAsync(promoted);
+            Check(!(await new SubjectService().GetByIdAsync(promoted.SubjectID))!.IsUnclassified, "Subject academic details can be completed later");
             using var canceled = new CancellationTokenSource(); canceled.Cancel(); bool rejected = false;
             try { await service.ValidateSkippingInvalidAcademicRowsAsync([sheet], token: canceled.Token); } catch (OperationCanceledException) { rejected = true; }
             Check(rejected, "Cancellation stops validation");

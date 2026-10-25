@@ -1,10 +1,10 @@
-import { api, refreshCsrf } from './api.js';
+﻿import { api, refreshCsrf } from './api.js';
 import { days } from './schema.js';
 const dayNames=Object.fromEntries(days);
 const $ = id => document.getElementById(id);
 const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 let schemas=[], workbook=null, preview=null, revision='', restore=null, sourcePage=1, busy=false, controller=null, authenticated=false, dirty=false;
-const mode = () => Number($('import-mode').value);
+const mode = () => 0;
 const selectedSheet = () => workbook?.sheets.find(s => s.index === Number($('import-sheet').value));
 const truth = value => /^(true|1|yes|نعم)$/i.test(value);
 function message(text) { $('transfer-status').textContent=text; }
@@ -37,13 +37,11 @@ function invalidate() { preview=null;revision='';dirty=!!workbook;$('import-summ
 function updateActions() {
   for(const id of ['import-controls','backup-controls','restore-controls'])$(id).disabled=busy||!authenticated;
   $('sheet-controls').disabled=$('preview-controls').disabled=busy||!authenticated||!workbook;
-  $('generate-import').disabled=busy||!preview?.isValid||preview.generationCompleted||![2,3].includes(mode());
   $('save-import').disabled=busy||!preview?.isValid||!preview.changes.length||([2,3].includes(mode())&&!preview.generationCompleted);
   $('restore-backup').disabled=busy||!restore?.preview.canRestore;
   $('skip-import').hidden=mode()!==0;$('import-updates').disabled=busy||mode()!==0;
   $('import-semester').disabled=busy||mode()===0;$('import-seconds').disabled=busy||mode()!==3;
   $('sheet-schema').disabled=busy||mode()!==0;
-  $('generate-import').textContent=mode()===3?'إصلاح الجدول ومعاينة المقارنة':'توليد المحاضرات المتبقية';
 }
 function visibleSheets() { const session=$('import-session').value;return workbook?.sheets.filter(s=>!session||!s.studySession||s.studySession===session)||[]; }
 function configureSheet(sheet) {
@@ -84,7 +82,6 @@ $('cancel-transfer').onclick=()=>controller?.abort();
 $('open-import').onclick=()=>run(async signal=>{
   const data=await api('imports/upload',{method:'POST',body:formFile('import-file'),signal});
   workbook=data;preview=null;revision='';dirty=true;
-  if(data.sheets.every(s=>s.schema==='Timetable'))$('import-mode').value=data.sheets.some(s=>s.isWeeklyTimetable)?'3':'1';
   for(const sheet of workbook.sheets){sheet.included=!!sheet.schema;configureSheet(sheet);}
   if(!workbook.sheets.some(s=>s.included))workbook.sheets[0].included=true;
   $('import-session').innerHTML='<option value="">الكل</option>'+[...new Set(data.sheets.map(s=>s.studySession).filter(Boolean))].map(s=>`<option value="${esc(s)}">${esc(s)}</option>`).join('');
@@ -102,11 +99,10 @@ $('source-table').oninput=e=>{const input=e.target;if(input.dataset.row===undefi
 $('source-prev').onclick=()=>{sourcePage--;renderSource();};$('source-next').onclick=()=>{sourcePage++;renderSource();};
 async function validate(skipInvalid=false){await run(async signal=>{preview=null;revision='';const sheets=visibleSheets().filter(s=>s.included).map(s=>({index:s.index,schema:s.schema,mapping:s.mapping,rows:s.rows}));const data=await api('imports/validate',{method:'POST',body:{id:workbook.id,mode:mode(),semester:Number($('import-semester').value),updateExisting:$('import-updates').checked,skipInvalid,sheets},signal});renderPreview(data);});}
 $('validate-import').onclick=()=>validate();$('skip-import').onclick=()=>validate(true);
-$('generate-import').onclick=()=>run(async signal=>{const savedRevision=revision;preview=null;renderPreview(await api('imports/generate',{method:'POST',body:{id:workbook.id,revision:savedRevision,seconds:Number($('import-seconds').value)},signal}));});
 $('save-import').onclick=async()=>{
   if(busy||!preview)return;
   const p=preview;
-  if(!await confirmSave(`حفظ الاستيراد المعروض؟\n${p.changes.filter(c=>c.action==='Add').length} إضافة، ${p.changes.filter(c=>['Update','Lock existing'].includes(c.action)).length} تحديث أو تثبيت.\nصفوف متخطاة: ${new Set(p.skippedRows.map(i=>i.sheet+'|'+i.row)).size}.\nمحاضرات معاد توزيعها: ${p.placementChanges.filter(c=>c.changed).length}.\nتُحفظ جميع التغييرات معًا.`))return;
+  if(!await confirmSave(`حفظ الاستيراد المعروض؟\n${p.changes.filter(c=>c.action==='Add').length} إضافة، ${p.changes.filter(c=>['Update','Lock existing'].includes(c.action)).length} تحديث.\nصفوف متخطاة: ${new Set(p.skippedRows.map(i=>i.sheet+'|'+i.row)).size}.\nتُحفظ جميع التغييرات معًا.`))return;
   await run(async signal=>{const result=await api('imports/save',{method:'POST',body:{id:workbook.id,revision,confirmed:true},signal});preview=null;workbook=null;revision='';dirty=false;message(`اكتمل الاستيراد: ${result.added} إضافة، ${result.updated} تحديث، ${result.unchanged} دون تغيير.`);},true);
 };
 $('download-backup').onclick=()=>run(async signal=>{download(await api('timetable-backups/download',{blob:true,signal}),'Timetable-'+new Date().toISOString().slice(0,10)+'.json');message('تم تنزيل نسخة الجدول.');});

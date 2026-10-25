@@ -38,6 +38,14 @@ public static class ExcelImportTemplates
             "Validate, review every reported error and change, then explicitly confirm saving. A failure rolls back the entire import.",
             "العربية مدعومة. راجع الأخطاء ثم أكد الحفظ. المحاضرات المقفلة تبقى في أماكنها أثناء التوليد الهجين."
         ];
+        if (mode == ExcelImportMode.AcademicData) lines =
+        [
+            "استيراد التدريسيين والمواد بالأسماء فقط",
+            "أدخل اسم التدريسي في FacultyName واسم المادة في SubjectName. لا تحتاج معرفات أو مرحلة أو فصل أو تخصص.",
+            "يمكن ترك أحد الاسمين فارغاً لاستيراد الاسم الآخر فقط. يتم تخطي الأسماء المكررة أو الموجودة سابقاً.",
+            "تظهر المواد الجديدة كغير مصنفة لحين استكمال بياناتها من شاشة المواد. لا تنشأ أي تكليفات.",
+            "تجاهل أوراق Example_؛ هي أمثلة فقط. تحقق من البيانات ثم أكد الحفظ."
+        ];
         for (int i = 0; i < lines.Length; i++) instructions.Cell(i + 1, 1).Value = lines[i];
         instructions.Column(1).Width = 120;
         instructions.Column(1).Style.Alignment.WrapText = true;
@@ -74,6 +82,7 @@ public static class ExcelImportTemplates
     }
     private static Dictionary<string, object> Sample(string sheet, ExcelImportMode mode) => sheet switch
     {
+        "NamedAssignments" => new() { ["FacultyName"] = "أحمد محمد", ["SubjectName"] = "الرياضيات" },
         "StudyYears" => new() { ["StudyYearID"] = 1, ["YearName"] = "First Year" },
         "Branches" => new() { ["BranchID"] = 1, ["BranchName"] = "Computer Science" },
         "FacultyMembers" => new() { ["FacultyMemberID"] = 1, ["FullName"] = "أحمد محمد", ["AcademicTitle"] = "Lecturer" },
