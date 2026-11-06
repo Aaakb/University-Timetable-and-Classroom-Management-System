@@ -19,7 +19,7 @@ public static class ImportLabels
         ["SectionName"] = "اسم الشعبة", ["StudentCount"] = "عدد الطلبة", ["SubjectID"] = "معرف المادة",
         ["SubjectName"] = "اسم المادة", ["SemesterNumber"] = "الفصل الدراسي", ["TheoreticalHours"] = "الساعات النظرية",
         ["PracticalHours"] = "الساعات العملية", ["CreditUnits"] = "الوحدات", ["Day"] = "اليوم",
-        ["TheoreticalLectureCount"] = "عدد المحاضرات النظرية أسبوعياً", ["PracticalLectureCount"] = "عدد المحاضرات العملية أسبوعياً لكل مجموعة",
+        ["TheoreticalLectureCount"] = "عدد المحاضرات النظرية أسبوعياً", ["PracticalLectureCount"] = "عدد المحاضرات العملية أسبوعياً لكل مجموعة", ["MergePracticalGroups"] = "عملي مدمج للشعبة كاملة",
         ["DayOfWeek"] = "اليوم", ["TimeSlot"] = "الفترة", ["Subject"] = "المادة", ["Faculty"] = "التدريسي",
         ["Classroom"] = "القاعة", ["Section"] = "الشعبة", ["LectureType"] = "نوع المحاضرة",
         ["GroupName"] = "المجموعة", ["StudyYear"] = "المرحلة", ["Branch"] = "الفرع", ["Locked"] = "تثبيت المحاضرة",

@@ -11,11 +11,85 @@ namespace University_Timetable_and_Classroom_Management_System
         {
             InitializeComponent();
             if (DesignerEnvironment.IsDesignTime(this)) return;
+            AddAcademicNavigation();
             ArabicUi.Apply(this);
             ConfigureStudyYearsGrid();
             ConfigureStudyYearsEvents();
         }
 
+        private void AddAcademicNavigation()
+        {
+            using var layout = new LayoutUpdateScope(this);
+            var host = new Panel { Name = "academicPageHost", Dock = DockStyle.Fill };
+            AcademicPage currentPage = AcademicPage.Stages;
+            SectionsForm? sections = null;
+            bool refreshStudentGroups = false;
+            Func<AcademicPage, Task> navigate = _ => Task.CompletedTask;
+            var students = new StudentListPage(AcademicPageNavigation.Create(AcademicPage.Students, page => navigate(page)))
+            { Dock = DockStyle.Fill, Visible = false };
+            host.Controls.Add(pnlWorkspace);
+            host.Controls.Add(students);
+            pnlMain.Controls.Add(host);
+            host.BringToFront();
+            AcademicPageNavigation.PlaceBelowEditor(layoutWorkspace, pnlStudyYearEditor, pnlStudyYearsTable,
+                AcademicPageNavigation.Create(AcademicPage.Stages, page => navigate(page)));
+
+            lblTableSubtitle.Text = "اضغط اسم المرحلة لفتح طلبتها. للتعديل، اختر رقم صفها.";
+            colYearName.HeaderText = "اسم المرحلة · عرض الطلبة";
+            colYearName.DefaultCellStyle.ForeColor = DesktopPalette.Primary;
+            colYearName.DefaultCellStyle.Font = new Font("Segoe UI Semibold", 11F, FontStyle.Underline);
+            dgvStudyYears.CellMouseEnter += (_, e) =>
+                dgvStudyYears.Cursor = e.RowIndex >= 0 && e.ColumnIndex == colYearName.Index ? Cursors.Hand : Cursors.Default;
+            dgvStudyYears.MouseLeave += (_, _) => dgvStudyYears.Cursor = Cursors.Default;
+            dgvStudyYears.CellClick += async (_, e) =>
+            {
+                if (e.RowIndex >= 0 && e.ColumnIndex == colYearName.Index &&
+                    dgvStudyYears.Rows[e.RowIndex].DataBoundItem is StudyYear { StudyYearID: >= 1 and <= 4 } year)
+                    await OpenStudentsAsync(year.StudyYearID, null);
+            };
+            dgvStudyYears.KeyDown += async (_, e) =>
+            {
+                if (e.KeyCode != Keys.Enter || dgvStudyYears.CurrentCell?.OwningColumn != colYearName ||
+                    dgvStudyYears.CurrentRow?.DataBoundItem is not StudyYear { StudyYearID: >= 1 and <= 4 } year) return;
+                e.SuppressKeyPress = true;
+                await OpenStudentsAsync(year.StudyYearID, null);
+            };
+            async Task OpenStudentsAsync(int stage, int? group)
+            {
+                var loading = students.OpenStageAsync(stage, group);
+                await NavigateAsync(AcademicPage.Students);
+                await loading;
+            }
+            async Task NavigateAsync(AcademicPage page)
+            {
+                if (IsDisposed || Disposing || currentPage == page) return;
+                currentPage = page;
+                using (new LayoutUpdateScope(host))
+                {
+                    if (page == AcademicPage.Sections && sections is null)
+                    {
+                        sections = new SectionsForm { Dock = DockStyle.Fill, Visible = false };
+                        sections.UseAcademicNavigation(AcademicPageNavigation.Create(AcademicPage.Sections, NavigateAsync),
+                            (stage, group) => OpenStudentsAsync(stage, group));
+                        host.Controls.Add(sections);
+                    }
+                    pnlWorkspace.Visible = page == AcademicPage.Stages;
+                    students.Visible = page == AcademicPage.Students;
+                    if (sections is not null) sections.Visible = page == AcademicPage.Sections;
+                }
+                if (page == AcademicPage.Sections)
+                {
+                    refreshStudentGroups = true;
+                }
+                else if (page == AcademicPage.Students)
+                {
+                    bool refresh = refreshStudentGroups;
+                    refreshStudentGroups = false;
+                    await students.LoadOnceAsync(refresh);
+                }
+            }
+            navigate = NavigateAsync;
+        }
         protected override async void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
@@ -29,6 +103,7 @@ namespace University_Timetable_and_Classroom_Management_System
         private void ConfigureStudyYearsGrid()
         {
             dgvStudyYears.AutoGenerateColumns = false;
+            dgvStudyYears.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             GridRowNumbers.Attach(dgvStudyYears, colRowNumber);
         }
 

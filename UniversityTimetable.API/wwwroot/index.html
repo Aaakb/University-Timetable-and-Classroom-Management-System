@@ -1,20 +1,20 @@
 <!doctype html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta charset="utf-8"><script src="/js/theme.js"></script><meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="theme-color" content="#102c3b"><meta name="description" content="نظام إدارة الجداول الجامعية">
   <meta name="application-name" content="University Timetable Management System">
   <title>University Timetable Management System</title>
   <link rel="manifest" href="/manifest.webmanifest"><link rel="icon" href="/icons/icon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="/icons/icon-192.png"><link rel="stylesheet" href="/css/app.css">
   <script type="module" src="/js/app.js"></script>
-</head>
+<link rel="stylesheet" href="/css/clinical-theme.css"><link rel="stylesheet" href="/css/blue-neon.css"><link rel="stylesheet" href="/css/theme.css"><link rel="stylesheet" href="/css/table-access.css"><link rel="stylesheet" href="/css/academic-lists.css"><link rel="stylesheet" href="/css/preferences.css"></head>
 <body>
   <a class="skip" href="#main">انتقل إلى المحتوى</a>
   <div id="connection" role="status" hidden>أنت غير متصل. لا يمكن تحميل البيانات أو حفظ التغييرات.</div>
   <div id="auth" class="auth-layout">
     <section class="auth-story"><div class="brand"><img src="/icons/icon.svg" alt="" width="48" height="48"><span>نظام إدارة الجداول الجامعية<small dir="ltr">University Timetable Management System</small></span></div>
-      <div><span class="eyebrow">مساحة واحدة لتنظيم اليوم الدراسي</span><h1>كل محاضرة.<br>في مكانها الصحيح.</h1><p>نظّم القاعات والمواد والتكليفات التدريسية، وتابع جدول الجامعة من أي شاشة.</p><div class="story-grid" aria-hidden="true"><span>الأحد</span><span>الإثنين</span><span>الثلاثاء</span><b>محاضرات نظرية</b><b>مختبرات عملية</b><b>جداول منظمة</b></div></div>
+      <div><span class="eyebrow">مساحة واحدة لتنظيم اليوم الدراسي</span><h1>كل محاضرة.<br>في مكانها الصحيح.</h1><p>نظّم القاعات والمواد والتكليفات التدريسية، وتابع جدول الجامعة من أي شاشة.</p></div>
       <small>نظام إدارة الجداول الجامعية</small>
     </section>
     <main class="auth-panel"><form id="auth-form" class="auth-card"><span class="eyebrow">مرحبًا بك</span><h2 id="auth-title">تسجيل الدخول</h2><p id="auth-description">استخدم حسابك الحالي في تطبيق الجامعة.</p>
@@ -33,11 +33,147 @@
       <main id="main" tabindex="-1"><div class="page-heading"><div><span class="eyebrow" id="page-kicker">مساحة العمل</span><h1 id="page-title">نظرة عامة</h1><p id="page-description">كل ما تحتاجه لتنظيم الفصل الدراسي.</p></div><div class="actions"><button id="refresh" class="secondary">↻ تحديث البيانات</button><button id="add" class="primary" hidden>+ إضافة سجل</button></div></div>
         <div id="loading" role="status" hidden>جارٍ تحميل البيانات…</div><div id="page-error" class="error" role="alert" hidden></div>
         <section id="dashboard"></section>
-        <section id="management" hidden><div class="panel"><div class="toolbar"><label class="search-label"><span>البحث</span><input id="search" type="search" placeholder="ابحث في السجلات…" maxlength="200"></label><div id="special-actions" class="actions"></div></div><div id="filters" class="filters"></div><div class="table-meta"><span id="result-count"></span><span id="view-note">البيانات المحفوظة في النظام</span></div><div id="table-host" class="table-scroll"></div><div id="pagination" class="pagination"></div></div></section>
+        <section id="management" hidden>
+          <section id="branch-workspace" class="panel" aria-labelledby="branch-form-title" hidden>
+            <h2 id="branch-form-title">بيانات الفرع</h2>
+            <form id="branch-form">
+              <label>معرّف الفرع<input id="branch-id" value="تلقائي" readonly></label>
+              <label>اسم الفرع<input name="branchName" maxlength="100" placeholder="أدخل اسم الفرع" required></label>
+              <div class="actions">
+                <button class="primary" type="submit" value="add">إضافة</button>
+                <button class="secondary" type="submit" id="branch-edit" value="edit" disabled>تعديل</button>
+                <button class="danger" type="button" id="branch-delete" disabled>حذف</button>
+                <button class="secondary" type="button" id="branch-clear">مسح الحقول</button>
+              </div>
+            </form>
+            <p id="branch-error" class="error" role="alert" hidden></p>
+          </section>
+          <div id="academic-editor"></div>
+    <section id="students-panel" class="panel" hidden>
+      <h2>إدارة الطلبة</h2>
+      <p id="student-status" role="status"></p>
+      <p id="student-error" class="error" role="alert" hidden></p>
+      <section id="student-import-result" aria-labelledby="student-import-summary" hidden>
+        <h3 id="student-import-summary" role="status"></h3>
+        <details id="student-imported-details"><summary>الطلبة الذين أُضيفوا</summary><ol id="student-imported-names"></ol></details>
+        <details id="student-skipped-details"><summary>الطلبة الذين تم تخطيهم وأسباب التخطي</summary><ol id="student-skipped-names"></ol></details>
+        <button type="button" id="dismiss-student-import" class="secondary">إغلاق الإشعار</button>
+      </section>
+      <div class="student-entry">
+        <label>المرحلة <select id="stage"><option value="1">الأولى</option><option value="2">الثانية</option><option value="3">الثالثة</option><option value="4">الرابعة</option></select></label>
+        <label>الشعبة أو التخصص <select id="group"></select></label>
+        <form id="add-student" class="academic-form-row">
+          <label>اسم الطالب <input name="fullName" maxlength="150" required></label>
+          <button class="primary">إضافة طالب</button>
+        </form>
+      </div>
+      <details class="student-import">
+        <summary>استيراد طلبة من Excel أو CSV</summary>
+        <form id="import-students" class="academic-form-row">
+          <label>ملف بعمود «اسم الطالب» <input type="file" name="file" accept=".xlsx,.csv" required></label>
+          <button class="primary">استيراد الطلبة</button>
+        </form>
+      </details>
+
+    </section>
+          <nav id="academic-navigation" class="academic-navigation" aria-label="المراحل والشعب والطلبة" hidden></nav>
+    <section id="students-results" class="panel" hidden>
+      <form id="move-students">
+        <h3>قائمة الطلبة</h3>
+        <div class="academic-form-row student-move">
+          <label>إجراء على المحددين <select id="operation"><option value="assign">تعيين الشعبة أو التخصص</option><option value="promote">الترفيع للمرحلة التالية</option></select></label>
+          <label>الوجهة <select id="destination"></select></label>
+          <button class="primary">تطبيق الإجراء</button>
+        </div>
+        <div class="student-selection actions">
+          <button type="button" class="secondary" id="select-all-students">تحديد الكل</button>
+          <button type="button" class="secondary" id="clear-selected-students">إلغاء تحديد الكل</button>
+          <button type="button" class="secondary" id="split-students" hidden>تقسيم الشعبة</button>
+          <button type="button" class="secondary" id="export-students-xlsx">تصدير Excel</button>
+          <button type="button" class="secondary" id="export-students-pdf">تصدير PDF</button>
+          <span id="student-count" role="status"></span>
+        </div>
+        <p id="students-empty" hidden>لا يوجد طلبة في النطاق المحدد.</p>
+        <div class="table-scroll">
+          <table><thead><tr><th scope="col">ت</th><th scope="col">التحديد</th><th scope="col">اسم الطالب</th><th scope="col">الشعبة أو التخصص</th><th scope="col">المعرّف</th></tr></thead><tbody id="students"></tbody></table>
+        </div>
+      </form>
+    </section>
+          <section class="panel schedule-strip" id="schedule-commands" aria-label="أوامر الجدول" hidden></section>
+          <section class="panel schedule-strip" id="schedule-filters" aria-label="تصفية الجدول" hidden></section>
+          <div class="panel" id="resource-results"><div id="schedule-results-heading" class="schedule-results-heading" hidden><h2>سجلات الجدول</h2><div id="schedule-view-controls" class="actions"></div></div><h2 id="branch-list-title" hidden>قائمة الفروع</h2><h2 id="subject-list-title" hidden>قائمة المواد</h2><h2 id="classroom-list-title" hidden>قائمة القاعات</h2><h2 id="timeslot-list-title" hidden>قائمة الفترات الدراسية</h2><h2 id="assignment-list-title" hidden>قائمة التكليفات التدريسية</h2><h2 id="faculty-list-title" hidden>قائمة التدريسيين</h2><div class="toolbar"><label class="search-label"><span>البحث</span><input id="search" type="search" placeholder="ابحث في السجلات…" maxlength="200"></label><div id="special-actions" class="actions"></div></div><div id="filters" class="filters"></div><div class="table-meta"><span id="result-count"></span><span id="view-note">البيانات المحفوظة في النظام</span></div><p id="table-scroll-hint" class="table-scroll-hint" hidden>مرّر الجدول أفقياً لعرض بقية الأعمدة.</p><div id="table-host" class="table-scroll" tabindex="0" role="region" aria-label="جدول السجلات؛ استخدم الأسهم للتمرير" aria-describedby="table-scroll-hint"></div><div id="pagination" class="pagination"></div></div></section>
+      <section id="preferences-workspace" hidden>
+        <fieldset id="day-controls" class="panel" disabled aria-label="التدريسي والفصل">
+          <div class="filters">
+            <label>التدريسي<select id="day-faculty"></select></label>
+            <label>الفصل الدراسي<select id="day-semester"><option value="1">الأول</option><option value="2">الثاني</option></select></label>
+            <label>مهلة التحسين / ثانية<input id="day-seconds" type="number" min="1" max="120" value="20"></label>
+          </div>
+          <label class="day-enabled"><input type="checkbox" id="day-enabled"> تحديد تفضيلات أيام لهذا التدريسي</label>
+          <fieldset id="day-cards" class="attendance-days" disabled aria-label="أيام الأسبوع"></fieldset>
+          <p>مفضّل: أولوية في التحسين · مسموح: متاح عند الحاجة · غير متاح: يُمنع وضع المحاضرات فيه</p>
+          <p id="day-profile-note"></p>
+        </fieldset>
+        <section class="panel" aria-label="جداول التدريسي">
+          <div class="actions" role="group" aria-label="عرض الجدول">
+            <button id="day-show-current" type="button" class="secondary" aria-controls="day-current" aria-pressed="true">الجدول الحالي للتدريسي</button>
+            <button id="day-show-changes" type="button" class="secondary" aria-controls="day-changes" aria-pressed="false">التغييرات المحفوظة في الفصل</button>
+          </div>
+          <div class="table-scroll" id="day-current"></div>
+          <div class="table-scroll" id="day-changes" hidden></div>
+        </section>
+        <p id="day-status" role="status"></p>
+        <div id="day-error" class="error" role="alert" hidden></div>
+        <div class="actions preferences-footer">
+          <button id="day-save" type="button" class="primary" disabled>حفظ بدون تفضيلات</button>
+          <button id="day-reload" type="button" class="secondary" disabled>تحديث البيانات</button>
+          <button id="day-cancel" type="button" class="secondary" hidden>إلغاء البحث</button>
+          <a id="day-close" class="secondary" href="#schedules">إغلاق</a>
+        </div>
+        <details class="panel"><summary>إعدادات الفترات المتقدمة</summary><p>استخدمها عند الحاجة إلى تفضيل فترات محددة ومعاينة التغييرات قبل اعتمادها.</p><a id="day-advanced" href="/preferences-advanced.html">فتح مصفوفة الفترات</a></details>
+      </section>
+      <section id="alternatives-workspace" hidden>
+        <fieldset id="alt-controls" class="panel" aria-label="إعدادات البحث" disabled>
+          <div class="filters"><label>الفصل<select id="alt-semester"><option value="1">الأول</option><option value="2">الثاني</option></select></label><label>مهلة البحث بالثواني<input id="alt-seconds" type="number" min="1" max="120" value="30"></label><label>تصفية المعاينة حسب التدريسي<select id="alt-faculty"></select></label></div>
+        </fieldset>
+        <section class="panel" aria-label="مقارنة الجداول">
+          <p>القيمة الأقل أفضل ↓. الفراغات والعبء بالدقائق، وعقوبة التفضيل بالنقاط.</p>
+          <div id="alt-comparison" class="table-scroll"></div>
+        </section>
+        <section class="panel" aria-label="معاينة الجداول">
+          <div class="actions" role="group" aria-label="طريقة المعاينة">
+            <button id="alt-show-original" type="button" class="secondary" aria-controls="alt-original-view" aria-pressed="true">الجدول الحالي والأقفال</button>
+            <button id="alt-show-detail" type="button" class="secondary" aria-controls="alt-detail-view" aria-pressed="false">تفاصيل الاختيار</button>
+            <button id="alt-show-week" type="button" class="secondary" aria-controls="alt-week-view" aria-pressed="false">معاينة أسبوعية</button>
+          </div>
+          <div id="alt-original-view">
+            <p>حدّد المحاضرات لتغيير حالة التثبيت. تبقى مواعيدها كما هي.</p>
+            <div class="actions alt-lock-actions">
+              <label><input type="checkbox" id="alt-select-all" disabled> تحديد كل المحاضرات</label>
+              <button id="alt-lock" type="button" class="secondary" disabled>تثبيت المحدد…</button>
+              <button id="alt-unlock" type="button" class="secondary" disabled>إلغاء تثبيت المحدد…</button>
+            </div>
+            <div class="table-scroll" id="alt-original"></div>
+          </div>
+          <div id="alt-detail-view" hidden><div class="table-scroll" id="alt-detail"></div></div>
+          <div id="alt-week-view" hidden><div class="table-scroll" id="alt-week"></div></div>
+        </section>
+        <p id="alt-message" role="status"></p>
+        <div id="alt-error" class="error" role="alert" hidden></div>
+        <div class="actions alternatives-footer">
+          <button type="button" class="primary" id="alt-generate" disabled>إنشاء حتى 3 بدائل</button>
+          <button type="button" class="primary" id="alt-save" disabled>اعتماد البديل المحدد…</button>
+          <button type="button" class="secondary" id="alt-cancel" disabled>إلغاء البحث</button>
+          <button type="button" class="secondary" id="alt-reload" disabled>تحديث البيانات</button>
+          <button type="button" class="secondary" id="alt-show-current" disabled>عرض الجدول الحالي</button>
+          <a id="alt-close" class="secondary" href="#schedules">إغلاق</a>
+        </div>
+      </section>
       </main><footer class="workspace-footer"><span dir="ltr">University Timetable Management System</span><span id="last-refresh">—</span></footer>
     </div>
   </div>
-  <dialog id="editor" aria-labelledby="editor-title"><form id="editor-form"><div class="dialog-heading"><div><span class="eyebrow">إدارة البيانات</span><h2 id="editor-title"></h2></div><button type="button" class="icon-button" id="close-editor" aria-label="إغلاق">×</button></div><div id="editor-fields" class="form-grid"></div><div id="editor-error" class="error" role="alert" hidden></div><div class="dialog-footer"><button type="button" id="cancel-editor" class="secondary">إلغاء</button><button type="submit" class="primary" id="save">حفظ التغييرات</button></div></form></dialog>
+  <dialog id="day-confirm"><form method="dialog"><h2>تأكيد حفظ التفضيلات</h2><p id="day-confirm-text"></p><div class="actions"><button value="yes" class="primary">تأكيد الحفظ</button><button value="cancel" class="secondary" autofocus>إلغاء</button></div></form></dialog>
+  <dialog id="editor" aria-labelledby="editor-title"><form id="editor-form"><div class="dialog-heading"><div><span class="eyebrow">إدارة البيانات</span><h2 id="editor-title"></h2></div><button type="button" class="icon-button" id="close-editor" aria-label="إغلاق">×</button></div><div id="editor-fields" class="form-grid"></div><div id="editor-error" class="error" role="alert" hidden></div><div class="dialog-footer"><button type="button" id="cancel-editor" class="secondary">إلغاء</button><button type="button" class="danger" id="academic-delete" hidden>حذف</button><button type="submit" class="primary" id="save">حفظ التغييرات</button></div></form></dialog>
   <dialog id="confirmation" aria-labelledby="confirm-title"><form method="dialog"><h2 id="confirm-title">تأكيد العملية</h2><p id="confirm-message"></p><div class="dialog-footer"><button value="cancel" class="secondary">إلغاء</button><button value="yes" class="danger">تأكيد</button></div></form></dialog>
   <div id="toast" role="status" hidden></div><div id="update-banner" hidden>يتوفر إصدار جديد. احفظ عملك أولًا. <button id="update-app" class="secondary">تحديث التطبيق</button></div>
   <noscript>يجب تفعيل JavaScript لاستخدام هذا التطبيق.</noscript>

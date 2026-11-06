@@ -25,34 +25,9 @@ internal static class Program
             Inspect(args[1]).GetAwaiter().GetResult(); return;
         }
         Run().GetAwaiter().GetResult();
-        ApplicationConfiguration.Initialize();
-        using var form = new ExcelImportForm();
-        var mode = (ComboBox)form.GetType().GetField("mode", BindingFlags.Instance | BindingFlags.NonPublic)!.GetValue(form)!;
-        Check(mode.Items.Count == 1, "Import UI has only the faculty and subjects mode");
-        var tabs = (TabControl)form.GetType().GetField("tabs", BindingFlags.Instance | BindingFlags.NonPublic)!.GetValue(form)!;
-        Check(tabs.TabPages.Count == 3, "Timetable generation and repair tab is removed");
-        var generate = (Control)form.GetType().GetField("generate", BindingFlags.Instance | BindingFlags.NonPublic)!.GetValue(form)!;
-        Check(generate.Parent is null, "Timetable generation action is removed from the form");
         bool pdfRejected = false;
         try { ImportFileReader.Read("unsupported.pdf"); } catch (ArgumentException) { pdfRejected = true; }
         Check(pdfRejected, "PDF import is rejected before reading the file");
-        var book = new ExcelWorkbookData(); var roster = Roster(["موجود", "General", "الأولى", "عام", "صباحي"]);
-        book.Sheets.Add(new(roster.Name, roster.Table, roster.SourceRows) { SuggestedSchemaName = "NamedAssignments" });
-        form.GetType().GetMethod("LoadWorkbook", BindingFlags.Instance | BindingFlags.NonPublic)!.Invoke(form, [book, "roster.xlsx"]);
-        var entity = (ComboBox)form.GetType().GetField("entity", BindingFlags.Instance | BindingFlags.NonPublic)!.GetValue(form)!;
-        Check(entity.SelectedItem?.ToString() == "NamedAssignments", "UI automatically selects the named morning roster schema");
-        var prepared = (List<ExcelSheetData>)form.GetType().GetMethod("PrepareSheets", BindingFlags.Instance | BindingFlags.NonPublic)!.Invoke(form, null)!;
-        Check(prepared.Single().Table.Columns.Count == 2 && prepared.Single().Table.Columns.Contains("SubjectName"), "UI maps only the two name columns and ignores academic details");
-        form.Size = new(1180, 800); form.Show(); Application.DoEvents(); form.PerformLayout();
-        var problemPreview = new ExcelImportPreview(); problemPreview.Issues.Add(new(roster.SourceName, 2, "", "مادة تحتاج مراجعة"));
-        form.GetType().GetField("preview", BindingFlags.Instance | BindingFlags.NonPublic)!.SetValue(form, problemPreview);
-        form.GetType().GetMethod("UpdateActions", BindingFlags.Instance | BindingFlags.NonPublic)!.Invoke(form, null);
-        var skip = (Control)form.Controls.Find("skipProblemImportRows", true).Single();
-        Check(skip.Enabled && skip.Visible, "Skip action is visible and enabled after a row validation error");
-        Directory.CreateDirectory("output/named-assignment-import");
-        using var bitmap = new Bitmap(form.Width, form.Height); form.DrawToBitmap(bitmap, new Rectangle(Point.Empty, bitmap.Size));
-        bitmap.Save("output/named-assignment-import/preview.png");
-        form.Close();
         Console.WriteLine($"SUMMARY {checks} checks, 0 failures");
     }
     static async Task Run()

@@ -35,6 +35,7 @@ namespace University_Timetable_and_Classroom_Management_System
             InitializeComponent();
             btnGenerateSchedule.Text = "توليد جدول جديد";
             if (DesignerEnvironment.IsDesignTime(this)) return;
+            ConfigureCompactScheduleWorkspace();
             ArabicUi.Apply(this);
             ConfigureScheduleGrid();
             ConfigureScheduleEvents();
@@ -65,15 +66,14 @@ namespace University_Timetable_and_Classroom_Management_System
             btnBackupTimetable.Click += async (_, _) => await SaveTimetableBackupAsync();
             btnRestoreTimetable.Click += async (_, _) => await RestoreTimetableBackupAsync();
             dgvSchedules.CurrentCellDirtyStateChanged += async (_, _) => await SaveScheduleLockCheckboxAsync();
-            btnAddSchedule.Click += async (_, _) => await AddScheduleAsync();
-            btnUpdateSchedule.Click += async (_, _) => await UpdateScheduleAsync();
+            btnAddSchedule.Click += async (_, _) => await ShowManualScheduleEditorAsync(edit: false);
+            btnUpdateSchedule.Click += async (_, _) => await ShowManualScheduleEditorAsync(edit: true);
             btnDeleteSchedule.Click += async (_, _) => await DeleteScheduleAsync();
             btnClearScheduleForm.Click += (_, _) => ClearScheduleForm();
             btnExportSchedulePdf.Click += async (_, _) => await ExportSchedulePdfAsync();
             btnScheduleGridView.Click += (_, _) => ShowScheduleGridView();
             btnScheduleTimetableView.Click += (_, _) => ShowScheduleTimetableView();
 
-            dgvSchedules.SelectionChanged += async (_, _) => await PopulateScheduleEditorFromSelectionAsync();
             cmbSubject.SelectedIndexChanged += (_, _) => ApplySubjectSelection();
             cmbStudyYear.SelectedIndexChanged += (_, _) => ApplyStudyYearSelection();
             cmbBranch.SelectedIndexChanged += (_, _) => ApplyBranchSelection();
@@ -89,7 +89,7 @@ namespace University_Timetable_and_Classroom_Management_System
         private void ShowInformation(string message)
         {
             if (IsScheduleUiUnavailable) return;
-            UiMessages.ShowInformation(this, message, "الجدول الدراسي");
+            UiMessages.ShowInformation((IWin32Window?)manualScheduleDialog ?? this, message, "الجدول الدراسي");
         }
 
 
@@ -97,7 +97,7 @@ namespace University_Timetable_and_Classroom_Management_System
         private void ShowError(string message, Exception ex)
         {
             if (IsScheduleUiUnavailable) return;
-            UiMessages.ShowError(this, message, "الجدول الدراسي", ex);
+            UiMessages.ShowError((IWin32Window?)manualScheduleDialog ?? this, message, "الجدول الدراسي", ex);
         }
 
     }

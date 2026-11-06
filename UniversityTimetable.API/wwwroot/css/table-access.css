@@ -1,0 +1,53 @@
+@media screen {
+  #table-host { max-height:min(65vh, 740px); overflow:auto; scrollbar-width:thin; scrollbar-color:#496187 #101a35; }
+  #table-host:focus-visible { outline:2px solid #56aeff; outline-offset:-2px; }
+  .table-scroll-hint { margin:0; padding:8px 24px; color:#a4b0d0; font-size:12px; }
+  #table-host thead th { position:sticky; top:0; z-index:2; }
+  #table-host .schedule-list { min-width:1450px; }
+  #table-host td:not(.actions-cell) { overflow-wrap:anywhere; }
+  #table-host table:not(.timetable) .actions-cell { position:sticky; inset-inline-end:0; z-index:1; background:#0d1635; box-shadow:4px 0 12px #03071a55; }
+  #table-host table:not(.timetable) thead .actions-cell { z-index:3; background:#111c3c; }
+  #table-host table:not(.timetable) tbody tr:hover .actions-cell { background:#17264a; }
+  html[data-theme="light"] #table-host { scrollbar-color:#9ab6d2 #edf3f9; }
+  html[data-theme="light"] .table-scroll-hint { color:#536782; }
+  html[data-theme="light"] #table-host table:not(.timetable) .actions-cell { background:#fff; box-shadow:4px 0 12px #183b641c; }
+  html[data-theme="light"] #table-host table:not(.timetable) thead .actions-cell { background:#f1f6fc; }
+  html[data-theme="light"] #table-host table:not(.timetable) tbody tr:hover .actions-cell { background:#f4f9ff; }
+}
+@media print { #table-host { max-height:none; overflow:visible; } .table-scroll-hint { display:none!important; } }
+
+/* Read-only accounts keep navigation and filters available. Server authorization remains authoritative. */
+body[data-read-only="true"] #add, body[data-read-only="true"] [data-edit], body[data-read-only="true"] [data-delete], body[data-read-only="true"] [data-lecture-lock], body[data-read-only="true"] #generate { display:none!important; }
+
+/* Branches use an editor above the list, as in the desktop screen. */
+#branch-workspace { margin-block-end:14px; padding:clamp(12px,2vw,20px); }
+#branch-form-title, #branch-list-title { margin:0 0 10px; font-size:1rem; }
+#branch-list-title { padding:14px 16px 0; }
+#branch-form { display:grid; grid-template-columns:minmax(85px,.6fr) minmax(160px,1.4fr) auto; align-items:end; gap:12px; }
+#branch-form label { display:grid; gap:4px; }
+#branch-form .actions { flex-wrap:wrap; }
+#table-host .branch-row-button { display:block; width:100%; text-align:start; background:transparent; color:inherit; }
+#table-host .branch-row-button[aria-pressed="true"] { outline:2px solid var(--teal); outline-offset:-2px; }
+@media(max-width:1050px) { #branch-form .actions { grid-column:1/-1; } #branch-form { grid-template-columns:minmax(85px,1fr) minmax(0,2fr); } }
+
+#academic-editor .academic-inline[open] { position:static; width:100%; max-width:none; margin:0; }
+.academic-navigation { flex-direction:row; flex-wrap:wrap; gap:8px; margin-block:12px; }
+.academic-navigation a { border:1px solid var(--line); padding:6px 16px; }
+.academic-navigation [aria-current="page"] { border-color:var(--teal); font-weight:700; }
+#table-host .academic-student-link { text-decoration:underline; text-underline-offset:3px; }
+#table-host .academic-row-button { min-height:32px; padding:4px 10px; }
+
+#subject-list-title, #classroom-list-title, #timeslot-list-title, #assignment-list-title, #faculty-list-title { padding:14px 16px 0; margin:0 0 10px; font-size:1rem; }
+#editor-fields .subject-merge { display:flex; align-items:center; gap:8px; }
+#editor-fields .subject-merge input { width:1.2rem; min-height:0; }
+
+.schedule-strip { padding:12px 16px; margin-block-end:12px; }
+.schedule-strip .filters { padding:0; border:0; }
+.schedule-results-heading { display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:8px; padding:14px 16px 0; }
+.schedule-results-heading h2 { font-size:1rem; }
+#editor-fields:has(fieldset) { grid-template-columns:minmax(0,1fr); }
+#editor-fields fieldset { min-width:0; display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,145px),1fr)); gap:10px; border:1px solid var(--line); border-radius:8px; padding:12px; }
+#editor-fields fieldset legend { padding-inline:6px; font-weight:600; }
+#table-host [data-select-lecture][aria-pressed="true"] { outline:2px solid var(--teal); }
+body[data-read-only="true"] :is(#schedule-add,#schedule-edit,#schedule-delete) { display:none!important; }
+@media print { .schedule-strip, #schedule-view-controls { display:none!important; } }

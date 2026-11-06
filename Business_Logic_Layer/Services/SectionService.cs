@@ -59,6 +59,10 @@ namespace University_Timetable_and_Classroom_Management_System.BusinessLayer
             if (assignedSubjects.Any(subject => !FacultyAssignmentRules.Matches(subject, section)))
                 throw new ArgumentException("للشعبة تكليفات تدريسية محددة؛ عدّل التكليفات قبل تغيير المرحلة أو التخصص أو اسم الشعبة.");
             var existing = await context.Sections.SingleAsync(s => s.SectionID == section.SectionID);
+            if ((existing.StudyYearID != section.StudyYearID || existing.BranchID != section.BranchID ||
+                !string.Equals(existing.SectionName, section.SectionName, StringComparison.OrdinalIgnoreCase)) &&
+                await context.Students.AnyAsync(s => s.SectionID == section.SectionID))
+                throw new ArgumentException("هذه الشعبة مرتبطة بطلبة، لذلك لا يمكن تغيير مرحلتها أو تخصصها أو اسمها.");
             var lessons = await context.Schedules.Include(s => s.Classroom)
                 .Where(s => s.SectionID == section.SectionID).ToListAsync();
             if (lessons.Count > 0 && (existing.StudyYearID != section.StudyYearID ||

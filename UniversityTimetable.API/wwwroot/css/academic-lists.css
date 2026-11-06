@@ -1,0 +1,47 @@
+/* Keep student navigation and forms compact without changing the shared theme. */
+.academic-page { max-width:1180px; padding:clamp(12px, 3vw, 28px); }
+.academic-page h1 { margin:6px 0 12px; font-size:clamp(1.35rem, 3vw, 1.85rem); }
+.academic-page h2, .academic-page h3 { margin:0 0 10px; }
+.academic-page #academic-tabs { flex-direction:row; flex-wrap:wrap; gap:8px; margin:12px 0 14px; }
+.academic-page #academic-tabs a { border:1px solid var(--line); padding:6px 16px; }
+.academic-page #academic-tabs [aria-current="page"] { border-color:var(--teal); font-weight:700; }
+.academic-page #status:empty { margin:0; }
+.academic-page .panel { padding:clamp(12px, 2.2vw, 22px); margin-block:12px; }
+.student-entry, .academic-form-row { display:grid; align-items:end; gap:10px 14px; }
+.student-entry { grid-template-columns:minmax(95px, .65fr) minmax(170px, 1.2fr) minmax(0, 2fr); }
+.academic-form-row { grid-template-columns:minmax(0, 1fr) auto; margin:0; }
+.student-entry label, .academic-form-row label { display:grid; gap:3px; min-width:0; font-size:.9rem; }
+.academic-form-row :is(input,select), .student-entry select { min-width:0; box-sizing:border-box; }
+.academic-form-row button { white-space:nowrap; }
+.student-import { margin:12px 0; border-top:1px solid var(--line); padding-top:8px; }
+.student-import summary { cursor:pointer; }
+.student-import form { max-width:640px; margin-top:8px; }
+#list-import, .student-move { grid-template-columns:minmax(0, 1fr) minmax(0, 1fr) auto; }
+#move-students { padding-top:10px; border-top:1px solid var(--line); }
+.student-move { max-width:720px; margin-bottom:10px; }
+#move-students .table-scroll { max-height:420px; overflow:auto; }
+#students input[type=checkbox] { width:1.2rem; height:1.2rem; min-height:0; }
+@media (max-width:800px) {
+  .student-entry { grid-template-columns:repeat(2, minmax(0, 1fr)); }
+  #add-student { grid-column:1/-1; }
+}
+@media (max-width:520px) {
+  .academic-page #academic-tabs a { padding-inline:10px; }
+  #list-import, .student-move { grid-template-columns:repeat(2, minmax(0, 1fr)); }
+  #list-import button, .student-move button { grid-column:1/-1; justify-self:start; }
+  .student-import form { grid-template-columns:minmax(0, 1fr); }
+  .student-import button { justify-self:start; }
+}
+
+#students-panel, #students-results { padding:clamp(12px,2vw,20px); }
+#student-status:empty { margin:0; }
+#students-panel h2, #students-results h3 { margin:0 0 10px; }
+#students-results #move-students { border:0; padding-top:0; }
+.student-selection { margin-block:8px 12px; }
+#students-empty { padding:10px; }
+
+#student-import-result { border:1px solid var(--line); border-radius:8px; padding:12px; margin-block:10px; }
+#student-import-result ol { max-height:180px; overflow:auto; padding-inline-start:28px; }
+#student-import-result summary { cursor:pointer; }
+#dismiss-student-import { margin-top:8px; }
+.student-row-action { background:none; color:inherit; text-decoration:underline; padding:2px 0; }

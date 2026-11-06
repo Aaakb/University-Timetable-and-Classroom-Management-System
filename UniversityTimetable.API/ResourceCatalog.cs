@@ -92,7 +92,11 @@ public sealed class ResourceCatalog : Dictionary<string, IResource>
         Add("subjects", new Resource<Subject, SubjectDto>(
             subjects.GetAllAsync, id => subjects.GetByIdAsync(ParseId(id)),
             dto => subjects.AddAsync(dto.ToEntity(0)),
-            (id, dto) => subjects.UpdateAsync(dto.ToEntity(ParseId(id))),
+            async (id, dto) => {
+                int subjectId = ParseId(id);
+                var existing = await subjects.GetByIdAsync(subjectId) ?? throw new KeyNotFoundException("Subject not found.");
+                return await subjects.UpdateAsync(dto.ToEntity(subjectId, existing.MergePracticalGroups));
+            },
             id => subjects.DeleteAsync(ParseId(id)), SubjectDto.From, x => x.SubjectID.ToString()));
         var timeslots = new TimeSlotService();
         Add("timeslots", new Resource<TimeSlot, TimeSlotDto>(

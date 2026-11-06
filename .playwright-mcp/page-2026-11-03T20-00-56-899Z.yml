@@ -1,0 +1,241 @@
+- generic [active] [ref=f5e1]:
+  - link "Skip to content" [ref=f5e2] [cursor=pointer]:
+    - /url: "#main"
+  - banner:
+    - link "MOTION/LAB — home" [ref=f5e4] [cursor=pointer]:
+      - /url: "#"
+    - navigation "Main" [ref=f5e9]:
+      - link "Library" [ref=f5e11] [cursor=pointer]:
+        - /url: "#"
+      - link "Templates" [ref=f5e12] [cursor=pointer]:
+        - /url: "#templates"
+      - link "MCP Soon" [ref=f5e13] [cursor=pointer]:
+        - /url: "#mcp"
+        - text: MCP
+        - generic [ref=f5e14]: Soon
+      - link "Plugins New" [ref=f5e15] [cursor=pointer]:
+        - /url: "#plugins"
+        - text: Plugins
+        - generic [ref=f5e16]: New
+      - link "Pricing" [ref=f5e17] [cursor=pointer]:
+        - /url: "#pricing"
+      - link "Make your site New" [ref=f5e18] [cursor=pointer]:
+        - /url: /start
+        - text: Make your site
+        - generic [ref=f5e19]: New
+    - navigation "Quick actions" [ref=f5e20]:
+      - button "Search the library (⌘K)" [ref=f5e21] [cursor=pointer]:
+        - generic [ref=f5e22]: Search ⌘K
+      - button "Turn sound off" [pressed] [ref=f5e28] [cursor=pointer]:
+        - generic [ref=f5e29]: Sound
+      - link "Sign in" [ref=f5e38] [cursor=pointer]:
+        - /url: /login
+        - generic [ref=f5e39]: Access key
+      - button "Open navigation" [ref=f5e45] [cursor=pointer]:
+        - generic [ref=f5e46]: Menu
+  - main [ref=f5e54]:
+    - generic [ref=f5e55]:
+      - region [ref=f5e56]:
+        - generic [ref=f5e57]:
+          - paragraph [ref=f5e58]:
+            - generic [ref=f5e60]: "316"
+            - text: live effects · updated
+            - generic [ref=f5e61]: 24 Oct
+          - heading "Animation effects & AI prompts for the web." [level=1] [ref=f5e62]
+          - paragraph [ref=f5e63]: Every effect runs live in your browser and comes with the exact prompt that rebuilds it in Claude, Cursor or v0.
+          - generic [ref=f5e64]:
+            - link "Explore the library" [ref=f5e65] [cursor=pointer]:
+              - /url: "#library"
+            - link "Get All Access $299 a month" [ref=f5e72] [cursor=pointer]:
+              - /url: "#pricing"
+              - generic [ref=f5e77]:
+                - generic [ref=f5e78]: Get All Access
+                - generic [ref=f5e79]: $299 a month
+        - generic "Wordmark techniques" [ref=f5e80]:
+          - generic [ref=f5e81]:
+            - generic [ref=f5e82]: prompt
+            - generic [ref=f5e83]: 01/05
+          - paragraph [ref=f5e84]
+          - link "from splittext-char-reveal" [ref=f5e86] [cursor=pointer]:
+            - /url: /library/splittext-char-reveal
+            - text: from
+            - generic [ref=f5e87]: splittext-char-reveal
+          - tablist "Pick a technique"
+        - generic [ref=f5e90]:
+          - list "Library in numbers" [ref=f5e91]:
+            - listitem [ref=f5e92]:
+              - generic [ref=f5e93]: "316"
+              - generic [ref=f5e94]: effects
+            - listitem [ref=f5e95]:
+              - generic [ref=f5e96]: "125"
+              - generic [ref=f5e97]: templates
+            - listitem [ref=f5e98]:
+              - generic [ref=f5e99]: "15"
+              - generic [ref=f5e100]: categories
+            - listitem [ref=f5e101]:
+              - generic [ref=f5e102]: "31"
+              - generic [ref=f5e103]: new this week
+          - img "MOTION/LAB" [ref=f5e104]
+      - region "316 effects. One point each. Sorted by what they do." [ref=f5e105]:
+        - generic [ref=f5e106]:
+          - generic:
+            - paragraph: The library at a glance
+            - heading "316 effects. One point each. Sorted by what they do." [level=2]:
+              - generic: 316 effects. One point each.
+              - generic: Sorted by what they do.
+            - paragraph: one effect new this week
+          - list [ref=f5e108]
+      - region [ref=f5e109]:
+        - generic [ref=f5e110]:
+          - paragraph [ref=f5e111]: Library
+          - heading "Every effect, live. Find yours in seconds." [level=2] [ref=f5e113]
+        - generic "Library search (compact)":
+          - generic: Search the library
+          - searchbox "Search the library"
+          - button "Show the filters":
+            - generic: Filters
+        - generic [ref=f5e114]:
+          - generic [ref=f5e115]:
+            - generic [ref=f5e116]:
+              - generic [ref=f5e117]:
+                - generic [ref=f5e121]: Search the library
+                - searchbox "Search the library ⌘K" [ref=f5e122]
+                - generic [ref=f5e123]: ⌘K
+              - radiogroup "Sort" [ref=f5e124]:
+                - radio "Best templates" [checked] [ref=f5e125] [cursor=pointer]
+                - radio "Newest" [ref=f5e126] [cursor=pointer]
+                - radio "Featured" [ref=f5e127] [cursor=pointer]
+                - radio "A–Z" [ref=f5e128] [cursor=pointer]
+            - group "Categories"
+            - group "Libraries"
+            - paragraph [ref=f5e129]
+          - list "Effects"
+          - button "Show 24 more" [ref=f5e131] [cursor=pointer]
+          - navigation "Best templates" [ref=f5e138]:
+            - link "E-bike brand" [ref=f5e140] [cursor=pointer]:
+              - /url: /library/tolvo-ebikes
+            - link "Headphones launch" [ref=f5e141] [cursor=pointer]:
+              - /url: /library/stillmere-headphones
+            - link "Lipstick brand" [ref=f5e142] [cursor=pointer]:
+              - /url: /library/carmesse-lipstick
+            - link "Perfume house" [ref=f5e143] [cursor=pointer]:
+              - /url: /library/noctiflore-perfume
+            - link "Soft drink launch" [ref=f5e144] [cursor=pointer]:
+              - /url: /library/ollo-soda
+            - link "Fashion store" [ref=f5e145] [cursor=pointer]:
+              - /url: /library/corde-linen
+            - link "Plant-care app" [ref=f5e146] [cursor=pointer]:
+              - /url: /library/rootle-plant-care
+            - link "Online course" [ref=f5e147] [cursor=pointer]:
+              - /url: /library/kelvo-photo-school
+            - link "Restaurant" [ref=f5e148] [cursor=pointer]:
+              - /url: /library/ascua-grill
+        - region [ref=f5e149]:
+          - generic [ref=f5e150]:
+            - heading "Collections" [level=3] [ref=f5e151]
+            - link "All collections →" [ref=f5e152] [cursor=pointer]:
+              - /url: /collections
+          - list
+        - region "More from MOTION/LAB" [ref=f5e153]:
+          - link "02 · Templates Whole pages for real businesses. 125 section templates, from bakeries to banks." [ref=f5e154] [cursor=pointer]:
+            - /url: "#templates"
+            - generic [ref=f5e155]: 02 · Templates
+            - generic [ref=f5e156]: Whole pages for real businesses.
+            - generic [ref=f5e157]: 125 section templates, from bakeries to banks.
+          - link "03 · MCP server The library inside your AI tool. Claude, Cursor, ChatGPT and VS Code." [ref=f5e159] [cursor=pointer]:
+            - /url: "#mcp"
+            - generic [ref=f5e160]: 03 · MCP server
+            - generic [ref=f5e161]: The library inside your AI tool.
+            - generic [ref=f5e162]: Claude, Cursor, ChatGPT and VS Code.
+            - generic [aria-hidden] [ref=f5e163]:
+              - generic [ref=f5e164]: › search_templates
+              - generic [ref=f5e165]: "\"bakery\""
+              - generic [ref=f5e166]: ✓ 3 results
+          - link "04 · Plugins Templates as Figma layers. Framer and Webflow next." [ref=f5e167] [cursor=pointer]:
+            - /url: "#plugins"
+            - generic [ref=f5e168]: 04 · Plugins
+            - generic [ref=f5e169]: Templates as Figma layers.
+            - generic [ref=f5e170]: Framer and Webflow next.
+    - generic [ref=f5e176]:
+      - generic [ref=f5e177]:
+        - generic [ref=f5e178]:
+          - paragraph [ref=f5e179]:
+            - text: That’s the end of the page.
+            - generic [ref=f5e180]: The library keeps going.
+          - generic [ref=f5e181]:
+            - link "Get All Access Cancel anytime" [ref=f5e182] [cursor=pointer]:
+              - /url: "#pricing"
+              - generic [ref=f5e187]:
+                - generic [ref=f5e188]: Get All Access
+                - generic [ref=f5e189]: Cancel anytime
+            - link "Explore the library" [ref=f5e190] [cursor=pointer]:
+              - /url: "#library"
+        - navigation "Footer" [ref=f5e198]:
+          - generic [ref=f5e199]:
+            - paragraph [ref=f5e200]: Explore
+            - link "Library" [ref=f5e201] [cursor=pointer]:
+              - /url: "#library"
+            - link "Templates" [ref=f5e202] [cursor=pointer]:
+              - /url: "#templates"
+            - link "MCP server" [ref=f5e203] [cursor=pointer]:
+              - /url: "#mcp"
+            - link "Plugins" [ref=f5e204] [cursor=pointer]:
+              - /url: "#plugins"
+            - link "Pricing" [ref=f5e205] [cursor=pointer]:
+              - /url: "#pricing"
+            - link "Changelog" [ref=f5e206] [cursor=pointer]:
+              - /url: /changelog
+          - generic [ref=f5e207]:
+            - paragraph [ref=f5e208]: Make your site
+            - link "Start here" [ref=f5e209] [cursor=pointer]:
+              - /url: /start
+            - link "AI tool guides" [ref=f5e210] [cursor=pointer]:
+              - /url: /guides
+            - link "Fix it" [ref=f5e211] [cursor=pointer]:
+              - /url: /help
+            - link "Publish for free" [ref=f5e212] [cursor=pointer]:
+              - /url: /publish
+            - link "We build it" [ref=f5e213] [cursor=pointer]:
+              - /url: /build-for-you
+          - generic [ref=f5e214]:
+            - paragraph [ref=f5e215]: Templates for
+            - link "Restaurants & cafés" [ref=f5e216] [cursor=pointer]:
+              - /url: /templates/restaurant-cafe-bakery-website-template
+            - link "Perfume & beauty" [ref=f5e217] [cursor=pointer]:
+              - /url: /templates/perfume-beauty-brand-website-template
+            - link "Real estate" [ref=f5e218] [cursor=pointer]:
+              - /url: /templates/real-estate-website-template
+            - link "SaaS & startups" [ref=f5e219] [cursor=pointer]:
+              - /url: /templates/saas-startup-landing-page-template
+            - link "Agencies & portfolios" [ref=f5e220] [cursor=pointer]:
+              - /url: /templates/agency-portfolio-website-template
+            - link "Hotels & travel" [ref=f5e221] [cursor=pointer]:
+              - /url: /templates/hotel-lodge-travel-website-template
+          - generic [ref=f5e222]:
+            - paragraph [ref=f5e223]: Learn
+            - link "Journal" [ref=f5e224] [cursor=pointer]:
+              - /url: /journal
+            - link "GSAP ScrollTrigger" [ref=f5e225] [cursor=pointer]:
+              - /url: /techniques/gsap-scrolltrigger-examples
+            - link "Three.js 3D scroll" [ref=f5e226] [cursor=pointer]:
+              - /url: /techniques/threejs-3d-scroll-website
+            - link "Lenis smooth scroll" [ref=f5e227] [cursor=pointer]:
+              - /url: /techniques/lenis-smooth-scroll-examples
+            - link "Text animation" [ref=f5e228] [cursor=pointer]:
+              - /url: /techniques/splittext-text-animation-examples
+          - generic [ref=f5e229]:
+            - paragraph [ref=f5e230]: Legal
+            - link "Licensing" [ref=f5e231] [cursor=pointer]:
+              - /url: /licensing
+            - link "Privacy" [ref=f5e232] [cursor=pointer]:
+              - /url: /privacy
+            - link "Terms" [ref=f5e233] [cursor=pointer]:
+              - /url: /terms
+            - link "Contact" [ref=f5e234] [cursor=pointer]:
+              - /url: /contact
+            - link "About" [ref=f5e235] [cursor=pointer]:
+              - /url: /about
+      - generic [ref=f5e236]:
+        - generic [ref=f5e237]: © MOTION/LAB 2026
+        - generic [ref=f5e238]: 316 effects · 24 Oct
+        - generic [ref=f5e239]: Your time

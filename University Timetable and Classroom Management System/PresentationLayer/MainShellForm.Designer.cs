@@ -25,8 +25,6 @@ namespace University_Timetable_and_Classroom_Management_System
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges3 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges4 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges5 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges6 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges7 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges8 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges9 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
@@ -46,14 +44,12 @@ namespace University_Timetable_and_Classroom_Management_System
             lblSidebarFooter = new DesignerHtmlLabel();
             btnNavigationBranches = new Guna.UI2.WinForms.Guna2Button();
             btnNavigationStudyYears = new Guna.UI2.WinForms.Guna2Button();
-            btnNavigationSections = new Guna.UI2.WinForms.Guna2Button();
             btnNavigationSubjects = new Guna.UI2.WinForms.Guna2Button();
             btnNavigationClassrooms = new Guna.UI2.WinForms.Guna2Button();
             btnNavigationTimeSlots = new Guna.UI2.WinForms.Guna2Button();
             btnNavigationFacultyAssignments = new Guna.UI2.WinForms.Guna2Button();
             btnNavigationFacultyMembers = new Guna.UI2.WinForms.Guna2Button();
             btnNavigationSchedules = new Guna.UI2.WinForms.Guna2Button();
-            btnExcelImport = new Guna.UI2.WinForms.Guna2Button();
             btnFacultyScheduleEditor = new Guna.UI2.WinForms.Guna2Button();
             btnTimetableAlternatives = new Guna.UI2.WinForms.Guna2Button();
             separatorSidebar = new Guna.UI2.WinForms.Guna2Separator();
@@ -76,7 +72,7 @@ namespace University_Timetable_and_Classroom_Management_System
             pnlSidebar.BackColor = Color.Transparent;
             pnlSidebar.CustomizableEdges = customizableEdges19;
             pnlSidebar.Dock = DockStyle.Left;
-            pnlSidebar.FillColor = Color.FromArgb(24, 38, 62);
+            pnlSidebar.FillColor = DesktopPalette.Sidebar;
             pnlSidebar.Location = new Point(0, 0);
             pnlSidebar.Margin = new Padding(3, 4, 3, 4);
             pnlSidebar.Name = "pnlSidebar";
@@ -89,7 +85,7 @@ namespace University_Timetable_and_Classroom_Management_System
             lblSidebarFooter.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             lblSidebarFooter.BackColor = Color.Transparent;
             lblSidebarFooter.Font = new Font("Segoe UI", 8.5F);
-            lblSidebarFooter.ForeColor = Color.FromArgb(148, 163, 184);
+            lblSidebarFooter.ForeColor = DesktopPalette.OnDarkMuted;
             lblSidebarFooter.Location = new Point(27, 995);
             lblSidebarFooter.Margin = new Padding(3, 4, 3, 4);
             lblSidebarFooter.Name = "lblSidebarFooter";
@@ -100,18 +96,18 @@ namespace University_Timetable_and_Classroom_Management_System
             //
             // btnNavigationBranches
             //
-            btnNavigationBranches.BorderRadius = 6;
-            btnNavigationBranches.CheckedState.FillColor = Color.FromArgb(37, 99, 235);
+            btnNavigationBranches.BorderRadius = DesktopCorners.Button;
+            btnNavigationBranches.CheckedState.FillColor = DesktopPalette.Header;
             btnNavigationBranches.CheckedState.ForeColor = Color.White;
             btnNavigationBranches.Cursor = Cursors.Hand;
             btnNavigationBranches.CustomizableEdges = customizableEdges1;
-            btnNavigationBranches.DisabledState.BorderColor = Color.FromArgb(37, 99, 235);
-            btnNavigationBranches.DisabledState.FillColor = Color.FromArgb(37, 99, 235);
+            btnNavigationBranches.DisabledState.BorderColor = DesktopPalette.Header;
+            btnNavigationBranches.DisabledState.FillColor = DesktopPalette.Header;
             btnNavigationBranches.DisabledState.ForeColor = Color.White;
             btnNavigationBranches.FillColor = Color.Transparent;
             btnNavigationBranches.Font = new Font("Segoe UI Semibold", 9.5F, FontStyle.Bold);
-            btnNavigationBranches.ForeColor = Color.FromArgb(226, 232, 240);
-            btnNavigationBranches.HoverState.FillColor = Color.FromArgb(36, 55, 86);
+            btnNavigationBranches.ForeColor = DesktopPalette.Border;
+            btnNavigationBranches.HoverState.FillColor = DesktopPalette.Header;
             btnNavigationBranches.Location = new Point(27, 147);
             btnNavigationBranches.Margin = new Padding(0, 0, 0, 16);
             btnNavigationBranches.Name = "btnNavigationBranches";
@@ -124,66 +120,44 @@ namespace University_Timetable_and_Classroom_Management_System
             //
             // btnNavigationStudyYears
             //
-            btnNavigationStudyYears.BorderRadius = 6;
-            btnNavigationStudyYears.CheckedState.FillColor = Color.FromArgb(37, 99, 235);
+            btnNavigationStudyYears.BorderRadius = DesktopCorners.Button;
+            btnNavigationStudyYears.CheckedState.FillColor = DesktopPalette.Header;
             btnNavigationStudyYears.CheckedState.ForeColor = Color.White;
             btnNavigationStudyYears.Cursor = Cursors.Hand;
             btnNavigationStudyYears.CustomizableEdges = customizableEdges3;
-            btnNavigationStudyYears.DisabledState.BorderColor = Color.FromArgb(37, 99, 235);
-            btnNavigationStudyYears.DisabledState.FillColor = Color.FromArgb(37, 99, 235);
+            btnNavigationStudyYears.DisabledState.BorderColor = DesktopPalette.Header;
+            btnNavigationStudyYears.DisabledState.FillColor = DesktopPalette.Header;
             btnNavigationStudyYears.DisabledState.ForeColor = Color.White;
             btnNavigationStudyYears.FillColor = Color.Transparent;
             btnNavigationStudyYears.Font = new Font("Segoe UI Semibold", 9.5F, FontStyle.Bold);
-            btnNavigationStudyYears.ForeColor = Color.FromArgb(226, 232, 240);
-            btnNavigationStudyYears.HoverState.FillColor = Color.FromArgb(36, 55, 86);
+            btnNavigationStudyYears.ForeColor = DesktopPalette.Border;
+            btnNavigationStudyYears.HoverState.FillColor = DesktopPalette.Header;
             btnNavigationStudyYears.Location = new Point(27, 221);
             btnNavigationStudyYears.Margin = new Padding(0, 0, 0, 16);
             btnNavigationStudyYears.Name = "btnNavigationStudyYears";
             btnNavigationStudyYears.ShadowDecoration.CustomizableEdges = customizableEdges4;
             btnNavigationStudyYears.Size = new Size(219, 53);
             btnNavigationStudyYears.TabIndex = 10;
-            btnNavigationStudyYears.Text = "المراحل الدراسية";
+            btnNavigationStudyYears.Text = "المراحل والشعب والطلبة";
             btnNavigationStudyYears.TextAlign = HorizontalAlignment.Left;
             btnNavigationStudyYears.TextOffset = new Point(14, 0);
             //
-            // btnNavigationSections
             //
-            btnNavigationSections.BorderRadius = 6;
-            btnNavigationSections.CheckedState.FillColor = Color.FromArgb(37, 99, 235);
-            btnNavigationSections.CheckedState.ForeColor = Color.White;
-            btnNavigationSections.Cursor = Cursors.Hand;
-            btnNavigationSections.CustomizableEdges = customizableEdges5;
-            btnNavigationSections.DisabledState.BorderColor = Color.FromArgb(37, 99, 235);
-            btnNavigationSections.DisabledState.FillColor = Color.FromArgb(37, 99, 235);
-            btnNavigationSections.DisabledState.ForeColor = Color.White;
-            btnNavigationSections.FillColor = Color.Transparent;
-            btnNavigationSections.Font = new Font("Segoe UI Semibold", 9.5F, FontStyle.Bold);
-            btnNavigationSections.ForeColor = Color.FromArgb(226, 232, 240);
-            btnNavigationSections.HoverState.FillColor = Color.FromArgb(36, 55, 86);
-            btnNavigationSections.Location = new Point(27, 296);
-            btnNavigationSections.Margin = new Padding(0, 0, 0, 16);
-            btnNavigationSections.Name = "btnNavigationSections";
-            btnNavigationSections.ShadowDecoration.CustomizableEdges = customizableEdges6;
-            btnNavigationSections.Size = new Size(219, 53);
-            btnNavigationSections.TabIndex = 10;
-            btnNavigationSections.Text = "الشعب";
-            btnNavigationSections.TextAlign = HorizontalAlignment.Left;
-            btnNavigationSections.TextOffset = new Point(14, 0);
             //
             // btnNavigationSubjects
             //
-            btnNavigationSubjects.BorderRadius = 6;
-            btnNavigationSubjects.CheckedState.FillColor = Color.FromArgb(37, 99, 235);
+            btnNavigationSubjects.BorderRadius = DesktopCorners.Button;
+            btnNavigationSubjects.CheckedState.FillColor = DesktopPalette.Header;
             btnNavigationSubjects.CheckedState.ForeColor = Color.White;
             btnNavigationSubjects.Cursor = Cursors.Hand;
             btnNavigationSubjects.CustomizableEdges = customizableEdges7;
-            btnNavigationSubjects.DisabledState.BorderColor = Color.FromArgb(37, 99, 235);
-            btnNavigationSubjects.DisabledState.FillColor = Color.FromArgb(37, 99, 235);
+            btnNavigationSubjects.DisabledState.BorderColor = DesktopPalette.Header;
+            btnNavigationSubjects.DisabledState.FillColor = DesktopPalette.Header;
             btnNavigationSubjects.DisabledState.ForeColor = Color.White;
             btnNavigationSubjects.FillColor = Color.Transparent;
             btnNavigationSubjects.Font = new Font("Segoe UI Semibold", 9.5F, FontStyle.Bold);
-            btnNavigationSubjects.ForeColor = Color.FromArgb(226, 232, 240);
-            btnNavigationSubjects.HoverState.FillColor = Color.FromArgb(36, 55, 86);
+            btnNavigationSubjects.ForeColor = DesktopPalette.Border;
+            btnNavigationSubjects.HoverState.FillColor = DesktopPalette.Header;
             btnNavigationSubjects.Location = new Point(27, 371);
             btnNavigationSubjects.Margin = new Padding(0, 0, 0, 16);
             btnNavigationSubjects.Name = "btnNavigationSubjects";
@@ -196,18 +170,18 @@ namespace University_Timetable_and_Classroom_Management_System
             //
             // btnNavigationClassrooms
             //
-            btnNavigationClassrooms.BorderRadius = 6;
-            btnNavigationClassrooms.CheckedState.FillColor = Color.FromArgb(37, 99, 235);
+            btnNavigationClassrooms.BorderRadius = DesktopCorners.Button;
+            btnNavigationClassrooms.CheckedState.FillColor = DesktopPalette.Header;
             btnNavigationClassrooms.CheckedState.ForeColor = Color.White;
             btnNavigationClassrooms.Cursor = Cursors.Hand;
             btnNavigationClassrooms.CustomizableEdges = customizableEdges9;
-            btnNavigationClassrooms.DisabledState.BorderColor = Color.FromArgb(37, 99, 235);
-            btnNavigationClassrooms.DisabledState.FillColor = Color.FromArgb(37, 99, 235);
+            btnNavigationClassrooms.DisabledState.BorderColor = DesktopPalette.Header;
+            btnNavigationClassrooms.DisabledState.FillColor = DesktopPalette.Header;
             btnNavigationClassrooms.DisabledState.ForeColor = Color.White;
             btnNavigationClassrooms.FillColor = Color.Transparent;
             btnNavigationClassrooms.Font = new Font("Segoe UI Semibold", 9.5F, FontStyle.Bold);
-            btnNavigationClassrooms.ForeColor = Color.FromArgb(226, 232, 240);
-            btnNavigationClassrooms.HoverState.FillColor = Color.FromArgb(36, 55, 86);
+            btnNavigationClassrooms.ForeColor = DesktopPalette.Border;
+            btnNavigationClassrooms.HoverState.FillColor = DesktopPalette.Header;
             btnNavigationClassrooms.Location = new Point(27, 445);
             btnNavigationClassrooms.Margin = new Padding(0, 0, 0, 16);
             btnNavigationClassrooms.Name = "btnNavigationClassrooms";
@@ -220,18 +194,18 @@ namespace University_Timetable_and_Classroom_Management_System
             //
             // btnNavigationTimeSlots
             //
-            btnNavigationTimeSlots.BorderRadius = 6;
-            btnNavigationTimeSlots.CheckedState.FillColor = Color.FromArgb(37, 99, 235);
+            btnNavigationTimeSlots.BorderRadius = DesktopCorners.Button;
+            btnNavigationTimeSlots.CheckedState.FillColor = DesktopPalette.Header;
             btnNavigationTimeSlots.CheckedState.ForeColor = Color.White;
             btnNavigationTimeSlots.Cursor = Cursors.Hand;
             btnNavigationTimeSlots.CustomizableEdges = customizableEdges11;
-            btnNavigationTimeSlots.DisabledState.BorderColor = Color.FromArgb(37, 99, 235);
-            btnNavigationTimeSlots.DisabledState.FillColor = Color.FromArgb(37, 99, 235);
+            btnNavigationTimeSlots.DisabledState.BorderColor = DesktopPalette.Header;
+            btnNavigationTimeSlots.DisabledState.FillColor = DesktopPalette.Header;
             btnNavigationTimeSlots.DisabledState.ForeColor = Color.White;
             btnNavigationTimeSlots.FillColor = Color.Transparent;
             btnNavigationTimeSlots.Font = new Font("Segoe UI Semibold", 9.5F, FontStyle.Bold);
-            btnNavigationTimeSlots.ForeColor = Color.FromArgb(226, 232, 240);
-            btnNavigationTimeSlots.HoverState.FillColor = Color.FromArgb(36, 55, 86);
+            btnNavigationTimeSlots.ForeColor = DesktopPalette.Border;
+            btnNavigationTimeSlots.HoverState.FillColor = DesktopPalette.Header;
             btnNavigationTimeSlots.Location = new Point(27, 520);
             btnNavigationTimeSlots.Margin = new Padding(0, 0, 0, 16);
             btnNavigationTimeSlots.Name = "btnNavigationTimeSlots";
@@ -244,18 +218,18 @@ namespace University_Timetable_and_Classroom_Management_System
             //
             // btnNavigationFacultyAssignments
             //
-            btnNavigationFacultyAssignments.BorderRadius = 6;
-            btnNavigationFacultyAssignments.CheckedState.FillColor = Color.FromArgb(37, 99, 235);
+            btnNavigationFacultyAssignments.BorderRadius = DesktopCorners.Button;
+            btnNavigationFacultyAssignments.CheckedState.FillColor = DesktopPalette.Header;
             btnNavigationFacultyAssignments.CheckedState.ForeColor = Color.White;
             btnNavigationFacultyAssignments.Cursor = Cursors.Hand;
             btnNavigationFacultyAssignments.CustomizableEdges = customizableEdges13;
-            btnNavigationFacultyAssignments.DisabledState.BorderColor = Color.FromArgb(37, 99, 235);
-            btnNavigationFacultyAssignments.DisabledState.FillColor = Color.FromArgb(37, 99, 235);
+            btnNavigationFacultyAssignments.DisabledState.BorderColor = DesktopPalette.Header;
+            btnNavigationFacultyAssignments.DisabledState.FillColor = DesktopPalette.Header;
             btnNavigationFacultyAssignments.DisabledState.ForeColor = Color.White;
             btnNavigationFacultyAssignments.FillColor = Color.Transparent;
             btnNavigationFacultyAssignments.Font = new Font("Segoe UI Semibold", 9.5F, FontStyle.Bold);
-            btnNavigationFacultyAssignments.ForeColor = Color.FromArgb(226, 232, 240);
-            btnNavigationFacultyAssignments.HoverState.FillColor = Color.FromArgb(36, 55, 86);
+            btnNavigationFacultyAssignments.ForeColor = DesktopPalette.Border;
+            btnNavigationFacultyAssignments.HoverState.FillColor = DesktopPalette.Header;
             btnNavigationFacultyAssignments.Location = new Point(27, 595);
             btnNavigationFacultyAssignments.Margin = new Padding(0, 0, 0, 16);
             btnNavigationFacultyAssignments.Name = "btnNavigationFacultyAssignments";
@@ -268,18 +242,18 @@ namespace University_Timetable_and_Classroom_Management_System
             //
             // btnNavigationFacultyMembers
             //
-            btnNavigationFacultyMembers.BorderRadius = 6;
-            btnNavigationFacultyMembers.CheckedState.FillColor = Color.FromArgb(37, 99, 235);
+            btnNavigationFacultyMembers.BorderRadius = DesktopCorners.Button;
+            btnNavigationFacultyMembers.CheckedState.FillColor = DesktopPalette.Header;
             btnNavigationFacultyMembers.CheckedState.ForeColor = Color.White;
             btnNavigationFacultyMembers.Cursor = Cursors.Hand;
             btnNavigationFacultyMembers.CustomizableEdges = customizableEdges15;
-            btnNavigationFacultyMembers.DisabledState.BorderColor = Color.FromArgb(37, 99, 235);
-            btnNavigationFacultyMembers.DisabledState.FillColor = Color.FromArgb(37, 99, 235);
+            btnNavigationFacultyMembers.DisabledState.BorderColor = DesktopPalette.Header;
+            btnNavigationFacultyMembers.DisabledState.FillColor = DesktopPalette.Header;
             btnNavigationFacultyMembers.DisabledState.ForeColor = Color.White;
             btnNavigationFacultyMembers.FillColor = Color.Transparent;
             btnNavigationFacultyMembers.Font = new Font("Segoe UI Semibold", 9.5F, FontStyle.Bold);
-            btnNavigationFacultyMembers.ForeColor = Color.FromArgb(226, 232, 240);
-            btnNavigationFacultyMembers.HoverState.FillColor = Color.FromArgb(36, 55, 86);
+            btnNavigationFacultyMembers.ForeColor = DesktopPalette.Border;
+            btnNavigationFacultyMembers.HoverState.FillColor = DesktopPalette.Header;
             btnNavigationFacultyMembers.Location = new Point(27, 669);
             btnNavigationFacultyMembers.Margin = new Padding(0, 0, 0, 16);
             btnNavigationFacultyMembers.Name = "btnNavigationFacultyMembers";
@@ -292,18 +266,18 @@ namespace University_Timetable_and_Classroom_Management_System
             //
             // btnNavigationSchedules
             //
-            btnNavigationSchedules.BorderRadius = 6;
-            btnNavigationSchedules.CheckedState.FillColor = Color.FromArgb(37, 99, 235);
+            btnNavigationSchedules.BorderRadius = DesktopCorners.Button;
+            btnNavigationSchedules.CheckedState.FillColor = DesktopPalette.Header;
             btnNavigationSchedules.CheckedState.ForeColor = Color.White;
             btnNavigationSchedules.Cursor = Cursors.Hand;
             btnNavigationSchedules.CustomizableEdges = customizableEdges17;
-            btnNavigationSchedules.DisabledState.BorderColor = Color.FromArgb(37, 99, 235);
-            btnNavigationSchedules.DisabledState.FillColor = Color.FromArgb(37, 99, 235);
+            btnNavigationSchedules.DisabledState.BorderColor = DesktopPalette.Header;
+            btnNavigationSchedules.DisabledState.FillColor = DesktopPalette.Header;
             btnNavigationSchedules.DisabledState.ForeColor = Color.White;
             btnNavigationSchedules.FillColor = Color.Transparent;
             btnNavigationSchedules.Font = new Font("Segoe UI Semibold", 9.5F, FontStyle.Bold);
-            btnNavigationSchedules.ForeColor = Color.FromArgb(226, 232, 240);
-            btnNavigationSchedules.HoverState.FillColor = Color.FromArgb(36, 55, 86);
+            btnNavigationSchedules.ForeColor = DesktopPalette.Border;
+            btnNavigationSchedules.HoverState.FillColor = DesktopPalette.Header;
             btnNavigationSchedules.Location = new Point(27, 744);
             btnNavigationSchedules.Margin = new Padding(0, 0, 0, 16);
             btnNavigationSchedules.Name = "btnNavigationSchedules";
@@ -316,7 +290,7 @@ namespace University_Timetable_and_Classroom_Management_System
             //
             // separatorSidebar
             //
-            separatorSidebar.FillColor = Color.FromArgb(51, 65, 85);
+            separatorSidebar.FillColor = DesktopPalette.Primary;
             separatorSidebar.Location = new Point(27, 115);
             separatorSidebar.Margin = new Padding(0, 16, 0, 16);
             separatorSidebar.Name = "separatorSidebar";
@@ -327,7 +301,7 @@ namespace University_Timetable_and_Classroom_Management_System
             //
             lblSidebarSubtitle.BackColor = Color.Transparent;
             lblSidebarSubtitle.Font = new Font("Segoe UI", 9F);
-            lblSidebarSubtitle.ForeColor = Color.FromArgb(148, 163, 184);
+            lblSidebarSubtitle.ForeColor = DesktopPalette.OnDarkMuted;
             lblSidebarSubtitle.Location = new Point(30, 69);
             lblSidebarSubtitle.Margin = new Padding(3, 4, 3, 4);
             lblSidebarSubtitle.Name = "lblSidebarSubtitle";
@@ -363,7 +337,7 @@ namespace University_Timetable_and_Classroom_Management_System
             //
             // pnlPageHost
             //
-            pnlPageHost.BackColor = Color.FromArgb(245, 247, 251);
+            pnlPageHost.BackColor = DesktopPalette.Canvas;
             pnlPageHost.AutoScroll = true;
             pnlPageHost.CustomizableEdges = customizableEdges21;
             pnlPageHost.Dock = DockStyle.Fill;
@@ -374,21 +348,6 @@ namespace University_Timetable_and_Classroom_Management_System
             pnlPageHost.Size = new Size(1189, 1061);
             pnlPageHost.TabIndex = 1;
             //
-            // btnExcelImport
-            //
-            btnExcelImport.Name = "btnExcelImport";
-            btnExcelImport.Text = "استيراد التدريسيين والمواد";
-            btnExcelImport.Dock = DockStyle.Fill;
-            btnExcelImport.Size = new Size(219, 53);
-            btnExcelImport.Margin = new Padding(0, 0, 0, 16);
-            btnExcelImport.BorderRadius = 6;
-            btnExcelImport.FillColor = Color.Transparent;
-            btnExcelImport.ForeColor = Color.FromArgb(226, 232, 240);
-            btnExcelImport.Font = new Font("Segoe UI Semibold", 9.5F, FontStyle.Bold);
-            btnExcelImport.TextAlign = HorizontalAlignment.Left;
-            btnExcelImport.TextOffset = new Point(-14, 0);
-            btnExcelImport.Cursor = Cursors.Hand;
-            //
             // btnFacultyScheduleEditor
             //
             btnFacultyScheduleEditor.Name = "btnFacultyScheduleEditor";
@@ -396,9 +355,9 @@ namespace University_Timetable_and_Classroom_Management_System
             btnFacultyScheduleEditor.Dock = DockStyle.Fill;
             btnFacultyScheduleEditor.Size = new Size(219, 53);
             btnFacultyScheduleEditor.Margin = new Padding(0, 0, 0, 16);
-            btnFacultyScheduleEditor.BorderRadius = 6;
+            btnFacultyScheduleEditor.BorderRadius = DesktopCorners.Button;
             btnFacultyScheduleEditor.FillColor = Color.Transparent;
-            btnFacultyScheduleEditor.ForeColor = Color.FromArgb(226, 232, 240);
+            btnFacultyScheduleEditor.ForeColor = DesktopPalette.Border;
             btnFacultyScheduleEditor.Font = new Font("Segoe UI Semibold", 9.5F, FontStyle.Bold);
             btnFacultyScheduleEditor.TextAlign = HorizontalAlignment.Left;
             btnFacultyScheduleEditor.TextOffset = new Point(-14, 0);
@@ -411,9 +370,9 @@ namespace University_Timetable_and_Classroom_Management_System
             btnTimetableAlternatives.Dock = DockStyle.Fill;
             btnTimetableAlternatives.Size = new Size(219, 53);
             btnTimetableAlternatives.Margin = new Padding(0, 0, 0, 16);
-            btnTimetableAlternatives.BorderRadius = 6;
+            btnTimetableAlternatives.BorderRadius = DesktopCorners.Button;
             btnTimetableAlternatives.FillColor = Color.Transparent;
-            btnTimetableAlternatives.ForeColor = Color.FromArgb(226, 232, 240);
+            btnTimetableAlternatives.ForeColor = DesktopPalette.Border;
             btnTimetableAlternatives.Font = new Font("Segoe UI Semibold", 9.5F, FontStyle.Bold);
             btnTimetableAlternatives.TextAlign = HorizontalAlignment.Left;
             btnTimetableAlternatives.TextOffset = new Point(-14, 0);
@@ -424,7 +383,7 @@ namespace University_Timetable_and_Classroom_Management_System
             AccessibleName = "النافذة الرئيسية لنظام إدارة الجداول الجامعية";
             AutoScaleDimensions = new SizeF(96F, 96F);
             AutoScaleMode = AutoScaleMode.Dpi;
-            BackColor = Color.FromArgb(245, 247, 251);
+            BackColor = DesktopPalette.Canvas;
             ClientSize = new Size(1463, 1061);
             Controls.Add(pnlPageHost);
             Controls.Add(pnlSidebar);
@@ -437,14 +396,12 @@ namespace University_Timetable_and_Classroom_Management_System
             Text = "نظام إدارة الجداول الجامعية";
 
             // Flexible layout containers
-            layoutNavigation.BackColor = Color.FromArgb(24, 38, 62);
+            layoutNavigation.BackColor = DesktopPalette.Sidebar;
             layoutNavigation.Name = "layoutNavigation";
             layoutNavigation.Margin = new Padding(0);
             layoutNavigation.ColumnCount = 1;
-            layoutNavigation.RowCount = 15;
+            layoutNavigation.RowCount = 13;
             layoutNavigation.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-            layoutNavigation.RowStyles.Add(new RowStyle(SizeType.AutoSize));
-            layoutNavigation.RowStyles.Add(new RowStyle(SizeType.AutoSize));
             layoutNavigation.RowStyles.Add(new RowStyle(SizeType.AutoSize));
             layoutNavigation.RowStyles.Add(new RowStyle(SizeType.AutoSize));
             layoutNavigation.RowStyles.Add(new RowStyle(SizeType.AutoSize));
@@ -463,7 +420,7 @@ namespace University_Timetable_and_Classroom_Management_System
             layoutNavigation.Dock = DockStyle.Top;
             pnlSidebar.Controls.Add(layoutNavigation);
             pnlSidebar.Padding = new Padding(24, 24, 24, 24);
-            layoutSidebarBrand.BackColor = Color.FromArgb(24, 38, 62);
+            layoutSidebarBrand.BackColor = DesktopPalette.Sidebar;
             layoutSidebarBrand.Name = "layoutSidebarBrand";
             layoutSidebarBrand.Margin = new Padding(0);
             layoutSidebarBrand.Dock = DockStyle.Fill;
@@ -485,24 +442,21 @@ namespace University_Timetable_and_Classroom_Management_System
             btnNavigationBranches.Dock = DockStyle.Fill;
             layoutNavigation.Controls.Add(btnNavigationStudyYears, 0, 3);
             btnNavigationStudyYears.Dock = DockStyle.Fill;
-            layoutNavigation.Controls.Add(btnNavigationSections, 0, 4);
-            btnNavigationSections.Dock = DockStyle.Fill;
-            layoutNavigation.Controls.Add(btnNavigationSubjects, 0, 5);
+            layoutNavigation.Controls.Add(btnNavigationSubjects, 0, 4);
             btnNavigationSubjects.Dock = DockStyle.Fill;
-            layoutNavigation.Controls.Add(btnNavigationClassrooms, 0, 6);
+            layoutNavigation.Controls.Add(btnNavigationClassrooms, 0, 5);
             btnNavigationClassrooms.Dock = DockStyle.Fill;
-            layoutNavigation.Controls.Add(btnNavigationTimeSlots, 0, 7);
+            layoutNavigation.Controls.Add(btnNavigationTimeSlots, 0, 6);
             btnNavigationTimeSlots.Dock = DockStyle.Fill;
-            layoutNavigation.Controls.Add(btnNavigationFacultyAssignments, 0, 8);
+            layoutNavigation.Controls.Add(btnNavigationFacultyAssignments, 0, 7);
             btnNavigationFacultyAssignments.Dock = DockStyle.Fill;
-            layoutNavigation.Controls.Add(btnNavigationFacultyMembers, 0, 9);
+            layoutNavigation.Controls.Add(btnNavigationFacultyMembers, 0, 8);
             btnNavigationFacultyMembers.Dock = DockStyle.Fill;
-            layoutNavigation.Controls.Add(btnNavigationSchedules, 0, 10);
+            layoutNavigation.Controls.Add(btnNavigationSchedules, 0, 9);
             btnNavigationSchedules.Dock = DockStyle.Fill;
-            layoutNavigation.Controls.Add(btnExcelImport, 0, 11);
-            layoutNavigation.Controls.Add(btnFacultyScheduleEditor, 0, 12);
-            layoutNavigation.Controls.Add(btnTimetableAlternatives, 0, 13);
-            layoutNavigation.Controls.Add(lblSidebarFooter, 0, 14);
+            layoutNavigation.Controls.Add(btnFacultyScheduleEditor, 0, 10);
+            layoutNavigation.Controls.Add(btnTimetableAlternatives, 0, 11);
+            layoutNavigation.Controls.Add(lblSidebarFooter, 0, 12);
             layoutSidebarBrand.ResumeLayout(false);
             layoutSidebarBrand.PerformLayout();
             layoutNavigation.ResumeLayout(false);
@@ -526,14 +480,12 @@ namespace University_Timetable_and_Classroom_Management_System
         private PictureBox picSidebarLogo;
         private Guna.UI2.WinForms.Guna2Button btnNavigationBranches;
         private Guna.UI2.WinForms.Guna2Button btnNavigationStudyYears;
-        private Guna.UI2.WinForms.Guna2Button btnNavigationSections;
         private Guna.UI2.WinForms.Guna2Button btnNavigationSubjects;
         private Guna.UI2.WinForms.Guna2Button btnNavigationClassrooms;
         private Guna.UI2.WinForms.Guna2Button btnNavigationTimeSlots;
         private Guna.UI2.WinForms.Guna2Button btnNavigationFacultyAssignments;
         private Guna.UI2.WinForms.Guna2Button btnNavigationFacultyMembers;
         private Guna.UI2.WinForms.Guna2Button btnNavigationSchedules;
-        private Guna.UI2.WinForms.Guna2Button btnExcelImport;
         private Guna.UI2.WinForms.Guna2Button btnFacultyScheduleEditor;
         private Guna.UI2.WinForms.Guna2Button btnTimetableAlternatives;
 

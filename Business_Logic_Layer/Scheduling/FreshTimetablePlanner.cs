@@ -57,7 +57,7 @@ internal static class FreshTimetablePlanner
             // couple their resource constraints by submitting both in one model.
             var result = await Task.Run(() => ImportedTimetableRepairPlanner.Solve(catalog, rows,
                 fixedRows, 55, default, optimizePreferences: true,
-                allowFacultyReassignment: true, requirePracticalExchange: false));
+                allowFacultyReassignment: true, requirePracticalExchange: true));
             System.Diagnostics.Trace.WriteLine($"Fresh constraint fallback result: semester={semester.Key}, status={result.Status}, placed={result.Plan?.Count ?? 0}");
             if (result.Plan is null) return new(null, result.Status, result.Diagnostics);
             complete.AddRange(result.Plan);

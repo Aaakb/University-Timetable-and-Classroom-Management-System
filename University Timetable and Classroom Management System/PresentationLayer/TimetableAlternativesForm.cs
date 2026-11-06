@@ -14,6 +14,7 @@ public partial class TimetableAlternativesForm : Form
     public TimetableAlternativesForm(TimetableAlternativesService? service)
     {
         InitializeComponent();
+        DialogAppearance.Apply(this);
         semester.SelectedIndex = 0;
         if (DesignerEnvironment.IsDesignTime(this)) return;
 
@@ -41,6 +42,7 @@ public partial class TimetableAlternativesForm : Form
             var result = await service.GenerateAsync(new(semester.SelectedIndex + 1, 3, (double)seconds.Value), token);
             current = result.Current; BindComparison(result.Alternatives); status.Text = result.Message;
             if (result.Alternatives.Count > 0) { comparison.CurrentCell = comparison.Rows[1].Cells[0]; selected = result.Alternatives[0]; BindSelection(); tabs.SelectedIndex = 1; }
+            else if (result.Message.Contains('\n')) MessageBox.Show(this, result.Message, "أسباب تعذّر إنشاء البدائل", MessageBoxButtons.OK, MessageBoxIcon.Information);
         });
         save.Click += async (_, _) =>
         {
@@ -107,7 +109,7 @@ public partial class TimetableAlternativesForm : Form
         int[] widths = [75, 160, 210, 240, 85, 80, 95, 130, 110, 75, 75];
         for (int c = 0; c < widths.Length; c++) { grid.Columns[c].MinimumWidth = widths[c]; grid.Columns[c].FillWeight = widths[c]; }
         grid.Columns[7].DefaultCellStyle.WrapMode = DataGridViewTriState.False;
-        foreach (var row in rows) { int i = grid.Rows.Add(row.Id, row.Faculty, row.Subject, row.Section, row.GroupName, ImportLabels.Display(row.LectureType), ImportLabels.Display(row.Day), "\u200e" + row.Period, row.Room, row.Locked ? "نعم" : "لا", row.Changed ? "نعم" : "لا"); grid.Rows[i].Tag = row; if (row.Changed) grid.Rows[i].DefaultCellStyle.BackColor = Color.FromArgb(219, 234, 254); }
+        foreach (var row in rows) { int i = grid.Rows.Add(row.Id, row.Faculty, row.Subject, row.Section, row.GroupName, ImportLabels.Display(row.LectureType), ImportLabels.Display(row.Day), "\u200e" + row.Period, row.Room, row.Locked ? "نعم" : "لا", row.Changed ? "نعم" : "لا"); grid.Rows[i].Tag = row; if (row.Changed) grid.Rows[i].DefaultCellStyle.BackColor = DesktopPalette.Selection; }
         grid.ClearSelection();
     }
     private async Task RunAsync(Func<CancellationToken, Task> work)

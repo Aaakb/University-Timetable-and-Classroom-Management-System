@@ -159,19 +159,19 @@ internal static partial class Program
             try
             {
                 var timer = System.Diagnostics.Stopwatch.StartNew();
-                var save = Descendants(form).OfType<Button>().Single(b => b.Name == "savePreferences");
-                var checkbox = Descendants(form).OfType<CheckBox>().Single(c => c.Name == "enableDayPreferences");
-                while (!save.Enabled || Descendants(form).OfType<ComboBox>().Count(c => c.Name.StartsWith("dayPreference_")) != 5)
+                var save = Descendants(form).OfType<Button>().Single(b => b.Name == "save");
+                var checkbox = Descendants(form).OfType<CheckBox>().Single(c => c.Name == "enabled");
+                while (!save.Enabled || Descendants(form).OfType<ComboBox>().Count(c => c.Name.StartsWith("dayPreference")) != 5)
                 { await Task.Delay(50); if (timer.Elapsed.TotalSeconds > 30) throw new Exception("UI loading timed out"); }
-                var choices = Descendants(form).OfType<ComboBox>().Where(c => c.Name.StartsWith("dayPreference_")).ToList();
+                var choices = Descendants(form).OfType<ComboBox>().Where(c => c.Name.StartsWith("dayPreference")).ToList();
                 Assert(choices.Count == 5 && choices.All(c => c.Items.Count == 3));
                 Assert(!Descendants(form).Any(c => c.Name is "preferenceMatrix" or "attendanceCount" or "otherLectureMoves"));
                 foreach (var size in new[] { new Size(800, 680), new Size(1180, 820) })
                 {
                     form.Size = size; await Task.Delay(120);
-                    foreach (var control in Descendants(form).Where(c => c is Button || c.Name.StartsWith("dayPreference_")))
+                    foreach (var control in Descendants(form).Where(c => c is Button || c.Name.StartsWith("dayPreference")))
                     { var bounds = form.RectangleToClient(control.RectangleToScreen(control.ClientRectangle)); Assert(form.ClientRectangle.Contains(bounds), "Clipped control " + control.Name); }
-                    var grid = Descendants(form).OfType<DataGridView>().Single(g => g.Name == "preferenceCurrent");
+                    var grid = Descendants(form).OfType<DataGridView>().Single(g => g.Name == "current");
                     Assert(grid.Height >= 125, $"Timetable clipped: {grid.Height} pixels at {size}");
                     using var bitmap = new Bitmap(form.Width, form.Height); form.DrawToBitmap(bitmap, new Rectangle(Point.Empty, bitmap.Size)); bitmap.Save(Path.Combine(output, $"preferences-days-{size.Width}.png"));
                 }
@@ -183,7 +183,7 @@ internal static partial class Program
                 Assert(profile.UseDayPreferences && profile.DayPreferences.Count == 5 && profile.PeriodPreferences.Count == 0);
                 Assert((await Rows()).Where(s => s.FacultyMemberID == 1).All(s => s.DayOfWeek == "Tuesday"));
                 Assert(form.HasSavedChanges);
-                Assert(Descendants(form).OfType<DataGridView>().Single(g => g.Name == "preferenceChanges").Rows.Count > 0);
+                Assert(Descendants(form).OfType<DataGridView>().Single(g => g.Name == "changes").Rows.Count > 0);
                 using (var updated = new Bitmap(form.Width, form.Height)) { form.DrawToBitmap(updated, new Rectangle(Point.Empty, updated.Size)); updated.Save(Path.Combine(output, "preferences-days-updated.png")); }
                 checkbox.Checked = false; save.PerformClick(); timer.Restart();
                 while (!save.Enabled) { await Task.Delay(50); if (timer.Elapsed.TotalSeconds > 30) throw new Exception("UI clear timed out"); }

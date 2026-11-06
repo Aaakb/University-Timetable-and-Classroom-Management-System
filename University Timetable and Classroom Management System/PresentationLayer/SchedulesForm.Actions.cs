@@ -7,7 +7,8 @@ namespace University_Timetable_and_Classroom_Management_System
     {
         private async Task GenerateScheduleAsync()
         {
-            if (IsScheduleUiUnavailable || !ConfirmScheduleGeneration())
+            int? semester = GetSelectedOptionalId(cmbSemesterFilter);
+            if (IsScheduleUiUnavailable || !ConfirmScheduleGeneration(semester))
             {
                 return;
             }
@@ -16,12 +17,14 @@ namespace University_Timetable_and_Classroom_Management_System
 
             try
             {
-                var result = await scheduleService.RegenerateAsync();
+                var result = semester.HasValue
+                    ? await scheduleService.RegenerateSemesterAsync(semester.Value)
+                    : await scheduleService.RegenerateAsync();
                 if (IsScheduleUiUnavailable) return;
                 await LoadSchedulesAsync();
                 if (IsScheduleUiUnavailable) return;
                 ClearScheduleForm();
-                ShowInformation(BuildGenerationMessage(result));
+                ShowInformation(BuildGenerationMessage(result, semester));
             }
             catch (Exception ex)
             {
@@ -33,20 +36,27 @@ namespace University_Timetable_and_Classroom_Management_System
             }
         }
 
-        private bool ConfirmScheduleGeneration()
+        private bool ConfirmScheduleGeneration(int? semester)
         {
+            string scope = semester switch
+            {
+                1 => "للفصل الأول فقط؛ سيبقى الفصل الثاني كما هو",
+                2 => "للفصل الثاني فقط؛ سيبقى الفصل الأول كما هو",
+                _ => "للفصلين؛ اختر فصلاً من فلتر الفصل إذا أردت توليد فصل واحد فقط"
+            };
+            string groupsNotice = "\n\nسيُراعى تبادل مجاميع العملي في اليوم نفسه بفترتين متتاليتين، وتبقى المواد المحددة كعملي مدمج للشعبة كاملة.";
             var confirmation = UiMessages.Confirm(
                 this,
-                "سيُنشأ جدول جديد للفصلين من المواد والتكليفات الحالية، بغض النظر عن الفلاتر. ستبقى المحاضرات المثبتة في مواقعها.\n\nإذا فشل التوليد يبقى الجدول الحالي كما هو.\n\nهل تريد توليد جدول جديد؟",
+                $"سيُنشأ جدول جديد {scope}. ستبقى المحاضرات المثبتة في مواقعها، ولا تحدد بقية الفلاتر نطاق التوليد.{groupsNotice}\n\nإذا فشل التوليد يبقى الجدول الحالي كما هو.\n\nهل تريد توليد جدول جديد؟",
                 "توليد جدول جديد");
 
             return confirmation == DialogResult.Yes;
         }
 
-        private static string BuildGenerationMessage(ScheduleGenerationResult result)
+        private static string BuildGenerationMessage(ScheduleGenerationResult result, int? semester)
         {
             if (result.IsRegenerated)
-                return $"اكتمل توليد جدول جديد للفصلين. إجمالي المحاضرات: {result.CreatedCount}.\n" +
+                return $"اكتمل توليد جدول جديد {(semester == 1 ? "للفصل الأول" : semester == 2 ? "للفصل الثاني" : "للفصلين")}. إجمالي المحاضرات: {result.CreatedCount}.\n" +
                     $"المحاضرات الجديدة: {result.AddedCount}، المحاضرات المثبتة المحتفظ بها: {result.PreservedCount}." +
                     (result.SafetyBackupPath is null ? "" : "\n\nنسخة الجدول السابق:\n" + result.SafetyBackupPath +
                         "\nيمكنك الرجوع إليها باستخدام «استعادة نسخة».");
@@ -102,35 +112,6 @@ namespace University_Timetable_and_Classroom_Management_System
             }
 
             return string.Join(Environment.NewLine, message);
-        }
-
-        private async Task AddScheduleAsync()
-        {
-            if (IsScheduleUiUnavailable) return;
-            if (!TryBuildSchedule(out var schedule))
-            {
-                return;
-            }
-
-            await ExecuteScheduleActionAsync(
-                async () => await scheduleService.AddAsync(schedule),
-                UiMessages.RecordAdded);
-        }
-
-        private async Task UpdateScheduleAsync()
-        {
-            if (IsScheduleUiUnavailable) return;
-            if (!TryGetSelectedScheduleId(out int scheduleId) || !TryBuildSchedule(out var schedule))
-            {
-                ShowInformation("اختر محاضرة من الجدول قبل التعديل.");
-                return;
-            }
-
-            schedule.ScheduleID = scheduleId;
-
-            await ExecuteScheduleActionAsync(
-                async () => await scheduleService.UpdateAsync(schedule),
-                UiMessages.RecordUpdated);
         }
 
         private async Task DeleteScheduleAsync()

@@ -14,9 +14,8 @@ public sealed class ResourcesController(ResourceCatalog catalog, MutationGate ga
     public async Task<object> List(string resource, [FromQuery] string? q, [FromQuery] int page = 1, [FromQuery] int pageSize = 100)
     {
         if (page < 1 || pageSize is < 1 or > 200) throw new ApiFailure(400, "Invalid pagination parameters.");
-        var source = await Find(resource).List();
-        if (!string.IsNullOrWhiteSpace(q)) source = source.Where(x => JsonSerializer.Serialize(x).Contains(q, StringComparison.OrdinalIgnoreCase)).ToList();
-        return new { items = source.Skip((int)Math.Min((long)(page - 1) * pageSize, int.MaxValue)).Take(pageSize).Select(Versions.Envelope), total = source.Count, page, pageSize };
+        var result = await ResourceQueries.Read(resource, q, page, pageSize, HttpContext.RequestAborted);
+        return new { items = result.Items.Select(Versions.Envelope), total = result.Total, page, pageSize };
     }
 
     [HttpGet("{id}")]

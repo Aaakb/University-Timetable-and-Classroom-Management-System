@@ -1,3 +1,21 @@
 .preferences-page{max-width:1300px;margin:auto;padding:24px}.preferences-page .panel{margin-block:20px;padding:20px}.attendance-days{display:flex;gap:18px;flex-wrap:wrap;margin-block:18px}.attendance-days label{display:flex;align-items:center;gap:8px}.attendance-days input{width:auto}.preference-0{background:#d1fae5}.preference-1{background:#dbeafe}.preference-2{background:#fee2e2}.preferences-page table select{min-width:135px}.preferences-page fieldset{min-width:0}.preferences-page .actions{margin-top:20px;flex-wrap:wrap}#pref-report{white-space:pre-line}.preferences-page td{vertical-align:middle}
 
-.day-enabled{display:flex;align-items:center;gap:10px;margin-block:20px}.day-enabled input{width:auto}#day-cards label{flex:1 1 150px;display:flex;flex-direction:column;align-items:stretch}#day-controls .filters{flex-wrap:wrap}#day-confirm{max-width:min(560px,calc(100vw - 32px))}
+.day-enabled{display:flex;align-items:center;gap:10px;margin-block:20px}.day-enabled input{width:auto}:is(#preferences-workspace,#alternatives-workspace) { display:grid; gap:14px; }
+:is(#preferences-workspace,#alternatives-workspace) > .panel { min-width:0; margin:0; padding:16px; }
+:is(#day-controls,#alt-controls) .filters { padding:0; }
+#day-cards { border:0; padding:0; margin-inline:0; gap:10px; }
+#day-cards label { flex:1 1 110px; display:flex; flex-direction:column; align-items:stretch; }
+:is(#preferences-workspace,#alternatives-workspace) .table-scroll { margin-top:12px; }
+:is(#preferences-workspace,#alternatives-workspace) button[aria-pressed="true"] { font-weight:700; box-shadow:inset 0 -3px currentColor; }
+:is(#day-close,#alt-close) { display:inline-flex; align-items:center; min-height:42px; padding:9px 17px; border-radius:9px; font-weight:600; }
+#day-confirm{max-width:min(560px,calc(100vw - 32px))}
+:is(#preferences-workspace,#alternatives-workspace) .table-scroll { min-block-size:3rem; }
+
+.alt-lock-actions { margin-top:8px; }
+#alt-original-view > p { margin-top:12px; }
+#alt-original input[type=checkbox], #alt-select-all { width:auto; min-height:0; }
+.alternatives-footer { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); align-items:stretch; }
+#alt-close { justify-content:center; }
+@media (max-width:540px) {
+  .alternatives-footer { grid-template-columns:repeat(2,minmax(0,1fr)); }
+}

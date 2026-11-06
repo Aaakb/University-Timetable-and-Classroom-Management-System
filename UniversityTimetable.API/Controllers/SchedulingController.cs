@@ -69,21 +69,33 @@ public sealed class SchedulingController(ScheduleService service, SchedulePdfExp
         return state;
     }
 
+    private async Task<string> GenerationVersion(int? semesterNumber) =>
+        Versions.Of(new { semesterNumber, state = await State() });
+
     [HttpGet("generation-state")]
-    public async Task<object> GenerationState() => new { version = Versions.Of(await State()),
-        warning = "سيُنشأ جدول جديد للفصلين من المواد والتكليفات الحالية، بغض النظر عن الفلاتر. ستبقى المحاضرات المثبتة في مواقعها. إذا فشل التوليد يبقى الجدول الحالي كما هو. هل تريد توليد جدول جديد؟" };
+    public async Task<object> GenerationState([FromQuery, Range(1, 2)] int? semesterNumber)
+    {
+        var scope = semesterNumber is null ? "الفصلين" : $"الفصل {semesterNumber}";
+        return new
+        {
+            version = await GenerationVersion(semesterNumber),
+            warning = $"سيُنشأ جدول جديد لـ{scope} من المواد والتكليفات الحالية. ستبقى المحاضرات المثبتة في مواقعها. لا تحدد بقية الفلاتر نطاق التوليد. إذا فشل التوليد يبقى الجدول الحالي كما هو. هل تريد المتابعة؟"
+        };
+    }
 
     [HttpPost("generate")]
     public async Task<object> Generate(GenerateRequest request)
     {
         if (!request.ConfirmReplacement) throw new ApiFailure(400, "يجب تأكيد توليد جدول جديد واستبدال الجدول الحالي.");
         using var lease = await gate.EnterAsync(HttpContext.RequestAborted);
-        if (request.Version != Versions.Of(await State())) throw new ApiFailure(412, "تغيرت بيانات الجدولة. راجعها ثم أكد التوليد مجددًا.");
-        return await service.RegenerateAsync();
+        if (request.Version != await GenerationVersion(request.SemesterNumber)) throw new ApiFailure(412, "تغيرت بيانات الجدولة. راجعها ثم أكد التوليد مجددًا.");
+        return request.SemesterNumber is int semester
+            ? await service.RegenerateSemesterAsync(semester)
+            : await service.RegenerateAsync();
     }
 }
 
-public sealed record GenerateRequest(bool ConfirmReplacement, [Required] string Version);
+public sealed record GenerateRequest(bool ConfirmReplacement, [Required] string Version, [Range(1, 2)] int? SemesterNumber = null);
 public sealed record SetLectureLock(bool Locked);
 public sealed class ScheduleFilter
 {

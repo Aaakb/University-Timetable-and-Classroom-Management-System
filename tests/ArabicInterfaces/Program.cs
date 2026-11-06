@@ -35,7 +35,7 @@ internal static class Program
             var all = Descendants(control).Prepend(control).ToArray();
             Check(name + " uses RTL", control.RightToLeft == RightToLeft.Yes);
             var untranslated = all.Where(c => c is Label || c.GetType().Name == "DesignerHtmlLabel" || c.GetType().Name == "Guna2Button")
-                .Where(c => Regex.IsMatch(Regex.Replace(c.Text, "<[^>]+>", "").Replace("PDF", "").Replace("Excel", ""), "[A-Za-z]{2}")).Select(c => c.Name + ": " + c.Text).ToArray();
+                .Where(c => Regex.IsMatch(Regex.Replace(c.Text, "<[^>]+>", "").Replace("PDF", "").Replace("Excel", "").Replace("CSV", ""), "[A-Za-z]{2}")).Select(c => c.Name + ": " + c.Text).ToArray();
             Check(name + " captions are Arabic", untranslated.Length == 0, string.Join("; ", untranslated));
             Check(name + " column headings are Arabic", all.OfType<DataGridView>().SelectMany(g => g.Columns.Cast<DataGridViewColumn>())
                 .All(c => !Regex.IsMatch(c.HeaderText, "[A-Za-z]{2}")));
@@ -47,12 +47,54 @@ internal static class Program
 
             foreach (var (comboName, value, expected) in new[] {
                 ("cmbDayOfWeek", "Sunday", "الأحد"), ("cmbLectureType", "Practical", "عملي"),
-                ("cmbRoomType", "Shared Lab", "مختبر مشترك"), ("cmbAcademicTitle", "Professor", "أستاذ") })
+                ("cmbRoomType", "Shared Lab", "مختبر مشترك") })
             {
                 if (all.FirstOrDefault(c => c.Name == comboName) is not ComboBox combo) continue;
                 combo.SelectedItem = value;
                 Check(name + " " + comboName + " shows Arabic", combo.GetItemText(combo.SelectedItem) == expected);
                 Check(name + " " + comboName + " keeps stored value", Equals(combo.SelectedItem, value));
+            }
+
+            if (name == "FacultyMembersForm")
+            {
+                const BindingFlags fields = BindingFlags.Instance | BindingFlags.NonPublic;
+                var type = control.GetType();
+                var rowsField = type.GetField("facultyRows", fields)!;
+                var members = (System.Collections.IList)rowsField.GetValue(control)!;
+                var memberType = rowsField.FieldType.GetGenericArguments()[0];
+                foreach (var (id, title) in new (int, string?)[] { (1, "أ.د"), (2, "م.م"), (3, null) })
+                {
+                    var member = Activator.CreateInstance(memberType)!;
+                    memberType.GetProperty("FacultyMemberID")!.SetValue(member, id);
+                    memberType.GetProperty("FullName")!.SetValue(member, $"تدريسي {id}");
+                    memberType.GetProperty("AcademicTitle")!.SetValue(member, title);
+                    members.Add(member);
+                }
+                type.GetMethod("BindTitleOptions", fields)!.Invoke(control, null);
+                var editor = all.Single(c => c.Name == "txtAcademicTitle");
+                var choose = all.Single(c => c.Name == "btnChooseAcademicTitle");
+                var storedTitles = (string[])type.GetField("academicTitles", fields)!.GetValue(control)!;
+                Check("Title filter is removed", all.All(c => c.Name != "cmbTitleFilter"));
+                Check("Title field has visible borders, a placeholder, and a title picker",
+                    editor.Visible && editor.Height >= 40 && choose.Visible && choose.Parent == editor.Parent &&
+                    editor.GetType().GetProperty("PlaceholderText")!.GetValue(editor) is string hint && hint.Contains("اختياري"));
+                Check("Title picker offers the stored abbreviations", storedTitles.Order().SequenceEqual(new[] { "أ.د", "م.م" }.Order()));
+                var grid = all.OfType<DataGridView>().Single(g => g.Name == "dgvFacultyMembers");
+                grid.AutoGenerateColumns = false;
+                type.GetMethod("ShowFacultyRows", fields)!.Invoke(control, null);
+                Check("Faculty list displays all rows", grid.DataSource is System.Collections.IList visible && visible.Count == members.Count);
+                type.GetMethod("ChooseAcademicTitle", fields)!.Invoke(control, null);
+                var menu = (ContextMenuStrip)type.GetField("academicTitleMenu", fields)!.GetValue(control)!;
+                menu.Items.Cast<ToolStripItem>().Single(item => item.Text == "أ.د").PerformClick();
+                menu.Close();
+                Check("Choosing a stored title fills the field", editor.Text == "أ.د");
+                type.GetMethod("SetAcademicTitle", fields)!.Invoke(control, ["Professor"]);
+                Check("An existing translated title keeps its stored value",
+                    editor.Text == "أستاذ" && Equals(type.GetMethod("ReadAcademicTitle", fields)!.Invoke(control, null), "Professor"));
+                editor.Text = "لقب تجريبي";
+                Check("The title editor accepts a new typed title", Equals(type.GetMethod("ReadAcademicTitle", fields)!.Invoke(control, null), "لقب تجريبي"));
+                type.GetMethod("ClearFacultyMemberForm", fields)!.Invoke(control, null);
+                Check("Clearing the editor removes the previous title", editor.Text.Length == 0);
             }
 
             if (name == "SchedulesForm")
@@ -65,9 +107,37 @@ internal static class Program
                 var day = grid.Columns.Cast<DataGridViewColumn>().First(c => c.DataPropertyName == "DayOfWeek");
                 grid.Rows[row].Cells[day.Index].Value = "Sunday";
                 Check("Grid formats Arabic without changing underlying data", Equals(grid.Rows[row].Cells[day.Index].FormattedValue, "الأحد") && Equals(grid.Rows[row].Cells[day.Index].Value, "Sunday"));
+                const BindingFlags methods = BindingFlags.Instance | BindingFlags.NonPublic;
+                var type = control.GetType();
+                type.GetMethod("ConfigureCompactScheduleWorkspace", methods)!.Invoke(control, null);
+                host.ClientSize = new Size(960, 660);
+                type.GetMethod("ResizeScheduleWorkspace", methods)!.Invoke(control, null);
+                var editor = control.Controls.Find("pnlScheduleEditor", true).Single();
+                var toolbar = control.Controls.Find("pnlScheduleCommands", true).Single();
+                var manual = control.Controls.Find("btnAddSchedule", true).Single();
+                Check("Compact schedule keeps the table and toolbar visible and hides the editor",
+                    !editor.Visible && toolbar.Visible && manual.Visible && grid.Visible && grid.Height >= 230);
+                bool modalOpened = false;
+                using var closeDialog = new System.Windows.Forms.Timer { Interval = 80 };
+                closeDialog.Tick += (_, _) =>
+                {
+                    var dialog = Application.OpenForms.Cast<Form>().FirstOrDefault(f => f.Name == "manualScheduleDialog");
+                    if (dialog is null) return;
+                    closeDialog.Stop();
+                    var cancel = (Button)dialog.Controls.Find("btnCancelManualSchedule", true).Single();
+                    modalOpened = editor.FindForm() == dialog && editor.Visible && cancel.Visible &&
+                        dialog.Controls.Find("btnSaveManualSchedule", true).Single().Visible;
+                    using var preview = new Bitmap(dialog.Width, dialog.Height);
+                    dialog.DrawToBitmap(preview, dialog.ClientRectangle);
+                    preview.Save(Path.Combine(output, "ManualScheduleDialog.png"));
+                    cancel.PerformClick();
+                };
+                closeDialog.Start();
+                ((Task)type.GetMethod("ShowManualScheduleEditorAsync", methods)!.Invoke(control, [false])!).GetAwaiter().GetResult();
+                Check("The manual dialog opens and cancel restores the table", modalOpened && !editor.Visible && grid.Visible);
             }
 
-            if (name is "LoginForm" or "RegisterForm" or "BranchesForm" or "SchedulesForm")
+            if (name is "LoginForm" or "RegisterForm" or "BranchesForm" or "SchedulesForm" or "FacultyMembersForm")
             {
                 using var image = new Bitmap(host.Width, host.Height);
                 host.DrawToBitmap(image, new Rectangle(Point.Empty, image.Size));

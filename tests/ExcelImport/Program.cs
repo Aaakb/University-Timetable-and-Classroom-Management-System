@@ -1,4 +1,4 @@
-﻿using System.Data;
+using System.Data;
 using System.Collections;
 using System.Reflection;
 using System.Text.Json;
@@ -23,7 +23,6 @@ internal static class Program
     private static void Main(string[] args)
     {
         Directory.CreateDirectory(Output);
-        if (args.Contains("ui")) { VerifyUi(); return; }
         RunAsync().GetAwaiter().GetResult();
         Check("Subject editor removes requirement selector and column in Designer layout", () =>
         {
@@ -506,37 +505,6 @@ internal static class Program
             });
         }
         finally { Environment.SetEnvironmentVariable(DatabaseConnection.EnvironmentVariableName, oldConnection); }
-    }
-    private static void VerifyUi()
-    {
-        ApplicationConfiguration.Initialize();
-        foreach (int selectedMode in new[] { 0, 1, 2 })
-        foreach (var size in new[] { new Size(800, 600), new Size(1180, 800) })
-        {
-            using var form = new ExcelImportForm { Size = size, ShowInTaskbar = false };
-            form.Show(); Application.DoEvents(); form.PerformLayout();
-            object Field(string name) => typeof(ExcelImportForm).GetField(name, BindingFlags.Instance | BindingFlags.NonPublic)!.GetValue(form)!;
-            ((ComboBox)Field("mode")).SelectedIndex = selectedMode;
-            var workbook = new ExcelWorkbookData();
-            workbook.Sheets.AddRange(selectedMode == 0 ? Academic() : [Timetable(["Sunday", "#1", "#1", "#1", "#1", "#1", "Theory", 1, "", true])]);
-            typeof(ExcelImportForm).GetField("workbook", BindingFlags.Instance | BindingFlags.NonPublic)!.SetValue(form, workbook);
-            var sheets = (ComboBox)Field("sheet");
-            sheets.Items.AddRange(workbook.Sheets.Select(s => (object)s.Name).ToArray()); sheets.SelectedIndex = 0;
-            Application.DoEvents(); form.PerformLayout();
-            var dataGrid = (DataGridView)Field("data");
-            Assert(dataGrid.Rows.Count > 0);
-            if (selectedMode == 2) Assert(dataGrid.Columns["Locked"] is DataGridViewCheckBoxColumn);
-            foreach (string name in new[] { "validate", "skipProblems", "generate", "save" })
-            {
-                var control = (Control)Field(name);
-                if (!control.Visible) continue;
-                var bounds = form.RectangleToClient(control.RectangleToScreen(control.ClientRectangle));
-                Assert(form.ClientRectangle.Contains(bounds), "Clipped action: " + name);
-            }
-            using var bitmap = new Bitmap(form.Width, form.Height); form.DrawToBitmap(bitmap, new Rectangle(0, 0, form.Width, form.Height));
-            bitmap.Save(Path.Combine(Output, $"import-ui-{selectedMode}-{size.Width}.png")); form.Close();
-        }
-        Console.WriteLine("PASS: 6 UI layouts, populated previews, Hybrid lock checkboxes and visible actions. Screenshots saved.");
     }
     private sealed class FailureInterceptor : SaveChangesInterceptor
     {

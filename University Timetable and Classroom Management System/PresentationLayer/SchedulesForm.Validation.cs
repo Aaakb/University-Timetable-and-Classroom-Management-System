@@ -24,7 +24,8 @@ namespace University_Timetable_and_Classroom_Management_System
                 ClassroomID = GetSelectedRequiredId(cmbClassroom),
                 TimeSlotID = GetSelectedRequiredId(cmbTimeSlot),
                 LectureType = GetSelectedPlainText(cmbLectureType) ?? "Theory",
-                GroupName = sectionsLookup.Any(section => section.SectionID == GetSelectedOptionalId(cmbSection) &&
+                GroupName = subjectsLookup.Any(subject => subject.SubjectID == GetSelectedRequiredId(cmbSubject) && subject.MergePracticalGroups) ||
+                    sectionsLookup.Any(section => section.SectionID == GetSelectedOptionalId(cmbSection) &&
                     AcademicStructureRules.AllowsWholeSectionPractical(section.StudyYearID))
                     ? null : GetSelectedPlainText(cmbGroupName),
                 StudyYearID = GetSelectedOptionalId(cmbStudyYear),
@@ -58,6 +59,7 @@ namespace University_Timetable_and_Classroom_Management_System
 
             if (string.Equals(schedule.LectureType, "Practical", StringComparison.OrdinalIgnoreCase) &&
                 string.IsNullOrWhiteSpace(schedule.GroupName) &&
+                !subjectsLookup.Any(subject => subject.SubjectID == schedule.SubjectID && subject.MergePracticalGroups) &&
                 !sectionsLookup.Any(section => section.SectionID == schedule.SectionID &&
                     AcademicStructureRules.AllowsWholeSectionPractical(section.StudyYearID)))
             {

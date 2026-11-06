@@ -9,7 +9,7 @@ using System.Text.Json.Nodes;
 internal static class Program
 {
     private const string Ns = "University_Timetable_and_Classroom_Management_System.";
-    private static readonly string[] Forms = ["ExcelImportForm", "FacultyPreferencesForm", "FacultyScheduleEditorForm", "TimetableAlternativesForm"];
+    private static readonly string[] Forms = ["FacultyPreferencesForm", "FacultyScheduleEditorForm", "TimetableAlternativesForm"];
     private static readonly JsonSerializerOptions Json = new() { WriteIndented = true };
     private static readonly List<object> Checks = [];
     private static int failures;
@@ -69,9 +69,6 @@ internal static class Program
                         var afterControls = (JsonArray)comparable["controls"]!;
                         Check(name + " " + suffix + " preserves every original control bound", beforeControls.Count == afterControls.Count && beforeControls.Select((control, index) =>
                             control!["properties"]!["bounds"]!.GetValue<string>() == afterControls[index]!["properties"]!["bounds"]!.GetValue<string>()).All(value => value));
-                        if (name == "ExcelImportForm")
-                            Check("Excel " + suffix + " keeps the three original field heights through designer minimums", new[] { "flow", "flow2", "entityField" }
-                                .All(field => Descendants(form).Single(c => c.Name == field).MinimumSize == new Size(0, 38)));
                         if (name == "FacultyScheduleEditorForm")
                             Check("Editor " + suffix + " keeps the three original field heights through designer minimums", new[] { "flow", "flow2", "flow3" }
                                 .All(field => Descendants(form).Single(c => c.Name == field).MinimumSize == new Size(0, 34)));
@@ -103,7 +100,6 @@ internal static class Program
                         }
                     }
                 }
-                if (name == "ExcelImportForm") CheckExcelImportBehavior(assembly);
             }
             catch (Exception exception) { Check(name + " completes", false, exception.ToString()); }
         }
@@ -220,78 +216,21 @@ internal static class Program
         using var shell = (Form)Activator.CreateInstance(assembly.GetType(Ns + "MainShellForm", true)!)!;
         var all = Descendants(shell).ToArray();
         var navigation = all.OfType<TableLayoutPanel>().Single(c => c.Name == "layoutNavigation");
-        foreach (var (name, row) in new[] { ("btnExcelImport", 11), ("btnFacultyScheduleEditor", 12), ("btnTimetableAlternatives", 13) })
+        foreach (var (name, row) in new[] { ("btnFacultyScheduleEditor", 11), ("btnTimetableAlternatives", 12) })
         {
             var matches = all.Where(c => c.Name == name).ToArray();
             Check("Shell designer contains exactly one " + name, matches.Length == 1);
             if (matches.Length == 1)
                 Check("Shell designer places " + name + " in row " + row, matches[0].Parent == navigation && navigation.GetRow(matches[0]) == row);
         }
+        Check("Removed import form is absent from the desktop assembly", assembly.GetType(Ns + "ExcelImportForm") is null);
+        Check("Removed import button is absent from the shell", !all.Any(c => c.Name == "btnExcelImport"));
         var footer = all.Single(c => c.Name == "lblSidebarFooter");
-        Check("Shell designer keeps footer after all commands", navigation.GetRow(footer) == 14 && navigation.RowCount == 15);
+        Check("Shell designer keeps footer after all commands", navigation.GetRow(footer) == 13 && navigation.RowCount == 14);
         Check("Shell designer does not create a runtime page", !all.Any(c => c.GetType().Name == "BranchesForm"));
         Check("Shell designer has no application event handlers", !ApplicationHandlers(shell).Concat(all.SelectMany(ApplicationHandlers)).Any());
         File.WriteAllText(Path.Combine(output, "MainShellForm-design.json"), Snapshot(shell).ToJsonString(Json));
         RenderWithoutShowingOriginal(shell, Path.Combine(output, "MainShellForm-design.png"));
-    }
-
-    private static void CheckExcelImportBehavior(Assembly assembly)
-    {
-        LicenseManager.CurrentContext = new LicenseContext();
-        Type formType = assembly.GetType(Ns + "ExcelImportForm", true)!;
-        Type sheetType = formType.GetField("workbook", BindingFlags.NonPublic | BindingFlags.Instance)!.FieldType.Assembly
-            .GetType(Ns + "BusinessLayer.ExcelSheetData", true)!;
-        Type workbookType = sheetType.Assembly.GetType(Ns + "BusinessLayer.ExcelWorkbookData", true)!;
-        for (int selectedMode = 0; selectedMode < 4; selectedMode++)
-        {
-            using var form = (Form)Activator.CreateInstance(formType)!;
-            form.BindingContext = new BindingContext();
-            _ = form.Handle;
-            object Field(string name) => formType.GetField(name, BindingFlags.NonPublic | BindingFlags.Instance)!.GetValue(form)!;
-            object? Call(string name, params object[] values) => formType.GetMethod(name, BindingFlags.NonPublic | BindingFlags.Instance)!.Invoke(form, values);
-            var mode = (ComboBox)Field("mode");
-            var entity = (ComboBox)Field("entity");
-            var data = (DataGridView)Field("data");
-            var mapping = (DataGridView)Field("mapping");
-            var tabs = (TabControl)Field("tabs");
-            _ = data.Handle; _ = mapping.Handle;
-            mode.SelectedIndex = selectedMode;
-            string expectedMode = new[] { "AcademicData", "CompleteTimetable", "Hybrid", "RepairTimetable" }[selectedMode];
-            var canonicalMode = formType.GetProperty("Mode", BindingFlags.NonPublic | BindingFlags.Instance)!.GetValue(form);
-            Check("Excel mode " + selectedMode + " keeps canonical enum", canonicalMode?.ToString() == expectedMode);
-            Check("Excel mode " + selectedMode + " keeps canonical schema choices", entity.Items.Contains("Branches") && entity.Items.Contains("NamedAssignments") && entity.Items.Cast<object>().All(v => !v.ToString()!.Any(c => c is >= '\u0600' and <= '\u06ff')));
-
-            var table = new DataTable(selectedMode == 0 ? "Branches" : "Timetable");
-            string[] columns = selectedMode == 0 ? ["BranchID", "BranchName"] : ["Day", "TimeSlot", "Subject", "Faculty", "Classroom", "Section", "LectureType", "SemesterNumber"];
-            foreach (string column in columns) table.Columns.Add(column, typeof(string));
-            table.Rows.Add(selectedMode == 0 ? ["51", "التقنيات الطبية"] : ["Sunday", "08:30", "الرياضيات", "تدريسي تجريبي", "قاعة 1", "A", "Theory", "1"]);
-            var sheet = Activator.CreateInstance(sheetType, [table.TableName, table, new[] { 7 }])!;
-            sheetType.GetProperty("SuggestedSchemaName")!.SetValue(sheet, table.TableName);
-            var workbook = Activator.CreateInstance(workbookType)!;
-            ((IList)workbookType.GetProperty("Sheets")!.GetValue(workbook)!).Add(sheet);
-            Call("LoadWorkbook", workbook, "designer-migration-fixture.xlsx");
-            Check("Excel mode " + selectedMode + " loads in-memory workbook", data.Rows.Count == 1 && ((Control)Field("validate")).Enabled && ((Label)Field("fileSummary")).Text.Contains("designer-migration-fixture.xlsx"));
-            Check("Excel mode " + selectedMode + " preserves mapping column types", mapping.Columns.Count == 2 && mapping.Columns[0] is DataGridViewTextBoxColumn && mapping.Columns[0].ReadOnly && mapping.Columns[1] is DataGridViewComboBoxColumn { DisplayMember: "Label", ValueMember: "Value" });
-            var prepared = ((IEnumerable)Call("PrepareSheets")!).Cast<object>().ToArray();
-            var preparedTable = (DataTable)sheetType.GetProperty("Table")!.GetValue(prepared.Single())!;
-            var sourceRows = (IEnumerable<int>)sheetType.GetProperty("SourceRows")!.GetValue(prepared.Single())!;
-            Check("Excel mode " + selectedMode + " preserves source rows and mapped values", sourceRows.SequenceEqual([7]) && preparedTable.Rows.Count == 1 &&
-                (selectedMode == 0 ? preparedTable.TableName == "Branches" && (string)preparedTable.Rows[0]["BranchID"] == "51" : (string)preparedTable.Rows[0]["Day"] == "Sunday" && (string)preparedTable.Rows[0]["LectureType"] == "Theory"));
-            Check("Excel mode " + selectedMode + " keeps appropriate fields", OwnVisible((Control)Field("entityField")) == (selectedMode == 0) && OwnVisible((Control)Field("semesterField")) == (selectedMode != 0) && OwnVisible((Control)Field("repairTimeField")) == (selectedMode == 3));
-            Check("Excel mode " + selectedMode + " keeps generation and save workflow", OwnVisible((Control)Field("generate")) == (selectedMode >= 2) && !((Control)Field("generate")).Enabled && !((Control)Field("save")).Enabled && tabs.TabPages.Count == 4);
-            if (selectedMode >= 2)
-            {
-                Check("Excel mode " + selectedMode + " preserves editable canonical lock column", data.Columns["Locked"] is DataGridViewCheckBoxColumn { TrueValue: "TRUE", FalseValue: "FALSE", Frozen: true, DisplayIndex: 0 } && (string)preparedTable.Rows[0]["Locked"] == "FALSE");
-                Check("Excel mode " + selectedMode + " preserves result tab caption", tabs.TabPages[3].Text == (selectedMode == 3 ? "٤. المقارنة قبل وبعد الإصلاح" : "٤. الجدول المكتمل"));
-            }
-            // Editing the map exercises the actual migrated CellValueChanged wiring.
-            mapping.Rows[0].Cells[1].Value = selectedMode == 0 ? "BranchName" : "Subject";
-            mapping.Rows[1].Cells[1].Value = selectedMode == 0 ? "BranchName" : "Subject";
-            bool duplicateRejected = false;
-            try { Call("PrepareSheets"); }
-            catch (TargetInvocationException exception) when (exception.InnerException is ArgumentException) { duplicateRejected = true; }
-            Check("Excel mode " + selectedMode + " rejects duplicate target mappings", duplicateRejected);
-        }
     }
 
     private static JsonObject Snapshot(Form form)
@@ -398,14 +337,6 @@ internal static class Program
         }
         else if (expected is JsonObject eo && actual is JsonObject ao)
         {
-            if (formName == "ExcelImportForm" && ao["name"]?.GetValue<string>() is "flow" or "flow2" or "entityField" &&
-                eo["properties"]?["type"]?.GetValue<string>() == typeof(FlowLayoutPanel).FullName &&
-                eo["properties"]?["minimumSize"]?.GetValue<string>() == "{Width=0, Height=0}" &&
-                ao["properties"]?["minimumSize"]?.GetValue<string>() == "{Width=0, Height=38}")
-            {
-                ao = (JsonObject)ao.DeepClone();
-                ao["properties"]!["minimumSize"] = "{Width=0, Height=0}";
-            }
             if (formName == "FacultyScheduleEditorForm" && ao["name"]?.GetValue<string>() is "flow" or "flow2" or "flow3" &&
                 eo["properties"]?["type"]?.GetValue<string>() == typeof(FlowLayoutPanel).FullName &&
                 eo["properties"]?["minimumSize"]?.GetValue<string>() == "{Width=0, Height=0}" &&

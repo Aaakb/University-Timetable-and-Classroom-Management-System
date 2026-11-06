@@ -74,7 +74,7 @@ namespace University_Timetable_and_Classroom_Management_System
             if (cell is null || cell.Entries.Count == 0)
             {
                 TextRenderer.DrawText(e.Graphics, "-", dgvTimetable.DefaultCellStyle.Font,
-                    new Rectangle(e.CellBounds.X, e.CellBounds.Y + 6, e.CellBounds.Width, 30), Color.FromArgb(148, 163, 184),
+                    new Rectangle(e.CellBounds.X, e.CellBounds.Y + 6, e.CellBounds.Width, 30), DesktopPalette.OnDarkMuted,
                     TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter | TextFormatFlags.PreserveGraphicsClipping);
                 e.Handled = true;
                 return;
@@ -91,25 +91,25 @@ namespace University_Timetable_and_Classroom_Management_System
                 bool conflict = cell.Conflicts.Contains(entry.ScheduleID);
                 bool practical = entry.LectureType == "Practical";
                 var bounds = new Rectangle(e.CellBounds.X + TimetablePixels(6), e.CellBounds.Y + TimetablePixels(6) + i * TimetableStep - offset, cardWidth, TimetableCardHeight);
-                Color fill = conflict ? Color.FromArgb(254, 242, 242) : practical ? Color.FromArgb(240, 253, 244) : Color.FromArgb(239, 246, 255);
-                Color border = conflict ? Color.FromArgb(248, 113, 113) : practical ? Color.FromArgb(34, 197, 94) : Color.FromArgb(96, 165, 250);
+                Color fill = conflict ? Color.FromArgb(254, 242, 242) : practical ? Color.FromArgb(240, 253, 244) : DesktopPalette.SoftAccent;
+                Color border = conflict ? Color.FromArgb(248, 113, 113) : practical ? Color.FromArgb(34, 197, 94) : DesktopPalette.Primary;
                 using var path = RoundedTimetableCard(bounds);
                 using var brush = new SolidBrush(fill);
                 using var pen = new Pen(border);
                 e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
                 e.Graphics.FillPath(brush, path);
                 e.Graphics.DrawPath(pen, path);
-                DrawTimetableLine(e.Graphics, (entry.IsLocked ? "مثبتة | " : "") + entry.SubjectName, titleFont, bounds, 5, Color.FromArgb(15, 23, 42));
-                DrawTimetableLine(e.Graphics, entry.FacultyMemberName, font, bounds, 24, Color.FromArgb(51, 65, 85));
+                DrawTimetableLine(e.Graphics, (entry.IsLocked ? "مثبتة | " : "") + entry.SubjectName, titleFont, bounds, 5, DesktopPalette.Ink);
+                DrawTimetableLine(e.Graphics, entry.FacultyMemberName, font, bounds, 24, DesktopPalette.Header);
                 DrawTimetableLine(e.Graphics, $"{entry.ClassroomName} | {entry.SectionName} | {BuildTimetableTypeLabel(entry)}", font, bounds, 43,
-                    conflict ? Color.FromArgb(185, 28, 28) : Color.FromArgb(71, 85, 105));
+                    conflict ? DesktopPalette.DangerHover : DesktopPalette.Primary);
             }
             int maxOffset = Math.Max(0, cell.Entries.Count * TimetableStep + TimetablePixels(6) - e.CellBounds.Height);
             if (maxOffset > 0)
             {
                 var track = new Rectangle(e.CellBounds.Right - TimetablePixels(16), e.CellBounds.Top + TimetablePixels(2), TimetablePixels(12), e.CellBounds.Height - TimetablePixels(4));
-                using var trackBrush = new SolidBrush(Color.FromArgb(241, 245, 249));
-                using var thumbBrush = new SolidBrush(Color.FromArgb(148, 163, 184));
+                using var trackBrush = new SolidBrush(DesktopPalette.Canvas);
+                using var thumbBrush = new SolidBrush(DesktopPalette.OnDarkMuted);
                 e.Graphics.FillRectangle(trackBrush, track);
                 int thumbHeight = Math.Max(TimetablePixels(20), track.Height * track.Height / (track.Height + maxOffset));
                 e.Graphics.FillRectangle(thumbBrush, new Rectangle(track.X + TimetablePixels(2), track.Y + offset * (track.Height - thumbHeight) / maxOffset, TimetablePixels(8), thumbHeight));
@@ -121,7 +121,7 @@ namespace University_Timetable_and_Classroom_Management_System
         private GraphicsPath RoundedTimetableCard(Rectangle bounds)
         {
             var path = new GraphicsPath();
-            int diameter = TimetablePixels(12);
+            int diameter = TimetablePixels(DesktopCorners.Field * 2);
             path.AddArc(bounds.X, bounds.Y, diameter, diameter, 180, 90);
             path.AddArc(bounds.Right - diameter - 1, bounds.Y, diameter, diameter, 270, 90);
             path.AddArc(bounds.Right - diameter - 1, bounds.Bottom - diameter - 1, diameter, diameter, 0, 90);
@@ -199,13 +199,13 @@ namespace University_Timetable_and_Classroom_Management_System
 
         private static void StyleScheduleViewButton(Guna2Button button, bool selected)
         {
-            button.FillColor = selected ? Color.FromArgb(15, 23, 42) : Color.White;
-            button.ForeColor = selected ? Color.White : Color.FromArgb(51, 65, 85);
-            button.HoverState.FillColor = selected ? Color.FromArgb(30, 41, 59) : Color.FromArgb(248, 250, 252);
-            button.HoverState.ForeColor = selected ? Color.White : Color.FromArgb(51, 65, 85);
-            button.DisabledState.BorderColor = Color.FromArgb(203, 213, 225);
-            button.DisabledState.FillColor = selected ? Color.FromArgb(15, 23, 42) : Color.White;
-            button.DisabledState.ForeColor = selected ? Color.White : Color.FromArgb(51, 65, 85);
+            button.FillColor = selected ? DesktopPalette.Header : Color.White;
+            button.ForeColor = selected ? Color.White : DesktopPalette.Header;
+            button.HoverState.FillColor = selected ? DesktopPalette.Header : DesktopPalette.Canvas;
+            button.HoverState.ForeColor = selected ? Color.White : DesktopPalette.Header;
+            button.DisabledState.BorderColor = DesktopPalette.Border;
+            button.DisabledState.FillColor = selected ? DesktopPalette.Header : Color.White;
+            button.DisabledState.ForeColor = selected ? Color.White : DesktopPalette.Header;
         }
 
         private static List<string> GetTimetableDays(IReadOnlyCollection<ScheduleRow> rows)

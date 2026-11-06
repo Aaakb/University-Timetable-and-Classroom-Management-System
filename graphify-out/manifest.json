@@ -1,0 +1,2768 @@
+{
+  "Business_Logic_Layer/Backups/TimetableBackupModels.cs": {
+    "mtime": 1792774423.115182,
+    "seen": 1793032195.9277298,
+    "ast_hash": "37f3a898dba0a298fba6a1e4ee49d5e9",
+    "semantic_hash": "37f3a898dba0a298fba6a1e4ee49d5e9"
+  },
+  "Business_Logic_Layer/Backups/TimetableBackupService.cs": {
+    "mtime": 1793350226.4725158,
+    "seen": 1793447234.194044,
+    "ast_hash": "8594ba03951537d6f8c50ac2504c6659",
+    "semantic_hash": ""
+  },
+  "Business_Logic_Layer/Business_Logic_Layer.csproj": {
+    "mtime": 1792516005.6178539,
+    "seen": 1793032195.9277377,
+    "ast_hash": "8770d4b688ff81dea161ffc6a4bc61eb",
+    "semantic_hash": "8770d4b688ff81dea161ffc6a4bc61eb"
+  },
+  "Business_Logic_Layer/FacultyScheduling/FacultyCpSatPlanner.cs": {
+    "mtime": 1792681490.1456304,
+    "seen": 1793032195.927739,
+    "ast_hash": "06100e63fdfea6ba75ced1fc038caa76",
+    "semantic_hash": "06100e63fdfea6ba75ced1fc038caa76"
+  },
+  "Business_Logic_Layer/FacultyScheduling/FacultyDayPreferenceService.cs": {
+    "mtime": 1792620484.158702,
+    "seen": 1793032195.9277399,
+    "ast_hash": "d69326c3e51ef7c6129ab28b39e7e8c0",
+    "semantic_hash": "d69326c3e51ef7c6129ab28b39e7e8c0"
+  },
+  "Business_Logic_Layer/FacultyScheduling/FacultyPracticalExchange.cs": {
+    "mtime": 1792939189.6155343,
+    "seen": 1793032195.9277406,
+    "ast_hash": "79e15e1e96da2b6dee27aed9060a7a68",
+    "semantic_hash": "79e15e1e96da2b6dee27aed9060a7a68"
+  },
+  "Business_Logic_Layer/FacultyScheduling/FacultyPreferenceMeasurement.cs": {
+    "mtime": 1792617923.6822653,
+    "seen": 1793032195.9277418,
+    "ast_hash": "f47b6ba0cd9cbc56f2b8b22bd183ac27",
+    "semantic_hash": "f47b6ba0cd9cbc56f2b8b22bd183ac27"
+  },
+  "Business_Logic_Layer/FacultyScheduling/FacultyPreferenceRules.cs": {
+    "mtime": 1792617909.7423575,
+    "seen": 1793032195.9277425,
+    "ast_hash": "57e752add622cde4921f891598e6ecf7",
+    "semantic_hash": "57e752add622cde4921f891598e6ecf7"
+  },
+  "Business_Logic_Layer/FacultyScheduling/FacultyPreferenceService.cs": {
+    "mtime": 1792617923.6822653,
+    "seen": 1793032195.9277434,
+    "ast_hash": "fad23c77a3b99821b9cd2ad6485f0a27",
+    "semantic_hash": "fad23c77a3b99821b9cd2ad6485f0a27"
+  },
+  "Business_Logic_Layer/FacultyScheduling/FacultyScheduleEditorService.cs": {
+    "mtime": 1792683792.63437,
+    "seen": 1793032195.9277442,
+    "ast_hash": "f571b294c16b4af5c349e342cea84faf",
+    "semantic_hash": "f571b294c16b4af5c349e342cea84faf"
+  },
+  "Business_Logic_Layer/FacultyScheduling/FacultyScheduleModels.cs": {
+    "mtime": 1792617909.7423575,
+    "seen": 1793032195.927745,
+    "ast_hash": "3a655cfb495b9340509663c894e38803",
+    "semantic_hash": "3a655cfb495b9340509663c894e38803"
+  },
+  "Business_Logic_Layer/FacultyScheduling/FacultySchedulingRuntime.cs": {
+    "mtime": 1792516030.4753132,
+    "seen": 1793032195.9277458,
+    "ast_hash": "5f4400bb63698600ae1205a64ea56be2",
+    "semantic_hash": "5f4400bb63698600ae1205a64ea56be2"
+  },
+  "Business_Logic_Layer/FacultyScheduling/ScheduleQualityAnalyzer.cs": {
+    "mtime": 1792937996.0937696,
+    "seen": 1793032195.9277468,
+    "ast_hash": "80c09681ed76add0504866acb69867ee",
+    "semantic_hash": "80c09681ed76add0504866acb69867ee"
+  },
+  "Business_Logic_Layer/FacultyScheduling/SchedulingCpSupport.cs": {
+    "mtime": 1792687886.7638035,
+    "seen": 1793032195.9277472,
+    "ast_hash": "da03a4d72f703620808bac65aa824985",
+    "semantic_hash": "da03a4d72f703620808bac65aa824985"
+  },
+  "Business_Logic_Layer/Helpers/AutoKeyGenerator.cs": {
+    "mtime": 1782042863.756955,
+    "seen": 1793032195.9277482,
+    "ast_hash": "c0433903105dcb287f2796113dda995f",
+    "semantic_hash": "c0433903105dcb287f2796113dda995f"
+  },
+  "Business_Logic_Layer/Helpers/ManualKeySaveHelper.cs": {
+    "mtime": 1791665072.5755312,
+    "seen": 1793032195.927749,
+    "ast_hash": "591fe8c0f72ed2022d99dfa3b02c8497",
+    "semantic_hash": "591fe8c0f72ed2022d99dfa3b02c8497"
+  },
+  "Business_Logic_Layer/Importing/AcademicExcelImport.cs": {
+    "mtime": 1793349927.4508083,
+    "seen": 1793447234.1940658,
+    "ast_hash": "c8c3e11ba7fbed57661d57f464d837a0",
+    "semantic_hash": ""
+  },
+  "Business_Logic_Layer/Importing/ExcelImportModels.cs": {
+    "mtime": 1792937996.0958967,
+    "seen": 1793032195.9277503,
+    "ast_hash": "2dca865a95ca3c7d9799945eb1aa2196",
+    "semantic_hash": "2dca865a95ca3c7d9799945eb1aa2196"
+  },
+  "Business_Logic_Layer/Importing/ExcelImportSchema.cs": {
+    "mtime": 1793349926.6924565,
+    "seen": 1793447234.1940682,
+    "ast_hash": "e8f80be3c78ff97040779303cb608d2f",
+    "semantic_hash": ""
+  },
+  "Business_Logic_Layer/Importing/ExcelImportService.cs": {
+    "mtime": 1792937996.0980124,
+    "seen": 1793032195.9277518,
+    "ast_hash": "34e1c4e2206cc367f755ead8f8d2339f",
+    "semantic_hash": "34e1c4e2206cc367f755ead8f8d2339f"
+  },
+  "Business_Logic_Layer/Importing/ExcelImportTemplates.cs": {
+    "mtime": 1792940042.9742515,
+    "seen": 1793032195.9277527,
+    "ast_hash": "69240448c76a71ca05e9e89f60de05a3",
+    "semantic_hash": "69240448c76a71ca05e9e89f60de05a3"
+  },
+  "Business_Logic_Layer/Importing/ExcelWorkbookReader.cs": {
+    "mtime": 1792937996.099012,
+    "seen": 1793032195.9277534,
+    "ast_hash": "d5e3d420ff09a10d2795075343832639",
+    "semantic_hash": "d5e3d420ff09a10d2795075343832639"
+  },
+  "Business_Logic_Layer/Importing/ImportCatalog.cs": {
+    "mtime": 1792536036.3847237,
+    "seen": 1793032195.9277544,
+    "ast_hash": "8ae9b7cf935f9ce23c7032ee1de8de30",
+    "semantic_hash": "8ae9b7cf935f9ce23c7032ee1de8de30"
+  },
+  "Business_Logic_Layer/Importing/ImportFileReader.cs": {
+    "mtime": 1792939552.4501574,
+    "seen": 1793032195.927755,
+    "ast_hash": "41f83f3e477c484d770eb74d35f8df9f",
+    "semantic_hash": "41f83f3e477c484d770eb74d35f8df9f"
+  },
+  "Business_Logic_Layer/Importing/ImportLabels.cs": {
+    "mtime": 1793349928.1962562,
+    "seen": 1793447234.1940744,
+    "ast_hash": "bd5bbc95d4c6431d00f54bed88bacee1",
+    "semantic_hash": ""
+  },
+  "Business_Logic_Layer/Importing/ImportValues.cs": {
+    "mtime": 1792517560.1642177,
+    "seen": 1793032195.9277565,
+    "ast_hash": "89372cb5f0be2384fa70126ccc76a85f",
+    "semantic_hash": "89372cb5f0be2384fa70126ccc76a85f"
+  },
+  "Business_Logic_Layer/Importing/ImportedTimetableRepair.cs": {
+    "mtime": 1792534360.369791,
+    "seen": 1793032195.9277573,
+    "ast_hash": "2884e2be6223d15f05864244165bf364",
+    "semantic_hash": "2884e2be6223d15f05864244165bf364"
+  },
+  "Business_Logic_Layer/Importing/ImportedTimetableRepairPlanner.cs": {
+    "mtime": 1792937996.1010115,
+    "seen": 1793032195.927758,
+    "ast_hash": "f83ec9af35e9e56f09645df8437dba93",
+    "semantic_hash": "f83ec9af35e9e56f09645df8437dba93"
+  },
+  "Business_Logic_Layer/Importing/NamedAssignmentImport.cs": {
+    "mtime": 1792939971.6991837,
+    "seen": 1793032195.927759,
+    "ast_hash": "c94d9552e3a0aef40b95f54d87fd4c3d",
+    "semantic_hash": "c94d9552e3a0aef40b95f54d87fd4c3d"
+  },
+  "Business_Logic_Layer/Importing/PdfTableReader.cs": {
+    "mtime": 1792518512.8153625,
+    "seen": 1793032195.9277594,
+    "ast_hash": "d7074b40ff0905027305ab6b63a172a1",
+    "semantic_hash": "d7074b40ff0905027305ab6b63a172a1"
+  },
+  "Business_Logic_Layer/Importing/WeeklyPdfTimetableReader.cs": {
+    "mtime": 1792518712.8856144,
+    "seen": 1793032195.9277601,
+    "ast_hash": "027593a69ec6379350e89d990d8a2772",
+    "semantic_hash": "027593a69ec6379350e89d990d8a2772"
+  },
+  "Business_Logic_Layer/Maintenance/DatabaseMaintenanceService.cs": {
+    "mtime": 1793349874.5582092,
+    "seen": 1793447234.194081,
+    "ast_hash": "eec5af3a87a76a1cfadc7ac7bd1af524",
+    "semantic_hash": ""
+  },
+  "Business_Logic_Layer/Maintenance/FourthYearPracticalMaintenance.cs": {
+    "mtime": 1792702832.1904037,
+    "seen": 1793032195.9277613,
+    "ast_hash": "fdad16f4d69bbdb27e0db617b1f6e071",
+    "semantic_hash": "fdad16f4d69bbdb27e0db617b1f6e071"
+  },
+  "Business_Logic_Layer/Maintenance/SchedulingResourceMaintenance.cs": {
+    "mtime": 1792937996.1028144,
+    "seen": 1793032195.9277623,
+    "ast_hash": "ffc08363819ba9f0171049b00d9750cf",
+    "semantic_hash": "ffc08363819ba9f0171049b00d9750cf"
+  },
+  "Business_Logic_Layer/Rules/AcademicStructureRules.cs": {
+    "mtime": 1792937996.1037078,
+    "seen": 1793032195.927763,
+    "ast_hash": "a151149445c836e557253ff5cd0fcf78",
+    "semantic_hash": "a151149445c836e557253ff5cd0fcf78"
+  },
+  "Business_Logic_Layer/Rules/ClassroomRules.cs": {
+    "mtime": 1792937996.1047435,
+    "seen": 1793032195.9277637,
+    "ast_hash": "50f99c90bb175048f289017be65b5ac7",
+    "semantic_hash": "50f99c90bb175048f289017be65b5ac7"
+  },
+  "Business_Logic_Layer/Rules/FacultyAssignmentRules.cs": {
+    "mtime": 1792781026.3550818,
+    "seen": 1793032195.9277642,
+    "ast_hash": "c7374ac6d1aa95bc0c28e467f50788c4",
+    "semantic_hash": "c7374ac6d1aa95bc0c28e467f50788c4"
+  },
+  "Business_Logic_Layer/Rules/InputValidation.cs": {
+    "mtime": 1792937996.1047435,
+    "seen": 1793032195.927765,
+    "ast_hash": "60af73490832ca525bb7c305fbe5681d",
+    "semantic_hash": "60af73490832ca525bb7c305fbe5681d"
+  },
+  "Business_Logic_Layer/Rules/ScheduleDayRules.cs": {
+    "mtime": 1792683792.63307,
+    "seen": 1793032195.9277656,
+    "ast_hash": "b378cb5b947a605fb0c131d8c4b7d40e",
+    "semantic_hash": "b378cb5b947a605fb0c131d8c4b7d40e"
+  },
+  "Business_Logic_Layer/Rules/ScheduleTimingRules.cs": {
+    "mtime": 1792785976.101071,
+    "seen": 1793032195.9277663,
+    "ast_hash": "c2c28ceffeb94e0c9b81c9dc9605b0d1",
+    "semantic_hash": "c2c28ceffeb94e0c9b81c9dc9605b0d1"
+  },
+  "Business_Logic_Layer/Rules/SubjectLectureRules.cs": {
+    "mtime": 1792680831.710838,
+    "seen": 1793032195.9277668,
+    "ast_hash": "efecc6064f859f4dbbc6b4a1c5a5b55f",
+    "semantic_hash": "efecc6064f859f4dbbc6b4a1c5a5b55f"
+  },
+  "Business_Logic_Layer/Scheduling/FreshTimetablePlanner.cs": {
+    "mtime": 1793349876.0708373,
+    "seen": 1793447234.1940906,
+    "ast_hash": "b37f0a60150c7dea65818ba4c6e2a1ab",
+    "semantic_hash": ""
+  },
+  "Business_Logic_Layer/Scheduling/ScheduleBuildContext.cs": {
+    "mtime": 1792688627.358325,
+    "seen": 1793032195.9277682,
+    "ast_hash": "d18aeea8cdc8372009f281c1d0385838",
+    "semantic_hash": "d18aeea8cdc8372009f281c1d0385838"
+  },
+  "Business_Logic_Layer/Scheduling/ScheduleConflictChecker.cs": {
+    "mtime": 1782729201.825568,
+    "seen": 1793032195.9277694,
+    "ast_hash": "d5968f06bc2e0df27952a21852daa0cf",
+    "semantic_hash": "d5968f06bc2e0df27952a21852daa0cf"
+  },
+  "Business_Logic_Layer/Scheduling/ScheduleFacultySelector.cs": {
+    "mtime": 1782734008.35612,
+    "seen": 1793032195.9277701,
+    "ast_hash": "51ac6ad22d24c6deb5f40ef81038ee11",
+    "semantic_hash": "51ac6ad22d24c6deb5f40ef81038ee11"
+  },
+  "Business_Logic_Layer/Scheduling/ScheduleGenerationModels.cs": {
+    "mtime": 1791995755.1687467,
+    "seen": 1793032195.9277709,
+    "ast_hash": "8f1dbe42e2606e9143e4b5e898efdaee",
+    "semantic_hash": "8f1dbe42e2606e9143e4b5e898efdaee"
+  },
+  "Business_Logic_Layer/Scheduling/ScheduleGenerationResult.cs": {
+    "mtime": 1792686579.2193522,
+    "seen": 1793032195.9277713,
+    "ast_hash": "733a38ac7bb801da35b84d3db7d2769e",
+    "semantic_hash": "733a38ac7bb801da35b84d3db7d2769e"
+  },
+  "Business_Logic_Layer/Scheduling/ScheduleGenerationState.cs": {
+    "mtime": 1792688627.3590243,
+    "seen": 1793032195.927772,
+    "ast_hash": "ba95543cda07d65b6166bcfd4810e567",
+    "semantic_hash": "ba95543cda07d65b6166bcfd4810e567"
+  },
+  "Business_Logic_Layer/Scheduling/ScheduleGenerator.cs": {
+    "mtime": 1793349875.3504999,
+    "seen": 1793447234.194097,
+    "ast_hash": "ed495bf99cc133e5f4dd065ce258e21d",
+    "semantic_hash": ""
+  },
+  "Business_Logic_Layer/Scheduling/ScheduleRequirementMatcher.cs": {
+    "mtime": 1792415292.2523696,
+    "seen": 1793032195.9277737,
+    "ast_hash": "bda8529e58f8917f5114b752c79d7e47",
+    "semantic_hash": "bda8529e58f8917f5114b752c79d7e47"
+  },
+  "Business_Logic_Layer/Scheduling/ScheduleRoomSelector.cs": {
+    "mtime": 1792702649.944965,
+    "seen": 1793032195.9277742,
+    "ast_hash": "dfd4f5881050ab424b5085055ca3e917",
+    "semantic_hash": "dfd4f5881050ab424b5085055ca3e917"
+  },
+  "Business_Logic_Layer/Scheduling/TimetableAlternativeModels.cs": {
+    "mtime": 1792537998.6096802,
+    "seen": 1793032195.927775,
+    "ast_hash": "3d6ee74cfe88be7940bbb43b8a26081c",
+    "semantic_hash": "3d6ee74cfe88be7940bbb43b8a26081c"
+  },
+  "Business_Logic_Layer/Scheduling/TimetableAlternativesService.cs": {
+    "mtime": 1793118620.642665,
+    "seen": 1793447234.194101,
+    "ast_hash": "f133872d5d69411aab5cd5399ecb9140",
+    "semantic_hash": ""
+  },
+  "Business_Logic_Layer/Services/AuthService.cs": {
+    "mtime": 1792015962.991234,
+    "seen": 1793032195.927776,
+    "ast_hash": "7e12558f10e38600831168b444ae588e",
+    "semantic_hash": "7e12558f10e38600831168b444ae588e"
+  },
+  "Business_Logic_Layer/Services/BranchService.cs": {
+    "mtime": 1792937996.1077442,
+    "seen": 1793032195.9277768,
+    "ast_hash": "ab8b1eec57fc87ab289a4c301eb13b21",
+    "semantic_hash": "ab8b1eec57fc87ab289a4c301eb13b21"
+  },
+  "Business_Logic_Layer/Services/ClassroomService.cs": {
+    "mtime": 1792937996.1077442,
+    "seen": 1793032195.9277773,
+    "ast_hash": "d5f360b0b920d8eff5c099abc109faef",
+    "semantic_hash": "d5f360b0b920d8eff5c099abc109faef"
+  },
+  "Business_Logic_Layer/Services/FacultyMemberService.cs": {
+    "mtime": 1792937996.1087444,
+    "seen": 1793032195.9277778,
+    "ast_hash": "30f37d44b67872892f60e594f3e46e39",
+    "semantic_hash": "30f37d44b67872892f60e594f3e46e39"
+  },
+  "Business_Logic_Layer/Services/FacultyMemberSubjectService.cs": {
+    "mtime": 1793112782.9638019,
+    "seen": 1793447234.1941059,
+    "ast_hash": "c1ebdc5ac77f367eb99dda5400bd79ba",
+    "semantic_hash": ""
+  },
+  "Business_Logic_Layer/Services/SchedulePdfExportService.cs": {
+    "mtime": 1792937996.110091,
+    "seen": 1793032195.9277794,
+    "ast_hash": "17b203bdb4f3d933b77aaf444a9f7eae",
+    "semantic_hash": "17b203bdb4f3d933b77aaf444a9f7eae"
+  },
+  "Business_Logic_Layer/Services/ScheduleService.cs": {
+    "mtime": 1793349876.8342032,
+    "seen": 1793447234.1941073,
+    "ast_hash": "025dd26d584dbd064c54c1d4bfbbc8f7",
+    "semantic_hash": ""
+  },
+  "Business_Logic_Layer/Services/SectionService.cs": {
+    "mtime": 1792937996.1121497,
+    "seen": 1793032195.9277806,
+    "ast_hash": "be26d8950a7db4b59a786f420c5c2c8b",
+    "semantic_hash": "be26d8950a7db4b59a786f420c5c2c8b"
+  },
+  "Business_Logic_Layer/Services/StudyYearService.cs": {
+    "mtime": 1792940042.9697936,
+    "seen": 1793032195.927781,
+    "ast_hash": "7d2bf9ffe035e51ea0c757a5e260cb3f",
+    "semantic_hash": "7d2bf9ffe035e51ea0c757a5e260cb3f"
+  },
+  "Business_Logic_Layer/Services/SubjectService.cs": {
+    "mtime": 1793274765.5694673,
+    "seen": 1793447234.1941102,
+    "ast_hash": "35d43bcfa8c4302f952bf68307707ed0",
+    "semantic_hash": ""
+  },
+  "Business_Logic_Layer/Services/TimeSlotService.cs": {
+    "mtime": 1792937996.1141498,
+    "seen": 1793032195.9277823,
+    "ast_hash": "5407f93a9c56fc56d86011cc00d65a45",
+    "semantic_hash": "5407f93a9c56fc56d86011cc00d65a45"
+  },
+  "Data_Access_Layer/Data_Access_Layer.csproj": {
+    "mtime": 1792777623.301126,
+    "seen": 1793032195.9277833,
+    "ast_hash": "bcfc12bb831627e5ba035c54b61afcfa",
+    "semantic_hash": "bcfc12bb831627e5ba035c54b61afcfa"
+  },
+  "Data_Access_Layer/DatabaseConnection.cs": {
+    "mtime": 1792774032.8643308,
+    "seen": 1793032195.9277837,
+    "ast_hash": "8a8b35dfef52e54cfcad495577e7644b",
+    "semantic_hash": "8a8b35dfef52e54cfcad495577e7644b"
+  },
+  "Data_Access_Layer/DbContext/appDbContext.cs": {
+    "mtime": 1793349872.9858723,
+    "seen": 1793447234.1941142,
+    "ast_hash": "5e751c4696799d590f48c315b0613267",
+    "semantic_hash": ""
+  },
+  "Data_Access_Layer/Importing/ImportTransaction.cs": {
+    "mtime": 1792937996.11515,
+    "seen": 1793032195.9277852,
+    "ast_hash": "afbf4c19944362366a4129f354b58682",
+    "semantic_hash": "afbf4c19944362366a4129f354b58682"
+  },
+  "Data_Access_Layer/Importing/ScheduleLockSchema.cs": {
+    "mtime": 1792415292.251138,
+    "seen": 1793032195.9277856,
+    "ast_hash": "6894aeaf0e967c971971fc788e585920",
+    "semantic_hash": "6894aeaf0e967c971971fc788e585920"
+  },
+  "Data_Access_Layer/Scheduling/FacultyAssignmentScopeSchema.cs": {
+    "mtime": 1792707934.8480518,
+    "seen": 1793032195.9277866,
+    "ast_hash": "e58600e471dffd2105f0e71f46d436e6",
+    "semantic_hash": "e58600e471dffd2105f0e71f46d436e6"
+  },
+  "Data_Access_Layer/Scheduling/FacultyPreferenceSchema.cs": {
+    "mtime": 1792536036.3841112,
+    "seen": 1793032195.927787,
+    "ast_hash": "978bfecbeca1c8a37948b789d82f06b2",
+    "semantic_hash": "978bfecbeca1c8a37948b789d82f06b2"
+  },
+  "Data_Access_Layer/Scheduling/FacultyScheduleWriter.cs": {
+    "mtime": 1792430560.766893,
+    "seen": 1793032195.9277875,
+    "ast_hash": "98cf8c37c1f54131c13cd282d83719b9",
+    "semantic_hash": "98cf8c37c1f54131c13cd282d83719b9"
+  },
+  "Data_Access_Layer/Scheduling/SubjectDeletionSchema.cs": {
+    "mtime": 1792682562.0398273,
+    "seen": 1793032195.9277883,
+    "ast_hash": "3e2b75fc118d868d9d4ba68d405780f4",
+    "semantic_hash": "3e2b75fc118d868d9d4ba68d405780f4"
+  },
+  "Data_Access_Layer/Scheduling/SubjectLectureCountSchema.cs": {
+    "mtime": 1792680831.6720543,
+    "seen": 1793032195.9277892,
+    "ast_hash": "ab71334f0f6ff461844c23bbf5fc47e3",
+    "semantic_hash": "ab71334f0f6ff461844c23bbf5fc47e3"
+  },
+  "Data_Access_Layer/Scheduling/TimetableSnapshotStore.cs": {
+    "mtime": 1792517398.8564136,
+    "seen": 1793032195.9277902,
+    "ast_hash": "cb1d1e377f8dca17501632008640fcb9",
+    "semantic_hash": "cb1d1e377f8dca17501632008640fcb9"
+  },
+  "Models/Entities/ApplicationUser.cs": {
+    "mtime": 1782064403.6719341,
+    "seen": 1793032195.9277906,
+    "ast_hash": "85de3cc30196b84fdeb728b5b4bb84fc",
+    "semantic_hash": "85de3cc30196b84fdeb728b5b4bb84fc"
+  },
+  "Models/Entities/Branch.cs": {
+    "mtime": 1781456048.9588985,
+    "seen": 1793032195.9277914,
+    "ast_hash": "0f3c9edeb57def76f1816fc8979580d4",
+    "semantic_hash": "0f3c9edeb57def76f1816fc8979580d4"
+  },
+  "Models/Entities/Classroom.cs": {
+    "mtime": 1781456048.9588985,
+    "seen": 1793032195.927792,
+    "ast_hash": "016f168aca11024e86d39c92962b9b8c",
+    "semantic_hash": "016f168aca11024e86d39c92962b9b8c"
+  },
+  "Models/Entities/FacultyMember.cs": {
+    "mtime": 1781456048.9709582,
+    "seen": 1793032195.9277928,
+    "ast_hash": "fb460a7c8caf02b4ed12dcde52d713ed",
+    "semantic_hash": "fb460a7c8caf02b4ed12dcde52d713ed"
+  },
+  "Models/Entities/FacultyMemberSubject.cs": {
+    "mtime": 1792707934.8470464,
+    "seen": 1793032195.9277937,
+    "ast_hash": "edd150ac2a44dffae0b8346eae157328",
+    "semantic_hash": "edd150ac2a44dffae0b8346eae157328"
+  },
+  "Models/Entities/FacultyPeriodPreference.cs": {
+    "mtime": 1792536036.3792396,
+    "seen": 1793032195.9277942,
+    "ast_hash": "90f547ae9773cfb4d9d70e61676e3e7b",
+    "semantic_hash": "90f547ae9773cfb4d9d70e61676e3e7b"
+  },
+  "Models/Entities/FacultySchedulingPreference.cs": {
+    "mtime": 1792534106.01781,
+    "seen": 1793032195.927795,
+    "ast_hash": "a19db2eea45369b922e225809f0071b6",
+    "semantic_hash": "a19db2eea45369b922e225809f0071b6"
+  },
+  "Models/Entities/Schedule.cs": {
+    "mtime": 1792415292.2442482,
+    "seen": 1793032195.9277956,
+    "ast_hash": "668c352fc369818e4324a139a20653a0",
+    "semantic_hash": "668c352fc369818e4324a139a20653a0"
+  },
+  "Models/Entities/ScheduleDetailsView.cs": {
+    "mtime": 1792415391.789634,
+    "seen": 1793032195.9277961,
+    "ast_hash": "6b51de354126cbb6d4b52430092002b1",
+    "semantic_hash": "6b51de354126cbb6d4b52430092002b1"
+  },
+  "Models/Entities/Section.cs": {
+    "mtime": 1781456048.9869895,
+    "seen": 1793032195.927797,
+    "ast_hash": "81edbfa594fd026cd9ac562ef085cb68",
+    "semantic_hash": "81edbfa594fd026cd9ac562ef085cb68"
+  },
+  "Models/Entities/StudyYear.cs": {
+    "mtime": 1781456048.9869895,
+    "seen": 1793032195.9277976,
+    "ast_hash": "8d74d807dd93184db97f9ef2d2c0cff4",
+    "semantic_hash": "8d74d807dd93184db97f9ef2d2c0cff4"
+  },
+  "Models/Entities/Subject.cs": {
+    "mtime": 1793349872.2713006,
+    "seen": 1793447234.1941361,
+    "ast_hash": "704b4b04ac2d75a78abe554b13bae59c",
+    "semantic_hash": ""
+  },
+  "Models/Entities/TimeSlot.cs": {
+    "mtime": 1781456048.9952683,
+    "seen": 1793032195.9277997,
+    "ast_hash": "84e31a2b5600f02fa4ce904ca29fb0be",
+    "semantic_hash": "84e31a2b5600f02fa4ce904ca29fb0be"
+  },
+  "Models/Models.csproj": {
+    "mtime": 1782596798.6465268,
+    "seen": 1793032195.9278004,
+    "ast_hash": "eb4d06ccb4aca8835e2cc919e8832fee",
+    "semantic_hash": "eb4d06ccb4aca8835e2cc919e8832fee"
+  },
+  "Start-Web.ps1": {
+    "mtime": 1792417626.4652271,
+    "seen": 1793032195.9278011,
+    "ast_hash": "a5555c65df5d9cedf621e585de897250",
+    "semantic_hash": "a5555c65df5d9cedf621e585de897250"
+  },
+  "University Timetable Management System.slnx": {
+    "mtime": 1792235531.3346393,
+    "seen": 1793032195.9278016,
+    "ast_hash": "25df8605a6f751d800e16245e78207bb",
+    "semantic_hash": "25df8605a6f751d800e16245e78207bb"
+  },
+  "University Timetable and Classroom Management System.slnx": {
+    "mtime": 1792418345.9216824,
+    "seen": 1793032195.9278023,
+    "ast_hash": "25df8605a6f751d800e16245e78207bb",
+    "semantic_hash": "25df8605a6f751d800e16245e78207bb"
+  },
+  "University Timetable and Classroom Management System/PresentationLayer/ArabicUi.cs": {
+    "mtime": 1792937996.1555338,
+    "seen": 1793032195.927803,
+    "ast_hash": "ef0885e2bef2717c7d497b72793624c4",
+    "semantic_hash": "ef0885e2bef2717c7d497b72793624c4"
+  },
+  "University Timetable and Classroom Management System/PresentationLayer/ArabicUiText.cs": {
+    "mtime": 1792680229.8093743,
+    "seen": 1793032195.927804,
+    "ast_hash": "db013c62e6fa1ff9aebc2dc0060de761",
+    "semantic_hash": "db013c62e6fa1ff9aebc2dc0060de761"
+  },
+  "University Timetable and Classroom Management System/PresentationLayer/BranchesForm.Designer.cs": {
+    "mtime": 1793110710.445684,
+    "seen": 1793447234.194145,
+    "ast_hash": "657c6ddef93e8f476cd6b0e7b36b5fc9",
+    "semantic_hash": ""
+  },
+  "University Timetable and Classroom Management System/PresentationLayer/BranchesForm.cs": {
+    "mtime": 1792937996.1561484,
+    "seen": 1793032195.9278052,
+    "ast_hash": "f3e4743157c699ef217a5cb22f3438b1",
+    "semantic_hash": "f3e4743157c699ef217a5cb22f3438b1"
+  },
+  "University Timetable and Classroom Management System/PresentationLayer/ClassroomsForm.Designer.cs": {
+    "mtime": 1793110710.527567,
+    "seen": 1793447234.194147,
+    "ast_hash": "49bfa1470db2a1c44a72e90b1cdb7918",
+    "semantic_hash": ""
+  },
+  "University Timetable and Classroom Management System/PresentationLayer/ClassroomsForm.cs": {
+    "mtime": 1792937996.157292,
+    "seen": 1793032195.9278064,
+    "ast_hash": "13ac2a40b2988d6878b4d892f496a490",
+    "semantic_hash": "13ac2a40b2988d6878b4d892f496a490"
+  },
+  "University Timetable and Classroom Management System/PresentationLayer/Common/ComboBoxHelper.cs": {
+    "mtime": 1791840190.5604222,
+    "seen": 1793032195.927807,
+    "ast_hash": "27e56b065fb2708e8512c840fef2b935",
+    "semantic_hash": "27e56b065fb2708e8512c840fef2b935"
+  },
+  "University Timetable and Classroom Management System/PresentationLayer/Common/ComboOption.cs": {
+    "mtime": 1782066681.2571807,
+    "seen": 1793032195.9278078,
+    "ast_hash": "dd8cc0596bf1e60d06036133279bfb11",
+    "semantic_hash": "dd8cc0596bf1e60d06036133279bfb11"
+  },
+  "University Timetable and Classroom Management System/PresentationLayer/Common/EditorAction.cs": {
+    "mtime": 1792748628.0411372,
+    "seen": 1793032195.9278083,
+    "ast_hash": "ee0bd745906384e11aa64f7e1478442c",
+    "semantic_hash": "ee0bd745906384e11aa64f7e1478442c"
+  },
+  "University Timetable and Classroom Management System/PresentationLayer/DesignerEnvironment.cs": {
+    "mtime": 1791751596.6688035,
+    "seen": 1793032195.927809,
+    "ast_hash": "cb21e89c7c9d743c0f874c31937ff5f6",
+    "semantic_hash": "cb21e89c7c9d743c0f874c31937ff5f6"
+  },
+  "University Timetable and Classroom Management System/PresentationLayer/DesignerHtmlLabel.cs": {
+    "mtime": 1792680012.8989036,
+    "seen": 1793032195.9278097,
+    "ast_hash": "9a8b3d74d63de20880fae17e95e581f4",
+    "semantic_hash": "9a8b3d74d63de20880fae17e95e581f4"
+  },
+  "University Timetable and Classroom Management System/PresentationLayer/FacultyMemberSubjectsForm.Designer.cs": {
+    "mtime": 1793110710.5721548,
+    "seen": 1793447234.1941607,
+    "ast_hash": "ff8e358484db31736c3811220b29655f",
+    "semantic_hash": ""
+  },
+  "University Timetable and Classroom Management System/PresentationLayer/FacultyMemberSubjectsForm.Scope.cs": {
+    "mtime": 1793113885.6062307,
+    "seen": 1793447234.194162,
+    "ast_hash": "32028751e17ad88e332c5ad8c09832e1",
+    "semantic_hash": ""
+  },
+  "University Timetable and Classroom Management System/PresentationLayer/FacultyMemberSubjectsForm.cs": {
+    "mtime": 1793435180.1060379,
+    "seen": 1793447234.1941626,
+    "ast_hash": "430c610b16ab603bea979e0c103588d8",
+    "semantic_hash": ""
+  },
+  "University Timetable and Classroom Management System/PresentationLayer/FacultyMembersForm.Designer.cs": {
+    "mtime": 1793110710.5644107,
+    "seen": 1793447234.1941638,
+    "ast_hash": "5efdf0cf4bfd1ff7b17fa37b5bfb0ce6",
+    "semantic_hash": ""
+  },
+  "University Timetable and Classroom Management System/PresentationLayer/FacultyMembersForm.cs": {
+    "mtime": 1792937996.1591823,
+    "seen": 1793032195.9278162,
+    "ast_hash": "cb68647b0edc384014e08eda00f36049",
+    "semantic_hash": "cb68647b0edc384014e08eda00f36049"
+  },
+  "University Timetable and Classroom Management System/PresentationLayer/FacultyPreferencesForm.Designer.cs": {
+    "mtime": 1793434587.0728025,
+    "seen": 1793447234.1941657,
+    "ast_hash": "25d106e29cc8b389d57b40555cde1de0",
+    "semantic_hash": ""
+  },
+  "University Timetable and Classroom Management System/PresentationLayer/FacultyPreferencesForm.cs": {
+    "mtime": 1793434587.5164437,
+    "seen": 1793447234.1941664,
+    "ast_hash": "16cef78abd1a3117c8c1e4cd9d4f7a1c",
+    "semantic_hash": ""
+  },
+  "University Timetable and Classroom Management System/PresentationLayer/FacultyScheduleEditorForm.Designer.cs": {
+    "mtime": 1793110710.606853,
+    "seen": 1793447234.1941674,
+    "ast_hash": "2336f4869a2827d0adef91643f74c5f8",
+    "semantic_hash": ""
+  },
+  "University Timetable and Classroom Management System/PresentationLayer/FacultyScheduleEditorForm.cs": {
+    "mtime": 1793110710.5961041,
+    "seen": 1793447234.1941683,
+    "ast_hash": "e9b48a9eafa13992b3e10121c6483841",
+    "semantic_hash": ""
+  },
+  "University Timetable and Classroom Management System/PresentationLayer/FormNavigation.cs": {
+    "mtime": 1793111367.339043,
+    "seen": 1793447234.194169,
+    "ast_hash": "523fad999c3fd74d5ba4ad0c7a2eb186",
+    "semantic_hash": ""
+  },
+  "University Timetable and Classroom Management System/PresentationLayer/GridRowNumbers.cs": {
+    "mtime": 1791647375.7589283,
+    "seen": 1793032195.92782,
+    "ast_hash": "750abd1dbfdf11d802d8138230a58206",
+    "semantic_hash": "750abd1dbfdf11d802d8138230a58206"
+  },
+  "University Timetable and Classroom Management System/PresentationLayer/ImportUiText.cs": {
+    "mtime": 1792516687.9794712,
+    "seen": 1793032195.9278207,
+    "ast_hash": "2c3ce35a93f7da25171f9fc6f4e6fcb7",
+    "semantic_hash": "2c3ce35a93f7da25171f9fc6f4e6fcb7"
+  },
+  "University Timetable and Classroom Management System/PresentationLayer/LayoutUpdateScope.cs": {
+    "mtime": 1792877067.7485516,
+    "seen": 1793032195.9278216,
+    "ast_hash": "67ea511cf3f6914c2a6f539c1320c7e0",
+    "semantic_hash": "67ea511cf3f6914c2a6f539c1320c7e0"
+  },
+  "University Timetable and Classroom Management System/PresentationLayer/LoginForm.Designer.cs": {
+    "mtime": 1793110710.6229033,
+    "seen": 1793447234.1941729,
+    "ast_hash": "ed5e8528a30838c9dfd40ce0a909e5c9",
+    "semantic_hash": ""
+  },
+  "University Timetable and Classroom Management System/PresentationLayer/LoginForm.cs": {
+    "mtime": 1792679086.9719305,
+    "seen": 1793032195.9278228,
+    "ast_hash": "c6f1a1bd038fbae02e97f4d21a6d288e",
+    "semantic_hash": "c6f1a1bd038fbae02e97f4d21a6d288e"
+  },
+  "University Timetable and Classroom Management System/PresentationLayer/MainShellForm.Designer.cs": {
+    "mtime": 1793353277.7957244,
+    "seen": 1793447234.1941748,
+    "ast_hash": "4fee8ff47328573d7863d619a4d91abd",
+    "semantic_hash": ""
+  },
+  "University Timetable and Classroom Management System/PresentationLayer/MainShellForm.cs": {
+    "mtime": 1793435617.0533035,
+    "seen": 1793447234.1941757,
+    "ast_hash": "6dbf8eba24511e99ead19473493303bf",
+    "semantic_hash": ""
+  },
+  "University Timetable and Classroom Management System/PresentationLayer/PasswordToggleIcon.cs": {
+    "mtime": 1793110710.6329236,
+    "seen": 1793447234.1941764,
+    "ast_hash": "184abc68df61a2ccfc7756d30e11b2fb",
+    "semantic_hash": ""
+  },
+  "University Timetable and Classroom Management System/PresentationLayer/RegisterForm.Designer.cs": {
+    "mtime": 1793110710.638613,
+    "seen": 1793447234.1941776,
+    "ast_hash": "1b0482134f6a1de047de663aed7d4ff9",
+    "semantic_hash": ""
+  },
+  "University Timetable and Classroom Management System/PresentationLayer/RegisterForm.cs": {
+    "mtime": 1792679086.9836864,
+    "seen": 1793032195.9278262,
+    "ast_hash": "663102f29c6df8c1859d2213a185e7e6",
+    "semantic_hash": "663102f29c6df8c1859d2213a185e7e6"
+  },
+  "University Timetable and Classroom Management System/PresentationLayer/ResponsiveCardPanel.cs": {
+    "mtime": 1791708041.708348,
+    "seen": 1793032195.927827,
+    "ast_hash": "fd328ea2d055689b8e8e6e80161a77e7",
+    "semantic_hash": "fd328ea2d055689b8e8e6e80161a77e7"
+  },
+  "University Timetable and Classroom Management System/PresentationLayer/ResponsiveFlowPanel.cs": {
+    "mtime": 1793274200.4004245,
+    "seen": 1793447234.1941803,
+    "ast_hash": "6b1aef3aaae762bdb43096b3a060cc71",
+    "semantic_hash": ""
+  },
+  "University Timetable and Classroom Management System/PresentationLayer/ResponsiveWorkspacePanel.cs": {
+    "mtime": 1791707880.016619,
+    "seen": 1793032195.9278283,
+    "ast_hash": "10d32723c1df3711037d51c1e6972f09",
+    "semantic_hash": "10d32723c1df3711037d51c1e6972f09"
+  },
+  "University Timetable and Classroom Management System/PresentationLayer/ScheduleFiltering/ScheduleFilterCriteria.cs": {
+    "mtime": 1782508886.2699788,
+    "seen": 1793032195.927829,
+    "ast_hash": "a2371aeb9ccfb954651e32df803f59f8",
+    "semantic_hash": "a2371aeb9ccfb954651e32df803f59f8"
+  },
+  "University Timetable and Classroom Management System/PresentationLayer/ScheduleFiltering/ScheduleFilterService.cs": {
+    "mtime": 1792272137.1884809,
+    "seen": 1793032195.9278295,
+    "ast_hash": "b5efa995cd266d323abea41ede4bf8b9",
+    "semantic_hash": "b5efa995cd266d323abea41ede4bf8b9"
+  },
+  "University Timetable and Classroom Management System/PresentationLayer/ScheduleTimetableGrid.cs": {
+    "mtime": 1791629613.7021675,
+    "seen": 1793032195.9278302,
+    "ast_hash": "d5474ba3f1bdea38269a8139b5efb44b",
+    "semantic_hash": "d5474ba3f1bdea38269a8139b5efb44b"
+  },
+  "University Timetable and Classroom Management System/PresentationLayer/SchedulesForm.Actions.cs": {
+    "mtime": 1793349896.0910108,
+    "seen": 1793447234.1941853,
+    "ast_hash": "807ebfea1dd7dba8dc295f64c988d159",
+    "semantic_hash": ""
+  },
+  "University Timetable and Classroom Management System/PresentationLayer/SchedulesForm.Backup.cs": {
+    "mtime": 1792517484.0105264,
+    "seen": 1793032195.9278314,
+    "ast_hash": "cdf7007ba8e1b15a91b499e02d094a37",
+    "semantic_hash": "cdf7007ba8e1b15a91b499e02d094a37"
+  },
+  "University Timetable and Classroom Management System/PresentationLayer/SchedulesForm.Designer.cs": {
+    "mtime": 1793110710.664523,
+    "seen": 1793447234.1941872,
+    "ast_hash": "cf47bec4074aa154738991c07c3ebe28",
+    "semantic_hash": ""
+  },
+  "University Timetable and Classroom Management System/PresentationLayer/SchedulesForm.Grid.cs": {
+    "mtime": 1793110710.667524,
+    "seen": 1793447234.1941898,
+    "ast_hash": "3e51daca6c25141f8a062b3b4a9cef06",
+    "semantic_hash": ""
+  },
+  "University Timetable and Classroom Management System/PresentationLayer/SchedulesForm.Loading.cs": {
+    "mtime": 1793349894.7336826,
+    "seen": 1793447234.1941905,
+    "ast_hash": "f0f7463299c55c95470c2845eb9c10d1",
+    "semantic_hash": ""
+  },
+  "University Timetable and Classroom Management System/PresentationLayer/SchedulesForm.Locks.cs": {
+    "mtime": 1792688319.5155642,
+    "seen": 1793032195.9278338,
+    "ast_hash": "04173f089357da24ca19c4f2a3eb65b0",
+    "semantic_hash": "04173f089357da24ca19c4f2a3eb65b0"
+  },
+  "University Timetable and Classroom Management System/PresentationLayer/SchedulesForm.Resizing.cs": {
+    "mtime": 1792877209.7625463,
+    "seen": 1793032195.9278345,
+    "ast_hash": "244af0cfe9f59271ca49117feb517828",
+    "semantic_hash": "244af0cfe9f59271ca49117feb517828"
+  },
+  "University Timetable and Classroom Management System/PresentationLayer/SchedulesForm.Timetable.cs": {
+    "mtime": 1793110710.6692817,
+    "seen": 1793447234.1941936,
+    "ast_hash": "f3893aa1791a490f146f6ba18d870f6e",
+    "semantic_hash": ""
+  },
+  "University Timetable and Classroom Management System/PresentationLayer/SchedulesForm.Validation.cs": {
+    "mtime": 1793350225.647254,
+    "seen": 1793447234.1941948,
+    "ast_hash": "0456c22bd8bdf302a69537c7f4123aa6",
+    "semantic_hash": ""
+  },
+  "University Timetable and Classroom Management System/PresentationLayer/SchedulesForm.cs": {
+    "mtime": 1792704175.271851,
+    "seen": 1793032195.927837,
+    "ast_hash": "199f407dbb442b4cf379dfcce185f1e2",
+    "semantic_hash": "199f407dbb442b4cf379dfcce185f1e2"
+  },
+  "University Timetable and Classroom Management System/PresentationLayer/SectionsForm.Designer.cs": {
+    "mtime": 1793110710.6919808,
+    "seen": 1793447234.1941965,
+    "ast_hash": "a6814812b25a640dfef4657d5d73da4f",
+    "semantic_hash": ""
+  },
+  "University Timetable and Classroom Management System/PresentationLayer/SectionsForm.cs": {
+    "mtime": 1792937996.1657398,
+    "seen": 1793032195.9278386,
+    "ast_hash": "334b2c8b9cdfc27b820d11685d80c0db",
+    "semantic_hash": "334b2c8b9cdfc27b820d11685d80c0db"
+  },
+  "University Timetable and Classroom Management System/PresentationLayer/StudyYearsForm.Designer.cs": {
+    "mtime": 1793110710.7019806,
+    "seen": 1793447234.1941984,
+    "ast_hash": "9061371e815dbc6ed76d5760cf6b7714",
+    "semantic_hash": ""
+  },
+  "University Timetable and Classroom Management System/PresentationLayer/StudyYearsForm.cs": {
+    "mtime": 1792937996.1670098,
+    "seen": 1793032195.9278398,
+    "ast_hash": "6c9aaf1eb195ae64aba2fdf74d8d1e04",
+    "semantic_hash": "6c9aaf1eb195ae64aba2fdf74d8d1e04"
+  },
+  "University Timetable and Classroom Management System/PresentationLayer/SubjectsForm.Designer.cs": {
+    "mtime": 1793110710.7196908,
+    "seen": 1793447234.1942,
+    "ast_hash": "76a41bb23ca5b52d325328922086e754",
+    "semantic_hash": ""
+  },
+  "University Timetable and Classroom Management System/PresentationLayer/SubjectsForm.cs": {
+    "mtime": 1793435080.013201,
+    "seen": 1793447234.1942008,
+    "ast_hash": "e753f3fdb7de8f057a2f93cf34cc12f7",
+    "semantic_hash": ""
+  },
+  "University Timetable and Classroom Management System/PresentationLayer/TimeDisplay.cs": {
+    "mtime": 1792680343.9347847,
+    "seen": 1793032195.927842,
+    "ast_hash": "6972180b51b69a28f9caa09f1cf5b747",
+    "semantic_hash": "6972180b51b69a28f9caa09f1cf5b747"
+  },
+  "University Timetable and Classroom Management System/PresentationLayer/TimeSlotsForm.Designer.cs": {
+    "mtime": 1793110710.7310398,
+    "seen": 1793447234.194203,
+    "ast_hash": "08d789ebb27d74606bcd5e9f6446fb86",
+    "semantic_hash": ""
+  },
+  "University Timetable and Classroom Management System/PresentationLayer/TimeSlotsForm.cs": {
+    "mtime": 1792937996.1680105,
+    "seen": 1793032195.927843,
+    "ast_hash": "0bf064e3fb86811eee90cad09f5121dc",
+    "semantic_hash": "0bf064e3fb86811eee90cad09f5121dc"
+  },
+  "University Timetable and Classroom Management System/PresentationLayer/TimetableAlternativesForm.Designer.cs": {
+    "mtime": 1793278904.9853022,
+    "seen": 1793447234.194209,
+    "ast_hash": "87211d91956d9be81d4c25dae3443004",
+    "semantic_hash": ""
+  },
+  "University Timetable and Classroom Management System/PresentationLayer/TimetableAlternativesForm.cs": {
+    "mtime": 1793276199.1485217,
+    "seen": 1793447234.1942098,
+    "ast_hash": "d7c6ea885369ce814a337cbc1d86d639",
+    "semantic_hash": ""
+  },
+  "University Timetable and Classroom Management System/PresentationLayer/UiMessages.cs": {
+    "mtime": 1792679573.028668,
+    "seen": 1793032195.927845,
+    "ast_hash": "20407357d1bd5d1915913905ee4be47c",
+    "semantic_hash": "20407357d1bd5d1915913905ee4be47c"
+  },
+  "University Timetable and Classroom Management System/PresentationLayer/ViewModels/ScheduleRow.cs": {
+    "mtime": 1792937996.1690104,
+    "seen": 1793032195.927846,
+    "ast_hash": "22522d862bb6d0300dc27b5d43fb82da",
+    "semantic_hash": "22522d862bb6d0300dc27b5d43fb82da"
+  },
+  "University Timetable and Classroom Management System/PresentationLayer/WindowSizing.cs": {
+    "mtime": 1791663365.0181174,
+    "seen": 1793032195.9278467,
+    "ast_hash": "d70799a55b099e88d8dd0077c0902414",
+    "semantic_hash": "d70799a55b099e88d8dd0077c0902414"
+  },
+  "University Timetable and Classroom Management System/Presentation_Layer.csproj": {
+    "mtime": 1793434731.349965,
+    "seen": 1793447234.1942134,
+    "ast_hash": "03ff8fc422ef0710bfdd3df312715978",
+    "semantic_hash": ""
+  },
+  "University Timetable and Classroom Management System/Program.cs": {
+    "mtime": 1792679178.480925,
+    "seen": 1793032195.9278479,
+    "ast_hash": "57ea3a5b48f553326459820adc445b7d",
+    "semantic_hash": "57ea3a5b48f553326459820adc445b7d"
+  },
+  "University Timetable and Classroom Management System/database-settings.json": {
+    "mtime": 1792774032.8643308,
+    "seen": 1793032195.9278483,
+    "ast_hash": "799a3573c63feb67da53525859e2a0be",
+    "semantic_hash": "799a3573c63feb67da53525859e2a0be"
+  },
+  "UniversityTimetable.API/ApiInfrastructure.cs": {
+    "mtime": 1792937996.1710112,
+    "seen": 1793032195.9278493,
+    "ast_hash": "ac4f2aff5ba6da7ccdfb0954a75b4a69",
+    "semantic_hash": "ac4f2aff5ba6da7ccdfb0954a75b4a69"
+  },
+  "UniversityTimetable.API/Controllers/AuthController.cs": {
+    "mtime": 1792235431.5666175,
+    "seen": 1793032195.92785,
+    "ast_hash": "63cfa7fa323599ae3b362d4a597d1481",
+    "semantic_hash": "63cfa7fa323599ae3b362d4a597d1481"
+  },
+  "UniversityTimetable.API/Controllers/FacultyPreferencesController.cs": {
+    "mtime": 1792937996.172263,
+    "seen": 1793032195.9278505,
+    "ast_hash": "8d379baaea57849d5aadfd6ec0c8ca6d",
+    "semantic_hash": "8d379baaea57849d5aadfd6ec0c8ca6d"
+  },
+  "UniversityTimetable.API/Controllers/ImportsController.cs": {
+    "mtime": 1792939606.2230456,
+    "seen": 1793032195.9278512,
+    "ast_hash": "04e348ee959719f62540d36d88b3efd2",
+    "semantic_hash": "04e348ee959719f62540d36d88b3efd2"
+  },
+  "UniversityTimetable.API/Controllers/OverviewController.cs": {
+    "mtime": 1792937996.1728704,
+    "seen": 1793032195.9278517,
+    "ast_hash": "60ecae84fa73b562a012a87afff23888",
+    "semantic_hash": "60ecae84fa73b562a012a87afff23888"
+  },
+  "UniversityTimetable.API/Controllers/ResourcesController.cs": {
+    "mtime": 1792235484.9211998,
+    "seen": 1793032195.9278526,
+    "ast_hash": "4650d3bafcc6608c36f9eda3111631b5",
+    "semantic_hash": "4650d3bafcc6608c36f9eda3111631b5"
+  },
+  "UniversityTimetable.API/Controllers/SchedulingController.cs": {
+    "mtime": 1792937996.1738522,
+    "seen": 1793032195.9278533,
+    "ast_hash": "0205fe745f3af4f95ac602734c5c2eee",
+    "semantic_hash": "0205fe745f3af4f95ac602734c5c2eee"
+  },
+  "UniversityTimetable.API/Controllers/TimetableAlternativesController.cs": {
+    "mtime": 1792538058.988713,
+    "seen": 1793032195.9278538,
+    "ast_hash": "3ba0804eee77feb42a9c96ae5f7ad1f1",
+    "semantic_hash": "3ba0804eee77feb42a9c96ae5f7ad1f1"
+  },
+  "UniversityTimetable.API/Controllers/TimetableBackupsController.cs": {
+    "mtime": 1792924925.6979668,
+    "seen": 1793032195.9278545,
+    "ast_hash": "7c66c721a2af11f41afa06df1d32f402",
+    "semantic_hash": "7c66c721a2af11f41afa06df1d32f402"
+  },
+  "UniversityTimetable.API/Dtos.cs": {
+    "mtime": 1792937996.1748724,
+    "seen": 1793032195.9278553,
+    "ast_hash": "199606c70b9a5f8a34cb8c0ee43966f3",
+    "semantic_hash": "199606c70b9a5f8a34cb8c0ee43966f3"
+  },
+  "UniversityTimetable.API/Program.cs": {
+    "mtime": 1792538058.9902127,
+    "seen": 1793032195.9278562,
+    "ast_hash": "ea986a8d97107df61788b9fe4b5d1abf",
+    "semantic_hash": "ea986a8d97107df61788b9fe4b5d1abf"
+  },
+  "UniversityTimetable.API/Properties/launchSettings.json": {
+    "mtime": 1792235431.5641055,
+    "seen": 1793032195.9278567,
+    "ast_hash": "4709fef68907e1584538f5896c393004",
+    "semantic_hash": "4709fef68907e1584538f5896c393004"
+  },
+  "UniversityTimetable.API/ResourceCatalog.cs": {
+    "mtime": 1792937996.1758707,
+    "seen": 1793032195.9278574,
+    "ast_hash": "906c07505d69870a1f83468cf97c27b9",
+    "semantic_hash": "906c07505d69870a1f83468cf97c27b9"
+  },
+  "UniversityTimetable.API/UniversityTimetable.API.csproj": {
+    "mtime": 1792937996.1758707,
+    "seen": 1793032195.9278605,
+    "ast_hash": "c950deeb07e46433ca3dba3c3423724c",
+    "semantic_hash": "c950deeb07e46433ca3dba3c3423724c"
+  },
+  "UniversityTimetable.API/appsettings.json": {
+    "mtime": 1792235431.5641055,
+    "seen": 1793032195.927861,
+    "ast_hash": "119cc0cfecf60c6656648ff8b4d40e71",
+    "semantic_hash": "119cc0cfecf60c6656648ff8b4d40e71"
+  },
+  "UniversityTimetable.API/wwwroot/js/alternatives.js": {
+    "mtime": 1792937996.1792133,
+    "seen": 1793032195.9278617,
+    "ast_hash": "2ba23bfc8a2664a5b61f329f6f47473e",
+    "semantic_hash": "2ba23bfc8a2664a5b61f329f6f47473e"
+  },
+  "UniversityTimetable.API/wwwroot/js/api.js": {
+    "mtime": 1792937996.1801138,
+    "seen": 1793032195.9278626,
+    "ast_hash": "2ecfa91a50ff8d942d2dae79c96aa594",
+    "semantic_hash": "2ecfa91a50ff8d942d2dae79c96aa594"
+  },
+  "UniversityTimetable.API/wwwroot/js/app.js": {
+    "mtime": 1792939637.7790115,
+    "seen": 1793032195.9278634,
+    "ast_hash": "a94c5481d0360561b5de52939e5a0a5b",
+    "semantic_hash": "a94c5481d0360561b5de52939e5a0a5b"
+  },
+  "UniversityTimetable.API/wwwroot/js/data-transfer.js": {
+    "mtime": 1792939606.2230456,
+    "seen": 1793032195.9278638,
+    "ast_hash": "718a56b0339bbd2dd4021c420d6b3539",
+    "semantic_hash": "718a56b0339bbd2dd4021c420d6b3539"
+  },
+  "UniversityTimetable.API/wwwroot/js/day-preferences.js": {
+    "mtime": 1792925899.3828201,
+    "seen": 1793032195.9278646,
+    "ast_hash": "b89ba2cb9ca93315ecb60f0c2ea15e02",
+    "semantic_hash": "b89ba2cb9ca93315ecb60f0c2ea15e02"
+  },
+  "UniversityTimetable.API/wwwroot/js/preferences.js": {
+    "mtime": 1792536984.6596777,
+    "seen": 1793032195.927865,
+    "ast_hash": "b5fc0155ec11f0771a6ec424387238f9",
+    "semantic_hash": "b5fc0155ec11f0771a6ec424387238f9"
+  },
+  "UniversityTimetable.API/wwwroot/js/schema.js": {
+    "mtime": 1792937996.1811557,
+    "seen": 1793032195.9278657,
+    "ast_hash": "da6e00a8038061352fafe55ee723776e",
+    "semantic_hash": "da6e00a8038061352fafe55ee723776e"
+  },
+  "UniversityTimetable.API/wwwroot/service-worker.js": {
+    "mtime": 1792937996.1828878,
+    "seen": 1793032195.9278665,
+    "ast_hash": "bc2c56de192320809baecd17d9022aee",
+    "semantic_hash": "bc2c56de192320809baecd17d9022aee"
+  },
+  "demo/netlify/api.js": {
+    "mtime": 1792945339.7045207,
+    "seen": 1793032195.9278672,
+    "ast_hash": "e8aefe14fb68e08d263f54d2422745cb",
+    "semantic_hash": "e8aefe14fb68e08d263f54d2422745cb"
+  },
+  "demo/netlify/demo-ui.js": {
+    "mtime": 1792945339.7045207,
+    "seen": 1793032195.927868,
+    "ast_hash": "b5e9938944df2c9c05b45a5249306232",
+    "semantic_hash": "b5e9938944df2c9c05b45a5249306232"
+  },
+  "demo/netlify/mock-data.js": {
+    "mtime": 1792945308.9051957,
+    "seen": 1793032195.9278686,
+    "ast_hash": "f51fd738977d9a7a7d0d2d7bd64569eb",
+    "semantic_hash": "f51fd738977d9a7a7d0d2d7bd64569eb"
+  },
+  "docs/FinalTimetable2026/faculty-cleanup-plan.json": {
+    "mtime": 1792273607.8710096,
+    "seen": 1793032195.927869,
+    "ast_hash": "de583118bdea904f2218f681d4262cf7",
+    "semantic_hash": "de583118bdea904f2218f681d4262cf7"
+  },
+  "docs/FinalTimetable2026/plan.json": {
+    "mtime": 1792272583.8713377,
+    "seen": 1793032195.92787,
+    "ast_hash": "37dc7af9f8fbc83672d73943d14d69d2",
+    "semantic_hash": "37dc7af9f8fbc83672d73943d14d69d2"
+  },
+  "docs/FinalTimetable2026/source-transcription.json": {
+    "mtime": 1792272583.8713377,
+    "seen": 1793032195.9278708,
+    "ast_hash": "62e52fe902fce0c5404db8adf1ca7f04",
+    "semantic_hash": "62e52fe902fce0c5404db8adf1ca7f04"
+  },
+  "docs/Verification/BllReadability/file-inventory.json": {
+    "mtime": 1792775390.6741698,
+    "seen": 1793032195.9278712,
+    "ast_hash": "dc9ce05ea45a27303f98ccd30d2f0ce0",
+    "semantic_hash": "dc9ce05ea45a27303f98ccd30d2f0ce0"
+  },
+  "docs/Verification/BllReadability/method-inventory.json": {
+    "mtime": 1792775275.8385885,
+    "seen": 1793032195.927872,
+    "ast_hash": "9e0dfca71fab739feed467a761fdb019",
+    "semantic_hash": "9e0dfca71fab739feed467a761fdb019"
+  },
+  "docs/Verification/DalAudit/baseline-checks.json": {
+    "mtime": 1792772556.2288606,
+    "seen": 1793032195.9278724,
+    "ast_hash": "1afbe7773873dc90c6b2512db49f2302",
+    "semantic_hash": "1afbe7773873dc90c6b2512db49f2302"
+  },
+  "docs/Verification/DalAudit/batch-a-checks.json": {
+    "mtime": 1792773043.2150097,
+    "seen": 1793032195.9278734,
+    "ast_hash": "1afbe7773873dc90c6b2512db49f2302",
+    "semantic_hash": "1afbe7773873dc90c6b2512db49f2302"
+  },
+  "docs/Verification/DalAudit/batch-a-dependencies-before.json": {
+    "mtime": 1792773002.8685758,
+    "seen": 1793032195.9278738,
+    "ast_hash": "737ddaf26c3cfa8304f8b0a39b88588e",
+    "semantic_hash": "737ddaf26c3cfa8304f8b0a39b88588e"
+  },
+  "docs/Verification/DalAudit/batch-a-dependency-comparison.json": {
+    "mtime": 1792773031.1592648,
+    "seen": 1793032195.9278748,
+    "ast_hash": "231e5777e88afed84877b0360082fc5d",
+    "semantic_hash": "231e5777e88afed84877b0360082fc5d"
+  },
+  "docs/Verification/DalAudit/dal-file-inventory.json": {
+    "mtime": 1792772637.7019422,
+    "seen": 1793032195.9278753,
+    "ast_hash": "0df85bf1412b8c9790466ca1e9e28ffc",
+    "semantic_hash": "0df85bf1412b8c9790466ca1e9e28ffc"
+  },
+  "docs/Verification/DesignerMigration/checks.json": {
+    "mtime": 1792855286.7472355,
+    "seen": 1793032195.9278772,
+    "ast_hash": "ec8d8edb3b2bfc2a0d125c6abca278e6",
+    "semantic_hash": "ec8d8edb3b2bfc2a0d125c6abca278e6"
+  },
+  "docs/Verification/PWA/api-results.json": {
+    "mtime": 1792236369.902795,
+    "seen": 1793032195.927878,
+    "ast_hash": "f897b19eb5d53c53585b31686d618bb8",
+    "semantic_hash": "f897b19eb5d53c53585b31686d618bb8"
+  },
+  "docs/Verification/PWA/browser-results.json": {
+    "mtime": 1792236368.944206,
+    "seen": 1793032195.9278786,
+    "ast_hash": "f6b731c5eda4f38653564ab1778c6769",
+    "semantic_hash": "f6b731c5eda4f38653564ab1778c6769"
+  },
+  "docs/Verification/PWA/current-plan.json": {
+    "mtime": 1792236456.690373,
+    "seen": 1793032195.9278793,
+    "ast_hash": "dd6fb3b8b878cc6db1911d3e805a47b1",
+    "semantic_hash": "dd6fb3b8b878cc6db1911d3e805a47b1"
+  },
+  "docs/Verification/PresentationBllRefactoring/baseline-results.json": {
+    "mtime": 1792750160.8876579,
+    "seen": 1793032195.92788,
+    "ast_hash": "16d601fb00fc385cb87fb2f345e38a1f",
+    "semantic_hash": "16d601fb00fc385cb87fb2f345e38a1f"
+  },
+  "docs/Verification/PresentationBllRefactoring/final-validation.json": {
+    "mtime": 1792750160.9099429,
+    "seen": 1793032195.9278808,
+    "ast_hash": "3852c78c06c49933b45fa2e72dc7dbe2",
+    "semantic_hash": "3852c78c06c49933b45fa2e72dc7dbe2"
+  },
+  "docs/Verification/PresentationBllRefactoring/pdf-render-comparison.json": {
+    "mtime": 1792750160.927254,
+    "seen": 1793032195.9278812,
+    "ast_hash": "e85eedca6e438daddc3e0ee244399523",
+    "semantic_hash": "e85eedca6e438daddc3e0ee244399523"
+  },
+  "docs/Verification/PresentationBllRefactoring/production-data-after.json": {
+    "mtime": 1792750160.927254,
+    "seen": 1793032195.927882,
+    "ast_hash": "13567e89fbb77b3d30940a51680890fc",
+    "semantic_hash": "13567e89fbb77b3d30940a51680890fc"
+  },
+  "docs/Verification/PresentationBllRefactoring/production-data-before.json": {
+    "mtime": 1792750160.927254,
+    "seen": 1793032195.9278824,
+    "ast_hash": "13567e89fbb77b3d30940a51680890fc",
+    "semantic_hash": "13567e89fbb77b3d30940a51680890fc"
+  },
+  "docs/Verification/PresentationBllRefactoring/protected-source-hashes.json": {
+    "mtime": 1792750160.9549165,
+    "seen": 1793032195.9278831,
+    "ast_hash": "6f8a88a6952c42320a41d9c9ed266a40",
+    "semantic_hash": "6f8a88a6952c42320a41d9c9ed266a40"
+  },
+  "docs/Verification/PresentationBllRefactoring/runtime-layout-comparison.json": {
+    "mtime": 1792750160.975836,
+    "seen": 1793032195.9278839,
+    "ast_hash": "af5ee9c5c7620cff1b986c0f3b285aa6",
+    "semantic_hash": "af5ee9c5c7620cff1b986c0f3b285aa6"
+  },
+  "docs/Verification/PresentationBllRefactoring/source-audit-after.json": {
+    "mtime": 1792750160.9787824,
+    "seen": 1793032195.9278846,
+    "ast_hash": "ff2797ebb1b22b04a258f18b78441f63",
+    "semantic_hash": "ff2797ebb1b22b04a258f18b78441f63"
+  },
+  "docs/Verification/PresentationBllRefactoring/source-audit-before.json": {
+    "mtime": 1792750160.9787824,
+    "seen": 1793032195.9278853,
+    "ast_hash": "f3b6c73df40e511a92a66bd081bbd497",
+    "semantic_hash": "f3b6c73df40e511a92a66bd081bbd497"
+  },
+  "docs/Verification/PresentationBllRefactoring/unused-symbol-report.json": {
+    "mtime": 1792750160.9976225,
+    "seen": 1793032195.9278858,
+    "ast_hash": "d751713988987e9331980363e24189ce",
+    "semantic_hash": "d751713988987e9331980363e24189ce"
+  },
+  "docs/Verification/PresentationBllRefactoring/visual-comparison.json": {
+    "mtime": 1792750160.9965272,
+    "seen": 1793032195.9278862,
+    "ast_hash": "1cde309bf1c2be36060d6a5fff47183d",
+    "semantic_hash": "1cde309bf1c2be36060d6a5fff47183d"
+  },
+  "docs/Verification/UiOpening/layout-checks.json": {
+    "mtime": 1792877238.8402798,
+    "seen": 1793032195.9278872,
+    "ast_hash": "543fd82057544ec58ae291f77e0a8014",
+    "semantic_hash": "543fd82057544ec58ae291f77e0a8014"
+  },
+  "docs/Verification/UnusedCleanup/exchange-debug.json": {
+    "mtime": 1791996919.2281103,
+    "seen": 1793032195.927888,
+    "ast_hash": "f6f4fa9c91648b8495bf58345099a63d",
+    "semantic_hash": "f6f4fa9c91648b8495bf58345099a63d"
+  },
+  "docs/Verification/UnusedCleanup/exchange-release.json": {
+    "mtime": 1791996963.3137457,
+    "seen": 1793032195.9278884,
+    "ast_hash": "f387c456b91786889478a9db0de477cc",
+    "semantic_hash": "f387c456b91786889478a9db0de477cc"
+  },
+  "docs/Verification/UnusedCleanup/label-lifecycle-release.json": {
+    "mtime": 1791996954.7288384,
+    "seen": 1793032195.927889,
+    "ast_hash": "4aba98bccb5237f3e8f28c983eaa21e4",
+    "semantic_hash": "4aba98bccb5237f3e8f28c983eaa21e4"
+  },
+  "docs/Verification/UnusedCleanup/navigation-release.json": {
+    "mtime": 1791997007.06624,
+    "seen": 1793032195.9278898,
+    "ast_hash": "5b72b5d2ba913cd9ca8fe7726a8cce45",
+    "semantic_hash": "5b72b5d2ba913cd9ca8fe7726a8cce45"
+  },
+  "docs/Verification/UnusedCleanup/preserved-resources.json": {
+    "mtime": 1791997013.3753777,
+    "seen": 1793032195.9278905,
+    "ast_hash": "0323e5db7d825cca5c93b58b8b4758b0",
+    "semantic_hash": "0323e5db7d825cca5c93b58b8b4758b0"
+  },
+  "docs/Verification/UnusedCleanup/regression-debug.json": {
+    "mtime": 1791996920.7855422,
+    "seen": 1793032195.927891,
+    "ast_hash": "6470e5c9640ca3d3281eb80ff9c4d561",
+    "semantic_hash": "6470e5c9640ca3d3281eb80ff9c4d561"
+  },
+  "docs/Verification/UnusedCleanup/regression-release.json": {
+    "mtime": 1791996965.654844,
+    "seen": 1793032195.9278917,
+    "ast_hash": "6470e5c9640ca3d3281eb80ff9c4d561",
+    "semantic_hash": "6470e5c9640ca3d3281eb80ff9c4d561"
+  },
+  "tests/ApplicationAudit/ApplicationAudit.csproj": {
+    "mtime": 1792015750.6440003,
+    "seen": 1793032195.9278924,
+    "ast_hash": "0b462f9c3085868db288b957383bad54",
+    "semantic_hash": "0b462f9c3085868db288b957383bad54"
+  },
+  "tests/ApplicationAudit/Program.cs": {
+    "mtime": 1792937996.1862042,
+    "seen": 1793032195.9278932,
+    "ast_hash": "fc6746189c3e3be746c8ca5bd1ea6b04",
+    "semantic_hash": "fc6746189c3e3be746c8ca5bd1ea6b04"
+  },
+  "tests/ArabicInterfaces/ArabicInterfaces.csproj": {
+    "mtime": 1792679376.8079917,
+    "seen": 1793032195.927894,
+    "ast_hash": "0dc373f2b13e01fc2c23075532a57d34",
+    "semantic_hash": "0dc373f2b13e01fc2c23075532a57d34"
+  },
+  "tests/ArabicInterfaces/Program.cs": {
+    "mtime": 1792937996.1871212,
+    "seen": 1793032195.9278946,
+    "ast_hash": "80e7dfbd4f9b0e8e681e1eb3c26bf724",
+    "semantic_hash": "80e7dfbd4f9b0e8e681e1eb3c26bf724"
+  },
+  "tests/AssignmentLectureTypes/AssignmentLectureTypes.csproj": {
+    "mtime": 1792708204.1979485,
+    "seen": 1793032195.9278953,
+    "ast_hash": "2b1e36c975ff9c80e6543895798b2b78",
+    "semantic_hash": "2b1e36c975ff9c80e6543895798b2b78"
+  },
+  "tests/AssignmentLectureTypes/Program.cs": {
+    "mtime": 1792781026.3561134,
+    "seen": 1793032195.9278958,
+    "ast_hash": "ececd19663c4443ea71135d152ff8b2a",
+    "semantic_hash": "ececd19663c4443ea71135d152ff8b2a"
+  },
+  "tests/AssignmentScopes/AssignmentScopes.csproj": {
+    "mtime": 1792703829.3615367,
+    "seen": 1793032195.9278965,
+    "ast_hash": "ae8b556f859289dbaeec704c9ccb2070",
+    "semantic_hash": "ae8b556f859289dbaeec704c9ccb2070"
+  },
+  "tests/AssignmentScopes/Program.cs": {
+    "mtime": 1793113996.1656613,
+    "seen": 1793447234.1942804,
+    "ast_hash": "de9f9906dbd5682a286e0eff8f29a0c4",
+    "semantic_hash": ""
+  },
+  "tests/DatabaseConfiguration/DatabaseConfiguration.csproj": {
+    "mtime": 1792774066.8953085,
+    "seen": 1793032195.927898,
+    "ast_hash": "9de27d0ac5d160c9a6b0ccd3f2ca6794",
+    "semantic_hash": "9de27d0ac5d160c9a6b0ccd3f2ca6794"
+  },
+  "tests/DatabaseConfiguration/Program.cs": {
+    "mtime": 1792774096.5604134,
+    "seen": 1793032195.9278994,
+    "ast_hash": "f7fd07bfddeb192afbc27928f7f52a2d",
+    "semantic_hash": "f7fd07bfddeb192afbc27928f7f52a2d"
+  },
+  "tests/DesignerCompatibility/DesignerCompatibility.csproj": {
+    "mtime": 1791663115.583135,
+    "seen": 1793032195.9279,
+    "ast_hash": "230c01f60eff22f422291a6696d1710f",
+    "semantic_hash": "230c01f60eff22f422291a6696d1710f"
+  },
+  "tests/DesignerCompatibility/Program.cs": {
+    "mtime": 1792937996.188156,
+    "seen": 1793032195.9279008,
+    "ast_hash": "a2faa0d0c43e872741e56053f92053f6",
+    "semantic_hash": "a2faa0d0c43e872741e56053f92053f6"
+  },
+  "tests/DesignerLifecycle/DesignerLifecycle.csproj": {
+    "mtime": 1791647747.2692802,
+    "seen": 1793032195.9279015,
+    "ast_hash": "0dc373f2b13e01fc2c23075532a57d34",
+    "semantic_hash": "0dc373f2b13e01fc2c23075532a57d34"
+  },
+  "tests/DesignerLifecycle/Program.cs": {
+    "mtime": 1792682800.8988135,
+    "seen": 1793032195.9279022,
+    "ast_hash": "d9b4fb636dbd02ecbbf4c2684b30bafb",
+    "semantic_hash": "d9b4fb636dbd02ecbbf4c2684b30bafb"
+  },
+  "tests/DesignerMigration/DesignerMigration.csproj": {
+    "mtime": 1792854183.7875485,
+    "seen": 1793032195.9279027,
+    "ast_hash": "0dc373f2b13e01fc2c23075532a57d34",
+    "semantic_hash": "0dc373f2b13e01fc2c23075532a57d34"
+  },
+  "tests/DesignerMigration/Program.cs": {
+    "mtime": 1793433689.5894988,
+    "seen": 1793447234.1942875,
+    "ast_hash": "302918f0d0e664762ec79f658c48a30c",
+    "semantic_hash": ""
+  },
+  "tests/ExcelImport/ExcelImportTests.csproj": {
+    "mtime": 1792415202.6519063,
+    "seen": 1793032195.9279044,
+    "ast_hash": "5232bcc54183c684010195f44d29d81d",
+    "semantic_hash": "5232bcc54183c684010195f44d29d81d"
+  },
+  "tests/ExcelImport/Program.cs": {
+    "mtime": 1793433689.5809772,
+    "seen": 1793447234.1942918,
+    "ast_hash": "4f2c8e443c5acb1282e902b74aad39c0",
+    "semantic_hash": ""
+  },
+  "tests/FacultyPreferences/AlternativesChecks.cs": {
+    "mtime": 1792537998.6096802,
+    "seen": 1793032195.9279056,
+    "ast_hash": "5710e132c482529f3fb4387e731bb1a1",
+    "semantic_hash": "5710e132c482529f3fb4387e731bb1a1"
+  },
+  "tests/FacultyPreferences/AlternativesUi.cs": {
+    "mtime": 1792538206.242371,
+    "seen": 1793032195.9279072,
+    "ast_hash": "a3c8c3f8488284b0625aa78ddf05b77c",
+    "semantic_hash": "a3c8c3f8488284b0625aa78ddf05b77c"
+  },
+  "tests/FacultyPreferences/DayPreferenceChecks.cs": {
+    "mtime": 1792618270.7049377,
+    "seen": 1793032195.927908,
+    "ast_hash": "c4e530eea0cc7fe43a1461c997faf525",
+    "semantic_hash": "c4e530eea0cc7fe43a1461c997faf525"
+  },
+  "tests/FacultyPreferences/FacultyPreferences.csproj": {
+    "mtime": 1792536338.5537105,
+    "seen": 1793032195.9279087,
+    "ast_hash": "0b462f9c3085868db288b957383bad54",
+    "semantic_hash": "0b462f9c3085868db288b957383bad54"
+  },
+  "tests/FacultyPreferences/Program.cs": {
+    "mtime": 1793276369.0762086,
+    "seen": 1793447234.1942961,
+    "ast_hash": "ac7fb106ea40c92684a5bcb2e88a1b0a",
+    "semantic_hash": ""
+  },
+  "tests/FacultyPreferences/SectionDayLimitChecks.cs": {
+    "mtime": 1792688962.2729394,
+    "seen": 1793032195.9279099,
+    "ast_hash": "789018e482f70d16b80f19e3cbdf4c44",
+    "semantic_hash": "789018e482f70d16b80f19e3cbdf4c44"
+  },
+  "tests/FacultyPreferences/WebSmoke.cs": {
+    "mtime": 1792538128.1597962,
+    "seen": 1793032195.9279103,
+    "ast_hash": "28ee673b8a34230d72b3f9854ffa7b57",
+    "semantic_hash": "28ee673b8a34230d72b3f9854ffa7b57"
+  },
+  "tests/FacultyScheduleEditor/FacultyScheduleEditor.csproj": {
+    "mtime": 1792430130.0564933,
+    "seen": 1793032195.9279113,
+    "ast_hash": "2c9c95cdfee857e8fc7d91e97a3d8473",
+    "semantic_hash": "2c9c95cdfee857e8fc7d91e97a3d8473"
+  },
+  "tests/FacultyScheduleEditor/Program.cs": {
+    "mtime": 1792430848.779314,
+    "seen": 1793032195.9279118,
+    "ast_hash": "15f659d2f0a8a8b7c82e11196141640d",
+    "semantic_hash": "15f659d2f0a8a8b7c82e11196141640d"
+  },
+  "tests/FinalTimetableImport/FinalTimetableImport.csproj": {
+    "mtime": 1792272344.1423984,
+    "seen": 1793032195.9279125,
+    "ast_hash": "f99b7ac888f23b4f2d0c8680aabfb17f",
+    "semantic_hash": "f99b7ac888f23b4f2d0c8680aabfb17f"
+  },
+  "tests/FinalTimetableImport/Program.cs": {
+    "mtime": 1792272505.3588004,
+    "seen": 1793032195.9279132,
+    "ast_hash": "46809709299c5475870599aea3865b3e",
+    "semantic_hash": "46809709299c5475870599aea3865b3e"
+  },
+  "tests/FourthYearPractical/FourthYearPractical.csproj": {
+    "mtime": 1792702773.4839585,
+    "seen": 1793032195.927914,
+    "ast_hash": "ae8b556f859289dbaeec704c9ccb2070",
+    "semantic_hash": "ae8b556f859289dbaeec704c9ccb2070"
+  },
+  "tests/FourthYearPractical/Program.cs": {
+    "mtime": 1792703015.8312945,
+    "seen": 1793032195.9279144,
+    "ast_hash": "86fbe36616feab10d7faa89cea165c42",
+    "semantic_hash": "86fbe36616feab10d7faa89cea165c42"
+  },
+  "tests/FullGenerationPreferences/FullGenerationPreferences.csproj": {
+    "mtime": 1792711024.0233996,
+    "seen": 1793032195.927915,
+    "ast_hash": "9605c779f65262f122196941b48d5403",
+    "semantic_hash": "9605c779f65262f122196941b48d5403"
+  },
+  "tests/FullGenerationPreferences/Program.cs": {
+    "mtime": 1792711134.2367587,
+    "seen": 1793032195.9279158,
+    "ast_hash": "3ff15848d3d37d5a9ec63a4822daabf8",
+    "semantic_hash": "3ff15848d3d37d5a9ec63a4822daabf8"
+  },
+  "tests/GenerationDiagnostics/GenerationDiagnostics.csproj": {
+    "mtime": 1792687620.3167298,
+    "seen": 1793032195.9279165,
+    "ast_hash": "f99b7ac888f23b4f2d0c8680aabfb17f",
+    "semantic_hash": "f99b7ac888f23b4f2d0c8680aabfb17f"
+  },
+  "tests/GenerationDiagnostics/Program.cs": {
+    "mtime": 1792688759.047825,
+    "seen": 1793032195.9279172,
+    "ast_hash": "8cfc5ed22145168b9b3ff4e6ff453ce1",
+    "semantic_hash": "8cfc5ed22145168b9b3ff4e6ff453ce1"
+  },
+  "tests/ImportedTimetableRepair/ImportedTimetableRepair.csproj": {
+    "mtime": 1792517278.1625373,
+    "seen": 1793032195.9279177,
+    "ast_hash": "17b53e00ffc3bed34ff6c450dede2b03",
+    "semantic_hash": "17b53e00ffc3bed34ff6c450dede2b03"
+  },
+  "tests/ImportedTimetableRepair/Program.cs": {
+    "mtime": 1792517688.7670135,
+    "seen": 1793032195.9279184,
+    "ast_hash": "f9762931a606b3d49bc690a3e52dbced",
+    "semantic_hash": "f9762931a606b3d49bc690a3e52dbced"
+  },
+  "tests/IncrementalGeneration/IncrementalGeneration.csproj": {
+    "mtime": 1792504734.7430482,
+    "seen": 1793032195.9279191,
+    "ast_hash": "b8499410f7f0582b4f6f83a66a031f0b",
+    "semantic_hash": "b8499410f7f0582b4f6f83a66a031f0b"
+  },
+  "tests/IncrementalGeneration/Program.cs": {
+    "mtime": 1792937996.1891565,
+    "seen": 1793032195.9279196,
+    "ast_hash": "0a3032ee06e8f4b8f1d33d3eeff50f7d",
+    "semantic_hash": "0a3032ee06e8f4b8f1d33d3eeff50f7d"
+  },
+  "tests/ManualFacultySelection/ManualFacultySelection.csproj": {
+    "mtime": 1792015354.3485818,
+    "seen": 1793032195.9279203,
+    "ast_hash": "5232bcc54183c684010195f44d29d81d",
+    "semantic_hash": "5232bcc54183c684010195f44d29d81d"
+  },
+  "tests/ManualFacultySelection/Program.cs": {
+    "mtime": 1792015354.3840933,
+    "seen": 1793032195.927921,
+    "ast_hash": "c8b55b2abecce211d8e5436e3e881551",
+    "semantic_hash": "c8b55b2abecce211d8e5436e3e881551"
+  },
+  "tests/NamedAssignmentImport/NamedAssignmentImport.csproj": {
+    "mtime": 1792847036.4479325,
+    "seen": 1793032195.927922,
+    "ast_hash": "7a591822b6a5723c669de295e95c97e2",
+    "semantic_hash": "7a591822b6a5723c669de295e95c97e2"
+  },
+  "tests/NamedAssignmentImport/Program.cs": {
+    "mtime": 1793433793.8003712,
+    "seen": 1793447234.194314,
+    "ast_hash": "2bf0ab783ef6b17d7b9c828ac3994a10",
+    "semantic_hash": ""
+  },
+  "tests/NativeSchedulingRuntime/Verify-Deployment.ps1": {
+    "mtime": 1792516129.1491687,
+    "seen": 1793032195.9279232,
+    "ast_hash": "8dae703784ba63d679147bb6c983cb3b",
+    "semantic_hash": "8dae703784ba63d679147bb6c983cb3b"
+  },
+  "tests/NetlifyDemo/browser.mjs": {
+    "mtime": 1792945401.8121982,
+    "seen": 1793032195.927924,
+    "ast_hash": "b5a5cba31d64e23303010b8bed729fe5",
+    "semantic_hash": "b5a5cba31d64e23303010b8bed729fe5"
+  },
+  "tests/NetlifyDemo/check.mjs": {
+    "mtime": 1792945401.8121982,
+    "seen": 1793032195.9279244,
+    "ast_hash": "f17f3681d3c56320d1d67568017a1a2e",
+    "semantic_hash": "f17f3681d3c56320d1d67568017a1a2e"
+  },
+  "tests/PdfExport/PdfExport.csproj": {
+    "mtime": 1791892948.3443272,
+    "seen": 1793032195.9279253,
+    "ast_hash": "72b7cc51cf3b0cb27b585d6c9039abd8",
+    "semantic_hash": "72b7cc51cf3b0cb27b585d6c9039abd8"
+  },
+  "tests/PdfExport/Program.cs": {
+    "mtime": 1792937996.1901557,
+    "seen": 1793032195.9279258,
+    "ast_hash": "29f588dda5192ed058379d32a31a50ea",
+    "semantic_hash": "29f588dda5192ed058379d32a31a50ea"
+  },
+  "tests/PdfImport/PdfImport.csproj": {
+    "mtime": 1792516241.7695515,
+    "seen": 1793032195.9279265,
+    "ast_hash": "5232bcc54183c684010195f44d29d81d",
+    "semantic_hash": "5232bcc54183c684010195f44d29d81d"
+  },
+  "tests/PdfImport/Program.cs": {
+    "mtime": 1793433689.5864995,
+    "seen": 1793447234.1943219,
+    "ast_hash": "8f9536973b71bbc31ce26d7b9e91f324",
+    "semantic_hash": ""
+  },
+  "tests/PracticalExchange/GeneratorProbe.cs": {
+    "mtime": 1791994897.8080792,
+    "seen": 1793032195.9279277,
+    "ast_hash": "dbd244695db20e137cb7ffa082778e65",
+    "semantic_hash": "dbd244695db20e137cb7ffa082778e65"
+  },
+  "tests/PracticalExchange/PracticalExchange.csproj": {
+    "mtime": 1791663637.7732663,
+    "seen": 1793032195.9279282,
+    "ast_hash": "de3924cda45db28d9de3cc2d7c8a3208",
+    "semantic_hash": "de3924cda45db28d9de3cc2d7c8a3208"
+  },
+  "tests/PracticalExchange/PracticalExchangeChecks.cs": {
+    "mtime": 1791995755.1746428,
+    "seen": 1793032195.9279292,
+    "ast_hash": "ad0e68917f8002be2b856781df8e5418",
+    "semantic_hash": "ad0e68917f8002be2b856781df8e5418"
+  },
+  "tests/PracticalExchange/Program.cs": {
+    "mtime": 1792016197.0503142,
+    "seen": 1793032195.9279296,
+    "ast_hash": "550a8719f03f4db96351ef073c3f30cf",
+    "semantic_hash": "550a8719f03f4db96351ef073c3f30cf"
+  },
+  "tests/PresentationBllRefactoring/PresentationBllRefactoring.csproj": {
+    "mtime": 1792748714.4052136,
+    "seen": 1793032195.9279304,
+    "ast_hash": "69114c23c0b96bc70e0a38496ff094e8",
+    "semantic_hash": "69114c23c0b96bc70e0a38496ff094e8"
+  },
+  "tests/PresentationBllRefactoring/Program.cs": {
+    "mtime": 1792748746.537398,
+    "seen": 1793032195.9279308,
+    "ast_hash": "7ff0bb495aa48f904a25d2f378bc104f",
+    "semantic_hash": "7ff0bb495aa48f904a25d2f378bc104f"
+  },
+  "tests/ResponsiveLayout/Program.cs": {
+    "mtime": 1792937996.1911566,
+    "seen": 1793032195.9279315,
+    "ast_hash": "ecd1714b13c679d781d87c8f3a980511",
+    "semantic_hash": "ecd1714b13c679d781d87c8f3a980511"
+  },
+  "tests/ResponsiveLayout/ResponsiveLayout.csproj": {
+    "mtime": 1791666162.867545,
+    "seen": 1793032195.9279325,
+    "ast_hash": "ae305cc4a44563ab12608424f97eeee9",
+    "semantic_hash": "ae305cc4a44563ab12608424f97eeee9"
+  },
+  "tests/RowNumbering/Program.cs": {
+    "mtime": 1792937996.1911566,
+    "seen": 1793032195.927933,
+    "ast_hash": "bcfda02e8d18a05f41a99760cfd83a48",
+    "semantic_hash": "bcfda02e8d18a05f41a99760cfd83a48"
+  },
+  "tests/RowNumbering/RowNumbering.csproj": {
+    "mtime": 1791647556.5004961,
+    "seen": 1793032195.9279337,
+    "ast_hash": "8028935d4b5ca55eae2d2a62c26c1724",
+    "semantic_hash": "8028935d4b5ca55eae2d2a62c26c1724"
+  },
+  "tests/SchedulePdfExport/Program.cs": {
+    "mtime": 1792273773.7969675,
+    "seen": 1793032195.9279342,
+    "ast_hash": "b0c52c9f27b1d27a128e022a5a9299ce",
+    "semantic_hash": "b0c52c9f27b1d27a128e022a5a9299ce"
+  },
+  "tests/SchedulePdfExport/SchedulePdfExport.csproj": {
+    "mtime": 1792273773.7969675,
+    "seen": 1793032195.927935,
+    "ast_hash": "f99b7ac888f23b4f2d0c8680aabfb17f",
+    "semantic_hash": "f99b7ac888f23b4f2d0c8680aabfb17f"
+  },
+  "tests/SchedulePdfExport/verify.py": {
+    "mtime": 1792273847.6124535,
+    "seen": 1793032195.9279356,
+    "ast_hash": "78bd3726677ca0f58f4f260409c59afb",
+    "semantic_hash": "78bd3726677ca0f58f4f260409c59afb"
+  },
+  "tests/SchedulingCapacity/Program.cs": {
+    "mtime": 1792017135.1851969,
+    "seen": 1793032195.927936,
+    "ast_hash": "50bb6c74666fdb7cf3929f64c63ce59f",
+    "semantic_hash": "50bb6c74666fdb7cf3929f64c63ce59f"
+  },
+  "tests/SchedulingCapacity/SchedulingCapacity.csproj": {
+    "mtime": 1792016925.5870268,
+    "seen": 1793032195.9279368,
+    "ast_hash": "bb70c89d43197952cca126f6730a3b81",
+    "semantic_hash": "bb70c89d43197952cca126f6730a3b81"
+  },
+  "tests/SubjectLectureCounts/Program.cs": {
+    "mtime": 1793274848.3888915,
+    "seen": 1793447234.194344,
+    "ast_hash": "d430905a3f0cac0469cb14b6d9d30964",
+    "semantic_hash": ""
+  },
+  "tests/SubjectLectureCounts/SubjectLectureCounts.csproj": {
+    "mtime": 1792681321.385537,
+    "seen": 1793032195.927938,
+    "ast_hash": "ae8b556f859289dbaeec704c9ccb2070",
+    "semantic_hash": "ae8b556f859289dbaeec704c9ccb2070"
+  },
+  "tests/SubjectLectureCounts/web-check.mjs": {
+    "mtime": 1792682800.897812,
+    "seen": 1793032195.9279387,
+    "ast_hash": "b1abb8bfb60aa6355ea2d7f2f5986e95",
+    "semantic_hash": "b1abb8bfb60aa6355ea2d7f2f5986e95"
+  },
+  "tests/TimetableBackups/Program.cs": {
+    "mtime": 1792517704.6858768,
+    "seen": 1793032195.9279394,
+    "ast_hash": "c9f5b3acc520269178a04a9d5840aa3e",
+    "semantic_hash": "c9f5b3acc520269178a04a9d5840aa3e"
+  },
+  "tests/TimetableBackups/TimetableBackups.csproj": {
+    "mtime": 1792517592.605981,
+    "seen": 1793032195.9279401,
+    "ast_hash": "af3c5503fb8de53b751de94d61bd3a61",
+    "semantic_hash": "af3c5503fb8de53b751de94d61bd3a61"
+  },
+  "tests/TimetableRegression/DynamicResourceChecks.cs": {
+    "mtime": 1792233549.3087003,
+    "seen": 1793032195.9279406,
+    "ast_hash": "ae1a3f039c80ccae326d77092165218d",
+    "semantic_hash": "ae1a3f039c80ccae326d77092165218d"
+  },
+  "tests/TimetableRegression/Program.cs": {
+    "mtime": 1792937996.1934414,
+    "seen": 1793032195.9279413,
+    "ast_hash": "113bc5a562a3b8770c7e66344ee39dee",
+    "semantic_hash": "113bc5a562a3b8770c7e66344ee39dee"
+  },
+  "tests/TimetableRegression/TimetableRegression.csproj": {
+    "mtime": 1791663637.7732663,
+    "seen": 1793032195.9279418,
+    "ast_hash": "de3924cda45db28d9de3cc2d7c8a3208",
+    "semantic_hash": "de3924cda45db28d9de3cc2d7c8a3208"
+  },
+  "tests/TimetableRegression/verify_pdf.py": {
+    "mtime": 1791627125.1601443,
+    "seen": 1793032195.9279425,
+    "ast_hash": "d3b8cfd60e78fc680b0dfefef97d64f6",
+    "semantic_hash": "d3b8cfd60e78fc680b0dfefef97d64f6"
+  },
+  "tests/UiOpening/Program.cs": {
+    "mtime": 1792877178.9730072,
+    "seen": 1793032195.9279432,
+    "ast_hash": "d50dc06c54179eb1fbafceed34bc77ef",
+    "semantic_hash": "d50dc06c54179eb1fbafceed34bc77ef"
+  },
+  "tests/UiOpening/UiOpening.csproj": {
+    "mtime": 1792877178.9720013,
+    "seen": 1793032195.9279437,
+    "ast_hash": "0dc373f2b13e01fc2c23075532a57d34",
+    "semantic_hash": "0dc373f2b13e01fc2c23075532a57d34"
+  },
+  "tests/WebDataTransfer/Program.cs": {
+    "mtime": 1792925825.2294927,
+    "seen": 1793032195.9279444,
+    "ast_hash": "46124bdddd443724c38fbb59da475e2e",
+    "semantic_hash": "46124bdddd443724c38fbb59da475e2e"
+  },
+  "tests/WebDataTransfer/WebDataTransfer.csproj": {
+    "mtime": 1792925390.7866864,
+    "seen": 1793032195.9279451,
+    "ast_hash": "b6c9cf77b307ae70ab4d7fa265ecd6b8",
+    "semantic_hash": "b6c9cf77b307ae70ab4d7fa265ecd6b8"
+  },
+  "tests/WebIntegration/CurrentDataPlanner.cs": {
+    "mtime": 1792236427.0713506,
+    "seen": 1793032195.9279456,
+    "ast_hash": "48a2ac553b6744e6f7145a9f9312912f",
+    "semantic_hash": "48a2ac553b6744e6f7145a9f9312912f"
+  },
+  "tests/WebIntegration/Program.cs": {
+    "mtime": 1792937996.1945765,
+    "seen": 1793032195.9279466,
+    "ast_hash": "87f9c2f0a37bef053afb695789d00b7a",
+    "semantic_hash": "87f9c2f0a37bef053afb695789d00b7a"
+  },
+  "tests/WebIntegration/WebIntegration.csproj": {
+    "mtime": 1792235998.0160987,
+    "seen": 1793032195.927947,
+    "ast_hash": "b6c9cf77b307ae70ab4d7fa265ecd6b8",
+    "semantic_hash": "b6c9cf77b307ae70ab4d7fa265ecd6b8"
+  },
+  "tests/WebIntegration/browser.mjs": {
+    "mtime": 1792937996.1945765,
+    "seen": 1793032195.9279478,
+    "ast_hash": "0c525d57e75f253cc6cacc40dc513ac1",
+    "semantic_hash": "0c525d57e75f253cc6cacc40dc513ac1"
+  },
+  "tests/WeeklyPdfImport/WeeklyPdfImport.csproj": {
+    "mtime": 1792518216.8095267,
+    "seen": 1793032195.9279482,
+    "ast_hash": "0b462f9c3085868db288b957383bad54",
+    "semantic_hash": "0b462f9c3085868db288b957383bad54"
+  },
+  "tests/WeeklyPdfImport/WeeklyVerification.cs": {
+    "mtime": 1793433689.587499,
+    "seen": 1793447234.1943598,
+    "ast_hash": "afb6058a0b29c55490d88a4879a856f7",
+    "semantic_hash": ""
+  },
+  "tools/AdoptPdfAssignments/AdoptPdfAssignments.csproj": {
+    "mtime": 1792708094.3135774,
+    "seen": 1793032195.9279497,
+    "ast_hash": "9605c779f65262f122196941b48d5403",
+    "semantic_hash": "9605c779f65262f122196941b48d5403"
+  },
+  "tools/AdoptPdfAssignments/Program.cs": {
+    "mtime": 1792709051.7056425,
+    "seen": 1793032195.9279504,
+    "ast_hash": "ff599416b304232f4e50195d5b6ca5de",
+    "semantic_hash": "ff599416b304232f4e50195d5b6ca5de"
+  },
+  "tools/AssignmentScopeUpgrade/AssignmentScopeUpgrade.csproj": {
+    "mtime": 1792704037.123624,
+    "seen": 1793032195.9279509,
+    "ast_hash": "f99b7ac888f23b4f2d0c8680aabfb17f",
+    "semantic_hash": "f99b7ac888f23b4f2d0c8680aabfb17f"
+  },
+  "tools/AssignmentScopeUpgrade/Program.cs": {
+    "mtime": 1792704037.123624,
+    "seen": 1793032195.9279516,
+    "ast_hash": "9a17cfedfbdee2ca4f818ba2dc06aced",
+    "semantic_hash": "9a17cfedfbdee2ca4f818ba2dc06aced"
+  },
+  "tools/Build-NetlifyDemo.ps1": {
+    "mtime": 1792945533.537699,
+    "seen": 1793032195.927952,
+    "ast_hash": "e28e9df3518e8ab0b4d82bacea9ea125",
+    "semantic_hash": "e28e9df3518e8ab0b4d82bacea9ea125"
+  },
+  "tools/Export-Source.ps1": {
+    "mtime": 1793397570.7851987,
+    "seen": 1793447234.194366,
+    "ast_hash": "0b76a3864584cf3f68b9b1a1c06cbb9b",
+    "semantic_hash": ""
+  },
+  "tools/FourthYearPractical/FourthYearPractical.csproj": {
+    "mtime": 1792702695.8554623,
+    "seen": 1793032195.9279535,
+    "ast_hash": "9605c779f65262f122196941b48d5403",
+    "semantic_hash": "9605c779f65262f122196941b48d5403"
+  },
+  "tools/FourthYearPractical/Program.cs": {
+    "mtime": 1792702980.954102,
+    "seen": 1793032195.9279542,
+    "ast_hash": "11cb25d6273c5c72e60137396abc1889",
+    "semantic_hash": "11cb25d6273c5c72e60137396abc1889"
+  },
+  "tools/ImportFacultyDays/ImportFacultyDays.csproj": {
+    "mtime": 1792710528.2109263,
+    "seen": 1793032195.9279547,
+    "ast_hash": "9605c779f65262f122196941b48d5403",
+    "semantic_hash": "9605c779f65262f122196941b48d5403"
+  },
+  "tools/ImportFacultyDays/Program.cs": {
+    "mtime": 1792710528.2109263,
+    "seen": 1793032195.9279554,
+    "ast_hash": "5049cbf63edf4b7ba29cd3278c92c5dd",
+    "semantic_hash": "5049cbf63edf4b7ba29cd3278c92c5dd"
+  },
+  "tools/Publish-WebHosting.ps1": {
+    "mtime": 1792945533.537699,
+    "seen": 1793032195.9279563,
+    "ast_hash": "83c1418108cc6a1adbf419cbd091ab7d",
+    "semantic_hash": "83c1418108cc6a1adbf419cbd091ab7d"
+  },
+  "tools/RestoreRoomConfiguration/Program.cs": {
+    "mtime": 1792709757.9865766,
+    "seen": 1793032195.9279568,
+    "ast_hash": "9506e936697c0b0459619943f8b5655a",
+    "semantic_hash": "9506e936697c0b0459619943f8b5655a"
+  },
+  "tools/RestoreRoomConfiguration/RestoreRoomConfiguration.csproj": {
+    "mtime": 1792709624.1517851,
+    "seen": 1793032195.9279575,
+    "ast_hash": "9605c779f65262f122196941b48d5403",
+    "semantic_hash": "9605c779f65262f122196941b48d5403"
+  },
+  "README.md": {
+    "mtime": 1793397571.9819007,
+    "seen": 1793447234.1943743,
+    "ast_hash": "a9d0f4eeef76957a6fee37b3b41a7b85",
+    "semantic_hash": ""
+  },
+  "UniversityTimetable.API/wwwroot/alternatives.html": {
+    "mtime": 1792937996.17687,
+    "seen": 1793032195.9279587,
+    "ast_hash": "c5ff83762b462b4fe15f853570538ddc",
+    "semantic_hash": "c5ff83762b462b4fe15f853570538ddc"
+  },
+  "UniversityTimetable.API/wwwroot/data-transfer.html": {
+    "mtime": 1792940042.9697936,
+    "seen": 1793032195.9279592,
+    "ast_hash": "13e910e24c914f9649cc12a5104df06c",
+    "semantic_hash": "13e910e24c914f9649cc12a5104df06c"
+  },
+  "UniversityTimetable.API/wwwroot/index.html": {
+    "mtime": 1792942126.8039763,
+    "seen": 1793032195.9279602,
+    "ast_hash": "ceceef3d81f068ec6c011f348dc28b92",
+    "semantic_hash": "ceceef3d81f068ec6c011f348dc28b92"
+  },
+  "UniversityTimetable.API/wwwroot/offline.html": {
+    "mtime": 1792417626.4627507,
+    "seen": 1793032195.9279606,
+    "ast_hash": "a688f7b9f2103c0434ed6d54b4ca6ade",
+    "semantic_hash": "a688f7b9f2103c0434ed6d54b4ca6ade"
+  },
+  "UniversityTimetable.API/wwwroot/preferences-advanced.html": {
+    "mtime": 1792925683.6014445,
+    "seen": 1793032195.9279613,
+    "ast_hash": "414836769d8b474eee4f4828d728e499",
+    "semantic_hash": "414836769d8b474eee4f4828d728e499"
+  },
+  "UniversityTimetable.API/wwwroot/preferences.html": {
+    "mtime": 1792937996.1818511,
+    "seen": 1793032195.927962,
+    "ast_hash": "235168b018c062553c28a251bcc80339",
+    "semantic_hash": "235168b018c062553c28a251bcc80339"
+  },
+  "docs/APPLICATION_AUDIT_2026_10_15.md": {
+    "mtime": 1792016387.3798645,
+    "seen": 1793032195.9279625,
+    "ast_hash": "b321c5e281a623506fb0902fe00e988f",
+    "semantic_hash": "b321c5e281a623506fb0902fe00e988f"
+  },
+  "docs/BLL_READABILITY_REVIEW_AR.md": {
+    "mtime": 1792775523.4327214,
+    "seen": 1793032195.9279635,
+    "ast_hash": "fea18aaddef0357cf9518bdcbaac8b2c",
+    "semantic_hash": "fea18aaddef0357cf9518bdcbaac8b2c"
+  },
+  "docs/CODE_CLEANUP.md": {
+    "mtime": 1791895184.9343443,
+    "seen": 1793032195.927964,
+    "ast_hash": "0f373c49e5566ebadabdfd56b55c7224",
+    "semantic_hash": "0f373c49e5566ebadabdfd56b55c7224"
+  },
+  "docs/CP_SAT_RUNTIME_FIX_2026_10_20.md": {
+    "mtime": 1792516293.43335,
+    "seen": 1793032195.9279647,
+    "ast_hash": "5e47be8284030d92d887d46ac3764686",
+    "semantic_hash": "5e47be8284030d92d887d46ac3764686"
+  },
+  "docs/DAL_AUDIT_REPORT_AR.md": {
+    "mtime": 1792774148.5499227,
+    "seen": 1793032195.9279652,
+    "ast_hash": "dd8a11d83313e9c2f232720f0af0f8e8",
+    "semantic_hash": "dd8a11d83313e9c2f232720f0af0f8e8"
+  },
+  "docs/DATABASE_CONFIGURATION_AR.md": {
+    "mtime": 1792777623.303358,
+    "seen": 1793032195.9279659,
+    "ast_hash": "3f4982025ed8e46cf50946abc012f944",
+    "semantic_hash": "3f4982025ed8e46cf50946abc012f944"
+  },
+  "docs/DESIGNER_COMPATIBILITY.md": {
+    "mtime": 1791751988.01194,
+    "seen": 1793032195.9279664,
+    "ast_hash": "19906e7c38b165f953ca66151350d1ba",
+    "semantic_hash": "19906e7c38b165f953ca66151350d1ba"
+  },
+  "docs/DESIGNER_MIGRATION_AR.md": {
+    "mtime": 1792876461.482498,
+    "seen": 1793032195.9279673,
+    "ast_hash": "9f154ab81d7a47e058e525901eef02a1",
+    "semantic_hash": "9f154ab81d7a47e058e525901eef02a1"
+  },
+  "docs/DISPLAY_COMPATIBILITY.md": {
+    "mtime": 1791751988.01194,
+    "seen": 1793032195.927968,
+    "ast_hash": "034baa41534e2b96d5c27c5157b67eeb",
+    "semantic_hash": "034baa41534e2b96d5c27c5157b67eeb"
+  },
+  "docs/DYNAMIC_RESOURCES_REVIEW_2026_10_17.md": {
+    "mtime": 1792417626.4652271,
+    "seen": 1793032195.9279685,
+    "ast_hash": "12efa40659b16b9566f916412a7287d1",
+    "semantic_hash": "12efa40659b16b9566f916412a7287d1"
+  },
+  "docs/ExcelImport.md": {
+    "mtime": 1793433793.7845252,
+    "seen": 1793447234.1943953,
+    "ast_hash": "4ac48ea327be21576890dd5f2d63ac8b",
+    "semantic_hash": ""
+  },
+  "docs/FIX_VERIFICATION.md": {
+    "mtime": 1791627222.339293,
+    "seen": 1793032195.9279697,
+    "ast_hash": "082c2e406dbe1e4cddeb5ecdb81c8da8",
+    "semantic_hash": "082c2e406dbe1e4cddeb5ecdb81c8da8"
+  },
+  "docs/FLEXIBLE_LECTURE_PERIODS.md": {
+    "mtime": 1791665459.9465606,
+    "seen": 1793032195.9279704,
+    "ast_hash": "d097a19775a77c6740ce896d7079b77f",
+    "semantic_hash": "d097a19775a77c6740ce896d7079b77f"
+  },
+  "docs/FacultyPreferenceSpecification.md": {
+    "mtime": 1792535937.7203405,
+    "seen": 1793032195.9279711,
+    "ast_hash": "cc74d43e14692e3ec16fcc47ed87127b",
+    "semantic_hash": "cc74d43e14692e3ec16fcc47ed87127b"
+  },
+  "docs/FacultyPreferences.md": {
+    "mtime": 1792620630.337087,
+    "seen": 1793032195.9279716,
+    "ast_hash": "143b7363eaa7df229154119a7e069d28",
+    "semantic_hash": "143b7363eaa7df229154119a7e069d28"
+  },
+  "docs/FacultyScheduleEditor.md": {
+    "mtime": 1792537220.5151505,
+    "seen": 1793032195.9279723,
+    "ast_hash": "e57d133303fd058bd5f88ab0bde05f1e",
+    "semantic_hash": "e57d133303fd058bd5f88ab0bde05f1e"
+  },
+  "docs/FinalTimetable2026/FACULTY_CLEANUP_AR.md": {
+    "mtime": 1792273607.8042653,
+    "seen": 1793032195.927973,
+    "ast_hash": "68582e807f00c1e5dcb63d79606d4da2",
+    "semantic_hash": "68582e807f00c1e5dcb63d79606d4da2"
+  },
+  "docs/FinalTimetable2026/UPDATE_REPORT_AR.md": {
+    "mtime": 1792273612.3352878,
+    "seen": 1793032195.9279737,
+    "ast_hash": "f1065d71d05c3584d558ce19e1ac9a45",
+    "semantic_hash": "f1065d71d05c3584d558ce19e1ac9a45"
+  },
+  "docs/FinalTimetable2026/validation.txt": {
+    "mtime": 1792272583.8723376,
+    "seen": 1793032195.9279745,
+    "ast_hash": "e5d54f49366e6a089a8ba5ed24f1d6f0",
+    "semantic_hash": "e5d54f49366e6a089a8ba5ed24f1d6f0"
+  },
+  "docs/FourthYearPractical.md": {
+    "mtime": 1792702980.9551086,
+    "seen": 1793032195.927975,
+    "ast_hash": "e17003dcfbb48b4b7b86311c1015fc01",
+    "semantic_hash": "e17003dcfbb48b4b7b86311c1015fc01"
+  },
+  "docs/GENERATION_DAY_PREFERENCES_FIX_2026_10_23.md": {
+    "mtime": 1792711203.6655588,
+    "seen": 1793032195.9279757,
+    "ast_hash": "008cdc7212d1081e0453915b3659ca01",
+    "semantic_hash": "008cdc7212d1081e0453915b3659ca01"
+  },
+  "docs/GENERATION_RULES_EXTRACTED_AR.md": {
+    "mtime": 1792847240.522959,
+    "seen": 1793032195.9279814,
+    "ast_hash": "738da35549a09db6c7f8beca3d05c7d1",
+    "semantic_hash": "738da35549a09db6c7f8beca3d05c7d1"
+  },
+  "docs/INCREMENTAL_GENERATION_FIX_2026_10_20.md": {
+    "mtime": 1792504897.198468,
+    "seen": 1793032195.927982,
+    "ast_hash": "78ea4965373a36803d7963ac8f2fee33",
+    "semantic_hash": "78ea4965373a36803d7963ac8f2fee33"
+  },
+  "docs/INSTRUCTOR_PDF_EXPORT_FIX.md": {
+    "mtime": 1792273847.6134546,
+    "seen": 1793032195.9279828,
+    "ast_hash": "87d6155aacf3d306b735ecd95961c449",
+    "semantic_hash": "87d6155aacf3d306b735ecd95961c449"
+  },
+  "docs/ImportedTimetableRepair.md": {
+    "mtime": 1792519157.452923,
+    "seen": 1793032195.9279835,
+    "ast_hash": "201ff41e4ac0780202e8aa116809bca4",
+    "semantic_hash": "201ff41e4ac0780202e8aa116809bca4"
+  },
+  "docs/LAYER_CLEANUP_AUDIT.md": {
+    "mtime": 1791997066.0575466,
+    "seen": 1793032195.9279845,
+    "ast_hash": "4f5fc2d1dcf0a785bdf4c0ef60519a14",
+    "semantic_hash": "4f5fc2d1dcf0a785bdf4c0ef60519a14"
+  },
+  "docs/NETLIFY_MOCK_AR.md": {
+    "mtime": 1792945517.5277348,
+    "seen": 1793032195.927985,
+    "ast_hash": "e287d3b9d7767f6626a658b36014d90f",
+    "semantic_hash": "e287d3b9d7767f6626a658b36014d90f"
+  },
+  "docs/ORIGINAL_PRACTICAL_EXCHANGE.md": {
+    "mtime": 1791995887.644143,
+    "seen": 1793032195.9279857,
+    "ast_hash": "735be1d34217e919bed2bb69630c5edf",
+    "semantic_hash": "735be1d34217e919bed2bb69630c5edf"
+  },
+  "docs/PDF_EXPORT_FIX.md": {
+    "mtime": 1791893112.1194496,
+    "seen": 1793032195.9279864,
+    "ast_hash": "06b8054ef48191b52579dd0633053908",
+    "semantic_hash": "06b8054ef48191b52579dd0633053908"
+  },
+  "docs/PRESENTATION_BLL_REFACTORING_REPORT.md": {
+    "mtime": 1792750261.7469616,
+    "seen": 1793032195.9279869,
+    "ast_hash": "06a14d0f04939f1458f891ff428da920",
+    "semantic_hash": "06a14d0f04939f1458f891ff428da920"
+  },
+  "docs/PROJECT_RENAME_AR.md": {
+    "mtime": 1792417992.9995294,
+    "seen": 1793032195.9279878,
+    "ast_hash": "5cd634d5c44714f8ba145da81578b54a",
+    "semantic_hash": "5cd634d5c44714f8ba145da81578b54a"
+  },
+  "docs/PROVISIONAL_SUBJECT_CORRECTIONS.md": {
+    "mtime": 1792016677.2637787,
+    "seen": 1793032195.9279883,
+    "ast_hash": "c26c7f9fa941c72a76143bd9df26d129",
+    "semantic_hash": "c26c7f9fa941c72a76143bd9df26d129"
+  },
+  "docs/PWA_IMPLEMENTATION.md": {
+    "mtime": 1792236549.3567193,
+    "seen": 1793032195.927989,
+    "ast_hash": "39b78968b20b13b8169a552a59fafa81",
+    "semantic_hash": "39b78968b20b13b8169a552a59fafa81"
+  },
+  "docs/PWA_STARTUP_AR.md": {
+    "mtime": 1792937996.1838863,
+    "seen": 1793032195.9279895,
+    "ast_hash": "da8231b334cb0b7a832d5df3a2c50676",
+    "semantic_hash": "da8231b334cb0b7a832d5df3a2c50676"
+  },
+  "docs/PdfImport.md": {
+    "mtime": 1792519157.4516723,
+    "seen": 1793032195.9279902,
+    "ast_hash": "b15ff6a4b4085f6d45a9823cf745e9f4",
+    "semantic_hash": "b15ff6a4b4085f6d45a9823cf745e9f4"
+  },
+  "docs/RESPONSIVE_UI_REPORT.md": {
+    "mtime": 1791894165.3810704,
+    "seen": 1793032195.9279912,
+    "ast_hash": "9b9966037e8c3a4a70cddc0edff00820",
+    "semantic_hash": "9b9966037e8c3a4a70cddc0edff00820"
+  },
+  "docs/ROOM_CONFIGURATION.md": {
+    "mtime": 1792937996.1848874,
+    "seen": 1793032195.9279919,
+    "ast_hash": "6ffe6db4f30df2b651fe2fe687defdcb",
+    "semantic_hash": "6ffe6db4f30df2b651fe2fe687defdcb"
+  },
+  "docs/SCHEDULING_CAPACITY.md": {
+    "mtime": 1792017231.3978944,
+    "seen": 1793032195.9279923,
+    "ast_hash": "e26bcb5c5d282a446f56f5e83a4d3b1e",
+    "semantic_hash": "e26bcb5c5d282a446f56f5e83a4d3b1e"
+  },
+  "docs/SQL_EXPRESS_STARTUP_FIX.md": {
+    "mtime": 1792017520.3322437,
+    "seen": 1793032195.927993,
+    "ast_hash": "e01fa8c15e05bf458ba93a5b58196b53",
+    "semantic_hash": "e01fa8c15e05bf458ba93a5b58196b53"
+  },
+  "docs/SUBJECT_REQUIREMENT_REMOVAL_2026_10_20.md": {
+    "mtime": 1792504173.0874717,
+    "seen": 1793032195.9279938,
+    "ast_hash": "7b8bbba41b42b3f550d449a8d1046af4",
+    "semantic_hash": "7b8bbba41b42b3f550d449a8d1046af4"
+  },
+  "docs/SubjectLectureCounts.md": {
+    "mtime": 1792683858.3090549,
+    "seen": 1793032195.9279947,
+    "ast_hash": "79117974602fbc37a8f638f0d58fcb4f",
+    "semantic_hash": "79117974602fbc37a8f638f0d58fcb4f"
+  },
+  "docs/TIMETABLE_PDF_ANALYSIS.md": {
+    "mtime": 1791928248.202995,
+    "seen": 1793032195.9279952,
+    "ast_hash": "4421d904db55457aea0cea875de278e2",
+    "semantic_hash": "4421d904db55457aea0cea875de278e2"
+  },
+  "docs/TIMETABLE_PRESERVATION_2026_10_19.md": {
+    "mtime": 1792428238.1213806,
+    "seen": 1793032195.927996,
+    "ast_hash": "26081f7c8caa75e2781c1cc241cfceca",
+    "semantic_hash": "26081f7c8caa75e2781c1cc241cfceca"
+  },
+  "docs/TIMETABLE_RECOVERY_2026_10_19.md": {
+    "mtime": 1792428238.096485,
+    "seen": 1793032195.9279966,
+    "ast_hash": "b3eaf72cc439828e9389a3d98ddecf64",
+    "semantic_hash": "b3eaf72cc439828e9389a3d98ddecf64"
+  },
+  "docs/TeachingAssignments.md": {
+    "mtime": 1793113166.8801358,
+    "seen": 1793447234.1944356,
+    "ast_hash": "505663b985b72074f07ccb37e1344025",
+    "semantic_hash": ""
+  },
+  "docs/TimetableAlternatives.md": {
+    "mtime": 1793118684.692181,
+    "seen": 1793447234.1944363,
+    "ast_hash": "93dd261e72452a0a88914f678f8ea0b3",
+    "semantic_hash": ""
+  },
+  "docs/TimetableBackups.md": {
+    "mtime": 1792937996.1848874,
+    "seen": 1793032195.9279985,
+    "ast_hash": "d743f808b3d01ba984c131736e2ea9f8",
+    "semantic_hash": "d743f808b3d01ba984c131736e2ea9f8"
+  },
+  "docs/UI_OPENING_PERFORMANCE_AR.md": {
+    "mtime": 1792877395.8117821,
+    "seen": 1793032195.9279993,
+    "ast_hash": "14fcfdcccb40801551701aff90324411",
+    "semantic_hash": "14fcfdcccb40801551701aff90324411"
+  },
+  "docs/UNUSED_CLEANUP_REPORT.md": {
+    "mtime": 1791997066.0575466,
+    "seen": 1793032195.928,
+    "ast_hash": "95168e509f0894eddcb13c94e92b7c30",
+    "semantic_hash": "95168e509f0894eddcb13c94e92b7c30"
+  },
+  "docs/Verification/BllReadability/method-index.md": {
+    "mtime": 1792775523.8909428,
+    "seen": 1793032195.9280005,
+    "ast_hash": "0f8106610b5e43285d1f90199243154d",
+    "semantic_hash": "0f8106610b5e43285d1f90199243154d"
+  },
+  "docs/Verification/DalAudit/baseline-verification.txt": {
+    "mtime": 1792772876.7067604,
+    "seen": 1793032195.9280012,
+    "ast_hash": "fc4e426746662d04951842d7aa341041",
+    "semantic_hash": "fc4e426746662d04951842d7aa341041"
+  },
+  "docs/Verification/DalAudit/batch-a-build.txt": {
+    "mtime": 1792773034.231178,
+    "seen": 1793032195.928002,
+    "ast_hash": "e248001fa1fede90d36c1b247d368c3b",
+    "semantic_hash": "e248001fa1fede90d36c1b247d368c3b"
+  },
+  "docs/Verification/DalAudit/batch-a-tests.txt": {
+    "mtime": 1792773043.2150097,
+    "seen": 1793032195.9280026,
+    "ast_hash": "95ae6c520d80fb1f52ba69deacd187ec",
+    "semantic_hash": "95ae6c520d80fb1f52ba69deacd187ec"
+  },
+  "docs/Verification/DalAudit/dal-consumers.txt": {
+    "mtime": 1792772637.5056186,
+    "seen": 1793032195.9280033,
+    "ast_hash": "107c834c433a32cbfd98cd0b49cda0ec",
+    "semantic_hash": "107c834c433a32cbfd98cd0b49cda0ec"
+  },
+  "docs/Verification/DalAudit/entity-consumers.txt": {
+    "mtime": 1792772637.5445225,
+    "seen": 1793032195.9280038,
+    "ast_hash": "5cfb3c4e32dfd0d3bb88d72e104b390a",
+    "semantic_hash": "5cfb3c4e32dfd0d3bb88d72e104b390a"
+  },
+  "docs/Verification/DalAudit/query-transaction-evidence.txt": {
+    "mtime": 1792772637.573825,
+    "seen": 1793032195.9280045,
+    "ast_hash": "95ecfdac291b2013cac2a6974531b386",
+    "semantic_hash": "95ecfdac291b2013cac2a6974531b386"
+  },
+  "docs/Verification/DalAudit/working-tree-before-report.txt": {
+    "mtime": 1792772637.6110108,
+    "seen": 1793032195.9280052,
+    "ast_hash": "7be7190bf9e5c06d7a390c4d0c3e691f",
+    "semantic_hash": "7be7190bf9e5c06d7a390c4d0c3e691f"
+  },
+  "docs/Verification/PresentationBllRefactoring/README.md": {
+    "mtime": 1792750160.9976225,
+    "seen": 1793032195.928006,
+    "ast_hash": "97add923f60ba4d83747f6d314f72fb5",
+    "semantic_hash": "97add923f60ba4d83747f6d314f72fb5"
+  },
+  "docs/Verification/UnusedCleanup/row-numbering-release.txt": {
+    "mtime": 1791997013.0830421,
+    "seen": 1793032195.9280064,
+    "ast_hash": "3ac294bd708d7541c02c25d081a40e59",
+    "semantic_hash": "3ac294bd708d7541c02c25d081a40e59"
+  },
+  "docs/WEB_HOSTING_AR.md": {
+    "mtime": 1792944926.6835566,
+    "seen": 1793032195.928007,
+    "ast_hash": "8becdf89630cf4acafa55e557402a61e",
+    "semantic_hash": "8becdf89630cf4acafa55e557402a61e"
+  },
+  "docs/WEB_PARITY_AR.md": {
+    "mtime": 1792926030.9698937,
+    "seen": 1793032195.9280078,
+    "ast_hash": "a23f1fe32a20e0fba2473b1735edacee",
+    "semantic_hash": "a23f1fe32a20e0fba2473b1735edacee"
+  },
+  "docs/WeeklyPdfImport.md": {
+    "mtime": 1792519157.453936,
+    "seen": 1793032195.9280088,
+    "ast_hash": "3c7cf1b95ad2e81fc666b30d68fdcdae",
+    "semantic_hash": "3c7cf1b95ad2e81fc666b30d68fdcdae"
+  },
+  "tests/ApplicationAudit/README.md": {
+    "mtime": 1792016709.1972947,
+    "seen": 1793032195.9280093,
+    "ast_hash": "fea23e179939eb25a22e6a93c1bbcda4",
+    "semantic_hash": "fea23e179939eb25a22e6a93c1bbcda4"
+  },
+  "tests/ArabicInterfaces/README.md": {
+    "mtime": 1792680281.4466877,
+    "seen": 1793032195.92801,
+    "ast_hash": "3f2c9b99b5c123173bed5624eb6ca19b",
+    "semantic_hash": "3f2c9b99b5c123173bed5624eb6ca19b"
+  },
+  "tests/AssignmentLectureTypes/README.md": {
+    "mtime": 1792708361.9357424,
+    "seen": 1793032195.9280107,
+    "ast_hash": "adf844ebef063101701f4dcf1975cce3",
+    "semantic_hash": "adf844ebef063101701f4dcf1975cce3"
+  },
+  "tests/DesignerCompatibility/README.md": {
+    "mtime": 1791665218.4333928,
+    "seen": 1793032195.9280114,
+    "ast_hash": "17d0cf01a52d403e9c68bf77d5e5d0c4",
+    "semantic_hash": "17d0cf01a52d403e9c68bf77d5e5d0c4"
+  },
+  "tests/DesignerLifecycle/README.md": {
+    "mtime": 1791665218.4323847,
+    "seen": 1793032195.9280121,
+    "ast_hash": "dc5097fd4d84d1bd18ca9bc8fc6cd93f",
+    "semantic_hash": "dc5097fd4d84d1bd18ca9bc8fc6cd93f"
+  },
+  "tests/DesignerMigration/README.md": {
+    "mtime": 1793433753.6142108,
+    "seen": 1793447234.1944609,
+    "ast_hash": "1b1e102b88a3b97c8b1f31be9b7825d6",
+    "semantic_hash": ""
+  },
+  "tests/ExcelImport/README.md": {
+    "mtime": 1793433717.9828563,
+    "seen": 1793447234.1944625,
+    "ast_hash": "50d8702535bc6b451ec5a06483fe54c6",
+    "semantic_hash": ""
+  },
+  "tests/FacultyPreferences/README.md": {
+    "mtime": 1792620630.3950746,
+    "seen": 1793032195.928014,
+    "ast_hash": "5d825d650ae0817d2b5122e289896558",
+    "semantic_hash": "5d825d650ae0817d2b5122e289896558"
+  },
+  "tests/FullGenerationPreferences/README.md": {
+    "mtime": 1792711024.0233996,
+    "seen": 1793032195.9280145,
+    "ast_hash": "c8c230f57cb86586c61523e28387ac42",
+    "semantic_hash": "c8c230f57cb86586c61523e28387ac42"
+  },
+  "tests/ImportedTimetableRepair/README.md": {
+    "mtime": 1792517688.768014,
+    "seen": 1793032195.9280155,
+    "ast_hash": "ba8d6c796f402898c2fd510cf471e0fe",
+    "semantic_hash": "ba8d6c796f402898c2fd510cf471e0fe"
+  },
+  "tests/PdfImport/README.md": {
+    "mtime": 1793433718.6342876,
+    "seen": 1793447234.1944668,
+    "ast_hash": "3ae1e11a35d78240281dd4dc96df615c",
+    "semantic_hash": ""
+  },
+  "tests/PracticalExchange/README.md": {
+    "mtime": 1792014600.3284369,
+    "seen": 1793032195.9280167,
+    "ast_hash": "bb103f77ec4b09417d673976f9161334",
+    "semantic_hash": "bb103f77ec4b09417d673976f9161334"
+  },
+  "tests/PresentationBllRefactoring/README.md": {
+    "mtime": 1792750086.5002983,
+    "seen": 1793032195.9280171,
+    "ast_hash": "bc820cf8b5ae856b9d3795bd4a3d49ba",
+    "semantic_hash": "bc820cf8b5ae856b9d3795bd4a3d49ba"
+  },
+  "tests/RowNumbering/README.md": {
+    "mtime": 1791647618.4763677,
+    "seen": 1793032195.9280179,
+    "ast_hash": "e79d0f8f3bdc103b007f152f4798777e",
+    "semantic_hash": "e79d0f8f3bdc103b007f152f4798777e"
+  },
+  "tests/SchedulePdfExport/README.md": {
+    "mtime": 1792273847.6124535,
+    "seen": 1793032195.9280186,
+    "ast_hash": "f89bee6329ba9fe2f3332d3493ba58af",
+    "semantic_hash": "f89bee6329ba9fe2f3332d3493ba58af"
+  },
+  "tests/SchedulingCapacity/README.md": {
+    "mtime": 1792017231.3978944,
+    "seen": 1793032195.9280193,
+    "ast_hash": "07fe49fde7a5b9b02d78947b3568961e",
+    "semantic_hash": "07fe49fde7a5b9b02d78947b3568961e"
+  },
+  "tests/SubjectLectureCounts/README.md": {
+    "mtime": 1793274816.630591,
+    "seen": 1793447234.1944742,
+    "ast_hash": "686b7511908a9b22ffc76a8a58c6d36b",
+    "semantic_hash": ""
+  },
+  "tests/TimetableRegression/README.md": {
+    "mtime": 1791665218.4333928,
+    "seen": 1793032195.9280205,
+    "ast_hash": "ea7a611e850606c7eebc359827eafdd3",
+    "semantic_hash": "ea7a611e850606c7eebc359827eafdd3"
+  },
+  "tests/UiOpening/README.md": {
+    "mtime": 1792877395.8117821,
+    "seen": 1793032195.9280212,
+    "ast_hash": "2705dc5ebb38d50d720f145b8bfc6c40",
+    "semantic_hash": "2705dc5ebb38d50d720f145b8bfc6c40"
+  },
+  "tests/WebDataTransfer/README.md": {
+    "mtime": 1792925899.5923245,
+    "seen": 1793032195.928022,
+    "ast_hash": "c0a0e5e4ba92d811ed361e0a93ca965c",
+    "semantic_hash": "c0a0e5e4ba92d811ed361e0a93ca965c"
+  },
+  "tests/WeeklyPdfImport/README.md": {
+    "mtime": 1793433719.2657428,
+    "seen": 1793447234.1944778,
+    "ast_hash": "3bbf74705a5d468fd023ebf9eb127c5a",
+    "semantic_hash": ""
+  },
+  "UniversityTimetable.API/wwwroot/icons/icon-192.png": {
+    "mtime": 1792235849.1188974,
+    "seen": 1793032195.9280233,
+    "ast_hash": "e10338fa4d440f9ac8a1ff333fdd661f",
+    "semantic_hash": "e10338fa4d440f9ac8a1ff333fdd661f"
+  },
+  "UniversityTimetable.API/wwwroot/icons/icon-512.png": {
+    "mtime": 1792235849.128641,
+    "seen": 1793032195.9280238,
+    "ast_hash": "c1ddf89385045f897b5d92938f9d83b1",
+    "semantic_hash": "c1ddf89385045f897b5d92938f9d83b1"
+  },
+  "UniversityTimetable.API/wwwroot/icons/icon.svg": {
+    "mtime": 1792235831.2081513,
+    "seen": 1793032195.9280245,
+    "ast_hash": "b5843da435f067798b8eaca6ec8ebd3b",
+    "semantic_hash": "b5843da435f067798b8eaca6ec8ebd3b"
+  },
+  "Data_Access_Layer/Scheduling/SubjectPracticalGroupingSchema.cs": {
+    "mtime": 1793349873.7923088,
+    "seen": 1793447234.1941228,
+    "ast_hash": "866278c50e1923bc12e4c305726c8d3a",
+    "semantic_hash": ""
+  },
+  "University Timetable and Classroom Management System/PresentationLayer/Common/AcademicSemesterSelection.cs": {
+    "mtime": 1793111367.3318374,
+    "seen": 1793447234.1941488,
+    "ast_hash": "54953f69016d9ade2b250e63ce0d0e47",
+    "semantic_hash": ""
+  },
+  "University Timetable and Classroom Management System/PresentationLayer/Common/ListFilterField.cs": {
+    "mtime": 1793113859.9492104,
+    "seen": 1793447234.1941533,
+    "ast_hash": "984167851931a9d1fe4fac1d14fa43db",
+    "semantic_hash": ""
+  },
+  "University Timetable and Classroom Management System/PresentationLayer/DialogAppearance.cs": {
+    "mtime": 1793278904.9853022,
+    "seen": 1793447234.194159,
+    "ast_hash": "5dca9149843e513a5548110ac71aa0d8",
+    "semantic_hash": ""
+  },
+  "tests/AlternativeAvailability/AlternativeAvailability.csproj": {
+    "mtime": 1793118533.24435,
+    "seen": 1793447234.1942706,
+    "ast_hash": "a7687f9119011c20b928093e8349167f",
+    "semantic_hash": ""
+  },
+  "tests/AlternativeAvailability/Program.cs": {
+    "mtime": 1793118533.24435,
+    "seen": 1793447234.1942716,
+    "ast_hash": "a870066eb1395aee2c5981604cb4bd2a",
+    "semantic_hash": ""
+  },
+  "tests/AssignmentDeletion/AssignmentDeletion.csproj": {
+    "mtime": 1793112724.8628235,
+    "seen": 1793447234.1942759,
+    "ast_hash": "2c443116e4bf184c86eff8e7eec3ff22",
+    "semantic_hash": ""
+  },
+  "tests/AssignmentDeletion/Program.cs": {
+    "mtime": 1793113166.877759,
+    "seen": 1793447234.1942766,
+    "ast_hash": "05886671fff02326f1dc148b94b913c5",
+    "semantic_hash": ""
+  },
+  "tests/DesktopInstaller/Verify-Package.ps1": {
+    "mtime": 1793396432.125561,
+    "seen": 1793447234.1942885,
+    "ast_hash": "58eba019dca997c56a2bf85bdf990170",
+    "semantic_hash": ""
+  },
+  "tests/EmbeddedPageNavigation/EmbeddedPageNavigation.csproj": {
+    "mtime": 1793276668.6663015,
+    "seen": 1793447234.1942894,
+    "ast_hash": "5232bcc54183c684010195f44d29d81d",
+    "semantic_hash": ""
+  },
+  "tests/EmbeddedPageNavigation/Program.cs": {
+    "mtime": 1793435617.0533035,
+    "seen": 1793447234.19429,
+    "ast_hash": "663f8b84e449553dfba5fa0941bb5f7a",
+    "semantic_hash": ""
+  },
+  "tests/PageReturnLayout/PageReturnLayout.csproj": {
+    "mtime": 1793274178.3375866,
+    "seen": 1793447234.1943176,
+    "ast_hash": "5232bcc54183c684010195f44d29d81d",
+    "semantic_hash": ""
+  },
+  "tests/PageReturnLayout/Program.cs": {
+    "mtime": 1793274178.3375866,
+    "seen": 1793447234.1943183,
+    "ast_hash": "dbba5ee2459f49a9500c3b888c91eb97",
+    "semantic_hash": ""
+  },
+  "tests/PracticalExchangeGeneration/PracticalExchangeGeneration.csproj": {
+    "mtime": 1793349687.132121,
+    "seen": 1793447234.1943226,
+    "ast_hash": "a7687f9119011c20b928093e8349167f",
+    "semantic_hash": ""
+  },
+  "tests/PracticalExchangeGeneration/Program.cs": {
+    "mtime": 1793350338.0002725,
+    "seen": 1793447234.1943235,
+    "ast_hash": "1a73abef05f4abe33ee5b3cf4f204187",
+    "semantic_hash": ""
+  },
+  "tests/SemesterGeneration/Program.cs": {
+    "mtime": 1793348207.2951424,
+    "seen": 1793447234.1943378,
+    "ast_hash": "243118ee5dd94da13772a97362922853",
+    "semantic_hash": ""
+  },
+  "tests/SemesterGeneration/SemesterGeneration.csproj": {
+    "mtime": 1793348105.5763881,
+    "seen": 1793447234.194339,
+    "ast_hash": "a7687f9119011c20b928093e8349167f",
+    "semantic_hash": ""
+  },
+  "tests/SemesterNavigation/Program.cs": {
+    "mtime": 1793113829.0071664,
+    "seen": 1793447234.1943398,
+    "ast_hash": "2a36b4b7b411cf2c87a6213715b75a14",
+    "semantic_hash": ""
+  },
+  "tests/SemesterNavigation/SemesterNavigation.csproj": {
+    "mtime": 1793111284.3415267,
+    "seen": 1793447234.1943407,
+    "ast_hash": "5232bcc54183c684010195f44d29d81d",
+    "semantic_hash": ""
+  },
+  "tests/SourceExport/Verify-SourceExport.ps1": {
+    "mtime": 1793397553.846863,
+    "seen": 1793447234.1943414,
+    "ast_hash": "349ef136c5554c952de41d358b61a587",
+    "semantic_hash": ""
+  },
+  "tests/SubjectDeletion/Program.cs": {
+    "mtime": 1793274748.895572,
+    "seen": 1793447234.1943421,
+    "ast_hash": "caca24b950857ce4a770a8276aef846d",
+    "semantic_hash": ""
+  },
+  "tests/SubjectDeletion/SubjectDeletion.csproj": {
+    "mtime": 1793274707.4962904,
+    "seen": 1793447234.1943429,
+    "ast_hash": "2c443116e4bf184c86eff8e7eec3ff22",
+    "semantic_hash": ""
+  },
+  "tools/Build-DesktopInstaller.ps1": {
+    "mtime": 1793396642.805696,
+    "seen": 1793447234.1943643,
+    "ast_hash": "2e25f068b2d09a70d757de6ee0a0dbe8",
+    "semantic_hash": ""
+  },
+  "tools/InstallerDatabase/InstallerDatabase.csproj": {
+    "mtime": 1793396019.3058915,
+    "seen": 1793447234.1943703,
+    "ast_hash": "855ffb021c891ea59580446876b73ab4",
+    "semantic_hash": ""
+  },
+  "tools/InstallerDatabase/Program.cs": {
+    "mtime": 1793396401.7304864,
+    "seen": 1793447234.194371,
+    "ast_hash": "d160cfc922fdae29f825cb12e2d3a50f",
+    "semantic_hash": ""
+  },
+  "docs/ALL_STAGES_PDF_REVIEW_20261029_AR.md": {
+    "mtime": 1793279920.3352873,
+    "seen": 1793447234.1943808,
+    "ast_hash": "f73007573c192f3c205dc363dd37fe40",
+    "semantic_hash": ""
+  },
+  "docs/ALL_STAGES_PDF_REVIEW_AFTER_20261030_AR.md": {
+    "mtime": 1793348335.059054,
+    "seen": 1793447234.1943812,
+    "ast_hash": "afdeb38f2a9104900fb71034c910ff22",
+    "semantic_hash": ""
+  },
+  "docs/ARCHIVED_SUBJECTS_CLEANUP_20261029_AR.md": {
+    "mtime": 1793275244.803282,
+    "seen": 1793447234.1943831,
+    "ast_hash": "da5f9f1ea43cb84c2f660a3683d10748",
+    "semantic_hash": ""
+  },
+  "docs/ASSIGNMENT_DELETION_AR.md": {
+    "mtime": 1793113166.8812578,
+    "seen": 1793447234.1943839,
+    "ast_hash": "6076f8c25bd7b40e59f58f6eba6e8641",
+    "semantic_hash": ""
+  },
+  "docs/DEEP_FINAL_AUDIT_20261030_AR.md": {
+    "mtime": 1793352963.834212,
+    "seen": 1793447234.1943896,
+    "ast_hash": "793874db786b3decd35bae031a089ce2",
+    "semantic_hash": ""
+  },
+  "docs/DEEP_FINAL_PDF_MATCH_20261030_AR.md": {
+    "mtime": 1793352963.8123014,
+    "seen": 1793447234.1943903,
+    "ast_hash": "d3d6dfde32e59c3f91f7de95f3a9342a",
+    "semantic_hash": ""
+  },
+  "docs/DESKTOP_INSTALLER_AR.md": {
+    "mtime": 1793396644.0098157,
+    "seen": 1793447234.194393,
+    "ast_hash": "793f12d5cd5fdb5bd87700c197295b89",
+    "semantic_hash": ""
+  },
+  "docs/GREEN_IT_AND_SEMESTER2_FAILURE_20261029_AR.md": {
+    "mtime": 1793279920.3342855,
+    "seen": 1793447234.1944056,
+    "ast_hash": "5a20a0c92e010b341ea961ac41e59ef3",
+    "semantic_hash": ""
+  },
+  "docs/PRACTICAL_EXCHANGE_GENERATION_AR.md": {
+    "mtime": 1793351433.6094153,
+    "seen": 1793447234.194412,
+    "ast_hash": "15a55acbfcfd6e508a744bdc8035f237",
+    "semantic_hash": ""
+  },
+  "docs/PRESENTATION_LAYER_AUDIT_20261031_AR.md": {
+    "mtime": 1793433793.8003712,
+    "seen": 1793447234.194414,
+    "ast_hash": "c17203e46ccfc7be7e8df4651260194e",
+    "semantic_hash": ""
+  },
+  "docs/PROJECT_MAP_AR.html": {
+    "mtime": 1793035642.626728,
+    "seen": 1793447234.1944144,
+    "ast_hash": "c0d89300c42ddd986aac99d75e584668",
+    "semantic_hash": ""
+  },
+  "docs/PROJECT_MAP_AR.md": {
+    "mtime": 1793035566.9670093,
+    "seen": 1793447234.194415,
+    "ast_hash": "53783d6145594b48557e29da32ff0cf9",
+    "semantic_hash": ""
+  },
+  "docs/SECOND_YEAR_REVIEW_20261029_AR.md": {
+    "mtime": 1793275247.9015698,
+    "seen": 1793447234.1944227,
+    "ast_hash": "6ec73f6f927c095a15e4d40e77fbae78",
+    "semantic_hash": ""
+  },
+  "docs/SECOND_YEAR_SEMESTER2_IMAGE_SUBJECTS_20261027_AR.md": {
+    "mtime": 1793119404.7763083,
+    "seen": 1793447234.1944234,
+    "ast_hash": "5897be6e50d99c1c219e2812827bf70c",
+    "semantic_hash": ""
+  },
+  "docs/SEMESTER2_CORRECTIONS_20261030_AR.md": {
+    "mtime": 1793348355.6300223,
+    "seen": 1793447234.1944244,
+    "ast_hash": "33848c740f9634112be73e5170bde23d",
+    "semantic_hash": ""
+  },
+  "docs/SEMESTER2_EXCHANGE_PREVIEW_20261030_AR.md": {
+    "mtime": 1793351447.112528,
+    "seen": 1793447234.194425,
+    "ast_hash": "95c7e86e44941dfc54dbb56dc282fe4d",
+    "semantic_hash": ""
+  },
+  "docs/SEMESTER2_EXPLICIT_PREFERENCES_20261027_AR.md": {
+    "mtime": 1793118780.6881397,
+    "seen": 1793447234.1944258,
+    "ast_hash": "9cdb3a14cc52a83a73c4dd71a19eafdf",
+    "semantic_hash": ""
+  },
+  "docs/SEMESTER2_PREFERENCES_COPY_20261027_AR.md": {
+    "mtime": 1793118780.687133,
+    "seen": 1793447234.1944265,
+    "ast_hash": "7846d348e3d9d2d62b9735c7a1253410",
+    "semantic_hash": ""
+  },
+  "docs/SEMESTER_NAVIGATION_AR.md": {
+    "mtime": 1793114074.1153672,
+    "seen": 1793447234.1944275,
+    "ast_hash": "e982cbb292fbf5969d6200ed87286ae2",
+    "semantic_hash": ""
+  },
+  "docs/SUBJECT_DELETION_AR.md": {
+    "mtime": 1793274913.3354814,
+    "seen": 1793447234.194429,
+    "ast_hash": "e4ba9b3c4e68d9e9eee166ece8b47a3e",
+    "semantic_hash": ""
+  },
+  "docs/THIRD_YEAR_CS_CYS_PDF_REVIEW_20261029_AR.md": {
+    "mtime": 1793277608.210031,
+    "seen": 1793447234.1944315,
+    "ast_hash": "49d7e40e2c0029f9f379fb324c401ca7",
+    "semantic_hash": ""
+  },
+  "docs/THIRD_YEAR_SEMESTER2_CS_CY_20261027_AR.md": {
+    "mtime": 1793116446.651229,
+    "seen": 1793447234.194432,
+    "ast_hash": "843dcbf62bfb904c63da58c686c5f39c",
+    "semantic_hash": ""
+  },
+  "graphify-out/memory/query_20261027_141347_7da3aa73_\u0627\u0631\u064a\u062f_\u062a\u063a\u064a\u064a\u0631_\u0627\u0644\u0627\u0644\u0648\u0627\u0646_\u0644\u0648\u0627\u062c\u0647\u0627\u062a_\u0627\u0644\u0648\u0646\u062f\u0648\u0632_\u0641\u0648\u0631\u0645_\u0628\u0627\u0644\u0645\u0634\u0631\u0648\u0639_\u0644.md": {
+    "mtime": 1793110427.2909682,
+    "seen": 1793447234.194453,
+    "ast_hash": "f584e8bb2b24e576a3c13bb07f43560f",
+    "semantic_hash": ""
+  },
+  "installer/INSTALLATION-NOTES-AR.txt": {
+    "mtime": 1793396676.0838501,
+    "seen": 1793447234.194454,
+    "ast_hash": "7e7558a9223edbbabff01153069c49c2",
+    "semantic_hash": ""
+  },
+  "tests/AlternativeAvailability/README.md": {
+    "mtime": 1793118684.692181,
+    "seen": 1793447234.1944547,
+    "ast_hash": "bca1f6dd4c288c3127250923802ed8a1",
+    "semantic_hash": ""
+  },
+  "tests/AssignmentDeletion/README.md": {
+    "mtime": 1793274913.3354814,
+    "seen": 1793447234.1944573,
+    "ast_hash": "a1bc839717ea8f30323d5e2ec134f147",
+    "semantic_hash": ""
+  },
+  "tests/EmbeddedPageNavigation/README.md": {
+    "mtime": 1793276818.5793025,
+    "seen": 1793447234.1944616,
+    "ast_hash": "f295d10cdcd1d663490045140e77fc08",
+    "semantic_hash": ""
+  },
+  "tests/PageReturnLayout/README.md": {
+    "mtime": 1793274315.0448108,
+    "seen": 1793447234.194466,
+    "ast_hash": "11ac22c95755c0d19b03715eb96926e2",
+    "semantic_hash": ""
+  },
+  "tests/PracticalExchangeGeneration/README.md": {
+    "mtime": 1793350736.7988896,
+    "seen": 1793447234.1944675,
+    "ast_hash": "43a0f6fd6efe756a6a5d5c6f2121868d",
+    "semantic_hash": ""
+  },
+  "tests/SemesterNavigation/README.md": {
+    "mtime": 1793114074.1167557,
+    "seen": 1793447234.1944726,
+    "ast_hash": "72d2ade87a28dace85f3b6e3773a3e6a",
+    "semantic_hash": ""
+  },
+  "tests/SubjectDeletion/README.md": {
+    "mtime": 1793274816.6317928,
+    "seen": 1793447234.1944733,
+    "ast_hash": "b970e96354c4c5b75bdf7c48a566f046",
+    "semantic_hash": ""
+  }
+}

@@ -10,6 +10,22 @@ namespace University_Timetable_and_Classroom_Management_System
         private readonly SubjectService subjectService = new();
         private readonly StudyYearService studyYearService = new();
         private readonly BranchService branchService = new();
+        private readonly AcademicSemesterSelection semesterSelection;
+        private readonly Guna2ComboBox cmbSemesterFilter = new() { Name = "cmbSemesterFilter" };
+        private const int RecentlyImportedFilter = -1;
+        private readonly Guna2Button btnImportSubjects = new()
+        {
+            Name = "btnImportSubjects", Text = "استيراد مواد من Excel",
+            AccessibleName = "استيراد مواد من Excel",
+            Size = new Size(175, 44), Margin = new Padding(6, 4, 6, 4),
+            BorderRadius = DesktopCorners.Button, FillColor = DesktopPalette.Primary, ForeColor = Color.White,
+            Font = new Font("Segoe UI Semibold", 9.5F, FontStyle.Bold)
+        };
+        private readonly CheckBox chkMergePracticalGroups = new()
+        {
+            Name = "chkMergePracticalGroups", Text = "عملي مدمج للشعبة كاملة",
+            AutoSize = true, Margin = new Padding(8, 14, 8, 14)
+        };
 
         private List<StudyYear> studyYearsLookup = [];
         private List<Branch> branchesLookup = [];
@@ -21,11 +37,25 @@ namespace University_Timetable_and_Classroom_Management_System
         private double legacyTheoreticalHours;
         private double legacyPracticalHours;
 
-        public SubjectsForm()
+        public SubjectsForm() : this(new AcademicSemesterSelection()) { }
+
+        internal SubjectsForm(AcademicSemesterSelection semesterSelection)
         {
+            this.semesterSelection = semesterSelection;
             InitializeComponent();
-            if (DesignerEnvironment.IsDesignTime(this)) return;
-            ArabicUi.Apply(this);
+            using (new LayoutUpdateScope(this))
+            {
+                flowEditorFields.Controls.Add(chkMergePracticalGroups);
+                ListFilterField.Add(flowResultsHeader, cmbSemesterFilter, "تصفية حسب الفصل", cmbStudyYearFilter);
+                flowResultsHeader.Controls.Add(btnImportSubjects);
+                lblBranchFilter.Text = "تصفية حسب القسم";
+                ComboBoxHelper.Bind(cmbSemesterFilter,
+                    [new(null, "جميع الفصول"), new(1, "الفصل الأول"), new(2, "الفصل الثاني"),
+                        new(0, "مواد غير مصنّفة"), new(RecentlyImportedFilter, "المضافة حديثًا")], semesterSelection.Semester);
+                SelectComboText(cmbSemester, semesterSelection.Semester.ToString());
+                if (DesignerEnvironment.IsDesignTime(this)) return;
+                ArabicUi.Apply(this);
+            }
             ConfigureSubjectsGrid();
             ConfigureSubjectsEvents();
             ResetLectureCounts();
@@ -50,11 +80,13 @@ namespace University_Timetable_and_Classroom_Management_System
             dgvSubjects.SelectionChanged += (_, _) => PopulateSubjectEditorFromSelection();
 
             btnAddSubject.Click += async (_, _) => await AddSubjectAsync();
+            btnImportSubjects.Click += async (_, _) => await ImportSubjectsAsync();
             btnUpdateSubject.Click += async (_, _) => await UpdateSubjectAsync();
             btnDeleteSubject.Click += async (_, _) => await DeleteSubjectAsync();
             cmbStudyYear.SelectedIndexChanged += (_, _) => ApplyStudyYearRulesToEditor();
             cmbStudyYearFilter.SelectedIndexChanged += (_, _) => ApplyStudyYearFilterSelection();
             cmbBranchFilter.SelectedIndexChanged += (_, _) => ApplySubjectFilters();
+            cmbSemesterFilter.SelectedIndexChanged += (_, _) => ApplySubjectSemesterSelection();
             txtTheoreticalLectureCount.TextChanged += (_, _) =>
             {
                 if (!updatingLectureCounts) theoreticalCountIsManual = !string.IsNullOrWhiteSpace(txtTheoreticalLectureCount.Text);
@@ -154,10 +186,70 @@ namespace University_Timetable_and_Classroom_Management_System
             var selectedBranchId = GetSelectedOptionalId(cmbBranchFilter);
 
             dgvSubjects.DataSource = subjectRows
+                .Where(MatchesSubjectSemester)
                 .Where(row => !selectedStudyYearId.HasValue || row.StudyYearID == selectedStudyYearId.Value)
                 .Where(row => !selectedBranchId.HasValue || row.BranchID == selectedBranchId.Value)
                 .ToList();
             dgvSubjects.ClearSelection();
+        }
+
+        private void ApplySubjectSemesterSelection()
+        {
+            if (IsDisposed || Disposing) return;
+            int? semester = GetSelectedOptionalId(cmbSemesterFilter);
+            if (semester is 1 or 2) semesterSelection.Semester = semester.Value;
+            lblTableSubtitle.Text = semester == RecentlyImportedFilter
+                ? "اختر مادة، حدّد الفصل والقسم وأعداد المحاضرات، ثم اضغط تعديل."
+                : "استعرض المواد واختر السجل المطلوب.";
+            cmbStudyYearFilter.Enabled = semester != 0;
+            if (semester == 0) SelectComboValue(cmbStudyYearFilter, null);
+            ApplyStudyYearFilterSelection();
+            // Binding can select a row; clear the editor after the new semester is displayed.
+            ClearSubjectForm();
+        }
+
+        private bool MatchesSubjectSemester(SubjectRow row)
+        {
+            int? semester = GetSelectedOptionalId(cmbSemesterFilter);
+            return semester switch
+            {
+                null => true,
+                0 => row.StudyYearID == Subject.UnclassifiedStudyYearId,
+                RecentlyImportedFilter => row.SemesterNumber == Subject.PendingSemesterNumber,
+                _ => row.StudyYearID != Subject.UnclassifiedStudyYearId && row.SemesterNumber == semester
+            };
+        }
+
+        private async Task ImportSubjectsAsync()
+        {
+            using var dialog = new OpenFileDialog
+            {
+                Title = "اختر ملف Excel بعمودَي «المادة» و«المرحلة» في الصف الأول",
+                Filter = "Excel (*.xlsx)|*.xlsx",
+                CheckFileExists = true
+            };
+            if (dialog.ShowDialog(this) != DialogResult.OK) return;
+
+            SetSubjectActionsEnabled(false);
+            btnImportSubjects.Text = "جارٍ الاستيراد…";
+            try
+            {
+                var (added, skipped) = await subjectService.ImportListAsync(dialog.FileName);
+                if (IsDisposed || Disposing) return;
+                SelectComboValue(cmbStudyYearFilter, null);
+                SelectComboValue(cmbBranchFilter, null);
+                SelectComboValue(cmbSemesterFilter, RecentlyImportedFilter);
+                await LoadSubjectsAsync();
+                if (IsDisposed || Disposing) return;
+                ClearSubjectForm();
+                ShowInformation($"أُضيفت {added} مادة. تم تجاوز {skipped} من الصفوف المكررة بحسب اسم المادة والمرحلة.");
+            }
+            catch (Exception ex) { ShowError("تعذر استيراد المواد من Excel.", ex); }
+            finally
+            {
+                if (!IsDisposed && !Disposing) btnImportSubjects.Text = "استيراد مواد من Excel";
+                SetSubjectActionsEnabled(true);
+            }
         }
 
         private async Task AddSubjectAsync()
@@ -198,7 +290,7 @@ namespace University_Timetable_and_Classroom_Management_System
             }
 
             var confirmation = UiMessages.Confirm(this,
-                "حذف المادة من القائمة ومن التوليد الجديد؟ ستبقى تكليفاتها ومحاضراتها المحفوظة دون حذف.", "حذف المادة");
+                "حذف المادة وجميع تكليفاتها ومحاضراتها من الجدول، بما فيها المحاضرات المثبّتة؟", "حذف المادة");
 
             if (confirmation != DialogResult.Yes)
             {
@@ -284,6 +376,7 @@ namespace University_Timetable_and_Classroom_Management_System
             subject.TheoreticalLectureCount = theoreticalCountIsManual ? theoreticalCount : null;
             subject.PracticalLectureCount = practicalCountIsManual ? practicalCount : null;
             subject.CreditUnits = original?.CreditUnits ?? 0;
+            subject.MergePracticalGroups = chkMergePracticalGroups.Checked;
             return true;
         }
 
@@ -315,10 +408,11 @@ namespace University_Timetable_and_Classroom_Management_System
         {
             txtSubjectId.Text = row.SubjectID.ToString();
             txtSubjectName.Text = row.SubjectName;
+            chkMergePracticalGroups.Checked = row.MergePracticalGroups;
             SelectComboValue(cmbStudyYear, row.StudyYearID);
             SelectComboValue(cmbBranch, row.BranchID);
             ApplyStudyYearRulesToEditor();
-            if (row.StudyYearID == Subject.UnclassifiedStudyYearId) ClearCombo(cmbSemester);
+            if (row.StudyYearID == Subject.UnclassifiedStudyYearId || row.SemesterNumber == Subject.PendingSemesterNumber) ClearCombo(cmbSemester);
             else SelectComboText(cmbSemester, row.SemesterNumber.ToString());
             updatingLectureCounts = true;
             try
@@ -339,10 +433,13 @@ namespace University_Timetable_and_Classroom_Management_System
 
             txtSubjectId.Text = "تلقائي";
             txtSubjectName.Clear();
+            chkMergePracticalGroups.Checked = false;
             ClearCombo(cmbStudyYear);
             ClearCombo(cmbBranch);
             cmbBranch.Enabled = true;
             ClearCombo(cmbSemester);
+            if (GetSelectedOptionalId(cmbSemesterFilter) is not (0 or RecentlyImportedFilter))
+                SelectComboText(cmbSemester, semesterSelection.Semester.ToString());
             legacyTheoreticalHours = legacyPracticalHours = 0;
             ResetLectureCounts();
             dgvSubjects.ClearSelection();
@@ -406,9 +503,13 @@ namespace University_Timetable_and_Classroom_Management_System
             if (IsDisposed || Disposing) return;
 
             btnAddSubject.Enabled = enabled;
+            btnImportSubjects.Enabled = enabled;
             btnUpdateSubject.Enabled = enabled;
             btnDeleteSubject.Enabled = enabled;
             dgvSubjects.Enabled = enabled;
+            cmbSemesterFilter.Enabled = enabled;
+            cmbStudyYearFilter.Enabled = enabled && GetSelectedOptionalId(cmbSemesterFilter) != 0;
+            cmbBranchFilter.Enabled = enabled;
         }
 
         private void BindBranchCombo()
@@ -435,6 +536,7 @@ namespace University_Timetable_and_Classroom_Management_System
         private void BindBranchFilterCombo(int? studyYearId, int? selectedBranchId)
         {
             var availableBranchIds = subjectRows
+                .Where(MatchesSubjectSemester)
                 .Where(row => !studyYearId.HasValue || row.StudyYearID == studyYearId.Value)
                 .Select(row => row.BranchID)
                 .ToHashSet();
@@ -505,7 +607,8 @@ namespace University_Timetable_and_Classroom_Management_System
             public string StudyYearName { get; init; } = string.Empty;
             public string BranchName { get; init; } = string.Empty;
             public int SemesterNumber { get; init; }
-            public string SemesterDisplay => StudyYearID == Subject.UnclassifiedStudyYearId ? "غير محدد" : SemesterNumber.ToString();
+            public string SemesterDisplay => StudyYearID == Subject.UnclassifiedStudyYearId || SemesterNumber == Subject.PendingSemesterNumber
+                ? "غير محدد" : SemesterNumber.ToString();
             public double TheoreticalHours { get; init; }
             public double PracticalHours { get; init; }
             public double CreditUnits { get; init; }
@@ -513,6 +616,7 @@ namespace University_Timetable_and_Classroom_Management_System
             public int? PracticalLectureOverride { get; init; }
             public int TheoreticalLectureCount { get; init; }
             public int PracticalLectureCount { get; init; }
+            public bool MergePracticalGroups { get; init; }
 
             public static SubjectRow FromSubject(Subject subject)
             {
@@ -523,7 +627,8 @@ namespace University_Timetable_and_Classroom_Management_System
                     StudyYearID = subject.StudyYearID,
                     BranchID = subject.BranchID,
                     StudyYearName = subject.StudyYear?.YearName ?? "-",
-                    BranchName = subject.IsUnclassified ? "غير محدد" : subject.Branch?.BranchName ?? "عام",
+                    BranchName = subject.IsUnclassified || subject.SemesterNumber == Subject.PendingSemesterNumber
+                        ? "غير محدد" : subject.Branch?.BranchName ?? "عام",
                     SemesterNumber = subject.SemesterNumber,
                     TheoreticalHours = subject.TheoreticalHours,
                     PracticalHours = subject.PracticalHours,
@@ -532,6 +637,7 @@ namespace University_Timetable_and_Classroom_Management_System
                     PracticalLectureOverride = subject.PracticalLectureCount,
                     TheoreticalLectureCount = subject.EffectiveTheoreticalLectureCount,
                     PracticalLectureCount = subject.EffectivePracticalLectureCount,
+                    MergePracticalGroups = subject.MergePracticalGroups,
                 };
             }
         }

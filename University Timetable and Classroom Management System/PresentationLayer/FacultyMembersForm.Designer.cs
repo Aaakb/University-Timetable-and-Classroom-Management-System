@@ -26,8 +26,6 @@ namespace University_Timetable_and_Classroom_Management_System
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges3 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges4 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges5 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges6 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges7 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges8 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges9 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
@@ -59,7 +57,7 @@ namespace University_Timetable_and_Classroom_Management_System
             txtFacultyMemberFullName = new Guna.UI2.WinForms.Guna2TextBox();
             layoutCmbAcademicTitle = new TableLayoutPanel();
             lblAcademicTitle = new DesignerHtmlLabel();
-            cmbAcademicTitle = new Guna.UI2.WinForms.Guna2ComboBox();
+            txtAcademicTitle = new Guna.UI2.WinForms.Guna2TextBox();
             flowEditorActions = new ResponsiveFlowPanel();
             btnAddFacultyMember = new Guna.UI2.WinForms.Guna2Button();
             btnUpdateFacultyMember = new Guna.UI2.WinForms.Guna2Button();
@@ -99,12 +97,12 @@ namespace University_Timetable_and_Classroom_Management_System
             // 
             // pnlMain
             // 
-            pnlMain.BackColor = Color.FromArgb(245, 247, 250);
+            pnlMain.BackColor = DesktopPalette.Canvas;
             pnlMain.Controls.Add(pnlWorkspace);
             pnlMain.Controls.Add(pnlHeader);
             pnlMain.CustomizableEdges = customizableEdges23;
             pnlMain.Dock = DockStyle.Fill;
-            pnlMain.FillColor = Color.FromArgb(245, 247, 250);
+            pnlMain.FillColor = DesktopPalette.Canvas;
             pnlMain.Font = new Font("Segoe UI", 9F);
             pnlMain.ForeColor = SystemColors.ControlText;
             pnlMain.Location = new Point(0, 0);
@@ -117,11 +115,11 @@ namespace University_Timetable_and_Classroom_Management_System
             // pnlWorkspace
             // 
             pnlWorkspace.AutoScroll = true;
-            pnlWorkspace.BackColor = Color.FromArgb(245, 247, 250);
+            pnlWorkspace.BackColor = DesktopPalette.Canvas;
             pnlWorkspace.Controls.Add(layoutWorkspace);
             pnlWorkspace.CustomizableEdges = customizableEdges19;
             pnlWorkspace.Dock = DockStyle.Fill;
-            pnlWorkspace.FillColor = Color.FromArgb(245, 247, 250);
+            pnlWorkspace.FillColor = DesktopPalette.Canvas;
             pnlWorkspace.Font = new Font("Segoe UI", 9F);
             pnlWorkspace.ForeColor = SystemColors.ControlText;
             pnlWorkspace.Location = new Point(0, 85);
@@ -135,7 +133,7 @@ namespace University_Timetable_and_Classroom_Management_System
             // 
             layoutWorkspace.AutoSize = true;
             layoutWorkspace.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            layoutWorkspace.BackColor = Color.FromArgb(245, 247, 250);
+            layoutWorkspace.BackColor = DesktopPalette.Canvas;
             layoutWorkspace.ColumnCount = 1;
             layoutWorkspace.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
             layoutWorkspace.Controls.Add(pnlFacultyMemberEditor, 0, 0);
@@ -156,8 +154,8 @@ namespace University_Timetable_and_Classroom_Management_System
             pnlFacultyMemberEditor.AutoSize = true;
             pnlFacultyMemberEditor.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             pnlFacultyMemberEditor.BackColor = Color.Transparent;
-            pnlFacultyMemberEditor.BorderColor = Color.FromArgb(226, 232, 240);
-            pnlFacultyMemberEditor.BorderRadius = 6;
+            pnlFacultyMemberEditor.BorderColor = DesktopPalette.Border;
+            pnlFacultyMemberEditor.BorderRadius = DesktopCorners.Card;
             pnlFacultyMemberEditor.BorderThickness = 1;
             pnlFacultyMemberEditor.Controls.Add(layoutEditor);
             pnlFacultyMemberEditor.CustomizableEdges = customizableEdges15;
@@ -198,7 +196,7 @@ namespace University_Timetable_and_Classroom_Management_System
             // 
             lblEditorTitle.BackColor = Color.Transparent;
             lblEditorTitle.Font = new Font("Segoe UI Semibold", 11F, FontStyle.Bold);
-            lblEditorTitle.ForeColor = Color.FromArgb(15, 23, 42);
+            lblEditorTitle.ForeColor = DesktopPalette.Ink;
             lblEditorTitle.Location = new Point(0, 0);
             lblEditorTitle.Margin = new Padding(0, 0, 0, 6);
             lblEditorTitle.Name = "lblEditorTitle";
@@ -210,7 +208,7 @@ namespace University_Timetable_and_Classroom_Management_System
             // 
             lblEditorSubtitle.BackColor = Color.Transparent;
             lblEditorSubtitle.Font = new Font("Segoe UI", 9F);
-            lblEditorSubtitle.ForeColor = Color.FromArgb(100, 116, 139);
+            lblEditorSubtitle.ForeColor = DesktopPalette.Primary;
             lblEditorSubtitle.Location = new Point(0, 28);
             lblEditorSubtitle.Margin = new Padding(0, 0, 0, 6);
             lblEditorSubtitle.Name = "lblEditorSubtitle";
@@ -259,7 +257,7 @@ namespace University_Timetable_and_Classroom_Management_System
             // 
             lblFacultyMemberId.BackColor = Color.Transparent;
             lblFacultyMemberId.Font = new Font("Segoe UI Semibold", 9.5F, FontStyle.Bold);
-            lblFacultyMemberId.ForeColor = Color.FromArgb(51, 65, 85);
+            lblFacultyMemberId.ForeColor = DesktopPalette.Header;
             lblFacultyMemberId.Location = new Point(0, 0);
             lblFacultyMemberId.Margin = new Padding(0, 0, 0, 6);
             lblFacultyMemberId.Name = "lblFacultyMemberId";
@@ -271,23 +269,23 @@ namespace University_Timetable_and_Classroom_Management_System
             // 
             txtFacultyMemberId.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             txtFacultyMemberId.BackColor = Color.Transparent;
-            txtFacultyMemberId.BorderColor = Color.FromArgb(203, 213, 225);
-            txtFacultyMemberId.BorderRadius = 6;
+            txtFacultyMemberId.BorderColor = DesktopPalette.FieldBorder;
+            txtFacultyMemberId.BorderRadius = DesktopCorners.Field;
             txtFacultyMemberId.Cursor = Cursors.IBeam;
             txtFacultyMemberId.CustomizableEdges = customizableEdges1;
             txtFacultyMemberId.DefaultText = "";
-            txtFacultyMemberId.DisabledState.BorderColor = Color.FromArgb(226, 232, 240);
-            txtFacultyMemberId.DisabledState.FillColor = Color.FromArgb(248, 250, 252);
-            txtFacultyMemberId.DisabledState.ForeColor = Color.FromArgb(100, 116, 139);
-            txtFacultyMemberId.DisabledState.PlaceholderForeColor = Color.FromArgb(138, 138, 138);
-            txtFacultyMemberId.FocusedState.BorderColor = Color.FromArgb(37, 99, 235);
+            txtFacultyMemberId.DisabledState.BorderColor = DesktopPalette.Border;
+            txtFacultyMemberId.DisabledState.FillColor = DesktopPalette.Canvas;
+            txtFacultyMemberId.DisabledState.ForeColor = DesktopPalette.Primary;
+            txtFacultyMemberId.DisabledState.PlaceholderForeColor = DesktopPalette.Primary;
+            txtFacultyMemberId.FocusedState.BorderColor = DesktopPalette.Primary;
             txtFacultyMemberId.Font = new Font("Segoe UI", 10F);
-            txtFacultyMemberId.ForeColor = Color.FromArgb(15, 23, 42);
-            txtFacultyMemberId.HoverState.BorderColor = Color.FromArgb(148, 163, 184);
+            txtFacultyMemberId.ForeColor = DesktopPalette.Ink;
+            txtFacultyMemberId.HoverState.BorderColor = DesktopPalette.Primary;
             txtFacultyMemberId.Location = new Point(0, 25);
             txtFacultyMemberId.Margin = new Padding(0);
             txtFacultyMemberId.Name = "txtFacultyMemberId";
-            txtFacultyMemberId.PlaceholderForeColor = Color.FromArgb(148, 163, 184);
+            txtFacultyMemberId.PlaceholderForeColor = DesktopPalette.Primary;
             txtFacultyMemberId.PlaceholderText = "تلقائي";
             txtFacultyMemberId.ReadOnly = true;
             txtFacultyMemberId.SelectedText = "";
@@ -320,7 +318,7 @@ namespace University_Timetable_and_Classroom_Management_System
             // 
             lblFullName.BackColor = Color.Transparent;
             lblFullName.Font = new Font("Segoe UI Semibold", 9.5F, FontStyle.Bold);
-            lblFullName.ForeColor = Color.FromArgb(51, 65, 85);
+            lblFullName.ForeColor = DesktopPalette.Header;
             lblFullName.Location = new Point(0, 0);
             lblFullName.Margin = new Padding(0, 0, 0, 6);
             lblFullName.Name = "lblFullName";
@@ -332,23 +330,23 @@ namespace University_Timetable_and_Classroom_Management_System
             // 
             txtFacultyMemberFullName.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             txtFacultyMemberFullName.BackColor = Color.Transparent;
-            txtFacultyMemberFullName.BorderColor = Color.FromArgb(203, 213, 225);
-            txtFacultyMemberFullName.BorderRadius = 6;
+            txtFacultyMemberFullName.BorderColor = DesktopPalette.FieldBorder;
+            txtFacultyMemberFullName.BorderRadius = DesktopCorners.Field;
             txtFacultyMemberFullName.Cursor = Cursors.IBeam;
             txtFacultyMemberFullName.CustomizableEdges = customizableEdges3;
             txtFacultyMemberFullName.DefaultText = "";
-            txtFacultyMemberFullName.DisabledState.BorderColor = Color.FromArgb(226, 232, 240);
-            txtFacultyMemberFullName.DisabledState.FillColor = Color.FromArgb(248, 250, 252);
-            txtFacultyMemberFullName.DisabledState.ForeColor = Color.FromArgb(100, 116, 139);
-            txtFacultyMemberFullName.DisabledState.PlaceholderForeColor = Color.FromArgb(138, 138, 138);
-            txtFacultyMemberFullName.FocusedState.BorderColor = Color.FromArgb(37, 99, 235);
+            txtFacultyMemberFullName.DisabledState.BorderColor = DesktopPalette.Border;
+            txtFacultyMemberFullName.DisabledState.FillColor = DesktopPalette.Canvas;
+            txtFacultyMemberFullName.DisabledState.ForeColor = DesktopPalette.Primary;
+            txtFacultyMemberFullName.DisabledState.PlaceholderForeColor = DesktopPalette.Primary;
+            txtFacultyMemberFullName.FocusedState.BorderColor = DesktopPalette.Primary;
             txtFacultyMemberFullName.Font = new Font("Segoe UI", 10F);
-            txtFacultyMemberFullName.ForeColor = Color.FromArgb(15, 23, 42);
-            txtFacultyMemberFullName.HoverState.BorderColor = Color.FromArgb(148, 163, 184);
+            txtFacultyMemberFullName.ForeColor = DesktopPalette.Ink;
+            txtFacultyMemberFullName.HoverState.BorderColor = DesktopPalette.Primary;
             txtFacultyMemberFullName.Location = new Point(0, 25);
             txtFacultyMemberFullName.Margin = new Padding(0);
             txtFacultyMemberFullName.Name = "txtFacultyMemberFullName";
-            txtFacultyMemberFullName.PlaceholderForeColor = Color.FromArgb(148, 163, 184);
+            txtFacultyMemberFullName.PlaceholderForeColor = DesktopPalette.Primary;
             txtFacultyMemberFullName.PlaceholderText = "أدخل الاسم الكامل";
             txtFacultyMemberFullName.SelectedText = "";
             txtFacultyMemberFullName.ShadowDecoration.CustomizableEdges = customizableEdges4;
@@ -363,7 +361,7 @@ namespace University_Timetable_and_Classroom_Management_System
             layoutCmbAcademicTitle.ColumnCount = 1;
             layoutCmbAcademicTitle.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
             layoutCmbAcademicTitle.Controls.Add(lblAcademicTitle, 0, 0);
-            layoutCmbAcademicTitle.Controls.Add(cmbAcademicTitle, 0, 1);
+            layoutCmbAcademicTitle.Controls.Add(txtAcademicTitle, 0, 1);
             layoutCmbAcademicTitle.Location = new Point(370, 0);
             layoutCmbAcademicTitle.Margin = new Padding(0, 0, 20, 12);
             layoutCmbAcademicTitle.MaximumSize = new Size(320, 0);
@@ -379,36 +377,29 @@ namespace University_Timetable_and_Classroom_Management_System
             // 
             lblAcademicTitle.BackColor = Color.Transparent;
             lblAcademicTitle.Font = new Font("Segoe UI Semibold", 9.5F, FontStyle.Bold);
-            lblAcademicTitle.ForeColor = Color.FromArgb(51, 65, 85);
+            lblAcademicTitle.ForeColor = DesktopPalette.Header;
             lblAcademicTitle.Location = new Point(0, 0);
             lblAcademicTitle.Margin = new Padding(0, 0, 0, 6);
             lblAcademicTitle.Name = "lblAcademicTitle";
             lblAcademicTitle.Size = new Size(90, 19);
             lblAcademicTitle.TabIndex = 6;
-            lblAcademicTitle.Text = "اللقب العلمي";
+            lblAcademicTitle.Text = "اللقب العلمي (اختياري)";
             // 
-            // cmbAcademicTitle
+            // txtAcademicTitle
             // 
-            cmbAcademicTitle.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            cmbAcademicTitle.BackColor = Color.Transparent;
-            cmbAcademicTitle.BorderColor = Color.FromArgb(203, 213, 225);
-            cmbAcademicTitle.BorderRadius = 6;
-            cmbAcademicTitle.CustomizableEdges = customizableEdges5;
-            cmbAcademicTitle.DrawMode = DrawMode.OwnerDrawFixed;
-            cmbAcademicTitle.DropDownStyle = ComboBoxStyle.DropDownList;
-            cmbAcademicTitle.FocusedColor = Color.FromArgb(37, 99, 235);
-            cmbAcademicTitle.FocusedState.BorderColor = Color.FromArgb(37, 99, 235);
-            cmbAcademicTitle.Font = new Font("Segoe UI", 10F);
-            cmbAcademicTitle.ForeColor = Color.FromArgb(15, 23, 42);
-            cmbAcademicTitle.HoverState.BorderColor = Color.FromArgb(148, 163, 184);
-            cmbAcademicTitle.ItemHeight = 36;
-            cmbAcademicTitle.Items.AddRange(new object[] { "Professor", "Associate Professor", "Assistant Professor", "Lecturer", "Assistant Lecturer" });
-            cmbAcademicTitle.Location = new Point(0, 25);
-            cmbAcademicTitle.Margin = new Padding(0);
-            cmbAcademicTitle.Name = "cmbAcademicTitle";
-            cmbAcademicTitle.ShadowDecoration.CustomizableEdges = customizableEdges6;
-            cmbAcademicTitle.Size = new Size(320, 42);
-            cmbAcademicTitle.TabIndex = 7;
+            txtAcademicTitle.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            txtAcademicTitle.BorderColor = DesktopPalette.FieldBorder;
+            txtAcademicTitle.BorderRadius = DesktopCorners.Field;
+            txtAcademicTitle.Font = new Font("Segoe UI", 11F);
+            txtAcademicTitle.ForeColor = DesktopPalette.Ink;
+            txtAcademicTitle.MaxLength = 50;
+            txtAcademicTitle.Location = new Point(0, 25);
+            txtAcademicTitle.Margin = new Padding(0);
+            txtAcademicTitle.Name = "txtAcademicTitle";
+            txtAcademicTitle.PlaceholderForeColor = DesktopPalette.Primary;
+            txtAcademicTitle.PlaceholderText = "اكتب اللقب (اختياري)";
+            txtAcademicTitle.Size = new Size(320, 42);
+            txtAcademicTitle.TabIndex = 7;
             // 
             // flowEditorActions
             // 
@@ -430,17 +421,17 @@ namespace University_Timetable_and_Classroom_Management_System
             // btnAddFacultyMember
             // 
             btnAddFacultyMember.BackColor = Color.Transparent;
-            btnAddFacultyMember.BorderRadius = 7;
+            btnAddFacultyMember.BorderRadius = DesktopCorners.Button;
             btnAddFacultyMember.Cursor = Cursors.Hand;
             btnAddFacultyMember.CustomizableEdges = customizableEdges7;
             btnAddFacultyMember.DisabledState.BorderColor = Color.DarkGray;
             btnAddFacultyMember.DisabledState.CustomBorderColor = Color.DarkGray;
-            btnAddFacultyMember.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            btnAddFacultyMember.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            btnAddFacultyMember.FillColor = Color.FromArgb(22, 163, 74);
+            btnAddFacultyMember.DisabledState.FillColor = DesktopPalette.DisabledSurface;
+            btnAddFacultyMember.DisabledState.ForeColor = DesktopPalette.Primary;
+            btnAddFacultyMember.FillColor = DesktopPalette.Primary;
             btnAddFacultyMember.Font = new Font("Segoe UI Semibold", 9.5F, FontStyle.Bold);
             btnAddFacultyMember.ForeColor = Color.White;
-            btnAddFacultyMember.HoverState.FillColor = Color.FromArgb(21, 128, 61);
+            btnAddFacultyMember.HoverState.FillColor = DesktopPalette.Header;
             btnAddFacultyMember.Location = new Point(0, 0);
             btnAddFacultyMember.Margin = new Padding(0, 0, 12, 6);
             btnAddFacultyMember.Name = "btnAddFacultyMember";
@@ -452,17 +443,17 @@ namespace University_Timetable_and_Classroom_Management_System
             // btnUpdateFacultyMember
             // 
             btnUpdateFacultyMember.BackColor = Color.Transparent;
-            btnUpdateFacultyMember.BorderRadius = 7;
+            btnUpdateFacultyMember.BorderRadius = DesktopCorners.Button;
             btnUpdateFacultyMember.Cursor = Cursors.Hand;
             btnUpdateFacultyMember.CustomizableEdges = customizableEdges9;
             btnUpdateFacultyMember.DisabledState.BorderColor = Color.DarkGray;
             btnUpdateFacultyMember.DisabledState.CustomBorderColor = Color.DarkGray;
-            btnUpdateFacultyMember.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            btnUpdateFacultyMember.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            btnUpdateFacultyMember.FillColor = Color.FromArgb(37, 99, 235);
+            btnUpdateFacultyMember.DisabledState.FillColor = DesktopPalette.DisabledSurface;
+            btnUpdateFacultyMember.DisabledState.ForeColor = DesktopPalette.Primary;
+            btnUpdateFacultyMember.FillColor = DesktopPalette.Primary;
             btnUpdateFacultyMember.Font = new Font("Segoe UI Semibold", 9.5F, FontStyle.Bold);
             btnUpdateFacultyMember.ForeColor = Color.White;
-            btnUpdateFacultyMember.HoverState.FillColor = Color.FromArgb(29, 78, 216);
+            btnUpdateFacultyMember.HoverState.FillColor = DesktopPalette.Header;
             btnUpdateFacultyMember.Location = new Point(120, 0);
             btnUpdateFacultyMember.Margin = new Padding(0, 0, 12, 6);
             btnUpdateFacultyMember.Name = "btnUpdateFacultyMember";
@@ -474,17 +465,17 @@ namespace University_Timetable_and_Classroom_Management_System
             // btnDeleteFacultyMember
             // 
             btnDeleteFacultyMember.BackColor = Color.Transparent;
-            btnDeleteFacultyMember.BorderRadius = 7;
+            btnDeleteFacultyMember.BorderRadius = DesktopCorners.Button;
             btnDeleteFacultyMember.Cursor = Cursors.Hand;
             btnDeleteFacultyMember.CustomizableEdges = customizableEdges11;
             btnDeleteFacultyMember.DisabledState.BorderColor = Color.DarkGray;
             btnDeleteFacultyMember.DisabledState.CustomBorderColor = Color.DarkGray;
-            btnDeleteFacultyMember.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            btnDeleteFacultyMember.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            btnDeleteFacultyMember.FillColor = Color.FromArgb(220, 38, 38);
+            btnDeleteFacultyMember.DisabledState.FillColor = DesktopPalette.DisabledSurface;
+            btnDeleteFacultyMember.DisabledState.ForeColor = DesktopPalette.Primary;
+            btnDeleteFacultyMember.FillColor = DesktopPalette.Danger;
             btnDeleteFacultyMember.Font = new Font("Segoe UI Semibold", 9.5F, FontStyle.Bold);
             btnDeleteFacultyMember.ForeColor = Color.White;
-            btnDeleteFacultyMember.HoverState.FillColor = Color.FromArgb(185, 28, 28);
+            btnDeleteFacultyMember.HoverState.FillColor = DesktopPalette.DangerHover;
             btnDeleteFacultyMember.Location = new Point(0, 44);
             btnDeleteFacultyMember.Margin = new Padding(0, 0, 12, 6);
             btnDeleteFacultyMember.Name = "btnDeleteFacultyMember";
@@ -496,19 +487,19 @@ namespace University_Timetable_and_Classroom_Management_System
             // btnClearFacultyMemberForm
             // 
             btnClearFacultyMemberForm.BackColor = Color.Transparent;
-            btnClearFacultyMemberForm.BorderColor = Color.FromArgb(203, 213, 225);
-            btnClearFacultyMemberForm.BorderRadius = 7;
+            btnClearFacultyMemberForm.BorderColor = DesktopPalette.Border;
+            btnClearFacultyMemberForm.BorderRadius = DesktopCorners.Button;
             btnClearFacultyMemberForm.BorderThickness = 1;
             btnClearFacultyMemberForm.Cursor = Cursors.Hand;
             btnClearFacultyMemberForm.CustomizableEdges = customizableEdges13;
             btnClearFacultyMemberForm.DisabledState.BorderColor = Color.DarkGray;
             btnClearFacultyMemberForm.DisabledState.CustomBorderColor = Color.DarkGray;
-            btnClearFacultyMemberForm.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            btnClearFacultyMemberForm.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            btnClearFacultyMemberForm.FillColor = Color.FromArgb(100, 116, 139);
+            btnClearFacultyMemberForm.DisabledState.FillColor = DesktopPalette.DisabledSurface;
+            btnClearFacultyMemberForm.DisabledState.ForeColor = DesktopPalette.Primary;
+            btnClearFacultyMemberForm.FillColor = DesktopPalette.Primary;
             btnClearFacultyMemberForm.Font = new Font("Segoe UI Semibold", 9.5F, FontStyle.Bold);
             btnClearFacultyMemberForm.ForeColor = Color.White;
-            btnClearFacultyMemberForm.HoverState.FillColor = Color.FromArgb(71, 85, 105);
+            btnClearFacultyMemberForm.HoverState.FillColor = DesktopPalette.Primary;
             btnClearFacultyMemberForm.Location = new Point(120, 44);
             btnClearFacultyMemberForm.Margin = new Padding(0, 0, 12, 6);
             btnClearFacultyMemberForm.Name = "btnClearFacultyMemberForm";
@@ -522,8 +513,8 @@ namespace University_Timetable_and_Classroom_Management_System
             // pnlFacultyMembersTable
             // 
             pnlFacultyMembersTable.BackColor = Color.Transparent;
-            pnlFacultyMembersTable.BorderColor = Color.FromArgb(226, 232, 240);
-            pnlFacultyMembersTable.BorderRadius = 6;
+            pnlFacultyMembersTable.BorderColor = DesktopPalette.Border;
+            pnlFacultyMembersTable.BorderRadius = DesktopCorners.Card;
             pnlFacultyMembersTable.BorderThickness = 1;
             pnlFacultyMembersTable.Controls.Add(layoutResults);
             pnlFacultyMembersTable.CustomizableEdges = customizableEdges17;
@@ -577,7 +568,7 @@ namespace University_Timetable_and_Classroom_Management_System
             // 
             lblTableSubtitle.BackColor = Color.Transparent;
             lblTableSubtitle.Font = new Font("Segoe UI", 9F);
-            lblTableSubtitle.ForeColor = Color.FromArgb(100, 116, 139);
+            lblTableSubtitle.ForeColor = DesktopPalette.Primary;
             lblTableSubtitle.Location = new Point(0, 0);
             lblTableSubtitle.Margin = new Padding(0, 0, 20, 12);
             lblTableSubtitle.Name = "lblTableSubtitle";
@@ -590,7 +581,7 @@ namespace University_Timetable_and_Classroom_Management_System
             // 
             lblTableTitle.BackColor = Color.Transparent;
             lblTableTitle.Font = new Font("Segoe UI Semibold", 11F, FontStyle.Bold);
-            lblTableTitle.ForeColor = Color.FromArgb(15, 23, 42);
+            lblTableTitle.ForeColor = DesktopPalette.Ink;
             lblTableTitle.Location = new Point(248, 0);
             lblTableTitle.Margin = new Padding(0, 0, 20, 12);
             lblTableTitle.Name = "lblTableTitle";
@@ -603,16 +594,16 @@ namespace University_Timetable_and_Classroom_Management_System
             dgvFacultyMembers.AllowUserToAddRows = false;
             dgvFacultyMembers.AllowUserToDeleteRows = false;
             dgvFacultyMembers.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.BackColor = Color.FromArgb(241, 245, 249);
-            dataGridViewCellStyle1.ForeColor = Color.FromArgb(15, 23, 42);
-            dataGridViewCellStyle1.SelectionBackColor = Color.FromArgb(37, 99, 235);
-            dataGridViewCellStyle1.SelectionForeColor = Color.White;
+            dataGridViewCellStyle1.BackColor = DesktopPalette.Canvas;
+            dataGridViewCellStyle1.ForeColor = DesktopPalette.Ink;
+            dataGridViewCellStyle1.SelectionBackColor = DesktopPalette.Selection;
+            dataGridViewCellStyle1.SelectionForeColor = DesktopPalette.Ink;
             dgvFacultyMembers.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = Color.FromArgb(15, 23, 42);
+            dataGridViewCellStyle2.BackColor = DesktopPalette.Header;
             dataGridViewCellStyle2.Font = new Font("Segoe UI Semibold", 11F, FontStyle.Bold);
             dataGridViewCellStyle2.ForeColor = Color.White;
-            dataGridViewCellStyle2.SelectionBackColor = Color.FromArgb(15, 23, 42);
+            dataGridViewCellStyle2.SelectionBackColor = DesktopPalette.Header;
             dataGridViewCellStyle2.SelectionForeColor = Color.White;
             dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
             dgvFacultyMembers.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
@@ -621,14 +612,14 @@ namespace University_Timetable_and_Classroom_Management_System
             dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = Color.White;
             dataGridViewCellStyle3.Font = new Font("Segoe UI", 11F);
-            dataGridViewCellStyle3.ForeColor = Color.FromArgb(15, 23, 42);
-            dataGridViewCellStyle3.SelectionBackColor = Color.FromArgb(37, 99, 235);
-            dataGridViewCellStyle3.SelectionForeColor = Color.White;
+            dataGridViewCellStyle3.ForeColor = DesktopPalette.Ink;
+            dataGridViewCellStyle3.SelectionBackColor = DesktopPalette.Selection;
+            dataGridViewCellStyle3.SelectionForeColor = DesktopPalette.Ink;
             dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
             dgvFacultyMembers.DefaultCellStyle = dataGridViewCellStyle3;
             dgvFacultyMembers.Dock = DockStyle.Fill;
             dgvFacultyMembers.Font = new Font("Segoe UI", 9F);
-            dgvFacultyMembers.GridColor = Color.FromArgb(226, 232, 240);
+            dgvFacultyMembers.GridColor = DesktopPalette.Border;
             dgvFacultyMembers.Location = new Point(0, 34);
             dgvFacultyMembers.Margin = new Padding(0);
             dgvFacultyMembers.MinimumSize = new Size(0, 160);
@@ -639,21 +630,21 @@ namespace University_Timetable_and_Classroom_Management_System
             dgvFacultyMembers.RowTemplate.Height = 48;
             dgvFacultyMembers.Size = new Size(1076, 296);
             dgvFacultyMembers.TabIndex = 2;
-            dgvFacultyMembers.ThemeStyle.AlternatingRowsStyle.BackColor = Color.FromArgb(241, 245, 249);
-            dgvFacultyMembers.ThemeStyle.AlternatingRowsStyle.ForeColor = Color.FromArgb(15, 23, 42);
-            dgvFacultyMembers.ThemeStyle.AlternatingRowsStyle.SelectionBackColor = Color.FromArgb(37, 99, 235);
-            dgvFacultyMembers.ThemeStyle.AlternatingRowsStyle.SelectionForeColor = Color.White;
-            dgvFacultyMembers.ThemeStyle.GridColor = Color.FromArgb(226, 232, 240);
-            dgvFacultyMembers.ThemeStyle.HeaderStyle.BackColor = Color.FromArgb(15, 23, 42);
+            dgvFacultyMembers.ThemeStyle.AlternatingRowsStyle.BackColor = DesktopPalette.Canvas;
+            dgvFacultyMembers.ThemeStyle.AlternatingRowsStyle.ForeColor = DesktopPalette.Ink;
+            dgvFacultyMembers.ThemeStyle.AlternatingRowsStyle.SelectionBackColor = DesktopPalette.Selection;
+            dgvFacultyMembers.ThemeStyle.AlternatingRowsStyle.SelectionForeColor = DesktopPalette.Ink;
+            dgvFacultyMembers.ThemeStyle.GridColor = DesktopPalette.Border;
+            dgvFacultyMembers.ThemeStyle.HeaderStyle.BackColor = DesktopPalette.Header;
             dgvFacultyMembers.ThemeStyle.HeaderStyle.Font = new Font("Segoe UI Semibold", 11F, FontStyle.Bold);
             dgvFacultyMembers.ThemeStyle.HeaderStyle.HeaightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             dgvFacultyMembers.ThemeStyle.HeaderStyle.Height = 48;
             dgvFacultyMembers.ThemeStyle.ReadOnly = true;
             dgvFacultyMembers.ThemeStyle.RowsStyle.Font = new Font("Segoe UI", 11F);
-            dgvFacultyMembers.ThemeStyle.RowsStyle.ForeColor = Color.FromArgb(15, 23, 42);
+            dgvFacultyMembers.ThemeStyle.RowsStyle.ForeColor = DesktopPalette.Ink;
             dgvFacultyMembers.ThemeStyle.RowsStyle.Height = 48;
-            dgvFacultyMembers.ThemeStyle.RowsStyle.SelectionBackColor = Color.FromArgb(37, 99, 235);
-            dgvFacultyMembers.ThemeStyle.RowsStyle.SelectionForeColor = Color.White;
+            dgvFacultyMembers.ThemeStyle.RowsStyle.SelectionBackColor = DesktopPalette.Selection;
+            dgvFacultyMembers.ThemeStyle.RowsStyle.SelectionForeColor = DesktopPalette.Ink;
             // 
             // colRowNumber
             // 
@@ -732,7 +723,7 @@ namespace University_Timetable_and_Classroom_Management_System
             // 
             lblPageTitle.BackColor = Color.Transparent;
             lblPageTitle.Font = new Font("Segoe UI Semibold", 16F, FontStyle.Bold);
-            lblPageTitle.ForeColor = Color.FromArgb(15, 23, 42);
+            lblPageTitle.ForeColor = DesktopPalette.Ink;
             lblPageTitle.Location = new Point(0, 0);
             lblPageTitle.Margin = new Padding(0, 0, 0, 6);
             lblPageTitle.Name = "lblPageTitle";
@@ -744,7 +735,7 @@ namespace University_Timetable_and_Classroom_Management_System
             // 
             lblPageSubtitle.BackColor = Color.Transparent;
             lblPageSubtitle.Font = new Font("Segoe UI", 9F);
-            lblPageSubtitle.ForeColor = Color.FromArgb(100, 116, 139);
+            lblPageSubtitle.ForeColor = DesktopPalette.Primary;
             lblPageSubtitle.Location = new Point(0, 38);
             lblPageSubtitle.Margin = new Padding(0, 0, 0, 6);
             lblPageSubtitle.Name = "lblPageSubtitle";
@@ -757,7 +748,7 @@ namespace University_Timetable_and_Classroom_Management_System
             AccessibleName = "إدارة التدريسيين";
             AutoScaleDimensions = new SizeF(96F, 96F);
             AutoScaleMode = AutoScaleMode.Dpi;
-            BackColor = Color.FromArgb(245, 247, 250);
+            BackColor = DesktopPalette.Canvas;
             Controls.Add(pnlMain);
             Font = new Font("Segoe UI", 9F);
             ForeColor = SystemColors.ControlText;
@@ -826,7 +817,7 @@ namespace University_Timetable_and_Classroom_Management_System
         private global::Guna.UI2.WinForms.Guna2Button btnDeleteFacultyMember;
         private global::Guna.UI2.WinForms.Guna2Button btnUpdateFacultyMember;
         private global::Guna.UI2.WinForms.Guna2Button btnAddFacultyMember;
-        private global::Guna.UI2.WinForms.Guna2ComboBox cmbAcademicTitle;
+        private Guna.UI2.WinForms.Guna2TextBox txtAcademicTitle;
         private global::University_Timetable_and_Classroom_Management_System.DesignerHtmlLabel lblAcademicTitle;
         private global::Guna.UI2.WinForms.Guna2TextBox txtFacultyMemberFullName;
         private global::University_Timetable_and_Classroom_Management_System.DesignerHtmlLabel lblFullName;

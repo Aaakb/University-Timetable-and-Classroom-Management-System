@@ -30,19 +30,9 @@
     <Content Include="Assets\AppIcon.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\Templates\Excel\*.xlsx" Link="Templates\Excel\%(Filename)%(Extension)">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="PresentationLayer\ExcelImportForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="PresentationLayer\ExcelImportForm.Designer.cs">
-      <DependentUpon>ExcelImportForm.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </Compile>
     <Compile Update="PresentationLayer\TimetableAlternativesForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -182,7 +172,9 @@
   <ItemGroup>
     <EmbeddedResource Include="PresentationLayer\BranchesForm.resx" />
     <EmbeddedResource Include="PresentationLayer\ClassroomsForm.resx" />
-    <EmbeddedResource Include="PresentationLayer\ExcelImportForm.resx" />
+    <EmbeddedResource Include="PresentationLayer\FacultyMemberSubjectsForm.Scope.resx">
+      <ManifestResourceName>University_Timetable_and_Classroom_Management_System.FacultyMemberSubjectsForm.Scope</ManifestResourceName>
+    </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\FacultyScheduleEditorForm.resx" />
     <EmbeddedResource Include="PresentationLayer\FacultyPreferencesForm.resx" />
     <EmbeddedResource Include="PresentationLayer\FacultyMembersForm.resx" />

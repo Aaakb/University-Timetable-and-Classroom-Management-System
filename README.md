@@ -1,4 +1,4 @@
-﻿# University Timetable Management System
+# University Timetable Management System
 
 تطبيق لإدارة الجداول الجامعية، مع إدارة القاعات والمختبرات والمواد والتدريسيين،
 وواجهة Windows Forms وواجهة ويب قابلة للتثبيت كتطبيق PWA.
@@ -12,8 +12,9 @@ powershell -ExecutionPolicy Bypass -File .\tools\Export-Source.ps1
 ```
 
 يُحفظ الملف داخل `output`، مع استبعاد `bin` و`obj` و`.git` و`.vs`
-ومجلدات `out` و`output` و`tmp` و`.tmp` في جذر المشروع، والأرشيفات السابقة
-والسجلات والملفات المؤقتة. لا يحذف الأمر أي ملفات أصلية.
+ومجلدات `.artifacts` و`out` و`output` و`tmp` و`.tmp` ونسخ قواعد البيانات في جذر المشروع،
+والأرشيفات السابقة والسجلات والملفات المؤقتة. تُحفظ خريطة Graphify في نسخة المصدر
+مع استبعاد كاش التحليل القابل لإعادة الإنشاء. لا يحذف الأمر أي ملفات أصلية.
 هذه نسخة للمصدر تحتاج بناءً واستعادة حزم NuGet، وليست نسخة تشغيل جاهزة.
 
 افتح `University Timetable Management System.slnx` في Visual Studio، أو نفّذ:
@@ -24,7 +25,7 @@ dotnet run --project "University Timetable and Classroom Management System/Prese
 ```
 
 لتشغيل الويب استخدم `Start-Web.cmd` أو `Start-Web.ps1`.
-نسخة الويب تدعم استيراد Excel / PDF، وحفظ نسخ الجدول واستعادتها، وتثبيت المحاضرات وتفضيلات الأيام؛ راجع [تفاصيل استكمال وظائف الويب](docs/WEB_PARITY_AR.md).
+نسخة الويب تدعم استيراد أسماء التدريسيين والمواد من Excel بصيغة `.xlsx`، وحفظ نسخ الجدول واستعادتها، وتثبيت المحاضرات وتفضيلات الأيام؛ راجع [تفاصيل استكمال وظائف الويب](docs/WEB_PARITY_AR.md).
 لتعديل اتصال قاعدة البيانات في النسخة المثبتة، عدّل `database-settings.json` بجانب البرنامج؛ راجع [دليل إعداد الاتصال](docs/DATABASE_CONFIGURATION_AR.md).
 التفاصيل في [دليل تشغيل الويب](docs/PWA_STARTUP_AR.md)،
 و[دليل استيراد Excel](docs/ExcelImport.md)،
@@ -46,8 +47,10 @@ dotnet run --project "University Timetable and Classroom Management System/Prese
 كل المحاضرات الجديدة غير مثبتة افتراضياً، وإذا فشل التوليد يبقى الجدول السابق.
 
 يفتح `Start-Desktop.cmd` نسخة `bin/Release/net8.0-windows` الافتراضية،
-ويستخدم `out/subject-update` كبديل عند غيابها. أغلق النسخة المفتوحة قبل تحديث ملفاتها.
+وعند غيابها يعرض أمر بنائها؛ لا يشغّل نسخ التجارب القديمة. أغلق النسخة المفتوحة قبل تحديث ملفاتها.
 
 الاسم الرسمي هو **University Timetable Management System**. احتُفظ بمسارات
 المشاريع الداخلية وNamespaces وأسماء Assemblies القائمة لحماية المراجع والتوافق.
 تبقى قاعدة البيانات `UniversityTimetable` وإعدادات الاتصال القائمة كما هي.
+
+إعداد مسؤولي الويب وصلاحيات القراءة وإنشاء الحسابات موضح في [إعداد صلاحيات الويب](docs/WEB_AUTHORIZATION_AR.md).

@@ -14,6 +14,7 @@
         public int StudyYearID { get; set; }
 
         public int SemesterNumber { get; set; }
+        public const int PendingSemesterNumber = 0;
 
         public double TheoreticalHours { get; set; }
 
@@ -24,6 +25,7 @@
         // Null keeps the automatic weekly count; a value is a user override.
         public int? TheoreticalLectureCount { get; set; }
         public int? PracticalLectureCount { get; set; }
+        public bool MergePracticalGroups { get; set; }
         public const int MaximumWeeklyLectureCount = 100;
 
         [System.ComponentModel.DataAnnotations.Schema.NotMapped]
@@ -35,7 +37,8 @@
         [System.ComponentModel.DataAnnotations.Schema.NotMapped]
         public int EffectivePracticalLectureCount => PracticalLectureCount ?? DefaultPracticalLectureCount;
         [System.ComponentModel.DataAnnotations.Schema.NotMapped]
-        public bool HasWeeklyLectures => !IsDeleted && !IsUnclassified && (EffectiveTheoreticalLectureCount > 0 || EffectivePracticalLectureCount > 0);
+        public bool HasWeeklyLectures => !IsDeleted && !IsUnclassified && SemesterNumber != PendingSemesterNumber &&
+            (EffectiveTheoreticalLectureCount > 0 || EffectivePracticalLectureCount > 0);
 
         // Retained only for compatibility with existing database constraints.
         public const string DefaultRequirementType = "University";

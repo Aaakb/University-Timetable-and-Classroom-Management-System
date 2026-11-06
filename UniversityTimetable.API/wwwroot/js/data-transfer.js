@@ -45,7 +45,9 @@ function updateActions() {
 }
 function visibleSheets() { const session=$('import-session').value;return workbook?.sheets.filter(s=>!session||!s.studySession||s.studySession===session)||[]; }
 function configureSheet(sheet) {
-  const schema=mode()===0?(sheet.schema&&sheet.schema!=='Timetable'?sheet.schema:schemas[0].name):'Timetable';
+  const available=schemas.filter(item=>Array.isArray(sheet.mappings?.[item.name]));
+  if(!available.length)throw new Error('تعذر ربط أعمدة الورقة بنوع بيانات مدعوم.');
+  const schema=available.some(item=>item.name===sheet.schema)?sheet.schema:available[0].name;
   sheet.schema=schema;sheet.mapping=[...sheet.mappings[schema]];
 }
 function renderSheets() {
@@ -79,8 +81,18 @@ function renderPreview(value) {
 function download(blob,name){const url=URL.createObjectURL(blob),link=document.createElement('a');link.href=url;link.download=name;document.body.append(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),30000);}
 function formFile(id){const file=$(id).files[0];if(!file)throw new Error('اختر ملفًا أولاً.');const form=new FormData();form.append('file',file);return form;}
 $('cancel-transfer').onclick=()=>controller?.abort();
+$('import-file').onchange=()=>{
+  if(workbook&&dirty&&!confirm('تغيير الملف سيتجاهل البيانات غير المحفوظة في الملف المفتوح. هل تريد المتابعة؟')){
+    $('import-file').value='';message('الملف المفتوح ما زال متاحاً للمراجعة.');return;
+  }
+  workbook=null;preview=null;revision='';dirty=false;
+  for(const id of ['sheet-selection','mapping-table','source-table','import-report','import-result'])$(id).replaceChildren();
+  $('import-summary').textContent='';$('source-page').textContent='';
+  $('transfer-error').hidden=true;message('اضغط فتح الملف لقراءة الملف المحدد.');updateActions();
+};
 $('open-import').onclick=()=>run(async signal=>{
   const data=await api('imports/upload',{method:'POST',body:formFile('import-file'),signal});
+  if(!data.sheets?.length)throw new Error('لا يحتوي الملف على أوراق بيانات قابلة للاستيراد.');
   workbook=data;preview=null;revision='';dirty=true;
   for(const sheet of workbook.sheets){sheet.included=!!sheet.schema;configureSheet(sheet);}
   if(!workbook.sheets.some(s=>s.included))workbook.sheets[0].included=true;

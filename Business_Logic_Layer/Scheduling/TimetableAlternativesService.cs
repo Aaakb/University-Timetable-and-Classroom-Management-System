@@ -36,11 +36,15 @@ public sealed class TimetableAlternativesService
         var profiles = FacultyPreferenceRules.FromCatalog(data).Where(p => p.Key.Semester == request.Semester).ToDictionary(p => p.Key, p => p.Value);
         var periods = data.Rows<TimeSlot>().ToDictionary(p => p.TimeSlotID);
         foreach (var profile in profiles.Values) FacultyPreferenceRules.ValidateMatrix(profile, periods.Values);
+        var capacityIssues = FindFacultyCapacityIssues(data, rows, profiles, periods);
+        if (capacityIssues.Count > 0)
+            return new(current, [], "لا يمكن توزيع محاضرات الفصل ضمن أيام الدوام الحالية:\n" + string.Join("\n", capacityIssues) +
+                "\nراجع أيام الدوام أو التكليفات للتدريسيين المذكورين. بقي الجدول والتفضيلات دون تغيير.", version);
         bool baselineValid = profiles.Values.All(p => FacultyPreferenceRules.Violation(p, rows, periods, requireAttendance: true) is null);
         long? cap = baselineValid ? rows.Where(s => profiles.TryGetValue((s.FacultyMemberID, s.SemesterNumber), out var p) && p.HasScoredPreferences &&
             FacultyPreferenceRules.Level(p, s.DayOfWeek, s.TimeSlotID) == FacultyPreferenceLevel.Preferred).Sum(s => 2L * FacultyPreferenceRules.Duration(periods[s.TimeSlotID])) : null;
         var excluded = new List<IReadOnlyList<Schedule>> { rows }; var alternatives = new List<TimetableAlternative>();
-        var clock = Stopwatch.StartNew(); string lastStatus = "Unknown";
+        var clock = Stopwatch.StartNew(); string lastStatus = "Unknown"; IReadOnlyList<string> lastDiagnostics = [];
         for (int i = 0; i < request.Count; i++)
         {
             token.ThrowIfCancellationRequested(); double remaining = request.TimeLimitSeconds - clock.Elapsed.TotalSeconds;
@@ -50,7 +54,7 @@ public sealed class TimetableAlternativesService
                 movable.Select(s => new TimetableImportRow("Saved", 0, s, false)).ToList(), fixedRows,
                 Math.Max(.01, remaining / (request.Count - i)), token,
                 alternativeSearch: new(goal, excluded, cap)), token);
-            search.Stop(); lastStatus = result.Status;
+            search.Stop(); lastStatus = result.Status; lastDiagnostics = result.Diagnostics;
             if (result.Plan is null) { if (result.Status == "Infeasible") break; continue; }
             var full = fixedRows.Concat(result.Plan).ToList();
             await ValidateAsync(data, full, request.Semester, token);
@@ -62,7 +66,32 @@ public sealed class TimetableAlternativesService
             ? $"عُثر على {alternatives.Count} بدائل مختلفة في الأيام أو الفترات. قارنها بالجدول الحالي؛ لم يُحفظ أي تغيير. لا تتراجع البدائل عن عقوبة التفضيل الحالية عندما يكون الجدول الحالي موافقًا للتفضيلات."
             : lastStatus == "Infeasible" ? "لا يوجد بديل مختلف في الأيام أو الفترات ضمن الأقفال والتفضيلات الحالية دون تراجع في التفضيلات. راجع القيود أو المحاضرات المسموح تحريكها."
             : "لم يُعثر على بديل مختلف ضمن المهلة؛ هذا لا يثبت استحالة البدائل. جرّب مهلة أطول.";
+        if (alternatives.Count == 0 && lastStatus == "Infeasible" && lastDiagnostics.Count > 0)
+            message += "\n" + string.Join("\n", lastDiagnostics.Take(6));
         return new(current, alternatives, message, version);
+    }
+    private static IReadOnlyList<string> FindFacultyCapacityIssues(ImportCatalog data, IReadOnlyList<Schedule> rows,
+        IReadOnlyDictionary<(int Faculty, int Semester), FacultyScheduleRequest> profiles, IReadOnlyDictionary<int, TimeSlot> periods)
+    {
+        var faculty = data.Rows<FacultyMember>().ToDictionary(f => f.FacultyMemberID, f => f.FullName);
+        var issues = new List<string>();
+        foreach (var group in rows.GroupBy(s => (Faculty: s.FacultyMemberID, Semester: s.SemesterNumber)))
+        {
+            if (!profiles.TryGetValue(group.Key, out var profile)) continue;
+            var durations = group.Select(s => FacultyPreferenceRules.Duration(periods[s.TimeSlotID])).ToHashSet();
+            // This is an upper bound: ignore competing teachers, rooms and student
+            // bookings. Exceeding it proves that the saved availability cannot fit.
+            var available = (from day in ScheduleDayRules.AllDays
+                             from period in periods.Values
+                             where !period.IsBreak && durations.Contains(FacultyPreferenceRules.Duration(period)) &&
+                                 FacultyPreferenceRules.Allows(profile, new Schedule { DayOfWeek = day, TimeSlotID = period.TimeSlotID }, period)
+                             select (Day: day, Period: period.TimeSlotID)).ToList();
+            if (group.Count() <= available.Count) continue;
+            string allowedDays = string.Join("، ", available.Select(s => s.Day).Distinct().Select(ImportLabels.Display));
+            if (allowedDays.Length == 0) allowedDays = "لا توجد أيام وفترات متاحة";
+            issues.Add($"التدريسي «{faculty[group.Key.Faculty]}»: {group.Count()} محاضرات، مقابل {available.Count} فترات متاحة كحد أقصى ({allowedDays}).");
+        }
+        return issues;
     }
     public async Task<int> SaveAsync(TimetableAlternative alternative, bool confirmed, CancellationToken token = default)
     {

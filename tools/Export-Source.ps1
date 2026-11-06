@@ -13,8 +13,9 @@ if (Test-Path -LiteralPath $Destination) { throw "Destination already exists: $D
 Add-Type -AssemblyName System.IO.Compression
 Add-Type -AssemblyName System.IO.Compression.FileSystem
 
-$excludedFolders = @('.git', '.vs', 'bin', 'obj', 'node_modules', 'TestResults', '__pycache__')
-$excludedRootFolders = @('out', 'output', 'tmp', '.tmp')
+$excludedFolders = @('.git', '.vs', 'bin', 'obj', '.artifacts', 'node_modules', 'TestResults', '__pycache__')
+$excludedRootFolders = @('out', 'output', 'tmp', '.tmp', 'Backups', 'DesignerTrial', 'Trials')
+$graphDirectory = Join-Path $projectRoot 'graphify-out'
 $pending = [Collections.Generic.Stack[string]]::new()
 $pending.Push($projectRoot)
 $fileCount = 0
@@ -29,12 +30,13 @@ try {
                 if ($item.PSIsContainer) {
                     if ($item.Name -in $excludedFolders) { continue }
                     if ($directory -eq $projectRoot -and $item.Name -in $excludedRootFolders) { continue }
+                    if ($directory -eq $graphDirectory -and $item.Name -eq 'cache') { continue }
                     if ($item.Attributes -band [IO.FileAttributes]::ReparsePoint) { continue }
                     $pending.Push($item.FullName)
                     continue
                 }
                 if ($item.FullName -eq $Destination) { continue }
-                if ($item.Extension -in @('.zip', '.7z', '.rar', '.pdb', '.log', '.tmp', '.user', '.suo')) { continue }
+                if ($item.Extension -in @('.zip', '.7z', '.rar', '.exe', '.dll', '.msi', '.bak', '.mdf', '.ldf', '.ndf', '.pdb', '.log', '.tmp', '.user', '.suo')) { continue }
                 $entryName = $item.FullName.Substring($projectRoot.Length + 1).Replace('\', '/')
                 [IO.Compression.ZipFileExtensions]::CreateEntryFromFile($archive, $item.FullName, $entryName, [IO.Compression.CompressionLevel]::Optimal) | Out-Null
                 $fileCount++

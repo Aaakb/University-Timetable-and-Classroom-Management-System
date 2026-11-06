@@ -24,7 +24,14 @@ export async function api(path, options = {}) {
     throw new ApiError(message || ({ 401: 'يرجى تسجيل الدخول.', 403: 'ليست لديك صلاحية.', 429: 'محاولات كثيرة. انتظر دقيقة ثم حاول مجددًا.' }[response.status] || 'تعذر إتمام الطلب.'), response.status);
   }
   if (options.blob) return response.blob();
-  return response.status === 204 ? null : response.json();
+  const data=response.status === 204 ? null : await response.json();
+  if ((path === 'auth/me' || path === 'auth/login') && data?.canManage !== undefined) {
+    document.body.dataset.readOnly=String(!data.canManage);
+    let note=document.getElementById('read-only-note');
+    if (!note) { note=document.createElement('p');note.id='read-only-note';note.role='status';document.body.prepend(note); }
+    note.textContent='هذا الحساب للقراءة فقط. تواصل مع مسؤول النظام لتغيير الصلاحيات.';note.hidden=data.canManage;
+  }
+  return data;
 }
 export async function all(resource) {
   const rows = []; let page = 1;

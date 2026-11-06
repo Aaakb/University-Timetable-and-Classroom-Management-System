@@ -33,7 +33,10 @@ public sealed class ApiErrors(RequestDelegate next, ILogger<ApiErrors> logger)
                 SqlException => (503, "تعذر الاتصال بقاعدة البيانات أو إتمام الطلب. تحقق من خدمة SQL Server والإعدادات."),
                 _ => (500, "تعذر إتمام العملية. راجع سجل الخادم باستخدام رقم التتبع.")
             };
-            // Do not log exception text: provider messages can contain submitted data.
+            // Retain location/type only. Provider messages and exception.ToString() may contain submitted data.
+            if (status >= 500)
+                logger.LogError("API diagnostic {Type}, inner {InnerType}, status {Status}, trace {Trace}, stack {Stack}",
+                    ex.GetType().FullName, ex.InnerException?.GetType().FullName, status, context.TraceIdentifier, ex.StackTrace);
             logger.LogWarning("API failure {Type}, status {Status}, trace {Trace}", ex.GetType().Name, status, context.TraceIdentifier);
             context.Response.StatusCode = status;
             await context.Response.WriteAsJsonAsync(new { title = message, status, traceId = context.TraceIdentifier });

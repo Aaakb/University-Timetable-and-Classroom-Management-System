@@ -54,7 +54,6 @@ internal static class WeeklyVerification
             Assert(loaded.Sheets[11].Table.Rows.Cast<DataRow>().Any(r => ((string)r["ImportNote"]).Contains("كتابة منفردة")));
         });
         DatabaseChecks(loaded).GetAwaiter().GetResult();
-        Check("Actual-file Arabic UI filters morning/evening pages at 800x600 and 1180x800", () => Ui(loaded, source));
         Check("Original PDF stays byte-for-byte unchanged", () => Assert(hash == Convert.ToHexString(SHA256.HashData(File.ReadAllBytes(source)))));
         File.WriteAllText(Path.Combine(Output, "results.json"), JsonSerializer.Serialize(new { Count = checks.Count, Pages = 17, Lectures = 235, Checks = checks }, new JsonSerializerOptions { WriteIndented = true }));
         File.WriteAllText(Path.Combine(Output, "extracted-lectures.json"), JsonSerializer.Serialize(loaded.Sheets.Select(s => new
@@ -106,29 +105,5 @@ internal static class WeeklyVerification
         await using (var db = factory()) Assert(!await db.Schedules.AnyAsync());
         var saved = await service.SaveAsync(repaired, true);
         await using (var db = factory()) Check("Reviewed real-PDF repair saves atomically into an isolated database", () => Assert(saved.Added == 10 && db.Schedules.Count() == 10));
-    }
-    private static void Ui(ExcelWorkbookData loaded, string path)
-    {
-        ApplicationConfiguration.Initialize();
-        foreach (var size in new[] { new Size(800, 600), new Size(1180, 800) })
-        {
-            using var form = new ExcelImportForm { Size = size, ShowInTaskbar = false }; form.Show(); Application.DoEvents();
-            object Field(string n) => typeof(ExcelImportForm).GetField(n, BindingFlags.Instance | BindingFlags.NonPublic)!.GetValue(form)!;
-            typeof(ExcelImportForm).GetMethod("LoadWorkbook", BindingFlags.Instance | BindingFlags.NonPublic)!.Invoke(form, [loaded, path]); Application.DoEvents();
-            Assert(((ComboBox)Field("mode")).SelectedIndex == 3);
-            var session = (ComboBox)Field("studySession"); var sheets = (ComboBox)Field("sheet"); Assert(sheets.Items.Count == 17 && session.Visible);
-            session.SelectedIndex = 1; Application.DoEvents(); Assert(sheets.Items.Count == 10);
-            var selected = (List<ExcelSheetData>)typeof(ExcelImportForm).GetMethod("PrepareSheets", BindingFlags.Instance | BindingFlags.NonPublic)!.Invoke(form, null)!;
-            Assert(selected.Count == 10 && selected.All(s => s.StudySession == "صباحي"));
-            var data = (DataGridView)Field("data"); Assert(data.Rows.Count == 10 && data.Height >= 80);
-            foreach (string n in new[] { "validate", "generate", "save" })
-            {
-                var control = (Control)Field(n); Assert(form.ClientRectangle.Contains(form.RectangleToClient(control.RectangleToScreen(control.ClientRectangle))), "Clipped " + n);
-            }
-            using var image = new Bitmap(form.Width, form.Height); form.DrawToBitmap(image, new Rectangle(Point.Empty, form.Size)); image.Save(Path.Combine(Output, $"weekly-import-{size.Width}.png"));
-            session.SelectedIndex = 2; Application.DoEvents(); Assert(sheets.Items.Count == 7);
-            selected = (List<ExcelSheetData>)typeof(ExcelImportForm).GetMethod("PrepareSheets", BindingFlags.Instance | BindingFlags.NonPublic)!.Invoke(form, null)!;
-            Assert(selected.Count == 7 && selected.All(s => s.StudySession == "مسائي")); form.Close();
-        }
     }
 }

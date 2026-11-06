@@ -11,6 +11,8 @@ namespace University_Timetable_and_Classroom_Management_System
         {
             dgvSchedules.AutoGenerateColumns = false;
             dgvSchedules.ReadOnly = false;
+            dgvSchedules.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvSchedules.MultiSelect = false;
             foreach (DataGridViewColumn column in dgvSchedules.Columns) column.ReadOnly = column != colLockStatus;
             GridRowNumbers.Attach(dgvSchedules, colRowNumber);
             dgvSchedules.DataSource = scheduleBindingSource;
@@ -32,11 +34,11 @@ namespace University_Timetable_and_Classroom_Management_System
                     : isPractical
                         ? Color.FromArgb(240, 253, 244)
                         : Color.White;
-                row.DefaultCellStyle.SelectionBackColor = Color.FromArgb(37, 99, 235);
-                row.DefaultCellStyle.SelectionForeColor = Color.White;
+                row.DefaultCellStyle.SelectionBackColor = DesktopPalette.Selection;
+                row.DefaultCellStyle.SelectionForeColor = DesktopPalette.Ink;
 
                 row.Cells["colDayOfWeek"].Style.Font = new Font("Segoe UI Semibold", 9.5F, FontStyle.Bold);
-                row.Cells["colTimeSlot"].Style.ForeColor = Color.FromArgb(37, 99, 235);
+                row.Cells["colTimeSlot"].Style.ForeColor = DesktopPalette.Primary;
 
                 if (row.Cells["colSubject"] is DataGridViewCell subjectCell)
                 {
@@ -136,12 +138,8 @@ namespace University_Timetable_and_Classroom_Management_System
 
         private bool TryGetSelectedScheduleId(out int scheduleId)
         {
-            if (int.TryParse(txtScheduleId.Text, out scheduleId))
-            {
-                return true;
-            }
-
-            var selectedSchedule = dgvSchedules.CurrentRow?.DataBoundItem as ScheduleRow;
+            var selectedSchedule = dgvSchedules.SelectedRows.Count == 1
+                ? dgvSchedules.SelectedRows[0].DataBoundItem as ScheduleRow : null;
             scheduleId = selectedSchedule?.ScheduleID ?? 0;
             return scheduleId > 0;
         }

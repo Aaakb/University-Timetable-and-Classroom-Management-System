@@ -16,6 +16,7 @@ namespace Data_Access_Layer
 
         public DbSet<Branch> Branches { get; set; } = null!;
         public DbSet<StudyYear> StudyYears { get; set; } = null!;
+        public DbSet<Student> Students { get; set; } = null!;
         public DbSet<Section> Sections { get; set; } = null!;
         public DbSet<Subject> Subjects { get; set; } = null!;
         public DbSet<FacultyMember> FacultyMembers { get; set; } = null!;
@@ -39,6 +40,18 @@ namespace Data_Access_Layer
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<Student>(entity =>
+            {
+                entity.ToTable("Students", table =>
+                {
+                    table.HasCheckConstraint("CK_Students_StudyYear", "[StudyYearID] BETWEEN 1 AND 4");
+                    table.HasCheckConstraint("CK_Students_PracticalGroup",
+                        "[PracticalGroupNumber] IS NULL OR ([PracticalGroupNumber] IN (1, 2) AND [StudyYearID] IN (1, 2) AND [SectionID] IS NOT NULL)");
+                });
+                entity.Property(s => s.FullName).HasMaxLength(150).IsRequired();
+                entity.HasOne<StudyYear>().WithMany().HasForeignKey(s => s.StudyYearID).OnDelete(DeleteBehavior.Restrict);
+                entity.HasOne<Section>().WithMany().HasForeignKey(s => s.SectionID).OnDelete(DeleteBehavior.Restrict);
+            });
             modelBuilder.Entity<FacultyPeriodPreference>(entity =>
             {
                 entity.ToTable("FacultyPeriodPreferences", table =>
@@ -124,6 +137,7 @@ namespace Data_Access_Layer
                 entity.HasIndex(e => new { e.SubjectName, e.StudyYearID, e.BranchID, e.SemesterNumber }).IsUnique()
                     .HasFilter("[IsDeleted] = 0");
                 entity.Property(e => e.IsDeleted).HasDefaultValue(false);
+                entity.Property(e => e.MergePracticalGroups).HasDefaultValue(false);
 
                 entity.Property(e => e.SubjectID)
                     .ValueGeneratedNever();

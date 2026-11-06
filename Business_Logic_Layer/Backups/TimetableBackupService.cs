@@ -122,12 +122,19 @@ public sealed class TimetableBackupService
     private static bool ReferenceMatches(TimetableBackupReference saved, TimetableBackupReference current)
     {
         if (saved.Values == current.Values) return true;
-        if (saved.Table != "FacultyMemberSubjects") return false;
+        if (saved.Table is not ("FacultyMemberSubjects" or "Subjects")) return false;
         using var before = JsonDocument.Parse(saved.Values);
         using var after = JsonDocument.Parse(current.Values);
         // Only accept omitted legacy fields when their current values still have
         // the legacy meaning; never restore across a changed teaching component.
         var properties = after.RootElement.EnumerateObject().ToDictionary(p => p.Name, p => p.Value);
+        if (saved.Table == "Subjects")
+        {
+            if (!before.RootElement.TryGetProperty("MergePracticalGroups", out _) &&
+                properties.TryGetValue("MergePracticalGroups", out var merged) && merged.ValueKind == JsonValueKind.False)
+                properties.Remove("MergePracticalGroups");
+            return JsonSerializer.Serialize(properties) == saved.Values;
+        }
         if (!before.RootElement.TryGetProperty("SectionID", out _) &&
             properties["SectionID"].ValueKind == JsonValueKind.Null) properties.Remove("SectionID");
         if (!before.RootElement.TryGetProperty("LectureType", out _) &&

@@ -16,9 +16,11 @@ namespace University_Timetable_and_Classroom_Management_System.BusinessLayer
             }
 
             await EnsureApplicationUsersTableAsync(context);
+            await StudentSchema.EnsureAsync(context);
             await EnsureSubjectsSchemaAsync(context);
             await SubjectDeletionSchema.EnsureAsync(context);
             await SubjectLectureCountSchema.EnsureAsync(context);
+            await SubjectPracticalGroupingSchema.EnsureAsync(context);
             await FacultyAssignmentScopeSchema.EnsureAsync(context);
             await EnsureSchedulesSchemaAsync(context);
             await ScheduleLockSchema.EnsureAsync(context);

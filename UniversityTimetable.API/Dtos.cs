@@ -60,11 +60,12 @@ public sealed class SubjectDto
     [Range(0, double.MaxValue)] public double CreditUnits { get; set; }
     [Range(0, Subject.MaximumWeeklyLectureCount)] public int? TheoreticalLectureCount { get; set; }
     [Range(0, Subject.MaximumWeeklyLectureCount)] public int? PracticalLectureCount { get; set; }
+    public bool? MergePracticalGroups { get; set; }
     // Accept legacy clients without exposing or requiring this retired input.
     [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull)]
     public string? RequirementType { get; set; }
-    public Subject ToEntity(int id) => new() { SubjectID = id, SubjectName = SubjectName, StudyYearID = StudyYearID, BranchID = BranchID, SemesterNumber = SemesterNumber, TheoreticalHours = TheoreticalHours, PracticalHours = PracticalHours, CreditUnits = CreditUnits, TheoreticalLectureCount = TheoreticalLectureCount, PracticalLectureCount = PracticalLectureCount };
-    public static SubjectDto From(Subject x) => new() { SubjectID = x.SubjectID, SubjectName = x.SubjectName, StudyYearID = x.StudyYearID, BranchID = x.BranchID, SemesterNumber = x.SemesterNumber, TheoreticalHours = x.TheoreticalHours, PracticalHours = x.PracticalHours, CreditUnits = x.CreditUnits, TheoreticalLectureCount = x.TheoreticalLectureCount, PracticalLectureCount = x.PracticalLectureCount };
+    public Subject ToEntity(int id, bool existingMergePracticalGroups = false) => new() { SubjectID = id, SubjectName = SubjectName, StudyYearID = StudyYearID, BranchID = BranchID, SemesterNumber = SemesterNumber, TheoreticalHours = TheoreticalHours, PracticalHours = PracticalHours, CreditUnits = CreditUnits, TheoreticalLectureCount = TheoreticalLectureCount, PracticalLectureCount = PracticalLectureCount, MergePracticalGroups = MergePracticalGroups ?? existingMergePracticalGroups };
+    public static SubjectDto From(Subject x) => new() { SubjectID = x.SubjectID, SubjectName = x.SubjectName, StudyYearID = x.StudyYearID, BranchID = x.BranchID, SemesterNumber = x.SemesterNumber, TheoreticalHours = x.TheoreticalHours, PracticalHours = x.PracticalHours, CreditUnits = x.CreditUnits, TheoreticalLectureCount = x.TheoreticalLectureCount, PracticalLectureCount = x.PracticalLectureCount, MergePracticalGroups = x.MergePracticalGroups };
 }
 
 public sealed class TimeSlotDto

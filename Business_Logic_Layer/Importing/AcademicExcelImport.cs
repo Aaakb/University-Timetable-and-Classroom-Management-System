@@ -68,7 +68,7 @@ internal static class AcademicExcelImport
         "Classrooms" => new Classroom { ClassroomID = v.Int("ClassroomID"), ClassroomNumber = v.Text("ClassroomNumber"), Capacity = v.Int("Capacity"), RoomType = v.Text("RoomType") },
         "TimeSlots" => new TimeSlot { TimeSlotID = v.Int("TimeSlotID"), StartTime = v.Time("StartTime"), EndTime = v.Time("EndTime") },
         "Sections" => new Section { SectionID = v.Int("SectionID"), SectionName = v.Text("SectionName"), StudentCount = v.Int("StudentCount"), StudyYearID = v.Int("StudyYearID"), BranchID = v.OptionalInt("BranchID") },
-        "Subjects" => new Subject { SubjectID = v.Int("SubjectID"), SubjectName = v.Text("SubjectName"), StudyYearID = v.Int("StudyYearID"), BranchID = v.OptionalInt("BranchID"), SemesterNumber = v.Int("SemesterNumber"), TheoreticalHours = v.Number("TheoreticalHours"), PracticalHours = v.Number("PracticalHours"), CreditUnits = v.Text("CreditUnits", false).Length == 0 ? 0 : v.Number("CreditUnits"), TheoreticalLectureCount = v.OptionalInt("TheoreticalLectureCount"), PracticalLectureCount = v.OptionalInt("PracticalLectureCount") },
+        "Subjects" => new Subject { SubjectID = v.Int("SubjectID"), SubjectName = v.Text("SubjectName"), StudyYearID = v.Int("StudyYearID"), BranchID = v.OptionalInt("BranchID"), SemesterNumber = v.Int("SemesterNumber"), TheoreticalHours = v.Number("TheoreticalHours"), PracticalHours = v.Number("PracticalHours"), CreditUnits = v.Text("CreditUnits", false).Length == 0 ? 0 : v.Number("CreditUnits"), TheoreticalLectureCount = v.OptionalInt("TheoreticalLectureCount"), PracticalLectureCount = v.OptionalInt("PracticalLectureCount"), MergePracticalGroups = v.Bool("MergePracticalGroups", false) },
         "FacultyMemberSubjects" => new FacultyMemberSubject { FacultyMemberID = v.Int("FacultyMemberID"), SubjectID = v.Int("SubjectID"), SectionID = v.OptionalInt("SectionID"), LectureType = v.Text("LectureType", false) is { Length: > 0 } t ? t : "Both" },
         _ => throw new ArgumentException("Unsupported worksheet.")
     };
@@ -127,6 +127,8 @@ internal static class AcademicExcelImport
                 if (!c.Rows<FacultyMember>().Any(f => f.FacultyMemberID == x.FacultyMemberID) ||
                     !c.Rows<Subject>().Any(s => s.SubjectID == x.SubjectID && !s.IsDeleted))
                     throw new ArgumentException("FacultyMemberID or SubjectID does not exist in the database or preceding sheets.");
+                if (c.Rows<Subject>().Any(s => s.SubjectID == x.SubjectID && s.SemesterNumber == Subject.PendingSemesterNumber))
+                    throw new ArgumentException("استكمل بيانات المادة في شاشة المواد قبل إضافة تكليف لها.");
                 if (x.SectionID.HasValue && !c.Rows<Section>().Any(section => section.SectionID == x.SectionID &&
                     FacultyAssignmentRules.Matches(c.Rows<Subject>().Single(s => s.SubjectID == x.SubjectID), section)))
                     throw new ArgumentException("شعبة التكليف لا تطابق مرحلة المادة وتخصصها.");
@@ -211,6 +213,8 @@ internal static class AcademicExcelImport
                     throw new ArgumentException("نوع التكليف يستبعد محاضرات محفوظة للتدريسي.");
                 if (!await db.FacultyMembers.AnyAsync(f => f.FacultyMemberID == x.FacultyMemberID) ||
                     !await db.Subjects.AnyAsync(s => s.SubjectID == x.SubjectID && !s.IsDeleted)) throw new ArgumentException("Teaching assignment reference no longer exists.");
+                if (await db.Subjects.AnyAsync(s => s.SubjectID == x.SubjectID && s.SemesterNumber == Subject.PendingSemesterNumber))
+                    throw new ArgumentException("استكمل بيانات المادة في شاشة المواد قبل إضافة تكليف لها.");
                 if (x.SectionID.HasValue)
                 {
                     var subject = await db.Subjects.AsNoTracking().SingleAsync(s => s.SubjectID == x.SubjectID);

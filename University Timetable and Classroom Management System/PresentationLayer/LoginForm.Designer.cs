@@ -63,11 +63,11 @@ namespace University_Timetable_and_Classroom_Management_System
             // pnlContent
             //
             pnlContent.AutoScroll = true;
-            pnlContent.BackColor = Color.FromArgb(245, 247, 250);
+            pnlContent.BackColor = DesktopPalette.Canvas;
             pnlContent.Controls.Add(pnlCard);
             pnlContent.CustomizableEdges = customizableEdges13;
             pnlContent.Dock = DockStyle.Fill;
-            pnlContent.FillColor = Color.FromArgb(245, 247, 250);
+            pnlContent.FillColor = DesktopPalette.Canvas;
             pnlContent.Font = new Font("Segoe UI", 9F);
             pnlContent.ForeColor = SystemColors.ControlText;
             pnlContent.Location = new Point(360, 0);
@@ -78,9 +78,9 @@ namespace University_Timetable_and_Classroom_Management_System
             //
             // pnlCard
             //
-            pnlCard.BackColor = Color.FromArgb(245, 247, 250);
-            pnlCard.BorderColor = Color.FromArgb(226, 232, 240);
-            pnlCard.BorderRadius = 8;
+            pnlCard.BackColor = DesktopPalette.Canvas;
+            pnlCard.BorderColor = DesktopPalette.Border;
+            pnlCard.BorderRadius = DesktopCorners.Card;
             pnlCard.BorderThickness = 1;
             pnlCard.CustomizableEdges = customizableEdges11;
             pnlCard.FillColor = Color.White;
@@ -96,7 +96,7 @@ namespace University_Timetable_and_Classroom_Management_System
             //
             lblTitle.BackColor = Color.Transparent;
             lblTitle.Font = new Font("Segoe UI Semibold", 20F, FontStyle.Bold);
-            lblTitle.ForeColor = Color.FromArgb(15, 23, 42);
+            lblTitle.ForeColor = DesktopPalette.Ink;
             lblTitle.Location = new Point(32, 30);
             lblTitle.Name = "lblTitle";
             lblTitle.Size = new Size(88, 39);
@@ -107,7 +107,7 @@ namespace University_Timetable_and_Classroom_Management_System
             //
             lblSubtitle.BackColor = Color.Transparent;
             lblSubtitle.Font = new Font("Segoe UI", 9.5F);
-            lblSubtitle.ForeColor = Color.FromArgb(100, 116, 139);
+            lblSubtitle.ForeColor = DesktopPalette.Primary;
             lblSubtitle.Location = new Point(34, 72);
             lblSubtitle.Name = "lblSubtitle";
             lblSubtitle.Size = new Size(226, 19);
@@ -118,7 +118,7 @@ namespace University_Timetable_and_Classroom_Management_System
             //
             lblUserName.BackColor = Color.Transparent;
             lblUserName.Font = new Font("Segoe UI Semibold", 9.5F, FontStyle.Bold);
-            lblUserName.ForeColor = Color.FromArgb(51, 65, 85);
+            lblUserName.ForeColor = DesktopPalette.Header;
             lblUserName.Location = new Point(34, 122);
             lblUserName.Name = "lblUserName";
             lblUserName.Size = new Size(70, 19);
@@ -127,20 +127,20 @@ namespace University_Timetable_and_Classroom_Management_System
             //
             // txtUserName
             //
-            txtUserName.BackColor = Color.FromArgb(245, 247, 250);
-            txtUserName.BorderColor = Color.FromArgb(203, 213, 225);
-            txtUserName.BorderRadius = 8;
+            txtUserName.BackColor = DesktopPalette.Canvas;
+            txtUserName.BorderColor = DesktopPalette.FieldBorder;
+            txtUserName.BorderRadius = DesktopCorners.Field;
             txtUserName.Cursor = Cursors.IBeam;
             txtUserName.CustomizableEdges = customizableEdges1;
             txtUserName.DefaultText = "";
             txtUserName.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
             txtUserName.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
-            txtUserName.DisabledState.ForeColor = Color.FromArgb(138, 138, 138);
-            txtUserName.DisabledState.PlaceholderForeColor = Color.FromArgb(138, 138, 138);
-            txtUserName.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
+            txtUserName.DisabledState.ForeColor = DesktopPalette.Primary;
+            txtUserName.DisabledState.PlaceholderForeColor = DesktopPalette.Primary;
+            txtUserName.FocusedState.BorderColor = DesktopPalette.Primary;
             txtUserName.Font = new Font("Segoe UI", 10F);
-            txtUserName.ForeColor = Color.FromArgb(15, 23, 42);
-            txtUserName.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
+            txtUserName.ForeColor = DesktopPalette.Ink;
+            txtUserName.HoverState.BorderColor = DesktopPalette.Primary;
             txtUserName.Location = new Point(32, 150);
             txtUserName.Name = "txtUserName";
             txtUserName.PlaceholderText = "أدخل اسم المستخدم";
@@ -153,7 +153,7 @@ namespace University_Timetable_and_Classroom_Management_System
             //
             lblPassword.BackColor = Color.Transparent;
             lblPassword.Font = new Font("Segoe UI Semibold", 9.5F, FontStyle.Bold);
-            lblPassword.ForeColor = Color.FromArgb(51, 65, 85);
+            lblPassword.ForeColor = DesktopPalette.Header;
             lblPassword.Location = new Point(34, 214);
             lblPassword.Name = "lblPassword";
             lblPassword.Size = new Size(61, 19);
@@ -162,20 +162,20 @@ namespace University_Timetable_and_Classroom_Management_System
             //
             // txtPassword
             //
-            txtPassword.BackColor = Color.FromArgb(245, 247, 250);
-            txtPassword.BorderColor = Color.FromArgb(203, 213, 225);
-            txtPassword.BorderRadius = 8;
+            txtPassword.BackColor = DesktopPalette.Canvas;
+            txtPassword.BorderColor = DesktopPalette.FieldBorder;
+            txtPassword.BorderRadius = DesktopCorners.Field;
             txtPassword.Cursor = Cursors.IBeam;
             txtPassword.CustomizableEdges = customizableEdges3;
             txtPassword.DefaultText = "";
             txtPassword.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
             txtPassword.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
-            txtPassword.DisabledState.ForeColor = Color.FromArgb(138, 138, 138);
-            txtPassword.DisabledState.PlaceholderForeColor = Color.FromArgb(138, 138, 138);
-            txtPassword.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
+            txtPassword.DisabledState.ForeColor = DesktopPalette.Primary;
+            txtPassword.DisabledState.PlaceholderForeColor = DesktopPalette.Primary;
+            txtPassword.FocusedState.BorderColor = DesktopPalette.Primary;
             txtPassword.Font = new Font("Segoe UI", 10F);
-            txtPassword.ForeColor = Color.FromArgb(15, 23, 42);
-            txtPassword.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
+            txtPassword.ForeColor = DesktopPalette.Ink;
+            txtPassword.HoverState.BorderColor = DesktopPalette.Primary;
             txtPassword.Location = new Point(32, 242);
             txtPassword.Name = "txtPassword";
             txtPassword.PasswordChar = '*';
@@ -188,20 +188,20 @@ namespace University_Timetable_and_Classroom_Management_System
             // btnTogglePassword
             //
             btnTogglePassword.AccessibleName = "إظهار كلمة المرور";
-            btnTogglePassword.BackColor = Color.FromArgb(245, 247, 250);
-            btnTogglePassword.BorderColor = Color.FromArgb(203, 213, 225);
-            btnTogglePassword.BorderRadius = 8;
+            btnTogglePassword.BackColor = DesktopPalette.Canvas;
+            btnTogglePassword.BorderColor = DesktopPalette.Border;
+            btnTogglePassword.BorderRadius = DesktopCorners.Button;
             btnTogglePassword.BorderThickness = 1;
             btnTogglePassword.Cursor = Cursors.Hand;
             btnTogglePassword.CustomizableEdges = customizableEdges5;
             btnTogglePassword.DisabledState.BorderColor = Color.DarkGray;
             btnTogglePassword.DisabledState.CustomBorderColor = Color.DarkGray;
-            btnTogglePassword.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            btnTogglePassword.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            btnTogglePassword.DisabledState.FillColor = DesktopPalette.DisabledSurface;
+            btnTogglePassword.DisabledState.ForeColor = DesktopPalette.Primary;
             btnTogglePassword.FillColor = Color.White;
             btnTogglePassword.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
-            btnTogglePassword.ForeColor = Color.FromArgb(37, 99, 235);
-            btnTogglePassword.HoverState.FillColor = Color.FromArgb(239, 246, 255);
+            btnTogglePassword.ForeColor = DesktopPalette.Primary;
+            btnTogglePassword.HoverState.FillColor = DesktopPalette.SoftAccent;
             btnTogglePassword.Image = (Image)resources.GetObject("btnTogglePassword.Image");
             btnTogglePassword.ImageSize = new Size(22, 22);
             btnTogglePassword.Location = new Point(308, 242);
@@ -212,18 +212,18 @@ namespace University_Timetable_and_Classroom_Management_System
             //
             // btnSignIn
             //
-            btnSignIn.BackColor = Color.FromArgb(245, 247, 250);
-            btnSignIn.BorderRadius = 8;
+            btnSignIn.BackColor = DesktopPalette.Canvas;
+            btnSignIn.BorderRadius = DesktopCorners.Button;
             btnSignIn.Cursor = Cursors.Hand;
             btnSignIn.CustomizableEdges = customizableEdges7;
             btnSignIn.DisabledState.BorderColor = Color.DarkGray;
             btnSignIn.DisabledState.CustomBorderColor = Color.DarkGray;
-            btnSignIn.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            btnSignIn.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            btnSignIn.FillColor = Color.FromArgb(37, 99, 235);
+            btnSignIn.DisabledState.FillColor = DesktopPalette.DisabledSurface;
+            btnSignIn.DisabledState.ForeColor = DesktopPalette.Primary;
+            btnSignIn.FillColor = DesktopPalette.Primary;
             btnSignIn.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold);
             btnSignIn.ForeColor = Color.White;
-            btnSignIn.HoverState.FillColor = Color.FromArgb(29, 78, 216);
+            btnSignIn.HoverState.FillColor = DesktopPalette.Header;
             btnSignIn.Location = new Point(32, 316);
             btnSignIn.Name = "btnSignIn";
             btnSignIn.ShadowDecoration.CustomizableEdges = customizableEdges8;
@@ -233,18 +233,18 @@ namespace University_Timetable_and_Classroom_Management_System
             //
             // btnCreateAccount
             //
-            btnCreateAccount.BackColor = Color.FromArgb(245, 247, 250);
-            btnCreateAccount.BorderRadius = 8;
+            btnCreateAccount.BackColor = DesktopPalette.Canvas;
+            btnCreateAccount.BorderRadius = DesktopCorners.Button;
             btnCreateAccount.Cursor = Cursors.Hand;
             btnCreateAccount.CustomizableEdges = customizableEdges9;
             btnCreateAccount.DisabledState.BorderColor = Color.DarkGray;
             btnCreateAccount.DisabledState.CustomBorderColor = Color.DarkGray;
-            btnCreateAccount.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            btnCreateAccount.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            btnCreateAccount.DisabledState.FillColor = DesktopPalette.DisabledSurface;
+            btnCreateAccount.DisabledState.ForeColor = DesktopPalette.Primary;
             btnCreateAccount.FillColor = Color.White;
             btnCreateAccount.Font = new Font("Segoe UI Semibold", 9.5F, FontStyle.Bold);
-            btnCreateAccount.ForeColor = Color.FromArgb(37, 99, 235);
-            btnCreateAccount.HoverState.FillColor = Color.FromArgb(239, 246, 255);
+            btnCreateAccount.ForeColor = DesktopPalette.Primary;
+            btnCreateAccount.HoverState.FillColor = DesktopPalette.SoftAccent;
             btnCreateAccount.Location = new Point(32, 368);
             btnCreateAccount.Name = "btnCreateAccount";
             btnCreateAccount.ShadowDecoration.CustomizableEdges = customizableEdges10;
@@ -254,10 +254,10 @@ namespace University_Timetable_and_Classroom_Management_System
             //
             // pnlBrand
             //
-            pnlBrand.BackColor = Color.FromArgb(245, 247, 250);
+            pnlBrand.BackColor = DesktopPalette.Canvas;
             pnlBrand.CustomizableEdges = customizableEdges15;
             pnlBrand.Dock = DockStyle.Left;
-            pnlBrand.FillColor = Color.FromArgb(24, 38, 62);
+            pnlBrand.FillColor = DesktopPalette.Sidebar;
             pnlBrand.Font = new Font("Segoe UI", 9F);
             pnlBrand.ForeColor = SystemColors.ControlText;
             pnlBrand.Location = new Point(0, 0);
@@ -296,7 +296,7 @@ namespace University_Timetable_and_Classroom_Management_System
             lblBrandSubtitle.AutoSize = false;
             lblBrandSubtitle.BackColor = Color.Transparent;
             lblBrandSubtitle.Font = new Font("Segoe UI", 10F);
-            lblBrandSubtitle.ForeColor = Color.FromArgb(203, 213, 225);
+            lblBrandSubtitle.ForeColor = DesktopPalette.Border;
             lblBrandSubtitle.Location = new Point(38, 368);
             lblBrandSubtitle.Name = "lblBrandSubtitle";
             lblBrandSubtitle.Size = new Size(284, 52);
@@ -309,7 +309,7 @@ namespace University_Timetable_and_Classroom_Management_System
             AccessibleName = "تسجيل الدخول";
             AutoScaleDimensions = new SizeF(96F, 96F);
             AutoScaleMode = AutoScaleMode.Dpi;
-            BackColor = Color.FromArgb(245, 247, 250);
+            BackColor = DesktopPalette.Canvas;
             ClientSize = new Size(980, 620);
             Controls.Add(pnlContent);
             Controls.Add(pnlBrand);
@@ -388,7 +388,7 @@ namespace University_Timetable_and_Classroom_Management_System
             layoutAccountCard.Controls.Add(btnCreateAccount, 0, 7);
             btnCreateAccount.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             btnCreateAccount.Margin = new Padding(0, 0, 0, 8);
-            layoutBrand.BackColor = Color.FromArgb(24, 38, 62);
+            layoutBrand.BackColor = DesktopPalette.Sidebar;
             layoutBrand.Name = "layoutBrand";
             layoutBrand.Margin = new Padding(0);
             layoutBrand.ColumnCount = 1;

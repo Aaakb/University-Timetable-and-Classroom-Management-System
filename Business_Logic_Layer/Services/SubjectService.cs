@@ -41,6 +41,45 @@ namespace University_Timetable_and_Classroom_Management_System.BusinessLayer
             return await AddInContextAsync(context, subject);
         }
 
+        public async Task<(int Added, int Skipped)> ImportListAsync(string path)
+        {
+            var rows = await Task.Run(() => SubjectListWorkbook.Read(path));
+            await using var context = new AppDbContext();
+            await using var transaction = await context.Database.BeginTransactionAsync(System.Data.IsolationLevel.Serializable);
+            var years = await context.StudyYears.AsNoTracking().ToListAsync();
+            var existing = await context.Subjects.Where(s => !s.IsDeleted)
+                .Select(s => new { s.StudyYearID, s.SubjectName }).ToListAsync();
+            var namesByYear = existing.ToLookup(s => s.StudyYearID, s => s.SubjectName.Trim());
+            var seen = years.ToDictionary(y => y.StudyYearID,
+                y => new HashSet<string>(namesByYear[y.StudyYearID], StringComparer.OrdinalIgnoreCase));
+            var additions = new List<Subject>();
+            foreach (var row in rows)
+            {
+                var year = SubjectListWorkbook.ResolveYear(years, row.Year)
+                    ?? throw new ArgumentException($"{row.Sheet}، الصف {row.Row}: المرحلة «{row.Year}» غير معروفة. استخدم رقم المرحلة أو اسمها الموجود في البرنامج.");
+                if (!seen[year.StudyYearID].Add(row.Name)) continue;
+                additions.Add(new Subject
+                {
+                    SubjectName = row.Name,
+                    StudyYearID = year.StudyYearID,
+                    SemesterNumber = Subject.PendingSemesterNumber,
+                    TheoreticalLectureCount = 0,
+                    PracticalLectureCount = 0
+                });
+            }
+
+            if (additions.Count > 0)
+            {
+                await SubjectPendingSemesterSchema.EnsureAsync(context);
+                int lastId = await context.Subjects.MaxAsync(s => (int?)s.SubjectID) ?? 0;
+                foreach (var subject in additions) subject.SubjectID = checked(++lastId);
+                context.Subjects.AddRange(additions);
+                await ManualKeySaveHelper.SaveWithManualKeyAsync(context, "[Subjects]");
+            }
+            await transaction.CommitAsync();
+            return (additions.Count, rows.Count - additions.Count);
+        }
+
         internal static async Task<Subject> AddInContextAsync(AppDbContext context, Subject subject)
         {
             subject.IsDeleted = false;
@@ -127,13 +166,18 @@ namespace University_Timetable_and_Classroom_Management_System.BusinessLayer
         public async Task DeleteAsync(int id)
         {
             await using var context = new AppDbContext();
+            await using var transaction = await context.Database.BeginTransactionAsync(System.Data.IsolationLevel.Serializable);
             var subject = await context.Subjects.FindAsync(id)
                 ?? throw new KeyNotFoundException("Subject not found.");
 
-            // Keep the referenced record so assignments and saved lectures retain
-            // their original subject and remain valid after removal from the list.
+            // Remove every current placement, including locked and legacy rows
+            // without an assignment, then all teachers' assignments for this subject.
+            await context.Schedules.Where(s => s.SubjectID == id).ExecuteDeleteAsync();
+            await context.FacultyMemberSubjects.Where(a => a.SubjectID == id).ExecuteDeleteAsync();
+            // Retain its identity for historical backup references, not current use.
             subject.IsDeleted = true;
             await context.SaveChangesAsync();
+            await transaction.CommitAsync();
         }
 
         private static async Task ValidateAsync(AppDbContext context, Subject subject, bool isUpdate)

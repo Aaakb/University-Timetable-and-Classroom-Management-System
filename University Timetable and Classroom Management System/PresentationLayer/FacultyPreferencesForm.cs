@@ -22,6 +22,7 @@ public partial class FacultyPreferencesForm : Form
     public FacultyPreferencesForm(FacultyScheduleEditorService? service)
     {
         InitializeComponent();
+        DialogAppearance.Apply(this);
         semester.SelectedIndex = 0;
         if (DesignerEnvironment.IsDesignTime(this)) return;
 

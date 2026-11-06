@@ -40,6 +40,13 @@ try
         for (int term=1;term<=2;term++)db.Schedules.Add(new() { SubjectID=term,FacultyMemberID=1,ClassroomID=1,TimeSlotID=1,DayOfWeek="Sunday",LectureType="Theory",SectionID=1,StudyYearID=1,SemesterNumber=term,IsLocked=term==2 });
         await db.SaveChangesAsync();
     }
+    string password=Guid.NewGuid()+"a!7";
+    var previousConnection=Environment.GetEnvironmentVariable(DatabaseConnection.EnvironmentVariableName);
+    try {
+        Environment.SetEnvironmentVariable(DatabaseConnection.EnvironmentVariableName,settings.ConnectionString);
+        var seeded=await new AuthService().RegisterAsync("Transfer test","transfer",password,password);
+        Check("Administrator seeded outside public API",seeded.Succeeded && seeded.User!.ApplicationUserID==1);
+    } finally { Environment.SetEnvironmentVariable(DatabaseConnection.EnvironmentVariableName,previousConnection); }
     var listener = new TcpListener(IPAddress.Loopback,0);listener.Start();int port=((IPEndPoint)listener.LocalEndpoint).Port;listener.Stop();
     client.BaseAddress = new Uri($"http://localhost:{port}");
     string api = Path.GetFullPath("UniversityTimetable.API");
@@ -52,8 +59,8 @@ try
     for(int i=0;i<100;i++){if(host.HasExited)throw new Exception("Isolated API failed to start.");try{ready=(await client.GetAsync("/")).IsSuccessStatusCode;if(ready)break;}catch(HttpRequestException){}await Task.Delay(100);}
     Check("Isolated API starts",ready);
     csrf=(await client.GetFromJsonAsync<JsonObject>("/api/auth/csrf"))!["token"]!.GetValue<string>();
-    string password=Guid.NewGuid()+"a!7";
-    await Send("auth/register",new{fullName="Transfer test",userName="transfer",password,confirmPassword=password},201);
+
+    await Send("auth/register",new{fullName="Blocked",userName="blocked",password,confirmPassword=password},401);
     await Send("auth/login",new{userName="transfer",password},200);
     csrf=(await client.GetFromJsonAsync<JsonObject>("/api/auth/csrf"))!["token"]!.GetValue<string>();
     byte[] backup=await client.GetByteArrayAsync("/api/timetable-backups/download");
@@ -78,7 +85,7 @@ try
     using var other=new HttpClient(new HttpClientHandler{CookieContainer=new CookieContainer()}){BaseAddress=client.BaseAddress};
     string otherToken=(await other.GetFromJsonAsync<JsonObject>("/api/auth/csrf"))!["token"]!.GetValue<string>();
     other.DefaultRequestHeaders.Add("X-CSRF-TOKEN",otherToken);
-    Check("Second account registration",(await other.PostAsJsonAsync("/api/auth/register",new{fullName="Other",userName="other",password,confirmPassword=password})).StatusCode==HttpStatusCode.Created);
+    await Send("auth/register",new{fullName="Other",userName="other",password,confirmPassword=password},201);
     Check("Second account login",(await other.PostAsJsonAsync("/api/auth/login",new{userName="other",password})).IsSuccessStatusCode);
     other.DefaultRequestHeaders.Remove("X-CSRF-TOKEN");other.DefaultRequestHeaders.Add("X-CSRF-TOKEN",(await other.GetFromJsonAsync<JsonObject>("/api/auth/csrf"))!["token"]!.GetValue<string>());
     Check("Safety download belongs to its account",(await other.GetAsync(result["safetyDownload"]!.GetValue<string>())).StatusCode==HttpStatusCode.NotFound);
@@ -87,40 +94,26 @@ try
     await Send("timetable-backups/restore",new{id=undo["id"]!.GetValue<string>(),confirmed=true},200);
     await using(var db=new AppDbContext(options))Check("Undo restores the previous placement",await db.Schedules.AnyAsync(s=>s.SemesterNumber==1&&s.DayOfWeek=="Tuesday"));
     await Send("timetable-backups/restore",new{id=preview["id"]!.GetValue<string>(),confirmed=true},409);
-    // A timetable import starts empty to exercise actual addition and generation.
-    await using(var db=new AppDbContext(options))await db.Schedules.ExecuteDeleteAsync();
-    using var workbook=new XLWorkbook();var sheet=workbook.Worksheets.Add("Timetable");
-    string[] columns=["Day","TimeSlot","Subject","Faculty","Classroom","Section","LectureType","SemesterNumber","Locked"];
-    string[] row=["Sunday","#1","#1","#1","#1","#1","Theory","1","TRUE"];
-    for(int c=0;c<columns.Length;c++){sheet.Cell(1,c+1).Value=columns[c];sheet.Cell(2,c+1).Value=row[c];}
+    using var workbook=new XLWorkbook();var sheet=workbook.Worksheets.Add("Names");
+    sheet.Cell(1,1).Value="اسم التدريسي";sheet.Cell(1,2).Value="المادة";
+    sheet.Cell(2,1).Value="Transfer Teacher";sheet.Cell(2,2).Value="Transfer Subject";
     using var stream=new MemoryStream();workbook.SaveAs(stream);
-    var upload=await Upload("imports/upload",stream.ToArray(),"timetable.xlsx");
-    string id=upload["id"]!.GetValue<string>();
-    var input=new{index=0,schema="Timetable",mapping=columns,rows=new[]{row}};
-    var validation=await Send("imports/validate",new{id,mode=2,semester=1,updateExisting=false,skipInvalid=false,sheets=new[]{input}},200);
-    Check("Another account cannot save this preview",(await other.PostAsJsonAsync("/api/imports/save",new{id,revision=validation["revision"]!.GetValue<string>(),confirmed=true})).StatusCode==HttpStatusCode.Conflict);
-    Check("Hybrid preview validates source",validation["preview"]!["isValid"]!.GetValue<bool>());
-    await Send("imports/save",new{id,revision=validation["revision"]!.GetValue<string>(),confirmed=true},400);
-    var generated=await Send("imports/generate",new{id,revision=validation["revision"]!.GetValue<string>(),seconds=5},200);
-    Check("Hybrid generation finishes without persistence",generated["preview"]!["generationCompleted"]!.GetValue<bool>());
-    await using(var db=new AppDbContext(options))Check("Preview does not write schedule",await db.Schedules.CountAsync()==0);
-    await Send("imports/save",new{id,revision=generated["revision"]!.GetValue<string>(),confirmed=true},200);
-    var pdf=new PdfDocumentBuilder();var font=pdf.AddStandard14Font(Standard14Font.Helvetica);var pdfPage=pdf.AddPage(640,480);
-    foreach(var (text,x,y) in new[]{("FacultyMemberID",40,420),("FullName",240,420),("2",40,390),("PDF Faculty",240,390)})pdfPage.AddText(text,10,new PdfPoint(x,y),font);
-    upload=await Upload("imports/upload",pdf.Build(),"faculty.pdf");id=upload["id"]!.GetValue<string>();
-    var pdfSheet=upload["sheets"]![0]!;
-    var pdfInput=new{index=0,schema="FacultyMembers",mapping=pdfSheet["mappings"]!["FacultyMembers"]!.DeepClone(),rows=pdfSheet["rows"]!.DeepClone()};
-    validation=await Send("imports/validate",new{id,mode=0,semester=1,updateExisting=false,skipInvalid=false,sheets=new[]{pdfInput}},200);
-    Check("PDF source validates for academic import",validation["preview"]!["isValid"]!.GetValue<bool>());
+    var upload=await Upload("imports/upload",stream.ToArray(),"names.xlsx");
+    string id=upload["id"]!.GetValue<string>();var source=upload["sheets"]![0]!;
+    var input=new{index=0,schema="NamedAssignments",mapping=source["mappings"]!["NamedAssignments"]!.DeepClone(),rows=source["rows"]!.DeepClone()};
+    await Send("imports/validate",new{id,mode=2,semester=1,updateExisting=false,skipInvalid=false,sheets=new[]{input}},400);
+    await Send("imports/validate",new{id,mode=3,semester=1,updateExisting=false,skipInvalid=false,sheets=new[]{input}},400);
+    var validation=await Send("imports/validate",new{id,mode=0,semester=1,updateExisting=false,skipInvalid=false,sheets=new[]{input}},200);
+    Check("Academic import preview is valid",validation["preview"]!["isValid"]!.GetValue<bool>());
+    Check("Reader cannot commit an import",(await other.PostAsJsonAsync("/api/imports/save",new{id,revision=validation["revision"]!.GetValue<string>(),confirmed=true})).StatusCode==HttpStatusCode.Forbidden);
+    await Send("imports/save",new{id,revision=validation["revision"]!.GetValue<string>(),confirmed=false},400);
     await Send("imports/save",new{id,revision=validation["revision"]!.GetValue<string>(),confirmed=true},200);
-    await using(var db=new AppDbContext(options))Check("PDF import persists parsed names",await db.FacultyMembers.AnyAsync(f=>f.FacultyMemberID==2&&f.FullName=="PDF Faculty"));
-    await using(var db=new AppDbContext(options))Check("Reviewed import saved with manual lock",await db.Schedules.CountAsync()==1&&await db.Schedules.AllAsync(s=>s.IsLocked));
-    // The same source can be checked, repaired and saved using the repair mode.
-    upload=await Upload("imports/upload",stream.ToArray(),"repair.xlsx");id=upload["id"]!.GetValue<string>();
-    validation=await Send("imports/validate",new{id,mode=3,semester=1,updateExisting=false,skipInvalid=false,sheets=new[]{input}},200);
-    generated=await Send("imports/generate",new{id,revision=validation["revision"]!.GetValue<string>(),seconds=5},200);
-    Check("Repair preview provides before and after comparison",generated["preview"]!["generationCompleted"]!.GetValue<bool>()&&generated["preview"]!["placementChanges"]!.AsArray().Count==1);
-    await Send("imports/save",new{id,revision=generated["revision"]!.GetValue<string>(),confirmed=true},200);
+    await using(var db=new AppDbContext(options))Check("Reviewed names persisted",await db.FacultyMembers.AnyAsync(x=>x.FullName=="Transfer Teacher")&&await db.Subjects.AnyAsync(x=>x.SubjectName=="Transfer Subject"));
+    using(var form=new MultipartFormDataContent()) {
+        form.Add(new ByteArrayContent("%PDF-1.7 unsupported"u8.ToArray()),"file","unsupported.pdf");
+        using var request=new HttpRequestMessage(HttpMethod.Post,"/api/imports/upload"){Content=form};request.Headers.Add("X-CSRF-TOKEN",csrf);
+        Check("PDF import explicitly rejected",(await client.SendAsync(request)).StatusCode==HttpStatusCode.BadRequest);
+    }
     Console.WriteLine($"PASS: {passed} isolated web transfer checks.");
 }
 finally

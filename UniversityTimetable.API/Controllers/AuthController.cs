@@ -13,7 +13,7 @@ using University_Timetable_and_Classroom_Management_System.BusinessLayer;
 namespace UniversityTimetable.API.Controllers;
 
 [ApiController, Route("api/auth")]
-public sealed class AuthController(AuthService service, IAntiforgery antiforgery, MutationGate gate) : ControllerBase
+public sealed class AuthController(AuthService service, IAntiforgery antiforgery, MutationGate gate, IConfiguration configuration) : ControllerBase
 {
     [HttpGet("csrf")]
     public object Csrf() => new { token = antiforgery.GetAndStoreTokens(HttpContext).RequestToken };
@@ -26,7 +26,7 @@ public sealed class AuthController(AuthService service, IAntiforgery antiforgery
         var user = await db.ApplicationUsers.AsNoTracking().Where(x => x.ApplicationUserID == id)
             .Select(x => new { id = x.ApplicationUserID, x.UserName, x.FullName }).SingleOrDefaultAsync();
         if (user is null) { await HttpContext.SignOutAsync(); throw new ApiFailure(401, "الحساب غير متاح."); }
-        return user;
+        return new { user.id, user.UserName, user.FullName, canManage = User.IsInRole(WebPermissions.Administrator) };
     }
 
     [HttpPost("login"), EnableRateLimiting("auth")]
@@ -35,18 +35,22 @@ public sealed class AuthController(AuthService service, IAntiforgery antiforgery
         var result = await service.SignInAsync(request.UserName, request.Password);
         if (!result.Succeeded) throw new ApiFailure(401, result.Message);
         var user = result.User!;
-        var identity = new ClaimsIdentity(new[] {
+        var claims = new List<Claim> {
             new Claim(ClaimTypes.NameIdentifier, user.ApplicationUserID.ToString()),
             new Claim(ClaimTypes.Name, user.UserName)
-        }, CookieAuthenticationDefaults.AuthenticationScheme);
+        };
+        bool canManage = WebPermissions.IsAdministrator(configuration, user.ApplicationUserID);
+        if (canManage) claims.Add(new Claim(ClaimTypes.Role, WebPermissions.Administrator));
+        var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
         await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(identity));
-        return new { id = user.ApplicationUserID, user.UserName, user.FullName };
+        return new { id = user.ApplicationUserID, user.UserName, user.FullName, canManage };
     }
 
-    [HttpPost("register"), EnableRateLimiting("auth")]
+    [HttpPost("register"), Authorize(Policy = WebPermissions.Administrator), EnableRateLimiting("auth")]
     public async Task<IActionResult> Register(RegisterRequest request)
     {
         using var lease = await gate.EnterAsync(HttpContext.RequestAborted);
+        WebPermissions.RequireStrongPassword(request.Password);
         var result = await service.RegisterAsync(request.FullName, request.UserName, request.Password, request.ConfirmPassword);
         if (!result.Succeeded) throw new ApiFailure(400, result.Message);
         return StatusCode(201, new { message = "تم إنشاء الحساب. يمكنك تسجيل الدخول الآن." });
@@ -59,5 +63,5 @@ public sealed class AuthController(AuthService service, IAntiforgery antiforgery
 public sealed record LoginRequest([Required, StringLength(50)] string UserName, [Required, StringLength(512)] string Password);
 public sealed record RegisterRequest([Required, StringLength(150)] string FullName,
     [Required, StringLength(50, MinimumLength = 3)] string UserName,
-    [Required, StringLength(512, MinimumLength = 4)] string Password,
+    [Required, StringLength(512, MinimumLength = 12)] string Password,
     [Required, StringLength(512)] string ConfirmPassword);

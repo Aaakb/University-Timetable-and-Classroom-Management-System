@@ -10,7 +10,9 @@ database. It verifies schema upgrades, persistence, API mappings and validation,
 actual timetable generation with repeated theory and practical occurrences,
 protection of saved lectures when reducing counts, compatibility with older
 imports, and the real subject editor's automatic/manual/reset behavior.
-It also verifies count-only editing, deletion while preserving assignments and
+It also verifies count-only editing, deletion of a subject's assignments and
 saved lectures, exclusion from new generation, and safe reuse of a subject name.
+Separate explicitly restored legacy-history fixtures still check archive editing,
+regeneration and backup compatibility; those rows are not left by deletion.
 It never changes the application's configured database. The screenshot is saved
 under `tmp/lecture-count-qa`.

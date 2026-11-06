@@ -15,6 +15,7 @@ public partial class FacultyScheduleEditorForm : Form
     public FacultyScheduleEditorForm(FacultyScheduleEditorService? service)
     {
         InitializeComponent();
+        DialogAppearance.Apply(this);
         semester.SelectedIndex = 0;
         mode.SelectedIndex = -1;
         if (DesignerEnvironment.IsDesignTime(this)) return;
@@ -33,7 +34,7 @@ public partial class FacultyScheduleEditorForm : Form
                 Headers(grid);
                 foreach (DataGridViewRow row in grid.Rows)
                     if (row.DataBoundItem is FacultyLectureChange change)
-                        row.DefaultCellStyle.BackColor = change.OutsidePreferredDays ? Color.FromArgb(255, 237, 213) : change.Changed ? Color.FromArgb(219, 234, 254) : Color.White;
+                        row.DefaultCellStyle.BackColor = change.OutsidePreferredDays ? Color.FromArgb(255, 237, 213) : change.Changed ? DesktopPalette.Selection : Color.White;
                 grid.ClearSelection();
             };
             grid.CellFormatting += (_, e) =>
@@ -114,7 +115,7 @@ public partial class FacultyScheduleEditorForm : Form
             proposed.DataSource = preview.Changes.ToList(); Headers(proposed);
             foreach (DataGridViewRow row in proposed.Rows)
                 if (row.DataBoundItem is FacultyLectureChange change)
-                    row.DefaultCellStyle.BackColor = change.OutsidePreferredDays ? Color.FromArgb(255, 237, 213) : change.Changed ? Color.FromArgb(219, 234, 254) : Color.White;
+                    row.DefaultCellStyle.BackColor = change.OutsidePreferredDays ? Color.FromArgb(255, 237, 213) : change.Changed ? DesktopPalette.Selection : Color.White;
             slots.DataSource = preview.SlotOptions.ToList(); Headers(slots);
             notes.Text = preview.Message + Environment.NewLine + "حالة البحث: " + preview.Status + Environment.NewLine + string.Join(Environment.NewLine, preview.Suggestions);
             status.Text = preview.Message;

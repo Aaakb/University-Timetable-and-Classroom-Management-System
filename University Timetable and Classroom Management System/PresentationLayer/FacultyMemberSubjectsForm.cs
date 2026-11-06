@@ -8,12 +8,16 @@ namespace University_Timetable_and_Classroom_Management_System
         private readonly FacultyMemberSubjectService assignmentService = new();
         private readonly FacultyMemberService facultyMemberService = new();
         private readonly SubjectService subjectService = new();
+        private readonly AcademicSemesterSelection semesterSelection;
 
         private int? selectedFacultyMemberId;
         private int? selectedSubjectId;
 
-        public FacultyMemberSubjectsForm()
+        public FacultyMemberSubjectsForm() : this(new AcademicSemesterSelection()) { }
+
+        internal FacultyMemberSubjectsForm(AcademicSemesterSelection semesterSelection)
         {
+            this.semesterSelection = semesterSelection;
             InitializeComponent();
             InitializeAssignmentScopeEditor();
             if (DesignerEnvironment.IsDesignTime(this)) return;
@@ -48,7 +52,9 @@ namespace University_Timetable_and_Classroom_Management_System
             btnDeleteAssignment.Click += async (_, _) => await DeleteAssignmentAsync();
             btnClearAssignmentForm.Click += (_, _) => ClearAssignmentForm();
             cmbAssignmentStudyYear.SelectedIndexChanged += (_, _) => ApplyAssignmentYearSelection();
-            cmbAssignmentSemester.SelectedIndexChanged += (_, _) => ApplyAssignmentSemesterSelection();
+            cmbAssignmentSemesterFilter.SelectedIndexChanged += (_, _) => ApplyAssignmentSemesterFilterSelection();
+            cmbAssignmentStudyYearFilter.SelectedIndexChanged += (_, _) => ApplyAssignmentYearFilterSelection();
+            cmbAssignmentBranchFilter.SelectedIndexChanged += (_, _) => ApplyAssignmentListFilterSelection();
             cmbAssignmentBranch.SelectedIndexChanged += (_, _) => ApplyAssignmentBranchSelection();
             cmbSubject.SelectedIndexChanged += (_, _) => { if (!bindingAssignmentScope) BindAssignmentSections(); };
         }
@@ -92,6 +98,8 @@ namespace University_Timetable_and_Classroom_Management_System
             if (IsDisposed || Disposing) return;
             var years = await new StudyYearService().GetAllAsync();
             if (IsDisposed || Disposing) return;
+            assignmentStudyYears = years;
+            BindAssignmentFilterLookups();
             bindingAssignmentScope = true;
             BindCombo(cmbAssignmentStudyYear, years.Select(y => new ComboOption(y.StudyYearID, ArabicUi.Display(y.YearName))));
 
@@ -164,10 +172,9 @@ namespace University_Timetable_and_Classroom_Management_System
                 return;
             }
 
-            bool isDeletedSubject = dgvFacultyMemberSubjects.CurrentRow?.DataBoundItem is AssignmentRow { IsSubjectDeleted: true };
-            var confirmation = isDeletedSubject
-                ? UiMessages.Confirm(this, "هل تريد حذف تكليف هذه المادة المحذوفة؟ ستبقى محاضراتها المحفوظة بأسماء التدريسيين ومواعيدها الحالية.", "حذف التكليف التدريسي")
-                : UiMessages.ConfirmDeletion(this, "حذف التكليف التدريسي");
+            var confirmation = UiMessages.Confirm(this,
+                "سيُحذف هذا التكليف وجميع محاضرات التدريسي لهذه المادة من الجدول، بما فيها المحاضرات المثبّتة. " +
+                "لن تُحذف المادة نفسها أو تكليفات التدريسيين الآخرين. هل تريد المتابعة؟", "حذف التكليف ومحاضراته");
 
             if (confirmation != DialogResult.Yes)
             {
@@ -176,7 +183,7 @@ namespace University_Timetable_and_Classroom_Management_System
 
             await ExecuteAssignmentActionAsync(
                 async () => await assignmentService.DeleteAsync(selectedFacultyMemberId.Value, selectedSubjectId.Value),
-                UiMessages.RecordDeleted);
+                "تم حذف التكليف ومحاضراته المرتبطة من الجدول.");
         }
 
         private Task ExecuteAssignmentActionAsync(Func<Task> action, string successMessage)
@@ -222,6 +229,16 @@ namespace University_Timetable_and_Classroom_Management_System
                 return false;
             }
 
+            int subjectId = assignment.SubjectID;
+            if (!assignmentSubjects.Any(subject => subject.SubjectID == subjectId && !subject.IsDeleted &&
+                (!ComboBoxHelper.GetSelectedOptionalId(cmbAssignmentSemesterFilter).HasValue ||
+                    subject.SemesterNumber == ComboBoxHelper.GetSelectedOptionalId(cmbAssignmentSemesterFilter))))
+            {
+                ShowInformation("اختر مادة من الفصل الدراسي المحدد.");
+                cmbSubject.Focus();
+                return false;
+            }
+
             return true;
         }
 
@@ -238,8 +255,10 @@ namespace University_Timetable_and_Classroom_Management_System
             selectedFacultyMemberId = row.FacultyMemberID;
             selectedSubjectId = row.SubjectID;
             bindingAssignmentScope = true;
-            if (ComboBoxHelper.GetSelectedOptionalId(cmbAssignmentSemester).HasValue)
-                SelectComboValue(cmbAssignmentSemester, row.SemesterNumber);
+            if (row.SemesterNumber is 1 or 2)
+            {
+                semesterSelection.Semester = row.SemesterNumber;
+            }
             SelectComboValue(cmbAssignmentStudyYear, row.StudyYearID);
             BindAssignmentBranches(row.BranchID);
             BindAssignmentSubjects(row.SubjectID);
@@ -258,8 +277,8 @@ namespace University_Timetable_and_Classroom_Management_System
             cmbAssignmentLectureType.SelectedIndex = 0;
             bindingAssignmentScope = true;
             ClearCombo(cmbFacultyMember);
-            ClearCombo(cmbAssignmentStudyYear);
-            BindAssignmentBranches();
+            ComboBoxHelper.SelectValue(cmbAssignmentStudyYear, ComboBoxHelper.GetSelectedOptionalId(cmbAssignmentStudyYearFilter));
+            BindAssignmentBranches(ComboBoxHelper.GetSelectedOptionalId(cmbAssignmentBranchFilter));
             ClearCombo(cmbSubject);
             BindAssignmentSubjects();
             BindAssignmentSections();
@@ -276,6 +295,11 @@ namespace University_Timetable_and_Classroom_Management_System
             btnDeleteAssignment.Enabled = enabled;
             btnClearAssignmentForm.Enabled = enabled;
             dgvFacultyMemberSubjects.Enabled = enabled;
+            cmbAssignmentSemesterFilter.Enabled = enabled;
+            cmbAssignmentStudyYearFilter.Enabled = enabled;
+            cmbAssignmentBranchFilter.Enabled = enabled &&
+                (!ComboBoxHelper.GetSelectedOptionalId(cmbAssignmentStudyYearFilter).HasValue ||
+                    AcademicStructureRules.UsesBranches(ComboBoxHelper.GetSelectedOptionalId(cmbAssignmentStudyYearFilter)!.Value));
         }
 
         private static void BindCombo(Guna.UI2.WinForms.Guna2ComboBox combo, IEnumerable<ComboOption> options)

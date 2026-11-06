@@ -17,7 +17,7 @@ public static class ExcelImportSchema
         new("Classrooms", ["ClassroomID", "ClassroomNumber", "Capacity", "RoomType"], []),
         new("TimeSlots", ["TimeSlotID", "StartTime", "EndTime"], []),
         new("Sections", ["SectionID", "SectionName", "StudentCount", "StudyYearID"], ["BranchID"]),
-        new("Subjects", ["SubjectID", "SubjectName", "StudyYearID", "SemesterNumber", "TheoreticalHours", "PracticalHours"], ["CreditUnits", "BranchID", "TheoreticalLectureCount", "PracticalLectureCount"]),
+        new("Subjects", ["SubjectID", "SubjectName", "StudyYearID", "SemesterNumber", "TheoreticalHours", "PracticalHours"], ["CreditUnits", "BranchID", "TheoreticalLectureCount", "PracticalLectureCount", "MergePracticalGroups"]),
         new("FacultyMemberSubjects", ["FacultyMemberID", "SubjectID"], ["SectionID", "LectureType"])
     ];
     public static ImportSheetSchema Timetable { get; } = new("Timetable",

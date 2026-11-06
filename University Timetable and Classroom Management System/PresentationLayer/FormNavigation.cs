@@ -19,7 +19,6 @@ namespace University_Timetable_and_Classroom_Management_System
         [
             new("btnNavigationBranches", NavigationPage.Branches),
             new("btnNavigationStudyYears", NavigationPage.StudyYears),
-            new("btnNavigationSections", NavigationPage.Sections),
             new("btnNavigationSubjects", NavigationPage.Subjects),
             new("btnNavigationClassrooms", NavigationPage.Classrooms),
             new("btnNavigationTimeSlots", NavigationPage.TimeSlots),
@@ -61,17 +60,17 @@ namespace University_Timetable_and_Classroom_Management_System
             }
         }
 
-        public static System.Windows.Forms.UserControl CreatePage(NavigationPage page)
+        public static System.Windows.Forms.UserControl CreatePage(NavigationPage page, AcademicSemesterSelection? semesterSelection = null)
         {
             return page switch
             {
                 NavigationPage.Branches => new BranchesForm(),
                 NavigationPage.StudyYears => new StudyYearsForm(),
                 NavigationPage.Sections => new SectionsForm(),
-                NavigationPage.Subjects => new SubjectsForm(),
+                NavigationPage.Subjects => new SubjectsForm(semesterSelection ?? new AcademicSemesterSelection()),
                 NavigationPage.Classrooms => new ClassroomsForm(),
                 NavigationPage.TimeSlots => new TimeSlotsForm(),
-                NavigationPage.FacultyAssignments => new FacultyMemberSubjectsForm(),
+                NavigationPage.FacultyAssignments => new FacultyMemberSubjectsForm(semesterSelection ?? new AcademicSemesterSelection()),
                 NavigationPage.FacultyMembers => new FacultyMembersForm(),
                 NavigationPage.Schedules => new SchedulesForm(),
                 _ => throw new ArgumentOutOfRangeException(nameof(page), page, null)

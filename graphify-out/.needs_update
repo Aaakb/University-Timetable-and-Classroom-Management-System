@@ -1,0 +1,2 @@
+2026-10-27: lower semester, study-year and department filters replace upper semester controls in SubjectsForm and FacultyMemberSubjectsForm.
+2026-10-27: TimetableAlternativesService now explains faculty availability capacity failures; desktop shows multiline failure details. Added tests/AlternativeAvailability and docs/SEMESTER2_EXPLICIT_PREFERENCES_20261027_AR.md. Production semester-two preferences now follow the user's 48-person list, with three authorized new faculty records; first semester preserved.

@@ -26,7 +26,7 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
     o.Events.OnRedirectToLogin = c => { c.Response.StatusCode = 401; return Task.CompletedTask; };
     o.Events.OnRedirectToAccessDenied = c => { c.Response.StatusCode = 403; return Task.CompletedTask; };
 });
-builder.Services.AddAuthorization();
+builder.Services.AddAuthorization(options => options.AddPolicy(WebPermissions.Administrator, policy => policy.RequireRole(WebPermissions.Administrator)));
 builder.Services.AddAntiforgery(o =>
 {
     o.HeaderName = "X-CSRF-TOKEN";
@@ -82,14 +82,26 @@ app.Use(async (context, next) =>
 {
     if (context.Request.Path.StartsWithSegments("/api") &&
         !HttpMethods.IsGet(context.Request.Method) && !HttpMethods.IsHead(context.Request.Method) && !HttpMethods.IsOptions(context.Request.Method))
+    {
         await context.RequestServices.GetRequiredService<IAntiforgery>().ValidateRequestAsync(context);
+        var path = context.Request.Path;
+        if (path != "/api/auth/login" && path != "/api/auth/logout")
+        {
+            if (context.User.Identity?.IsAuthenticated != true) { context.Response.StatusCode = 401; return; }
+            if (!int.TryParse(context.User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value, out var userId) || !WebPermissions.IsAdministrator(context.RequestServices.GetRequiredService<IConfiguration>(), userId)) { context.Response.StatusCode = 403; return; }
+        }
+    }
     await next();
 });
 app.MapControllers();
-// Additive preference tables only; use the desktop maintenance path for general
-// database setup. Existing academic and timetable records are untouched here.
+// Keep the additive scheduling schema in step with the desktop application.
+// Existing academic and timetable records are untouched here.
 await using (var preferenceSchemaContext = new AppDbContext())
+{
     await FacultyPreferenceSchema.EnsureAsync(preferenceSchemaContext);
+    await SubjectPracticalGroupingSchema.EnsureAsync(preferenceSchemaContext);
+    await StudentSchema.EnsureAsync(preferenceSchemaContext);
+}
 app.Run();
 
 public partial class Program { }

@@ -24,6 +24,14 @@ public sealed class OverviewController : ControllerBase
         };
     }
 
+    [HttpGet("academic-titles")]
+    public async Task<string[]> AcademicTitles(CancellationToken token)
+    {
+        await using var db = new AppDbContext();
+        return await db.FacultyMembers.Where(member => member.AcademicTitle != null && member.AcademicTitle != "")
+            .Select(member => member.AcademicTitle!).Distinct().OrderBy(title => title).ToArrayAsync(token);
+    }
+
     [HttpGet("rules")]
     public async Task<object> Rules()
     {

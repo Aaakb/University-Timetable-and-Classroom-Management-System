@@ -152,29 +152,32 @@ var thread = new Thread(() =>
         year.SelectedIndex = 0; Call("BindAssignmentBranches", (object?)null); Call("BindAssignmentSubjects", 1); Call("BindAssignmentSections", 2, true);
         Check(!Combo("cmbAssignmentBranch").Enabled && Combo("cmbSubject").Items.Count == 1 && Combo("cmbAssignmentSection").Items.Count == 3,
             "Desktop year filter shows general subjects and A/B scope choices");
-        var semester = Combo("cmbAssignmentSemester");
-        Check(semester.Items.Count == 3 && semester.SelectedIndex == 0, "Semester selector defaults to all semesters");
-        semester.SelectedIndex = 2; Call("BindAssignmentSubjects", (object?)null);
+        var semester = Combo("cmbAssignmentSemesterFilter");
+        void SelectSemester(int number) => semester.SelectedIndex = number;
+        Check(semester.SelectedIndex == 1, "Lower semester filter defaults to the first semester");
+        SelectSemester(2); Call("BindAssignmentSubjects", (object?)null);
         Check(Combo("cmbSubject").Items.Count == 0, "Second-semester filter excludes first-semester subjects");
-        semester.SelectedIndex = 1; Call("BindAssignmentSubjects", 1);
+        SelectSemester(1); Call("BindAssignmentSubjects", 1);
         Check(Combo("cmbSubject").Items.Count == 1, "First-semester filter includes matching subjects");
-        semester.SelectedIndex = 0;
         var rowType = type.GetNestedType("AssignmentRow", BindingFlags.NonPublic)!;
         var rows = (System.Collections.IList)Activator.CreateInstance(typeof(List<>).MakeGenericType(rowType))!;
         foreach (var assignment in uiAssignments)
             rows.Add(rowType.GetMethod("FromAssignment")!.Invoke(null, new object[] { assignment }));
         Set("assignmentRows", rows); Call("ApplyAssignmentRowsFilter");
         var grid = (DataGridView)type.GetField("dgvFacultyMemberSubjects", flags)!.GetValue(form)!;
-        int allRows = grid.Rows.Count;
-        semester.SelectedIndex = 2; Call("ApplyAssignmentRowsFilter");
+        int firstSemesterRows = grid.Rows.Count;
+        SelectSemester(2); Call("ApplyAssignmentRowsFilter");
         Check(grid.Columns.Cast<DataGridViewColumn>().Any(c => c.DataPropertyName == "SemesterName") && grid.Rows.Count > 0 &&
             grid.Rows.Cast<DataGridViewRow>().All(r => (int)r.DataBoundItem.GetType().GetProperty("SemesterNumber")!.GetValue(r.DataBoundItem)! == 2),
             "Assignment table displays the semester column and filters to second semester");
-        semester.SelectedIndex = 0; Call("ApplyAssignmentRowsFilter");
-        Check(grid.Rows.Count == allRows, "All-semesters choice restores every assignment");
+        SelectSemester(1); Call("ApplyAssignmentRowsFilter");
+        Check(grid.Rows.Count == firstSemesterRows && grid.Rows.Cast<DataGridViewRow>().All(r =>
+            (int)r.DataBoundItem.GetType().GetProperty("SemesterNumber")!.GetValue(r.DataBoundItem)! == 1),
+            "First-semester navigation restores only first-semester assignments");
         year.SelectedIndex = 1; Call("BindAssignmentBranches", 1); Call("BindAssignmentSubjects", 2); Call("BindAssignmentSections", null, false);
         Check(Combo("cmbAssignmentBranch").Enabled && Combo("cmbSubject").Items.Count == 1 && Combo("cmbAssignmentSection").SelectedValue?.ToString() == "3",
             "Desktop specialization filters subjects and selects the sole matching section");
+        SelectSemester(2);
         year.SelectedIndex = 2; Call("BindAssignmentBranches", 1); Call("BindAssignmentSubjects", 3); Call("BindAssignmentSections", null, false);
         Check(Combo("cmbAssignmentSection").Items.Cast<object>().All(o => !o.ToString()!.Contains("A1") && !o.ToString()!.Contains("A2")), "Fourth-year assignment editor has no practical subgroup choices");
         Check(Combo("cmbAssignmentLectureType").Items.Cast<object>().Select(o=>o.ToString()).SequenceEqual(new[] { "كلاهما", "نظري", "عملي" }),

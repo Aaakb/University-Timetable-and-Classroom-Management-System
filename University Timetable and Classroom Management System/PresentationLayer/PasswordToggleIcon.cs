@@ -5,7 +5,7 @@ namespace University_Timetable_and_Classroom_Management_System
 {
     internal static class PasswordToggleIcon
     {
-        private static readonly Color IconColor = Color.FromArgb(37, 99, 235);
+        private static readonly Color IconColor = DesktopPalette.Primary;
 
         public static void Apply(Guna.UI2.WinForms.Guna2Button button, bool passwordVisible)
         {

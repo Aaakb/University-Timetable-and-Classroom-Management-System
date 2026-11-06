@@ -714,7 +714,7 @@ namespace University_Timetable_and_Classroom_Management_System.BusinessLayer
                 yield break;
             }
 
-            var practicalGroups = GetPracticalGroupsForSection(section);
+            var practicalGroups = subject.MergePracticalGroups ? [] : GetPracticalGroupsForSection(section);
 
             if (practicalGroups.Count == 0)
             {

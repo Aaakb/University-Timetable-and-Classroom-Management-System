@@ -75,7 +75,6 @@ internal static class Program
             var read = ImportFileReader.Read(path).Sheets.Single();
             Assert(read.SourceRows.Single() == 3 && (string)read.Table.Rows[0][1] == "البرمجيات");
         });
-        Check("Arabic UI, PDF preview, repair comparison and mapping across all four modes and small windows", Ui);
         Console.WriteLine($"PASS: {passed} PDF import checks. Fixtures and screenshots: {Output}");
     }
     private static void Check(string name, Action action) { action(); passed++; Console.WriteLine("PASS: " + name); }
@@ -121,78 +120,5 @@ internal static class Program
         var sheet = ImportFileReader.Read(path).Sheets.Single();
         Assert(sheet.SuggestedSchemaName == "FacultyMembers", string.Join(" | ", sheet.Table.Columns.Cast<DataColumn>().Select(c => c.ColumnName)));
         Assert(sheet.Table.Rows[0].ItemArray.Cast<string>().Contains("أحمد محمد"), string.Join(" | ", sheet.Table.Rows[0].ItemArray));
-    }
-    private static void Ui()
-    {
-        ApplicationConfiguration.Initialize();
-        foreach (int modeIndex in new[] { 0, 1, 2, 3 })
-        foreach (var size in new[] { new Size(800, 600), new Size(1180, 800) })
-        {
-            using var form = new ExcelImportForm { Size = size, ShowInTaskbar = false };
-            form.Show(); Application.DoEvents();
-            object Field(string name) => typeof(ExcelImportForm).GetField(name, BindingFlags.Instance | BindingFlags.NonPublic)!.GetValue(form)!;
-            ((ComboBox)Field("mode")).SelectedIndex = modeIndex;
-            var workbook = ImportFileReader.Read(Path.Combine(Output, modeIndex == 0 ? "arabic.pdf" : "timetable.pdf"));
-            typeof(ExcelImportForm).GetMethod("LoadWorkbook", BindingFlags.Instance | BindingFlags.NonPublic)!.Invoke(form, [workbook, modeIndex == 0 ? "arabic.pdf" : "timetable.pdf"]);
-            Application.DoEvents(); form.PerformLayout();
-            Assert(form.RightToLeft == RightToLeft.Yes && form.RightToLeftLayout);
-            var mapping = (DataGridView)Field("mapping");
-            Assert(mapping.Rows.Cast<DataGridViewRow>().All(r => !string.IsNullOrEmpty(Convert.ToString(r.Cells[1].Value))));
-            var prepared = (List<ExcelSheetData>)typeof(ExcelImportForm).GetMethod("PrepareSheets", BindingFlags.Instance | BindingFlags.NonPublic)!.Invoke(form, null)!;
-            Assert(prepared.Count == 1 && prepared[0].Table.Columns.Contains(modeIndex == 0 ? "FullName" : "Day"));
-            if (modeIndex == 0) Assert(prepared[0].Name == "FacultyMembers" && prepared[0].SourceName == "صفحة 1");
-            foreach (string name in new[] { "validate", "generate", "save" })
-            {
-                var control = (Control)Field(name);
-                if (control.Visible) Assert(form.ClientRectangle.Contains(form.RectangleToClient(control.RectangleToScreen(control.ClientRectangle))), "Clipped button " + name);
-            }
-            Assert(((DataGridView)Field("data")).Height >= 100, "Preview too short");
-            if (modeIndex == 3)
-            {
-                Assert(((Control)Field("generate")).Visible && ((Control)Field("generate")).Text == "إصلاح الجدول المستورد");
-                var grid = (DataGridView)Field("data");
-                Assert(grid.Columns["Locked"] is DataGridViewCheckBoxColumn && grid.Rows[0].Cells["Locked"].Value.ToString() == "FALSE");
-                var preview = new ExcelImportPreview();
-                preview.RepairableConflicts.Add(new("صفحة 1", 2, "", "Classroom conflict with saved lecture #1 on Sunday, period #1."));
-                preview.Lectures.Add(new("صفحة 1", 2, new() { SubjectID = 1, FacultyMemberID = 1, SectionID = 1, SemesterNumber = 1, DayOfWeek = "Sunday", LectureType = "Theory" }, false));
-                typeof(ExcelImportForm).GetField("preview", BindingFlags.Instance | BindingFlags.NonPublic)!.SetValue(form, preview);
-                typeof(ExcelImportForm).GetMethod("ShowPreview", BindingFlags.Instance | BindingFlags.NonPublic)!.Invoke(form, null);
-                typeof(ExcelImportForm).GetMethod("UpdateActions", BindingFlags.Instance | BindingFlags.NonPublic)!.Invoke(form, null);
-                Assert(((Control)Field("generate")).Enabled && !((Control)Field("save")).Enabled);
-                ((TabControl)Field("tabs")).SelectedIndex = 2; Application.DoEvents();
-                using var conflictImage = new Bitmap(form.Width, form.Height); form.DrawToBitmap(conflictImage, new Rectangle(Point.Empty, form.Size));
-                conflictImage.Save(Path.Combine(Output, $"repair-conflicts-{size.Width}.png"));
-                preview.PlacementChanges.Add(new("صفحة 1", 2, "الرياضيات", "أحمد محمد", "A", "Theory", null, false,
-                    "Sunday", "08:30 – 10:00", "101", "Monday", "08:30 – 10:00", "102", true));
-                typeof(ExcelImportPreview).GetProperty("GenerationCompleted")!.SetValue(preview, true);
-                typeof(ExcelImportForm).GetMethod("ShowPreview", BindingFlags.Instance | BindingFlags.NonPublic)!.Invoke(form, null);
-                typeof(ExcelImportForm).GetMethod("UpdateActions", BindingFlags.Instance | BindingFlags.NonPublic)!.Invoke(form, null);
-                Assert(((Control)Field("save")).Enabled);
-                ((TabControl)Field("tabs")).SelectedIndex = 3; Application.DoEvents();
-                form.DrawToBitmap(conflictImage, new Rectangle(Point.Empty, form.Size)); conflictImage.Save(Path.Combine(Output, $"repair-comparison-{size.Width}.png"));
-            }
-            using var image = new Bitmap(form.Width, form.Height); form.DrawToBitmap(image, new Rectangle(Point.Empty, form.Size));
-            image.Save(Path.Combine(Output, $"arabic-import-{modeIndex}-{size.Width}.png"));
-            if (modeIndex == 0 && size.Width == 1180)
-            {
-                var tabs = (TabControl)Field("tabs"); tabs.SelectedIndex = 1; Application.DoEvents();
-                form.DrawToBitmap(image, new Rectangle(Point.Empty, form.Size)); image.Save(Path.Combine(Output, "arabic-column-mapping.png"));
-                var preview = new ExcelImportPreview();
-                preview.Issues.Add(new("صفحة 1", 2, "FullName", "FullName: value is required."));
-                preview.Changes.Add(new("صفحة 1", 3, "Add", "2"));
-                typeof(ExcelImportForm).GetField("preview", BindingFlags.Instance | BindingFlags.NonPublic)!.SetValue(form, preview);
-                typeof(ExcelImportForm).GetMethod("ShowPreview", BindingFlags.Instance | BindingFlags.NonPublic)!.Invoke(form, null);
-                tabs.SelectedIndex = 2; Application.DoEvents();
-                var report = (DataGridView)Field("report");
-                Assert(report.Rows[0].Cells["Detail"].Value.ToString()!.Contains("القيمة مطلوبة"));
-                form.DrawToBitmap(image, new Rectangle(Point.Empty, form.Size)); image.Save(Path.Combine(Output, "arabic-validation-report.png"));
-            }
-            form.Close();
-        }
-        using var automatic = new ExcelImportForm();
-        typeof(ExcelImportForm).GetMethod("LoadWorkbook", BindingFlags.Instance | BindingFlags.NonPublic)!.Invoke(automatic,
-            [ImportFileReader.Read(Path.Combine(Output, "timetable.pdf")), "timetable.pdf"]);
-        var selectedMode = (ComboBox)typeof(ExcelImportForm).GetField("mode", BindingFlags.Instance | BindingFlags.NonPublic)!.GetValue(automatic)!;
-        Assert(selectedMode.SelectedIndex == 1, "Timetable PDF should select timetable mode");
     }
 }

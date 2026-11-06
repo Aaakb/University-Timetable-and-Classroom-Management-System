@@ -26,37 +26,21 @@ namespace University_Timetable_and_Classroom_Management_System
             pnlWorkspace.SuspendLayout();
             try
             {
-                // Scroll only when height is too small for the editor and a useful table.
+                // Keep the toolbar and filters above the table, including when they wrap.
                 pnlWorkspace.AutoScroll = true;
                 pnlScheduleEditor.Anchor = pnlScheduleFilters.Anchor = pnlSchedulesTable.Anchor = AnchorStyles.Top | AnchorStyles.Left;
                 int width = Math.Max(Px(420), pnlWorkspace.ClientSize.Width - Px(76));
                 lblPageTitle.Left = lblPageTitle.Parent!.Width - Px(28) - lblPageTitle.Width;
                 lblPageSubtitle.Left = lblPageSubtitle.Parent!.Width - Px(28) - lblPageSubtitle.Width;
-                var basic = pnlScheduleEditor.Controls["pnlCourseStaff"]!;
-                var placement = pnlScheduleEditor.Controls["pnlAcademicPlacement"]!;
-                var commands = pnlScheduleEditor.Controls["pnlScheduleCommands"]!;
-                basic.Anchor = placement.Anchor = commands.Anchor = AnchorStyles.Top | AnchorStyles.Left;
-                int groupWidth = width - Px(48);
-                basic.SetBounds(Px(24), Px(62), groupWidth, basic.Height);
-                LayoutScheduleFields(basic, [(lblSubject, cmbSubject), (lblFacultyMember, cmbFacultyMember),
-                    (lblLectureType, cmbLectureType), (lblGroupName, cmbGroupName)]);
-                placement.SetBounds(Px(24), basic.Bottom + Px(8), groupWidth, placement.Height);
-                LayoutScheduleFields(placement, [(lblStudyYear, cmbStudyYear), (lblBranch, cmbBranch),
-                    (lblSection, cmbSection), (lblDayOfWeek, cmbDayOfWeek),
-                    (lblTimeSlot, cmbTimeSlot), (lblClassroom, cmbClassroom)]);
-
-                commands.SetBounds(Px(24), placement.Bottom + Px(8), groupWidth, commands.Height);
-                LayoutScheduleButtons(commands);
                 var scroll = pnlWorkspace.AutoScrollPosition;
-                pnlScheduleEditor.SetBounds(Px(28) + scroll.X, Px(92) + scroll.Y, width, commands.Bottom + Px(20));
-                lblEditorTitle.Left = width - Px(24) - lblEditorTitle.Width;
-                lblEditorSubtitle.Left = width - Px(24) - lblEditorSubtitle.Width;
-                pnlScheduleFilters.SetBounds(Px(28) + scroll.X, pnlScheduleEditor.Bottom + Px(18), width, pnlScheduleFilters.Height);
+                pnlScheduleCommands.SetBounds(Px(28) + scroll.X, Px(84) + scroll.Y, width, pnlScheduleCommands.Height);
+                LayoutScheduleButtons(pnlScheduleCommands);
+                pnlScheduleFilters.SetBounds(Px(28) + scroll.X, pnlScheduleCommands.Bottom + Px(10), width, pnlScheduleFilters.Height);
                 LayoutScheduleFields(pnlScheduleFilters, [(lblSemesterFilter, cmbSemesterFilter),
                     (lblStudyYearFilter, cmbStudyYearFilter), (lblSectionFilter, cmbSectionFilter),
-                    (lblGroupFilter, cmbGroupFilter), (lblFacultyFilter, cmbFacultyFilter)], 12);
-                pnlSchedulesTable.SetBounds(Px(28) + scroll.X, pnlScheduleFilters.Bottom + Px(18), width,
-                    Math.Max(Px(270), pnlWorkspace.ClientSize.Height - (pnlScheduleFilters.Bottom - scroll.Y) - Px(46)));
+                    (lblGroupFilter, cmbGroupFilter), (lblFacultyFilter, cmbFacultyFilter)], top: 12, columnWidth: 155);
+                pnlSchedulesTable.SetBounds(Px(28) + scroll.X, pnlScheduleFilters.Bottom + Px(10), width,
+                    Math.Max(Px(270), pnlWorkspace.ClientSize.Height - (pnlScheduleFilters.Bottom - scroll.Y) - Px(34)));
                 ConfigureScheduleTableHeader();
                 // Prevent anchors from pushing header buttons off-screen after their new positions are set.
                 btnScheduleGridView.Anchor = btnScheduleTimetableView.Anchor = AnchorStyles.Top | AnchorStyles.Left;
@@ -69,11 +53,11 @@ namespace University_Timetable_and_Classroom_Management_System
         }
 
         private static void LayoutScheduleFields(Control parent,
-            (DesignerHtmlLabel Label, Guna2ComboBox Combo)[] fields, int top = 24)
+            (DesignerHtmlLabel Label, Guna2ComboBox Combo)[] fields, int top = 24, int columnWidth = 195)
         {
             int Px(int value) => WindowSizing.Pixels(parent, value);
             top = Px(top);
-            int columns = Math.Clamp((parent.ClientSize.Width - Px(32)) / Px(195), 1, fields.Length);
+            int columns = Math.Clamp((parent.ClientSize.Width - Px(32)) / Px(columnWidth), 1, fields.Length);
             int cellWidth = (parent.ClientSize.Width - Px(32)) / columns;
             for (int i = 0; i < fields.Length; i++)
             {
@@ -92,20 +76,16 @@ namespace University_Timetable_and_Classroom_Management_System
         private void LayoutScheduleButtons(Control parent)
         {
             int Px(int value) => WindowSizing.Pixels(parent, value);
-            int x = 0, y = Px(20);
+            int x = Px(10), y = Px(8);
             foreach (var button in new[] { btnGenerateSchedule, btnAddSchedule, btnUpdateSchedule,
-                btnDeleteSchedule, btnClearScheduleForm, btnExportSchedulePdf, btnBackupTimetable, btnRestoreTimetable })
+                btnDeleteSchedule, btnExportSchedulePdf, btnBackupTimetable, btnRestoreTimetable })
             {
-                if (x > 0 && x + button.Width > parent.ClientSize.Width) { x = 0; y += Px(62); }
+                if (x > Px(10) && x + button.Width + Px(10) > parent.ClientSize.Width) { x = Px(10); y += Px(43); }
                 int left = parent.ClientSize.Width - x - button.Width;
                 button.Location = new Point(left, y);
-                // Existing group labels above the action buttons follow them when wrapping.
-                foreach (Control label in parent.Controls)
-                    if (label is DesignerHtmlLabel && label.Text == (button == btnGenerateSchedule ? "الجدولة الآلية" : button == btnAddSchedule ? "إدارة المحاضرات" : ""))
-                        label.Location = new Point(left + button.Width - label.Width, y - Px(20));
                 x += button.Width + Px(10);
             }
-            parent.Height = y + Px(46);
+            parent.Height = y + Px(42);
         }
     }
 }

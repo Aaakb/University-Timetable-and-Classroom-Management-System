@@ -92,12 +92,12 @@ namespace University_Timetable_and_Classroom_Management_System
             // 
             // pnlMain
             // 
-            pnlMain.BackColor = Color.FromArgb(245, 247, 250);
+            pnlMain.BackColor = DesktopPalette.Canvas;
             pnlMain.Controls.Add(pnlWorkspace);
             pnlMain.Controls.Add(pnlHeader);
             pnlMain.CustomizableEdges = customizableEdges21;
             pnlMain.Dock = DockStyle.Fill;
-            pnlMain.FillColor = Color.FromArgb(245, 247, 250);
+            pnlMain.FillColor = DesktopPalette.Canvas;
             pnlMain.Font = new Font("Segoe UI", 9F);
             pnlMain.ForeColor = SystemColors.ControlText;
             pnlMain.Location = new Point(0, 0);
@@ -110,11 +110,11 @@ namespace University_Timetable_and_Classroom_Management_System
             // pnlWorkspace
             // 
             pnlWorkspace.AutoScroll = true;
-            pnlWorkspace.BackColor = Color.FromArgb(245, 247, 250);
+            pnlWorkspace.BackColor = DesktopPalette.Canvas;
             pnlWorkspace.Controls.Add(layoutWorkspace);
             pnlWorkspace.CustomizableEdges = customizableEdges17;
             pnlWorkspace.Dock = DockStyle.Fill;
-            pnlWorkspace.FillColor = Color.FromArgb(245, 247, 250);
+            pnlWorkspace.FillColor = DesktopPalette.Canvas;
             pnlWorkspace.Font = new Font("Segoe UI", 9F);
             pnlWorkspace.ForeColor = SystemColors.ControlText;
             pnlWorkspace.Location = new Point(0, 85);
@@ -136,7 +136,7 @@ namespace University_Timetable_and_Classroom_Management_System
             layoutWorkspace.Location = new Point(28, 24);
             layoutWorkspace.Margin = new Padding(0);
             layoutWorkspace.MinimumSize = new Size(380, 583);
-            layoutWorkspace.BackColor = Color.FromArgb(245, 247, 250);
+            layoutWorkspace.BackColor = DesktopPalette.Canvas;
             layoutWorkspace.Name = "layoutWorkspace";
             layoutWorkspace.RowCount = 2;
             layoutWorkspace.RowStyles.Add(new RowStyle());
@@ -149,8 +149,8 @@ namespace University_Timetable_and_Classroom_Management_System
             pnlBranchEditor.AutoSize = true;
             pnlBranchEditor.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             pnlBranchEditor.BackColor = Color.Transparent;
-            pnlBranchEditor.BorderColor = Color.FromArgb(226, 232, 240);
-            pnlBranchEditor.BorderRadius = 6;
+            pnlBranchEditor.BorderColor = DesktopPalette.Border;
+            pnlBranchEditor.BorderRadius = DesktopCorners.Card;
             pnlBranchEditor.BorderThickness = 1;
             pnlBranchEditor.Controls.Add(layoutEditor);
             pnlBranchEditor.CustomizableEdges = customizableEdges13;
@@ -191,7 +191,7 @@ namespace University_Timetable_and_Classroom_Management_System
             // 
             lblEditorTitle.BackColor = Color.Transparent;
             lblEditorTitle.Font = new Font("Segoe UI Semibold", 11F, FontStyle.Bold);
-            lblEditorTitle.ForeColor = Color.FromArgb(15, 23, 42);
+            lblEditorTitle.ForeColor = DesktopPalette.Ink;
             lblEditorTitle.Location = new Point(0, 0);
             lblEditorTitle.Margin = new Padding(0, 0, 0, 6);
             lblEditorTitle.Name = "lblEditorTitle";
@@ -203,7 +203,7 @@ namespace University_Timetable_and_Classroom_Management_System
             // 
             lblEditorSubtitle.BackColor = Color.Transparent;
             lblEditorSubtitle.Font = new Font("Segoe UI", 9F);
-            lblEditorSubtitle.ForeColor = Color.FromArgb(100, 116, 139);
+            lblEditorSubtitle.ForeColor = DesktopPalette.Primary;
             lblEditorSubtitle.Location = new Point(0, 28);
             lblEditorSubtitle.Margin = new Padding(0, 0, 0, 6);
             lblEditorSubtitle.Name = "lblEditorSubtitle";
@@ -251,7 +251,7 @@ namespace University_Timetable_and_Classroom_Management_System
             // 
             lblBranchId.BackColor = Color.Transparent;
             lblBranchId.Font = new Font("Segoe UI Semibold", 9.5F, FontStyle.Bold);
-            lblBranchId.ForeColor = Color.FromArgb(51, 65, 85);
+            lblBranchId.ForeColor = DesktopPalette.Header;
             lblBranchId.Location = new Point(0, 0);
             lblBranchId.Margin = new Padding(0, 0, 0, 6);
             lblBranchId.Name = "lblBranchId";
@@ -263,23 +263,23 @@ namespace University_Timetable_and_Classroom_Management_System
             // 
             txtBranchId.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             txtBranchId.BackColor = Color.Transparent;
-            txtBranchId.BorderColor = Color.FromArgb(203, 213, 225);
-            txtBranchId.BorderRadius = 6;
+            txtBranchId.BorderColor = DesktopPalette.FieldBorder;
+            txtBranchId.BorderRadius = DesktopCorners.Field;
             txtBranchId.Cursor = Cursors.IBeam;
             txtBranchId.CustomizableEdges = customizableEdges1;
             txtBranchId.DefaultText = "";
-            txtBranchId.DisabledState.BorderColor = Color.FromArgb(226, 232, 240);
-            txtBranchId.DisabledState.FillColor = Color.FromArgb(248, 250, 252);
-            txtBranchId.DisabledState.ForeColor = Color.FromArgb(100, 116, 139);
-            txtBranchId.DisabledState.PlaceholderForeColor = Color.FromArgb(138, 138, 138);
-            txtBranchId.FocusedState.BorderColor = Color.FromArgb(37, 99, 235);
+            txtBranchId.DisabledState.BorderColor = DesktopPalette.Border;
+            txtBranchId.DisabledState.FillColor = DesktopPalette.Canvas;
+            txtBranchId.DisabledState.ForeColor = DesktopPalette.Primary;
+            txtBranchId.DisabledState.PlaceholderForeColor = DesktopPalette.Primary;
+            txtBranchId.FocusedState.BorderColor = DesktopPalette.Primary;
             txtBranchId.Font = new Font("Segoe UI", 10F);
-            txtBranchId.ForeColor = Color.FromArgb(15, 23, 42);
-            txtBranchId.HoverState.BorderColor = Color.FromArgb(148, 163, 184);
+            txtBranchId.ForeColor = DesktopPalette.Ink;
+            txtBranchId.HoverState.BorderColor = DesktopPalette.Primary;
             txtBranchId.Location = new Point(0, 25);
             txtBranchId.Margin = new Padding(0);
             txtBranchId.Name = "txtBranchId";
-            txtBranchId.PlaceholderForeColor = Color.FromArgb(148, 163, 184);
+            txtBranchId.PlaceholderForeColor = DesktopPalette.Primary;
             txtBranchId.PlaceholderText = "تلقائي";
             txtBranchId.ReadOnly = true;
             txtBranchId.SelectedText = "";
@@ -312,7 +312,7 @@ namespace University_Timetable_and_Classroom_Management_System
             // 
             lblBranchName.BackColor = Color.Transparent;
             lblBranchName.Font = new Font("Segoe UI Semibold", 9.5F, FontStyle.Bold);
-            lblBranchName.ForeColor = Color.FromArgb(51, 65, 85);
+            lblBranchName.ForeColor = DesktopPalette.Header;
             lblBranchName.Location = new Point(0, 0);
             lblBranchName.Margin = new Padding(0, 0, 0, 6);
             lblBranchName.Name = "lblBranchName";
@@ -324,23 +324,23 @@ namespace University_Timetable_and_Classroom_Management_System
             // 
             txtBranchName.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             txtBranchName.BackColor = Color.Transparent;
-            txtBranchName.BorderColor = Color.FromArgb(203, 213, 225);
-            txtBranchName.BorderRadius = 6;
+            txtBranchName.BorderColor = DesktopPalette.FieldBorder;
+            txtBranchName.BorderRadius = DesktopCorners.Field;
             txtBranchName.Cursor = Cursors.IBeam;
             txtBranchName.CustomizableEdges = customizableEdges3;
             txtBranchName.DefaultText = "";
-            txtBranchName.DisabledState.BorderColor = Color.FromArgb(226, 232, 240);
-            txtBranchName.DisabledState.FillColor = Color.FromArgb(248, 250, 252);
-            txtBranchName.DisabledState.ForeColor = Color.FromArgb(100, 116, 139);
-            txtBranchName.DisabledState.PlaceholderForeColor = Color.FromArgb(138, 138, 138);
-            txtBranchName.FocusedState.BorderColor = Color.FromArgb(37, 99, 235);
+            txtBranchName.DisabledState.BorderColor = DesktopPalette.Border;
+            txtBranchName.DisabledState.FillColor = DesktopPalette.Canvas;
+            txtBranchName.DisabledState.ForeColor = DesktopPalette.Primary;
+            txtBranchName.DisabledState.PlaceholderForeColor = DesktopPalette.Primary;
+            txtBranchName.FocusedState.BorderColor = DesktopPalette.Primary;
             txtBranchName.Font = new Font("Segoe UI", 10F);
-            txtBranchName.ForeColor = Color.FromArgb(15, 23, 42);
-            txtBranchName.HoverState.BorderColor = Color.FromArgb(148, 163, 184);
+            txtBranchName.ForeColor = DesktopPalette.Ink;
+            txtBranchName.HoverState.BorderColor = DesktopPalette.Primary;
             txtBranchName.Location = new Point(0, 25);
             txtBranchName.Margin = new Padding(0);
             txtBranchName.Name = "txtBranchName";
-            txtBranchName.PlaceholderForeColor = Color.FromArgb(148, 163, 184);
+            txtBranchName.PlaceholderForeColor = DesktopPalette.Primary;
             txtBranchName.PlaceholderText = "أدخل اسم الفرع";
             txtBranchName.SelectedText = "";
             txtBranchName.ShadowDecoration.CustomizableEdges = customizableEdges4;
@@ -367,17 +367,17 @@ namespace University_Timetable_and_Classroom_Management_System
             // btnAddBranch
             // 
             btnAddBranch.BackColor = Color.Transparent;
-            btnAddBranch.BorderRadius = 7;
+            btnAddBranch.BorderRadius = DesktopCorners.Button;
             btnAddBranch.Cursor = Cursors.Hand;
             btnAddBranch.CustomizableEdges = customizableEdges5;
             btnAddBranch.DisabledState.BorderColor = Color.DarkGray;
             btnAddBranch.DisabledState.CustomBorderColor = Color.DarkGray;
-            btnAddBranch.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            btnAddBranch.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            btnAddBranch.FillColor = Color.FromArgb(22, 163, 74);
+            btnAddBranch.DisabledState.FillColor = DesktopPalette.DisabledSurface;
+            btnAddBranch.DisabledState.ForeColor = DesktopPalette.Primary;
+            btnAddBranch.FillColor = DesktopPalette.Primary;
             btnAddBranch.Font = new Font("Segoe UI Semibold", 9.5F, FontStyle.Bold);
             btnAddBranch.ForeColor = Color.White;
-            btnAddBranch.HoverState.FillColor = Color.FromArgb(21, 128, 61);
+            btnAddBranch.HoverState.FillColor = DesktopPalette.Header;
             btnAddBranch.Location = new Point(0, 0);
             btnAddBranch.Margin = new Padding(0, 0, 12, 6);
             btnAddBranch.Name = "btnAddBranch";
@@ -389,17 +389,17 @@ namespace University_Timetable_and_Classroom_Management_System
             // btnUpdateBranch
             // 
             btnUpdateBranch.BackColor = Color.Transparent;
-            btnUpdateBranch.BorderRadius = 7;
+            btnUpdateBranch.BorderRadius = DesktopCorners.Button;
             btnUpdateBranch.Cursor = Cursors.Hand;
             btnUpdateBranch.CustomizableEdges = customizableEdges7;
             btnUpdateBranch.DisabledState.BorderColor = Color.DarkGray;
             btnUpdateBranch.DisabledState.CustomBorderColor = Color.DarkGray;
-            btnUpdateBranch.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            btnUpdateBranch.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            btnUpdateBranch.FillColor = Color.FromArgb(37, 99, 235);
+            btnUpdateBranch.DisabledState.FillColor = DesktopPalette.DisabledSurface;
+            btnUpdateBranch.DisabledState.ForeColor = DesktopPalette.Primary;
+            btnUpdateBranch.FillColor = DesktopPalette.Primary;
             btnUpdateBranch.Font = new Font("Segoe UI Semibold", 9.5F, FontStyle.Bold);
             btnUpdateBranch.ForeColor = Color.White;
-            btnUpdateBranch.HoverState.FillColor = Color.FromArgb(29, 78, 216);
+            btnUpdateBranch.HoverState.FillColor = DesktopPalette.Header;
             btnUpdateBranch.Location = new Point(120, 0);
             btnUpdateBranch.Margin = new Padding(0, 0, 12, 6);
             btnUpdateBranch.Name = "btnUpdateBranch";
@@ -411,17 +411,17 @@ namespace University_Timetable_and_Classroom_Management_System
             // btnDeleteBranch
             // 
             btnDeleteBranch.BackColor = Color.Transparent;
-            btnDeleteBranch.BorderRadius = 7;
+            btnDeleteBranch.BorderRadius = DesktopCorners.Button;
             btnDeleteBranch.Cursor = Cursors.Hand;
             btnDeleteBranch.CustomizableEdges = customizableEdges9;
             btnDeleteBranch.DisabledState.BorderColor = Color.DarkGray;
             btnDeleteBranch.DisabledState.CustomBorderColor = Color.DarkGray;
-            btnDeleteBranch.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            btnDeleteBranch.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            btnDeleteBranch.FillColor = Color.FromArgb(220, 38, 38);
+            btnDeleteBranch.DisabledState.FillColor = DesktopPalette.DisabledSurface;
+            btnDeleteBranch.DisabledState.ForeColor = DesktopPalette.Primary;
+            btnDeleteBranch.FillColor = DesktopPalette.Danger;
             btnDeleteBranch.Font = new Font("Segoe UI Semibold", 9.5F, FontStyle.Bold);
             btnDeleteBranch.ForeColor = Color.White;
-            btnDeleteBranch.HoverState.FillColor = Color.FromArgb(185, 28, 28);
+            btnDeleteBranch.HoverState.FillColor = DesktopPalette.DangerHover;
             btnDeleteBranch.Location = new Point(0, 44);
             btnDeleteBranch.Margin = new Padding(0, 0, 12, 6);
             btnDeleteBranch.Name = "btnDeleteBranch";
@@ -433,19 +433,19 @@ namespace University_Timetable_and_Classroom_Management_System
             // btnClearBranchForm
             // 
             btnClearBranchForm.BackColor = Color.Transparent;
-            btnClearBranchForm.BorderColor = Color.FromArgb(203, 213, 225);
-            btnClearBranchForm.BorderRadius = 7;
+            btnClearBranchForm.BorderColor = DesktopPalette.Border;
+            btnClearBranchForm.BorderRadius = DesktopCorners.Button;
             btnClearBranchForm.BorderThickness = 1;
             btnClearBranchForm.Cursor = Cursors.Hand;
             btnClearBranchForm.CustomizableEdges = customizableEdges11;
             btnClearBranchForm.DisabledState.BorderColor = Color.DarkGray;
             btnClearBranchForm.DisabledState.CustomBorderColor = Color.DarkGray;
-            btnClearBranchForm.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            btnClearBranchForm.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            btnClearBranchForm.FillColor = Color.FromArgb(100, 116, 139);
+            btnClearBranchForm.DisabledState.FillColor = DesktopPalette.DisabledSurface;
+            btnClearBranchForm.DisabledState.ForeColor = DesktopPalette.Primary;
+            btnClearBranchForm.FillColor = DesktopPalette.Primary;
             btnClearBranchForm.Font = new Font("Segoe UI Semibold", 9.5F, FontStyle.Bold);
             btnClearBranchForm.ForeColor = Color.White;
-            btnClearBranchForm.HoverState.FillColor = Color.FromArgb(71, 85, 105);
+            btnClearBranchForm.HoverState.FillColor = DesktopPalette.Primary;
             btnClearBranchForm.Location = new Point(120, 44);
             btnClearBranchForm.Margin = new Padding(0, 0, 12, 6);
             btnClearBranchForm.Name = "btnClearBranchForm";
@@ -458,8 +458,8 @@ namespace University_Timetable_and_Classroom_Management_System
             // pnlBranchesTable
             // 
             pnlBranchesTable.BackColor = Color.Transparent;
-            pnlBranchesTable.BorderColor = Color.FromArgb(226, 232, 240);
-            pnlBranchesTable.BorderRadius = 6;
+            pnlBranchesTable.BorderColor = DesktopPalette.Border;
+            pnlBranchesTable.BorderRadius = DesktopCorners.Card;
             pnlBranchesTable.BorderThickness = 1;
             pnlBranchesTable.Controls.Add(layoutResults);
             pnlBranchesTable.CustomizableEdges = customizableEdges15;
@@ -513,7 +513,7 @@ namespace University_Timetable_and_Classroom_Management_System
             // 
             lblTableSubtitle.BackColor = Color.Transparent;
             lblTableSubtitle.Font = new Font("Segoe UI", 9F);
-            lblTableSubtitle.ForeColor = Color.FromArgb(100, 116, 139);
+            lblTableSubtitle.ForeColor = DesktopPalette.Primary;
             lblTableSubtitle.Location = new Point(0, 0);
             lblTableSubtitle.Margin = new Padding(0, 0, 20, 12);
             lblTableSubtitle.Name = "lblTableSubtitle";
@@ -526,7 +526,7 @@ namespace University_Timetable_and_Classroom_Management_System
             // 
             lblTableTitle.BackColor = Color.Transparent;
             lblTableTitle.Font = new Font("Segoe UI Semibold", 11F, FontStyle.Bold);
-            lblTableTitle.ForeColor = Color.FromArgb(15, 23, 42);
+            lblTableTitle.ForeColor = DesktopPalette.Ink;
             lblTableTitle.Location = new Point(255, 0);
             lblTableTitle.Margin = new Padding(0, 0, 20, 12);
             lblTableTitle.Name = "lblTableTitle";
@@ -539,16 +539,16 @@ namespace University_Timetable_and_Classroom_Management_System
             dgvBranches.AllowUserToAddRows = false;
             dgvBranches.AllowUserToDeleteRows = false;
             dgvBranches.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.BackColor = Color.FromArgb(241, 245, 249);
-            dataGridViewCellStyle1.ForeColor = Color.FromArgb(15, 23, 42);
-            dataGridViewCellStyle1.SelectionBackColor = Color.FromArgb(37, 99, 235);
-            dataGridViewCellStyle1.SelectionForeColor = Color.White;
+            dataGridViewCellStyle1.BackColor = DesktopPalette.Canvas;
+            dataGridViewCellStyle1.ForeColor = DesktopPalette.Ink;
+            dataGridViewCellStyle1.SelectionBackColor = DesktopPalette.Selection;
+            dataGridViewCellStyle1.SelectionForeColor = DesktopPalette.Ink;
             dgvBranches.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = Color.FromArgb(15, 23, 42);
+            dataGridViewCellStyle2.BackColor = DesktopPalette.Header;
             dataGridViewCellStyle2.Font = new Font("Segoe UI Semibold", 11F, FontStyle.Bold);
             dataGridViewCellStyle2.ForeColor = Color.White;
-            dataGridViewCellStyle2.SelectionBackColor = Color.FromArgb(15, 23, 42);
+            dataGridViewCellStyle2.SelectionBackColor = DesktopPalette.Header;
             dataGridViewCellStyle2.SelectionForeColor = Color.White;
             dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
             dgvBranches.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
@@ -557,14 +557,14 @@ namespace University_Timetable_and_Classroom_Management_System
             dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = Color.White;
             dataGridViewCellStyle3.Font = new Font("Segoe UI", 11F);
-            dataGridViewCellStyle3.ForeColor = Color.FromArgb(15, 23, 42);
-            dataGridViewCellStyle3.SelectionBackColor = Color.FromArgb(37, 99, 235);
-            dataGridViewCellStyle3.SelectionForeColor = Color.White;
+            dataGridViewCellStyle3.ForeColor = DesktopPalette.Ink;
+            dataGridViewCellStyle3.SelectionBackColor = DesktopPalette.Selection;
+            dataGridViewCellStyle3.SelectionForeColor = DesktopPalette.Ink;
             dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
             dgvBranches.DefaultCellStyle = dataGridViewCellStyle3;
             dgvBranches.Dock = DockStyle.Fill;
             dgvBranches.Font = new Font("Segoe UI", 9F);
-            dgvBranches.GridColor = Color.FromArgb(226, 232, 240);
+            dgvBranches.GridColor = DesktopPalette.Border;
             dgvBranches.Location = new Point(0, 34);
             dgvBranches.Margin = new Padding(0);
             dgvBranches.MinimumSize = new Size(0, 160);
@@ -575,21 +575,21 @@ namespace University_Timetable_and_Classroom_Management_System
             dgvBranches.RowTemplate.Height = 48;
             dgvBranches.Size = new Size(1076, 308);
             dgvBranches.TabIndex = 2;
-            dgvBranches.ThemeStyle.AlternatingRowsStyle.BackColor = Color.FromArgb(241, 245, 249);
-            dgvBranches.ThemeStyle.AlternatingRowsStyle.ForeColor = Color.FromArgb(15, 23, 42);
-            dgvBranches.ThemeStyle.AlternatingRowsStyle.SelectionBackColor = Color.FromArgb(37, 99, 235);
-            dgvBranches.ThemeStyle.AlternatingRowsStyle.SelectionForeColor = Color.White;
-            dgvBranches.ThemeStyle.GridColor = Color.FromArgb(226, 232, 240);
-            dgvBranches.ThemeStyle.HeaderStyle.BackColor = Color.FromArgb(15, 23, 42);
+            dgvBranches.ThemeStyle.AlternatingRowsStyle.BackColor = DesktopPalette.Canvas;
+            dgvBranches.ThemeStyle.AlternatingRowsStyle.ForeColor = DesktopPalette.Ink;
+            dgvBranches.ThemeStyle.AlternatingRowsStyle.SelectionBackColor = DesktopPalette.Selection;
+            dgvBranches.ThemeStyle.AlternatingRowsStyle.SelectionForeColor = DesktopPalette.Ink;
+            dgvBranches.ThemeStyle.GridColor = DesktopPalette.Border;
+            dgvBranches.ThemeStyle.HeaderStyle.BackColor = DesktopPalette.Header;
             dgvBranches.ThemeStyle.HeaderStyle.Font = new Font("Segoe UI Semibold", 11F, FontStyle.Bold);
             dgvBranches.ThemeStyle.HeaderStyle.HeaightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             dgvBranches.ThemeStyle.HeaderStyle.Height = 48;
             dgvBranches.ThemeStyle.ReadOnly = true;
             dgvBranches.ThemeStyle.RowsStyle.Font = new Font("Segoe UI", 11F);
-            dgvBranches.ThemeStyle.RowsStyle.ForeColor = Color.FromArgb(15, 23, 42);
+            dgvBranches.ThemeStyle.RowsStyle.ForeColor = DesktopPalette.Ink;
             dgvBranches.ThemeStyle.RowsStyle.Height = 48;
-            dgvBranches.ThemeStyle.RowsStyle.SelectionBackColor = Color.FromArgb(37, 99, 235);
-            dgvBranches.ThemeStyle.RowsStyle.SelectionForeColor = Color.White;
+            dgvBranches.ThemeStyle.RowsStyle.SelectionBackColor = DesktopPalette.Selection;
+            dgvBranches.ThemeStyle.RowsStyle.SelectionForeColor = DesktopPalette.Ink;
             // 
             // colRowNumber
             // 
@@ -661,7 +661,7 @@ namespace University_Timetable_and_Classroom_Management_System
             lblPageTitle.AccessibleDescription = "عنوان صفحة الفروع الأكاديمية";
             lblPageTitle.BackColor = Color.Transparent;
             lblPageTitle.Font = new Font("Segoe UI Semibold", 16F, FontStyle.Bold);
-            lblPageTitle.ForeColor = Color.FromArgb(15, 23, 42);
+            lblPageTitle.ForeColor = DesktopPalette.Ink;
             lblPageTitle.Location = new Point(0, 0);
             lblPageTitle.Margin = new Padding(0, 0, 0, 6);
             lblPageTitle.Name = "lblPageTitle";
@@ -673,7 +673,7 @@ namespace University_Timetable_and_Classroom_Management_System
             // 
             lblPageSubtitle.BackColor = Color.Transparent;
             lblPageSubtitle.Font = new Font("Segoe UI", 9F);
-            lblPageSubtitle.ForeColor = Color.FromArgb(100, 116, 139);
+            lblPageSubtitle.ForeColor = DesktopPalette.Primary;
             lblPageSubtitle.Location = new Point(0, 38);
             lblPageSubtitle.Margin = new Padding(0, 0, 0, 6);
             lblPageSubtitle.Name = "lblPageSubtitle";
@@ -685,7 +685,7 @@ namespace University_Timetable_and_Classroom_Management_System
             // 
             AutoScaleDimensions = new SizeF(96F, 96F);
             AutoScaleMode = AutoScaleMode.Dpi;
-            BackColor = Color.FromArgb(245, 247, 250);
+            BackColor = DesktopPalette.Canvas;
             Controls.Add(pnlMain);
             Font = new Font("Segoe UI", 9F);
             ForeColor = SystemColors.ControlText;

@@ -25,6 +25,25 @@ namespace University_Timetable_and_Classroom_Management_System.BusinessLayer
             return await AddInContextAsync(context, facultyMember);
         }
 
+        public async Task<(IReadOnlyList<int> AddedIds, int Skipped)> ImportListAsync(string path)
+        {
+            var rows = await Task.Run(() => FacultyListFile.Read(path));
+            await using var context = new AppDbContext();
+            await using var transaction = await context.Database.BeginTransactionAsync(System.Data.IsolationLevel.Serializable);
+            var existing = await context.FacultyMembers.Select(f => f.FullName).ToListAsync();
+            var names = new HashSet<string>(existing.Select(name => name.Trim()), StringComparer.OrdinalIgnoreCase);
+            var additions = rows.Where(row => names.Add(row.FullName)).ToList();
+            if (additions.Count > 0)
+            {
+                int lastId = await context.FacultyMembers.MaxAsync(f => (int?)f.FacultyMemberID) ?? 0;
+                foreach (var member in additions) member.FacultyMemberID = checked(++lastId);
+                context.FacultyMembers.AddRange(additions);
+                await ManualKeySaveHelper.SaveWithManualKeyAsync(context, "[FacultyMembers]");
+            }
+            await transaction.CommitAsync();
+            return (additions.Select(member => member.FacultyMemberID).ToList(), rows.Count - additions.Count);
+        }
+
         internal static async Task<FacultyMember> AddInContextAsync(AppDbContext context, FacultyMember facultyMember)
         {
             await ValidateAsync(context, facultyMember, false);

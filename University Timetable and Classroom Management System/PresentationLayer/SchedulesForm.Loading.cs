@@ -174,12 +174,15 @@ namespace University_Timetable_and_Classroom_Management_System
                 : null;
 
             cmbGroupName.Items.Clear();
-            if (section != null && AcademicStructureRules.AllowsWholeSectionPractical(section.StudyYearID))
+            var subject = GetSelectedOptionalId(cmbSubject) is int subjectId
+                ? subjectsLookup.FirstOrDefault(item => item.SubjectID == subjectId) : null;
+            bool merged = subject?.MergePracticalGroups == true;
+            if (section != null && (merged || AcademicStructureRules.AllowsWholeSectionPractical(section.StudyYearID)))
             {
                 cmbGroupName.Items.Add(section.SectionName);
                 currentSelection = section.SectionName;
             }
-            cmbGroupName.Items.AddRange(GetAllowedGroupsForSection(section).Cast<object>().ToArray());
+            if (!merged) cmbGroupName.Items.AddRange(GetAllowedGroupsForSection(section).Cast<object>().ToArray());
             SelectComboText(cmbGroupName, currentSelection);
             ApplyLectureTypeSelection();
         }

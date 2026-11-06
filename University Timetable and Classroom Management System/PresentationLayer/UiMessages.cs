@@ -23,7 +23,8 @@ namespace University_Timetable_and_Classroom_Management_System
                 MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1, MessageBoxOptions.RightAlign | MessageBoxOptions.RtlReading);
         }
 
-        public static DialogResult Confirm(IWin32Window? owner, string message, string title)
+        public static DialogResult Confirm(IWin32Window? owner, string message, string title,
+            MessageBoxDefaultButton defaultButton = MessageBoxDefaultButton.Button1)
         {
             if (!CanShow(owner)) return DialogResult.No;
             return MessageBox.Show(
@@ -31,7 +32,7 @@ namespace University_Timetable_and_Classroom_Management_System
                 ArabicUiText.Message(message),
                 title,
                 MessageBoxButtons.YesNo,
-                MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1, MessageBoxOptions.RightAlign | MessageBoxOptions.RtlReading);
+                MessageBoxIcon.Warning, defaultButton, MessageBoxOptions.RightAlign | MessageBoxOptions.RtlReading);
         }
 
         public static void ShowInformation(IWin32Window? owner, string message, string title)

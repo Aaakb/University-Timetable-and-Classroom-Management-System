@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>قوائم الطلبة والاستيراد</title>
+  <link rel="stylesheet" href="/css/app.css">
+  <link rel="stylesheet" href="/css/preferences.css">
+  <link rel="stylesheet" href="/css/theme.css">
+  <link rel="stylesheet" href="/css/academic-lists.css">
+  <script src="/js/theme.js"></script>
+  <script type="module" src="/js/academic-lists.js"></script>
+</head>
+<body>
+<main class="preferences-page academic-page">
+  <p><a id="return-link" href="/">العودة إلى النظام</a> · <a href="/#students">الطلبة</a></p>
+  <h1 id="academic-title">قوائم الطلبة والاستيراد</h1>
+  <p id="status" role="status"></p>
+  <p id="error" role="alert" class="error" hidden></p>
+  <div id="workspace" hidden>
+    <section id="list-panel" class="panel">
+      <h2>استيراد قوائم التدريسيين والمواد</h2>
+      <form id="list-import" class="academic-form-row">
+        <label>نوع القائمة <select name="kind"><option value="faculty">التدريسيون (Excel أو CSV)</option><option value="subjects">المواد والمراحل (Excel)</option></select></label>
+        <label>الملف <input type="file" name="file" accept=".xlsx,.csv" required></label>
+        <button class="primary">استيراد القائمة</button>
+      </form>
+    </section>
+
+  </div>
+</main>
+</body>
+</html>

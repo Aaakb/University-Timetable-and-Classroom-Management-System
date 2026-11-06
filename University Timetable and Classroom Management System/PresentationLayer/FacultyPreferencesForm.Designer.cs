@@ -16,1129 +16,774 @@ namespace University_Timetable_and_Classroom_Management_System
 
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1;
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2;
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3;
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4;
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5;
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6;
-            dayCardSunday = new System.Windows.Forms.TableLayoutPanel();
-            dayLabelSunday = new System.Windows.Forms.Label();
-            dayPreferenceSunday = new System.Windows.Forms.ComboBox();
-            dayCardMonday = new System.Windows.Forms.TableLayoutPanel();
-            dayLabelMonday = new System.Windows.Forms.Label();
-            dayPreferenceMonday = new System.Windows.Forms.ComboBox();
-            dayCardTuesday = new System.Windows.Forms.TableLayoutPanel();
-            dayLabelTuesday = new System.Windows.Forms.Label();
-            dayPreferenceTuesday = new System.Windows.Forms.ComboBox();
-            dayCardWednesday = new System.Windows.Forms.TableLayoutPanel();
-            dayLabelWednesday = new System.Windows.Forms.Label();
-            dayPreferenceWednesday = new System.Windows.Forms.ComboBox();
-            dayCardThursday = new System.Windows.Forms.TableLayoutPanel();
-            dayLabelThursday = new System.Windows.Forms.Label();
-            dayPreferenceThursday = new System.Windows.Forms.ComboBox();
-            root = new System.Windows.Forms.TableLayoutPanel();
-            heading = new System.Windows.Forms.TableLayoutPanel();
-            lblHeading = new System.Windows.Forms.Label();
-            lblDescription = new System.Windows.Forms.Label();
-            filters = new System.Windows.Forms.FlowLayoutPanel();
-            flow = new System.Windows.Forms.FlowLayoutPanel();
-            lblCaption = new System.Windows.Forms.Label();
-            faculty = new System.Windows.Forms.ComboBox();
-            flow2 = new System.Windows.Forms.FlowLayoutPanel();
-            lblCaption2 = new System.Windows.Forms.Label();
-            semester = new System.Windows.Forms.ComboBox();
-            flow3 = new System.Windows.Forms.FlowLayoutPanel();
-            lblCaption3 = new System.Windows.Forms.Label();
-            seconds = new System.Windows.Forms.NumericUpDown();
-            layout = new System.Windows.Forms.TableLayoutPanel();
-            enabled = new System.Windows.Forms.CheckBox();
-            dayCards = new System.Windows.Forms.TableLayoutPanel();
-            lblCaption4 = new System.Windows.Forms.Label();
-            profileStatus = new System.Windows.Forms.Label();
-            tabs = new System.Windows.Forms.TabControl();
-            tabCurrent = new System.Windows.Forms.TabPage();
-            current = new System.Windows.Forms.DataGridView();
-            tabChanges = new System.Windows.Forms.TabPage();
-            changes = new System.Windows.Forms.DataGridView();
-            status = new System.Windows.Forms.Label();
-            footer = new System.Windows.Forms.TableLayoutPanel();
-            save = new System.Windows.Forms.Button();
-            reload = new System.Windows.Forms.Button();
-            cancel = new System.Windows.Forms.Button();
-            close = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)seconds).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)current).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)changes).BeginInit();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
+            dayCardSunday = new TableLayoutPanel();
+            dayLabelSunday = new Label();
+            dayPreferenceSunday = new ComboBox();
+            dayCardMonday = new TableLayoutPanel();
+            dayLabelMonday = new Label();
+            dayPreferenceMonday = new ComboBox();
+            dayCardTuesday = new TableLayoutPanel();
+            dayLabelTuesday = new Label();
+            dayPreferenceTuesday = new ComboBox();
+            dayCardWednesday = new TableLayoutPanel();
+            dayLabelWednesday = new Label();
+            dayPreferenceWednesday = new ComboBox();
+            dayCardThursday = new TableLayoutPanel();
+            dayLabelThursday = new Label();
+            dayPreferenceThursday = new ComboBox();
+            root = new TableLayoutPanel();
+            heading = new TableLayoutPanel();
+            lblHeading = new Label();
+            lblDescription = new Label();
+            filters = new FlowLayoutPanel();
+            flow = new FlowLayoutPanel();
+            lblCaption = new Label();
+            faculty = new ComboBox();
+            flow2 = new FlowLayoutPanel();
+            lblCaption2 = new Label();
+            semester = new ComboBox();
+            flow3 = new FlowLayoutPanel();
+            lblCaption3 = new Label();
+            seconds = new NumericUpDown();
+            layout = new TableLayoutPanel();
+            enabled = new CheckBox();
+            dayCards = new TableLayoutPanel();
+            lblCaption4 = new Label();
+            profileStatus = new Label();
+            tabs = new TabControl();
+            tabCurrent = new TabPage();
+            current = new DataGridView();
+            tabChanges = new TabPage();
+            changes = new DataGridView();
+            status = new Label();
+            footer = new TableLayoutPanel();
+            save = new Button();
+            reload = new Button();
+            cancel = new Button();
+            close = new Button();
+            dayCardSunday.SuspendLayout();
+            dayCardMonday.SuspendLayout();
+            dayCardTuesday.SuspendLayout();
+            dayCardWednesday.SuspendLayout();
+            dayCardThursday.SuspendLayout();
             root.SuspendLayout();
             heading.SuspendLayout();
             filters.SuspendLayout();
             flow.SuspendLayout();
             flow2.SuspendLayout();
             flow3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)seconds).BeginInit();
             layout.SuspendLayout();
+            dayCards.SuspendLayout();
             tabs.SuspendLayout();
             tabCurrent.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)current).BeginInit();
             tabChanges.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)changes).BeginInit();
             footer.SuspendLayout();
-            dayCardSunday.SuspendLayout();
-            dayCardMonday.SuspendLayout();
-            dayCardTuesday.SuspendLayout();
-            dayCardWednesday.SuspendLayout();
-            dayCardThursday.SuspendLayout();
-            dayCards.SuspendLayout();
             SuspendLayout();
-            // FacultyPreferencesForm
-            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.BackColor = System.Drawing.Color.FromArgb(243, 246, 249);
-            this.ClientSize = new System.Drawing.Size(1164, 781);
-            this.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Sizable;
-            this.MinimumSize = new System.Drawing.Size(800, 680);
-            this.MaximumSize = new System.Drawing.Size(0, 0);
-            this.Name = "FacultyPreferencesForm";
-            this.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.RightToLeftLayout = true;
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "تفضيلات أيام التدريسيين";
-            this.MaximizeBox = true;
-            this.MinimizeBox = true;
-            this.ShowIcon = true;
-            this.ShowInTaskbar = true;
-            
+            // 
+            // dayCardSunday
+            // 
+            dayCardSunday.BackColor = DesktopPalette.Canvas;
+            dayCardSunday.ColumnCount = 1;
+            dayCardSunday.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            dayCardSunday.Controls.Add(dayLabelSunday, 0, 0);
+            dayCardSunday.Controls.Add(dayPreferenceSunday, 0, 1);
+            dayCardSunday.Dock = DockStyle.Fill;
+            dayCardSunday.Location = new Point(893, 3);
+            dayCardSunday.Name = "dayCardSunday";
+            dayCardSunday.Padding = new Padding(5);
+            dayCardSunday.RowCount = 2;
+            dayCardSunday.RowStyles.Add(new RowStyle(SizeType.Absolute, 27F));
+            dayCardSunday.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            dayCardSunday.Size = new Size(216, 60);
+            dayCardSunday.TabIndex = 0;
+            // 
+            // dayLabelSunday
+            // 
+            dayLabelSunday.Dock = DockStyle.Fill;
+            dayLabelSunday.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
+            dayLabelSunday.Location = new Point(8, 5);
+            dayLabelSunday.Name = "dayLabelSunday";
+            dayLabelSunday.Size = new Size(200, 27);
+            dayLabelSunday.TabIndex = 0;
+            dayLabelSunday.Text = "الأحد";
+            dayLabelSunday.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // dayPreferenceSunday
+            // 
+            dayPreferenceSunday.Dock = DockStyle.Top;
+            dayPreferenceSunday.DropDownHeight = 240;
+            dayPreferenceSunday.DropDownStyle = ComboBoxStyle.DropDownList;
+            dayPreferenceSunday.IntegralHeight = false;
+            dayPreferenceSunday.Items.AddRange(new object[] { "مفضّل", "مسموح", "غير متاح" });
+            dayPreferenceSunday.Location = new Point(8, 35);
+            dayPreferenceSunday.Name = "dayPreferenceSunday";
+            dayPreferenceSunday.Size = new Size(200, 25);
+            dayPreferenceSunday.TabIndex = 1;
+            // 
+            // dayCardMonday
+            // 
+            dayCardMonday.BackColor = DesktopPalette.Canvas;
+            dayCardMonday.ColumnCount = 1;
+            dayCardMonday.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            dayCardMonday.Controls.Add(dayLabelMonday, 0, 0);
+            dayCardMonday.Controls.Add(dayPreferenceMonday, 0, 1);
+            dayCardMonday.Dock = DockStyle.Fill;
+            dayCardMonday.Location = new Point(671, 3);
+            dayCardMonday.Name = "dayCardMonday";
+            dayCardMonday.Padding = new Padding(5);
+            dayCardMonday.RowCount = 2;
+            dayCardMonday.RowStyles.Add(new RowStyle(SizeType.Absolute, 27F));
+            dayCardMonday.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            dayCardMonday.Size = new Size(216, 60);
+            dayCardMonday.TabIndex = 1;
+            // 
+            // dayLabelMonday
+            // 
+            dayLabelMonday.Dock = DockStyle.Fill;
+            dayLabelMonday.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
+            dayLabelMonday.Location = new Point(8, 5);
+            dayLabelMonday.Name = "dayLabelMonday";
+            dayLabelMonday.Size = new Size(200, 27);
+            dayLabelMonday.TabIndex = 0;
+            dayLabelMonday.Text = "الاثنين";
+            dayLabelMonday.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // dayPreferenceMonday
+            // 
+            dayPreferenceMonday.Dock = DockStyle.Top;
+            dayPreferenceMonday.DropDownHeight = 240;
+            dayPreferenceMonday.DropDownStyle = ComboBoxStyle.DropDownList;
+            dayPreferenceMonday.IntegralHeight = false;
+            dayPreferenceMonday.Items.AddRange(new object[] { "مفضّل", "مسموح", "غير متاح" });
+            dayPreferenceMonday.Location = new Point(8, 35);
+            dayPreferenceMonday.Name = "dayPreferenceMonday";
+            dayPreferenceMonday.Size = new Size(200, 25);
+            dayPreferenceMonday.TabIndex = 1;
+            // 
+            // dayCardTuesday
+            // 
+            dayCardTuesday.BackColor = DesktopPalette.Canvas;
+            dayCardTuesday.ColumnCount = 1;
+            dayCardTuesday.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            dayCardTuesday.Controls.Add(dayLabelTuesday, 0, 0);
+            dayCardTuesday.Controls.Add(dayPreferenceTuesday, 0, 1);
+            dayCardTuesday.Dock = DockStyle.Fill;
+            dayCardTuesday.Location = new Point(449, 3);
+            dayCardTuesday.Name = "dayCardTuesday";
+            dayCardTuesday.Padding = new Padding(5);
+            dayCardTuesday.RowCount = 2;
+            dayCardTuesday.RowStyles.Add(new RowStyle(SizeType.Absolute, 27F));
+            dayCardTuesday.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            dayCardTuesday.Size = new Size(216, 60);
+            dayCardTuesday.TabIndex = 2;
+            // 
+            // dayLabelTuesday
+            // 
+            dayLabelTuesday.Dock = DockStyle.Fill;
+            dayLabelTuesday.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
+            dayLabelTuesday.Location = new Point(8, 5);
+            dayLabelTuesday.Name = "dayLabelTuesday";
+            dayLabelTuesday.Size = new Size(200, 27);
+            dayLabelTuesday.TabIndex = 0;
+            dayLabelTuesday.Text = "الثلاثاء";
+            dayLabelTuesday.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // dayPreferenceTuesday
+            // 
+            dayPreferenceTuesday.Dock = DockStyle.Top;
+            dayPreferenceTuesday.DropDownHeight = 240;
+            dayPreferenceTuesday.DropDownStyle = ComboBoxStyle.DropDownList;
+            dayPreferenceTuesday.IntegralHeight = false;
+            dayPreferenceTuesday.Items.AddRange(new object[] { "مفضّل", "مسموح", "غير متاح" });
+            dayPreferenceTuesday.Location = new Point(8, 35);
+            dayPreferenceTuesday.Name = "dayPreferenceTuesday";
+            dayPreferenceTuesday.Size = new Size(200, 25);
+            dayPreferenceTuesday.TabIndex = 1;
+            // 
+            // dayCardWednesday
+            // 
+            dayCardWednesday.BackColor = DesktopPalette.Canvas;
+            dayCardWednesday.ColumnCount = 1;
+            dayCardWednesday.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            dayCardWednesday.Controls.Add(dayLabelWednesday, 0, 0);
+            dayCardWednesday.Controls.Add(dayPreferenceWednesday, 0, 1);
+            dayCardWednesday.Dock = DockStyle.Fill;
+            dayCardWednesday.Location = new Point(227, 3);
+            dayCardWednesday.Name = "dayCardWednesday";
+            dayCardWednesday.Padding = new Padding(5);
+            dayCardWednesday.RowCount = 2;
+            dayCardWednesday.RowStyles.Add(new RowStyle(SizeType.Absolute, 27F));
+            dayCardWednesday.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            dayCardWednesday.Size = new Size(216, 60);
+            dayCardWednesday.TabIndex = 3;
+            // 
+            // dayLabelWednesday
+            // 
+            dayLabelWednesday.Dock = DockStyle.Fill;
+            dayLabelWednesday.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
+            dayLabelWednesday.Location = new Point(8, 5);
+            dayLabelWednesday.Name = "dayLabelWednesday";
+            dayLabelWednesday.Size = new Size(200, 27);
+            dayLabelWednesday.TabIndex = 0;
+            dayLabelWednesday.Text = "الأربعاء";
+            dayLabelWednesday.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // dayPreferenceWednesday
+            // 
+            dayPreferenceWednesday.Dock = DockStyle.Top;
+            dayPreferenceWednesday.DropDownHeight = 240;
+            dayPreferenceWednesday.DropDownStyle = ComboBoxStyle.DropDownList;
+            dayPreferenceWednesday.IntegralHeight = false;
+            dayPreferenceWednesday.Items.AddRange(new object[] { "مفضّل", "مسموح", "غير متاح" });
+            dayPreferenceWednesday.Location = new Point(8, 35);
+            dayPreferenceWednesday.Name = "dayPreferenceWednesday";
+            dayPreferenceWednesday.Size = new Size(200, 25);
+            dayPreferenceWednesday.TabIndex = 1;
+            // 
+            // dayCardThursday
+            // 
+            dayCardThursday.BackColor = DesktopPalette.Canvas;
+            dayCardThursday.ColumnCount = 1;
+            dayCardThursday.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            dayCardThursday.Controls.Add(dayLabelThursday, 0, 0);
+            dayCardThursday.Controls.Add(dayPreferenceThursday, 0, 1);
+            dayCardThursday.Dock = DockStyle.Fill;
+            dayCardThursday.Location = new Point(3, 3);
+            dayCardThursday.Name = "dayCardThursday";
+            dayCardThursday.Padding = new Padding(5);
+            dayCardThursday.RowCount = 2;
+            dayCardThursday.RowStyles.Add(new RowStyle(SizeType.Absolute, 27F));
+            dayCardThursday.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            dayCardThursday.Size = new Size(218, 60);
+            dayCardThursday.TabIndex = 4;
+            // 
+            // dayLabelThursday
+            // 
+            dayLabelThursday.Dock = DockStyle.Fill;
+            dayLabelThursday.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
+            dayLabelThursday.Location = new Point(8, 5);
+            dayLabelThursday.Name = "dayLabelThursday";
+            dayLabelThursday.Size = new Size(202, 27);
+            dayLabelThursday.TabIndex = 0;
+            dayLabelThursday.Text = "الخميس";
+            dayLabelThursday.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // dayPreferenceThursday
+            // 
+            dayPreferenceThursday.Dock = DockStyle.Top;
+            dayPreferenceThursday.DropDownHeight = 240;
+            dayPreferenceThursday.DropDownStyle = ComboBoxStyle.DropDownList;
+            dayPreferenceThursday.IntegralHeight = false;
+            dayPreferenceThursday.Items.AddRange(new object[] { "مفضّل", "مسموح", "غير متاح" });
+            dayPreferenceThursday.Location = new Point(8, 35);
+            dayPreferenceThursday.Name = "dayPreferenceThursday";
+            dayPreferenceThursday.Size = new Size(202, 25);
+            dayPreferenceThursday.TabIndex = 1;
+            // 
             // root
-            root.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left;
-            root.AutoSize = false;
-            root.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowOnly;
-            root.Cursor = System.Windows.Forms.Cursors.Default;
-            root.Dock = System.Windows.Forms.DockStyle.Fill;
-            root.Location = new System.Drawing.Point(0, 0);
-            root.Margin = new System.Windows.Forms.Padding(3, 3, 3, 3);
-            root.MaximumSize = new System.Drawing.Size(0, 0);
-            root.MinimumSize = new System.Drawing.Size(0, 0);
-            root.Padding = new System.Windows.Forms.Padding(16, 16, 16, 16);
-            root.Size = new System.Drawing.Size(1164, 781);
-            root.TabIndex = 0;
-            root.TabStop = false;
-            root.Name = "root";
-            root.Visible = true;
-            root.Enabled = true;
+            // 
             root.ColumnCount = 1;
-            root.RowCount = 6;
-            root.GrowStyle = System.Windows.Forms.TableLayoutPanelGrowStyle.AddRows;
-            root.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.None;
-            root.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            root.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 56F));
-            root.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.AutoSize, 0F));
-            root.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 190F));
-            root.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            root.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 48F));
-            root.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 52F));
-            root.AutoScroll = false;
-            root.AutoScrollMargin = new System.Drawing.Size(0, 0);
-            root.AutoScrollMinSize = new System.Drawing.Size(0, 0);
-            
-            // heading
-            heading.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left;
-            heading.AutoSize = false;
-            heading.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowOnly;
-            heading.Cursor = System.Windows.Forms.Cursors.Default;
-            heading.Dock = System.Windows.Forms.DockStyle.Fill;
-            heading.Location = new System.Drawing.Point(16, 16);
-            heading.Margin = new System.Windows.Forms.Padding(0, 0, 0, 0);
-            heading.MaximumSize = new System.Drawing.Size(0, 0);
-            heading.MinimumSize = new System.Drawing.Size(0, 0);
-            heading.Padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
-            heading.Size = new System.Drawing.Size(1132, 56);
-            heading.TabIndex = 0;
-            heading.TabStop = false;
-            heading.Name = "heading";
-            heading.Visible = true;
-            heading.Enabled = true;
-            heading.ColumnCount = 1;
-            heading.RowCount = 2;
-            heading.GrowStyle = System.Windows.Forms.TableLayoutPanelGrowStyle.AddRows;
-            heading.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.None;
-            heading.AutoScroll = false;
-            heading.AutoScrollMargin = new System.Drawing.Size(0, 0);
-            heading.AutoScrollMinSize = new System.Drawing.Size(0, 0);
-            
-            // lblHeading
-            lblHeading.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left;
-            lblHeading.AutoSize = true;
-            lblHeading.ForeColor = System.Drawing.Color.FromArgb(25, 52, 67);
-            lblHeading.Font = new System.Drawing.Font("Segoe UI", 19F, System.Drawing.FontStyle.Bold);
-            lblHeading.Cursor = System.Windows.Forms.Cursors.Default;
-            lblHeading.Dock = System.Windows.Forms.DockStyle.None;
-            lblHeading.Location = new System.Drawing.Point(848, 0);
-            lblHeading.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
-            lblHeading.MaximumSize = new System.Drawing.Size(0, 0);
-            lblHeading.MinimumSize = new System.Drawing.Size(0, 0);
-            lblHeading.Padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
-            lblHeading.Size = new System.Drawing.Size(281, 36);
-            lblHeading.TabIndex = 0;
-            lblHeading.TabStop = false;
-            lblHeading.Text = "تفضيلات أيام التدريسيين";
-            lblHeading.Name = "lblHeading";
-            lblHeading.Visible = true;
-            lblHeading.Enabled = true;
-            lblHeading.AutoEllipsis = false;
-            lblHeading.TextAlign = System.Drawing.ContentAlignment.TopLeft;
-            lblHeading.UseMnemonic = true;
-            lblHeading.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            
-            // lblDescription
-            lblDescription.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left;
-            lblDescription.AutoSize = true;
-            lblDescription.ForeColor = System.Drawing.Color.FromArgb(91, 108, 122);
-            lblDescription.Cursor = System.Windows.Forms.Cursors.Default;
-            lblDescription.Dock = System.Windows.Forms.DockStyle.None;
-            lblDescription.Location = new System.Drawing.Point(739, 36);
-            lblDescription.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
-            lblDescription.MaximumSize = new System.Drawing.Size(0, 0);
-            lblDescription.MinimumSize = new System.Drawing.Size(0, 0);
-            lblDescription.Padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
-            lblDescription.Size = new System.Drawing.Size(390, 19);
-            lblDescription.TabIndex = 1;
-            lblDescription.TabStop = false;
-            lblDescription.Text = "اختر الأيام، وسنُعيد توزيع الجدول الحالي وفق التفضيلات المتوفرة.";
-            lblDescription.Name = "lblDescription";
-            lblDescription.Visible = true;
-            lblDescription.Enabled = true;
-            lblDescription.AutoEllipsis = false;
-            lblDescription.TextAlign = System.Drawing.ContentAlignment.TopLeft;
-            lblDescription.UseMnemonic = true;
-            lblDescription.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            
-            // filters
-            filters.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left;
-            filters.AutoSize = true;
-            filters.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowOnly;
-            filters.Cursor = System.Windows.Forms.Cursors.Default;
-            filters.Dock = System.Windows.Forms.DockStyle.Fill;
-            filters.Location = new System.Drawing.Point(16, 72);
-            filters.Margin = new System.Windows.Forms.Padding(0, 0, 0, 0);
-            filters.MaximumSize = new System.Drawing.Size(0, 0);
-            filters.MinimumSize = new System.Drawing.Size(0, 0);
-            filters.Padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
-            filters.Size = new System.Drawing.Size(1132, 63);
-            filters.TabIndex = 1;
-            filters.TabStop = false;
-            filters.Name = "filters";
-            filters.Visible = true;
-            filters.Enabled = true;
-            filters.FlowDirection = System.Windows.Forms.FlowDirection.LeftToRight;
-            filters.WrapContents = true;
-            filters.AutoScroll = false;
-            filters.AutoScrollMargin = new System.Drawing.Size(0, 0);
-            filters.AutoScrollMinSize = new System.Drawing.Size(0, 0);
-            
-            // flow
-            flow.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left;
-            flow.AutoSize = true;
-            flow.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowOnly;
-            flow.Cursor = System.Windows.Forms.Cursors.Default;
-            flow.Dock = System.Windows.Forms.DockStyle.None;
-            flow.Location = new System.Drawing.Point(820, 0);
-            flow.Margin = new System.Windows.Forms.Padding(6, 0, 6, 5);
-            flow.MaximumSize = new System.Drawing.Size(0, 0);
-            flow.MinimumSize = new System.Drawing.Size(0, 58);
-            flow.Padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
-            flow.Size = new System.Drawing.Size(306, 58);
-            flow.TabIndex = 0;
-            flow.TabStop = false;
-            flow.Name = "flow";
-            flow.Visible = true;
-            flow.Enabled = true;
-            flow.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            flow.WrapContents = false;
-            flow.AutoScroll = false;
-            flow.AutoScrollMargin = new System.Drawing.Size(0, 0);
-            flow.AutoScrollMinSize = new System.Drawing.Size(0, 0);
-            
-            // lblCaption
-            lblCaption.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left;
-            lblCaption.AutoSize = true;
-            lblCaption.ForeColor = System.Drawing.Color.FromArgb(91, 108, 122);
-            lblCaption.Cursor = System.Windows.Forms.Cursors.Default;
-            lblCaption.Dock = System.Windows.Forms.DockStyle.None;
-            lblCaption.Location = new System.Drawing.Point(241, 0);
-            lblCaption.Margin = new System.Windows.Forms.Padding(3, 0, 3, 5);
-            lblCaption.MaximumSize = new System.Drawing.Size(0, 0);
-            lblCaption.MinimumSize = new System.Drawing.Size(0, 0);
-            lblCaption.Padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
-            lblCaption.Size = new System.Drawing.Size(62, 19);
-            lblCaption.TabIndex = 0;
-            lblCaption.TabStop = false;
-            lblCaption.Text = "التدريسي";
-            lblCaption.Name = "lblCaption";
-            lblCaption.Visible = true;
-            lblCaption.Enabled = true;
-            lblCaption.AutoEllipsis = false;
-            lblCaption.TextAlign = System.Drawing.ContentAlignment.TopLeft;
-            lblCaption.UseMnemonic = true;
-            lblCaption.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            
-            // faculty
-            faculty.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left;
-            faculty.AutoSize = false;
-            faculty.Cursor = System.Windows.Forms.Cursors.Default;
-            faculty.Dock = System.Windows.Forms.DockStyle.None;
-            faculty.Location = new System.Drawing.Point(3, 27);
-            faculty.Margin = new System.Windows.Forms.Padding(3, 3, 3, 3);
-            faculty.MaximumSize = new System.Drawing.Size(0, 0);
-            faculty.MinimumSize = new System.Drawing.Size(0, 0);
-            faculty.Padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
-            faculty.Size = new System.Drawing.Size(300, 27);
-            faculty.TabIndex = 1;
-            faculty.TabStop = true;
-            faculty.Name = "preferenceFaculty";
-            faculty.Visible = true;
-            faculty.Enabled = true;
-            faculty.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDown;
-            faculty.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            faculty.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            faculty.DisplayMember = "Text";
-            faculty.FormattingEnabled = false;
-            faculty.DropDownWidth = 300;
-            faculty.MaxDropDownItems = 8;
-            faculty.Sorted = false;
-            faculty.DropDownHeight = 240;
-            faculty.IntegralHeight = false;
-            
-            // flow2
-            flow2.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left;
-            flow2.AutoSize = true;
-            flow2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowOnly;
-            flow2.Cursor = System.Windows.Forms.Cursors.Default;
-            flow2.Dock = System.Windows.Forms.DockStyle.None;
-            flow2.Location = new System.Drawing.Point(662, 0);
-            flow2.Margin = new System.Windows.Forms.Padding(6, 0, 6, 5);
-            flow2.MaximumSize = new System.Drawing.Size(0, 0);
-            flow2.MinimumSize = new System.Drawing.Size(0, 58);
-            flow2.Padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
-            flow2.Size = new System.Drawing.Size(146, 58);
-            flow2.TabIndex = 1;
-            flow2.TabStop = false;
-            flow2.Name = "flow2";
-            flow2.Visible = true;
-            flow2.Enabled = true;
-            flow2.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            flow2.WrapContents = false;
-            flow2.AutoScroll = false;
-            flow2.AutoScrollMargin = new System.Drawing.Size(0, 0);
-            flow2.AutoScrollMinSize = new System.Drawing.Size(0, 0);
-            
-            // lblCaption2
-            lblCaption2.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left;
-            lblCaption2.AutoSize = true;
-            lblCaption2.ForeColor = System.Drawing.Color.FromArgb(91, 108, 122);
-            lblCaption2.Cursor = System.Windows.Forms.Cursors.Default;
-            lblCaption2.Dock = System.Windows.Forms.DockStyle.None;
-            lblCaption2.Location = new System.Drawing.Point(46, 0);
-            lblCaption2.Margin = new System.Windows.Forms.Padding(3, 0, 3, 5);
-            lblCaption2.MaximumSize = new System.Drawing.Size(0, 0);
-            lblCaption2.MinimumSize = new System.Drawing.Size(0, 0);
-            lblCaption2.Padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
-            lblCaption2.Size = new System.Drawing.Size(97, 19);
-            lblCaption2.TabIndex = 0;
-            lblCaption2.TabStop = false;
-            lblCaption2.Text = "الفصل الدراسي";
-            lblCaption2.Name = "lblCaption2";
-            lblCaption2.Visible = true;
-            lblCaption2.Enabled = true;
-            lblCaption2.AutoEllipsis = false;
-            lblCaption2.TextAlign = System.Drawing.ContentAlignment.TopLeft;
-            lblCaption2.UseMnemonic = true;
-            lblCaption2.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            
-            // semester
-            semester.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left;
-            semester.AutoSize = false;
-            semester.Cursor = System.Windows.Forms.Cursors.Default;
-            semester.Dock = System.Windows.Forms.DockStyle.None;
-            semester.Location = new System.Drawing.Point(3, 27);
-            semester.Margin = new System.Windows.Forms.Padding(3, 3, 3, 3);
-            semester.MaximumSize = new System.Drawing.Size(0, 0);
-            semester.MinimumSize = new System.Drawing.Size(0, 0);
-            semester.Padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
-            semester.Size = new System.Drawing.Size(140, 27);
-            semester.TabIndex = 1;
-            semester.TabStop = true;
-            semester.Name = "preferenceSemester";
-            semester.Visible = true;
-            semester.Enabled = true;
-            semester.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            semester.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.None;
-            semester.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.None;
-            semester.FormattingEnabled = false;
-            semester.DropDownWidth = 140;
-            semester.MaxDropDownItems = 8;
-            semester.Sorted = false;
-            semester.DropDownHeight = 240;
-            semester.IntegralHeight = false;
-            semester.Items.AddRange(new object[] { "الفصل الأول", "الفصل الثاني" });
-            
-            // flow3
-            flow3.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left;
-            flow3.AutoSize = true;
-            flow3.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowOnly;
-            flow3.Cursor = System.Windows.Forms.Cursors.Default;
-            flow3.Dock = System.Windows.Forms.DockStyle.None;
-            flow3.Location = new System.Drawing.Point(517, 0);
-            flow3.Margin = new System.Windows.Forms.Padding(6, 0, 6, 5);
-            flow3.MaximumSize = new System.Drawing.Size(0, 0);
-            flow3.MinimumSize = new System.Drawing.Size(0, 0);
-            flow3.Padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
-            flow3.Size = new System.Drawing.Size(133, 55);
-            flow3.TabIndex = 2;
-            flow3.TabStop = false;
-            flow3.Name = "flow3";
-            flow3.Visible = true;
-            flow3.Enabled = true;
-            flow3.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            flow3.WrapContents = false;
-            flow3.AutoScroll = false;
-            flow3.AutoScrollMargin = new System.Drawing.Size(0, 0);
-            flow3.AutoScrollMinSize = new System.Drawing.Size(0, 0);
-            
-            // lblCaption3
-            lblCaption3.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left;
-            lblCaption3.AutoSize = true;
-            lblCaption3.ForeColor = System.Drawing.Color.FromArgb(91, 108, 122);
-            lblCaption3.Cursor = System.Windows.Forms.Cursors.Default;
-            lblCaption3.Dock = System.Windows.Forms.DockStyle.None;
-            lblCaption3.Location = new System.Drawing.Point(3, 0);
-            lblCaption3.Margin = new System.Windows.Forms.Padding(3, 0, 3, 5);
-            lblCaption3.MaximumSize = new System.Drawing.Size(0, 0);
-            lblCaption3.MinimumSize = new System.Drawing.Size(0, 0);
-            lblCaption3.Padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
-            lblCaption3.Size = new System.Drawing.Size(127, 19);
-            lblCaption3.TabIndex = 0;
-            lblCaption3.TabStop = false;
-            lblCaption3.Text = "مهلة التحسين / ثانية";
-            lblCaption3.Name = "lblCaption3";
-            lblCaption3.Visible = true;
-            lblCaption3.Enabled = true;
-            lblCaption3.AutoEllipsis = false;
-            lblCaption3.TextAlign = System.Drawing.ContentAlignment.TopLeft;
-            lblCaption3.UseMnemonic = true;
-            lblCaption3.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            
-            // seconds
-            seconds.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left;
-            seconds.AutoSize = false;
-            seconds.Cursor = System.Windows.Forms.Cursors.Default;
-            seconds.Dock = System.Windows.Forms.DockStyle.None;
-            seconds.Location = new System.Drawing.Point(58, 27);
-            seconds.Margin = new System.Windows.Forms.Padding(3, 3, 3, 3);
-            seconds.MaximumSize = new System.Drawing.Size(0, 0);
-            seconds.MinimumSize = new System.Drawing.Size(0, 0);
-            seconds.Padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
-            seconds.Size = new System.Drawing.Size(72, 25);
-            seconds.TabIndex = 1;
-            seconds.TabStop = true;
-            seconds.Name = "preferenceSeconds";
-            seconds.Visible = true;
-            seconds.Enabled = true;
-            seconds.AutoScroll = false;
-            seconds.AutoScrollMargin = new System.Drawing.Size(0, 0);
-            seconds.AutoScrollMinSize = new System.Drawing.Size(0, 0);
-            seconds.Minimum = 1M;
-            seconds.Maximum = 120M;
-            seconds.DecimalPlaces = 0;
-            seconds.Increment = 1M;
-            seconds.Value = 20M;
-            seconds.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            seconds.ThousandsSeparator = false;
-            
-            // layout
-            layout.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left;
-            layout.AutoSize = false;
-            layout.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowOnly;
-            layout.BackColor = System.Drawing.Color.White;
-            layout.Cursor = System.Windows.Forms.Cursors.Default;
-            layout.Dock = System.Windows.Forms.DockStyle.Fill;
-            layout.Location = new System.Drawing.Point(16, 143);
-            layout.Margin = new System.Windows.Forms.Padding(0, 8, 0, 8);
-            layout.MaximumSize = new System.Drawing.Size(0, 0);
-            layout.MinimumSize = new System.Drawing.Size(0, 0);
-            layout.Padding = new System.Windows.Forms.Padding(10, 10, 10, 10);
-            layout.Size = new System.Drawing.Size(1132, 174);
-            layout.TabIndex = 2;
-            layout.TabStop = false;
-            layout.Name = "layout";
-            layout.Visible = true;
-            layout.Enabled = true;
-            layout.ColumnCount = 1;
-            layout.RowCount = 4;
-            layout.GrowStyle = System.Windows.Forms.TableLayoutPanelGrowStyle.AddRows;
-            layout.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.None;
-            layout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            layout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.AutoSize, 0F));
-            layout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 80F));
-            layout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.AutoSize, 0F));
-            layout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            layout.AutoScroll = false;
-            layout.AutoScrollMargin = new System.Drawing.Size(0, 0);
-            layout.AutoScrollMinSize = new System.Drawing.Size(0, 0);
-            
-            // enabled
-            enabled.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left;
-            enabled.AutoSize = true;
-            enabled.Cursor = System.Windows.Forms.Cursors.Default;
-            enabled.Dock = System.Windows.Forms.DockStyle.None;
-            enabled.Location = new System.Drawing.Point(892, 14);
-            enabled.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            enabled.MaximumSize = new System.Drawing.Size(0, 0);
-            enabled.MinimumSize = new System.Drawing.Size(0, 0);
-            enabled.Padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
-            enabled.Size = new System.Drawing.Size(226, 23);
-            enabled.TabIndex = 0;
-            enabled.TabStop = true;
-            enabled.Text = "تحديد تفضيلات أيام لهذا التدريسي";
-            enabled.Name = "enableDayPreferences";
-            enabled.Visible = true;
-            enabled.Enabled = true;
-            enabled.Checked = false;
-            enabled.CheckAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            enabled.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            enabled.ThreeState = false;
-            enabled.UseVisualStyleBackColor = false;
-            
-            // dayCards
-            dayCards.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left;
-            dayCards.AutoSize = false;
-            dayCards.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowOnly;
-            dayCards.Cursor = System.Windows.Forms.Cursors.Default;
-            dayCards.Dock = System.Windows.Forms.DockStyle.Fill;
-            dayCards.Location = new System.Drawing.Point(10, 47);
-            dayCards.Margin = new System.Windows.Forms.Padding(0, 6, 0, 8);
-            dayCards.MaximumSize = new System.Drawing.Size(0, 0);
-            dayCards.MinimumSize = new System.Drawing.Size(0, 0);
-            dayCards.Padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
-            dayCards.Size = new System.Drawing.Size(1112, 66);
-            dayCards.TabIndex = 1;
-            dayCards.TabStop = false;
-            dayCards.Name = "dayPreferenceCards";
-            dayCards.Visible = true;
-            dayCards.Enabled = false;
-            dayCards.ColumnCount = 5;
-            dayCards.RowCount = 1;
-            dayCards.GrowStyle = System.Windows.Forms.TableLayoutPanelGrowStyle.AddRows;
-            dayCards.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.None;
-            dayCards.AutoScroll = false;
-            dayCards.AutoScrollMargin = new System.Drawing.Size(0, 0);
-            dayCards.AutoScrollMinSize = new System.Drawing.Size(0, 0);
-            
-            // lblCaption4
-            lblCaption4.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left;
-            lblCaption4.AutoSize = true;
-            lblCaption4.ForeColor = System.Drawing.Color.FromArgb(72, 91, 105);
-            lblCaption4.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular);
-            lblCaption4.Cursor = System.Windows.Forms.Cursors.Default;
-            lblCaption4.Dock = System.Windows.Forms.DockStyle.None;
-            lblCaption4.Location = new System.Drawing.Point(633, 123);
-            lblCaption4.Margin = new System.Windows.Forms.Padding(4, 2, 4, 4);
-            lblCaption4.MaximumSize = new System.Drawing.Size(0, 0);
-            lblCaption4.MinimumSize = new System.Drawing.Size(0, 0);
-            lblCaption4.Padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
-            lblCaption4.Size = new System.Drawing.Size(485, 15);
-            lblCaption4.TabIndex = 2;
-            lblCaption4.TabStop = false;
-            lblCaption4.Text = "مفضّل: أولوية في التحسين    •    مسموح: متاح عند الحاجة    •    غير متاح: يُمنع وضع المحاضرات فيه";
-            lblCaption4.Name = "lblCaption4";
-            lblCaption4.Visible = true;
-            lblCaption4.Enabled = true;
-            lblCaption4.AutoEllipsis = false;
-            lblCaption4.TextAlign = System.Drawing.ContentAlignment.TopLeft;
-            lblCaption4.UseMnemonic = true;
-            lblCaption4.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            
-            // profileStatus
-            profileStatus.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left;
-            profileStatus.AutoSize = true;
-            profileStatus.ForeColor = System.Drawing.Color.FromArgb(91, 108, 122);
-            profileStatus.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular);
-            profileStatus.Cursor = System.Windows.Forms.Cursors.Default;
-            profileStatus.Dock = System.Windows.Forms.DockStyle.None;
-            profileStatus.Location = new System.Drawing.Point(1118, 142);
-            profileStatus.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            profileStatus.MaximumSize = new System.Drawing.Size(1000, 0);
-            profileStatus.MinimumSize = new System.Drawing.Size(0, 0);
-            profileStatus.Padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
-            profileStatus.Size = new System.Drawing.Size(0, 15);
-            profileStatus.TabIndex = 3;
-            profileStatus.TabStop = false;
-            profileStatus.Name = "profileStatus";
-            profileStatus.Visible = true;
-            profileStatus.Enabled = true;
-            profileStatus.AutoEllipsis = false;
-            profileStatus.TextAlign = System.Drawing.ContentAlignment.TopLeft;
-            profileStatus.UseMnemonic = true;
-            profileStatus.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            
-            // tabs
-            tabs.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left;
-            tabs.AutoSize = false;
-            tabs.Cursor = System.Windows.Forms.Cursors.Default;
-            tabs.Dock = System.Windows.Forms.DockStyle.Fill;
-            tabs.Location = new System.Drawing.Point(19, 328);
-            tabs.Margin = new System.Windows.Forms.Padding(3, 3, 3, 3);
-            tabs.MaximumSize = new System.Drawing.Size(0, 0);
-            tabs.MinimumSize = new System.Drawing.Size(0, 0);
-            tabs.Padding = new System.Drawing.Point(18, 7);
-            tabs.Size = new System.Drawing.Size(1126, 334);
-            tabs.TabIndex = 3;
-            tabs.TabStop = true;
-            tabs.Name = "tabs";
-            tabs.Visible = true;
-            tabs.Enabled = true;
-            tabs.RightToLeftLayout = false;
-            tabs.Multiline = false;
-            tabs.SizeMode = System.Windows.Forms.TabSizeMode.Normal;
-            tabs.Padding = new System.Drawing.Point(18, 7);
-            tabs.SelectedIndex = 0;
-            
-            // tabCurrent
-            tabCurrent.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left;
-            tabCurrent.AutoSize = false;
-            tabCurrent.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowOnly;
-            tabCurrent.BackColor = System.Drawing.Color.White;
-            tabCurrent.Cursor = System.Windows.Forms.Cursors.Default;
-            tabCurrent.Dock = System.Windows.Forms.DockStyle.None;
-            tabCurrent.Location = new System.Drawing.Point(0, 0);
-            tabCurrent.Margin = new System.Windows.Forms.Padding(3, 3, 3, 3);
-            tabCurrent.MaximumSize = new System.Drawing.Size(0, 0);
-            tabCurrent.MinimumSize = new System.Drawing.Size(0, 0);
-            tabCurrent.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
-            tabCurrent.Size = new System.Drawing.Size(200, 100);
-            tabCurrent.TabIndex = 0;
-            tabCurrent.TabStop = false;
-            tabCurrent.Text = "الجدول الحالي للتدريسي";
-            tabCurrent.Name = "tabCurrent";
-            tabCurrent.Visible = false;
-            tabCurrent.Enabled = true;
-            tabCurrent.AutoScroll = false;
-            tabCurrent.AutoScrollMargin = new System.Drawing.Size(0, 0);
-            tabCurrent.AutoScrollMinSize = new System.Drawing.Size(0, 0);
-            tabCurrent.UseVisualStyleBackColor = false;
-            
-            // current
-            current.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left;
-            current.AutoSize = false;
-            current.Cursor = System.Windows.Forms.Cursors.Default;
-            current.Dock = System.Windows.Forms.DockStyle.Fill;
-            current.Location = new System.Drawing.Point(6, 6);
-            current.Margin = new System.Windows.Forms.Padding(3, 3, 3, 3);
-            current.MaximumSize = new System.Drawing.Size(0, 0);
-            current.MinimumSize = new System.Drawing.Size(0, 0);
-            current.Padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
-            current.Size = new System.Drawing.Size(188, 88);
-            current.TabIndex = 0;
-            current.TabStop = true;
-            current.Name = "preferenceCurrent";
-            current.Visible = true;
-            current.Enabled = true;
-            current.ReadOnly = true;
-            current.AllowUserToAddRows = false;
-            current.AllowUserToDeleteRows = false;
-            current.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
-            current.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.None;
-            current.BackgroundColor = System.Drawing.Color.White;
-            current.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            current.RowHeadersVisible = false;
-            current.AutoGenerateColumns = true;
-            current.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.RowHeaderSelect;
-            current.MultiSelect = true;
-            current.EnableHeadersVisualStyles = false;
-            current.ColumnHeadersHeight = 42;
-            current.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
-            current.GridColor = System.Drawing.SystemColors.WindowFrame;
-            current.RowHeadersWidth = 41;
-            current.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            current.RowTemplate.Height = 34;
-            dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.NotSet;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(237, 243, 246);
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.FromArgb(55, 78, 93);
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.Empty;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Empty;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.NotSet;
-            dataGridViewCellStyle1.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
-            current.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(220, 238, 231);
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.FromArgb(25, 52, 67);
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            dataGridViewCellStyle2.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular);
-            current.DefaultCellStyle = dataGridViewCellStyle2;
-            dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.NotSet;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(247, 250, 251);
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Empty;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.Empty;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Empty;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.NotSet;
-            dataGridViewCellStyle3.Padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
-            current.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
-            
-            // tabChanges
-            tabChanges.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left;
-            tabChanges.AutoSize = false;
-            tabChanges.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowOnly;
-            tabChanges.BackColor = System.Drawing.Color.White;
-            tabChanges.Cursor = System.Windows.Forms.Cursors.Default;
-            tabChanges.Dock = System.Windows.Forms.DockStyle.None;
-            tabChanges.Location = new System.Drawing.Point(0, 0);
-            tabChanges.Margin = new System.Windows.Forms.Padding(3, 3, 3, 3);
-            tabChanges.MaximumSize = new System.Drawing.Size(0, 0);
-            tabChanges.MinimumSize = new System.Drawing.Size(0, 0);
-            tabChanges.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
-            tabChanges.Size = new System.Drawing.Size(200, 100);
-            tabChanges.TabIndex = 1;
-            tabChanges.TabStop = false;
-            tabChanges.Text = "التغييرات المحفوظة في الفصل";
-            tabChanges.Name = "tabChanges";
-            tabChanges.Visible = false;
-            tabChanges.Enabled = true;
-            tabChanges.AutoScroll = false;
-            tabChanges.AutoScrollMargin = new System.Drawing.Size(0, 0);
-            tabChanges.AutoScrollMinSize = new System.Drawing.Size(0, 0);
-            tabChanges.UseVisualStyleBackColor = false;
-            
-            // changes
-            changes.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left;
-            changes.AutoSize = false;
-            changes.Cursor = System.Windows.Forms.Cursors.Default;
-            changes.Dock = System.Windows.Forms.DockStyle.Fill;
-            changes.Location = new System.Drawing.Point(6, 6);
-            changes.Margin = new System.Windows.Forms.Padding(3, 3, 3, 3);
-            changes.MaximumSize = new System.Drawing.Size(0, 0);
-            changes.MinimumSize = new System.Drawing.Size(0, 0);
-            changes.Padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
-            changes.Size = new System.Drawing.Size(188, 88);
-            changes.TabIndex = 0;
-            changes.TabStop = true;
-            changes.Name = "preferenceChanges";
-            changes.Visible = true;
-            changes.Enabled = true;
-            changes.ReadOnly = true;
-            changes.AllowUserToAddRows = false;
-            changes.AllowUserToDeleteRows = false;
-            changes.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
-            changes.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.None;
-            changes.BackgroundColor = System.Drawing.Color.White;
-            changes.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            changes.RowHeadersVisible = false;
-            changes.AutoGenerateColumns = true;
-            changes.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.RowHeaderSelect;
-            changes.MultiSelect = true;
-            changes.EnableHeadersVisualStyles = false;
-            changes.ColumnHeadersHeight = 42;
-            changes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
-            changes.GridColor = System.Drawing.SystemColors.WindowFrame;
-            changes.RowHeadersWidth = 41;
-            changes.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            changes.RowTemplate.Height = 34;
-            dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.NotSet;
-            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(237, 243, 246);
-            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.FromArgb(55, 78, 93);
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.Empty;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.Empty;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.NotSet;
-            dataGridViewCellStyle4.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
-            changes.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
-            dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.FromArgb(220, 238, 231);
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.FromArgb(25, 52, 67);
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            dataGridViewCellStyle5.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular);
-            changes.DefaultCellStyle = dataGridViewCellStyle5;
-            dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.NotSet;
-            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(247, 250, 251);
-            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.Empty;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.Empty;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.Empty;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.NotSet;
-            dataGridViewCellStyle6.Padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
-            changes.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle6;
-            
-            // status
-            status.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left;
-            status.AutoSize = false;
-            status.BackColor = System.Drawing.Color.FromArgb(231, 241, 238);
-            status.ForeColor = System.Drawing.Color.FromArgb(32, 92, 76);
-            status.Cursor = System.Windows.Forms.Cursors.Default;
-            status.Dock = System.Windows.Forms.DockStyle.Fill;
-            status.Location = new System.Drawing.Point(19, 665);
-            status.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
-            status.MaximumSize = new System.Drawing.Size(0, 0);
-            status.MinimumSize = new System.Drawing.Size(0, 0);
-            status.Padding = new System.Windows.Forms.Padding(12, 4, 12, 4);
-            status.Size = new System.Drawing.Size(1126, 48);
-            status.TabIndex = 4;
-            status.TabStop = false;
-            status.Name = "preferenceStatus";
-            status.Visible = true;
-            status.Enabled = true;
-            status.AutoEllipsis = false;
-            status.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            status.UseMnemonic = true;
-            status.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            
-            // footer
-            footer.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left;
-            footer.AutoSize = false;
-            footer.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowOnly;
-            footer.Cursor = System.Windows.Forms.Cursors.Default;
-            footer.Dock = System.Windows.Forms.DockStyle.Fill;
-            footer.Location = new System.Drawing.Point(16, 721);
-            footer.Margin = new System.Windows.Forms.Padding(0, 8, 0, 0);
-            footer.MaximumSize = new System.Drawing.Size(0, 0);
-            footer.MinimumSize = new System.Drawing.Size(0, 0);
-            footer.Padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
-            footer.Size = new System.Drawing.Size(1132, 44);
-            footer.TabIndex = 5;
-            footer.TabStop = false;
-            footer.Name = "footer";
-            footer.Visible = true;
-            footer.Enabled = true;
-            footer.ColumnCount = 4;
-            footer.RowCount = 1;
-            footer.GrowStyle = System.Windows.Forms.TableLayoutPanelGrowStyle.AddRows;
-            footer.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.None;
-            footer.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 43F));
-            footer.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 23F));
-            footer.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 19F));
-            footer.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15F));
-            footer.AutoScroll = false;
-            footer.AutoScrollMargin = new System.Drawing.Size(0, 0);
-            footer.AutoScrollMinSize = new System.Drawing.Size(0, 0);
-            
-            // save
-            save.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left;
-            save.AutoSize = false;
-            save.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowOnly;
-            save.BackColor = System.Drawing.Color.FromArgb(24, 113, 95);
-            save.ForeColor = System.Drawing.Color.White;
-            save.Cursor = System.Windows.Forms.Cursors.Default;
-            save.Dock = System.Windows.Forms.DockStyle.Fill;
-            save.Location = new System.Drawing.Point(650, 4);
-            save.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            save.MaximumSize = new System.Drawing.Size(0, 0);
-            save.MinimumSize = new System.Drawing.Size(0, 0);
-            save.Padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
-            save.Size = new System.Drawing.Size(478, 36);
-            save.TabIndex = 0;
-            save.TabStop = true;
-            save.Text = "حفظ بدون تفضيلات";
-            save.Name = "savePreferences";
-            save.Visible = true;
-            save.Enabled = false;
-            save.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            save.UseVisualStyleBackColor = false;
-            save.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            save.DialogResult = System.Windows.Forms.DialogResult.None;
-            
-            // reload
-            reload.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left;
-            reload.AutoSize = false;
-            reload.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowOnly;
-            reload.BackColor = System.Drawing.Color.White;
-            reload.Cursor = System.Windows.Forms.Cursors.Default;
-            reload.Dock = System.Windows.Forms.DockStyle.Fill;
-            reload.Location = new System.Drawing.Point(390, 4);
-            reload.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            reload.MaximumSize = new System.Drawing.Size(0, 0);
-            reload.MinimumSize = new System.Drawing.Size(0, 0);
-            reload.Padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
-            reload.Size = new System.Drawing.Size(252, 36);
-            reload.TabIndex = 1;
-            reload.TabStop = true;
-            reload.Text = "تحديث البيانات";
-            reload.Name = "reloadPreferences";
-            reload.Visible = true;
-            reload.Enabled = false;
-            reload.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            reload.UseVisualStyleBackColor = false;
-            reload.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            reload.DialogResult = System.Windows.Forms.DialogResult.None;
-            
-            // cancel
-            cancel.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left;
-            cancel.AutoSize = false;
-            cancel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowOnly;
-            cancel.BackColor = System.Drawing.Color.White;
-            cancel.Cursor = System.Windows.Forms.Cursors.Default;
-            cancel.Dock = System.Windows.Forms.DockStyle.Fill;
-            cancel.Location = new System.Drawing.Point(175, 4);
-            cancel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            cancel.MaximumSize = new System.Drawing.Size(0, 0);
-            cancel.MinimumSize = new System.Drawing.Size(0, 0);
-            cancel.Padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
-            cancel.Size = new System.Drawing.Size(207, 36);
-            cancel.TabIndex = 2;
-            cancel.TabStop = true;
-            cancel.Text = "إلغاء البحث";
-            cancel.Name = "cancelPreferences";
-            cancel.Visible = true;
-            cancel.Enabled = false;
-            cancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            cancel.UseVisualStyleBackColor = false;
-            cancel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            cancel.DialogResult = System.Windows.Forms.DialogResult.None;
-            
-            // close
-            close.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left;
-            close.AutoSize = false;
-            close.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowOnly;
-            close.BackColor = System.Drawing.Color.White;
-            close.Cursor = System.Windows.Forms.Cursors.Default;
-            close.Dock = System.Windows.Forms.DockStyle.Fill;
-            close.Location = new System.Drawing.Point(4, 4);
-            close.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            close.MaximumSize = new System.Drawing.Size(0, 0);
-            close.MinimumSize = new System.Drawing.Size(0, 0);
-            close.Padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
-            close.Size = new System.Drawing.Size(163, 36);
-            close.TabIndex = 3;
-            close.TabStop = true;
-            close.Text = "إغلاق";
-            close.Name = "closePreferences";
-            close.Visible = true;
-            close.Enabled = true;
-            close.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            close.UseVisualStyleBackColor = false;
-            close.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            close.DialogResult = System.Windows.Forms.DialogResult.None;
-            
-            footer.Controls.Add(save, 0, 0);
-            footer.Controls.Add(reload, 1, 0);
-            footer.Controls.Add(cancel, 2, 0);
-            footer.Controls.Add(close, 3, 0);
-            tabChanges.Controls.Add(changes);
-            tabCurrent.Controls.Add(current);
-            tabs.Controls.Add(tabCurrent);
-            tabs.Controls.Add(tabChanges);
-            layout.Controls.Add(enabled, 0, 0);
-            layout.Controls.Add(dayCards, 0, 1);
-            layout.Controls.Add(lblCaption4, 0, 2);
-            layout.Controls.Add(profileStatus, 0, 3);
-            flow3.Controls.Add(lblCaption3);
-            flow3.Controls.Add(seconds);
-            flow2.Controls.Add(lblCaption2);
-            flow2.Controls.Add(semester);
-            flow.Controls.Add(lblCaption);
-            flow.Controls.Add(faculty);
-            filters.Controls.Add(flow);
-            filters.Controls.Add(flow2);
-            filters.Controls.Add(flow3);
-            heading.Controls.Add(lblHeading, -1, -1);
-            heading.Controls.Add(lblDescription, -1, -1);
+            root.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
             root.Controls.Add(heading, 0, 0);
             root.Controls.Add(filters, 0, 1);
             root.Controls.Add(layout, 0, 2);
             root.Controls.Add(tabs, 0, 3);
             root.Controls.Add(status, 0, 4);
             root.Controls.Add(footer, 0, 5);
-            // dayCardSunday
-            dayCards.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            dayCardSunday.Name = "dayCardSunday";
-            dayCardSunday.Dock = System.Windows.Forms.DockStyle.Fill;
-            dayCardSunday.ColumnCount = 1;
-            dayCardSunday.RowCount = 2;
-            dayCardSunday.Padding = new System.Windows.Forms.Padding(5);
-            dayCardSunday.Margin = new System.Windows.Forms.Padding(3);
-            dayCardSunday.BackColor = System.Drawing.Color.FromArgb(244, 247, 250);
-            dayCardSunday.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            dayCardSunday.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 27F));
-            dayCardSunday.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            dayLabelSunday.Name = "dayLabelSunday";
-            dayLabelSunday.Text = "الأحد";
-            dayLabelSunday.Dock = System.Windows.Forms.DockStyle.Fill;
-            dayLabelSunday.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold);
-            dayLabelSunday.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            dayPreferenceSunday.Name = "dayPreference_Sunday";
-            dayPreferenceSunday.Size = new System.Drawing.Size(130, 28);
-            dayPreferenceSunday.Dock = System.Windows.Forms.DockStyle.Top;
-            dayPreferenceSunday.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            dayPreferenceSunday.DropDownHeight = 240;
-            dayPreferenceSunday.IntegralHeight = false;
-            dayPreferenceSunday.Items.AddRange(new object[] { "مفضّل", "مسموح", "غير متاح" });
-            dayPreferenceSunday.SelectedIndex = 1;
-            dayCardSunday.Controls.Add(dayLabelSunday, 0, 0);
-            dayCardSunday.Controls.Add(dayPreferenceSunday, 0, 1);
+            root.Dock = DockStyle.Fill;
+            root.Location = new Point(0, 0);
+            root.Name = "root";
+            root.Padding = new Padding(16);
+            root.RowCount = 6;
+            root.RowStyles.Add(new RowStyle(SizeType.Absolute, 56F));
+            root.RowStyles.Add(new RowStyle());
+            root.RowStyles.Add(new RowStyle(SizeType.Absolute, 190F));
+            root.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            root.RowStyles.Add(new RowStyle(SizeType.Absolute, 48F));
+            root.RowStyles.Add(new RowStyle(SizeType.Absolute, 52F));
+            root.Size = new Size(1164, 781);
+            root.TabIndex = 0;
+            // 
+            // heading
+            // 
+            heading.ColumnCount = 1;
+            heading.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 20F));
+            heading.Controls.Add(lblHeading);
+            heading.Controls.Add(lblDescription);
+            heading.Dock = DockStyle.Fill;
+            heading.Location = new Point(16, 16);
+            heading.Margin = new Padding(0);
+            heading.Name = "heading";
+            heading.RowCount = 2;
+            heading.RowStyles.Add(new RowStyle(SizeType.Absolute, 32F));
+            heading.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
+            heading.Size = new Size(1132, 56);
+            heading.TabIndex = 0;
+            // 
+            // lblHeading
+            // 
+            lblHeading.AutoSize = true;
+            lblHeading.Font = new Font("Segoe UI", 19F, FontStyle.Bold);
+            lblHeading.ForeColor = DesktopPalette.Ink;
+            lblHeading.Location = new Point(848, 0);
+            lblHeading.Name = "lblHeading";
+            lblHeading.Size = new Size(281, 32);
+            lblHeading.TabIndex = 0;
+            lblHeading.Text = "تفضيلات أيام التدريسيين";
+            // 
+            // lblDescription
+            // 
+            lblDescription.AutoSize = true;
+            lblDescription.ForeColor = DesktopPalette.Primary;
+            lblDescription.Location = new Point(739, 32);
+            lblDescription.Name = "lblDescription";
+            lblDescription.Size = new Size(390, 19);
+            lblDescription.TabIndex = 1;
+            lblDescription.Text = "اختر الأيام، وسنُعيد توزيع الجدول الحالي وفق التفضيلات المتوفرة.";
+            // 
+            // filters
+            // 
+            filters.AutoSize = true;
+            filters.Controls.Add(flow);
+            filters.Controls.Add(flow2);
+            filters.Controls.Add(flow3);
+            filters.Dock = DockStyle.Fill;
+            filters.Location = new Point(16, 72);
+            filters.Margin = new Padding(0);
+            filters.Name = "filters";
+            filters.Size = new Size(1132, 63);
+            filters.TabIndex = 1;
+            // 
+            // flow
+            // 
+            flow.AutoSize = true;
+            flow.Controls.Add(lblCaption);
+            flow.Controls.Add(faculty);
+            flow.FlowDirection = FlowDirection.TopDown;
+            flow.Location = new Point(820, 0);
+            flow.Margin = new Padding(6, 0, 6, 5);
+            flow.MinimumSize = new Size(0, 58);
+            flow.Name = "flow";
+            flow.Size = new Size(306, 58);
+            flow.TabIndex = 0;
+            flow.WrapContents = false;
+            // 
+            // lblCaption
+            // 
+            lblCaption.AutoSize = true;
+            lblCaption.ForeColor = DesktopPalette.Primary;
+            lblCaption.Location = new Point(241, 0);
+            lblCaption.Margin = new Padding(3, 0, 3, 5);
+            lblCaption.Name = "lblCaption";
+            lblCaption.Size = new Size(62, 19);
+            lblCaption.TabIndex = 0;
+            lblCaption.Text = "التدريسي";
+            // 
+            // faculty
+            // 
+            faculty.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            faculty.AutoCompleteSource = AutoCompleteSource.ListItems;
+            faculty.DisplayMember = "Text";
+            faculty.DropDownHeight = 240;
+            faculty.DropDownWidth = 300;
+            faculty.IntegralHeight = false;
+            faculty.Location = new Point(3, 27);
+            faculty.Name = "faculty";
+            faculty.Size = new Size(300, 25);
+            faculty.TabIndex = 1;
+            // 
+            // flow2
+            // 
+            flow2.AutoSize = true;
+            flow2.Controls.Add(lblCaption2);
+            flow2.Controls.Add(semester);
+            flow2.FlowDirection = FlowDirection.TopDown;
+            flow2.Location = new Point(662, 0);
+            flow2.Margin = new Padding(6, 0, 6, 5);
+            flow2.MinimumSize = new Size(0, 58);
+            flow2.Name = "flow2";
+            flow2.Size = new Size(146, 58);
+            flow2.TabIndex = 1;
+            flow2.WrapContents = false;
+            // 
+            // lblCaption2
+            // 
+            lblCaption2.AutoSize = true;
+            lblCaption2.ForeColor = DesktopPalette.Primary;
+            lblCaption2.Location = new Point(46, 0);
+            lblCaption2.Margin = new Padding(3, 0, 3, 5);
+            lblCaption2.Name = "lblCaption2";
+            lblCaption2.Size = new Size(97, 19);
+            lblCaption2.TabIndex = 0;
+            lblCaption2.Text = "الفصل الدراسي";
+            // 
+            // semester
+            // 
+            semester.DropDownHeight = 240;
+            semester.DropDownStyle = ComboBoxStyle.DropDownList;
+            semester.DropDownWidth = 140;
+            semester.IntegralHeight = false;
+            semester.Items.AddRange(new object[] { "الفصل الأول", "الفصل الثاني" });
+            semester.Location = new Point(3, 27);
+            semester.Name = "semester";
+            semester.Size = new Size(140, 25);
+            semester.TabIndex = 1;
+            // 
+            // flow3
+            // 
+            flow3.AutoSize = true;
+            flow3.Controls.Add(lblCaption3);
+            flow3.Controls.Add(seconds);
+            flow3.FlowDirection = FlowDirection.TopDown;
+            flow3.Location = new Point(517, 0);
+            flow3.Margin = new Padding(6, 0, 6, 5);
+            flow3.Name = "flow3";
+            flow3.Size = new Size(133, 55);
+            flow3.TabIndex = 2;
+            flow3.WrapContents = false;
+            // 
+            // lblCaption3
+            // 
+            lblCaption3.AutoSize = true;
+            lblCaption3.ForeColor = DesktopPalette.Primary;
+            lblCaption3.Location = new Point(3, 0);
+            lblCaption3.Margin = new Padding(3, 0, 3, 5);
+            lblCaption3.Name = "lblCaption3";
+            lblCaption3.Size = new Size(127, 19);
+            lblCaption3.TabIndex = 0;
+            lblCaption3.Text = "مهلة التحسين / ثانية";
+            // 
+            // seconds
+            // 
+            seconds.Location = new Point(58, 27);
+            seconds.Maximum = new decimal(new int[] { 120, 0, 0, 0 });
+            seconds.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
+            seconds.Name = "seconds";
+            seconds.Size = new Size(72, 25);
+            seconds.TabIndex = 1;
+            seconds.Value = new decimal(new int[] { 20, 0, 0, 0 });
+            // 
+            // layout
+            // 
+            layout.BackColor = Color.White;
+            layout.ColumnCount = 1;
+            layout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            layout.Controls.Add(enabled, 0, 0);
+            layout.Controls.Add(dayCards, 0, 1);
+            layout.Controls.Add(lblCaption4, 0, 2);
+            layout.Controls.Add(profileStatus, 0, 3);
+            layout.Dock = DockStyle.Fill;
+            layout.Location = new Point(16, 143);
+            layout.Margin = new Padding(0, 8, 0, 8);
+            layout.Name = "layout";
+            layout.Padding = new Padding(10);
+            layout.RowCount = 4;
+            layout.RowStyles.Add(new RowStyle());
+            layout.RowStyles.Add(new RowStyle(SizeType.Absolute, 80F));
+            layout.RowStyles.Add(new RowStyle());
+            layout.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            layout.Size = new Size(1132, 174);
+            layout.TabIndex = 2;
+            // 
+            // enabled
+            // 
+            enabled.AutoSize = true;
+            enabled.Location = new Point(892, 14);
+            enabled.Margin = new Padding(4);
+            enabled.Name = "enabled";
+            enabled.Size = new Size(226, 23);
+            enabled.TabIndex = 0;
+            enabled.Text = "تحديد تفضيلات أيام لهذا التدريسي";
+            enabled.UseVisualStyleBackColor = false;
+            // 
+            // dayCards
+            // 
+            dayCards.ColumnCount = 5;
+            dayCards.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 20F));
+            dayCards.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 20F));
+            dayCards.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 20F));
+            dayCards.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 20F));
+            dayCards.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 20F));
             dayCards.Controls.Add(dayCardSunday, 0, 0);
-
-            // dayCardMonday
-            dayCards.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            dayCardMonday.Name = "dayCardMonday";
-            dayCardMonday.Dock = System.Windows.Forms.DockStyle.Fill;
-            dayCardMonday.ColumnCount = 1;
-            dayCardMonday.RowCount = 2;
-            dayCardMonday.Padding = new System.Windows.Forms.Padding(5);
-            dayCardMonday.Margin = new System.Windows.Forms.Padding(3);
-            dayCardMonday.BackColor = System.Drawing.Color.FromArgb(244, 247, 250);
-            dayCardMonday.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            dayCardMonday.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 27F));
-            dayCardMonday.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            dayLabelMonday.Name = "dayLabelMonday";
-            dayLabelMonday.Text = "الاثنين";
-            dayLabelMonday.Dock = System.Windows.Forms.DockStyle.Fill;
-            dayLabelMonday.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold);
-            dayLabelMonday.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            dayPreferenceMonday.Name = "dayPreference_Monday";
-            dayPreferenceMonday.Size = new System.Drawing.Size(130, 28);
-            dayPreferenceMonday.Dock = System.Windows.Forms.DockStyle.Top;
-            dayPreferenceMonday.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            dayPreferenceMonday.DropDownHeight = 240;
-            dayPreferenceMonday.IntegralHeight = false;
-            dayPreferenceMonday.Items.AddRange(new object[] { "مفضّل", "مسموح", "غير متاح" });
-            dayPreferenceMonday.SelectedIndex = 1;
-            dayCardMonday.Controls.Add(dayLabelMonday, 0, 0);
-            dayCardMonday.Controls.Add(dayPreferenceMonday, 0, 1);
             dayCards.Controls.Add(dayCardMonday, 1, 0);
-
-            // dayCardTuesday
-            dayCards.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            dayCardTuesday.Name = "dayCardTuesday";
-            dayCardTuesday.Dock = System.Windows.Forms.DockStyle.Fill;
-            dayCardTuesday.ColumnCount = 1;
-            dayCardTuesday.RowCount = 2;
-            dayCardTuesday.Padding = new System.Windows.Forms.Padding(5);
-            dayCardTuesday.Margin = new System.Windows.Forms.Padding(3);
-            dayCardTuesday.BackColor = System.Drawing.Color.FromArgb(244, 247, 250);
-            dayCardTuesday.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            dayCardTuesday.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 27F));
-            dayCardTuesday.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            dayLabelTuesday.Name = "dayLabelTuesday";
-            dayLabelTuesday.Text = "الثلاثاء";
-            dayLabelTuesday.Dock = System.Windows.Forms.DockStyle.Fill;
-            dayLabelTuesday.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold);
-            dayLabelTuesday.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            dayPreferenceTuesday.Name = "dayPreference_Tuesday";
-            dayPreferenceTuesday.Size = new System.Drawing.Size(130, 28);
-            dayPreferenceTuesday.Dock = System.Windows.Forms.DockStyle.Top;
-            dayPreferenceTuesday.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            dayPreferenceTuesday.DropDownHeight = 240;
-            dayPreferenceTuesday.IntegralHeight = false;
-            dayPreferenceTuesday.Items.AddRange(new object[] { "مفضّل", "مسموح", "غير متاح" });
-            dayPreferenceTuesday.SelectedIndex = 1;
-            dayCardTuesday.Controls.Add(dayLabelTuesday, 0, 0);
-            dayCardTuesday.Controls.Add(dayPreferenceTuesday, 0, 1);
             dayCards.Controls.Add(dayCardTuesday, 2, 0);
-
-            // dayCardWednesday
-            dayCards.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            dayCardWednesday.Name = "dayCardWednesday";
-            dayCardWednesday.Dock = System.Windows.Forms.DockStyle.Fill;
-            dayCardWednesday.ColumnCount = 1;
-            dayCardWednesday.RowCount = 2;
-            dayCardWednesday.Padding = new System.Windows.Forms.Padding(5);
-            dayCardWednesday.Margin = new System.Windows.Forms.Padding(3);
-            dayCardWednesday.BackColor = System.Drawing.Color.FromArgb(244, 247, 250);
-            dayCardWednesday.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            dayCardWednesday.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 27F));
-            dayCardWednesday.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            dayLabelWednesday.Name = "dayLabelWednesday";
-            dayLabelWednesday.Text = "الأربعاء";
-            dayLabelWednesday.Dock = System.Windows.Forms.DockStyle.Fill;
-            dayLabelWednesday.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold);
-            dayLabelWednesday.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            dayPreferenceWednesday.Name = "dayPreference_Wednesday";
-            dayPreferenceWednesday.Size = new System.Drawing.Size(130, 28);
-            dayPreferenceWednesday.Dock = System.Windows.Forms.DockStyle.Top;
-            dayPreferenceWednesday.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            dayPreferenceWednesday.DropDownHeight = 240;
-            dayPreferenceWednesday.IntegralHeight = false;
-            dayPreferenceWednesday.Items.AddRange(new object[] { "مفضّل", "مسموح", "غير متاح" });
-            dayPreferenceWednesday.SelectedIndex = 1;
-            dayCardWednesday.Controls.Add(dayLabelWednesday, 0, 0);
-            dayCardWednesday.Controls.Add(dayPreferenceWednesday, 0, 1);
             dayCards.Controls.Add(dayCardWednesday, 3, 0);
-
-            // dayCardThursday
-            dayCards.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            dayCardThursday.Name = "dayCardThursday";
-            dayCardThursday.Dock = System.Windows.Forms.DockStyle.Fill;
-            dayCardThursday.ColumnCount = 1;
-            dayCardThursday.RowCount = 2;
-            dayCardThursday.Padding = new System.Windows.Forms.Padding(5);
-            dayCardThursday.Margin = new System.Windows.Forms.Padding(3);
-            dayCardThursday.BackColor = System.Drawing.Color.FromArgb(244, 247, 250);
-            dayCardThursday.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            dayCardThursday.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 27F));
-            dayCardThursday.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            dayLabelThursday.Name = "dayLabelThursday";
-            dayLabelThursday.Text = "الخميس";
-            dayLabelThursday.Dock = System.Windows.Forms.DockStyle.Fill;
-            dayLabelThursday.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold);
-            dayLabelThursday.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            dayPreferenceThursday.Name = "dayPreference_Thursday";
-            dayPreferenceThursday.Size = new System.Drawing.Size(130, 28);
-            dayPreferenceThursday.Dock = System.Windows.Forms.DockStyle.Top;
-            dayPreferenceThursday.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            dayPreferenceThursday.DropDownHeight = 240;
-            dayPreferenceThursday.IntegralHeight = false;
-            dayPreferenceThursday.Items.AddRange(new object[] { "مفضّل", "مسموح", "غير متاح" });
-            dayPreferenceThursday.SelectedIndex = 1;
-            dayCardThursday.Controls.Add(dayLabelThursday, 0, 0);
-            dayCardThursday.Controls.Add(dayPreferenceThursday, 0, 1);
             dayCards.Controls.Add(dayCardThursday, 4, 0);
-
-            this.Controls.Add(root);
-            
-            ((System.ComponentModel.ISupportInitialize)seconds).EndInit();
-            ((System.ComponentModel.ISupportInitialize)current).EndInit();
-            ((System.ComponentModel.ISupportInitialize)changes).EndInit();
+            dayCards.Dock = DockStyle.Fill;
+            dayCards.Enabled = false;
+            dayCards.Location = new Point(10, 47);
+            dayCards.Margin = new Padding(0, 6, 0, 8);
+            dayCards.Name = "dayCards";
+            dayCards.RowCount = 1;
+            dayCards.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
+            dayCards.Size = new Size(1112, 66);
+            dayCards.TabIndex = 1;
+            // 
+            // lblCaption4
+            // 
+            lblCaption4.AutoSize = true;
+            lblCaption4.Font = new Font("Segoe UI", 9F);
+            lblCaption4.ForeColor = DesktopPalette.Primary;
+            lblCaption4.Location = new Point(633, 123);
+            lblCaption4.Margin = new Padding(4, 2, 4, 4);
+            lblCaption4.Name = "lblCaption4";
+            lblCaption4.Size = new Size(485, 15);
+            lblCaption4.TabIndex = 2;
+            lblCaption4.Text = "مفضّل: أولوية في التحسين    •    مسموح: متاح عند الحاجة    •    غير متاح: يُمنع وضع المحاضرات فيه";
+            // 
+            // profileStatus
+            // 
+            profileStatus.AutoSize = true;
+            profileStatus.Font = new Font("Segoe UI", 9F);
+            profileStatus.ForeColor = DesktopPalette.Primary;
+            profileStatus.Location = new Point(1118, 142);
+            profileStatus.Margin = new Padding(4, 0, 4, 0);
+            profileStatus.MaximumSize = new Size(1000, 0);
+            profileStatus.Name = "profileStatus";
+            profileStatus.Size = new Size(0, 15);
+            profileStatus.TabIndex = 3;
+            // 
+            // tabs
+            // 
+            tabs.Controls.Add(tabCurrent);
+            tabs.Controls.Add(tabChanges);
+            tabs.Dock = DockStyle.Fill;
+            tabs.Location = new Point(19, 328);
+            tabs.Name = "tabs";
+            tabs.Padding = new Point(18, 7);
+            tabs.SelectedIndex = 0;
+            tabs.Size = new Size(1126, 334);
+            tabs.TabIndex = 3;
+            // 
+            // tabCurrent
+            // 
+            tabCurrent.BackColor = Color.White;
+            tabCurrent.Controls.Add(current);
+            tabCurrent.Location = new Point(4, 34);
+            tabCurrent.Name = "tabCurrent";
+            tabCurrent.Padding = new Padding(6);
+            tabCurrent.Size = new Size(1118, 296);
+            tabCurrent.TabIndex = 0;
+            tabCurrent.Text = "الجدول الحالي للتدريسي";
+            tabCurrent.Visible = false;
+            // 
+            // current
+            // 
+            current.AllowUserToAddRows = false;
+            current.AllowUserToDeleteRows = false;
+            dataGridViewCellStyle1.BackColor = DesktopPalette.Canvas;
+            current.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            current.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            current.BackgroundColor = Color.White;
+            current.BorderStyle = BorderStyle.None;
+            dataGridViewCellStyle2.BackColor = DesktopPalette.SoftAccent;
+            dataGridViewCellStyle2.ForeColor = DesktopPalette.Header;
+            dataGridViewCellStyle2.Padding = new Padding(6);
+            current.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            current.ColumnHeadersHeight = 42;
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = SystemColors.Window;
+            dataGridViewCellStyle3.Font = new Font("Segoe UI", 10F);
+            dataGridViewCellStyle3.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle3.Padding = new Padding(4);
+            dataGridViewCellStyle3.SelectionBackColor = DesktopPalette.Selection;
+            dataGridViewCellStyle3.SelectionForeColor = DesktopPalette.Ink;
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
+            current.DefaultCellStyle = dataGridViewCellStyle3;
+            current.Dock = DockStyle.Fill;
+            current.EnableHeadersVisualStyles = false;
+            current.Location = new Point(6, 6);
+            current.Name = "current";
+            current.ReadOnly = true;
+            current.RowHeadersVisible = false;
+            current.RowTemplate.Height = 34;
+            current.Size = new Size(1106, 284);
+            current.TabIndex = 0;
+            // 
+            // tabChanges
+            // 
+            tabChanges.BackColor = Color.White;
+            tabChanges.Controls.Add(changes);
+            tabChanges.Location = new Point(4, 34);
+            tabChanges.Name = "tabChanges";
+            tabChanges.Padding = new Padding(6);
+            tabChanges.Size = new Size(1118, 295);
+            tabChanges.TabIndex = 1;
+            tabChanges.Text = "التغييرات المحفوظة في الفصل";
+            tabChanges.Visible = false;
+            // 
+            // changes
+            // 
+            changes.AllowUserToAddRows = false;
+            changes.AllowUserToDeleteRows = false;
+            dataGridViewCellStyle4.BackColor = DesktopPalette.Canvas;
+            changes.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
+            changes.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            changes.BackgroundColor = Color.White;
+            changes.BorderStyle = BorderStyle.None;
+            dataGridViewCellStyle5.BackColor = DesktopPalette.SoftAccent;
+            dataGridViewCellStyle5.ForeColor = DesktopPalette.Header;
+            dataGridViewCellStyle5.Padding = new Padding(6);
+            changes.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            changes.ColumnHeadersHeight = 42;
+            dataGridViewCellStyle6.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = SystemColors.Window;
+            dataGridViewCellStyle6.Font = new Font("Segoe UI", 10F);
+            dataGridViewCellStyle6.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle6.Padding = new Padding(4);
+            dataGridViewCellStyle6.SelectionBackColor = DesktopPalette.Selection;
+            dataGridViewCellStyle6.SelectionForeColor = DesktopPalette.Ink;
+            dataGridViewCellStyle6.WrapMode = DataGridViewTriState.False;
+            changes.DefaultCellStyle = dataGridViewCellStyle6;
+            changes.Dock = DockStyle.Fill;
+            changes.EnableHeadersVisualStyles = false;
+            changes.Location = new Point(6, 6);
+            changes.Name = "changes";
+            changes.ReadOnly = true;
+            changes.RowHeadersVisible = false;
+            changes.RowTemplate.Height = 34;
+            changes.Size = new Size(1106, 283);
+            changes.TabIndex = 0;
+            // 
+            // status
+            // 
+            status.BackColor = Color.FromArgb(231, 241, 238);
+            status.Dock = DockStyle.Fill;
+            status.ForeColor = Color.FromArgb(32, 92, 76);
+            status.Location = new Point(19, 665);
+            status.Name = "status";
+            status.Padding = new Padding(12, 4, 12, 4);
+            status.Size = new Size(1126, 48);
+            status.TabIndex = 4;
+            status.TextAlign = ContentAlignment.MiddleRight;
+            // 
+            // footer
+            // 
+            footer.ColumnCount = 4;
+            footer.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 43F));
+            footer.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 23F));
+            footer.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 19F));
+            footer.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 15F));
+            footer.Controls.Add(save, 0, 0);
+            footer.Controls.Add(reload, 1, 0);
+            footer.Controls.Add(cancel, 2, 0);
+            footer.Controls.Add(close, 3, 0);
+            footer.Dock = DockStyle.Fill;
+            footer.Location = new Point(16, 721);
+            footer.Margin = new Padding(0, 8, 0, 0);
+            footer.Name = "footer";
+            footer.RowCount = 1;
+            footer.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
+            footer.Size = new Size(1132, 44);
+            footer.TabIndex = 5;
+            // 
+            // save
+            // 
+            save.BackColor = DesktopPalette.Primary;
+            save.Dock = DockStyle.Fill;
+            save.Enabled = false;
+            save.FlatStyle = FlatStyle.Flat;
+            save.ForeColor = Color.White;
+            save.Location = new Point(650, 4);
+            save.Margin = new Padding(4);
+            save.Name = "save";
+            save.Size = new Size(478, 36);
+            save.TabIndex = 0;
+            save.Text = "حفظ بدون تفضيلات";
+            save.UseVisualStyleBackColor = false;
+            // 
+            // reload
+            // 
+            reload.BackColor = Color.White;
+            reload.Dock = DockStyle.Fill;
+            reload.Enabled = false;
+            reload.FlatStyle = FlatStyle.Flat;
+            reload.Location = new Point(390, 4);
+            reload.Margin = new Padding(4);
+            reload.Name = "reload";
+            reload.Size = new Size(252, 36);
+            reload.TabIndex = 1;
+            reload.Text = "تحديث البيانات";
+            reload.UseVisualStyleBackColor = false;
+            // 
+            // cancel
+            // 
+            cancel.BackColor = Color.White;
+            cancel.Dock = DockStyle.Fill;
+            cancel.Enabled = false;
+            cancel.FlatStyle = FlatStyle.Flat;
+            cancel.Location = new Point(175, 4);
+            cancel.Margin = new Padding(4);
+            cancel.Name = "cancel";
+            cancel.Size = new Size(207, 36);
+            cancel.TabIndex = 2;
+            cancel.Text = "إلغاء البحث";
+            cancel.UseVisualStyleBackColor = false;
+            // 
+            // close
+            // 
+            close.BackColor = Color.White;
+            close.Dock = DockStyle.Fill;
+            close.FlatStyle = FlatStyle.Flat;
+            close.Location = new Point(4, 4);
+            close.Margin = new Padding(4);
+            close.Name = "close";
+            close.Size = new Size(163, 36);
+            close.TabIndex = 3;
+            close.Text = "إغلاق";
+            close.UseVisualStyleBackColor = false;
+            // 
+            // FacultyPreferencesForm
+            // 
+            AutoScaleDimensions = new SizeF(96F, 96F);
+            AutoScaleMode = AutoScaleMode.Dpi;
+            BackColor = DesktopPalette.Canvas;
+            ClientSize = new Size(1164, 781);
+            Controls.Add(root);
+            Font = new Font("Segoe UI", 10F);
+            MinimumSize = new Size(800, 680);
+            Name = "FacultyPreferencesForm";
+            RightToLeft = RightToLeft.Yes;
+            RightToLeftLayout = true;
+            StartPosition = FormStartPosition.CenterParent;
+            Text = "تفضيلات أيام التدريسيين";
             dayCardSunday.ResumeLayout(false);
-            dayCardSunday.PerformLayout();
             dayCardMonday.ResumeLayout(false);
-            dayCardMonday.PerformLayout();
             dayCardTuesday.ResumeLayout(false);
-            dayCardTuesday.PerformLayout();
             dayCardWednesday.ResumeLayout(false);
-            dayCardWednesday.PerformLayout();
             dayCardThursday.ResumeLayout(false);
-            dayCardThursday.PerformLayout();
-            dayCards.ResumeLayout(false);
-            dayCards.PerformLayout();
-            footer.ResumeLayout(false);
-            footer.PerformLayout();
-            tabChanges.ResumeLayout(false);
-            tabChanges.PerformLayout();
-            tabCurrent.ResumeLayout(false);
-            tabCurrent.PerformLayout();
-            tabs.ResumeLayout(false);
-            tabs.PerformLayout();
-            layout.ResumeLayout(false);
-            layout.PerformLayout();
-            flow3.ResumeLayout(false);
-            flow3.PerformLayout();
-            flow2.ResumeLayout(false);
-            flow2.PerformLayout();
-            flow.ResumeLayout(false);
-            flow.PerformLayout();
-            filters.ResumeLayout(false);
-            filters.PerformLayout();
-            heading.ResumeLayout(false);
-            heading.PerformLayout();
             root.ResumeLayout(false);
             root.PerformLayout();
+            heading.ResumeLayout(false);
+            heading.PerformLayout();
+            filters.ResumeLayout(false);
+            filters.PerformLayout();
+            flow.ResumeLayout(false);
+            flow.PerformLayout();
+            flow2.ResumeLayout(false);
+            flow2.PerformLayout();
+            flow3.ResumeLayout(false);
+            flow3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)seconds).EndInit();
+            layout.ResumeLayout(false);
+            layout.PerformLayout();
+            dayCards.ResumeLayout(false);
+            tabs.ResumeLayout(false);
+            tabCurrent.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)current).EndInit();
+            tabChanges.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)changes).EndInit();
+            footer.ResumeLayout(false);
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion

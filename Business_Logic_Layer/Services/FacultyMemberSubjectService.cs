@@ -91,10 +91,11 @@ namespace University_Timetable_and_Classroom_Management_System.BusinessLayer
             var item = await context.FacultyMemberSubjects.FindAsync(facultyMemberId, subjectId)
                 ?? throw new KeyNotFoundException("Faculty member subject assignment not found.");
 
-            // Archived lectures refer to the subject and teacher directly. Removing
-            // this assignment must not remove or invalidate those saved lectures.
-            if (!await context.Subjects.AnyAsync(s => s.SubjectID == subjectId && s.IsDeleted))
-                await EnsureAssignmentIsUnusedAsync(context, facultyMemberId, subjectId);
+            // FacultyMemberID + SubjectID is the assignment's unique key. Remove
+            // all of its placements (including locked/history rows), never the subject.
+            await context.Schedules
+                .Where(s => s.FacultyMemberID == facultyMemberId && s.SubjectID == subjectId)
+                .ExecuteDeleteAsync();
             context.FacultyMemberSubjects.Remove(item);
             await context.SaveChangesAsync();
             await transaction.CommitAsync();
@@ -107,8 +108,7 @@ namespace University_Timetable_and_Classroom_Management_System.BusinessLayer
             {
                 string subjectName = await context.Subjects.Where(s => s.SubjectID == subjectId).Select(s => s.SubjectName).SingleAsync();
                 throw new ArgumentException($"التكليف لمادة «{subjectName}» مرتبط بعدد {count} من المحاضرات المحفوظة. " +
-                    "غيّر التدريسي في هذه المحاضرات أو احذفها قبل تغيير التكليف أو حذفه. " +
-                    "إذا حذفت المادة من قائمة المواد، يمكنك حذف تكليفها مع إبقاء محاضراتها السابقة.");
+                    "انقل هذه المحاضرات إلى تكليف آخر أو احذفها قبل تغيير التدريسي أو المادة في هذا التكليف.");
             }
         }
 
@@ -129,6 +129,8 @@ namespace University_Timetable_and_Classroom_Management_System.BusinessLayer
             {
                 throw new ArgumentException("Subject does not exist.");
             }
+            if (subject.SemesterNumber == Subject.PendingSemesterNumber)
+                throw new ArgumentException("استكمل بيانات المادة في شاشة المواد قبل إضافة تكليف لها.");
 
             if (entity.SectionID.HasValue)
             {

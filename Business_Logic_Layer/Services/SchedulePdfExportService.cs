@@ -35,7 +35,7 @@ namespace University_Timetable_and_Classroom_Management_System.BusinessLayer
 
         private static byte[] BuildPdf(IReadOnlyList<SchedulePdfRow> rows, SchedulePdfExportOptions? options)
         {
-            _ = NativeLibrariesReady.Value;
+            EnsurePdfNativeLibraries();
             using var stream = new MemoryStream();
             using var document = SKDocument.CreatePdf(stream);
             foreach (var page in BuildPages(rows, options))
@@ -52,6 +52,8 @@ namespace University_Timetable_and_Classroom_Management_System.BusinessLayer
             document.Close();
             return stream.ToArray();
         }
+
+        internal static void EnsurePdfNativeLibraries() => _ = NativeLibrariesReady.Value;
 
         private static bool LoadWindowsNativeLibraries()
         {

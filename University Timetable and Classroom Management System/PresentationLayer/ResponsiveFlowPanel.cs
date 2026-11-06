@@ -6,10 +6,13 @@ namespace University_Timetable_and_Classroom_Management_System
     {
         public override Size GetPreferredSize(Size proposedSize)
         {
-            if (Parent is not null)
+            // During a resize the parent can still have its previous, narrower
+            // bounds. A finite proposed width is the new allocation: clamping
+            // it to those stale bounds leaves the AutoSize row one pass behind.
+            if (Parent is not null && (proposedSize.Width <= 1 || proposedSize.Width >= 65536))
             {
                 int available = Math.Max(1, Parent.ClientSize.Width - Parent.Padding.Horizontal - Margin.Horizontal);
-                proposedSize.Width = proposedSize.Width <= 1 ? available : Math.Min(proposedSize.Width, available);
+                proposedSize.Width = available;
             }
             return base.GetPreferredSize(proposedSize);
         }

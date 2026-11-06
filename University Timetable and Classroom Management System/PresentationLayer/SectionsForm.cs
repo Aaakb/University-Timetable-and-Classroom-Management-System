@@ -28,6 +28,43 @@ namespace University_Timetable_and_Classroom_Management_System
             await RefreshSectionsAsync();
         }
 
+        internal void UseAcademicNavigation(Control navigation, Func<int, int, Task> openStudents)
+        {
+            pnlHeader.Visible = false;
+            AcademicPageNavigation.PlaceBelowEditor(layoutWorkspace, pnlSectionEditor, pnlSectionsTable, navigation);
+            foreach (var column in new[] { colSectionName, colBranch })
+            {
+                column.DefaultCellStyle.ForeColor = DesktopPalette.Primary;
+                column.DefaultCellStyle.Font = new Font("Segoe UI Semibold", 11F, FontStyle.Underline);
+            }
+            colSectionName.HeaderText = "اسم الشعبة · عرض الطلبة";
+
+            SectionRow? GetGroup(int rowIndex, int columnIndex)
+            {
+                if (rowIndex < 0 || rowIndex >= dgvSections.Rows.Count ||
+                    dgvSections.Rows[rowIndex].DataBoundItem is not SectionRow { StudyYearID: >= 1 and <= 4 } row)
+                    return null;
+                return columnIndex == colSectionName.Index || (columnIndex == colBranch.Index && row.BranchID.HasValue)
+                    ? row : null;
+            }
+
+            dgvSections.CellMouseEnter += (_, e) =>
+                dgvSections.Cursor = GetGroup(e.RowIndex, e.ColumnIndex) is not null ? Cursors.Hand : Cursors.Default;
+            dgvSections.MouseLeave += (_, _) => dgvSections.Cursor = Cursors.Default;
+            dgvSections.CellClick += async (_, e) =>
+            {
+                if (GetGroup(e.RowIndex, e.ColumnIndex) is { } row)
+                    await openStudents(row.StudyYearID, row.SectionID);
+            };
+            dgvSections.KeyDown += async (_, e) =>
+            {
+                if (e.KeyCode != Keys.Enter || dgvSections.CurrentCell is not { } cell ||
+                    GetGroup(cell.RowIndex, cell.ColumnIndex) is not { } row) return;
+                e.SuppressKeyPress = true;
+                await openStudents(row.StudyYearID, row.SectionID);
+            };
+        }
+
 
         private void ConfigureSectionsGrid()
         {

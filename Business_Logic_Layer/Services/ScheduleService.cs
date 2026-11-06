@@ -149,7 +149,14 @@ namespace University_Timetable_and_Classroom_Management_System.BusinessLayer
         public Task<ScheduleGenerationResult> RegenerateAsync(string? safetyBackupPath = null) =>
             BuildTimetableAsync(regenerate: true, safetyBackupPath);
 
-        private async Task<ScheduleGenerationResult> BuildTimetableAsync(bool regenerate, string? safetyBackupPath)
+        public Task<ScheduleGenerationResult> RegenerateSemesterAsync(int semesterNumber, string? safetyBackupPath = null)
+        {
+            if (semesterNumber is not (1 or 2))
+                throw new ArgumentOutOfRangeException(nameof(semesterNumber));
+            return BuildTimetableAsync(regenerate: true, safetyBackupPath, semesterNumber);
+        }
+
+        private async Task<ScheduleGenerationResult> BuildTimetableAsync(bool regenerate, string? safetyBackupPath, int? semesterNumber = null)
         {
             await using var context = new AppDbContext();
             await using var transaction = await context.Database.BeginTransactionAsync(System.Data.IsolationLevel.Serializable);
@@ -158,7 +165,8 @@ namespace University_Timetable_and_Classroom_Management_System.BusinessLayer
             var allSubjects = await context.Subjects
                 .AsNoTracking()
                 .ToListAsync();
-            var subjects = allSubjects.Where(subject => subject.HasWeeklyLectures).ToList();
+            var subjects = allSubjects.Where(subject => subject.HasWeeklyLectures &&
+                (!semesterNumber.HasValue || subject.SemesterNumber == semesterNumber)).ToList();
 
             var assignments = await context.FacultyMemberSubjects
                 .Include(fms => fms.Subject)
@@ -166,7 +174,8 @@ namespace University_Timetable_and_Classroom_Management_System.BusinessLayer
                 .ThenBy(fms => fms.Subject.SubjectName)
                 .AsNoTracking()
                 .ToListAsync();
-            assignments.RemoveAll(assignment => !assignment.Subject.HasWeeklyLectures);
+            assignments.RemoveAll(assignment => !assignment.Subject.HasWeeklyLectures ||
+                (semesterNumber.HasValue && assignment.Subject.SemesterNumber != semesterNumber));
 
             var sections = (await context.Sections
                 .Include(section => section.StudyYear)
@@ -195,7 +204,9 @@ namespace University_Timetable_and_Classroom_Management_System.BusinessLayer
                 .ToListAsync();
             ScheduleTimingRules.EnsureCompatibleLectureSlots(timeSlots);
 
-            var existingSchedules = await context.Schedules.ToListAsync();
+            var existingSchedules = await context.Schedules
+                .Where(s => !semesterNumber.HasValue || s.SemesterNumber == semesterNumber)
+                .ToListAsync();
             var generationInput = regenerate ? existingSchedules.Where(s => s.IsLocked).ToList() : existingSchedules;
             int variationSeed = regenerate ? Random.Shared.Next(1, int.MaxValue) : 0;
             var generatedSchedules = new List<Schedule>();
@@ -304,7 +315,7 @@ namespace University_Timetable_and_Classroom_Management_System.BusinessLayer
             var planningResult = ScheduleGenerator.BuildPlan(
                 remainingRequests,
                 new ScheduleBuildContext(classrooms, timeSlots)
-                { RequirePracticalExchange = false, EnforceSectionDayLimit = regenerate,
+                { RequirePracticalExchange = regenerate, EnforceSectionDayLimit = regenerate,
                     FixedSchedules = retainedSchedules, Preferences = preferences, VariationSeed = variationSeed });
 
             bool Complete(SchedulePlanningResult plan) => plan.PracticalExchangeIssues.Count == 0 &&
@@ -315,7 +326,7 @@ namespace University_Timetable_and_Classroom_Management_System.BusinessLayer
                 // Variation must not make an otherwise feasible baseline fail.
                 var baseline = ScheduleGenerator.BuildPlan(remainingRequests,
                     new ScheduleBuildContext(classrooms, timeSlots)
-                    { RequirePracticalExchange = false, EnforceSectionDayLimit = false,
+                    { RequirePracticalExchange = true, EnforceSectionDayLimit = false,
                         FixedSchedules = retainedSchedules, Preferences = preferences });
                 if (Complete(baseline)) planningResult = baseline;
             }
@@ -323,7 +334,7 @@ namespace University_Timetable_and_Classroom_Management_System.BusinessLayer
             {
                 var expanded = ScheduleGenerator.BuildPlan(remainingRequests,
                     new ScheduleBuildContext(classrooms, timeSlots)
-                    { RequirePracticalExchange = false, EnforceSectionDayLimit = regenerate, FixedSchedules = retainedSchedules,
+                    { RequirePracticalExchange = regenerate, EnforceSectionDayLimit = regenerate, FixedSchedules = retainedSchedules,
                         UseAllTeachingDays = true, Preferences = preferences, VariationSeed = variationSeed });
                 if (Complete(expanded)) planningResult = expanded;
             }
@@ -410,14 +421,14 @@ namespace University_Timetable_and_Classroom_Management_System.BusinessLayer
                     var optimized = await Task.Run(() => ImportedTimetableRepairPlanner.Solve(catalog,
                         optimizationRows.Select(s => new TimetableImportRow("Generated", 0, s, s.IsLocked)).ToList(),
                         generatedSchedules.Except(optimizationRows).ToList(), 20, default, optimizePreferences: true,
-                        allowFacultyReassignment: regenerate, requirePracticalExchange: !regenerate));
+                        allowFacultyReassignment: regenerate, requirePracticalExchange: true));
                     if (regenerate && optimized.Plan is null && optimizationRows.Count < batchRows.Count)
                     {
                         optimizationRows = batchRows;
                         optimized = await Task.Run(() => ImportedTimetableRepairPlanner.Solve(catalog,
                             batchRows.Select(s => new TimetableImportRow("Generated", 0, s, s.IsLocked)).ToList(),
                             generatedSchedules.Except(batchRows).ToList(), 40, default, optimizePreferences: true,
-                            allowFacultyReassignment: true, requirePracticalExchange: false));
+                            allowFacultyReassignment: true, requirePracticalExchange: true));
                     }
                     if (optimized.Plan is null)
                     {
@@ -441,6 +452,10 @@ namespace University_Timetable_and_Classroom_Management_System.BusinessLayer
                 }
             }
             FacultyPreferenceRules.Validate(generatedSchedules, timeSlots.ToDictionary(p => p.TimeSlotID), preferences);
+            if (regenerate)
+                FacultyPracticalExchange.Validate(generatedSchedules,
+                    generatedSchedules.Where(s => s.LectureType == "Practical" && !string.IsNullOrWhiteSpace(s.GroupName))
+                        .Select(s => s.SectionID!.Value).ToHashSet(), timeSlots);
             if (regenerate || preferences.Values.Any(p => p.HasScoredPreferences))
                 ScheduleDayRules.EnsureSectionDayLimit(generatedSchedules, sections);
 
@@ -575,7 +590,7 @@ namespace University_Timetable_and_Classroom_Management_System.BusinessLayer
             }
 
             EnsureBaseSectionIsUsed(section);
-            NormalizeLectureTypeAndGroup(schedule, section);
+            NormalizeLectureTypeAndGroup(schedule, section, subject);
             if (schedule.LectureType == "Practical" && subject.EffectivePracticalLectureCount <= 0 ||
                 schedule.LectureType == "Theory" && subject.EffectiveTheoreticalLectureCount <= 0)
                 throw new ArgumentException("The selected subject does not have this lecture type.");
@@ -673,7 +688,7 @@ namespace University_Timetable_and_Classroom_Management_System.BusinessLayer
             return AcademicStructureRules.IsGeneralSectionValid(section);
         }
 
-        private static void NormalizeLectureTypeAndGroup(Schedule schedule, Section section)
+        private static void NormalizeLectureTypeAndGroup(Schedule schedule, Section section, Subject subject)
         {
             schedule.LectureType = NormalizeLectureType(schedule.LectureType);
 
@@ -687,11 +702,11 @@ namespace University_Timetable_and_Classroom_Management_System.BusinessLayer
                 ? null
                 : schedule.GroupName.Trim().ToUpperInvariant();
 
-            if (AcademicStructureRules.AllowsWholeSectionPractical(section.StudyYearID))
+            if (subject.MergePracticalGroups || AcademicStructureRules.AllowsWholeSectionPractical(section.StudyYearID))
             {
                 if (normalizedGroupName is not null &&
                     !string.Equals(normalizedGroupName, section.SectionName.Trim(), StringComparison.OrdinalIgnoreCase))
-                    throw new ArgumentException("عملي المرحلة الرابعة للشعبة كاملة في جميع التخصصات؛ استخدم A بدون A1 أو A2.");
+                    throw new ArgumentException("عملي هذه المادة للشعبة كاملة؛ استخدم اسم الشعبة بدون رقم المجموعة.");
                 schedule.GroupName = null;
                 return;
             }

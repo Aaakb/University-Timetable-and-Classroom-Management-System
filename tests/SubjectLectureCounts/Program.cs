@@ -16,7 +16,7 @@ internal static class Program
     private const BindingFlags Private = BindingFlags.Instance | BindingFlags.NonPublic;
 
     [STAThread]
-    private static int Main()
+    private static int Main(string[] args)
     {
         ApplicationConfiguration.Initialize();
         CultureInfo.CurrentCulture = CultureInfo.GetCultureInfo("en-US");
@@ -31,10 +31,14 @@ internal static class Program
         {
             try
             {
-                await CheckDatabaseAndGenerator();
-                await CheckRegeneration();
-                await CheckPreferenceRegeneration();
-                await CheckEditor();
+                bool deletionOnly = args.Contains("--subject-deletion-only");
+                await CheckDatabaseAndGenerator(includeImportCheck: !deletionOnly);
+                if (!deletionOnly)
+                {
+                    await CheckRegeneration();
+                    await CheckPreferenceRegeneration();
+                    await CheckEditor();
+                }
                 await CheckSubjectDeletion();
                 await CheckArchivedRegenerationBackup();
             }
@@ -66,7 +70,7 @@ internal static class Program
         Check("API rejects excessive counts", !Validator.TryValidateObject(dto, new ValidationContext(dto), [], true));
     }
 
-    private static async Task CheckDatabaseAndGenerator()
+    private static async Task CheckDatabaseAndGenerator(bool includeImportCheck = true)
     {
         await using (var db = new AppDbContext())
         {
@@ -130,6 +134,7 @@ internal static class Program
         Check("Faculty solver supports repeated practical occurrences", facultyPreview.CanSave,
             facultyPreview.Status + ": " + string.Join("; ", facultyPreview.Suggestions));
 
+        if (!includeImportCheck) return;
         var table = new DataTable("Subjects");
         foreach (string column in new[] { "SubjectID", "SubjectName", "StudyYearID", "SemesterNumber", "TheoreticalHours", "PracticalHours" }) table.Columns.Add(column);
         table.Rows.Add(subject.SubjectID, subject.SubjectName, 1, 1, 4, 2);
@@ -418,26 +423,25 @@ internal static class Program
         var service = new SubjectService();
         var subject = (await service.GetAllAsync()).Single(s => s.SubjectName == "Counted subject");
         var schedules = new ScheduleService();
-        string before = System.Text.Json.JsonSerializer.Serialize((await schedules.GetAllAsync()).Select(s => new
-            { s.ScheduleID, s.SubjectID, s.FacultyMemberID, s.ClassroomID, s.TimeSlotID, s.DayOfWeek, s.LectureType, s.GroupName }));
+        var legacyArchivedLectures = await SavedLectures();
         var assignments = new FacultyMemberSubjectService();
-        try { await assignments.DeleteAsync(1, subject.SubjectID); Check("Used active assignment remains protected", false); }
-        catch (ArgumentException ex) { Check("Used active assignment error gives material name and lecture count", ex.Message.Contains(subject.SubjectName) && ex.Message.Contains("6")); }
         await service.DeleteAsync(subject.SubjectID);
         Check("Deleted subject disappears from active list and lookup", !(await service.GetAllAsync()).Any(s => s.SubjectID == subject.SubjectID) &&
             await service.GetByIdAsync(subject.SubjectID) is null);
-        var assignment = (await new FacultyMemberSubjectService().GetAllAsync()).Single(a => a.SubjectID == subject.SubjectID);
-        Check("Deletion preserves assignment and original subject name", assignment.FacultyMemberID == 1 && assignment.Subject.SubjectName == subject.SubjectName && assignment.Subject.IsDeleted);
-        var dto = AssignmentDto.From(assignment);
-        Check("Web can display retained deleted-subject assignments", dto.SubjectName == subject.SubjectName && dto.IsSubjectDeleted);
-        string after = System.Text.Json.JsonSerializer.Serialize((await schedules.GetAllAsync()).Select(s => new
-            { s.ScheduleID, s.SubjectID, s.FacultyMemberID, s.ClassroomID, s.TimeSlotID, s.DayOfWeek, s.LectureType, s.GroupName }));
-        Check("Deletion preserves saved timetable", before == after);
-        var result = await schedules.GenerateAsync();
-        Check("Deleted subjects add no new timetable requirements", result.RequiredCount == 0 && result.AddedCount == 0 && result.PreservedCount == 6);
+        Check("Deletion removes the subject's teaching assignments", !(await assignments.GetAllAsync()).Any(a => a.SubjectID == subject.SubjectID));
+        Check("Deletion removes the subject's saved timetable", !(await schedules.GetAllAsync()).Any(s => s.SubjectID == subject.SubjectID));
+        try
+        {
+            await schedules.GenerateAsync();
+            Check("Generation cannot recreate the deleted subject's lectures", false);
+        }
+        catch (ArgumentException ex) when (ex.Message.StartsWith("No lessons could be generated.", StringComparison.Ordinal))
+        {
+            Check("Generation cannot recreate the deleted subject's lectures", (await schedules.GetAllAsync()).Count == 0);
+        }
         var replacement = await service.AddAsync(new Subject { SubjectName = subject.SubjectName, StudyYearID = 1, SemesterNumber = 1 });
         Check("Same name can be reused without transferring old assignments", replacement.SubjectID != subject.SubjectID &&
-            (await new FacultyMemberSubjectService().GetAllAsync()).Single().SubjectID == subject.SubjectID);
+            !(await assignments.GetAllAsync()).Any(a => a.SubjectID == subject.SubjectID || a.SubjectID == replacement.SubjectID));
         try
         {
             await new FacultyMemberSubjectService().AddAsync(new FacultyMemberSubject { FacultyMemberID = 1, SubjectID = subject.SubjectID });
@@ -445,17 +449,21 @@ internal static class Program
         }
         catch (ArgumentException) { Check("New assignments cannot target deleted subjects", true); }
 
-        await assignments.DeleteAsync(1, subject.SubjectID);
-        Check("Deleted-subject assignment can be removed despite saved lectures", await assignments.GetByIdAsync(1, subject.SubjectID) is null);
-        after = System.Text.Json.JsonSerializer.Serialize((await schedules.GetAllAsync()).Select(s => new
-            { s.ScheduleID, s.SubjectID, s.FacultyMemberID, s.ClassroomID, s.TimeSlotID, s.DayOfWeek, s.LectureType, s.GroupName }));
-        Check("Removing archived assignment preserves lecture identities and placements", before == after);
+        await using (var db = new AppDbContext())
+        {
+            Check("Subject deletion retains its identity for backup references", await db.Subjects.AnyAsync(s => s.SubjectID == subject.SubjectID && s.IsDeleted));
+            // Explicitly restore a legacy-history fixture for the independent
+            // archive tests below. Current subject deletion leaves no timetable rows.
+            await using var transaction = await db.Database.BeginTransactionAsync(IsolationLevel.Serializable);
+            await TimetableSnapshotStore.ReplaceAsync(db, legacyArchivedLectures, default);
+            await transaction.CommitAsync();
+        }
         // Keep the replacement subject out of new generation so this run exercises
         // the case where every assignment has been removed but history remains.
         replacement.TheoreticalLectureCount = replacement.PracticalLectureCount = 0;
         await service.UpdateAsync(replacement);
-        result = await schedules.GenerateAsync();
-        Check("Generation preserves archived lectures after the last assignment is removed", result.RequiredCount == 0 && result.AddedCount == 0 && result.PreservedCount == 6);
+        var result = await schedules.GenerateAsync();
+        Check("Generation preserves legacy archive fixtures without current assignments", result.RequiredCount == 0 && result.AddedCount == 0 && result.PreservedCount == 6);
         var original = (await schedules.GetAllAsync()).First();
         var copy = new Schedule { ScheduleID = original.ScheduleID, SubjectID = original.SubjectID, FacultyMemberID = original.FacultyMemberID,
             SectionID = original.SectionID, ClassroomID = original.ClassroomID, TimeSlotID = original.TimeSlotID, DayOfWeek = original.DayOfWeek,
