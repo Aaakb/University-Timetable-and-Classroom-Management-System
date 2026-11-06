@@ -8,6 +8,8 @@ using University_Timetable_and_Classroom_Management_System.BusinessLayer;
 using UniversityTimetable.API;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.Configure<Microsoft.AspNetCore.Builder.ForwardedHeadersOptions>(
+    options => TrustedProxyConfiguration.Configure(options, builder.Configuration));
 // Existing services construct their own context. Configure their existing environment
 // hook once at startup rather than maintaining a second connection mechanism.
 var configuredConnection = builder.Configuration.GetConnectionString("UniversityTimetable");
@@ -50,6 +52,7 @@ builder.Services.AddScoped<SchedulePdfExportService>();
 builder.Services.AddSingleton<ResourceCatalog>();
 builder.Services.AddSingleton<MutationGate>();
 var app = builder.Build();
+app.UseForwardedHeaders();
 app.UseMiddleware<ApiErrors>();
 app.Use(async (context, next) =>
 {
